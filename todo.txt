@@ -1,0 +1,6 @@
+1.Add GoogleServicesInfo.plst via XCode
+2.Add set up for google analytics for ios
+3.Add set up for Firebase Cloud messaging for ios firebase_messaging from pub.dev
+4.Push notification service for android is not yet configured
+5.firebase_crashlytics set up for ios
+

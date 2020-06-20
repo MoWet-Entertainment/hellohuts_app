@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hellohuts_app/helper/logger.dart';
 
 void main() {
   runApp(MyApp());
@@ -6,6 +7,8 @@ void main() {
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+  var log = getLogger("MyApp");
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -50,9 +53,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  var log = getLogger("HomePage");
   int _counter = 0;
 
   void _incrementCounter() {
+    log.e("icon pressed");
     setState(() {
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
