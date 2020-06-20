@@ -91,7 +91,7 @@ Widget _appBarTop() {
     floating: true,
     pinned: false,
     elevation: 0,
-    brightness: Brightness.light
+    brightness: Brightness.light,
     backgroundColor: AppColors.kPureWhite,
     leading: appBarIcon(icon: HelloIcons.subject, size: 24),
     actions: <Widget>[appBarIcon(icon: HelloIcons.bell, size: 24)],
