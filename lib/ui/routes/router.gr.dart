@@ -10,15 +10,18 @@ import 'package:auto_route/auto_route.dart';
 import 'package:hellohuts_app/ui/screens/base_page.dart';
 import 'package:hellohuts_app/ui/screens/explore.dart';
 import 'package:hellohuts_app/ui/screens/welcome_page.dart';
+import 'package:hellohuts_app/ui/screens/search/search_screen.dart';
 
 abstract class Routes {
   static const basePage = '/';
   static const explorePage = '/explore-page';
   static const welcomePage = '/welcome-page';
+  static const searchScreen = '/search-screen';
   static const all = {
     basePage,
     explorePage,
     welcomePage,
+    searchScreen,
   };
 }
 
@@ -66,6 +69,18 @@ class Router extends RouterBase {
           settings: settings,
           transitionsBuilder: TransitionsBuilders.slideBottom,
         );
+      case Routes.searchScreen:
+        if (hasInvalidArgs<SearchScreenArguments>(args)) {
+          return misTypedArgsRoute<SearchScreenArguments>(args);
+        }
+        final typedArgs =
+            args as SearchScreenArguments ?? SearchScreenArguments();
+        return PageRouteBuilder<dynamic>(
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              SearchScreen(key: typedArgs.key),
+          settings: settings,
+          transitionsBuilder: TransitionsBuilders.slideBottom,
+        );
       default:
         return unknownRoutePage(settings.name);
     }
@@ -93,4 +108,10 @@ class ExplorePageArguments {
 class WelcomePageArguments {
   final Key key;
   WelcomePageArguments({this.key});
+}
+
+//SearchScreen arguments holder class
+class SearchScreenArguments {
+  final Key key;
+  SearchScreenArguments({this.key});
 }

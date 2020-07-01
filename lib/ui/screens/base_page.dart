@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:hellohuts_app/states/app_state.dart';
-import 'package:hellohuts_app/ui/common_widgets/bottomNavbar/bottom_navbar.dart';
-import 'package:hellohuts_app/ui/common_widgets/custom_bottom_nav_bar.dart';
+import 'package:hellohuts_app/states/auth_state.dart';
+import 'package:hellohuts_app/states/feed_state.dart';
+import 'package:hellohuts_app/ui/common_widgets/bottom_navbar/bottom_navbar.dart';
 import 'package:hellohuts_app/ui/screens/explore.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:provider/provider.dart';
@@ -14,29 +16,44 @@ class BasePage extends StatefulWidget {
   _BasePageState createState() => _BasePageState();
 }
 
-class _BasePageState extends State<BasePage> {
+class _BasePageState extends State<BasePage>{
   final PageStorageBucket bucket = PageStorageBucket();
   final PageStorageKey exploreKey = PageStorageKey('exploreKey');
   final PageStorageKey homeKey = PageStorageKey('homeKey');
   final PageStorageKey categoryKey = PageStorageKey('categoryKey');
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final _refreshIndicatorKey = new GlobalKey<RefreshIndicatorState>();
   int pageIndex = 0;
 
   @override
   void initState() {
-    print("test");
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: AppColors.kPureWhite,
+        statusBarIconBrightness: Brightness.dark));
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      //TODO: Initialise all the db functionalities here
+      initFeedPosts();
+    });
     super.initState();
   }
 
  
 
+
+  void initFeedPosts() {
+    var state = Provider.of<FeedState>(context, listen: false);
+    // state.databaseInit();
+    state.getDataFromDatabase();
+  }
+
   Widget _body() {
-    var state = Provider.of<AppState>(context);
-    return Stack(
-      children: <Widget>[
-        _getPage(state.pageIndex),
-        BottomNavBar(),
-      ],
+    return Scaffold(
+      backgroundColor: AppColors.kPureWhite,
+      body: Stack(
+        children: <Widget>[
+          _getPage(Provider.of<AppState>(context).pageIndex),
+        ],
+      ),
     );
   }
 
@@ -44,8 +61,10 @@ class _BasePageState extends State<BasePage> {
     switch (index) {
       case 0:
         return ExplorePage(
+            key: exploreKey,
           scaffoldKey: _scaffoldKey,
-          key: exploreKey,
+          refreshIndicatorKey: _refreshIndicatorKey,
+        
         );
         break;
       case 1:
@@ -98,6 +117,15 @@ class _BasePageState extends State<BasePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        key: _scaffoldKey, body: PageStorage(bucket: bucket, child: _body()));
+      key: _scaffoldKey,
+      body: PageStorage(
+        bucket: bucket,
+        child: _body(),
+      ),
+      extendBody: true,
+      backgroundColor: Colors.transparent,
+      bottomNavigationBar: BottomNavBar(),
+    );
   }
+
 }

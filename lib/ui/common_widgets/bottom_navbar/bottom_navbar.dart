@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hellohuts_app/constants/hello_icons.dart';
 import 'package:hellohuts_app/states/app_state.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
@@ -25,6 +27,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   void initState() {
     _pageController = widget.pageController;
+    ScreenUtil.init(width: 375, height: 801);
     super.initState();
   }
 
@@ -38,7 +41,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         decoration: BoxDecoration(
           color: AppColors.kNavBarColor,
         ),
-        height: 64,
+        height: 64.h,
         width: MediaQuery.of(context).size.width,
         child: Row(
           mainAxisSize: MainAxisSize.max,
@@ -80,6 +83,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 _selectedIcon = index;
                 state.setPageIndex = index;
               });
+              //TODO: Remove this line
+              print("Page Index is ${state.pageIndex}");
             },
           ),
         ),
@@ -89,20 +94,15 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      bottom: 0,
-      child: Container(
-        decoration: BoxDecoration(
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: Colors.black38,
-              blurRadius: 48,
-              offset: Offset(0, -2),
-            ),
-          ],
+    return Container(
+      decoration: BoxDecoration(color: Colors.transparent, boxShadow: [
+        BoxShadow(
+          color: Colors.black12,
+          blurRadius: 32,
+          offset: Offset(0, -2),
         ),
-        child: _iconRow(),
-      ),
+      ]),
+      child: _iconRow(),
     );
   }
 }

@@ -1,5 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hellohuts_app/helper/utilities.dart';
+import 'package:hellohuts_app/ui/styles/app_colors.dart';
 
 double getDimention(context, double unit) {
   if (fullWidth(context) <= 360.0) {
@@ -18,15 +21,16 @@ double fullHeight(BuildContext context) {
   return MediaQuery.of(context).size.height;
 }
 
-Widget customTitleText(String title, {BuildContext context, FontWeight fontWeight, double fontSize}) {
+Widget customTitleText(String title,
+    {BuildContext context, FontWeight fontWeight, double fontSize}) {
   return Text(
     title ?? '',
     style: TextStyle(
         // color: AppColors.darkPrimary,
         color: Colors.deepOrange,
         fontFamily: 'SFProDisplay',
-        fontWeight: fontWeight??FontWeight.w600,
-        fontSize: fontSize??24),
+        fontWeight: fontWeight ?? FontWeight.w600,
+        fontSize: fontSize ?? 24),
   );
 }
 
@@ -174,3 +178,67 @@ dynamic customAdvanceNetworkImage(String path) {
 }
 
 **/
+
+Widget postedUserSection(BuildContext context,
+    {
+      String imagePath = "http://www.gravatar.com/avatar/?d=identicon",
+    String postedUser,
+    String userTitle,
+    double radiusOfAvatar = 8}) {
+  return Container(
+    child: Row(
+      children: <Widget>[
+        Align(
+          alignment: Alignment.center,
+                  child: CircleAvatar(
+            radius: radiusOfAvatar,
+             backgroundColor: AppColors.kDarkGrey,
+             backgroundImage: NetworkImage(imagePath),
+             
+          ),
+        ),
+        spacer(width: 4.0),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+          
+          Container(
+            constraints: BoxConstraints(maxHeight: fullWidth(context)/1.6),
+            child: Text(
+                postedUser,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: GoogleFonts.roboto(
+                  fontSize: 10.0,
+                  textStyle: TextStyle(
+                      fontWeight: FontWeight.w500, color: AppColors.kDarkTextColor),
+                ),
+              ),
+          ),
+          Container(
+            constraints: BoxConstraints(maxHeight: fullWidth(context)/1.6),
+            child: Text(
+                userTitle,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: GoogleFonts.roboto(
+                  fontSize: 8.0,
+                  textStyle: TextStyle(
+                      fontWeight: FontWeight.w500, color: AppColors.kDarkGrey),
+                ),
+              ),
+          ),
+       
+        ]),
+      ],
+    ),
+  );
+}
+
+Widget spacer({double height, double width}) {
+  return SizedBox(
+    height: height ?? 0,
+    width: width ?? 0,
+  );
+}

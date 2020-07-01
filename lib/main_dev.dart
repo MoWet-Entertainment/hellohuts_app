@@ -8,6 +8,8 @@ import 'package:hellohuts_app/helper/app_config.dart';
 import 'package:hellohuts_app/locators.dart';
 import 'package:provider/provider.dart';
 
+
+
 void main() async {
   /**
    Set `enableInDevMode` to true to see reports while in debug mode
@@ -15,13 +17,24 @@ void main() async {
   submitted as expected. It is not intended to be used for everyday
   development.
 **/
-  Crashlytics.instance.enableInDevMode = true;
+  // Crashlytics.instance.enableInDevMode = false;
 
   // Pass all uncaught errors from the framework to Crashlytics.
   // FlutterError.onError = Crashlytics.instance.recordFlutterError;
   WidgetsFlutterBinding.ensureInitialized();
   
   await setUpLocator();
+
+   runApp(Provider<AppConfig>(
+      create: (context) => AppConfig(
+        appTitle: AppConstants.appNameDev,
+        buildFlavor: AppFlavor.dev,
+      ),
+      child: App(),
+      
+    ));
+
+    /** 
   runZoned(() {
     runApp(Provider<AppConfig>(
       create: (context) => AppConfig(
@@ -31,4 +44,6 @@ void main() async {
       child: App(),
     ));
   }, onError: Crashlytics.instance.recordError);
+
+  **/
 }
