@@ -10,13 +10,14 @@ Widget appBarIcon(
   return Stack(
     alignment: Alignment.center,
     children: <Widget>[
-      ClipRRect(
-        borderRadius: BorderRadius.circular(10.0),
-        child: Container(
-          height: 40.0,
-          width: 40.0,
+      Container(
+        decoration: BoxDecoration(
+         borderRadius: BorderRadius.circular(10.0),
           color: AppColors.kLightGrey,
         ),
+        height: 40.0,
+        width: 40.0,
+       
       ),
       IconButton(
           icon: Icon(

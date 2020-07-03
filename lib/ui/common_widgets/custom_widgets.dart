@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hellohuts_app/helper/utilities.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
+import 'package:hellohuts_app/ui/styles/app_themes.dart';
 
 double getDimention(context, double unit) {
   if (fullWidth(context) <= 360.0) {
@@ -180,8 +181,7 @@ dynamic customAdvanceNetworkImage(String path) {
 **/
 
 Widget postedUserSection(BuildContext context,
-    {
-      String imagePath = "http://www.gravatar.com/avatar/?d=identicon",
+    {String imagePath = "http://www.gravatar.com/avatar/?d=identicon",
     String postedUser,
     String userTitle,
     double radiusOfAvatar = 8}) {
@@ -190,47 +190,36 @@ Widget postedUserSection(BuildContext context,
       children: <Widget>[
         Align(
           alignment: Alignment.center,
-                  child: CircleAvatar(
+          child: CircleAvatar(
             radius: radiusOfAvatar,
-             backgroundColor: AppColors.kDarkGrey,
-             backgroundImage: NetworkImage(imagePath),
-             
+            backgroundColor: AppColors.kDarkGrey,
+            backgroundImage: NetworkImage(imagePath),
           ),
         ),
         spacer(width: 4.0),
         Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-          
-          Container(
-            constraints: BoxConstraints(maxHeight: fullWidth(context)/1.6),
-            child: Text(
-                postedUser,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: GoogleFonts.roboto(
-                  fontSize: 10.0,
-                  textStyle: TextStyle(
-                      fontWeight: FontWeight.w500, color: AppColors.kDarkTextColor),
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Container(
+                constraints:
+                    BoxConstraints(maxHeight: fullWidth(context) / 1.6),
+                child: Text(
+                  postedUser,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: AppThemes.postedAuthorTextMainHeadStyle,
                 ),
               ),
-          ),
-          Container(
-            constraints: BoxConstraints(maxHeight: fullWidth(context)/1.6),
-            child: Text(
-                userTitle,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: GoogleFonts.roboto(
-                  fontSize: 8.0,
-                  textStyle: TextStyle(
-                      fontWeight: FontWeight.w500, color: AppColors.kDarkGrey),
-                ),
+              Container(
+                constraints:
+                    BoxConstraints(maxHeight: fullWidth(context) / 1.6),
+                child: Text(userTitle,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: AppThemes.postedAuthorTextSubHeadStyle),
               ),
-          ),
-       
-        ]),
+            ]),
       ],
     ),
   );

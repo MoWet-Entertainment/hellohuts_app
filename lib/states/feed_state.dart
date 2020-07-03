@@ -31,7 +31,7 @@ class FeedState extends AppState {
     if (_feedList == null) {
       return null;
     } else {
-      return List.from(_feedList.reversed);
+      return List.from(_feedList);
     }
   }
 

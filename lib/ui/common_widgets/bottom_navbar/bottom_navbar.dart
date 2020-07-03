@@ -33,27 +33,26 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   Widget _iconRow() {
     var state = Provider.of<AppState>(context);
-    return ClipRRect(
-      borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(24.0), topRight: Radius.circular(24.0)),
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 48.0),
-        decoration: BoxDecoration(
-          color: AppColors.kNavBarColor,
-        ),
-        height: 64.h,
-        width: MediaQuery.of(context).size.width,
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            _icon(HelloIcons.compass, 0, iconSize: 26),
-            _icon(HelloIcons.apps, 1, iconSize: 22),
-            _icon(HelloIcons.heart, 2, iconSize: 26),
-            _icon(HelloIcons.hello_icon, 3, iconSize: 20)
-          ],
-        ),
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 48.0),
+      decoration: BoxDecoration(
+        color: AppColors.kNavBarColor,
+         borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(24.0), topRight: Radius.circular(24.0)),
+
+      ),
+      height: 64.h,
+      width: MediaQuery.of(context).size.width,
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          _icon(HelloIcons.compass, 0, iconSize: 26),
+          _icon(HelloIcons.apps, 1, iconSize: 22),
+          _icon(HelloIcons.heart, 2, iconSize: 26),
+          _icon(HelloIcons.hello_icon, 3, iconSize: 20)
+        ],
       ),
     );
   }

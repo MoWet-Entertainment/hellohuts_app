@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppThemes {
   static BuildContext context;
@@ -9,5 +10,31 @@ class AppThemes {
     buttonColor: AppColors.kPrimaryColor,
     canvasColor: AppColors.kPureWhite,
     bottomAppBarColor: AppColors.kPrimaryColor,
+  );
+
+  static final TextStyle postDateAndCategoryStyle = GoogleFonts.openSans(
+    textStyle: TextStyle(
+        color: AppColors.kDarkGrey,
+        fontSize: 10.0,
+        fontWeight: FontWeight.w400),
+  );
+
+  static final TextStyle postHeadLineStyle = GoogleFonts.roboto(
+    textStyle: TextStyle(
+        color: AppColors.kDarkTextColor,
+        fontSize: 14,
+        fontWeight: FontWeight.w500),
+  );
+
+  static final TextStyle postedAuthorTextMainHeadStyle = GoogleFonts.roboto(
+    fontSize: 10.0,
+    textStyle:
+        TextStyle(fontWeight: FontWeight.w500, color: AppColors.kDarkTextColor),
+  );
+
+  static final TextStyle postedAuthorTextSubHeadStyle = GoogleFonts.roboto(
+    fontSize: 8.0,
+    textStyle:
+        TextStyle(fontWeight: FontWeight.w500, color: AppColors.kDarkGrey),
   );
 }
