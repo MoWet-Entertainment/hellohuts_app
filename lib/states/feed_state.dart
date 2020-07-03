@@ -20,9 +20,8 @@ class FeedState extends AppState {
     for (var model in jsonVal) {
       var temp = FeedModel.fromJson(model);
       _feedList.add(temp);
-     
     }
-     notifyListeners();
+    notifyListeners();
     isBusy = false;
   }
 
@@ -46,4 +45,11 @@ class FeedState extends AppState {
   }
 
   bool get isNotificationFlag => _notificationFlag;
+
+  ///Add/remove like on a post
+  ///Add Like Aggregation method(Cloud functions) instead of this
+  void addLikeToPost(FeedModel model, String userId) {
+    model.userLiked = !model.userLiked;
+    notifyListeners();
+  }
 }

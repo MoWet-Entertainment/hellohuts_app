@@ -12,7 +12,8 @@ class Mock2 {
 "posted_user_title": "Graphic Designer",
 "posted_date": "5/3/2020",
 "post_category": "Kids",
-"user_avatar": "https://robohash.org/consecteturmagninumquam.jpg?size=50x50&set=set1"
+"user_avatar": "https://robohash.org/consecteturmagninumquam.jpg?size=50x50&set=set1",
+"user_liked":"true"
 },
 {
 "post_title": "Expert tips in Designing your home",
@@ -22,7 +23,8 @@ class Mock2 {
 "posted_user_title": "Information Systems Manager",
 "posted_date": "5/17/2020",
 "post_category": "Shoes",
-"user_avatar": "https://robohash.org/accusamusetvoluptas.bmp?size=50x50&set=set1"
+"user_avatar": "https://robohash.org/accusamusetvoluptas.bmp?size=50x50&set=set1",
+"user_liked":"false"
 },
 {
 "post_title": "Seize compelling e-business",
@@ -32,7 +34,8 @@ class Mock2 {
 "posted_user_title": "Senior Sales Associate",
 "posted_date": "3/20/2020",
 "post_category": "Kids",
-"user_avatar": "https://robohash.org/consecteturnumquamquidem.png?size=50x50&set=set1"
+"user_avatar": "https://robohash.org/consecteturnumquamquidem.png?size=50x50&set=set1",
+"user_liked":"false"
 },
 {
 "post_title": "Stilize enterprise functionalities",
@@ -42,7 +45,8 @@ class Mock2 {
 "posted_user_title": "Clinical Specialist",
 "posted_date": "5/30/2020",
 "post_category": "Computers",
-"user_avatar": "https://robohash.org/autipsaquidem.png?size=50x50&set=set1"
+"user_avatar": "https://robohash.org/autipsaquidem.png?size=50x50&set=set1",
+"user_liked":"true"
 },
 {
 "post_title": "Orchestrate dynamic deliverables",
@@ -52,7 +56,8 @@ class Mock2 {
 "posted_user_title": "Chief Design Engineer",
 "posted_date": "6/24/2020",
 "post_category": "Health",
-"user_avatar": "https://robohash.org/magnamnecessitatibusnon.png?size=50x50&set=set1"
+"user_avatar": "https://robohash.org/magnamnecessitatibusnon.png?size=50x50&set=set1",
+"user_liked":"true"
 },
 {
 "post_title": "transition one-to-one web services",
@@ -62,7 +67,8 @@ class Mock2 {
 "posted_user_title": "Food Chemist",
 "posted_date": "6/18/2020",
 "post_category": "Health",
-"user_avatar": "https://robohash.org/illumdoloreseos.png?size=50x50&set=set1"
+"user_avatar": "https://robohash.org/illumdoloreseos.png?size=50x50&set=set1",
+"user_liked":"false"
 },
 {
 "post_title": "architect holistic markets",
@@ -72,7 +78,8 @@ class Mock2 {
 "posted_user_title": "Safety Technician I",
 "posted_date": "3/18/2020",
 "post_category": "Automotive",
-"user_avatar": "https://robohash.org/etetquis.jpg?size=50x50&set=set1"
+"user_avatar": "https://robohash.org/etetquis.jpg?size=50x50&set=set1",
+"user_liked":"false"
 },
 {
 "post_title": "utilize scalable portals",
@@ -82,7 +89,8 @@ class Mock2 {
 "posted_user_title": "Data Coordiator",
 "posted_date": "6/16/2020",
 "post_category": "Automotive",
-"user_avatar": "https://robohash.org/necessitatibussequivoluptates.png?size=50x50&set=set1"
+"user_avatar": "https://robohash.org/necessitatibussequivoluptates.png?size=50x50&set=set1",
+"user_liked":"true"
 },
 {
 "post_title": "optimize enterprise mindshare",
@@ -92,7 +100,8 @@ class Mock2 {
 "posted_user_title": "Financial Analyst",
 "posted_date": "2/10/2020",
 "post_category": "Tools",
-"user_avatar": "https://robohash.org/incidunttotamnam.png?size=50x50&set=set1"
+"user_avatar": "https://robohash.org/incidunttotamnam.png?size=50x50&set=set1",
+"user_liked":"false"
 },
 {
 "post_title": "deliver e-business models",
@@ -102,7 +111,8 @@ class Mock2 {
 "posted_user_title": "Media Manager III",
 "posted_date": "2/25/2020",
 "post_category": "Shoes",
-"user_avatar": "https://robohash.org/rerummagnamitaque.jpg?size=50x50&set=set1"
+"user_avatar": "https://robohash.org/rerummagnamitaque.jpg?size=50x50&set=set1",
+"user_liked":"false"
 },
 {
 "post_title": "whiteboard user-centric functionalities",
@@ -112,7 +122,8 @@ class Mock2 {
 "posted_user_title": "Dental Hygienist",
 "posted_date": "6/13/2020",
 "post_category": "Games",
-"user_avatar": "https://robohash.org/odioperferendisaspernatur.jpg?size=50x50&set=set1"
+"user_avatar": "https://robohash.org/odioperferendisaspernatur.jpg?size=50x50&set=set1",
+"user_liked":"true"
 },
   ];
 }
