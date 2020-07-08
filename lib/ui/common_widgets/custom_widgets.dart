@@ -1,7 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:hellohuts_app/helper/utilities.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
 
@@ -231,3 +228,6 @@ Widget spacer({double height, double width}) {
     width: width ?? 0,
   );
 }
+
+
+

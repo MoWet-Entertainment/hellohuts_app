@@ -10,6 +10,7 @@ import 'package:hellohuts_app/states/feed_state.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
 import 'package:hellohuts_app/ui/common_widgets/feed_posts/feed_post.dart';
 import 'package:hellohuts_app/ui/routes/router.gr.dart';
+import 'package:hellohuts_app/ui/screens/search/search_screen.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/common_widgets/app_bar/app_bar.dart';
 import 'package:hellohuts_app/ui/common_widgets/scroll_behavior/neat_scroll_behavior.dart';
@@ -19,37 +20,18 @@ import 'package:provider/provider.dart';
 
 class ExplorePage extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
-  final GlobalKey<RefreshIndicatorState> refreshIndicatorKey;
-
-  ExplorePage({Key key, this.scaffoldKey, this.refreshIndicatorKey})
-      : super(key: key);
+  ExplorePage({Key key, this.scaffoldKey}) : super(key: key);
 
   bool notificationFlag = false;
-
-  @override
-  void initState() {
-    ScreenUtil.init(width: 375, height: 801);
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
       body: Container(
-        child: RefreshIndicator(
-          key: refreshIndicatorKey,
-          onRefresh: () async {
-            //refersh the home page feed
-            //TODO: Add provider her to get data from the data base
-            var feedState = Provider.of<FeedState>(context, listen: false);
-            // feedState.getDataFromDataBase();
-            print("refresh");
-            return Future.value(true);
-          },
-          child: _FeedWidgetBody(
-            refreshIndicatorKey: refreshIndicatorKey,
-            scaffoldKey: scaffoldKey,
-          ),
+        child: _FeedWidgetBody(
+          key: key,
+          scaffoldKey: scaffoldKey,
         ),
       ),
     );
@@ -58,10 +40,8 @@ class ExplorePage extends StatelessWidget {
 
 class _FeedWidgetBody extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
-  final GlobalKey<RefreshIndicatorState> refreshIndicatorKey;
 
-  const _FeedWidgetBody({Key key, this.scaffoldKey, this.refreshIndicatorKey})
-      : super(key: key);
+  const _FeedWidgetBody({Key key, this.scaffoldKey}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +50,7 @@ class _FeedWidgetBody extends StatelessWidget {
       ///This feature is not available in flutter stable `1.17.4`
       ///
       /// but available in Master branch
+      
       headerSliverBuilder: (context, bool innerBoxIsScrolled) {
         return <Widget>[
           _AppBarTop(
@@ -80,7 +61,7 @@ class _FeedWidgetBody extends StatelessWidget {
       },
       body: _ExplorePostsFeed(
         scaffoldKey: scaffoldKey,
-        refreshIndicatorKey: refreshIndicatorKey,
+    
       ),
     );
   }
@@ -88,8 +69,8 @@ class _FeedWidgetBody extends StatelessWidget {
 
 class _ExplorePostsFeed extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
-  final GlobalKey<RefreshIndicatorState> refreshIndicatorKey;
-  const _ExplorePostsFeed({Key key, this.scaffoldKey, this.refreshIndicatorKey})
+
+  const _ExplorePostsFeed({Key key, this.scaffoldKey})
       : super(key: key);
 
   @override
@@ -107,6 +88,7 @@ class _ExplorePostsFeed extends StatelessWidget {
           child: Consumer<FeedState>(builder: (context, state, child) {
             final List<FeedModel> list = state.getFeedList();
             return ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
               padding: EdgeInsets.only(bottom: 12),
               scrollDirection: Axis.vertical,
               itemCount: list.length,
@@ -141,7 +123,7 @@ class _AppBarTop extends StatelessWidget {
         sliver: SliverPadding(
           padding: EdgeInsets.symmetric(horizontal: 16.0),
           sliver: SliverAppBar(
-            floating: true,
+            floating: true,   
             pinned: false,
 
             ///set `snap` false, when flutter verion `1.17.4` is upgraded
@@ -171,7 +153,7 @@ class _AppBarTop extends StatelessWidget {
 }
 
 class _HeaderSection extends StatelessWidget {
-  var user = 'Vinoop';
+  final user = 'Vinoop';
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -230,8 +212,6 @@ class _HeaderSection extends StatelessWidget {
     );
   }
 
-  
-
   Widget _quickPicks() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -268,13 +248,11 @@ class _HeaderSection extends StatelessWidget {
             children: <Widget>[
               Container(
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16.w),
-                      color: AppColors.kLightGrey,
-
+                  borderRadius: BorderRadius.circular(16.w),
+                  color: AppColors.kLightGrey,
                 ),
                 width: 56.w,
                 height: 56.w,
-              
                 child: Icon(
                   icon,
                   size: size,
@@ -308,6 +286,7 @@ class _HeaderSection extends StatelessWidget {
     );
   }
 }
+
 class _SearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -340,9 +319,8 @@ class _SearchBar extends StatelessWidget {
           ),
         ),
       ),
-      onTap: () {
-        ExtendedNavigator.ofRouter<Router>().pushNamed(Routes.searchScreen);
-      },
+      onTap: ()=> ExtendedNavigator.of(context).pushNamed(Routes.searchScreen),
+      // onTap: () => showSearch(context: context, delegate: CustomSearchDelegate()),
     );
   }
 }

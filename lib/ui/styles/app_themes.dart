@@ -19,6 +19,12 @@ class AppThemes {
         fontWeight: FontWeight.w400),
   );
 
+static final TextStyle popUpStyle = GoogleFonts.roboto(
+    textStyle: TextStyle(
+        color: AppColors.kDarkGrey,
+        fontSize: 12.0,
+        fontWeight: FontWeight.w400),
+  );
   static final TextStyle postHeadLineStyle = GoogleFonts.roboto(
     textStyle: TextStyle(
         color: AppColors.kDarkTextColor,
@@ -37,4 +43,11 @@ class AppThemes {
     textStyle:
         TextStyle(fontWeight: FontWeight.w500, color: AppColors.kDarkGrey),
   );
+
+  static final TextStyle searchHintStyle = GoogleFonts.openSans(
+    fontSize: 14.0,
+    textStyle:
+        TextStyle(fontWeight: FontWeight.w400, color: AppColors.kDarkGrey),
+  );
+
 }

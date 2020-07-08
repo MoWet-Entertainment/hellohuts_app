@@ -69,6 +69,8 @@ dependencies:
   flutter_screenutil: ^2.1.0
   google_nav_bar: ^2.2.0
   cached_network_image: ^2.2.0+1
+  carousel_pro: ^1.0.0
+
 
 
 
@@ -78,6 +80,8 @@ dependencies:
   #utilities
   equatable: ^1.2.0
   logger: ^0.9.1
+  flutter_hooks: ^0.11.0
+
 
 
 

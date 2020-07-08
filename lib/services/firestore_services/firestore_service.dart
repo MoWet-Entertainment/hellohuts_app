@@ -120,6 +120,7 @@ class FirestoreService {
       print(error);
       logger.e('Error in Get User');
     }
+    return null;
   }
 
   Future addPost(FeedModel model) async {

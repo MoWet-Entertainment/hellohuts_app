@@ -1,4 +1,3 @@
-import 'dart:html';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_route/auto_route_annotations.dart';
@@ -19,8 +18,8 @@ class $Router {
   @CustomRoute(transitionsBuilder: TransitionsBuilders.slideBottom)
   WelcomePage welcomePage;
 
-  @CustomRoute(transitionsBuilder: TransitionsBuilders.slideBottom)
-  SearchScreen searchScreen;
+  @CustomRoute(transitionsBuilder: TransitionsBuilders.fadeIn)
+  SearchPage searchScreen;
 
   // SignIn signIn;
   // SignUp signUp;

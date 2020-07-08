@@ -28,7 +28,7 @@ class FeedModel {
     postedDate = map["posted_date"];
     postCategory = map["post_category"];
     userAvatar = map["user_avatar"];
-    userLiked = map["user_liked"] == "true" ? true : false;
+    userLiked = map["user_liked"];
   }
   toJson() {
     return {
@@ -40,7 +40,7 @@ class FeedModel {
       "posted_date": this.postedDate,
       "post_category": this.postCategory,
       "user_avatar": this.userAvatar,
-      "user_liked": this.userLiked ==true?"true":"false",
+      "user_liked": this.userLiked,
     };
   }
 

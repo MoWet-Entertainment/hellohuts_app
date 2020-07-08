@@ -70,16 +70,15 @@ class Router extends RouterBase {
           transitionsBuilder: TransitionsBuilders.slideBottom,
         );
       case Routes.searchScreen:
-        if (hasInvalidArgs<SearchScreenArguments>(args)) {
-          return misTypedArgsRoute<SearchScreenArguments>(args);
+        if (hasInvalidArgs<SearchPageArguments>(args)) {
+          return misTypedArgsRoute<SearchPageArguments>(args);
         }
-        final typedArgs =
-            args as SearchScreenArguments ?? SearchScreenArguments();
+        final typedArgs = args as SearchPageArguments ?? SearchPageArguments();
         return PageRouteBuilder<dynamic>(
-          pageBuilder: (context, animation, secondaryAnimation) =>
-              SearchScreen(key: typedArgs.key),
+          pageBuilder: (context, animation, secondaryAnimation) => SearchPage(
+              key: typedArgs.key, scaffoldKey: typedArgs.scaffoldKey),
           settings: settings,
-          transitionsBuilder: TransitionsBuilders.slideBottom,
+          transitionsBuilder: TransitionsBuilders.fadeIn,
         );
       default:
         return unknownRoutePage(settings.name);
@@ -110,8 +109,9 @@ class WelcomePageArguments {
   WelcomePageArguments({this.key});
 }
 
-//SearchScreen arguments holder class
-class SearchScreenArguments {
+//SearchPage arguments holder class
+class SearchPageArguments {
   final Key key;
-  SearchScreenArguments({this.key});
+  final GlobalKey<ScaffoldState> scaffoldKey;
+  SearchPageArguments({this.key, this.scaffoldKey});
 }
