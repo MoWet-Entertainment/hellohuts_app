@@ -12,9 +12,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class FeedPostContent extends StatelessWidget {
   final FeedModel model;
   const FeedPostContent({Key key, this.model}) : super(key: key);
-
+  
   @override
   Widget build(BuildContext context) {
+     var userId = '1234';
+  var state = Provider.of<FeedState>(context,listen:  false);
     return Material(
       borderRadius: const BorderRadius.all(Radius.circular(32.0)),
       child: InkWell(
@@ -24,7 +26,9 @@ class FeedPostContent extends StatelessWidget {
             _FeedPostBottomSection(model: model),
           ],
         ),
-        onTap: () => {print("Clicked on the Post")},
+        onDoubleTap: ()=> state.addLikeToPost(model, userId),
+        onTap: ()=> print("user clicked on  the post"),
+
       ),
     );
   }

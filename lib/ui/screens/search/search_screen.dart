@@ -22,7 +22,8 @@ class _SearchPageState extends State<SearchPage> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final state = Provider.of<SearchState>(context,listen: false);
+      final state = Provider.of<SearchState>(context, listen: false);
+      state.resetSearch();
       //TODO: initialise Search State here and show user specific filter conditions
     });
     super.initState();
@@ -30,18 +31,37 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
+    print("building parenr");
     return Scaffold(
-        appBar: CustomAppBar(
-      isBackButton: true,
-      iconData: HelloIcons.sliders_v_alt,
-      onActionPressed: onFilterPressed,
-    ),);
+      appBar: CustomSearchBar(
+        isBackButton: true,
+        iconData: HelloIcons.sliders_v_alt,
+        onActionPressed: onFilterPressed,
+      ),
+      body: SearchBody(),
+    );
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
+  }
+}
+
+class SearchBody extends StatelessWidget {
+  const SearchBody({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    print("building again");
+    final state = Provider.of<SearchState>(context);
+    final text = state.searchText;
+    return Container(
+      child: Center(
+        child: Text(text),
+      ),
+    );
   }
 }
 

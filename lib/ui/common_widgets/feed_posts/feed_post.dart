@@ -19,7 +19,7 @@ class FeedPost extends StatelessWidget {
     );
   }
 
-  Widget _feedPosts(FeedModel list) {
+  Widget _feedPosts(FeedModel model) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12.0),
       child: Container(
@@ -29,8 +29,8 @@ class FeedPost extends StatelessWidget {
         ),
         child: Column(
           children: <Widget>[
-            FeedPostTopSection(model: list),
-            FeedPostContent(model: list),
+            FeedPostTopSection(model: model),
+            FeedPostContent(model: model),
           ],
         ),
       ),

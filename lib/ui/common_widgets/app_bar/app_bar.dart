@@ -2,9 +2,13 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hellohuts_app/constants/hello_icons.dart';
+import 'package:hellohuts_app/states/search_state.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
+import 'dart:math' as math;
+
+import 'package:provider/provider.dart';
 
 Widget appBarIcon(
     {@required IconData icon,
@@ -61,7 +65,7 @@ Widget appBarIcon(
   );
 }
 
-class CustomAppBar extends HookWidget implements PreferredSizeWidget {
+class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
   final List<Widget> actions;
   final Size appBarHeight = Size.fromHeight(64.0);
   final IconData iconData;
@@ -77,7 +81,7 @@ class CustomAppBar extends HookWidget implements PreferredSizeWidget {
   final ValueChanged<String> onSearchChanged;
   String searchText = '';
   bool isAnyTextPresent = false;
-  CustomAppBar({
+  CustomSearchBar({
     Key key,
     this.actions,
     this.iconData,
@@ -93,7 +97,8 @@ class CustomAppBar extends HookWidget implements PreferredSizeWidget {
     this.onSearchChanged,
   }) : super(key: key);
 
-  Widget _searchField(TextEditingController controller) {
+  Widget _searchField(BuildContext context, TextEditingController controller) {
+    final state = Provider.of<SearchState>(context);
     return Container(
       height: 56,
       padding: const EdgeInsets.symmetric(vertical: 5),
@@ -103,7 +108,9 @@ class CustomAppBar extends HookWidget implements PreferredSizeWidget {
         autofocus: true,
         textCapitalization: TextCapitalization.words,
         cursorColor: AppColors.kDarkGrey,
-        onChanged: (text) {},
+        onChanged: (text) {
+          state.setSearchText(text);
+        },
         onSubmitted: onSubmitText,
         controller: controller,
         keyboardType: TextInputType.text,
@@ -118,7 +125,6 @@ class CustomAppBar extends HookWidget implements PreferredSizeWidget {
             filled: true,
             hintText: hintText,
             hintStyle: AppThemes.searchHintStyle,
-          
             focusColor: AppColors.kPureWhite,
             suffixIcon: (controller.text.trim().length == 0)
                 ? Container(
@@ -132,6 +138,7 @@ class CustomAppBar extends HookWidget implements PreferredSizeWidget {
                     ),
                     onTap: () {
                       controller.text = '';
+                      state.resetSearch();
                     }),
             contentPadding: const EdgeInsets.only(left: 16, right: 5)),
       ),
@@ -147,11 +154,14 @@ class CustomAppBar extends HookWidget implements PreferredSizeWidget {
                 if (onActionPressed != null) onActionPressed();
               },
               child: Container(
-                padding: const EdgeInsets.only(left: 4.0, right: 8),
-                child: Icon(
-                  iconData,
-                  size: 24,
-                  color: AppColors.kDarkGrey,
+                padding: const EdgeInsets.only(left: 0, right: 16),
+                child: Transform.rotate(
+                  angle: math.pi / 2,
+                  child: Icon(
+                    iconData,
+                    size: 24,
+                    color: AppColors.kAccentColor,
+                  ),
                 ),
               ),
             )
@@ -160,8 +170,10 @@ class CustomAppBar extends HookWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final state = Provider.of<SearchState>(context);
     final controller = useTextEditingController();
     final update = useValueListenable(controller);
+
     return AppBar(
       backgroundColor: AppColors.kPureWhite,
       elevation: 0,
@@ -170,6 +182,7 @@ class CustomAppBar extends HookWidget implements PreferredSizeWidget {
               color: AppColors.kDarkGrey,
               onPressed: () {
                 FocusScope.of(context).unfocus();
+                state.resetSearch();
                 ExtendedNavigator.of(context).pop();
               },
             )
@@ -182,7 +195,7 @@ class CustomAppBar extends HookWidget implements PreferredSizeWidget {
                   },
                 )
               : Container(),
-      title: title != null ? title : _searchField(controller),
+      title: title != null ? title : _searchField(context, controller),
       actions: _getActionButtons(context),
       bottom: PreferredSize(
         child: isBottomLine
@@ -200,5 +213,3 @@ class CustomAppBar extends HookWidget implements PreferredSizeWidget {
   // TODO: implement preferredSize
   Size get preferredSize => appBarHeight;
 }
-
-
