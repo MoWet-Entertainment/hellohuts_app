@@ -1,6 +1,11 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hellohuts_app/constants/hello_icons.dart';
 import 'package:hellohuts_app/ui/common_widgets/app_bar/app_bar.dart';
+import 'package:hellohuts_app/ui/common_widgets/search_bar.dart';
+import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:provider/provider.dart';
 import 'package:hellohuts_app/states/search_state.dart';
 
@@ -57,10 +62,30 @@ class SearchBody extends StatelessWidget {
     print("building again");
     final state = Provider.of<SearchState>(context);
     final text = state.searchText;
+    final bool isSearching = state.isSearching;
     return Container(
-      child: Center(
-        child: Text(text),
-      ),
+      child: isSearching
+          ? Center(
+              child: Text(text),
+            )
+          : _buildSuggestions(),
+    );
+  }
+}
+
+class _buildSuggestions extends StatelessWidget {
+  const _buildSuggestions({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final cities = ['Ankara', 'İzmir', 'İstanbul', 'Samsun', 'Sakarya'];
+    return Container(
+      child: ListView.builder(itemBuilder: (context, index) {
+        return ListTile(
+          title: Text(cities[index]),
+        );
+      },
+      itemCount: cities.length,),
     );
   }
 }

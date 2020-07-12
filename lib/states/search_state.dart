@@ -1,8 +1,10 @@
+import 'package:hellohuts_app/models/search/search_item.dart';
 import 'package:hellohuts_app/states/app_state.dart';
 
 class SearchState extends AppState {
   bool _isSearching = false;
-  String _searchText= '';
+  String _searchText = '';
+  List<SearchItem> searchHistory = [];
 
   void setSearchText(String text) {
     _searchText = text;
