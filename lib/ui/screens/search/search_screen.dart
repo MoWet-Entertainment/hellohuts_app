@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hellohuts_app/constants/hello_icons.dart';
+import 'package:hellohuts_app/models/search/search_item.dart';
 import 'package:hellohuts_app/ui/common_widgets/app_bar/app_bar.dart';
 import 'package:hellohuts_app/ui/common_widgets/search_bar.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
@@ -36,6 +37,7 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
+    final state = Provider.of<SearchState>(context);
     print("building parenr");
     return Scaffold(
       appBar: CustomSearchBar(
@@ -64,12 +66,29 @@ class SearchBody extends StatelessWidget {
     final text = state.searchText;
     final bool isSearching = state.isSearching;
     return Container(
-      child: isSearching
-          ? Center(
-              child: Text(text),
-            )
-          : _buildSuggestions(),
+      padding: EdgeInsets.symmetric(horizontal: 48.0),
+      child: isSearching ? _showResults() : _buildSuggestions(),
     );
+  }
+}
+
+class _showResults extends StatelessWidget {
+  const _showResults({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final state = Provider.of<SearchState>(context);
+    final  results = state.getSearchResults();
+    return ListView.builder(
+        itemCount: results.length,
+        itemBuilder: (context, index) {
+          return Card(
+            child: ListTile(
+                title: Text(
+              results[index].searchString,
+            )),
+          );
+        });
   }
 }
 
@@ -80,12 +99,14 @@ class _buildSuggestions extends StatelessWidget {
   Widget build(BuildContext context) {
     final cities = ['Ankara', 'İzmir', 'İstanbul', 'Samsun', 'Sakarya'];
     return Container(
-      child: ListView.builder(itemBuilder: (context, index) {
-        return ListTile(
-          title: Text(cities[index]),
-        );
-      },
-      itemCount: cities.length,),
+      child: ListView.builder(
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(cities[index]),
+          );
+        },
+        itemCount: cities.length,
+      ),
     );
   }
 }

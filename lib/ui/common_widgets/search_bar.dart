@@ -17,7 +17,7 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
   final bool isCrossButton;
   final Widget leading;
   final Function onActionPressed;
-  final Function onSubmitText;
+
   final GlobalKey<ScaffoldState> scaffoldKey;
   final Widget title;
   final String hintText;
@@ -34,7 +34,6 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
     this.leading,
     this.onActionPressed,
     this.scaffoldKey,
-    this.onSubmitText,
     this.title,
     this.hintText = 'Search cost for 4 bedroom home..',
     this.onSearchChanged,
@@ -54,7 +53,7 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
         onChanged: (text) {
           state.setSearchText(text);
         },
-        onSubmitted: onSubmitText,
+     
         controller: controller,
         keyboardType: TextInputType.text,
         decoration: InputDecoration(

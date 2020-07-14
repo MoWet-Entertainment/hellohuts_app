@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-enum SearchType { Location, Professionals, Material, Building, Other }
+enum SearchType { Location, Building, Professionals, Material, Other }
 
-class SearchItem {
+class SearchItem implements Comparable<SearchItem> {
   final String searchString;
   final SearchType searchType;
   final String timeStamp;
@@ -50,7 +50,7 @@ class SearchItem {
     }
   }
 
- static  _setSearchType(String type) {
+  static _setSearchType(String type) {
     switch (type) {
       case 'building':
         return SearchType.Building;
@@ -71,19 +71,19 @@ class SearchItem {
     }
   }
 
-  static SearchItem fromMap(Map<String, dynamic> map) {
+  static SearchItem fromJson(Map<String, dynamic> map) {
     if (map == null) return null;
 
     return SearchItem(
-      searchString: map['searchString'],
-      searchType:_setSearchType(map['searchType']),
-      timeStamp: map['timeStamp'],
+      searchString: map['search_string'],
+      searchType: _setSearchType(map['search_type']),
+      timeStamp: map['time_stamp'],
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  static SearchItem fromJson(String source) => fromMap(json.decode(source));
+  // static SearchItem fromJson(String source) => fromMap(json.decode(source));
 
   @override
   String toString() =>
@@ -102,4 +102,10 @@ class SearchItem {
   @override
   int get hashCode =>
       searchString.hashCode ^ searchType.hashCode ^ timeStamp.hashCode;
+
+  @override
+  int compareTo(SearchItem item) {
+
+    return this.searchType.index.compareTo(item.searchType.index);
+  }
 }
