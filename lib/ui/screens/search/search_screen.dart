@@ -78,17 +78,43 @@ class _showResults extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<SearchState>(context);
-    final  results = state.getSearchResults();
+    final results = state.getSearchResults();
     return ListView.builder(
         itemCount: results.length,
         itemBuilder: (context, index) {
-          return Card(
-            child: ListTile(
-                title: Text(
-              results[index].searchString,
-            )),
-          );
+          return _buildCard(results[index]);
         });
+  }
+
+  Widget _buildCard(SearchItem item) {
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+      elevation: 0.5,
+      child: ListTile(
+          leading: _getLeadingIcon(item.searchType),
+          title: Text(
+            item.searchString,
+          )),
+    );
+  }
+
+  Widget _getLeadingIcon(SearchType type) {
+   
+    switch (type) {
+      case SearchType.Building:
+        return Icon(HelloIcons.building);
+      case SearchType.Location:
+        return Icon(HelloIcons.location_point);
+      case SearchType.Material:
+        return Icon(HelloIcons.truck);
+
+      case SearchType.Professionals:
+        return Icon(HelloIcons.constructor_1);
+      case SearchType.Other:
+        return Icon(HelloIcons.post_stamp);
+      default:
+        return Icon(HelloIcons.building);
+    }
   }
 }
 
