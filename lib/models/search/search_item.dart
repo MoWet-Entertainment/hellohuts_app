@@ -40,7 +40,7 @@ class SearchItem implements Comparable<SearchItem> {
         return 'location';
       case SearchType.Material:
         return 'material';
-
+  
       case SearchType.Professionals:
         return 'professionals';
       case SearchType.Other:

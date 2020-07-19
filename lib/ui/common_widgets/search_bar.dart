@@ -35,7 +35,7 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
     this.onActionPressed,
     this.scaffoldKey,
     this.title,
-    this.hintText = 'Search cost for 4 bedroom home..',
+    this.hintText = 'Search for homes  ...',
     this.onSearchChanged,
   }) : super(key: key);
 
@@ -43,7 +43,7 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
     final state = Provider.of<SearchState>(context);
     return Container(
       height: 56,
-      padding: const EdgeInsets.symmetric(vertical: 5),
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       child: TextField(
         style: AppThemes.searchHintStyle.copyWith(
             color: AppColors.kDarkTextColor, fontWeight: FontWeight.w500),
@@ -53,7 +53,6 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
         onChanged: (text) {
           state.setSearchText(text);
         },
-     
         controller: controller,
         keyboardType: TextInputType.text,
         decoration: InputDecoration(
@@ -66,9 +65,12 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
             fillColor: AppColors.kLightGrey,
             filled: true,
             prefixIcon: Padding(
-              padding: EdgeInsets.only(left:8,right: 2),
-              child: Icon(HelloIcons.search,size:18,color: AppColors.kDarkGrey,)),
-          
+                padding: EdgeInsets.only(left: 8, right: 2),
+                child: Icon(
+                  HelloIcons.search,
+                  size: 18,
+                  color: AppColors.kDarkGrey,
+                )),
             hintText: hintText,
             hintStyle: AppThemes.searchHintStyle,
             focusColor: AppColors.kPureWhite,
@@ -121,28 +123,47 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
     final update = useValueListenable(controller);
 
     return AppBar(
+      titleSpacing: 8.0,
       backgroundColor: AppColors.kPureWhite,
       elevation: 0,
-      leading: isBackButton
-          ? BackButton(
-              color: AppColors.kDarkGrey,
-              onPressed: () {
+
+      // leading: isBackButton
+      //     ? BackButton(
+
+      //         color: AppColors.kDarkGrey,
+      //         onPressed: () {
+      //           FocusScope.of(context).unfocus();
+      //           state.resetSearch();
+      //           ExtendedNavigator.of(context).pop();
+      //         },
+      //       )
+      //     : isCrossButton
+      //         ? IconButton(
+      //             icon: Icon(HelloIcons.times),
+      //             onPressed: () {
+      //               FocusScope.of(context).unfocus();
+      //               ExtendedNavigator.of(context).pop();
+      //             },
+      //           )
+      //         : Container(),
+      title: title != null ? title : _searchField(context, controller),
+      // actions: _getActionButtons(context),
+      actions: <Widget>[
+        Align(
+          alignment: Alignment.center,
+                  child: GestureDetector(
+            onTap: () {
                 FocusScope.of(context).unfocus();
                 state.resetSearch();
                 ExtendedNavigator.of(context).pop();
-              },
-            )
-          : isCrossButton
-              ? IconButton(
-                  icon: Icon(HelloIcons.times),
-                  onPressed: () {
-                    FocusScope.of(context).unfocus();
-                    ExtendedNavigator.of(context).pop();
-                  },
-                )
-              : Container(),
-      title: title != null ? title : _searchField(context, controller),
-      actions: _getActionButtons(context),
+            },
+            child: Container(
+                padding: const EdgeInsets.only(right: 16.0,top: 4.0,bottom: 4.0),
+                child: Text('Cancel',style: AppThemes.postedAuthorTextSubHeadStyle.copyWith(color: AppColors.kDarkGrey, fontSize: 12.0)),
+              ),
+          ),
+        )
+      ],
       bottom: PreferredSize(
         child: isBottomLine
             ? Container(

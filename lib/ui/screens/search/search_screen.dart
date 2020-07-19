@@ -1,12 +1,10 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:hellohuts_app/constants/hello_icons.dart';
 import 'package:hellohuts_app/models/search/search_item.dart';
-import 'package:hellohuts_app/ui/common_widgets/app_bar/app_bar.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hellohuts_app/ui/common_widgets/search_bar.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
+import 'package:hellohuts_app/ui/styles/app_themes.dart';
 import 'package:provider/provider.dart';
 import 'package:hellohuts_app/states/search_state.dart';
 
@@ -39,13 +37,18 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     final state = Provider.of<SearchState>(context);
     print("building parenr");
-    return Scaffold(
-      appBar: CustomSearchBar(
-        isBackButton: true,
-        iconData: HelloIcons.sliders_v_alt,
-        onActionPressed: onFilterPressed,
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+         home:  SafeArea(
+                    child: Scaffold(
+        appBar: CustomSearchBar(
+            isBackButton: true,
+            iconData: HelloIcons.sliders_v_alt,
+            onActionPressed: onFilterPressed,
+        ),
+        body: SearchBody(),
       ),
-      body: SearchBody(),
+         ),
     );
   }
 
@@ -61,12 +64,10 @@ class SearchBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("building again");
     final state = Provider.of<SearchState>(context);
-    final text = state.searchText;
     final bool isSearching = state.isSearching;
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 48.0),
+      padding: const EdgeInsets.symmetric(horizontal: 18),
       child: isSearching ? _showResults() : _buildSuggestions(),
     );
   }
@@ -82,7 +83,7 @@ class _showResults extends StatelessWidget {
     return ListView.builder(
         itemCount: results.length,
         itemBuilder: (context, index) {
-          return _buildCard(results[index]);
+          return _searchResultsCard(results[index]);
         });
   }
 
@@ -98,23 +99,96 @@ class _showResults extends StatelessWidget {
     );
   }
 
+  Widget _searchResultsCard(SearchItem item) {
+    return Container(
+      height: 64.0,
+      decoration: BoxDecoration(
+        border:
+            Border(bottom: BorderSide(width: 1, color: AppColors.kMediumGrey)),
+      ),
+      child: _searchResultsCardItem(item),
+    );
+  }
+
+  Widget _searchResultsCardItem(SearchItem item) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+      child: Row(
+        children: <Widget>[
+          Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              border:  Border.all(color: AppColors.kMediumGrey,width: 1.0),
+              borderRadius: BorderRadius.circular(8.0),
+              color: AppColors.kLightGrey,
+            ),
+            child: _getLeadingIcon(item.searchType),
+          ),
+          const SizedBox(width: 16.0,),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                child: Text(item.searchString,style: AppThemes.postHeadLineStyle,),
+
+                ),
+              Container(
+                color: Colors.red,
+
+              )
+
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
   Widget _getLeadingIcon(SearchType type) {
-   
     switch (type) {
       case SearchType.Building:
-        return Icon(HelloIcons.building);
+        return _customIconForSeach(
+          HelloIcons.building,
+  
+        );
       case SearchType.Location:
-        return Icon(HelloIcons.location_point);
+        return _customIconForSeach(
+          HelloIcons.location_point,
+         
+        );
       case SearchType.Material:
-        return Icon(HelloIcons.truck);
+        return _customIconForSeach(
+          HelloIcons.truck,
+         
+        );
 
       case SearchType.Professionals:
-        return Icon(HelloIcons.constructor_1);
+        return _customIconForSeach(
+          HelloIcons.constructor_1,
+         
+        );
       case SearchType.Other:
-        return Icon(HelloIcons.post_stamp);
+        return _customIconForSeach(
+                 HelloIcons.book_alt,
+
+         
+        );
       default:
-        return Icon(HelloIcons.building);
+        return _customIconForSeach(
+        HelloIcons.postcard
+         
+        );
     }
+  }
+
+  Widget _customIconForSeach(IconData iconData,{size =16.0,Color color =AppColors.kAlmostBlack}){
+    return Icon(
+      iconData,
+      size:size,
+      color: color,
+
+    );
   }
 }
 

@@ -43,20 +43,23 @@ class SearchState extends AppState {
 
     List<SearchItem> searchResults = [];
     if (_searchText.length != 0 || _searchText.isNotEmpty) {
-      for (SearchItem item in _searchList) {
-        if (item.searchString.toLowerCase().contains(_searchText)) {
-          searchResults.add(item);
-        }
-      }
-
+      // for (SearchItem item in _searchList) {
+      //   if (item.searchString.toLowerCase().contains(_searchText)) {
+      //     searchResults.add(item);
+      //   }
+      // }
+      searchResults = _searchList
+          .where((element) =>
+              element.searchString.toLowerCase().contains(_searchText))
+          .take(6).toList();
       searchResults.sort();
 
       //Removing duplicates if any
-      final distictResults = [
+      final distinctResults = [
         ...{...searchResults}
       ];
 
-      return distictResults;
+      return distinctResults;
     }
   }
 }
