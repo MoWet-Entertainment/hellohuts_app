@@ -17,7 +17,7 @@ class SearchState extends AppState {
   SearchItem get getSelectedItem => _selectedItem;
 
   void setSearchText(String text) {
-    _searchText = text;
+    _searchText = text.toLowerCase();
     print(text);
     if (text.length > 0) {
       _isSearching = true;
