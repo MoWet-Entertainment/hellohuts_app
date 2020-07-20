@@ -11,17 +11,20 @@ import 'package:hellohuts_app/ui/screens/base_page.dart';
 import 'package:hellohuts_app/ui/screens/explore.dart';
 import 'package:hellohuts_app/ui/screens/welcome_page.dart';
 import 'package:hellohuts_app/ui/screens/search/search_screen.dart';
+import 'package:hellohuts_app/ui/screens/search/search_detail.dart';
 
 abstract class Routes {
   static const basePage = '/';
   static const explorePage = '/explore-page';
   static const welcomePage = '/welcome-page';
   static const searchScreen = '/search-screen';
+  static const searchDetail = '/search-detail';
   static const all = {
     basePage,
     explorePage,
     welcomePage,
     searchScreen,
+    searchDetail,
   };
 }
 
@@ -80,6 +83,18 @@ class Router extends RouterBase {
           settings: settings,
           transitionsBuilder: TransitionsBuilders.fadeIn,
         );
+      case Routes.searchDetail:
+        if (hasInvalidArgs<SearchDetailArguments>(args)) {
+          return misTypedArgsRoute<SearchDetailArguments>(args);
+        }
+        final typedArgs =
+            args as SearchDetailArguments ?? SearchDetailArguments();
+        return PageRouteBuilder<dynamic>(
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              SearchDetail(key: typedArgs.key),
+          settings: settings,
+          transitionsBuilder: TransitionsBuilders.slideLeft,
+        );
       default:
         return unknownRoutePage(settings.name);
     }
@@ -114,4 +129,10 @@ class SearchPageArguments {
   final Key key;
   final GlobalKey<ScaffoldState> scaffoldKey;
   SearchPageArguments({this.key, this.scaffoldKey});
+}
+
+//SearchDetail arguments holder class
+class SearchDetailArguments {
+  final Key key;
+  SearchDetailArguments({this.key});
 }

@@ -1,8 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hellohuts_app/constants/hello_icons.dart';
 import 'package:hellohuts_app/models/search/search_item.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hellohuts_app/ui/common_widgets/search_bar.dart';
+import 'package:hellohuts_app/ui/routes/router.gr.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
 import 'package:provider/provider.dart';
@@ -39,16 +41,16 @@ class _SearchPageState extends State<SearchPage> {
     print("building parenr");
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-         home:  SafeArea(
-                    child: Scaffold(
-        appBar: CustomSearchBar(
+      home: SafeArea(
+        child: Scaffold(
+          appBar: CustomSearchBar(
             isBackButton: true,
             iconData: HelloIcons.sliders_v_alt,
             onActionPressed: onFilterPressed,
+          ),
+          body: SearchBody(),
         ),
-        body: SearchBody(),
       ),
-         ),
     );
   }
 
@@ -68,13 +70,13 @@ class SearchBody extends StatelessWidget {
     final bool isSearching = state.isSearching;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 18),
-      child: isSearching ? _showResults() : _buildSuggestions(),
+      child: isSearching ? _ShowResults() : _BuildSuggestions(),
     );
   }
 }
 
-class _showResults extends StatelessWidget {
-  const _showResults({Key key}) : super(key: key);
+class _ShowResults extends StatelessWidget {
+  const _ShowResults({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -83,30 +85,32 @@ class _showResults extends StatelessWidget {
     return ListView.builder(
         itemCount: results.length,
         itemBuilder: (context, index) {
-          return _searchResultsCard(results[index]);
+          return _SearchResultsCard(item: results[index]);
         });
   }
+}
 
-  Widget _buildCard(SearchItem item) {
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-      elevation: 0.5,
-      child: ListTile(
-          leading: _getLeadingIcon(item.searchType),
-          title: Text(
-            item.searchString,
-          )),
-    );
-  }
+class _SearchResultsCard extends StatelessWidget {
+  final SearchItem item;
+  const _SearchResultsCard({Key key, this.item}) : super(key: key);
 
-  Widget _searchResultsCard(SearchItem item) {
-    return Container(
-      height: 64.0,
-      decoration: BoxDecoration(
-        border:
-            Border(bottom: BorderSide(width: 1, color: AppColors.kMediumGrey)),
+  @override
+  Widget build(BuildContext context) {
+    var state = Provider.of<SearchState>(context);
+    return InkWell(
+      child: Container(
+        height: 64.0,
+        decoration: BoxDecoration(
+          border: Border(
+              bottom: BorderSide(width: 1, color: AppColors.kMediumGrey)),
+        ),
+        child: _searchResultsCardItem(item),
       ),
-      child: _searchResultsCardItem(item),
+      onTap: () {
+        state.setSelectedItem(item);
+        print("User wishes to navigate to " + item.searchString + " page");
+        ExtendedNavigator.of(context).pushNamed(Routes.searchDetail);
+      },
     );
   }
 
@@ -119,29 +123,44 @@ class _showResults extends StatelessWidget {
             width: 40,
             height: 40,
             decoration: BoxDecoration(
-              border:  Border.all(color: AppColors.kMediumGrey,width: 1.0),
+              border: Border.all(color: AppColors.kMediumGrey, width: 1.0),
               borderRadius: BorderRadius.circular(8.0),
               color: AppColors.kLightGrey,
             ),
-            child: _getLeadingIcon(item.searchType),
+            child: _GetLeadingIcon(type: item.searchType),
           ),
-          const SizedBox(width: 16.0,),
+          const SizedBox(
+            width: 16.0,
+          ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Container(
-                child: Text(item.searchString,style: AppThemes.postHeadLineStyle,),
-
+                child: Text(
+                  item.searchString,
+                  style: AppThemes.postHeadLineStyle,
                 ),
+              ),
               Container(
                 color: Colors.red,
-
               )
-
             ],
           )
         ],
       ),
+    );
+  }
+}
+
+class _GetLeadingIcon extends StatelessWidget {
+  final SearchType type;
+
+  const _GetLeadingIcon({Key key, this.type}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: _getLeadingIcon(type),
     );
   }
 
@@ -150,50 +169,41 @@ class _showResults extends StatelessWidget {
       case SearchType.Building:
         return _customIconForSeach(
           HelloIcons.building,
-  
         );
       case SearchType.Location:
         return _customIconForSeach(
           HelloIcons.location_point,
-         
         );
       case SearchType.Material:
         return _customIconForSeach(
           HelloIcons.truck,
-         
         );
 
       case SearchType.Professionals:
         return _customIconForSeach(
           HelloIcons.constructor_1,
-         
         );
       case SearchType.Other:
         return _customIconForSeach(
-                 HelloIcons.book_alt,
-
-         
+          HelloIcons.book_alt,
         );
       default:
-        return _customIconForSeach(
-        HelloIcons.postcard
-         
-        );
+        return _customIconForSeach(HelloIcons.postcard);
     }
   }
 
-  Widget _customIconForSeach(IconData iconData,{size =16.0,Color color =AppColors.kAlmostBlack}){
+  Widget _customIconForSeach(IconData iconData,
+      {size = 16.0, Color color = AppColors.kAlmostBlack}) {
     return Icon(
       iconData,
-      size:size,
+      size: size,
       color: color,
-
     );
   }
 }
 
-class _buildSuggestions extends StatelessWidget {
-  const _buildSuggestions({Key key}) : super(key: key);
+class _BuildSuggestions extends StatelessWidget {
+  const _BuildSuggestions({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

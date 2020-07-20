@@ -7,6 +7,14 @@ class SearchState extends AppState {
   String _searchText = '';
   List<SearchItem> searchHistory = [];
   List<SearchItem> _searchList = [];
+  SearchItem _selectedItem;
+
+//When user clicks on the search results, value gets stored in the selectedItem
+  void setSelectedItem(SearchItem item) {
+    _selectedItem = item;
+  }
+
+  SearchItem get getSelectedItem => _selectedItem;
 
   void setSearchText(String text) {
     _searchText = text;
@@ -22,6 +30,7 @@ class SearchState extends AppState {
   void resetSearch() {
     _searchText = "";
     _isSearching = false;
+    _selectedItem = null;
     notifyListeners();
   }
 
@@ -51,7 +60,8 @@ class SearchState extends AppState {
       searchResults = _searchList
           .where((element) =>
               element.searchString.toLowerCase().contains(_searchText))
-          .take(6).toList();
+          .take(6)
+          .toList();
       searchResults.sort();
 
       //Removing duplicates if any
