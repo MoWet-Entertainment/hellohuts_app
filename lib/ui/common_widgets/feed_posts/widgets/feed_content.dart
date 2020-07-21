@@ -120,6 +120,9 @@ class _FeedPostBottomSection extends StatelessWidget {
             FeedPostTitleDetails(model: model),
             FeedPostLikeSection(
               model: model,
+            ),
+             FeedPostLikeSection(
+              model: model,
             )
           ],
         ),

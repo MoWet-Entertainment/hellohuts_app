@@ -11,7 +11,7 @@ class FeedPostTitleDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Flexible(
-      flex: 5,
+      flex: 4,
       child: Padding(
         padding: EdgeInsets.only(left: 16.w),
         child: Column(

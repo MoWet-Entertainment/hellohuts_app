@@ -18,24 +18,34 @@ import 'package:hellohuts_app/models/test.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
-class ExplorePage extends StatelessWidget {
+class ExplorePage extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
   ExplorePage({Key key, this.scaffoldKey}) : super(key: key);
 
+  @override
+  _ExplorePageState createState() => _ExplorePageState();
+}
+
+class _ExplorePageState extends State<ExplorePage>
+    with AutomaticKeepAliveClientMixin<ExplorePage> {
   bool notificationFlag = false;
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       extendBody: true,
       body: Container(
         child: _FeedWidgetBody(
-          key: key,
-          scaffoldKey: scaffoldKey,
+          key: widget.key,
+          scaffoldKey: widget.scaffoldKey,
         ),
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
 
 class _FeedWidgetBody extends StatelessWidget {
@@ -50,7 +60,7 @@ class _FeedWidgetBody extends StatelessWidget {
       ///This feature is not available in flutter stable `1.17.4`
       ///
       /// but available in Master branch
-      
+
       headerSliverBuilder: (context, bool innerBoxIsScrolled) {
         return <Widget>[
           _AppBarTop(
@@ -61,7 +71,6 @@ class _FeedWidgetBody extends StatelessWidget {
       },
       body: _ExplorePostsFeed(
         scaffoldKey: scaffoldKey,
-    
       ),
     );
   }
@@ -70,26 +79,25 @@ class _FeedWidgetBody extends StatelessWidget {
 class _ExplorePostsFeed extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
 
-  const _ExplorePostsFeed({Key key, this.scaffoldKey})
-      : super(key: key);
+  const _ExplorePostsFeed({Key key, this.scaffoldKey}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(32.0), topRight: Radius.circular(32.0)),
+        borderRadius: const BorderRadius.only(
+            topLeft: const Radius.circular(20.0), topRight: const Radius.circular(20.0)),
         color: AppColors.kMediumGrey,
       ),
       child: Padding(
-        padding: EdgeInsets.fromLTRB(16, 16, 16, 64.h),
+        padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
         child: ScrollConfiguration(
           behavior: NeatScrollBehavior(),
           child: Consumer<FeedState>(builder: (context, state, child) {
             final List<FeedModel> list = state.getFeedList();
             return ListView.builder(
               physics: NeverScrollableScrollPhysics(),
-              padding: EdgeInsets.only(bottom: 12),
+              padding: const EdgeInsets.only(top: 12,bottom: 64),
               scrollDirection: Axis.vertical,
               itemCount: list.length,
               itemBuilder: (context, index) {
@@ -123,7 +131,7 @@ class _AppBarTop extends StatelessWidget {
         sliver: SliverPadding(
           padding: EdgeInsets.symmetric(horizontal: 16.0),
           sliver: SliverAppBar(
-            floating: true,   
+            floating: true,
             pinned: false,
 
             ///set `snap` false, when flutter verion `1.17.4` is upgraded
@@ -319,7 +327,7 @@ class _SearchBar extends StatelessWidget {
           ),
         ),
       ),
-      onTap: ()=> ExtendedNavigator.of(context).pushNamed(Routes.searchScreen),
+      onTap: () => ExtendedNavigator.of(context).pushNamed(Routes.searchScreen),
       // onTap: () => showSearch(context: context, delegate: CustomSearchDelegate()),
     );
   }
