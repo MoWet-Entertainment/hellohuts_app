@@ -10,6 +10,7 @@ class AppThemes {
     buttonColor: AppColors.kPrimaryColor,
     canvasColor: AppColors.kPureWhite,
     bottomAppBarColor: AppColors.kPrimaryColor,
+
   );
 
   static final TextStyle postDateAndCategoryStyle = GoogleFonts.openSans(
@@ -28,26 +29,26 @@ static final TextStyle popUpStyle = GoogleFonts.roboto(
   static final TextStyle postHeadLineStyle = GoogleFonts.roboto(
     textStyle: TextStyle(
         color: AppColors.kDarkTextColor,
-        fontSize: 14,
-        fontWeight: FontWeight.w500),
+        fontSize: 12,
+        fontWeight: FontWeight.w400),
   );
 
   static final TextStyle postedAuthorTextMainHeadStyle = GoogleFonts.roboto(
     fontSize: 10.0,
     textStyle:
-        TextStyle(fontWeight: FontWeight.w500, color: AppColors.kDarkTextColor),
+        TextStyle(fontWeight: FontWeight.w400, color: AppColors.kDarkTextColor),
   );
 
   static final TextStyle postedAuthorTextSubHeadStyle = GoogleFonts.roboto(
     fontSize: 8.0,
     textStyle:
-        TextStyle(fontWeight: FontWeight.w500, color: AppColors.kDarkGrey),
+        TextStyle(fontWeight: FontWeight.w400, color: AppColors.kAlmostBlack),
   );
 
   static final TextStyle searchHintStyle = GoogleFonts.openSans(
     fontSize: 14.0,
     textStyle:
-        TextStyle(fontWeight: FontWeight.w400, color: AppColors.kDarkGrey),
+        TextStyle(fontWeight: FontWeight.w200, color: AppColors.kDarkGrey),
   );
 
 }

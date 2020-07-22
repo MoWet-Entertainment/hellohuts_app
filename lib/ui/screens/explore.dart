@@ -86,7 +86,8 @@ class _ExplorePostsFeed extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.only(
-            topLeft: const Radius.circular(20.0), topRight: const Radius.circular(20.0)),
+            topLeft: const Radius.circular(8.0),
+            topRight: const Radius.circular(8.0)),
         color: AppColors.kMediumGrey,
       ),
       child: Padding(
@@ -97,7 +98,7 @@ class _ExplorePostsFeed extends StatelessWidget {
             final List<FeedModel> list = state.getFeedList();
             return ListView.builder(
               physics: NeverScrollableScrollPhysics(),
-              padding: const EdgeInsets.only(top: 12,bottom: 64),
+              padding: const EdgeInsets.only(top: 12, bottom: 64),
               scrollDirection: Axis.vertical,
               itemCount: list.length,
               itemBuilder: (context, index) {
@@ -138,9 +139,10 @@ class _AppBarTop extends StatelessWidget {
             snap: true,
             primary: true,
             forceElevated: innerBoxIsScrolled,
-            elevation: 0,
+            elevation:0.0,
             brightness: Brightness.light,
             backgroundColor: AppColors.kPureWhite,
+          
             leading: appBarIcon(icon: HelloIcons.subject, size: 24),
             actions: <Widget>[
               appBarIcon(

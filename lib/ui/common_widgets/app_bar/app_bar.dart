@@ -44,10 +44,11 @@ Widget appBarIcon(
                   color: AppColors.kPureWhite,
                   borderRadius: BorderRadius.circular(8),
                 ),
-                constraints: BoxConstraints(
-                  minWidth: 16,
-                  minHeight: 16,
-                ),
+                 constraints: BoxConstraints(
+                    maxHeight: 16,
+                    maxWidth: 16,
+                  ),
+              
                 child: Container(
                   decoration: new BoxDecoration(
                     color: AppColors.kAccentColor,

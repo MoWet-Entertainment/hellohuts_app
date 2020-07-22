@@ -21,7 +21,7 @@ class FeedPost extends StatelessWidget {
 
   Widget _feedPosts(FeedModel model) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 12.0),
+      padding: const EdgeInsets.only(bottom: 8.0),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(16.0)),
