@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hellohuts_app/app.dart';
 import 'package:hellohuts_app/constants/hello_icons.dart';
 import 'package:hellohuts_app/models/test.dart';
@@ -23,16 +24,14 @@ class FeedPostContent extends StatelessWidget {
     return GestureDetector(
       // borderRadius: const BorderRadius.all(Radius.circular(16.0)),
 
-        child: Column(
-          children: <Widget>[
-            _FeedPostMiddleSection(model: model),
-            _FeedPostBottomSection(model: model),
-          ],
-        ),
-        onDoubleTap: () => state.addLikeToPost(model, userId),
-        onTap: () => print("user clicked on  the post"),
-      
-    
+      child: Column(
+        children: <Widget>[
+          _FeedPostMiddleSection(model: model),
+          _FeedPostBottomSection(model: model),
+        ],
+      ),
+      onDoubleTap: () => state.addLikeToPost(model, userId),
+      onTap: () => print("user clicked on  the post"),
     );
   }
 
@@ -55,6 +54,7 @@ class _FeedPostMiddleSection extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 0),
       child: AspectRatio(
+        
         aspectRatio: 319.w / 197.15.w,
         child: Image.network(
           list.postImage,
@@ -90,7 +90,6 @@ class _FeedPostBottomSection extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-           
             SizedBox(
               height: 8.0,
             ),
@@ -98,32 +97,32 @@ class _FeedPostBottomSection extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Container(
-                  child: GestureDetector(
-                    child: model.userLiked
-                        ? const Icon(
-                            HelloIcons.heart,
-                            size: 22,
-                            color: AppColors.kDarkRed,
-                          )
-                        : const Icon(
-                            HelloIcons.heart,
-                            size: 22,
-                            color: AppColors.kDarkGrey,
-                          ),
-                    onTap: () {
-                      state.addLikeToPost(model, '1234');
-                    },
-                  ),
+                  child: LikeButton(model: model, state: state),
                 ),
                 SizedBox(
-                  width: 8.0,
+                  width: 10.0,
                 ),
+                // Container(
+                //   child: GestureDetector(
+                //     child: Icon(
+                //       HelloIcons.comment_alt,
+                //       color: AppColors.kAlmostBlack,
+                //       size: 20,
+                //     ),
+                //     onTap: () {
+                //       print('User wants to see comments');
+                //     },
+                //   ),
+                // ),
+                // SizedBox(
+                //   width: 8.0,
+                // ),
                 Container(
                   child: GestureDetector(
                     child: Icon(
                       HelloIcons.comment_alt,
-                      color: AppColors.kDarkGrey,
-                      size: 20,
+                      size: 21,
+                      color: AppColors.kAlmostBlack,
                     ),
                     onTap: () {
                       print('User wants to see comments');
@@ -131,26 +130,37 @@ class _FeedPostBottomSection extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  width: 8.0,
+                  width: 10.0,
                 ),
-                 Container(
+                Container(
                   child: GestureDetector(
                     child: Icon(
-                      HelloIcons.share_alt,
-                      size: 20,
-                      color: AppColors.kDarkGrey,
+                      HelloIcons.navigator,
+                      size: 21,
+                      color: AppColors.kAlmostBlack,
                     ),
                     onTap: () {
                       print('User wants to see comments');
                     },
                   ),
                 ),
-                SizedBox(
-                  width: 8.0,
+                Spacer(),
+
+                Container(
+                  child: GestureDetector(
+                    child: Icon(
+                      HelloIcons.plus_circle,
+                      color: AppColors.kAlmostBlack,
+                      size: 22,
+                    ),
+                    onTap: () {
+                      print('User wants to see comments');
+                    },
+                  ),
                 ),
               ],
             ),
-             SizedBox(
+            SizedBox(
               height: 8.0,
             ),
             Text(
@@ -164,17 +174,51 @@ class _FeedPostBottomSection extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 FeedPostTitleDetails(model: model),
-                FeedPostLikeSection(
-                  model: model,
-                ),
-                FeedPostLikeSection(
-                  model: model,
-                )
+                // FeedPostLikeSection(
+                //   model: model,
+                // ),
+                // FeedPostLikeSection(
+                //   model: model,
+                // )
               ],
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class LikeButton extends StatelessWidget {
+  const LikeButton({
+    Key key,
+    @required this.model,
+    @required this.state,
+  }) : super(key: key);
+
+  final FeedModel model;
+  final FeedState state;
+
+  @override
+  Widget build(BuildContext context) {
+    // var controller = useAnimationController(
+    //     duration: Duration(milliseconds: 300), lowerBound: 0.9, upperBound: 1);
+
+    return GestureDetector(
+      child: model.userLiked
+          ? const Icon(
+              HelloIcons.thumbs_up,
+              size: 22,
+              color: AppColors.kDarkRed,
+            )
+          : const Icon(
+              HelloIcons.thumbs_up,
+              size: 22,
+              color: AppColors.kAlmostBlack,
+            ),
+      onTap: () {
+        state.addLikeToPost(model, '1234');
+      },
     );
   }
 }
