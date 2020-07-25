@@ -2,7 +2,7 @@ import 'package:hellohuts_app/models/test.dart';
    
 class Mock2 {
   static var list = [{
-  "post_title": "Benchmark for visionary Partnerships",
+  "post_title": "Benchmark for visionary. Partnerships, when the things are so cute and we have to find alternate solutions for the same is mandating the necessity to have a global solutions for all the potential problems which society faces!",
   "post_description": "Path fx in oth disease, l femur, subs for fx w routn heal",
   "post_image": "https://images.unsplash.com/photo-1510627489930-0c1b0bfb6785?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
   "posted_user": "Bernette Ruddle",

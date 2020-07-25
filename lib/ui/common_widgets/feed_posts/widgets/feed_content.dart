@@ -21,17 +21,13 @@ class FeedPostContent extends StatelessWidget {
   Widget build(BuildContext context) {
     var userId = '1234';
     var state = Provider.of<FeedState>(context, listen: false);
-    return GestureDetector(
-      // borderRadius: const BorderRadius.all(Radius.circular(16.0)),
-
-      child: Column(
-        children: <Widget>[
-          _FeedPostMiddleSection(model: model),
-          _FeedPostBottomSection(model: model),
-        ],
-      ),
-      onDoubleTap: () => state.addLikeToPost(model, userId),
-      onTap: () => print("user clicked on  the post"),
+    return Column(
+      children: <Widget>[
+        GestureDetector(child: _FeedPostMiddleSection(model: model),
+          onDoubleTap: () => state.addLikeToPost(model, userId),
+        ),
+        _FeedPostBottomSection(model: model),
+      ],
     );
   }
 
@@ -51,6 +47,7 @@ class _FeedPostMiddleSection extends StatelessWidget {
   }
 
   Container _feedPostMiddleSection(FeedModel list) {
+
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 0),
       child: AspectRatio(
@@ -91,14 +88,12 @@ class _FeedPostBottomSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             SizedBox(
-              height: 8.0,
-            ),
+              height: 10.0,
+            ),  
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Container(
-                  child: LikeButton(model: model, state: state),
-                ),
+                LikeButton(model: model, state: state),
                 SizedBox(
                   width: 10.0,
                 ),
@@ -117,57 +112,31 @@ class _FeedPostBottomSection extends StatelessWidget {
                 // SizedBox(
                 //   width: 8.0,
                 // ),
-                Container(
-                  child: GestureDetector(
-                    child: Icon(
-                      HelloIcons.comment_alt,
-                      size: 21,
-                      color: AppColors.kAlmostBlack,
-                    ),
-                    onTap: () {
-                      print('User wants to see comments');
-                    },
-                  ),
-                ),
+                CommentButton(),
                 SizedBox(
                   width: 10.0,
                 ),
-                Container(
-                  child: GestureDetector(
-                    child: Icon(
-                      HelloIcons.navigator,
-                      size: 21,
-                      color: AppColors.kAlmostBlack,
-                    ),
-                    onTap: () {
-                      print('User wants to see comments');
-                    },
-                  ),
+                PinnedWidget(),
+                 SizedBox(
+                  width: 10.0,
                 ),
+                // ViewsCountWidget(),
                 Spacer(),
 
                 Container(
-                  child: GestureDetector(
-                    child: Icon(
-                      HelloIcons.plus_circle,
-                      color: AppColors.kAlmostBlack,
-                      size: 22,
-                    ),
-                    onTap: () {
-                      print('User wants to see comments');
-                    },
-                  ),
+                  child: PlusButton(),
                 ),
               ],
             ),
+              SizedBox(
+              height: 10.0,
+            ),
+            
+            Container(height: 1.0,color: AppColors.kMediumGrey,),
             SizedBox(
               height: 8.0,
             ),
-            Text(
-              '123 likes',
-              style: AppThemes.postHeadLineStyle
-                  .copyWith(fontWeight: FontWeight.w600),
-            ),
+
             Row(
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -189,6 +158,122 @@ class _FeedPostBottomSection extends StatelessWidget {
   }
 }
 
+class PlusButton extends StatelessWidget {
+  const PlusButton({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      child: Icon(
+        HelloIcons.plus_circle,
+        color: AppColors.kAlmostBlack,
+        size: 22,
+      ),
+      onTap: () {
+        print('User wants to see comments');
+      },
+    );
+  }
+}
+
+class ShareWidget extends StatelessWidget {
+  const ShareWidget({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      child: Icon(
+        HelloIcons.navigator,
+        size: 21,
+        color: AppColors.kAlmostBlack,
+      ),
+      onTap: () {
+        print('User wants to Share');
+      },
+    );
+  }
+}
+class PinnedWidget extends StatelessWidget {
+  const PinnedWidget({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+          child: Row(
+        children: <Widget>[
+          Icon(
+            HelloIcons.paperclip,
+            size: 21,
+            color: AppColors.kAlmostBlack,
+          ),
+         SizedBox(width: 4.0,),
+          Text('30',style: TextStyle(fontSize: 10),)
+        ],
+      ),
+         onTap: () {
+              print('User wants to pin the post');
+            },
+    );
+  }
+}
+class ViewsCountWidget extends StatelessWidget {
+  const ViewsCountWidget({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+          child: Row(
+        children: <Widget>[
+          Icon(
+            HelloIcons.eye,
+            size: 21,
+            color: AppColors.kAlmostBlack,
+          ),
+            SizedBox(width: 4.0,),
+          Text('2.3K',style: TextStyle(fontSize: 10),)
+        ],
+      ),
+       onTap: () {
+              print('User wants to see comments');
+            },
+    );
+  }
+}
+
+class CommentButton extends StatelessWidget {
+  const CommentButton({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+          child: Row(
+        children: <Widget>[
+          Icon(
+            HelloIcons.comment,
+            size: 21,
+            color: AppColors.kAlmostBlack,
+          ),
+           SizedBox(width:4.0,),
+          Text('128',style: TextStyle(fontSize: 10),)
+        ],
+      ),
+       onTap: () {
+              print('User wants to see comments');
+            },
+    );
+  }
+}
+
 class LikeButton extends StatelessWidget {
   const LikeButton({
     Key key,
@@ -205,20 +290,27 @@ class LikeButton extends StatelessWidget {
     //     duration: Duration(milliseconds: 300), lowerBound: 0.9, upperBound: 1);
 
     return GestureDetector(
-      child: model.userLiked
-          ? const Icon(
-              HelloIcons.thumbs_up,
-              size: 22,
-              color: AppColors.kDarkRed,
-            )
-          : const Icon(
-              HelloIcons.thumbs_up,
-              size: 22,
-              color: AppColors.kAlmostBlack,
-            ),
-      onTap: () {
-        state.addLikeToPost(model, '1234');
-      },
+          child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          model.userLiked
+              ? const Icon(
+                  HelloIcons.thumbs_up,
+                  size: 22,
+                  color: AppColors.kDarkRed,
+                )
+              : const Icon(
+                  HelloIcons.thumbs_up,
+                  size: 22,
+                  color: AppColors.kAlmostBlack,
+                ),
+          SizedBox(width: 4.0,),
+          Text('1.2K',style: TextStyle(fontSize: 10),)
+        ],
+      ),
+          onTap: () {
+              state.addLikeToPost(model, '1234');
+            },
     );
   }
 }

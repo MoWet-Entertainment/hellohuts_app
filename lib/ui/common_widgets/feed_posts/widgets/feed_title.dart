@@ -1,6 +1,8 @@
+import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:hellohuts_app/models/test.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
+import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -20,14 +22,41 @@ class FeedPostTitleDetails extends StatelessWidget {
             padding: const EdgeInsets.only(top: 4),
             child: Container(
               constraints: BoxConstraints(maxWidth: 333.w),
-              child: Text(
-                model.postTitle,
-                overflow: TextOverflow.ellipsis,
+              child: RichText(
                 maxLines: 2,
-                style: AppThemes.postHeadLineStyle,
+                text: TextSpan(children: <InlineSpan>[
+                  //  TextSpan(text: model.postedUser,style: AppThemes.postHeadLineStyle.copyWith(fontWeight: FontWeight.w500)),
+                  WidgetSpan(
+                    alignment: PlaceholderAlignment.middle,
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 4.0),
+                      child: Text(
+                        model.postedUser,
+                        style: AppThemes.postHeadLineUserStyle,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      ),
+                    ),
+                  ),
+                  WidgetSpan(
+                      alignment: PlaceholderAlignment.middle,
+                      child: ExpandableText(
+                        model.postTitle,
+                        expandText: "more",
+                        collapseText: '',
+                        linkColor: AppColors.kDarkGrey,
+                        style: AppThemes.postHeadLineStyle,
+                      )),
+                ]),
               ),
             ),
           ),
+          SizedBox(height: 4.0),
+
+          //TODO:Add a condition for comments present or not here
+          //Show the commments text should be based on whether
+          //comments are present in the post or not
+          PostCommentsPlaceholder(model: model),
           Padding(
             padding: const EdgeInsets.only(top: 4, bottom: 8.0),
             child: Row(
@@ -42,9 +71,29 @@ class FeedPostTitleDetails extends StatelessWidget {
                     style: AppThemes.postDateAndCategoryStyle),
               ],
             ),
-          )
+          ),
         ],
       ),
+    );
+  }
+}
+
+class PostCommentsPlaceholder extends StatelessWidget {
+  final FeedModel model;
+  const PostCommentsPlaceholder({Key key, this.model}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      child: Container(
+        child: Text('See all comments',
+            style: AppThemes.postHeadLineStyle.copyWith(
+                fontWeight: FontWeight.w300, color: AppColors.kDarkGrey)),
+      ),
+      onTap: () {
+        //TODO: Add Navigation to the Comment Section here
+        print("User wants to see all the comments");
+      },
     );
   }
 }

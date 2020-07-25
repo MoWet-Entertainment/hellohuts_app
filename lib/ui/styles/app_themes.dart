@@ -10,7 +10,6 @@ class AppThemes {
     buttonColor: AppColors.kPrimaryColor,
     canvasColor: AppColors.kPureWhite,
     bottomAppBarColor: AppColors.kPrimaryColor,
-
   );
 
   static final TextStyle postDateAndCategoryStyle = GoogleFonts.openSans(
@@ -20,16 +19,23 @@ class AppThemes {
         fontWeight: FontWeight.w400),
   );
 
-static final TextStyle popUpStyle = GoogleFonts.roboto(
+  static final TextStyle popUpStyle = GoogleFonts.roboto(
     textStyle: TextStyle(
         color: AppColors.kDarkGrey,
-        fontSize: 12.0,
+        fontSize: 14.0,
         fontWeight: FontWeight.w400),
   );
+  static final TextStyle postHeadLineUserStyle =GoogleFonts.roboto(
+    textStyle: TextStyle(
+        color: AppColors.kDarkTextColor,
+        fontSize: 13,
+        fontWeight: FontWeight.w500),
+  );
+    
   static final TextStyle postHeadLineStyle = GoogleFonts.roboto(
     textStyle: TextStyle(
         color: AppColors.kDarkTextColor,
-        fontSize: 12,
+        fontSize: 13,
         fontWeight: FontWeight.w400),
   );
 
@@ -50,5 +56,4 @@ static final TextStyle popUpStyle = GoogleFonts.roboto(
     textStyle:
         TextStyle(fontWeight: FontWeight.w200, color: AppColors.kDarkGrey),
   );
-
 }
