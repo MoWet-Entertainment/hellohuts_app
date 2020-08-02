@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_route/auto_route_annotations.dart';
-import 'package:hellohuts_app/ui/common_widgets/feed_posts/comments/comments_screen.dart';
+import 'package:hellohuts_app/models/user_feed/post_detail.dart';
 import 'package:hellohuts_app/ui/screens/base_page.dart';
 import 'package:hellohuts_app/ui/screens/explore.dart';
+import 'package:hellohuts_app/ui/screens/feed_posts/feed_post_detail.dart';
+import 'package:hellohuts_app/ui/screens/feed_posts/widgets/comments/post_comments_deatil.dart';
 import 'package:hellohuts_app/ui/screens/search/search_detail.dart';
 import 'package:hellohuts_app/ui/screens/search/search_screen.dart';
 import 'package:hellohuts_app/ui/screens/welcome_page.dart';
@@ -23,7 +25,9 @@ class $Router {
   @CustomRoute(transitionsBuilder: TransitionsBuilders.slideLeft)
   SearchDetail searchDetail;
 
- @CustomRoute(transitionsBuilder: TransitionsBuilders.slideBottom)
+
+  PostDetailScreen postDetailScreen;
+  @CustomRoute(transitionsBuilder: TransitionsBuilders.slideBottom)
   PostCommentsDetail commentsDetail;
 
   // SignIn signIn;

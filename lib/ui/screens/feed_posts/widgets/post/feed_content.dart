@@ -8,11 +8,12 @@ import 'package:hellohuts_app/constants/hello_icons.dart';
 import 'package:hellohuts_app/models/test.dart';
 import 'package:hellohuts_app/states/feed_state.dart';
 import 'package:hellohuts_app/ui/routes/router.gr.dart';
+import 'package:hellohuts_app/ui/screens/feed_posts/feed_post_detail.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
 import 'package:provider/provider.dart';
-import 'feed_like_section.dart';
-import 'feed_title.dart';
+import '../likes/feed_like_section.dart';
+import 'feed_content_title.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:math' as math;
 
@@ -29,6 +30,9 @@ class FeedPostContent extends StatelessWidget {
         GestureDetector(
           child: _FeedPostMiddleSection(model: model),
           onDoubleTap: () => state.addLikeToPost(model, userId),
+          onTap: () => {
+            ExtendedNavigator.of(context).pushNamed(Routes.postDetailScreen,arguments: PostDetailScreenArguments(model: model,))
+          },
         ),
         _FeedPostBottomSection(model: model),
       ],
@@ -37,6 +41,7 @@ class FeedPostContent extends StatelessWidget {
 
   void onTapPost(BuildContext context) {
     var feedState = Provider.of<FeedState>(context, listen: false);
+    print("user tapped on post");
     // feedState.getPostDetailsFromDatabase(model: model);
   }
 }
@@ -102,21 +107,6 @@ class _FeedPostBottomSection extends StatelessWidget {
                 SizedBox(
                   width: 10.0,
                 ),
-                // Container(
-                //   child: GestureDetector(
-                //     child: Icon(
-                //       HelloIcons.comment_alt,
-                //       color: AppColors.kAlmostBlack,
-                //       size: 20,
-                //     ),
-                //     onTap: () {
-                //       print('User wants to see comments');
-                //     },
-                //   ),
-                // ),
-                // SizedBox(
-                //   width: 8.0,
-                // ),
                 CommentButton(),
                 SizedBox(
                   width: 10.0,
@@ -125,9 +115,7 @@ class _FeedPostBottomSection extends StatelessWidget {
                 SizedBox(
                   width: 10.0,
                 ),
-                // ViewsCountWidget(),
                 Spacer(),
-
                 Container(
                   child: PlusButton(),
                 ),
@@ -271,7 +259,8 @@ class CommentButton extends StatelessWidget {
   final String commentCount;
   const CommentButton({
     Key key,
-    this.postId, this.commentCount ='',
+    this.postId,
+    this.commentCount = '',
   }) : super(key: key);
 
   @override
@@ -296,52 +285,6 @@ class CommentButton extends StatelessWidget {
       onTap: () {
         print('User wants to see comments');
         ExtendedNavigator.of(context).pushNamed(Routes.commentsDetail);
-      },
-    );
-  }
-}
-
-class LikeButton extends StatelessWidget {
-  const LikeButton({
-    Key key,
-    @required this.model,
-    @required this.state,
-  }) : super(key: key);
-
-  final FeedModel model;
-  final FeedState state;
-
-  @override
-  Widget build(BuildContext context) {
-    // var controller = useAnimationController(
-    //     duration: Duration(milliseconds: 300), lowerBound: 0.9, upperBound: 1);
-//TODO: ADD Aimation to give resoponse to the user
-    return GestureDetector(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          model.userLiked
-              ? const Icon(
-                  HelloIcons.thumbs_up,
-                  size: 22,
-                  color: AppColors.kDarkRed,
-                )
-              : const Icon(
-                  HelloIcons.thumbs_up,
-                  size: 22,
-                  color: AppColors.kAlmostBlack,
-                ),
-          SizedBox(
-            width: 4.0,
-          ),
-          Text(
-            '1.2K',
-            style: TextStyle(fontSize: 10),
-          )
-        ],
-      ),
-      onTap: () {
-        state.addLikeToPost(model, '1234');
       },
     );
   }

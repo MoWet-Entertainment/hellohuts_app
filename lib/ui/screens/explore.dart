@@ -8,8 +8,8 @@ import 'package:hellohuts_app/constants/hello_icons.dart';
 
 import 'package:hellohuts_app/states/feed_state.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
-import 'package:hellohuts_app/ui/common_widgets/feed_posts/feed_post.dart';
 import 'package:hellohuts_app/ui/routes/router.gr.dart';
+import 'package:hellohuts_app/ui/screens/feed_posts/feed_post.dart';
 import 'package:hellohuts_app/ui/screens/search/search_screen.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/common_widgets/app_bar/app_bar.dart';

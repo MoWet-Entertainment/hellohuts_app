@@ -5,14 +5,15 @@ import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
 
 class PostCommentsDetail extends StatelessWidget {
-  const PostCommentsDetail({Key key, this.model}) : super(key: key);
+  const PostCommentsDetail({Key key, this.model, this.commentsParentPostId}) : super(key: key);
+  final String commentsParentPostId;
   final Comment model;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-          home: SafeArea(
-            child: Scaffold(
+      home: SafeArea(
+        child: Scaffold(
           appBar: AppBar(
             titleSpacing: 8.0,
             backgroundColor: AppColors.kPureWhite,
@@ -26,7 +27,10 @@ class PostCommentsDetail extends StatelessWidget {
               },
             ),
 
-            title: Text('Comments',style: AppThemes.postHeadLineStyle,),
+            title: Text(
+              'Comments',
+              style: AppThemes.postHeadLineStyle,
+            ),
             // actions: _getActionButtons(context),
             actions: <Widget>[
               Align(
@@ -36,11 +40,11 @@ class PostCommentsDetail extends StatelessWidget {
                     FocusScope.of(context).unfocus();
                   },
                   child: Container(
-                    padding:
-                        const EdgeInsets.only(right: 16.0, top: 4.0, bottom: 4.0),
+                    padding: const EdgeInsets.only(
+                        right: 16.0, top: 4.0, bottom: 4.0),
                     child: Text('Cancel',
-                        style: AppThemes.postedAuthorTextSubHeadStyle
-                            .copyWith(color: AppColors.kDarkGrey, fontSize: 12.0)),
+                        style: AppThemes.postedAuthorTextSubHeadStyle.copyWith(
+                            color: AppColors.kDarkGrey, fontSize: 12.0)),
                   ),
                 ),
               )
@@ -66,7 +70,9 @@ class _CommentsDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Center(child: Text('COmments'),),
+      child: Center(
+        child: Text('COmments'),
+      ),
     );
   }
 }
