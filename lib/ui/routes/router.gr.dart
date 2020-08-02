@@ -11,17 +11,24 @@ import 'package:hellohuts_app/ui/screens/base_page.dart';
 import 'package:hellohuts_app/ui/screens/explore.dart';
 import 'package:hellohuts_app/ui/screens/welcome_page.dart';
 import 'package:hellohuts_app/ui/screens/search/search_screen.dart';
+import 'package:hellohuts_app/ui/screens/search/search_detail.dart';
+import 'package:hellohuts_app/ui/common_widgets/feed_posts/comments/comments_screen.dart';
+import 'package:hellohuts_app/models/user_feed/comments.dart';
 
 abstract class Routes {
   static const basePage = '/';
   static const explorePage = '/explore-page';
   static const welcomePage = '/welcome-page';
   static const searchScreen = '/search-screen';
+  static const searchDetail = '/search-detail';
+  static const commentsDetail = '/comments-detail';
   static const all = {
     basePage,
     explorePage,
     welcomePage,
     searchScreen,
+    searchDetail,
+    commentsDetail,
   };
 }
 
@@ -70,14 +77,37 @@ class Router extends RouterBase {
           transitionsBuilder: TransitionsBuilders.slideBottom,
         );
       case Routes.searchScreen:
-        if (hasInvalidArgs<SearchScreenArguments>(args)) {
-          return misTypedArgsRoute<SearchScreenArguments>(args);
+        if (hasInvalidArgs<SearchPageArguments>(args)) {
+          return misTypedArgsRoute<SearchPageArguments>(args);
+        }
+        final typedArgs = args as SearchPageArguments ?? SearchPageArguments();
+        return PageRouteBuilder<dynamic>(
+          pageBuilder: (context, animation, secondaryAnimation) => SearchPage(
+              key: typedArgs.key, scaffoldKey: typedArgs.scaffoldKey),
+          settings: settings,
+          transitionsBuilder: TransitionsBuilders.fadeIn,
+        );
+      case Routes.searchDetail:
+        if (hasInvalidArgs<SearchDetailArguments>(args)) {
+          return misTypedArgsRoute<SearchDetailArguments>(args);
         }
         final typedArgs =
-            args as SearchScreenArguments ?? SearchScreenArguments();
+            args as SearchDetailArguments ?? SearchDetailArguments();
         return PageRouteBuilder<dynamic>(
           pageBuilder: (context, animation, secondaryAnimation) =>
-              SearchScreen(key: typedArgs.key),
+              SearchDetail(key: typedArgs.key),
+          settings: settings,
+          transitionsBuilder: TransitionsBuilders.slideLeft,
+        );
+      case Routes.commentsDetail:
+        if (hasInvalidArgs<PostCommentsDetailArguments>(args)) {
+          return misTypedArgsRoute<PostCommentsDetailArguments>(args);
+        }
+        final typedArgs = args as PostCommentsDetailArguments ??
+            PostCommentsDetailArguments();
+        return PageRouteBuilder<dynamic>(
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              PostCommentsDetail(key: typedArgs.key, model: typedArgs.model),
           settings: settings,
           transitionsBuilder: TransitionsBuilders.slideBottom,
         );
@@ -110,8 +140,22 @@ class WelcomePageArguments {
   WelcomePageArguments({this.key});
 }
 
-//SearchScreen arguments holder class
-class SearchScreenArguments {
+//SearchPage arguments holder class
+class SearchPageArguments {
   final Key key;
-  SearchScreenArguments({this.key});
+  final GlobalKey<ScaffoldState> scaffoldKey;
+  SearchPageArguments({this.key, this.scaffoldKey});
+}
+
+//SearchDetail arguments holder class
+class SearchDetailArguments {
+  final Key key;
+  SearchDetailArguments({this.key});
+}
+
+//PostCommentsDetail arguments holder class
+class PostCommentsDetailArguments {
+  final Key key;
+  final Comment model;
+  PostCommentsDetailArguments({this.key, this.model});
 }

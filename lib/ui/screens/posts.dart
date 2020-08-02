@@ -13,7 +13,7 @@ class Posts extends StatelessWidget {
       margin: EdgeInsets.all(8.0),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
-        child: Card(
+        child: Card(  
           shadowColor: Colors.black,
           child: Column(
             children: <Widget>[

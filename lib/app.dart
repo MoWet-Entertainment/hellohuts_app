@@ -1,15 +1,13 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
 import 'package:hellohuts_app/helper/app_config.dart';
 import 'package:hellohuts_app/locators.dart';
 import 'package:hellohuts_app/providers/providers.dart';
 import 'package:hellohuts_app/services/firestore_services/analytics_service.dart';
 import 'package:hellohuts_app/ui/routes/guards/auth_guards.dart';
-import 'package:hellohuts_app/ui/routes/router.gr.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
 import 'package:provider/provider.dart';
+import 'package:hellohuts_app/ui/routes/router.gr.dart';
 
 class App extends StatelessWidget {
   const App({Key key}) : super(key: key);

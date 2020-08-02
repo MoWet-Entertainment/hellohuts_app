@@ -7,6 +7,7 @@ class FeedModel {
   String postedDate;
   String postCategory;
   String userAvatar;
+  bool userLiked;
 
   FeedModel(
       {this.postTitle,
@@ -27,6 +28,7 @@ class FeedModel {
     postedDate = map["posted_date"];
     postCategory = map["post_category"];
     userAvatar = map["user_avatar"];
+    userLiked = map["user_liked"];
   }
   toJson() {
     return {
@@ -38,6 +40,7 @@ class FeedModel {
       "posted_date": this.postedDate,
       "post_category": this.postCategory,
       "user_avatar": this.userAvatar,
+      "user_liked": this.userLiked,
     };
   }
 
