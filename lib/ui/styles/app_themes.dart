@@ -52,8 +52,8 @@ class AppThemes {
   );
 
   static final TextStyle searchHintStyle = GoogleFonts.openSans(
-    fontSize: 14.0,
+    fontSize: 12.0,
     textStyle:
-        TextStyle(fontWeight: FontWeight.w200, color: AppColors.kDarkGrey),
+        TextStyle(fontWeight: FontWeight.w400, color: AppColors.kDarkGrey),
   );
 }
