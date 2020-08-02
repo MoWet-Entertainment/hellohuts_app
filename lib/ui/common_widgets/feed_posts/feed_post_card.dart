@@ -48,7 +48,7 @@ class FeedPostCard extends StatelessWidget {
 
   Widget _feedPostTopSection(BuildContext context, FeedModel list) {
     return Padding(
-      padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 16.h, bottom: 8.h),
+      padding: EdgeInsets.only(left: 16, right: 0, top: 16.h, bottom: 8.h),
       child: Row(
         children: <Widget>[
           postedUserSection(context,

@@ -21,10 +21,10 @@ class FeedPost extends StatelessWidget {
 
   Widget _feedPosts(FeedModel model) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 12.0),
+      padding: const EdgeInsets.only(bottom: 8.0),
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(32.0)),
+          borderRadius: const BorderRadius.all(Radius.circular(16.0)),
           color: AppColors.kPureWhite,
         ),
         child: Column(

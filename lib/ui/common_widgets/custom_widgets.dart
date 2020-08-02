@@ -184,19 +184,17 @@ Widget postedUserSection(BuildContext context,
     double radiusOfAvatar = 8}) {
   return Container(
     child: Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        Align(
-          alignment: Alignment.center,
-          child: CircleAvatar(
-            radius: radiusOfAvatar,
-            backgroundColor: AppColors.kDarkGrey,
-            backgroundImage: NetworkImage(imagePath),
-          ),
+        CircleAvatar(
+          radius: radiusOfAvatar,
+          backgroundColor: AppColors.kDarkGrey,
+          backgroundImage: NetworkImage(imagePath),
         ),
-        spacer(width: 4.0),
+        spacer(width: 8.0),
         Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Container(
                 constraints:

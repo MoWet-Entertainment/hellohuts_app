@@ -14,7 +14,7 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  PageController _pageController;
+
   int _selectedIcon = 0;
   double ICON_OFF = -3;
   double ICON_ON = 0;
@@ -25,7 +25,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   int ANIM_DURATION = 300;
   @override
   void initState() {
-    _pageController = widget.pageController;
+
     ScreenUtil.init(width: 375, height: 801);
     super.initState();
   }
@@ -36,9 +36,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
       padding: EdgeInsets.symmetric(horizontal: 48.0),
       decoration: BoxDecoration(
         color: AppColors.kNavBarColor,
-         borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(24.0), topRight: Radius.circular(24.0)),
-
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(24.0), topRight: Radius.circular(24.0)),
       ),
       height: 64.h,
       width: MediaQuery.of(context).size.width,
@@ -80,8 +79,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
               setState(() {
                 _selectedIcon = index;
                 state.setPageIndex = index;
+                widget.pageController.jumpToPage(index);
               });
               //TODO: Remove this line
+
               print("Page Index is ${state.pageIndex}");
             },
           ),

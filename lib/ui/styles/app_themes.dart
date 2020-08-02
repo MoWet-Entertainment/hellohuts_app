@@ -19,35 +19,41 @@ class AppThemes {
         fontWeight: FontWeight.w400),
   );
 
-static final TextStyle popUpStyle = GoogleFonts.roboto(
+  static final TextStyle popUpStyle = GoogleFonts.roboto(
     textStyle: TextStyle(
         color: AppColors.kDarkGrey,
-        fontSize: 12.0,
+        fontSize: 14.0,
         fontWeight: FontWeight.w400),
   );
+  static final TextStyle postHeadLineUserStyle =GoogleFonts.roboto(
+    textStyle: TextStyle(
+        color: AppColors.kDarkTextColor,
+        fontSize: 13,
+        fontWeight: FontWeight.w500),
+  );
+    
   static final TextStyle postHeadLineStyle = GoogleFonts.roboto(
     textStyle: TextStyle(
         color: AppColors.kDarkTextColor,
-        fontSize: 14,
-        fontWeight: FontWeight.w500),
+        fontSize: 13,
+        fontWeight: FontWeight.w400),
   );
 
   static final TextStyle postedAuthorTextMainHeadStyle = GoogleFonts.roboto(
     fontSize: 10.0,
     textStyle:
-        TextStyle(fontWeight: FontWeight.w500, color: AppColors.kDarkTextColor),
+        TextStyle(fontWeight: FontWeight.w400, color: AppColors.kDarkTextColor),
   );
 
   static final TextStyle postedAuthorTextSubHeadStyle = GoogleFonts.roboto(
     fontSize: 8.0,
     textStyle:
-        TextStyle(fontWeight: FontWeight.w500, color: AppColors.kDarkGrey),
+        TextStyle(fontWeight: FontWeight.w400, color: AppColors.kAlmostBlack),
   );
 
   static final TextStyle searchHintStyle = GoogleFonts.openSans(
-    fontSize: 14.0,
+    fontSize: 12.0,
     textStyle:
         TextStyle(fontWeight: FontWeight.w400, color: AppColors.kDarkGrey),
   );
-
 }

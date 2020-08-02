@@ -24,6 +24,10 @@ class _BasePageState extends State<BasePage> {
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   int pageIndex = 0;
+  final PageController _pageController = PageController(
+    initialPage: 0,
+    keepPage: true,
+  );
 
   @override
   void initState() {
@@ -44,10 +48,28 @@ class _BasePageState extends State<BasePage> {
     state.getDataFromDatabase();
   }
 
+  // Widget _body(int index) {
+  //   return IndexedStack(
+  //     children: <Widget>[ExplorePage(), WelcomePage(), FirstPage(), FirstPage()],
+  //     index: index,
+  //   );
+  // }
+
   Widget _body(int index) {
-    return IndexedStack(
-      children: <Widget>[ExplorePage(), WelcomePage(), FirstPage(), FirstPage()],
-      index: index,
+    var state = Provider.of<AppState>(context);
+    return PageView(
+      physics: NeverScrollableScrollPhysics(),
+      children: <Widget>[
+        ExplorePage(),
+        WelcomePage(),
+        FirstPage(),
+        FirstPage()
+      ],
+      controller: _pageController,
+      
+      onPageChanged: (page) {
+        state.setPageIndex = page;
+      },
     );
   }
 
@@ -91,6 +113,16 @@ class _BasePageState extends State<BasePage> {
   //   );
   // }
 
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Scaffold(
+  //     key: _scaffoldKey,
+  //     body: _body(Provider.of<AppState>(context).pageIndex),
+  //     extendBody: true,
+  //     backgroundColor: AppColors.kPureWhite,
+  //     bottomNavigationBar: BottomNavBar(),
+  //   );
+  // }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,7 +130,7 @@ class _BasePageState extends State<BasePage> {
       body: _body(Provider.of<AppState>(context).pageIndex),
       extendBody: true,
       backgroundColor: AppColors.kPureWhite,
-      bottomNavigationBar: BottomNavBar(),
+      bottomNavigationBar: BottomNavBar(pageController: _pageController,),
     );
   }
 }

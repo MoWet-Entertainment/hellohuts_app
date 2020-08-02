@@ -1166,9 +1166,23 @@ class HelloIcons {
   static const IconData yen = IconData(0xec84, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData yen_circle = IconData(0xec85, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData yin_yang = IconData(0xec86, fontFamily: _kFontFam, fontPackage: _kFontPkg);
- static const IconData heart_filled = IconData(0xec94, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData abacus = IconData(0xec93, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData heart_1 = IconData(0xec94, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData truck_icon = IconData(0xec95, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData cost_estimate_icon = IconData(0xec96, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData professionals_icon = IconData(0xec97, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData menu_icon = IconData(0xec98, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData heart_empty_2 = IconData(0xec99, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData heart_2 = IconData(0xec9a, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData heart_empty_1 = IconData(0xec9b, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData heart_3 = IconData(0xec9c, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData heart_filled_1 = IconData(0xec9d, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData heart_filled = IconData(0xec9e, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData heart_empty = IconData(0xec9f, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData thumbs_up_1 = IconData(0xeca0, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData thumbs_down_1 = IconData(0xeca1, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData thumbs_up_2 = IconData(0xeca2, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData thumbs_down_2 = IconData(0xeca3, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData thumbs_up_alt = IconData(0xf164, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData thumbs_down_alt = IconData(0xf165, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }

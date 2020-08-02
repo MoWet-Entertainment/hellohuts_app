@@ -7,7 +7,7 @@ import 'package:meta/meta.dart';
 class FeedState extends AppState {
   bool isBusy = false;
 
-  bool _notificationFlag = false;
+  bool _notificationFlag = true;
 
   List<FeedModel> _feedList = [];
   PostDetail _postDetail;

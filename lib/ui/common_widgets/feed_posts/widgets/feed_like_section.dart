@@ -26,13 +26,13 @@ class FeedPostLikeSection extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 24.0),
           icon: model.userLiked
               ? const Icon(
-                  HelloIcons.heart_filled,
-                  size: 21,
+                  HelloIcons.heart_1,
+              
                   color: AppColors.kDarkRed,
                 )
               : const Icon(
-                  HelloIcons.heart,
-                  size: 28,
+                  HelloIcons.heart_empty_1,
+                
                   color: AppColors.kDarkGrey,
                 ),
           onPressed: () {

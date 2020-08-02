@@ -12,6 +12,8 @@ import 'package:hellohuts_app/ui/screens/explore.dart';
 import 'package:hellohuts_app/ui/screens/welcome_page.dart';
 import 'package:hellohuts_app/ui/screens/search/search_screen.dart';
 import 'package:hellohuts_app/ui/screens/search/search_detail.dart';
+import 'package:hellohuts_app/ui/common_widgets/feed_posts/comments/comments_screen.dart';
+import 'package:hellohuts_app/models/user_feed/comments.dart';
 
 abstract class Routes {
   static const basePage = '/';
@@ -19,12 +21,14 @@ abstract class Routes {
   static const welcomePage = '/welcome-page';
   static const searchScreen = '/search-screen';
   static const searchDetail = '/search-detail';
+  static const commentsDetail = '/comments-detail';
   static const all = {
     basePage,
     explorePage,
     welcomePage,
     searchScreen,
     searchDetail,
+    commentsDetail,
   };
 }
 
@@ -95,6 +99,18 @@ class Router extends RouterBase {
           settings: settings,
           transitionsBuilder: TransitionsBuilders.slideLeft,
         );
+      case Routes.commentsDetail:
+        if (hasInvalidArgs<PostCommentsDetailArguments>(args)) {
+          return misTypedArgsRoute<PostCommentsDetailArguments>(args);
+        }
+        final typedArgs = args as PostCommentsDetailArguments ??
+            PostCommentsDetailArguments();
+        return PageRouteBuilder<dynamic>(
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              PostCommentsDetail(key: typedArgs.key, model: typedArgs.model),
+          settings: settings,
+          transitionsBuilder: TransitionsBuilders.slideBottom,
+        );
       default:
         return unknownRoutePage(settings.name);
     }
@@ -135,4 +151,11 @@ class SearchPageArguments {
 class SearchDetailArguments {
   final Key key;
   SearchDetailArguments({this.key});
+}
+
+//PostCommentsDetail arguments holder class
+class PostCommentsDetailArguments {
+  final Key key;
+  final Comment model;
+  PostCommentsDetailArguments({this.key, this.model});
 }
