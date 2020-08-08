@@ -55,33 +55,29 @@ class _FeedPostMiddleSection extends StatelessWidget {
     return _feedPostMiddleSection(model);
   }
 
-  Widget _feedPostMiddleSection(FeedModel list) {
+  Container _feedPostMiddleSection(FeedModel list) {
     //TODO: Add a method to pick the aspect ratio from JSON
     final bool _customAspectRatio = false;
-    return ClipRRect(
-    borderRadius: const BorderRadius.all(Radius.circular(16)),
-          child: Container(
-      
-        padding: const EdgeInsets.symmetric(horizontal: 0),
-        child: AspectRatio(
-          aspectRatio: _customAspectRatio ? 1 : (319.w / 197.15.w),
-          // aspectRatio: 319.w / 197.15.w,
-          child: Image.network(
-            list.postImage,
-            fit: BoxFit.cover,
-            loadingBuilder: (BuildContext context, Widget child,
-                ImageChunkEvent loadingProgress) {
-              if (loadingProgress == null) return child;
-              return Center(
-                child: CircularProgressIndicator(
-                  value: loadingProgress.expectedTotalBytes != null
-                      ? loadingProgress.cumulativeBytesLoaded /
-                          loadingProgress.expectedTotalBytes
-                      : null,
-                ),
-              );
-            },
-          ),
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 0),
+      child: AspectRatio(
+        aspectRatio: _customAspectRatio ? 1 : (319.w / 197.15.w),
+        // aspectRatio: 319.w / 197.15.w,
+        child: Image.network(
+          list.postImage,
+          fit: BoxFit.cover,
+          loadingBuilder: (BuildContext context, Widget child,
+              ImageChunkEvent loadingProgress) {
+            if (loadingProgress == null) return child;
+            return Center(
+              child: CircularProgressIndicator(
+                value: loadingProgress.expectedTotalBytes != null
+                    ? loadingProgress.cumulativeBytesLoaded /
+                        loadingProgress.expectedTotalBytes
+                    : null,
+              ),
+            );
+          },
         ),
       ),
     );

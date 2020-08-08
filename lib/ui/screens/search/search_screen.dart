@@ -109,7 +109,7 @@ class _SearchResultsCard extends StatelessWidget {
       onTap: () {
         state.setSelectedItem(item);
         print("User wishes to navigate to " + item.searchString + " page");
-        ExtendedNavigator.of(context).pushNamed(Routes.searchDetail);
+        ExtendedNavigator.of(context).push(Routes.searchDetail);
       },
     );
   }
