@@ -3,7 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hellohuts_app/models/test.dart';
-import 'package:hellohuts_app/ui/common_widgets/feed_posts/widgets/widgets.dart';
+import 'package:hellohuts_app/ui/screens/feed_posts/widgets/post/feed_content.dart';
+import 'package:hellohuts_app/ui/screens/feed_posts/widgets/post/feed_top_section.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 
 class FeedPost extends StatelessWidget {

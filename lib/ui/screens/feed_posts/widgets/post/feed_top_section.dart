@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hellohuts_app/constants/hello_icons.dart';
 import 'package:hellohuts_app/models/test.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
-import 'package:hellohuts_app/ui/common_widgets/feed_posts/widgets/feed_popup.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hellohuts_app/ui/screens/feed_posts/widgets/board/add_to_board.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 
 class FeedPostTopSection extends StatelessWidget {

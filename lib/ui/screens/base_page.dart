@@ -31,12 +31,13 @@ class _BasePageState extends State<BasePage> {
 
   @override
   void initState() {
-    ScreenUtil.init(width: 375, height: 801);
+
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         statusBarColor: AppColors.kPureWhite,
         statusBarIconBrightness: Brightness.dark));
     WidgetsBinding.instance.addPostFrameCallback((_) {
       //TODO: Initialise all the db functionalities here
+          ScreenUtil.init(context,width: 375, height: 801);
       initFeedPosts();
     });
     super.initState();
