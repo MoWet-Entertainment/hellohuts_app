@@ -9,7 +9,7 @@ import 'package:hellohuts_app/constants/hello_icons.dart';
 import 'package:hellohuts_app/states/feed_state.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
 import 'package:hellohuts_app/ui/routes/router.gr.dart';
-import 'package:hellohuts_app/ui/screens/feed_posts/feed_post.dart';
+import 'package:hellohuts_app/ui/screens/feed_posts_copy/feed_post.dart';
 import 'package:hellohuts_app/ui/screens/search/search_screen.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/common_widgets/app_bar/app_bar.dart';
@@ -232,31 +232,36 @@ class _HeaderSection extends StatelessWidget {
           call: _callCostEstimate,
         ),
         _quickPickItem(
-            icon: HelloIcons.constructor_1, text: "Professionals", call: _callProfessionals),
-        _quickPickItem(icon: HelloIcons.truck, text: "Materials", call: _callMaterials),
-        _quickPickItem(icon: HelloIcons.apps, text: 'More', call: _callMoreItems),
+            icon: HelloIcons.constructor_1,
+            text: "Professionals",
+            call: _callProfessionals),
+        _quickPickItem(
+            icon: HelloIcons.truck, text: "Materials", call: _callMaterials),
+        _quickPickItem(
+            icon: HelloIcons.apps, text: 'More', call: _callMoreItems),
       ],
     );
   }
 
   void _callProfessionals() {
     print("Clicked Proferssionals");
-    ExtendedNavigator.named(Routes.professionals);
+    ExtendedNavigator.root.push(Routes.professionals);
   }
+
   void _callMaterials() {
     print("Clicked Materials");
-    ExtendedNavigator.named(Routes.materials);
+    ExtendedNavigator.root.push(Routes.materials);
   }
- void _callMoreItems() {
+
+  void _callMoreItems() {
     print("Clicked More Items");
-    ExtendedNavigator.named(Routes.moreItems);
+    ExtendedNavigator.root.push(Routes.moreItems);
   }
 
-   void _callCostEstimate() {
+  void _callCostEstimate() {
     print("Clicked CostEstimate");
-    ExtendedNavigator.named(Routes.costEstimate);
+    ExtendedNavigator.root.push(Routes.costEstimate);
   }
-
 
   Widget _quickPickItem(
       {IconData icon,

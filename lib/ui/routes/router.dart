@@ -21,9 +21,9 @@ import 'package:hellohuts_app/ui/screens/welcome_page.dart';
      AdaptiveRoute(page: PostDetailScreen ),
  CustomRoute(page: PostCommentsDetail, name: "commentsDetail", transitionsBuilder: TransitionsBuilders.slideBottom ),
       CustomRoute(page: CostEstimate, transitionsBuilder: TransitionsBuilders.fadeIn ),
- CustomRoute(page: Professionals, transitionsBuilder: TransitionsBuilders.fadeIn ),
+ CustomRoute(page: Professionals, name:"professionals", transitionsBuilder: TransitionsBuilders.fadeIn ),
  CustomRoute(page: MoreItems, transitionsBuilder: TransitionsBuilders.fadeIn ),
-  CustomRoute(page: Materials, transitionsBuilder: TransitionsBuilders.fadeIn ),
+  CustomRoute(page: Materials, name:"materials",transitionsBuilder: TransitionsBuilders.fadeIn ),
 
   ]
 )
