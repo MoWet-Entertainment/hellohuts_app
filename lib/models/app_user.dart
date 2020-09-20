@@ -2,8 +2,8 @@ import 'package:equatable/equatable.dart';
 import 'package:hellohuts_app/constants/json_constants.dart';
 import 'package:meta/meta.dart';
 
-class User extends Equatable {
-   User({
+class AppUser extends Equatable {
+   AppUser({
     @required this.uid,
     @required this.email,
     this.photoUrl,
@@ -27,7 +27,7 @@ class User extends Equatable {
    String profLastUpdatedAt;
    String lastLoginAt;
 
-  User.fromJson(Map<String, dynamic> data) {
+  AppUser.fromJson(Map<String, dynamic> data) {
     
     uid = data[JsonConstants.userId];
     email = data[JsonConstants.email];
@@ -56,7 +56,7 @@ class User extends Equatable {
     };
   }
 
-  User copyWith({
+  AppUser copyWith({
     String uid,
     String email,
     String userRole,
@@ -68,7 +68,7 @@ class User extends Equatable {
     String profLastUpdatedAt,
     String lastLoginAt,
   }) {
-    return User(
+    return AppUser(
       uid: uid ?? this.uid,
       email: email ?? this.email,
       phoneNumber: phoneNumber ?? this.phoneNumber,
@@ -98,6 +98,6 @@ class User extends Equatable {
 
    @override
    String toString() {
-     return 'User{uid: $uid, email: $email, photoUrl: $photoUrl, displayName: $displayName, phoneNumber: $phoneNumber, userRole: $userRole, isEmailVerified: $isEmailVerified, createdAt: $createdAt, profLastUpdatedAt: $profLastUpdatedAt, lastLoginAt: $lastLoginAt}';
+     return 'AppUser{uid: $uid, email: $email, photoUrl: $photoUrl, displayName: $displayName, phoneNumber: $phoneNumber, userRole: $userRole, isEmailVerified: $isEmailVerified, createdAt: $createdAt, profLastUpdatedAt: $profLastUpdatedAt, lastLoginAt: $lastLoginAt}';
    }
 }

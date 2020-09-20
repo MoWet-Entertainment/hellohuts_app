@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:hellohuts_app/constants/json_constants.dart';
 import 'package:hellohuts_app/helper/utilities.dart';
-import 'package:hellohuts_app/models/user.dart';
+import 'package:hellohuts_app/models/app_user.dart';
 import 'package:hellohuts_app/models/user_feed/feed.dart';
 import 'package:hellohuts_app/services/firestore_services/firestore_path.dart';
 import 'package:hellohuts_app/helper/logger.dart';
@@ -89,7 +89,7 @@ class FirestoreService {
     return true;
   }
 
-  Future createUser(User user) async {
+  Future createUser(AppUser user) async {
     final snapShot =
         await Firestore.instance.collection('users').document(user.uid).get();
     if ((snapShot == null || !snapShot.exists)) {
@@ -109,13 +109,13 @@ class FirestoreService {
     }
   }
 
-  Future<User> getUser(String uid) async {
+  Future<AppUser> getUser(String uid) async {
     try {
       var userData = await _userCollectionReference.document(uid).get();
       print(userData.data);
       logger.d('Fetched user data from Firestore for uid:' + uid);
-      print(User.fromJson((userData.data)));
-      return User.fromJson(userData.data);
+      print(AppUser.fromJson((userData.data)));
+      return AppUser.fromJson(userData.data);
     } catch (error) {
       print(error);
       logger.e('Error in Get User');
