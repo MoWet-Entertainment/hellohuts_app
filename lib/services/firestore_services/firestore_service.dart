@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -16,10 +17,10 @@ class FirestoreService {
   FirestoreService._();
   static final instance = FirestoreService._();
   final CollectionReference _userCollectionReference =
-      Firestore.instance.collection(FirestorePath.users);
+      FirebaseFirestore.instance.collection(FirestorePath.users);
 
   final CollectionReference _postsCollectionReference =
-      Firestore.instance.collection(FirestorePath.posts);
+      FirebaseFirestore.instance.collection(FirestorePath.posts);
 
   final StreamController<List<FeedModel>> _postController =
       StreamController<List<FeedModel>>.broadcast();
@@ -29,15 +30,15 @@ class FirestoreService {
     @required Map<String, dynamic> data,
     bool merge = false,
   }) async {
-    final reference = Firestore.instance.document(path);
+    final reference = FirebaseFirestore.instance.doc(path);
     print('$path: $data');
-    await reference.setData(data, merge: merge);
+    await reference.set(data);
   }
 
   Future<void> deleteData({
     @required String path,
   }) async {
-    final reference = Firestore.instance.document(path);
+    final reference = FirebaseFirestore.instance.doc(path);
     print('delete: $path');
     await reference.delete();
   }
@@ -48,13 +49,13 @@ class FirestoreService {
     Query queryBuilder(Query query),
     int sort(T lhs, T rhs),
   }) {
-    Query query = Firestore.instance.collection(path);
+    Query query = FirebaseFirestore.instance.collection(path);
     if (queryBuilder != null) {
       query = queryBuilder(query);
     }
     final Stream<QuerySnapshot> snapshots = query.snapshots();
     return snapshots.map((snapshot) {
-      final result = snapshot.documents
+      final result = snapshot.docs
           .map((snapshot) => builder(
                 snapshot.data,
                 snapshot.documentID,
