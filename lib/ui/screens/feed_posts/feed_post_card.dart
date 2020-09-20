@@ -8,6 +8,9 @@ import 'package:hellohuts_app/ui/styles/app_themes.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+
+
+//TODO:REMOVE THIS AS WE ARE NOT USING THIS
 class FeedPostCard extends StatelessWidget {
   final FeedModel model;
   const FeedPostCard({Key key, this.model}) : super(key: key);
@@ -144,7 +147,7 @@ class FeedPostCard extends StatelessWidget {
             ),
             contentPadding: const EdgeInsets.symmetric(horizontal: 8.0),
             title: Text(
-              "Report",
+              "Reporst",
               style: AppThemes.popUpStyle,
             ),
             onTap: state.handlePostReportClick,

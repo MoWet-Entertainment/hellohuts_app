@@ -3,7 +3,7 @@ import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hellohuts_app/helper/logger.dart';
 import 'package:hellohuts_app/locators.dart';
-import 'package:hellohuts_app/models/user.dart';
+import 'package:hellohuts_app/models/app_user.dart';
 import 'package:hellohuts_app/services/auth_services/auth_service.dart';
 import 'package:hellohuts_app/services/firestore_services/analytics_service.dart';
 import 'package:hellohuts_app/services/firestore_services/firestore_service.dart';
@@ -15,22 +15,22 @@ class FireBaseAuthService implements AuthService {
   final FirestoreService _firestoreService = locator<FirestoreService>();
   final AnalyticsService _analyticsService = locator<AnalyticsService>();
   String _verificationCode = "";
-  User _userModel;
-  User get userModel => _userModel;
+  AppUser _userModel;
+  AppUser get userModel => _userModel;
   FirebaseUser user;
   String userId;
   var log = getLogger('FireBaseAuthService');
-  Future<User> _userFromFirebase(FirebaseUser user) async {
+  Future<AppUser> _userFromFirebase(FirebaseUser user) async {
     if (user == null) {
       return null;
     }
-    User userFromFirebase = await _firestoreService.getUser(user.uid);
+    AppUser userFromFirebase = await _firestoreService.getUser(user.uid);
     return userFromFirebase;
   }
 
   @override
-  Future<User> createUserWithEmailAndPassword(
-      {User userModel,
+  Future<AppUser> createUserWithEmailAndPassword(
+      {AppUser userModel,
       @required String email,
       @required String password}) async {
     try {
@@ -206,12 +206,12 @@ class FireBaseAuthService implements AuthService {
   }
 
   @override
-  Stream<User> get onAuthStateChanged {
+  Stream<AppUser> get onAuthStateChanged {
     return _firebaseAuth.onAuthStateChanged.map((user) => _userModel);
   }
 
   @override
-  Future<User> currentUser() async {
+  Future<AppUser> currentUser() async {
     final FirebaseUser user = await _firebaseAuth.currentUser();
     return _userFromFirebase(user);
   }
@@ -285,7 +285,7 @@ class FireBaseAuthService implements AuthService {
   /// `Create` and `Update` user
   /// If `newUser` is `true`, then new User is created
   /// Else existing user will get updated with new values
-  void createUser(User user, {bool newUser = false}) {
+  void createUser(AppUser user, {bool newUser = false}) {
     if (newUser) {
       _analyticsService.logEvent(event: 'create_newUser');
       _userModel = user;
@@ -310,7 +310,7 @@ class FireBaseAuthService implements AuthService {
     bool val = await _firestoreService.checkUserIsPresent(user);
     if (!val) {
       String currentDateTime = setCurrentDateTime();
-      User model = User(
+      AppUser model = AppUser(
         photoUrl: user.photoUrl,
         displayName: user.displayName,
         email: user.email,

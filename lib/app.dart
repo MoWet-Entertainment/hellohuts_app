@@ -22,13 +22,13 @@ class App extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: Provider.of<AppConfig>(context).appTitle,
         theme: AppThemes.defaultTheme,
-        builder: ExtendedNavigator<Router>(
+        home: Container(),
+        builder: ExtendedNavigator.builder<Router>(
           router: Router(),
-          guards: [AuthGuard()],
-        ),
-        navigatorObservers: <NavigatorObserver>[
-          locator<AnalyticsService>().getAnalyticsObserver(),
-        ],
+          guards: [AuthGuard()],),
+            navigatorObservers: <NavigatorObserver>[
+          locator<AnalyticsService>().getAnalyticsObserver(),],
+      
       ),
     );
   }

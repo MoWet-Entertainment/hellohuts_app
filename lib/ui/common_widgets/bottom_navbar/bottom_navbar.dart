@@ -26,7 +26,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   void initState() {
 
-    ScreenUtil.init(width: 375, height: 801);
+   
     super.initState();
   }
 
@@ -93,6 +93,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   @override
   Widget build(BuildContext context) {
+     ScreenUtil.init(context,width: 375, height: 801);
     return Container(
       decoration: BoxDecoration(color: Colors.transparent, boxShadow: [
         BoxShadow(

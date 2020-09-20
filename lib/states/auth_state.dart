@@ -7,7 +7,7 @@ import 'package:hellohuts_app/constants/firebase_constants.dart';
 import 'package:hellohuts_app/constants/strings.dart';
 import 'package:hellohuts_app/helper/utilities.dart';
 import 'package:hellohuts_app/locators.dart';
-import 'package:hellohuts_app/models/user.dart';
+import 'package:hellohuts_app/models/app_user.dart';
 import 'package:hellohuts_app/services/auth_services/auth_service.dart';
 import 'package:hellohuts_app/services/auth_services/firebase_auth_service.dart';
 import 'package:hellohuts_app/services/firestore_services/analytics_service.dart';
@@ -22,8 +22,8 @@ class AuthState extends AppState {
   AuthStatus authStatus = AuthStatus.NOT_DETERMINED;
   String userId;
   FirebaseUser user;
-  User _userModel;
-  User get userModel => _userModel;
+  AppUser _userModel;
+  AppUser get userModel => _userModel;
   final AuthService _authService = locator<FireBaseAuthService>();
   final AnalyticsService _analyticsService = locator<AnalyticsService>();
   final FirestoreService _firestoreService = locator<FirestoreService>();
@@ -98,7 +98,7 @@ class AuthState extends AppState {
     }
   }
 
-  Future<String> signUpWithEmailAndPassword(User userModel, String password,
+  Future<String> signUpWithEmailAndPassword(AppUser userModel, String password,
       {GlobalKey<ScaffoldState> scaffoldKey}) async {
     try {
       loading = true;
@@ -184,7 +184,7 @@ class AuthState extends AppState {
   }
 
   /// Fetch current user profile
-  Future<User> getCurrentUser() async {
+  Future<AppUser> getCurrentUser() async {
     try {
       loading = true;
       _analyticsService.logEvent(event: 'get_currentUSer');

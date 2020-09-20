@@ -8,8 +8,8 @@ import 'package:hellohuts_app/constants/hello_icons.dart';
 
 import 'package:hellohuts_app/states/feed_state.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
-import 'package:hellohuts_app/ui/common_widgets/feed_posts/feed_post.dart';
 import 'package:hellohuts_app/ui/routes/router.gr.dart';
+import 'package:hellohuts_app/ui/screens/feed_posts_copy/feed_post.dart';
 import 'package:hellohuts_app/ui/screens/search/search_screen.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/common_widgets/app_bar/app_bar.dart';
@@ -139,10 +139,10 @@ class _AppBarTop extends StatelessWidget {
             snap: true,
             primary: true,
             forceElevated: innerBoxIsScrolled,
-            elevation:0.0,
+            elevation: 0.0,
             brightness: Brightness.light,
             backgroundColor: AppColors.kPureWhite,
-          
+
             leading: appBarIcon(icon: HelloIcons.subject, size: 24),
             actions: <Widget>[
               appBarIcon(
@@ -229,18 +229,38 @@ class _HeaderSection extends StatelessWidget {
         _quickPickItem(
           icon: HelloIcons.rupee_sign,
           text: "Cost Estimate",
-          call: _test,
+          call: _callCostEstimate,
         ),
         _quickPickItem(
-            icon: HelloIcons.constructor_1, text: "Professionals", call: _test),
-        _quickPickItem(icon: HelloIcons.truck, text: "Materials", call: _test),
-        _quickPickItem(icon: HelloIcons.apps, text: 'More', call: _test),
+            icon: HelloIcons.constructor_1,
+            text: "Professionals",
+            call: _callProfessionals),
+        _quickPickItem(
+            icon: HelloIcons.truck, text: "Materials", call: _callMaterials),
+        _quickPickItem(
+            icon: HelloIcons.apps, text: 'More', call: _callMoreItems),
       ],
     );
   }
 
-  void _test() {
-    print("Clicked");
+  void _callProfessionals() {
+    print("Clicked Proferssionals");
+    ExtendedNavigator.root.push(Routes.professionals);
+  }
+
+  void _callMaterials() {
+    print("Clicked Materials");
+    ExtendedNavigator.root.push(Routes.materials);
+  }
+
+  void _callMoreItems() {
+    print("Clicked More Items");
+    ExtendedNavigator.root.push(Routes.moreItems);
+  }
+
+  void _callCostEstimate() {
+    print("Clicked CostEstimate");
+    ExtendedNavigator.root.push(Routes.costEstimate);
   }
 
   Widget _quickPickItem(
@@ -329,7 +349,7 @@ class _SearchBar extends StatelessWidget {
           ),
         ),
       ),
-      onTap: () => ExtendedNavigator.of(context).pushNamed(Routes.searchScreen),
+      onTap: () => ExtendedNavigator.of(context).push(Routes.searchPage),
       // onTap: () => showSearch(context: context, delegate: CustomSearchDelegate()),
     );
   }
