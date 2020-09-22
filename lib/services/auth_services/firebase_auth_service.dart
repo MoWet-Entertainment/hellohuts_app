@@ -186,7 +186,7 @@ class FireBaseAuthService implements AuthService {
     String countryCode = Constants.countryCode["INDIA"];
     await _firebaseAuth.verifyPhoneNumber(
       phoneNumber: countryCode + phoneNumber,
-      timeout: Duration(seconds: 3),
+      timeout: Duration(seconds: 60),
       verificationCompleted: (authCredential) =>
           _verificationCompleted(authCredential),
       verificationFailed: (authException) => _verificationFailed(authException),
@@ -213,33 +213,48 @@ class FireBaseAuthService implements AuthService {
     this._verificationCode = verificationCode;
   }
 
+  Future<String> verifyOTPAndLogin({String smsCode}) async {
+    AuthCredential _authCredential = PhoneAuthProvider.credential(
+        verificationId: _verificationCode, smsCode: smsCode);
+
+    _firebaseAuth
+        .signInWithCredential(_authCredential)
+        .then((UserCredential result) async {
+      return result.user.uid;
+    }).catchError((error) {
+      throw error;
+    });
+    return null;
+  }
+
   @override
   Future<String> signInWithSmsCode(String phoneNumber, String smsCode) async {
-    try {
-      _analyticsService.logLogin('sms_code_based');
-      print("sms code :" + smsCode.toString());
-      print("verification code: " + _verificationCode);
-      await _firebaseAuth.verifyPhoneNumber(
-        phoneNumber: phoneNumber,
-        codeSent: (String verficationId, int resendToken) async {
-          String smsCode = 'xxxx';
-          PhoneAuthCredential credential = PhoneAuthProvider.credential(
-              verificationId: verficationId, smsCode: smsCode);
-          final UserCredential authResult =
-              await _firebaseAuth.signInWithCredential(credential);
-          user = authResult.user;
-          userId = user.uid;
-          createUserFromSocialSignIn(user);
-          return userId;
-        },
-      );
-    } on FirebaseAuthException catch (error) {
-      throw FirebaseAuthException(code: error.code, message: error.message);
-    } catch (error) {
-      user = null;
-      cprint(error, errorIn: 'signInWithSms');
-      throw error;
-    }
+    // try {
+    //   _analyticsService.logLogin('sms_code_based');
+    //   print("sms code :" + smsCode.toString());
+    //   print("verification code: " + _verificationCode);
+    //   await _firebaseAuth.verifyPhoneNumber(
+    //     phoneNumber: phoneNumber,
+    //     timeout: Duration(seconds: 60),
+    //     codeSent: (String verficationId, int resendToken) async {
+    //       String smsCode = 'xxxx';
+    //       PhoneAuthCredential credential = PhoneAuthProvider.credential(
+    //           verificationId: verficationId, smsCode: smsCode);
+    //       final UserCredential authResult =
+    //           await _firebaseAuth.signInWithCredential(credential);
+    //       user = authResult.user;
+    //       userId = user.uid;
+    //       createUserFromSocialSignIn(user);
+    //       return userId;
+    //     },
+    //   );
+    // } on FirebaseAuthException catch (error) {
+    //   throw FirebaseAuthException(code: error.code, message: error.message);
+    // } catch (error) {
+    //   user = null;
+    //   cprint(error, errorIn: 'signInWithSms');
+    //   throw error;
+    // }
   }
 
   /// `Create` and `Update` user

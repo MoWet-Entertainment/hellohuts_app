@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 
 import '../../models/test.dart';
 import '../../models/user_feed/comments.dart';
+import '../screens/auth/phone_auth/get_phone.dart';
 import '../screens/base_page.dart';
 import '../screens/explore.dart';
 import '../screens/feed_posts/feed_post_detail.dart';
@@ -21,7 +22,7 @@ import '../screens/search/search_screen.dart';
 import '../screens/welcome_page.dart';
 
 class Routes {
-  static const String basePage = '/';
+  static const String basePage = '/base-page';
   static const String explorePage = '/explore-page';
   static const String welcomePage = '/welcome-page';
   static const String searchPage = '/search-page';
@@ -32,6 +33,7 @@ class Routes {
   static const String professionals = '/Professionals';
   static const String moreItems = '/more-items';
   static const String materials = '/Materials';
+  static const String phoneAuthGetPhone = '/';
   static const all = <String>{
     basePage,
     explorePage,
@@ -44,6 +46,7 @@ class Routes {
     professionals,
     moreItems,
     materials,
+    phoneAuthGetPhone,
   };
 }
 
@@ -62,6 +65,7 @@ class Router extends RouterBase {
     RouteDef(Routes.professionals, page: Professionals),
     RouteDef(Routes.moreItems, page: MoreItems),
     RouteDef(Routes.materials, page: Materials),
+    RouteDef(Routes.phoneAuthGetPhone, page: PhoneAuthGetPhone),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -176,6 +180,12 @@ class Router extends RouterBase {
             const Materials(),
         settings: data,
         transitionsBuilder: TransitionsBuilders.fadeIn,
+      );
+    },
+    PhoneAuthGetPhone: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => PhoneAuthGetPhone(),
+        settings: data,
       );
     },
   };

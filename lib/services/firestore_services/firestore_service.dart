@@ -15,6 +15,7 @@ import 'package:meta/meta.dart';
 class FirestoreService {
   var logger = getLogger('FirestoreService');
   FirestoreService._();
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   static final instance = FirestoreService._();
   final CollectionReference _userCollectionReference =
       FirebaseFirestore.instance.collection(FirestorePath.users);
@@ -30,7 +31,7 @@ class FirestoreService {
     @required Map<String, dynamic> data,
     bool merge = false,
   }) async {
-    final reference = FirebaseFirestore.instance.doc(path);
+    final reference = _firestore.doc(path);
     print('$path: $data');
     await reference.set(data);
   }
@@ -38,7 +39,7 @@ class FirestoreService {
   Future<void> deleteData({
     @required String path,
   }) async {
-    final reference = FirebaseFirestore.instance.doc(path);
+    final reference = _firestore.doc(path);
     print('delete: $path');
     await reference.delete();
   }
@@ -49,7 +50,7 @@ class FirestoreService {
     Query queryBuilder(Query query),
     int sort(T lhs, T rhs),
   }) {
-    Query query = FirebaseFirestore.instance.collection(path);
+    Query query = _firestore.collection(path);
     if (queryBuilder != null) {
       query = queryBuilder(query);
     }
@@ -57,8 +58,8 @@ class FirestoreService {
     return snapshots.map((snapshot) {
       final result = snapshot.docs
           .map((snapshot) => builder(
-                snapshot.data,
-                snapshot.documentID,
+                snapshot.data(),
+                snapshot.id,
               ))
           .where((value) => value != null)
           .toList();
@@ -73,17 +74,19 @@ class FirestoreService {
     @required String path,
     @required T builder(Map<String, dynamic> data, String documentId),
   }) {
-    final DocumentReference reference = Firestore.instance.document(path);
+    final DocumentReference reference = _firestore.doc(path);
     final Stream<DocumentSnapshot> snapshots = reference.snapshots();
     return snapshots.map((snapshot) => builder(
-          snapshot.data,
-          snapshot.documentID,
+          snapshot.data(),
+          snapshot.id,
         ));
   }
 
-  Future<bool> checkUserIsPresent(FirebaseUser user) async {
-    final snapShot =
-        await Firestore.instance.collection('users').document(user.uid).get();
+  Future<bool> checkUserIsPresent(User user) async {
+    final snapShot = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid)
+        .get();
     if ((snapShot == null || !snapShot.exists)) {
       return false;
     }
@@ -91,13 +94,13 @@ class FirestoreService {
   }
 
   Future createUser(AppUser user) async {
-    final snapShot =
-        await Firestore.instance.collection('users').document(user.uid).get();
+    final snapShot = await _firestore
+        .collection('users')
+        .doc(user.uid)
+        .get();
     if ((snapShot == null || !snapShot.exists)) {
       try {
-        await _userCollectionReference
-            .document(user.uid)
-            .setData(user.toJson());
+        await _userCollectionReference.doc(user.uid).set(user.toJson());
         logger.d('New user is Created  in Firestore with uid:' + user.uid);
       } catch (e) {
         if (e is PlatformException) {
@@ -112,11 +115,11 @@ class FirestoreService {
 
   Future<AppUser> getUser(String uid) async {
     try {
-      var userData = await _userCollectionReference.document(uid).get();
+      var userData = await _userCollectionReference.doc(uid).get();
       print(userData.data);
       logger.d('Fetched user data from Firestore for uid:' + uid);
-      print(AppUser.fromJson((userData.data)));
-      return AppUser.fromJson(userData.data);
+      print(AppUser.fromJson((userData.data())));
+      return AppUser.fromJson(userData.data());
     } catch (error) {
       print(error);
       logger.e('Error in Get User');
@@ -136,10 +139,10 @@ class FirestoreService {
   Future getPostsOnceOff() async {
     try {
       var postDocumentsSnapshot =
-          await _postsCollectionReference.getDocuments();
-      if (postDocumentsSnapshot.documents.isNotEmpty) {
-        return postDocumentsSnapshot.documents
-            .map((snapshot) => FeedModel.fromJson(snapshot.data))
+          await _postsCollectionReference.get();
+      if (postDocumentsSnapshot.docs.isNotEmpty) {
+        return postDocumentsSnapshot.docs
+            .map((snapshot) => FeedModel.fromJson(snapshot.data()))
             .where((mappedItem) => mappedItem.title != null)
             .toList();
       } else {
@@ -153,9 +156,9 @@ class FirestoreService {
 
   Stream listenToPostRealTime() {
     _postsCollectionReference.snapshots().listen((postSnapshot) {
-      if (postSnapshot.documents.isNotEmpty) {
-        var posts = postSnapshot.documents
-            .map((snapshot) => FeedModel.fromJson(snapshot.data))
+      if (postSnapshot.docs.isNotEmpty) {
+        var posts = postSnapshot.docs
+            .map((snapshot) => FeedModel.fromJson(snapshot.data()))
             .where((mappedItem) => mappedItem.isValidPost)
             .toList();
         _postController.add(posts);
@@ -166,7 +169,7 @@ class FirestoreService {
 
   Future deletePost(String documentId) async {
     try {
-      await _postsCollectionReference.document(documentId).delete();
+      await _postsCollectionReference.doc(documentId).delete();
     } catch (error) {
       cprint("Could not delete the post");
       throw error;
@@ -176,8 +179,8 @@ class FirestoreService {
   Future updatePost(FeedModel model) async {
     try {
       await _postsCollectionReference
-          .document(model.key)
-          .setData(model.toJson());
+          .doc(model.key)
+          .set(model.toJson());
       cprint('Post updated');
     } catch (error) {
       cprint(error, errorIn: 'updatePost');
@@ -188,10 +191,10 @@ class FirestoreService {
   Future updateLike(FeedModel model, String userId) async {
     try {
       await _postsCollectionReference
-          .document(model.key)
+          .doc(model.key)
           .collection(AppFeedConstants.postLikeList)
-          .document(userId)
-          .setData({AppFeedConstants.userId: userId});
+          .doc(userId)
+          .set({AppFeedConstants.userId: userId});
     } catch (error) {
       cprint(error, errorIn: 'updateLike');
       throw error;
@@ -200,9 +203,9 @@ class FirestoreService {
 
   Future getPostDetail(String postId) async {
     try {
-      var postData = await _postsCollectionReference.document(postId).get();
+      var postData = await _postsCollectionReference.doc(postId).get();
       if (postData.exists) {
-        return FeedModel.fromJson(postData.data);
+        return FeedModel.fromJson(postData.data());
       } else {
         return null;
       }

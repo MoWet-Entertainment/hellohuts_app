@@ -5,7 +5,7 @@ import 'package:hellohuts_app/models/app_user.dart';
 abstract class AuthService {
   Future<AppUser> currentUser();
   User currentFirebaseUser();
- bool isSignedIn();
+  bool isSignedIn();
   Future<String> signInWithEmailAndPassword(String email, String password);
   Future<AppUser> createUserWithEmailAndPassword(
       {AppUser userModel, @required String email, @required String password});
@@ -13,7 +13,8 @@ abstract class AuthService {
   Future<String> signInWithGoogle();
   Future<String> signInWithFacebook();
   Future<void> verifyPhoneNumber(String phoneNumber);
-  Future<String> signInWithSmsCode(String phoneNumber,String smsCode);
+  Future<String> signInWithSmsCode(String phoneNumber, String smsCode);
+  Future<String> verifyOTPAndLogin({@required String smsCode});
   Future<void> signOut();
   Stream<User> get onAuthStateChanged;
   void dispose();
