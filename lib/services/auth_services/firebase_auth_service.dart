@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/helper/logger.dart';
 import 'package:hellohuts_app/locators.dart';
 import 'package:hellohuts_app/models/app_user.dart';
@@ -17,10 +18,10 @@ class FireBaseAuthService implements AuthService {
   String _verificationCode = "";
   AppUser _userModel;
   AppUser get userModel => _userModel;
-  FirebaseUser user;
+  User user;
   String userId;
   var log = getLogger('FireBaseAuthService');
-  Future<AppUser> _userFromFirebase(FirebaseUser user) async {
+  Future<AppUser> _userFromFirebase(User user) async {
     if (user == null) {
       return null;
     }
@@ -34,7 +35,7 @@ class FireBaseAuthService implements AuthService {
       @required String email,
       @required String password}) async {
     try {
-      final AuthResult authResult = await _firebaseAuth
+      final UserCredential authResult = await _firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: password);
       user = authResult.user;
       userId = user.uid;
@@ -43,10 +44,11 @@ class FireBaseAuthService implements AuthService {
       userModel.copyWith(
         uid: userId,
       );
+      //TODO: Do email verification if necessary
       createUser(userModel, newUser: true);
       return userModel;
-    } on AuthException catch (error) {
-      throw AuthException(error.code, error.message);
+    } on FirebaseAuthException catch (error) {
+      throw FirebaseAuthException(message: error.message, code: error.code);
     } catch (error) {
       cprint(error, errorIn: 'signInWithEmailAndPassword');
       throw error;
@@ -57,24 +59,19 @@ class FireBaseAuthService implements AuthService {
   Future<String> signInWithEmailAndPassword(
       String email, String password) async {
     try {
-      final AuthResult authResult = await _firebaseAuth
+      final UserCredential authResult = await _firebaseAuth
           .signInWithEmailAndPassword(email: email, password: email);
       user = authResult.user;
       userId = user.uid;
       await _analyticsService.logSignUp('email');
       await _analyticsService.setUserProperties(userId: userId);
       return userId;
-    } on AuthException catch (error) {
-      throw AuthException(error.code, error.message);
+    } on FirebaseAuthException catch (error) {
+      throw FirebaseAuthException(code: error.code, message: error.message);
     } catch (error) {
       user = null;
       throw error;
     }
-  }
-
-  @override
-  Future<bool> isSignInWithEmailLink(String link) async {
-    return await _firebaseAuth.isSignInWithEmailLink(link);
   }
 
   @override
@@ -83,75 +80,28 @@ class FireBaseAuthService implements AuthService {
   }
 
   @override
-  Future<void> sendSignInWithEmailLink(
-      {String email,
-      String url,
-      bool handleCodeInApp,
-      String iOSBundleID,
-      String androidPackageName,
-      bool androidInstallIfNotAvailable,
-      String androidMinimumVersion}) async {
-    return await _firebaseAuth.sendSignInWithEmailLink(
-      email: email,
-      url: url,
-      handleCodeInApp: handleCodeInApp,
-      iOSBundleID: iOSBundleID,
-      androidPackageName: androidPackageName,
-      androidInstallIfNotAvailable: androidInstallIfNotAvailable,
-      androidMinimumVersion: androidMinimumVersion,
-    );
-  }
-
-  @override
-  Future<String> signInWithEmailAndLink({String email, String link}) async {
-    try {
-      final AuthResult authResult = await _firebaseAuth.signInWithEmailAndLink(
-        email: email,
-        link: link,
-      );
-      user = authResult.user;
-      userId = user.uid;
-      await _analyticsService.logSignUp('email with link');
-      await _analyticsService.setUserProperties(userId: userId);
-      return userId;
-    }
-    on AuthException catch (error) {
-      throw AuthException(error.code, error.message);
-    } catch (error) {
-      user = null;
-      debugLog(error);
-      throw error;
-    }
-  }
-
-  ///Create User from `Facebook Login`
-  ///If the  user is new, the create a new user
-  ///If user is old, then it authenticates and returns firebase user data
-  @override
   Future<String> signInWithFacebook() async {
-    try {
-      final FacebookLogin facebookLogin = FacebookLogin();
-      facebookLogin.loginBehavior = FacebookLoginBehavior.webViewOnly;
-      _analyticsService.logLogin('facebook_login');
-      final FacebookLoginResult result =
-          await facebookLogin.logIn(<String>['public_profile']);
-      if (result == null) {
-        throw Exception('Facbook login Cancelled by user');
-      }
-      if (result.accessToken != null) {
-        final AuthResult authResult = await _firebaseAuth.signInWithCredential(
-          FacebookAuthProvider.getCredential(
-              accessToken: result.accessToken.token),
-        );
-        user = authResult.user;
-        userId = user.uid;
-        createUserFromSocialSignIn(user);
-        return userId;
-      }
-      return null;
+    //Trigger sign-in flow
+    final LoginResult result = await FacebookAuth.instance.login();
+    if (result == null) {
+      throw Exception('Facebook login cancelled by user');
     }
-    on AuthException catch (error) {
-      throw AuthException(error.code, error.message);
+
+    //Create a credential from the access token
+    final FacebookAuthCredential facebookAuthCredential =
+        FacebookAuthProvider.credential(result.accessToken.token);
+
+    try {
+      //Once signed in, return the user credentials
+      final UserCredential userCredential =
+          await _firebaseAuth.signInWithCredential(facebookAuthCredential);
+      _analyticsService.logLogin('facebook_login');
+      user = userCredential.user;
+      userId = user.uid;
+      createUserFromSocialSignIn(user);
+      return userId;
+    } on FirebaseAuthException catch (error) {
+      throw FirebaseAuthException(code: error.code, message: error.message);
     } catch (error) {
       user = null;
       cprint(error, errorIn: 'signInWithFacebook');
@@ -164,28 +114,32 @@ class FireBaseAuthService implements AuthService {
     try {
       final GoogleSignIn googleSignIn = GoogleSignIn();
       _analyticsService.logLogin('google_signin');
+
+      //Trigger authentication flow
       final GoogleSignInAccount googleUser = await googleSignIn.signIn();
       if (googleUser == null) {
         throw Exception('Google Login cancelled by user');
       }
+
+      //Obtain auth details from the request
       final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;
-      if (googleAuth.accessToken != null && googleAuth.idToken != null) {
-        final AuthResult authResult = await _firebaseAuth
-            .signInWithCredential(GoogleAuthProvider.getCredential(
-          idToken: googleAuth.idToken,
-          accessToken: googleAuth.accessToken,
-        ));
-        user = authResult.user;
+
+      //Create a new credential
+      final GoogleAuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
+      if (credential != null) {
+        final UserCredential userCredential =
+            await _firebaseAuth.signInWithCredential(credential);
+        user = userCredential.user;
         userId = user.uid;
         createUserFromSocialSignIn(user);
         print("user id is: " + userId);
         return userId;
       }
       return null;
-    }
-    on AuthException catch (error) {
-      throw AuthException(error.code, error.message);
+    } on FirebaseAuthException catch (error) {
+      throw FirebaseAuthException(code: error.code, message: error.message);
     } catch (error) {
       user = null;
       cprint(error, errorIn: 'signInWithGoogle');
@@ -200,39 +154,39 @@ class FireBaseAuthService implements AuthService {
     user = null;
     final GoogleSignIn googleSignIn = GoogleSignIn();
     await googleSignIn.signOut();
-    final FacebookLogin facebookLogin = FacebookLogin();
-    await facebookLogin.logOut();
+    await FacebookAuth.instance.logOut();
     return _firebaseAuth.signOut();
   }
 
   @override
-  Stream<AppUser> get onAuthStateChanged {
-    return _firebaseAuth.onAuthStateChanged.map((user) => _userModel);
+  Stream<User> get onAuthStateChanged {
+    return _firebaseAuth.userChanges();
   }
 
   @override
   Future<AppUser> currentUser() async {
-    final FirebaseUser user = await _firebaseAuth.currentUser();
+    final User user = _firebaseAuth.currentUser;
     return _userFromFirebase(user);
   }
 
   @override
-  Future<FirebaseUser> currentFirebaseUser() async {
-    final FirebaseUser user = await _firebaseAuth.currentUser();
-    return user;
+  User currentFirebaseUser() {
+    return _firebaseAuth.currentUser;
   }
 
   @override
-  Future<bool> isSignedIn() async {
-    final currentUser = await _firebaseAuth.currentUser();
+  bool isSignedIn() {
+    final currentUser = _firebaseAuth.currentUser;
     return currentUser != null;
   }
 
   @override
   Future<void> verifyPhoneNumber(String phoneNumber) async {
+    //TODO: Get the Country dynamically depending on the country
+    String countryCode = Constants.countryCode["INDIA"];
     await _firebaseAuth.verifyPhoneNumber(
-      phoneNumber: "+91" + phoneNumber,
-      timeout: Duration(seconds: 3),
+      phoneNumber: countryCode + phoneNumber,
+      timeout: Duration(seconds: 60),
       verificationCompleted: (authCredential) =>
           _verificationCompleted(authCredential),
       verificationFailed: (authException) => _verificationFailed(authException),
@@ -243,11 +197,11 @@ class FireBaseAuthService implements AuthService {
     );
   }
 
-  _verificationCompleted(AuthCredential authCredential) {
-    // _firebaseAuth.signInWithCredential(authCredential);
+  _verificationCompleted(PhoneAuthCredential phoneAuthCredential) {
+    _firebaseAuth.signInWithCredential(phoneAuthCredential);
   }
 
-  String _verificationFailed(AuthException authException) {
+  String _verificationFailed(FirebaseAuthException authException) {
     return authException.message;
   }
 
@@ -259,27 +213,48 @@ class FireBaseAuthService implements AuthService {
     this._verificationCode = verificationCode;
   }
 
-  @override
-  Future<String> signInWithSmsCode(String smsCode) async {
-    try {
-      _analyticsService.logLogin('sms_code_based');
-      print("sms code :" + smsCode.toString());
-      print("verification code: " + _verificationCode);
-      AuthCredential authCredential = PhoneAuthProvider.getCredential(
-          verificationId: _verificationCode, smsCode: smsCode);
-      final AuthResult authResult =
-          await _firebaseAuth.signInWithCredential(authCredential);
-      user = authResult.user;
-      userId = user.uid;
-      createUserFromSocialSignIn(user);
-      return userId;
-    }on AuthException catch (error) {
-      throw AuthException(error.code, error.message);
-    } catch (error) {
-      user = null;
-      cprint(error, errorIn: 'signInWithSms');
+  Future<String> verifyOTPAndLogin({String smsCode}) async {
+    AuthCredential _authCredential = PhoneAuthProvider.credential(
+        verificationId: _verificationCode, smsCode: smsCode);
+
+    _firebaseAuth
+        .signInWithCredential(_authCredential)
+        .then((UserCredential result) async {
+      return result.user.uid;
+    }).catchError((error) {
       throw error;
-    }
+    });
+    return null;
+  }
+
+  @override
+  Future<String> signInWithSmsCode(String phoneNumber, String smsCode) async {
+    // try {
+    //   _analyticsService.logLogin('sms_code_based');
+    //   print("sms code :" + smsCode.toString());
+    //   print("verification code: " + _verificationCode);
+    //   await _firebaseAuth.verifyPhoneNumber(
+    //     phoneNumber: phoneNumber,
+    //     timeout: Duration(seconds: 60),
+    //     codeSent: (String verficationId, int resendToken) async {
+    //       String smsCode = 'xxxx';
+    //       PhoneAuthCredential credential = PhoneAuthProvider.credential(
+    //           verificationId: verficationId, smsCode: smsCode);
+    //       final UserCredential authResult =
+    //           await _firebaseAuth.signInWithCredential(credential);
+    //       user = authResult.user;
+    //       userId = user.uid;
+    //       createUserFromSocialSignIn(user);
+    //       return userId;
+    //     },
+    //   );
+    // } on FirebaseAuthException catch (error) {
+    //   throw FirebaseAuthException(code: error.code, message: error.message);
+    // } catch (error) {
+    //   user = null;
+    //   cprint(error, errorIn: 'signInWithSms');
+    //   throw error;
+    // }
   }
 
   /// `Create` and `Update` user
@@ -303,7 +278,7 @@ class FireBaseAuthService implements AuthService {
   }
 
   /// Create user profile from Social Media login
-  createUserFromSocialSignIn(FirebaseUser user) async {
+  createUserFromSocialSignIn(User user) async {
     var diff = DateTime.now().difference(user.metadata.creationTime);
     // Check if user is new or old
     // If user is new then add new user to firebase database
@@ -311,12 +286,12 @@ class FireBaseAuthService implements AuthService {
     if (!val) {
       String currentDateTime = setCurrentDateTime();
       AppUser model = AppUser(
-        photoUrl: user.photoUrl,
+        photoUrl: user.photoURL,
         displayName: user.displayName,
         email: user.email,
         uid: user.uid,
         phoneNumber: user.phoneNumber,
-        isEmailVerified: user.isEmailVerified,
+        isEmailVerified: user.emailVerified,
         createdAt: currentDateTime,
         lastLoginAt: currentDateTime,
         profLastUpdatedAt: currentDateTime,

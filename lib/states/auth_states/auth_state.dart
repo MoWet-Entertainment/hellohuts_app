@@ -208,7 +208,7 @@ class AuthState extends AppState {
 
   Future<void> sendEmailVerification(
       GlobalKey<ScaffoldState> scaffoldKey) async {
-    FirebaseUser user = await _authService.currentFirebaseUser();
+    User user = _authService.currentFirebaseUser();
     user.sendEmailVerification().then((_) {
       _analyticsService.logEvent(
         event: 'email_verifcation_sent',
