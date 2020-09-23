@@ -45,7 +45,7 @@ class _SearchPageState extends State<SearchPage> {
         child: Scaffold(
           appBar: CustomSearchBar(
             isBackButton: true,
-            iconData: HelloIcons.sliders_v_alt,
+            iconData: HelloIconsOld.sliders_v_alt,
             onActionPressed: onFilterPressed,
           ),
           body: SearchBody(),
@@ -168,27 +168,27 @@ class _GetLeadingIcon extends StatelessWidget {
     switch (type) {
       case SearchType.Building:
         return _customIconForSeach(
-          HelloIcons.building,
+          HelloIconsOld.building,
         );
       case SearchType.Location:
         return _customIconForSeach(
-          HelloIcons.location_point,
+          HelloIconsOld.location_point,
         );
       case SearchType.Material:
         return _customIconForSeach(
-          HelloIcons.truck,
+          HelloIconsOld.truck,
         );
 
       case SearchType.Professionals:
         return _customIconForSeach(
-          HelloIcons.constructor_1,
+          HelloIconsOld.constructor_1,
         );
       case SearchType.Other:
         return _customIconForSeach(
-          HelloIcons.book_alt,
+          HelloIconsOld.book_alt,
         );
       default:
-        return _customIconForSeach(HelloIcons.postcard);
+        return _customIconForSeach(HelloIconsOld.postcard);
     }
   }
 
@@ -229,7 +229,7 @@ class CustomSearchDelegate extends SearchDelegate<String> {
   List<Widget> buildActions(BuildContext context) {
     return [
       IconButton(
-        icon: Icon(HelloIcons.filter),
+        icon: Icon(HelloIconsOld.filter),
         onPressed: () => print("user wants to filter search results"),
       ),
     ];
@@ -241,7 +241,7 @@ class CustomSearchDelegate extends SearchDelegate<String> {
   @override
   Widget buildLeading(BuildContext context) {
     return IconButton(
-      icon: Icon(HelloIcons.angle_left_b),
+      icon: Icon(HelloIconsOld.angle_left_b),
       onPressed: () {
         close(context, null);
       },

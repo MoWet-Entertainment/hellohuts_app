@@ -22,7 +22,7 @@ import '../screens/search/search_screen.dart';
 import '../screens/welcome_page.dart';
 
 class Routes {
-  static const String basePage = '/base-page';
+  static const String basePage = '/';
   static const String explorePage = '/explore-page';
   static const String welcomePage = '/welcome-page';
   static const String searchPage = '/search-page';
@@ -33,7 +33,7 @@ class Routes {
   static const String professionals = '/Professionals';
   static const String moreItems = '/more-items';
   static const String materials = '/Materials';
-  static const String phoneAuthGetPhone = '/';
+  static const String phoneAuthGetPhone = '/phone-auth-get-phone';
   static const all = <String>{
     basePage,
     explorePage,

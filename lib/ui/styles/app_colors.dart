@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const kPrimaryColor = Color(0xff14213D);
+  static const kPrimaryColor = Color(0xff200E32);
   static const kAccentColor = Color(0xffFCA311);
   static const kPureBlack = Color(0xff000000);
   static const kAlmostBlack = Color(0xff00142F);
@@ -12,4 +12,9 @@ class AppColors {
   static const kDarkTextColor = Color(0xff14213D);
   static const kNavBarColor = Color(0xff14213D);
   static const kDarkRed = Color(0xffEB5757);
+  static const kLavender = Color(0xffDDDDF3);
+  static const kSmokedWhite = Color(0xffF6F7F9);
+  static const kAliceBlue = Color(0xffF2F5FC);
+  static const kPrimaryRed = Color(0xffEF5B5B);
+  
 }

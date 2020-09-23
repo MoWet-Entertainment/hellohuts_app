@@ -31,7 +31,7 @@ class FeedPostTopSection extends StatelessWidget {
                 radiusOfAvatar: 10),
             Spacer(),
             GestureDetector(
-              child: const Icon(HelloIcons.ellipsis_v,size: 20.0,color: AppColors.kAlmostBlack,),
+              child: const Icon(HelloIconsOld.ellipsis_v,size: 20.0,color: AppColors.kAlmostBlack,),
               onTapDown: (TapDownDetails details) {
                 // showPopupMenu(context, model, details.globalPosition);
                 openBottonSheet(context, model);

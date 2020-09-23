@@ -30,7 +30,7 @@ void showPopupMenu(
         child: ListTile(
           dense: true,
           contentPadding: const EdgeInsets.symmetric(horizontal: 8.0),
-          trailing: Icon(HelloIcons.plus_circle,
+          trailing: Icon(HelloIconsOld.plus_circle,
               size: 16.0, color: AppColors.kDarkGrey),
           title: Text(
             "Add to board",
@@ -44,7 +44,7 @@ void showPopupMenu(
         child: ListTile(
           dense: true,
           trailing: Icon(
-            HelloIcons.share,
+            HelloIconsOld.share,
             size: 16.0,
             color: AppColors.kDarkGrey,
           ),
@@ -61,7 +61,7 @@ void showPopupMenu(
         child: ListTile(
           dense: true,
           trailing: Icon(
-            HelloIcons.thumbs_down,
+            HelloIconsOld.thumbs_down,
             size: 16.0,
             color: AppColors.kDarkGrey,
           ),
@@ -78,7 +78,7 @@ void showPopupMenu(
         child: ListTile(
           dense: true,
           trailing: Icon(
-            HelloIcons.eye,
+            HelloIconsOld.eye,
             size: 16.0,
             color: AppColors.kDarkGrey,
           ),
@@ -137,10 +137,10 @@ state.setFeedModel = model;
             ),
           ),
         ),
-        _widgetBottomSheetRow(context, HelloIcons.plus_circle, text: "Add to board",isEnable: true,onPressed: state.handleAddToBoard),
-           _widgetBottomSheetRow(context, HelloIcons.share, text: "Share to",isEnable: true,onPressed: state.handleShareClick),             
-         _widgetBottomSheetRow(context, HelloIcons.thumbs_down, text: "Not Interested",isEnable: true,onPressed: state.handleNotIntersetedClick), 
-         _widgetBottomSheetRow(context, HelloIcons.eye, text: "Report",isEnable: true,onPressed: state.handlePostReportClick), 
+        _widgetBottomSheetRow(context, HelloIconsOld.plus_circle, text: "Add to board",isEnable: true,onPressed: state.handleAddToBoard),
+           _widgetBottomSheetRow(context, HelloIconsOld.share, text: "Share to",isEnable: true,onPressed: state.handleShareClick),             
+         _widgetBottomSheetRow(context, HelloIconsOld.thumbs_down, text: "Not Interested",isEnable: true,onPressed: state.handleNotIntersetedClick), 
+         _widgetBottomSheetRow(context, HelloIconsOld.eye, text: "Report",isEnable: true,onPressed: state.handlePostReportClick), 
         //TODO: isEnable need to be implemented
           
         ],);

@@ -19,7 +19,7 @@ class CommentButton extends StatelessWidget {
       child: Row(
         children: <Widget>[
           Icon(
-            HelloIcons.comment,
+            HelloIconsOld.comment,
             size: 21,
             color: AppColors.kAlmostBlack,
           ),

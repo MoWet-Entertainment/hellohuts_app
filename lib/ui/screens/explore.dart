@@ -33,12 +33,15 @@ class _ExplorePageState extends State<ExplorePage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Scaffold(
-      extendBody: true,
-      body: Container(
-        child: _FeedWidgetBody(
-          key: widget.key,
-          scaffoldKey: widget.scaffoldKey,
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        extendBody: true,
+        body: SafeArea(
+          child: _FeedWidgetBody(
+            key: widget.key,
+            scaffoldKey: widget.scaffoldKey,
+          ),
         ),
       ),
     );
@@ -143,16 +146,16 @@ class _AppBarTop extends StatelessWidget {
             brightness: Brightness.light,
             backgroundColor: AppColors.kPureWhite,
 
-            leading: appBarIcon(icon: HelloIcons.subject, size: 24),
+            leading: appBarIcon(icon: HelloIconsOld.subject, size: 24),
             actions: <Widget>[
               appBarIcon(
-                  icon: HelloIcons.bell,
+                  icon: HelloIconsOld.bell,
                   size: 24,
                   notification: state.isNotificationFlag),
             ],
             centerTitle: true,
             title: Icon(
-              HelloIcons.hello_icon,
+              HelloIconsOld.hello_icon,
               color: AppColors.kDarkTextColor,
             ),
           ),
@@ -227,18 +230,18 @@ class _HeaderSection extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         _quickPickItem(
-          icon: HelloIcons.rupee_sign,
+          icon: HelloIconsOld.rupee_sign,
           text: "Cost Estimate",
           call: _callCostEstimate,
         ),
         _quickPickItem(
-            icon: HelloIcons.constructor_1,
+            icon: HelloIconsOld.constructor_1,
             text: "Professionals",
             call: _callProfessionals),
         _quickPickItem(
-            icon: HelloIcons.truck, text: "Materials", call: _callMaterials),
+            icon: HelloIconsOld.truck, text: "Materials", call: _callMaterials),
         _quickPickItem(
-            icon: HelloIcons.apps, text: 'More', call: _callMoreItems),
+            icon: HelloIconsOld.apps, text: 'More', call: _callMoreItems),
       ],
     );
   }
@@ -334,7 +337,7 @@ class _SearchBar extends StatelessWidget {
             children: <Widget>[
               Spacer(),
               Icon(
-                HelloIcons.search,
+                HelloIconsOld.search,
                 size: 16,
                 color: AppColors.kAccentColor,
               ),

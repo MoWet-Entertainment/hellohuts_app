@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/constants/hello_icons.dart';
 import 'package:hellohuts_app/states/app_state.dart';
+import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +16,6 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-
   int _selectedIcon = 0;
   double ICON_OFF = -3;
   double ICON_ON = 0;
@@ -25,17 +26,19 @@ class _BottomNavBarState extends State<BottomNavBar> {
   int ANIM_DURATION = 300;
   @override
   void initState() {
-
-   
     super.initState();
   }
 
   Widget _iconRow() {
+    var width = fullWidth(context);
+    print("width : $width");
     var state = Provider.of<AppState>(context);
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 48.0),
+      padding: width > 500
+          ? EdgeInsets.symmetric(horizontal: 0.25 * width)
+          : EdgeInsets.symmetric(horizontal: 0.1 * width),
       decoration: BoxDecoration(
-        color: AppColors.kNavBarColor,
+        color: AppColors.kPrimaryColor,
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(24.0), topRight: Radius.circular(24.0)),
       ),
@@ -46,17 +49,43 @@ class _BottomNavBarState extends State<BottomNavBar> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          _icon(HelloIcons.compass, 0, iconSize: 26),
-          _icon(HelloIcons.apps, 1, iconSize: 22),
-          _icon(HelloIcons.heart, 2, iconSize: 26),
-          _icon(HelloIcons.hello_icon, 3, iconSize: 20)
+          _icon(null, 0,
+              icon: 0 == state.pageIndex
+                  ? HelloIcons.explore_bold_icon
+                  : HelloIcons.explore_light_icon,
+              isCustomIcon: true,
+              iconSize: 24),
+          _icon(null, 1,
+              icon: 1 == state.pageIndex
+                  ? HelloIcons.category_bold_icon
+                  : HelloIcons.category_light_icon,
+              isCustomIcon: true,
+              iconSize: 24),
+          _icon(null, 2,
+              icon: 2 == state.pageIndex
+                  ? HelloIcons.home_bold_icon
+                  : HelloIcons.home_light_icon,
+              isCustomIcon: true,
+              iconSize: 24),
+          _icon(null, 3,
+              icon: 3 == state.pageIndex
+                  ? HelloIcons.bookmark_bold_icon
+                  : HelloIcons.bookmark_light_icon,
+              isCustomIcon: true,
+              iconSize: 24),
+          _icon(null, 4,
+              icon: 4 == state.pageIndex
+                  ? HelloIcons.profile_bold_icon
+                  : HelloIcons.profile_light_icon,
+              isCustomIcon: true,
+              iconSize: 24),
         ],
       ),
     );
   }
 
   Widget _icon(IconData iconData, int index,
-      {bool isCustomIcon = false, int icon, double iconSize = 22}) {
+      {bool isCustomIcon = false, String icon, double iconSize = 22}) {
     var state = Provider.of<AppState>(context);
     return Container(
       child: AnimatedAlign(
@@ -73,7 +102,14 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 : AppColors.kPureWhite,
             padding: EdgeInsets.all(0),
             alignment: Alignment(0, 0),
-            icon: Icon(iconData),
+            icon: isCustomIcon
+                ? Image.asset(
+                    icon,
+                    color: index == state.pageIndex
+                        ? AppColors.kAccentColor
+                        : AppColors.kPureWhite,
+                  )
+                : Icon(iconData),
             iconSize: iconSize,
             onPressed: () {
               setState(() {

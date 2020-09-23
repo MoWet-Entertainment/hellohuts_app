@@ -61,7 +61,7 @@ class FeedPostCard extends StatelessWidget {
               radiusOfAvatar: 8.w),
           Spacer(),
           GestureDetector(
-            child: const Icon(HelloIcons.ellipsis_v),
+            child: const Icon(HelloIconsOld.ellipsis_v),
             onTapDown: (TapDownDetails details) {
               _showPopupMenu(context, details.globalPosition);
             },
@@ -92,7 +92,7 @@ class FeedPostCard extends StatelessWidget {
           child: ListTile(
             dense: true,
             contentPadding: const EdgeInsets.symmetric(horizontal: 8.0),
-            trailing: Icon(HelloIcons.plus_circle,
+            trailing: Icon(HelloIconsOld.plus_circle,
                 size: 16.0, color: AppColors.kDarkGrey),
             title: Text(
               "Add to board",
@@ -107,7 +107,7 @@ class FeedPostCard extends StatelessWidget {
           child: ListTile(
             dense: true,
             trailing: Icon(
-              HelloIcons.share,
+              HelloIconsOld.share,
               size: 16.0,
               color: AppColors.kDarkGrey,
             ),
@@ -124,7 +124,7 @@ class FeedPostCard extends StatelessWidget {
           child: ListTile(
             dense: true,
             trailing: Icon(
-              HelloIcons.thumbs_down,
+              HelloIconsOld.thumbs_down,
               size: 16.0,
               color: AppColors.kDarkGrey,
             ),
@@ -141,7 +141,7 @@ class FeedPostCard extends StatelessWidget {
           child: ListTile(
             dense: true,
             trailing: Icon(
-              HelloIcons.eye,
+              HelloIconsOld.eye,
               size: 16.0,
               color: AppColors.kDarkGrey,
             ),
