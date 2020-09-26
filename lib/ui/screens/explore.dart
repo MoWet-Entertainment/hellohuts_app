@@ -102,11 +102,10 @@ class _ExplorePostsFeed extends StatelessWidget {
           behavior: NeatScrollBehavior(),
           child: Consumer<FeedState>(builder: (context, state, child) {
             final List<FeedModel> list = state.getFeedList();
-            final List<Widget> bodyDataList = [];
             return ListView.builder(
               physics: NeverScrollableScrollPhysics(),
               padding:
-                  EdgeInsets.only(top: 24, bottom: 64, left: 16.w, right: 16.w),
+                  EdgeInsets.only(top: 32.w, bottom: 64, left: 12.w, right: 12.w),
               scrollDirection: Axis.vertical,
               itemCount: list.length,
               itemBuilder: (context, index) {
