@@ -34,6 +34,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     print("width : $width");
     var state = Provider.of<AppState>(context);
     return Container(
+
       padding: width > 500
           ? EdgeInsets.symmetric(horizontal: 0.25 * width)
           : EdgeInsets.symmetric(horizontal: 0.1 * width),
@@ -42,8 +43,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(24.0), topRight: Radius.circular(24.0)),
       ),
-      height: 64.h,
-      width: MediaQuery.of(context).size.width,
+      height: 64,
+      width: width>500? 0.5* width: width,
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -108,6 +109,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                     color: index == state.pageIndex
                         ? AppColors.kAccentColor
                         : AppColors.kPureWhite,
+                    height: iconSize,
                   )
                 : Icon(iconData),
             iconSize: iconSize,

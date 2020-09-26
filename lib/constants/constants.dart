@@ -29,6 +29,7 @@ class Assets {
 class HelloIcons {
   static String _iconsRoot = "assets/icons/";
 
+  //Nav bar Items
   static String explore_bold_icon = _iconsRoot + "Discovery_bold_icon.png";
   static String explore_light_icon = _iconsRoot + "Discovery_light_icon.png";
   static String category_bold_icon = _iconsRoot + "Category_bold_icon.png";
@@ -40,6 +41,16 @@ class HelloIcons {
       _iconsRoot + "Bookmark_new_light_icon.png";
   static String profile_bold_icon = _iconsRoot + "Profile_bold_icon.png";
   static String profile_light_icon = _iconsRoot + "Profile_light_icon.png";
+
+//App bar Items
+  static String menu_icon = _iconsRoot + "Menu_light_icon.png";
+  static String search_icon = _iconsRoot + "Search_light_icon.png";
+
+//Quick Pick Items
+  static String professionals_icon = _iconsRoot + "Professionals_light_icon.png";
+  static String cost_estimate_icon = _iconsRoot + "Cost_estimate_light_icon.png";
+  static String materials_icon = _iconsRoot + "Materials_light_icon.png";
+  static String more_items_icon = _iconsRoot + "More_items_light_icon.png";
 }
 
 class SessionData {

@@ -21,7 +21,7 @@ class AuthState extends AppState {
   var logger = getLogger('AuthState');
   AuthStatus authStatus = AuthStatus.NOT_DETERMINED;
   String userId;
-  FirebaseUser user;
+  User user;
   AppUser _userModel;
   AppUser get userModel => _userModel;
   final AuthService _authService = locator<FireBaseAuthService>();

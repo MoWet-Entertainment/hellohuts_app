@@ -9,12 +9,12 @@ class AppColors {
   static const kLightGrey = Color(0xffF2F2F5);
   static const kMediumGrey = Color(0xffE5E5E5);
   static const kDarkGrey = Color(0xff989898);
-  static const kDarkTextColor = Color(0xff14213D);
+  static const kDarkTextColor = Color(0xff00142F);
   static const kNavBarColor = Color(0xff14213D);
   static const kDarkRed = Color(0xffEB5757);
   static const kLavender = Color(0xffDDDDF3);
   static const kSmokedWhite = Color(0xffF6F7F9);
   static const kAliceBlue = Color(0xffF2F5FC);
   static const kPrimaryRed = Color(0xffEF5B5B);
-  
+
 }
