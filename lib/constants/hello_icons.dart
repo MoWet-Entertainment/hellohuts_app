@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
-class HelloIcons {
-   HelloIcons._();
+class HelloIconsOld {
+   HelloIconsOld._();
 
   static const _kFontFam = 'HelloIcons';
   static const _kFontPkg = null;

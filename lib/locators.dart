@@ -7,6 +7,7 @@ import 'package:hellohuts_app/services/firestore_services/firestore_service.dart
 GetIt locator = GetIt.instance;
 
 Future setUpLocator() async {
+  
   locator.registerLazySingleton(() => FirestoreService.instance);
   locator.registerLazySingleton(() => FireBaseAuthService());
   locator.registerLazySingleton(() => AnalyticsService());

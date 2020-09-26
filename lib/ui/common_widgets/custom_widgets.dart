@@ -183,39 +183,56 @@ Widget postedUserSection(BuildContext context,
     String userTitle,
     double radiusOfAvatar = 8}) {
   return Container(
-    child: Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        CircleAvatar(
-          radius: radiusOfAvatar,
-          backgroundColor: AppColors.kDarkGrey,
-          backgroundImage: NetworkImage(imagePath),
-        ),
-        spacer(width: 8.0),
-        Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                constraints:
-                    BoxConstraints(maxHeight: fullWidth(context) / 1.6),
-                child: Text(
-                  postedUser,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: AppThemes.postedAuthorTextMainHeadStyle,
-                ),
-              ),
-              Container(
-                constraints:
-                    BoxConstraints(maxHeight: fullWidth(context) / 1.6),
-                child: Text(userTitle,
+    child: InkWell(
+      splashColor: Colors.transparent,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            width: 2 * (radiusOfAvatar + 2),
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: AppColors.kAccentColor,
+                  width: 2.0,
+                )),
+            child: CircleAvatar(
+              radius: radiusOfAvatar,
+              backgroundColor: AppColors.kDarkGrey,
+              backgroundImage: NetworkImage(imagePath),
+            ),
+          ),
+          spacer(width: 8.0),
+          Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  constraints:
+                      BoxConstraints(maxHeight: fullWidth(context) / 1.6),
+                  child: Text(
+                    postedUser,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: AppThemes.postedAuthorTextSubHeadStyle),
-              ),
-            ]),
-      ],
+                    style: AppThemes.postedAuthorTextMainHeadStyle,
+                  ),
+                ),
+                Container(
+                  constraints:
+                      BoxConstraints(maxHeight: fullWidth(context) / 1.6),
+                  child: Text(userTitle,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppThemes.postedAuthorTextSubHeadStyle),
+                ),
+              ]),
+        ],
+      ),
+      onTap: () {
+        //TODO: Write a method to navigate to the Posted User
+        print(
+            "This should navigate the user to the post Authors Profile page ");
+      },
     ),
   );
 }
@@ -227,5 +244,45 @@ Widget spacer({double height, double width}) {
   );
 }
 
-
-
+Widget customIconSquare({
+  IconData iconData,
+  bool isCustomIcon = true,
+  String iconAsset,
+  double backgroundSize = 30,
+  Color backgroundColor = AppColors.kSmokedWhite,
+  double iconSize = 24,
+  Color iconColor = AppColors.kDarkTextColor,
+  double borderRadius = 12,
+  Function actionCall,
+}) {
+  return Stack(
+    alignment: Alignment.center,
+    children: <Widget>[
+      Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(borderRadius),
+          color: backgroundColor,
+        ),
+        height: backgroundSize,
+        width: backgroundSize,
+      ),
+      IconButton(
+          splashColor: Colors.white,
+          icon: isCustomIcon
+              ? Image.asset(
+                  iconAsset,
+                  color: iconColor,
+                  width: iconSize,
+                  height: iconSize,
+                )
+              : Icon(
+                  iconData,
+                  color: iconColor,
+                  size: iconSize,
+                ),
+          onPressed: () => {
+                if (actionCall != null) {actionCall()} else {print("tests")}
+              }),
+    ],
+  );
+}

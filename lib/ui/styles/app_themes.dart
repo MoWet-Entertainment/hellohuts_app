@@ -39,16 +39,16 @@ class AppThemes {
         fontWeight: FontWeight.w400),
   );
 
-  static final TextStyle postedAuthorTextMainHeadStyle = GoogleFonts.roboto(
-    fontSize: 10.0,
+  static final TextStyle postedAuthorTextMainHeadStyle = GoogleFonts.lato(
+    fontSize: 12.0,
     textStyle:
         TextStyle(fontWeight: FontWeight.w400, color: AppColors.kDarkTextColor),
   );
 
-  static final TextStyle postedAuthorTextSubHeadStyle = GoogleFonts.roboto(
-    fontSize: 8.0,
+  static final TextStyle postedAuthorTextSubHeadStyle = GoogleFonts.lato(
+    fontSize: 10.0,
     textStyle:
-        TextStyle(fontWeight: FontWeight.w400, color: AppColors.kAlmostBlack),
+        TextStyle(fontWeight: FontWeight.w400, color: AppColors.kDarkGrey),
   );
 
   static final TextStyle searchHintStyle = GoogleFonts.openSans(
@@ -57,8 +57,8 @@ class AppThemes {
         TextStyle(fontWeight: FontWeight.w400, color: AppColors.kDarkGrey),
   );
 
-  static final TextStyle appBarDefaultText = GoogleFonts.roboto(
+  static final TextStyle appBarDefaultText = GoogleFonts.openSans(
       fontSize: 16,
       textStyle: TextStyle(
-          fontWeight: FontWeight.w500, color: AppColors.kDarkTextColor));
+          fontWeight: FontWeight.bold, color: AppColors.kDarkTextColor));
 }

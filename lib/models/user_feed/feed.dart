@@ -1,5 +1,5 @@
 import 'package:hellohuts_app/constants/json_constants.dart';
-import 'package:hellohuts_app/models/user.dart';
+import 'package:hellohuts_app/models/app_user.dart';
 import 'package:hellohuts_app/models/user_feed/comments.dart';
 import 'package:hellohuts_app/models/user_feed/likes.dart';
 
@@ -19,7 +19,7 @@ class FeedModel {
   List<String> imagePathList;
   List<String> tags;
   List<String> commentKeyList;
-  User user;
+  AppUser user;
 
   FeedModel({
     this.key,
@@ -98,7 +98,7 @@ class FeedModel {
     likeCount = map[AppFeedConstants.postLikeCount];
     commentCount = map[AppFeedConstants.postCommentCount];
     shareCount = map[AppFeedConstants.postShareCount];
-    user = User.fromJson(map[AppFeedConstants.postedUser]);
+    user = AppUser.fromJson(map[AppFeedConstants.postedUser]);
     createdAt = map[AppFeedConstants.postCreatedAt];
     parentKey = map[AppFeedConstants.postParentKey];
     childKey = map[AppFeedConstants.postChildKey];

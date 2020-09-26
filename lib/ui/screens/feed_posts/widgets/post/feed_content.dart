@@ -166,7 +166,7 @@ class PlusButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Icon(
-        HelloIcons.plus_circle,
+        HelloIconsOld.plus_circle,
         color: AppColors.kAlmostBlack,
         size: 22,
       ),
@@ -186,7 +186,7 @@ class ShareWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Icon(
-        HelloIcons.share_alt,
+        HelloIconsOld.share_alt,
         size: 21,
         color: AppColors.kAlmostBlack,
       ),

@@ -43,7 +43,7 @@ class Posts extends StatelessWidget {
                         }).toList()),
                          Container(
                            alignment: Alignment.bottomCenter,
-                           child: Icon(HelloIcons.arrow_right, color: Colors.white,),)
+                           child: Icon(HelloIconsOld.arrow_right, color: Colors.white,),)
                       ],
                       )
                     : SizedBox(),

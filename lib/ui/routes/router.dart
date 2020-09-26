@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_route/auto_route_annotations.dart';
 import 'package:hellohuts_app/models/user_feed/post_detail.dart';
+import 'package:hellohuts_app/ui/screens/auth/phone_auth/get_phone.dart';
 import 'package:hellohuts_app/ui/screens/base_page.dart';
 import 'package:hellohuts_app/ui/screens/explore.dart';
 import 'package:hellohuts_app/ui/screens/feed_posts/feed_post_detail.dart';
@@ -13,7 +14,7 @@ import 'package:hellohuts_app/ui/screens/welcome_page.dart';
 
 @MaterialAutoRouter(
   routes:<AutoRoute> [
-    AdaptiveRoute(page: BasePage, initial: true),
+    AdaptiveRoute(page: BasePage,initial: true),
     AdaptiveRoute(page: ExplorePage  ),
     CustomRoute(page: WelcomePage, transitionsBuilder: TransitionsBuilders.slideBottom ),
     CustomRoute(page: SearchPage, transitionsBuilder: TransitionsBuilders.fadeIn ),
@@ -24,7 +25,7 @@ import 'package:hellohuts_app/ui/screens/welcome_page.dart';
  CustomRoute(page: Professionals, name:"professionals", transitionsBuilder: TransitionsBuilders.fadeIn ),
  CustomRoute(page: MoreItems, transitionsBuilder: TransitionsBuilders.fadeIn ),
   CustomRoute(page: Materials, name:"materials",transitionsBuilder: TransitionsBuilders.fadeIn ),
-
+AdaptiveRoute(page: PhoneAuthGetPhone),
   ]
 )
 class $Router {}
