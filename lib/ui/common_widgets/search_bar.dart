@@ -69,7 +69,7 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
             prefixIcon: Padding(
                 padding: EdgeInsets.only(left: 8, right: 2),
                 child: Icon(
-                  HelloIcons.search,
+                  HelloIconsOld.search,
                   size: 18,
                   color: AppColors.kDarkGrey,
                 )),
@@ -82,7 +82,7 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
                   )
                 : GestureDetector(
                     child: Icon(
-                      HelloIcons.times_circle,
+                      HelloIconsOld.times_circle,
                       color: AppColors.kDarkGrey,
                       size: 14,
                     ),

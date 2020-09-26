@@ -11,7 +11,7 @@ import 'dart:math' as math;
 import 'package:provider/provider.dart';
 
 Widget appBarIcon(
-    {@required IconData icon,
+    {IconData icon,
     Color color,
     double size = 24,
     bool notification = false,
@@ -28,12 +28,14 @@ Widget appBarIcon(
         width: 40.0,
       ),
       IconButton(
-          icon: Icon(
+      icon: Icon(
             icon,
             color: color ?? AppColors.kPureBlack,
             size: size,
           ),
-          onPressed: actionCall),
+          onPressed: actionCall,
+        ),
+   
       notification
           ? new Positioned(
               right: 2,
@@ -44,11 +46,10 @@ Widget appBarIcon(
                   color: AppColors.kPureWhite,
                   borderRadius: BorderRadius.circular(8),
                 ),
-                 constraints: BoxConstraints(
-                    maxHeight: 16,
-                    maxWidth: 16,
-                  ),
-              
+                constraints: BoxConstraints(
+                  maxHeight: 16,
+                  maxWidth: 16,
+                ),
                 child: Container(
                   decoration: new BoxDecoration(
                     color: AppColors.kAccentColor,
@@ -65,4 +66,6 @@ Widget appBarIcon(
     ],
   );
 }
+
+
 

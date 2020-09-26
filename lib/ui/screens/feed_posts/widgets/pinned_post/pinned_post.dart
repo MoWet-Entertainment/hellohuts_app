@@ -13,7 +13,7 @@ class PinnedWidget extends StatelessWidget {
       child: Row(
         children: <Widget>[
           Icon(
-            HelloIcons.paperclip,
+            HelloIconsOld.paperclip,
             size: 21,
             color: AppColors.kAlmostBlack,
           ),
@@ -44,7 +44,7 @@ class ViewsCountWidget extends StatelessWidget {
       child: Row(
         children: <Widget>[
           Icon(
-            HelloIcons.eye,
+            HelloIconsOld.eye,
             size: 21,
             color: AppColors.kAlmostBlack,
           ),

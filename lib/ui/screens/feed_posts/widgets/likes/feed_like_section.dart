@@ -29,12 +29,12 @@ class LikeButton extends StatelessWidget {
         children: <Widget>[
           model.userLiked
               ? const Icon(
-                  HelloIcons.thumbs_up,
+                  HelloIconsOld.thumbs_up,
                   size: 22,
                   color: AppColors.kDarkRed,
                 )
               : const Icon(
-                  HelloIcons.thumbs_up,
+                  HelloIconsOld.thumbs_up,
                   size: 22,
                   color: AppColors.kAlmostBlack,
                 ),
