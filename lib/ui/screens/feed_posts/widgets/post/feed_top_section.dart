@@ -18,7 +18,7 @@ class FeedPostTopSection extends StatelessWidget {
   Widget _feedPostTopSection(
       BuildContext context, FeedModel list) {
     return Container(
-      height: 40,
+      height: 45,
       child: Padding(
         padding: const EdgeInsets.only(left: 14, right: 8),
         child: Row(

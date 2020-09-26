@@ -25,7 +25,7 @@ class FeedPost extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 8.0),
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+          borderRadius: const BorderRadius.all(Radius.circular(20.0)),
           color: AppColors.kPureWhite,
         ),
         child: Column(
