@@ -18,7 +18,6 @@ void main() async {
   // Pass all uncaught errors from the framework to Crashlytics.
   // FlutterError.onError = Crashlytics.instance.recordFlutterError;
   WidgetsFlutterBinding.ensureInitialized();
-  ScreenUtil.init(designSize: Size(375, 801),allowFontScaling: false);
   await setUpLocator();
 
   runApp(Provider<AppConfig>(

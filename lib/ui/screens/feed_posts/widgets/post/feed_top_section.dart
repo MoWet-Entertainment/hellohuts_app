@@ -9,14 +9,14 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class FeedPostTopSection extends StatelessWidget {
   final FeedModel model;
-  const FeedPostTopSection({Key key, this.model }) : super(key: key);
+  const FeedPostTopSection({Key key, this.model}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return _feedPostTopSection(context, model);
   }
 
-  Widget _feedPostTopSection(
-      BuildContext context, FeedModel list) {
+  Widget _feedPostTopSection(BuildContext context, FeedModel list) {
+    PageController controller = new PageController();
     return Container(
       height: 45,
       child: Padding(
@@ -30,26 +30,31 @@ class FeedPostTopSection extends StatelessWidget {
                 userTitle: list.postedUsertitle,
                 radiusOfAvatar: 12),
             Spacer(),
-            GestureDetector(
-              child: const Icon(
-                HelloIconsOld.ellipsis_v,
-                size: 20.0,
-                color: AppColors.kAlmostBlack,
+            // GestureDetector(
+            //   child: const Icon(
+            //     HelloIconsOld.ellipsis_v,
+            //     size: 20.0,
+            //     color: AppColors.kAlmostBlack,
+            //   ),
+            //   onTapDown: (TapDownDetails details) {
+            //     // showPopupMenu(context, model, details.globalPosition);
+            //     openBottonSheet(context, model);
+            //   },
+            // ),
+            Container(
+              padding: EdgeInsets.only(right: 16.0),
+              child: SmoothPageIndicator(
+                controller: controller,
+                count: 4,
+                effect: ExpandingDotsEffect(
+                    dotHeight: 4,
+                    dotWidth: 6,
+                    spacing: 3,
+                    dotColor: AppColors.kDarkGrey,
+                    activeDotColor: AppColors.kDarkestGrey,
+                    expansionFactor: 2),
               ),
-              onTapDown: (TapDownDetails details) {
-                // showPopupMenu(context, model, details.globalPosition);
-                openBottonSheet(context, model);
-              },
-            ),
-            // Container(
-            //   child: SmoothPageIndicator(
-            //     controller: controller,
-            //     count: 4,
-            //     effect: ExpandingDotsEffect(
-            //       expansionFactor: 3
-            //     ),
-              // ),
-            // )
+            )
           ],
         ),
       ),

@@ -1,6 +1,8 @@
+
 import 'dart:math' as math;
 
 import 'package:auto_route/auto_route.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,7 +25,9 @@ import 'feed_content_title.dart';
 
 class FeedPostContent extends StatelessWidget {
   final FeedModel model;
-  const FeedPostContent({Key key, this.model}) : super(key: key);
+  final PageController controller;
+  const FeedPostContent({Key key, this.model, this.controller})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +59,8 @@ class FeedPostContent extends StatelessWidget {
 
 class _FeedPostMiddleSection extends StatelessWidget {
   final FeedModel model;
-  const _FeedPostMiddleSection({Key key, this.model}) : super(key: key);
+  const _FeedPostMiddleSection({Key key, this.model})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -65,30 +70,45 @@ class _FeedPostMiddleSection extends StatelessWidget {
   Widget _feedPostMiddleSection(FeedModel list) {
     //TODO: Add a method to pick the aspect ratio from JSON
     final bool _customAspectRatio = false;
+    List<String> imageListTemp = [
+      "https://images.unsplash.com/photo-1575379047099-155c957f7bab?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1564078516393-cf04bd966897?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80",
+      "https://images.unsplash.com/photo-1565031491910-e57fac031c41?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1558882224-dda166733046?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1049&q=80",
+    ];
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: ClipRRect(
         borderRadius: const BorderRadius.all(Radius.circular(16)),
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 0),
-          child: AspectRatio(
+        child: CarouselSlider.builder(
+            itemCount: imageListTemp.length,
+          options: CarouselOptions(
+            autoPlay: false,
+            enableInfiniteScroll: false,
+           viewportFraction: 1,
+scrollDirection: Axis.horizontal,
             aspectRatio: _customAspectRatio ? 1 : (327.w / 243.w),
-            // aspectRatio: 319.w / 197.15.w,
-            child: Image.network(
-              list.postImage,
-              fit: BoxFit.cover,
-              loadingBuilder: (BuildContext context, Widget child,
-                  ImageChunkEvent loadingProgress) {
-                if (loadingProgress == null) return child;
-                return Center(
-                  child: CircularProgressIndicator(
-                    value: loadingProgress.expectedTotalBytes != null
-                        ? loadingProgress.cumulativeBytesLoaded /
-                            loadingProgress.expectedTotalBytes
-                        : null,
-                  ),
-                );
-              },
+          ),
+          itemBuilder: (BuildContext context, int itemIndex) => Container(
+            padding: const EdgeInsets.symmetric(horizontal: 0),
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              child: Image.network( 
+                  imageListTemp[itemIndex],
+                  fit: BoxFit.cover,
+                  loadingBuilder: (BuildContext context, Widget child,
+                      ImageChunkEvent loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return Center(
+                      child: CircularProgressIndicator(
+                        value: loadingProgress.expectedTotalBytes != null
+              ? loadingProgress.cumulativeBytesLoaded /
+                  loadingProgress.expectedTotalBytes
+              : null,
+                      ),
+                    );
+                  },
+                ),
             ),
           ),
         ),
@@ -130,7 +150,9 @@ class _FeedPostBottomSection extends StatelessWidget {
                   width: 10.0,
                 ),
                 Spacer(),
-                PlusButton(model: model,),
+                PlusButton(
+                  model: model,
+                ),
               ],
             ),
             SizedBox(

@@ -26,6 +26,10 @@ class ExplorePage extends StatefulWidget {
   ExplorePage({Key key, this.scaffoldKey}) : super(key: key);
 
   @override
+  void initState() {
+  }
+
+  @override
   _ExplorePageState createState() => _ExplorePageState();
 }
 
@@ -104,8 +108,8 @@ class _ExplorePostsFeed extends StatelessWidget {
             final List<FeedModel> list = state.getFeedList();
             return ListView.builder(
               physics: NeverScrollableScrollPhysics(),
-              padding:
-                  EdgeInsets.only(top: 32.w, bottom: 64, left: 12.w, right: 12.w),
+              padding: EdgeInsets.only(
+                  top: 32.w, bottom: 64, left: 12.w, right: 12.w),
               scrollDirection: Axis.vertical,
               itemCount: list.length,
               itemBuilder: (context, index) {
@@ -137,8 +141,7 @@ class _AppBarTop extends StatelessWidget {
         top: false,
         bottom: false,
         sliver: SliverPadding(
-
-          padding: EdgeInsets.only( bottom: 16.0),
+          padding: EdgeInsets.only(bottom: 16.0),
           sliver: SliverAppBar(
             floating: true,
             pinned: false,
@@ -153,7 +156,7 @@ class _AppBarTop extends StatelessWidget {
 
             leading: Padding(
               padding: const EdgeInsets.only(left: 16.0),
-                          child: customIconSquare(
+              child: customIconSquare(
                   isCustomIcon: true,
                   iconAsset: HelloIcons.menu_icon,
                   iconColor: AppColors.kDarkTextColor,
@@ -168,8 +171,8 @@ class _AppBarTop extends StatelessWidget {
             ),
             actions: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(right:16.0),
-                              child: customIconSquare(
+                padding: const EdgeInsets.only(right: 16.0),
+                child: customIconSquare(
                     isCustomIcon: true,
                     iconAsset: HelloIcons.search_icon,
                     iconColor: AppColors.kDarkTextColor,
@@ -223,7 +226,7 @@ class _UsersGreet extends StatelessWidget {
     final authState = Provider.of<AuthState>(context);
     var user = authState.user != null ? authState.user.displayName : "James";
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      padding: EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -268,7 +271,7 @@ class _QuickPicks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 4.w),
+      padding: const EdgeInsets.symmetric(horizontal: 4),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(20.0)),
@@ -327,10 +330,10 @@ class _QuickPicks extends StatelessWidget {
 }
 
 class _QuickPicksItem extends StatelessWidget {
-  String iconAsset;
-  String text;
-  Color textColor;
-  Function call;
+final  String iconAsset;
+ final  String text;
+  final Color textColor;
+  final Function call;
   _QuickPicksItem({
     Key key,
     this.iconAsset,
@@ -341,17 +344,18 @@ class _QuickPicksItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context,designSize: Size(375, 801),allowFontScaling: false);
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 4.0.w),
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: InkWell(
         child: Column(
           children: <Widget>[
             customIconSquare(
               iconAsset: iconAsset,
               isCustomIcon: true,
-              iconSize: 24.0.w,
+              iconSize: 24.0,
               iconColor: AppColors.kAlmostBlack,
-              backgroundSize: 56.w,
+              backgroundSize: 56,
               borderRadius: 16.0,
               backgroundColor: AppColors.kPureWhite,
               actionCall: call,

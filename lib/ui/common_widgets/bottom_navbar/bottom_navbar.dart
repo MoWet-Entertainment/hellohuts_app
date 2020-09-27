@@ -32,7 +32,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   Widget _iconRow() {
     var width = fullWidth(context);
     var height = fullHeight(context);
-    //TODO: Remove this line
+    //TODO: Remove below lines
     print("width : $width");
     print("height: $height");
     print("height nav : ${height * 0.07}");
