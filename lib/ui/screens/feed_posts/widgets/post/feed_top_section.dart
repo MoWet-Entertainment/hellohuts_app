@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hellohuts_app/constants/hello_icons.dart';
 import 'package:hellohuts_app/models/test.dart';
+import 'package:hellohuts_app/states/feed_state.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hellohuts_app/ui/screens/feed_posts/widgets/board/add_to_board.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
+import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class FeedPostTopSection extends StatelessWidget {
@@ -12,11 +14,11 @@ class FeedPostTopSection extends StatelessWidget {
   const FeedPostTopSection({Key key, this.model}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final feedState = Provider.of<FeedState>(context);
     return _feedPostTopSection(context, model);
   }
 
   Widget _feedPostTopSection(BuildContext context, FeedModel list) {
-    PageController controller = new PageController();
     return Container(
       height: 45,
       child: Padding(
@@ -43,9 +45,9 @@ class FeedPostTopSection extends StatelessWidget {
             // ),
             Container(
               padding: EdgeInsets.only(right: 16.0),
-              child: SmoothPageIndicator(
-                controller: controller,
+              child: AnimatedSmoothIndicator(
                 count: 4,
+                activeIndex: model.activePage,
                 effect: ExpandingDotsEffect(
                     dotHeight: 4,
                     dotWidth: 6,

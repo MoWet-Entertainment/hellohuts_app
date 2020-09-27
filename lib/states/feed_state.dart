@@ -59,6 +59,13 @@ class FeedState extends AppState {
     notifyListeners();
   }
 
+  void updatePostActivePage(FeedModel model, int activePage) {
+    if (model.activePage != activePage) {
+      model.activePage = activePage;
+      notifyListeners();
+    }
+  }
+
   ///[getPostDetailFromDatabase] is used to get the details of the post from Firestore
   void getPostDetailFromDatabase({@required FeedModel model}) async {
     //TODO: Add methods to get the post detail from Database here

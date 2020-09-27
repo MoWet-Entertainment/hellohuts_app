@@ -13,6 +13,7 @@ class FeedModel {
   int likeCount;
   List<LikeList> likeList;
   int commentCount;
+  int activePage = 1;
   List<CommentList> commentList;
   int shareCount;
   String createdAt;
@@ -33,6 +34,7 @@ class FeedModel {
     this.createdAt,
     this.imagePathList,
     this.likeList,
+    this.activePage,
     this.tags,
     this.user,
     this.commentKeyList,
@@ -160,6 +162,4 @@ class FeedModel {
   String toString() {
     return 'FeedModel{key: $key, parentKey: $parentKey, childKey: $childKey, title: $title, description: $description, userId: $userId, likeCount: $likeCount, likeList: $likeList, commentCount: $commentCount, commentList: $commentList, shareCount: $shareCount, createdAt: $createdAt, imagePathList: $imagePathList, tags: $tags, commentKeyList: $commentKeyList, user: $user}';
   }
-
-
 }
