@@ -37,8 +37,8 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    final state = Provider.of<SearchState>(context);
-    print("building parenr");
+    final state = Provider.of<SearchState>(context,listen:false);
+    print("building parent");
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SafeArea(

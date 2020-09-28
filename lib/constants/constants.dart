@@ -59,6 +59,7 @@ class HelloIcons {
   static String comment_bold_icon = _iconsRoot + "Chat_bold_icon.png";
   static String share_bold_icon = _iconsRoot + "Share_bold_icon.png";
 
+
 }
 
 class SessionData {
