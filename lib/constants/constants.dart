@@ -47,10 +47,18 @@ class HelloIcons {
   static String search_icon = _iconsRoot + "Search_light_icon.png";
 
 //Quick Pick Items
-  static String professionals_icon = _iconsRoot + "Professionals_light_icon.png";
-  static String cost_estimate_icon = _iconsRoot + "Cost_estimate_light_icon.png";
+  static String professionals_icon =
+      _iconsRoot + "Professionals_light_icon.png";
+  static String cost_estimate_icon =
+      _iconsRoot + "Cost_estimate_light_icon.png";
   static String materials_icon = _iconsRoot + "Materials_light_icon.png";
   static String more_items_icon = _iconsRoot + "More_items_light_icon.png";
+
+  //Feed Post Items
+  static String heart_bold_icon = _iconsRoot + "Heart_Filled_bold_icon.png";
+  static String comment_bold_icon = _iconsRoot + "Chat_bold_icon.png";
+  static String share_bold_icon = _iconsRoot + "Share_bold_icon.png";
+
 }
 
 class SessionData {

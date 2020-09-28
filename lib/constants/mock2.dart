@@ -4,7 +4,7 @@ class Mock2 {
   static var list = [{
   "post_title": "Benchmark for visionary😘. Partnerships, when the things are so cute and we have to find alternate solutions for the same is mandating the necessity to have a global solutions for all the potential problems which society faces!",
   "post_description": "Path fx in oth disease, l femur, subs for fx w routn heal",
-  "post_image": "https://images.unsplash.com/photo-1510627489930-0c1b0bfb6785?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
+  "post_image": "  https://images.unsplash.com/photo-1551516595-09cb9fcf8db5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80",
   "posted_user": "Bernette Ruddle",
   "posted_user_title": "Web Designer III",
   "posted_date": "3/3/2020",
@@ -40,7 +40,7 @@ class Mock2 {
 }, {
   "post_title": "mesh visionary interfaces",
   "post_description": "Adverse effect of antifungal antibiotics, sys used, init",
-  "post_image": "http://dummyimage.com/455x300.png/dddddd/000000",
+  "post_image": "https://images.unsplash.com/photo-1510627489930-0c1b0bfb6785?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
   "posted_user": "Halie Tooth",
   "posted_user_title": "Systems Administrator II",
   "posted_date": "5/14/2020",
@@ -52,7 +52,7 @@ class Mock2 {
 }, {
   "post_title": "optimize B2B e-services",
   "post_description": "Fx oth prt scapula, unsp shoulder, subs for fx w malunion",
-  "post_image": "http://dummyimage.com/466x300.jpg/5fa2dd/ffffff",
+  "post_image": "https://images.unsplash.com/photo-1575379047099-155c957f7bab?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80",
   "posted_user": "Odey Dozdill",
   "posted_user_title": "Director of Sales",
   "posted_date": "4/17/2020",

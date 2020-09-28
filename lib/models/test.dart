@@ -1,4 +1,5 @@
 class FeedModel {
+  String postId;
   String postTitle;
   String postDesc;
   String postImage;
@@ -8,18 +9,23 @@ class FeedModel {
   String postCategory;
   String userAvatar;
   bool userLiked;
+  int activePage = 0;
 
   FeedModel(
-      {this.postTitle,
+      {this.postId,
+      this.postTitle,
       this.postDesc,
       this.postImage,
       this.postedUser,
       this.postedUsertitle,
       this.postedDate,
       this.postCategory,
-      this.userAvatar});
+      this.userAvatar,
+      this.userLiked,
+      this.activePage});
 
   FeedModel.fromJson(Map<String, dynamic> map) {
+    postId = map["post_id"];
     postTitle = map["post_title"];
     postDesc = map["post_description"];
     postImage = map["post_image"];
@@ -32,6 +38,7 @@ class FeedModel {
   }
   toJson() {
     return {
+      "post_id": this.postId,
       "post_title": this.postTitle,
       "post_description": this.postDesc,
       "post_image": this.postImage,

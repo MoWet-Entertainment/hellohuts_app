@@ -7,16 +7,21 @@ import 'package:hellohuts_app/ui/screens/feed_posts/widgets/post/feed_content.da
 import 'package:hellohuts_app/ui/screens/feed_posts/widgets/post/feed_top_section.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 
-class FeedPost extends StatelessWidget {
+class FeedPost extends StatefulWidget {
   final FeedModel model;
-  const FeedPost({Key key, this.model}) : super(key: key);
+   FeedPost({Key key, this.model}) : super(key: key);
 
+  @override
+  _FeedPostState createState() => _FeedPostState();
+}
+
+class _FeedPostState extends State<FeedPost> {
 
   @override
   Widget build(BuildContext context) {
 
     return Container(
-      child: _feedPosts(model),
+      child: _feedPosts(widget.model),
     );
   }
 
@@ -25,7 +30,7 @@ class FeedPost extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 8.0),
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+          borderRadius: const BorderRadius.all(Radius.circular(20.0)),
           color: AppColors.kPureWhite,
         ),
         child: Column(
@@ -37,5 +42,4 @@ class FeedPost extends StatelessWidget {
       ),
     );
   }
-
 }

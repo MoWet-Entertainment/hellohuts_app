@@ -31,10 +31,13 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   Widget _iconRow() {
     var width = fullWidth(context);
+    var height = fullHeight(context);
+    //TODO: Remove below lines
     print("width : $width");
+    print("height: $height");
+    print("height nav : ${height * 0.07}");
     var state = Provider.of<AppState>(context);
     return Container(
-
       padding: width > 500
           ? EdgeInsets.symmetric(horizontal: 0.25 * width)
           : EdgeInsets.symmetric(horizontal: 0.1 * width),
@@ -43,8 +46,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(24.0), topRight: Radius.circular(24.0)),
       ),
-      height: 64,
-      width: width>500? 0.5* width: width,
+      height: (height * 0.07) > 64 ? 80 : 64,
+      width: width > 500 ? 0.5 * width : width,
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

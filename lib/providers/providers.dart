@@ -15,6 +15,6 @@ List<SingleChildWidget> providers = [
    ChangeNotifierProvider<PopupState>(create: (_) => PopupState()),
    ChangeNotifierProvider<SearchState>(create: (_) => SearchState()),
    ChangeNotifierProvider<PhoneAuthDataProvider>(create: (_)=>PhoneAuthDataProvider(),),
-   ChangeNotifierProvider<CountryProvider>(create: (_)=>CountryProvider(),)
+   ChangeNotifierProvider<CountryProvider>(create: (_)=>CountryProvider(),),
  
 ];
