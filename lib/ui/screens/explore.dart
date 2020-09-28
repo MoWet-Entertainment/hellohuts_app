@@ -4,7 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hellohuts_app/ui/styles/app_themes.dart';
+import 'package:hellohuts_app/constants/app_constants.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
@@ -20,14 +20,14 @@ import 'package:hellohuts_app/ui/routes/router.gr.dart';
 import 'package:hellohuts_app/ui/screens/feed_posts/feed_post.dart';
 import 'package:hellohuts_app/ui/screens/search/search_screen.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
+import 'package:hellohuts_app/ui/styles/app_themes.dart';
 
 class ExplorePage extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
   ExplorePage({Key key, this.scaffoldKey}) : super(key: key);
 
   @override
-  void initState() {
-  }
+  void initState() {}
 
   @override
   _ExplorePageState createState() => _ExplorePageState();
@@ -67,10 +67,11 @@ class _FeedWidgetBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return NestedScrollView(
-      ///set [floatHeaderSliver] to true . For getting the floating appBar
-      ///This feature is not available in flutter stable `1.17.4`
-      ///
-      /// but available in Master branch
+      ///This can be used to achieve floating app bar,
+      ///but currently this also floats the [_HeaderSection] which is undesirable
+      ///Therefore given false for now
+      floatHeaderSlivers: false,
+
       headerSliverBuilder: (context, bool innerBoxIsScrolled) {
         return <Widget>[
           _AppBarTop(
@@ -93,6 +94,9 @@ class _ExplorePostsFeed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final state = Provider.of<FeedState>(context);
+    final List<FeedModel> list = state.getFeedList();
+
     return Container(
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.only(
@@ -104,23 +108,20 @@ class _ExplorePostsFeed extends StatelessWidget {
         padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
         child: ScrollConfiguration(
           behavior: NeatScrollBehavior(),
-          child: Consumer<FeedState>(builder: (context, state, child) {
-            final List<FeedModel> list = state.getFeedList();
-            return ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              padding: EdgeInsets.only(
-                  top: 32.w, bottom: 64, left: 12.w, right: 12.w),
-              scrollDirection: Axis.vertical,
-              itemCount: list.length,
-              itemBuilder: (context, index) {
-                FeedModel model = list[index];
+          child: ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            padding:
+                EdgeInsets.only(top: 32.w, bottom: 64, left: 12.w, right: 12.w),
+            scrollDirection: Axis.vertical,
+            itemCount: list.length,
+            itemBuilder: (context, index) {
+              FeedModel model = list[index];
 
-                ///TODO: Check if you are facing any perf issue
-                /// If yes Change the FeedPost to _feedPosts(context, model)
-                return FeedPost(model: model);
-              },
-            );
-          }),
+              ///TODO: Check if you are facing any perf issue
+              /// If yes Change the FeedPost to _feedPosts(context, model)
+              return FeedPost(model: model);
+            },
+          ),
         ),
       ),
     );
@@ -144,12 +145,12 @@ class _AppBarTop extends StatelessWidget {
           padding: EdgeInsets.only(bottom: 16.0),
           sliver: SliverAppBar(
             floating: true,
-            pinned: false,
+            pinned: true,
 
             ///set `snap` false, when flutter verion `1.17.4` is upgraded
-            snap: true,
+            snap: false,
             primary: true,
-            forceElevated: false,
+            forceElevated: innerBoxIsScrolled,
             elevation: 1.0,
             brightness: Brightness.light,
             backgroundColor: AppColors.kPureWhite,
@@ -186,7 +187,7 @@ class _AppBarTop extends StatelessWidget {
               ),
             ],
             centerTitle: true,
-            title: Text("helllohuts", style: AppThemes.appBarDefaultText),
+            title: Text(AppConstants.appName.toLowerCase(), style: AppThemes.appBarDefaultText),
           ),
         ),
       ),
@@ -330,8 +331,8 @@ class _QuickPicks extends StatelessWidget {
 }
 
 class _QuickPicksItem extends StatelessWidget {
-final  String iconAsset;
- final  String text;
+  final String iconAsset;
+  final String text;
   final Color textColor;
   final Function call;
   _QuickPicksItem({
@@ -344,7 +345,8 @@ final  String iconAsset;
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context,designSize: Size(375, 801),allowFontScaling: false);
+    ScreenUtil.init(context,
+        designSize: Size(375, 801), allowFontScaling: false);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: InkWell(
