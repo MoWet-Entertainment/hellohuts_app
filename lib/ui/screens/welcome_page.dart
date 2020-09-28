@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 class WelcomePage extends StatelessWidget {
   WelcomePage({Key key}) : super(key: key);
   Widget build(BuildContext context) {
-    return _child();
+    return MaterialApp(
+      home: Scaffold(
+      body: SafeArea(child: _child())
+     ), );
   }
 
   Widget _child() {

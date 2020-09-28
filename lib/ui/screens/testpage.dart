@@ -5,16 +5,22 @@ class FirstPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("First Screen"),
+    return MaterialApp(
+          home: SafeArea(
+                      child: Scaffold(
+        appBar: AppBar(
+            title: Text("First Screen"),
+        ),
+        body: SafeArea(
+                  child: ListView.builder(itemBuilder: (context, index) {
+              return ListTile(
+                title: Text('Lorem Ipsum'),
+                subtitle: Text('$index'),
+              );
+            }),
+        ),
       ),
-      body: ListView.builder(itemBuilder: (context, index) {
-        return ListTile(
-          title: Text('Lorem Ipsum'),
-          subtitle: Text('$index'),
-        );
-      }),
+          ),
     );
   }
 }
