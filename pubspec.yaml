@@ -72,7 +72,7 @@ dependencies:
   carousel_slider: ^2.3.1
   flutter_svg: ^0.19.0
 
-  # ----For videos---
+  # ----For videos----
   # video_player: ^0.11.0
   # video_player_platform_interface: ^2.2.0
 
