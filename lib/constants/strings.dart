@@ -11,8 +11,7 @@ class Strings {
 
 //Signup
 
-  static const String signUpHeroText =
-      'Smarter ways to your dream home';
+  static const String signUpHeroText = 'Smarter ways to your dream home';
   // Sign In Page
   static const String signIn = 'Sign in';
   static const String signInWithEmailPassword =
@@ -88,4 +87,7 @@ class Strings {
   static const String authenticationType = 'Authentication type';
   static const String firebase = 'Firebase';
   static const String mock = 'Mock';
+
+  //Search Screen
+  static const String searchHintText = "Where do you want your home?";
 }
