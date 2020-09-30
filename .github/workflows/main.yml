@@ -24,7 +24,7 @@ jobs:
       with:
         flutter-version: '1.20.4'
     - run: flutter pub get
-    - run: flutter test
+    # - run: flutter test
     - run:  flutter build apk --release -t lib/main_dev.dart --split-per-abi --flavor dev
     - name: Create a Hellohuts Release APK
       uses: ncipollo/release-action@v1
