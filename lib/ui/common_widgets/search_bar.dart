@@ -3,6 +3,8 @@ import 'dart:math' as math;
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hellohuts_app/constants/constants.dart';
 import 'package:provider/provider.dart';
 
 import 'package:hellohuts_app/constants/hello_icons.dart';
@@ -12,7 +14,7 @@ import 'package:hellohuts_app/ui/styles/app_themes.dart';
 
 class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
   final List<Widget> actions;
-  final Size appBarHeight = Size.fromHeight(64.0);
+  final Size appBarHeight = Size.fromHeight(72.0);
   final IconData iconData;
   final bool isBackButton;
   final bool isBottomLine;
@@ -37,18 +39,18 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
     this.onActionPressed,
     this.scaffoldKey,
     this.title,
-    this.hintText = 'Search for homes  ...',
+    this.hintText = '',
     this.onSearchChanged,
   }) : super(key: key);
 
   Widget _searchField(BuildContext context, TextEditingController controller) {
     final state = Provider.of<SearchState>(context);
     return Container(
-      height: 56,
-      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      height: 64,
+      padding: const EdgeInsets.only(top: 16, bottom: 8.0 , left: 24,right: 16),
       child: TextField(
         style: AppThemes.searchHintStyle.copyWith(
-            color: AppColors.kDarkTextColor, fontWeight: FontWeight.w500),
+            color: AppColors.kDarkTextColor, fontSize: 14),
         autofocus: true,
         textCapitalization: TextCapitalization.words,
         cursorColor: AppColors.kDarkGrey,
@@ -61,36 +63,34 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
             border: OutlineInputBorder(
               borderSide: const BorderSide(width: 0, style: BorderStyle.none),
               borderRadius: const BorderRadius.all(
-                const Radius.circular(12.0),
+                const Radius.circular(20.0),
               ),
             ),
-            fillColor: AppColors.kLightGrey,
-            filled: true,
-            prefixIcon: Padding(
-                padding: EdgeInsets.only(left: 8, right: 2),
-                child: Icon(
-                  HelloIconsOld.search,
-                  size: 18,
-                  color: AppColors.kDarkGrey,
-                )),
+            fillColor: AppColors.kAliceBlue,  
+            // isDense: true,          
+            prefixIcon: leading??Padding(
+              padding: EdgeInsets.only(left:12.0, right: 8.0),
+              child: Image.asset(HelloIcons.search_icon, color: AppColors.kDarkGrey, height: 22,)),
+            prefixIconConstraints: BoxConstraints(maxHeight: 44, maxWidth: 44),
             hintText: hintText,
             hintStyle: AppThemes.searchHintStyle,
             focusColor: AppColors.kPureWhite,
+            filled: true,
             suffixIcon: (controller.text.trim().length == 0)
                 ? Container(
                     width: 0,
                   )
                 : GestureDetector(
-                    child: Icon(
-                      HelloIconsOld.times_circle,
-                      color: AppColors.kDarkGrey,
-                      size: 14,
+                    child:Padding(
+                      padding: const EdgeInsets.only(left:4,right: 12.0),
+                      child: Image.asset(HelloIcons.close_circle_bold_icon, color: AppColors.kDarkGrey,height: 16,),
                     ),
                     onTap: () {
                       controller.text = '';
                       state.resetSearch();
                     }),
-            contentPadding: const EdgeInsets.only(left: 16, right: 5)),
+            contentPadding: const EdgeInsets.only(left: 5, right: 4),
+            suffixIconConstraints: BoxConstraints(maxWidth: 40, maxHeight: 40)),
       ),
     );
   }
@@ -161,10 +161,10 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
             },
             child: Container(
               padding:
-                  const EdgeInsets.only(right: 16.0, top: 4.0, bottom: 4.0),
+                  const EdgeInsets.only(right: 24, top: 4.0, bottom: 4.0),
               child: Text('Cancel',
-                  style: AppThemes.postedAuthorTextSubHeadStyle
-                      .copyWith(color: AppColors.kDarkGrey, fontSize: 12.0)),
+                  style: AppThemes.normalTextStyle
+                      .copyWith(color: AppColors.kDarkTextColor, fontSize: 12.0)),
             ),
           ),
         )

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
 
@@ -285,4 +286,87 @@ Widget customIconSquare({
               }),
     ],
   );
+}
+
+class CustomListTile extends StatelessWidget {
+  ///Creates a custom tile as per hellohuts design standards.
+
+  const CustomListTile({
+    Key key,
+    this.titleText,
+    this.subTitle,
+    this.leading,
+    this.trailing,
+    this.onTap,
+    this.onLongPress,
+    this.backgroundColor,
+    this.contentPadding,
+    this.borderRadius,
+    this.hoverColor,
+    this.selectedColor,
+    this.disabledColor,
+    this.height,
+    this.width,
+  }) : super(key: key);
+
+  ///title text widget. Either pass as Text("your text") or a specific widget
+  final Widget titleText;
+
+  final Widget subTitle;
+
+  ///leadinng widget: usually this is a icon specific to the list tile
+  final Widget leading;
+
+  ///trailing widget: usually, this is a  text or icon or a action widget
+  final Widget trailing;
+
+  //height of the list tile. By default this will be 56
+  final double height;
+
+  ///width of the list tile. By default this will be , full device width
+  final double width;
+
+  final GestureTapCallback onTap;
+  final GestureLongPressCallback onLongPress;
+
+  ///color of the background of the tile. By default this uses [AppColors.smokedWhite] or [Color(0xffF6F7F9)]
+  final Color backgroundColor;
+  final EdgeInsetsGeometry contentPadding;
+  final BorderRadius borderRadius;
+  final bool isSelected = false;
+  final bool isEnabled = false;
+  final bool isDisabled = false;
+  final Color hoverColor;
+  final Color selectedColor;
+  final Color disabledColor;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+      height: height ?? 56,
+      width: width ?? fullWidth(context),
+      decoration: BoxDecoration(
+        borderRadius: borderRadius ?? BorderRadius.circular(16.0),
+        color: backgroundColor ?? AppColors.kSmokedWhite,
+      ),
+      child: Row(
+        children: [
+          leading ?? SizedBox(),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 2),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                titleText ?? SizedBox(),
+                subTitle ?? SizedBox(),
+              ],
+            ),
+          ),
+          Spacer(),
+          trailing ?? SizedBox(),
+        ],
+      ),
+    );
+  }
 }
