@@ -86,10 +86,10 @@ app.*.symbols
 app.*.map.json
 
 # API key stuff
-android/app/google-services.json
-ios/Runner/GoogleService-Info.plist
-google-services.json
-GoogleService-Info.plist
+# android/app/google-services.json
+# ios/Runner/GoogleService-Info.plist
+# google-services.json
+# GoogleService-Info.plist
 
 # Exceptions to above rules.
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
