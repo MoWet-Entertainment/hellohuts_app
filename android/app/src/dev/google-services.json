@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "750707015828",
+    "firebase_url": "https://hellohuts-dev.firebaseio.com",
+    "project_id": "hellohuts-dev",
+    "storage_bucket": "hellohuts-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:750707015828:android:617555533e1f726093f481",
+        "android_client_info": {
+          "package_name": "com.hellohuts.hellohuts_app.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "750707015828-0fsl19670983jgslgcorjvhm2oovppcl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hellohuts.hellohuts_app.dev",
+            "certificate_hash": "9a77408df3662d6c4e70a74917c50d2115de0b27"
+          }
+        },
+        {
+          "client_id": "750707015828-iaev3318dfnnt4o00nllm67vj67obnl9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBdmd89Vzccm-POmA2Kytzco7x0i3Mw_s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "750707015828-iaev3318dfnnt4o00nllm67vj67obnl9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
