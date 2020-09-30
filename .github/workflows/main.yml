@@ -31,4 +31,4 @@ jobs:
       with:
         artifacts: "build/app/outputs/apk/dev/release/*.apk"
         token: ${{ secrets.TOKEN }}
-  ]
+  
