@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hellohuts_app/constants/constants.dart';
 import 'package:provider/provider.dart';
 
@@ -38,7 +39,7 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
     this.onActionPressed,
     this.scaffoldKey,
     this.title,
-    this.hintText = 'Where do you want your home?',
+    this.hintText = '',
     this.onSearchChanged,
   }) : super(key: key);
 
@@ -49,7 +50,7 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
       padding: const EdgeInsets.only(top: 16, bottom: 8.0 , left: 24,right: 16),
       child: TextField(
         style: AppThemes.searchHintStyle.copyWith(
-            color: AppColors.kDarkGrey),
+            color: AppColors.kDarkTextColor, fontSize: 14),
         autofocus: true,
         textCapitalization: TextCapitalization.words,
         cursorColor: AppColors.kDarkGrey,
@@ -65,29 +66,31 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
                 const Radius.circular(20.0),
               ),
             ),
-            fillColor: AppColors.kAliceBlue,
-            filled: true,
-            prefixIcon: ConstrainedBox(
-              constraints: BoxConstraints(maxHeight: 22,maxWidth: 22),
-              child: Image.asset(HelloIcons.search_icon,color: AppColors.kDarkestGrey,height: 22,width: 22,fit: BoxFit.contain,)),
+            fillColor: AppColors.kAliceBlue,  
+            // isDense: true,          
+            prefixIcon: leading??Padding(
+              padding: EdgeInsets.only(left:12.0, right: 8.0),
+              child: Image.asset(HelloIcons.search_icon, color: AppColors.kDarkGrey, height: 22,)),
+            prefixIconConstraints: BoxConstraints(maxHeight: 44, maxWidth: 44),
             hintText: hintText,
             hintStyle: AppThemes.searchHintStyle,
             focusColor: AppColors.kPureWhite,
+            filled: true,
             suffixIcon: (controller.text.trim().length == 0)
                 ? Container(
                     width: 0,
                   )
                 : GestureDetector(
-                    child: Icon(
-                      HelloIconsOld.times_circle,
-                      color: AppColors.kDarkGrey,
-                      size: 14,
+                    child:Padding(
+                      padding: const EdgeInsets.only(left:4,right: 12.0),
+                      child: Image.asset(HelloIcons.close_circle_bold_icon, color: AppColors.kDarkGrey,height: 16,),
                     ),
                     onTap: () {
                       controller.text = '';
                       state.resetSearch();
                     }),
-            contentPadding: const EdgeInsets.only(left: 5, right: 5)),
+            contentPadding: const EdgeInsets.only(left: 5, right: 4),
+            suffixIconConstraints: BoxConstraints(maxWidth: 40, maxHeight: 40)),
       ),
     );
   }
@@ -158,10 +161,10 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
             },
             child: Container(
               padding:
-                  const EdgeInsets.only(right: 16.0, top: 4.0, bottom: 4.0),
+                  const EdgeInsets.only(right: 24, top: 4.0, bottom: 4.0),
               child: Text('Cancel',
-                  style: AppThemes.postedAuthorTextSubHeadStyle
-                      .copyWith(color: AppColors.kDarkGrey, fontSize: 12.0)),
+                  style: AppThemes.normalTextStyle
+                      .copyWith(color: AppColors.kDarkTextColor, fontSize: 12.0)),
             ),
           ),
         )

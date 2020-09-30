@@ -45,6 +45,7 @@ class HelloIcons {
 //App bar Items
   static String menu_icon = _iconsRoot + "Menu_light_icon.png";
   static String search_icon = _iconsRoot + "Search_light_icon.png";
+  static String search_svg_icon = _iconsRoot + "Search_light_icon.svg";
 
 //Quick Pick Items
   static String professionals_icon =
@@ -59,7 +60,13 @@ class HelloIcons {
   static String comment_bold_icon = _iconsRoot + "Chat_bold_icon.png";
   static String share_bold_icon = _iconsRoot + "Share_bold_icon.png";
 
+//Search Screen
+  static String close_circle_bold_icon =
+      _iconsRoot + "Close Circle_bold_icon.png";
 
+  static String location_bold_icon = _iconsRoot + "Location_bold_icon.png";
+  static String bag_bold_icon = _iconsRoot + "Bag_bold_icon.png";
+  static String chart_bold_icon = _iconsRoot + "Chart_bold_icon.png";
 }
 
 class SessionData {

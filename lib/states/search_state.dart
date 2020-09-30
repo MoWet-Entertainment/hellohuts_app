@@ -4,15 +4,23 @@ import 'package:hellohuts_app/states/app_state.dart';
 
 class SearchState extends AppState {
   bool _isSearching = false;
+  bool _isLoading = false;
+
+
+
+
   String _searchText = '';
   List<SearchItem> searchHistory = [];
   List<SearchItem> _searchList = [];
+
+  get searchList => _searchList;
   SearchItem _selectedItem;
 
 //When user clicks on the search results, value gets stored in the selectedItem
   void setSelectedItem(SearchItem item) {
     _selectedItem = item;
   }
+
 
   SearchItem get getSelectedItem => _selectedItem;
 
@@ -43,7 +51,6 @@ class SearchState extends AppState {
 
   List<SearchItem> getSearchResults() {
     //TODO: Modify this code to fetch values from DB
-
     var list = MockSearch.mockSearch;
     for (var item in list) {
       var temp = SearchItem.fromJson(item);
@@ -68,8 +75,7 @@ class SearchState extends AppState {
       final distinctResults = [
         ...{...searchResults}
       ];
-
-      return distinctResults;
+     return  distinctResults;
     }
   }
 }
