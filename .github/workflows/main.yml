@@ -6,10 +6,9 @@ name: Test Build Hellohuts apk
 # events but only for the master branch
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-
+    tags:
+      - v*
+      
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build:
@@ -29,6 +28,6 @@ jobs:
     - name: Create a Hellohuts Release APK
       uses: ncipollo/release-action@v1
       with:
-        artifacts: "build/app/outputs/apk/dev/release/*.apk"
+        artifacts: "build/app/outputs/flutter-apk/*-release.apk"
         token: ${{ secrets.TOKEN }}
- 
+  
