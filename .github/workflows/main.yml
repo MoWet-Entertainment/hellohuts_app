@@ -8,7 +8,7 @@ on:
   push:
     tags:
       - v*
-      
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build:
@@ -28,6 +28,6 @@ jobs:
     - name: Create a Hellohuts Release APK
       uses: ncipollo/release-action@v1
       with:
-        artifacts: "build/app/outputs/flutter-apk/*-release.apk"
+        artifacts: "build/app/outputs/apk/dev/release/*.apk"
         token: ${{ secrets.TOKEN }}
   
