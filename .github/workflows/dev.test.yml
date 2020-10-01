@@ -64,7 +64,7 @@ jobs:
     - name: Create a Release in GitHub
       uses: ncipollo/release-action@v1
       with:
-        artifacts: "build/app/outputs/**/*.apk"
+        artifacts: "build/**/*.apk"
         token: ${{ secrets.TOKEN }}
         tag: ${{ steps.version.outputs.content }}
         commit: ${{ github.sha }}
