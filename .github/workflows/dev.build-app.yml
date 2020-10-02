@@ -1,18 +1,16 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Test Build Hellohuts apk
+name: Build application check
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
-  push:
-    tags:
-      - v*
+  pull_request:
       
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build:
-    name: Build APK
+    name: Build App
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
@@ -25,9 +23,5 @@ jobs:
     - run: flutter pub get
     # - run: flutter test
     - run:  flutter build apk --release -t lib/main_dev.dart --split-per-abi --flavor dev
-    - name: Create a Hellohuts Release APK
-      uses: ncipollo/release-action@v1
-      with:
-        artifacts: "build/app/outputs/flutter-apk/*-release.apk"
-        token: ${{ secrets.TOKEN }}
+  
   
