@@ -19,6 +19,7 @@ import '../screens/feed_posts/widgets/comments/post_comments_deatil.dart';
 import '../screens/quick_items/quick_items.dart';
 import '../screens/search/search_detail.dart';
 import '../screens/search/search_screen.dart';
+import '../screens/search/services_offered.dart';
 import '../screens/welcome_page.dart';
 
 class Routes {
@@ -34,6 +35,7 @@ class Routes {
   static const String moreItems = '/more-items';
   static const String materials = '/Materials';
   static const String phoneAuthGetPhone = '/phone-auth-get-phone';
+  static const String servicesOffered = '/services-offered';
   static const all = <String>{
     basePage,
     explorePage,
@@ -47,6 +49,7 @@ class Routes {
     moreItems,
     materials,
     phoneAuthGetPhone,
+    servicesOffered,
   };
 }
 
@@ -66,6 +69,7 @@ class Router extends RouterBase {
     RouteDef(Routes.moreItems, page: MoreItems),
     RouteDef(Routes.materials, page: Materials),
     RouteDef(Routes.phoneAuthGetPhone, page: PhoneAuthGetPhone),
+    RouteDef(Routes.servicesOffered, page: ServicesOffered),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -186,6 +190,14 @@ class Router extends RouterBase {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => PhoneAuthGetPhone(),
         settings: data,
+      );
+    },
+    ServicesOffered: (data) {
+      return PageRouteBuilder<dynamic>(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            const ServicesOffered(),
+        settings: data,
+        transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
       );
     },
   };
