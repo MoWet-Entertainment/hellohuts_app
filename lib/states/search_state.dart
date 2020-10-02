@@ -1,14 +1,12 @@
 import 'package:hellohuts_app/constants/mock_search.dart';
+import 'package:hellohuts_app/helper/logger.dart';
 import 'package:hellohuts_app/models/search/search_item.dart';
 import 'package:hellohuts_app/states/app_state.dart';
 
 class SearchState extends AppState {
+  var logger = getLogger('AuthState');
+
   bool _isSearching = false;
-  bool _isLoading = false;
-
-
-
-
   String _searchText = '';
   List<SearchItem> searchHistory = [];
   List<SearchItem> _searchList = [];
@@ -20,7 +18,6 @@ class SearchState extends AppState {
   void setSelectedItem(SearchItem item) {
     _selectedItem = item;
   }
-
 
   SearchItem get getSelectedItem => _selectedItem;
 
@@ -75,7 +72,7 @@ class SearchState extends AppState {
       final distinctResults = [
         ...{...searchResults}
       ];
-     return  distinctResults;
+  return distinctResults;
     }
   }
 }

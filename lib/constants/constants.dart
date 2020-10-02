@@ -27,46 +27,64 @@ class Assets {
 }
 
 class HelloIcons {
-  static String _iconsRoot = "assets/icons/";
+  static const String _iconsRoot = "assets/icons/";
 
   //Nav bar Items
-  static String explore_bold_icon = _iconsRoot + "Discovery_bold_icon.png";
-  static String explore_light_icon = _iconsRoot + "Discovery_light_icon.png";
-  static String category_bold_icon = _iconsRoot + "Category_bold_icon.png";
-  static String category_light_icon = _iconsRoot + "Category_light_icon.png";
-  static String home_bold_icon = _iconsRoot + "Home_bold_icon.png";
-  static String home_light_icon = _iconsRoot + "Home_light_icon.png";
-  static String bookmark_bold_icon = _iconsRoot + "Bookmark_new_bold_icon.png";
-  static String bookmark_light_icon =
+  static const String explore_bold_icon =
+      _iconsRoot + "Discovery_bold_icon.png";
+  static const String explore_light_icon =
+      _iconsRoot + "Discovery_light_icon.png";
+  static const String category_bold_icon =
+      _iconsRoot + "Category_bold_icon.png";
+  static const String category_light_icon =
+      _iconsRoot + "Category_light_icon.png";
+  static const String home_bold_icon = _iconsRoot + "Home_bold_icon.png";
+  static const String home_light_icon = _iconsRoot + "Home_light_icon.png";
+  static const String bookmark_bold_icon =
+      _iconsRoot + "Bookmark_new_bold_icon.png";
+  static const String bookmark_light_icon =
       _iconsRoot + "Bookmark_new_light_icon.png";
-  static String profile_bold_icon = _iconsRoot + "Profile_bold_icon.png";
-  static String profile_light_icon = _iconsRoot + "Profile_light_icon.png";
+  static const String profile_bold_icon = _iconsRoot + "Profile_bold_icon.png";
+  static const String profile_light_icon =
+      _iconsRoot + "Profile_light_icon.png";
 
 //App bar Items
-  static String menu_icon = _iconsRoot + "Menu_light_icon.png";
-  static String search_icon = _iconsRoot + "Search_light_icon.png";
-  static String search_svg_icon = _iconsRoot + "Search_light_icon.svg";
+  static const String menu_icon = _iconsRoot + "Menu_light_icon.png";
+  static const String search_icon = _iconsRoot + "Search_light_icon.png";
+  static const String search_svg_icon = _iconsRoot + "Search_light_icon.svg";
 
 //Quick Pick Items
-  static String professionals_icon =
+  static const String professionals_icon =
       _iconsRoot + "Professionals_light_icon.png";
-  static String cost_estimate_icon =
+  static const String cost_estimate_icon =
       _iconsRoot + "Cost_estimate_light_icon.png";
-  static String materials_icon = _iconsRoot + "Materials_light_icon.png";
-  static String more_items_icon = _iconsRoot + "More_items_light_icon.png";
+  static const String materials_icon = _iconsRoot + "Materials_light_icon.png";
+  static const String more_items_icon =
+      _iconsRoot + "More_items_light_icon.png";
 
   //Feed Post Items
-  static String heart_bold_icon = _iconsRoot + "Heart_Filled_bold_icon.png";
-  static String comment_bold_icon = _iconsRoot + "Chat_bold_icon.png";
-  static String share_bold_icon = _iconsRoot + "Share_bold_icon.png";
+  static const String heart_bold_icon =
+      _iconsRoot + "Heart_Filled_bold_icon.png";
+  static const String comment_bold_icon = _iconsRoot + "Chat_bold_icon.png";
+  static const String share_bold_icon = _iconsRoot + "Share_bold_icon.png";
 
 //Search Screen
-  static String close_circle_bold_icon =
+  static const String close_circle_bold_icon =
       _iconsRoot + "Close Circle_bold_icon.png";
 
-  static String location_bold_icon = _iconsRoot + "Location_bold_icon.png";
-  static String bag_bold_icon = _iconsRoot + "Bag_bold_icon.png";
-  static String chart_bold_icon = _iconsRoot + "Chart_bold_icon.png";
+  static const String location_bold_icon =
+      _iconsRoot + "Location_bold_icon.png";
+  static const String bag_bold_icon = _iconsRoot + "Bag_bold_icon.png";
+  static const String chart_bold_icon = _iconsRoot + "Chart_bold_icon.png";
+
+  //Arrows for App Bar
+  static const String left_arrow_light_icon =
+      _iconsRoot + "Arrow_left_icon.png";
+  static const String right_arrow_light_icon =
+      _iconsRoot + "Arrow_right_icon.png";
+  static const String up_arrow_light_icon = _iconsRoot + "Arrow_up_icon.png";
+  static const String down_arrow_light_icon =
+      _iconsRoot + "Arrow_down_icon.png";
 }
 
 class SessionData {

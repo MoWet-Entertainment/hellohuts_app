@@ -81,7 +81,7 @@ signingConfigs {
        qa{
             dimension "flavor-type"
             resValue "string","app_name", "Hellohuts_QA"
-              applicationIdSuffix ".qa"
+            applicationIdSuffix ".qa"
             versionNameSuffix "-qa"
 
        }
@@ -89,7 +89,7 @@ signingConfigs {
        prod{
            dimension "flavor-type"
             resValue "string","app_name", "Hellohuts"
-              applicationIdSuffix ".prod"
+            applicationIdSuffix ".prod"
        }
    }
 

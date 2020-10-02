@@ -1,9 +1,9 @@
 name: Hellohuts App Test
 
 on:
-  pull_request:
-    types: closed
-    branches: [ master ]
+  push:
+    tags:
+      - v*
 
 jobs:
   version:
@@ -65,8 +65,8 @@ jobs:
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v2
       with:
-        repo_token: ${{ secrets.TOKEN }}
-        file: "build/app/outputs/apk/**/*.apk"
+        artifacts: "build/app/outputs/apk/**/*.apk"
+        token: ${{ secrets.GITHUB_TOKEN }}
         tag: ${{ steps.version.outputs.content }}
         overwrite: true
         file_glob: true
