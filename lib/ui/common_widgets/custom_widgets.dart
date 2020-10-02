@@ -320,7 +320,7 @@ class CustomListTile extends StatelessWidget {
   ///trailing widget: usually, this is a  text or icon or a action widget
   final Widget trailing;
 
-  //height of the list tile. By default this will be 56
+  ///height of the list tile. By default this will be 56
   final double height;
 
   ///width of the list tile. By default this will be , full device width
@@ -343,7 +343,7 @@ class CustomListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
-      height: height ?? 56,
+      height: height ?? 64,
       width: width ?? fullWidth(context),
       decoration: BoxDecoration(
         borderRadius: borderRadius ?? BorderRadius.circular(16.0),

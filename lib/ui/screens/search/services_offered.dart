@@ -19,8 +19,6 @@ class ServicesOffered extends StatelessWidget {
             appBar: CustomAppBar(
               isBackButton: true,
               onBackButtonPressed: ExtendedNavigator.of(context).pop,
-             actions: customIconSquare(iconAsset:HelloIcons.comment_bold_icon),
-              // actions: SizedBox(),
             ),
             body: Container(
               child: Center(
