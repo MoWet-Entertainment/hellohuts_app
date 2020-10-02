@@ -40,7 +40,6 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    final state = Provider.of<SearchState>(context, listen: false);
     print("building parent");
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -60,9 +59,14 @@ class _SearchPageState extends State<SearchPage> {
   }
 }
 
-class SearchBody extends StatelessWidget {
+class SearchBody extends StatefulWidget {
   const SearchBody({Key key}) : super(key: key);
 
+  @override
+  _SearchBodyState createState() => _SearchBodyState();
+}
+
+class _SearchBodyState extends State<SearchBody> {
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<SearchState>(context);
@@ -75,17 +79,22 @@ class SearchBody extends StatelessWidget {
   }
 }
 
-class _ShowResults extends StatelessWidget {
+class _ShowResults extends StatefulWidget {
   const _ShowResults({Key key}) : super(key: key);
 
+  @override
+  __ShowResultsState createState() => __ShowResultsState();
+}
+
+class __ShowResultsState extends State<_ShowResults> {
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<SearchState>(context);
     final results = state.getSearchResults();
     return Container(
       padding: const EdgeInsets.only(top: 12.0),
-      child:ListView.builder(
-              itemCount: results.length,
+      child: ListView.builder(
+              itemCount: results?.length ?? 0,
               itemBuilder: (context, index) {
                 return _SearchResultsCard(item: results[index]);
               }),
