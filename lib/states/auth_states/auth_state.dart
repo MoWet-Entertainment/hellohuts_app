@@ -75,19 +75,19 @@ class AuthState extends AppState {
       loading = false;
       String message;
       if (error.code.contains(AuthErrors.auth_InvalidEmail)) {
-        message = Strings.invalidEmailErrorText;
+        message = AppStrings.invalidEmailErrorText;
       } else if (error.code.contains(AuthErrors.auth_UserNotFound)) {
-        message = Strings.userNotFoundSignUpInstead;
+        message = AppStrings.userNotFoundSignUpInstead;
       } else if (error.code.contains(AuthErrors.auth_UserDisabled)) {
-        message = Strings.userDisabledText;
+        message = AppStrings.userDisabledText;
       } else if (error.code.contains(AuthErrors.auth_TooManyRequests)) {
-        message = Strings.tooManyRequests;
+        message = AppStrings.tooManyRequests;
       } else if (error.code.contains(AuthErrors.auth_OperationNotAllowed)) {
-        message = Strings.operationNotAllowed;
+        message = AppStrings.operationNotAllowed;
       } else if (error.code.contains(AuthErrors.auth_IncorrectPassword)) {
-        message = Strings.invalidPassword;
+        message = AppStrings.invalidPassword;
       } else {
-        message = Strings.genericErrorText;
+        message = AppStrings.genericErrorText;
       }
       cprint(error, errorIn: 'signInWithEmailAndPassword');
       customSnackBar(scaffoldKey, message);
@@ -118,11 +118,11 @@ class AuthState extends AppState {
       String message;
       logger.e(error.code);
       if (error.code.contains(AuthErrors.auth_EmailAlreadyInUse)) {
-        message = Strings.emailAlreadyUsed;
+        message = AppStrings.emailAlreadyUsed;
       } else if (error.code.contains(AuthErrors.auth_WeakPassword)) {
-        message = Strings.passwordWeak;
+        message = AppStrings.passwordWeak;
       } else {
-        message = Strings.genericErrorText;
+        message = AppStrings.genericErrorText;
       }
       cprint(error, errorIn: 'signUpWithEmailAndPassword');
       customSnackBar(scaffoldKey, message);
@@ -152,7 +152,7 @@ class AuthState extends AppState {
       cprint(error, errorIn: 'googleLogin');
       _analyticsService.logLogin('social_google_login');
       if (error.message.contains(AuthErrors.auth_accoundExistsWithDiffCred)) {
-        message = Strings.accountExistsWithDiffCredentials;
+        message = AppStrings.accountExistsWithDiffCredentials;
         customSnackBar(scaffoldKey, message);
       }
       return null;
@@ -176,7 +176,7 @@ class AuthState extends AppState {
       cprint(error, errorIn: 'facebookLogin');
       _analyticsService.logLogin('social_facebook_login');
       if (error.message.contains(AuthErrors.auth_accoundExistsWithDiffCred)) {
-        message = Strings.accountExistsWithDiffCredentials;
+        message = AppStrings.accountExistsWithDiffCredentials;
         customSnackBar(scaffoldKey, message);
       }
       return null;
