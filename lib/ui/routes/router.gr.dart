@@ -19,7 +19,8 @@ import '../screens/feed_posts/widgets/comments/post_comments_deatil.dart';
 import '../screens/quick_items/quick_items.dart';
 import '../screens/search/search_detail.dart';
 import '../screens/search/search_screen.dart';
-import '../screens/search/services_offered.dart';
+import '../screens/services_offered/build_my_home/add_details.dart';
+import '../screens/services_offered/services_offered_base_page.dart';
 import '../screens/welcome_page.dart';
 
 class Routes {
@@ -35,7 +36,8 @@ class Routes {
   static const String moreItems = '/more-items';
   static const String materials = '/Materials';
   static const String phoneAuthGetPhone = '/phone-auth-get-phone';
-  static const String servicesOffered = '/services-offered';
+  static const String servicesOfferedBasePage = '/services-offered-base-page';
+  static const String addDetailsForHome = '/add-details-for-home';
   static const all = <String>{
     basePage,
     explorePage,
@@ -49,7 +51,8 @@ class Routes {
     moreItems,
     materials,
     phoneAuthGetPhone,
-    servicesOffered,
+    servicesOfferedBasePage,
+    addDetailsForHome,
   };
 }
 
@@ -69,7 +72,8 @@ class Router extends RouterBase {
     RouteDef(Routes.moreItems, page: MoreItems),
     RouteDef(Routes.materials, page: Materials),
     RouteDef(Routes.phoneAuthGetPhone, page: PhoneAuthGetPhone),
-    RouteDef(Routes.servicesOffered, page: ServicesOffered),
+    RouteDef(Routes.servicesOfferedBasePage, page: ServicesOfferedBasePage),
+    RouteDef(Routes.addDetailsForHome, page: AddDetailsForHome),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -192,12 +196,20 @@ class Router extends RouterBase {
         settings: data,
       );
     },
-    ServicesOffered: (data) {
+    ServicesOfferedBasePage: (data) {
       return PageRouteBuilder<dynamic>(
         pageBuilder: (context, animation, secondaryAnimation) =>
-            const ServicesOffered(),
+            const ServicesOfferedBasePage(),
         settings: data,
         transitionsBuilder: TransitionsBuilders.slideLeft,
+      );
+    },
+    AddDetailsForHome: (data) {
+      return PageRouteBuilder<dynamic>(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            const AddDetailsForHome(),
+        settings: data,
+        transitionsBuilder: TransitionsBuilders.fadeIn,
       );
     },
   };

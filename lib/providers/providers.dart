@@ -1,3 +1,4 @@
+import 'package:hellohuts_app/states/cost_estimate_state.dart';
 import 'package:hellohuts_app/states/countries.dart';
 import 'package:hellohuts_app/states/feed_state.dart';
 import 'package:hellohuts_app/states/auth_states/phone_auth.dart';
@@ -16,5 +17,6 @@ List<SingleChildWidget> providers = [
    ChangeNotifierProvider<SearchState>(create: (_) => SearchState()),
    ChangeNotifierProvider<PhoneAuthDataProvider>(create: (_)=>PhoneAuthDataProvider(),),
    ChangeNotifierProvider<CountryProvider>(create: (_)=>CountryProvider(),),
- 
+    ChangeNotifierProvider<CostEstimateState>(create: (_)=>CostEstimateState(),),
+
 ];

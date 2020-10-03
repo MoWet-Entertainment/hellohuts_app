@@ -29,14 +29,13 @@ Widget appBarIcon(
         width: 40.0,
       ),
       IconButton(
-      icon: Icon(
-            icon,
-            color: color ?? AppColors.kPureBlack,
-            size: size,
-          ),
-          onPressed: actionCall,
+        icon: Icon(
+          icon,
+          color: color ?? AppColors.kPureBlack,
+          size: size,
         ),
-   
+        onPressed: actionCall,
+      ),
       notification
           ? new Positioned(
               right: 2,
@@ -118,18 +117,20 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       leading: isBackButton
           ? GestureDetector(
-              
-                child: customBackButton ??
-                    Icon(Icons.arrow_back_ios,color: AppColors.kAlmostBlack,),
-                  
-              
-              onTap: onBackButtonPressed ?? () => {},
+              child: customBackButton ??
+                  Icon(
+                    Icons.arrow_back_ios,
+                    color: AppColors.kAlmostBlack,
+                  ),
+              onTap: onBackButtonPressed,
             )
           : isCrossButton
               ? GestureDetector(
                   child: customBackButton ??
-                      Image.asset(HelloIcons.close_circle_bold_icon,),
-                  onTap: onCrossButtonPressed ?? () => {},
+                      Image.asset(
+                        HelloIcons.close_circle_bold_icon,
+                      ),
+                  onTap: onCrossButtonPressed,
                 )
               : SizedBox(),
       title: title ?? SizedBox(),
@@ -137,7 +138,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         GestureDetector(
           child: actions ?? SizedBox(),
-          onTap: onActionPressed ?? () => {},
+          onTap: onActionPressed,
         ),
       ],
     );
@@ -146,7 +147,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
 class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
   ///A custom search bar based on Hellohuts Design Standards
-  
+
   final List<Widget> actions;
   final Size appBarHeight = Size.fromHeight(72.0);
   final IconData iconData;
@@ -181,10 +182,10 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
     final state = Provider.of<SearchState>(context);
     return Container(
       height: 64,
-      padding: const EdgeInsets.only(top: 16, bottom: 8.0 , left: 24,right: 16),
+      padding: const EdgeInsets.only(top: 16, bottom: 8.0, left: 24, right: 16),
       child: TextField(
-        style: AppThemes.searchHintStyle.copyWith(
-            color: AppColors.kDarkTextColor, fontSize: 14),
+        style: AppThemes.searchHintStyle
+            .copyWith(color: AppColors.kDarkTextColor, fontSize: 14),
         autofocus: true,
         textCapitalization: TextCapitalization.words,
         cursorColor: AppColors.kDarkGrey,
@@ -200,11 +201,16 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
                 const Radius.circular(20.0),
               ),
             ),
-            fillColor: AppColors.kAliceBlue,  
-            // isDense: true,          
-            prefixIcon: leading??Padding(
-              padding: EdgeInsets.only(left:12.0, right: 8.0),
-              child: Image.asset(HelloIcons.search_icon, color: AppColors.kDarkGrey, height: 22,)),
+            fillColor: AppColors.kAliceBlue,
+            // isDense: true,
+            prefixIcon: leading ??
+                Padding(
+                    padding: EdgeInsets.only(left: 12.0, right: 8.0),
+                    child: Image.asset(
+                      HelloIcons.search_icon,
+                      color: AppColors.kDarkGrey,
+                      height: 22,
+                    )),
             prefixIconConstraints: BoxConstraints(maxHeight: 44, maxWidth: 44),
             hintText: hintText,
             hintStyle: AppThemes.searchHintStyle,
@@ -215,9 +221,13 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
                     width: 0,
                   )
                 : GestureDetector(
-                    child:Padding(
-                      padding: const EdgeInsets.only(left:4,right: 12.0),
-                      child: Image.asset(HelloIcons.close_circle_bold_icon, color: AppColors.kDarkGrey,height: 16,),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 4, right: 12.0),
+                      child: Image.asset(
+                        HelloIcons.close_circle_bold_icon,
+                        color: AppColors.kDarkGrey,
+                        height: 16,
+                      ),
                     ),
                     onTap: () {
                       controller.text = '';
@@ -294,11 +304,10 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
               ExtendedNavigator.of(context).pop();
             },
             child: Container(
-              padding:
-                  const EdgeInsets.only(right: 24, top: 4.0, bottom: 4.0),
+              padding: const EdgeInsets.only(right: 24, top: 4.0, bottom: 4.0),
               child: Text('Cancel',
-                  style: AppThemes.normalTextStyle
-                      .copyWith(color: AppColors.kDarkTextColor, fontSize: 12.0)),
+                  style: AppThemes.normalTextStyle.copyWith(
+                      color: AppColors.kDarkTextColor, fontSize: 12.0)),
             ),
           ),
         )

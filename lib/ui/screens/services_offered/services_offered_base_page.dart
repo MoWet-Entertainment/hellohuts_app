@@ -5,12 +5,13 @@ import 'package:hellohuts_app/constants/strings.dart';
 import 'package:hellohuts_app/states/search_state.dart';
 import 'package:hellohuts_app/ui/common_widgets/app_bar/app_bar.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
+import 'package:hellohuts_app/ui/routes/router.gr.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
 import 'package:provider/provider.dart';
 
-class ServicesOffered extends StatelessWidget {
-  const ServicesOffered({Key key}) : super(key: key);
+class ServicesOfferedBasePage extends StatelessWidget {
+  const ServicesOfferedBasePage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -96,8 +97,7 @@ class ServicesOffferedItems extends StatelessWidget {
           items: ["Design", "Build", "Smart"],
         ),
         onTap: () => {
-          //TODO: Add Navigation to Build Home Screens
-          print("User want to Build Home")
+         ExtendedNavigator.root.push(Routes.addDetailsForHome),
         },
       ),
     );
