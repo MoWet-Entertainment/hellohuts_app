@@ -282,7 +282,7 @@ Widget customIconSquare({
                   size: iconSize,
                 ),
           onPressed: () => {
-                if (actionCall != null) {actionCall()} else {print("tests")}
+                if (actionCall != null) {actionCall()}
               }),
     ],
   );
@@ -341,31 +341,61 @@ class CustomListTile extends StatelessWidget {
   final Color disabledColor;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
-      height: height ?? 64,
-      width: width ?? fullWidth(context),
-      decoration: BoxDecoration(
-        borderRadius: borderRadius ?? BorderRadius.circular(16.0),
-        color: backgroundColor ?? AppColors.kSmokedWhite,
-      ),
-      child: Row(
-        children: [
-          leading ?? SizedBox(),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 2),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                titleText ?? SizedBox(),
-                subTitle ?? SizedBox(),
-              ],
+    return GestureDetector(
+          child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+        height: height ?? 64,
+        width: width ?? fullWidth(context),
+        decoration: BoxDecoration(
+          borderRadius: borderRadius ?? BorderRadius.circular(16.0),
+          color: backgroundColor ?? AppColors.kSmokedWhite,
+        ),
+        child: Row(
+          children: [
+            leading ?? SizedBox(),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 2),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  titleText ?? SizedBox(),
+                  subTitle ?? SizedBox(),
+                ],
+              ),
             ),
-          ),
-          Spacer(),
-          trailing ?? SizedBox(),
-        ],
+            Spacer(),
+            trailing ?? SizedBox(),
+          ],
+        ),
+      ),
+      onTap: onTap,
+      onLongPress: onLongPress
+      );
+
+      
+   
+  }
+}
+
+class FilledCircle extends StatelessWidget {
+  //FilledCircle is a simple widgte which creates a circle with color
+
+  const FilledCircle({
+    Key key,
+    this.color = AppColors.kAlmostBlack,
+    this.size = 2.0,
+  }) : super(key: key);
+  final double size;
+  final Color color;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: color,
       ),
     );
   }

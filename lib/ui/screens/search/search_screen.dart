@@ -4,9 +4,8 @@ import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/constants/hello_icons.dart';
 import 'package:hellohuts_app/constants/strings.dart';
 import 'package:hellohuts_app/models/search/search_item.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hellohuts_app/ui/common_widgets/app_bar/app_bar.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
-import 'package:hellohuts_app/ui/common_widgets/search_bar.dart';
 import 'package:hellohuts_app/ui/routes/router.gr.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
@@ -45,7 +44,7 @@ class _SearchPageState extends State<SearchPage> {
       debugShowCheckedModeBanner: false,
       home: SafeArea(
         child: Scaffold(
-          appBar: CustomSearchBar(hintText: Strings.searchHintText),
+          appBar: CustomSearchBar(hintText: AppStrings.searchHintText),
           body: SearchBody(),
         ),
       ),
