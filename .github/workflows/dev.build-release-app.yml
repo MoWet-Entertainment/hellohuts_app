@@ -65,9 +65,9 @@ jobs:
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v2
       with:
-        artifacts: "build/app/outputs/apk/**/*.apk"
+        file: "build/app/outputs/apk/**/*.apk"
         token: ${{ secrets.GITHUB_TOKEN }}
-        tag: ${{ steps.version.outputs.content }}
+        tag: ${{ github.ref }}
         overwrite: true
         file_glob: true
 #    - name: Create a Release in GitHub
