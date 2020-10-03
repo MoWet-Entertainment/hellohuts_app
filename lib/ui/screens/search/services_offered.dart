@@ -54,49 +54,148 @@ class _ServicesOfferedBody extends StatelessWidget {
           SizedBox(
             height: 32,
           ),
-          CustomListTile(
-            backgroundColor: AppColors.kAliceBlue,
-            leading: customIconSquare(
-              backgroundColor: AppColors.kPureWhite,
-              iconAsset: HelloIcons.home_bold_icon,
-              iconColor: AppColors.kAlmostBlack,
-              backgroundSize: 40,
-              iconSize: 24,
-              isCustomIcon: true,
-            ),
-            titleText: Text(
-              "Build my home",
-              style: AppThemes.normalTextStyle
-                  .copyWith(fontSize: 14, fontWeight: FontWeight.bold),
-            ),
-            subTitle: _HorizontalSeparatedTextItems(
-              items: ["Design", "Build", "Smart"],
-            ),
-            onTap: () => {
-              print("User want to Build Home")
-            },
-          ),
-          CustomListTile(
-            backgroundColor: AppColors.kAliceBlue,
-            leading: customIconSquare(
-              backgroundColor: AppColors.kPureWhite,
-              iconAsset: HelloIcons.home_bold_icon,
-              iconColor: AppColors.kAlmostBlack,
-              backgroundSize: 40,
-              iconSize: 24,
-              isCustomIcon: true,
-            ),
-            titleText: Text(
-              "Build my home",
-              style: AppThemes.normalTextStyle
-                  .copyWith(fontSize: 14, fontWeight: FontWeight.bold),
-            ),
-            subTitle: _HorizontalSeparatedTextItems(
-              items: ["Design", "Build", "Smart"],
-            ),
-          ),
+         ServicesOffferedItems(),
         ],
       ),
+    );
+  }
+}
+
+class ServicesOffferedItems extends StatelessWidget {
+  const ServicesOffferedItems({Key key}) : super(key: key);
+
+  List<Widget> getServicesOffered() {
+    return [
+      _getBuildMyHome(),
+      _getProffessionals(),
+      _getDesignAndPlans(),
+      _getHomeStores()
+    ];
+  }
+
+  Widget _getBuildMyHome() {
+    return Padding(
+            padding: const EdgeInsets.only(bottom: 12),
+
+          child: CustomListTile(
+        backgroundColor: AppColors.kAliceBlue,
+        leading: customIconSquare(
+          backgroundColor: AppColors.kPureWhite,
+          iconAsset: HelloIcons.home_bold_icon,
+          iconColor: AppColors.kAlmostBlack,
+          backgroundSize: 40,
+          iconSize: 24,
+          isCustomIcon: true,
+        ),
+        titleText: Text(
+          "Build my home",
+          style: AppThemes.normalTextStyle
+              .copyWith(fontSize: 14, fontWeight: FontWeight.bold),
+        ),
+        subTitle: _HorizontalSeparatedTextItems(
+          items: ["Design", "Build", "Smart"],
+        ),
+        onTap: () => {
+          //TODO: Add Navigation to Build Home Screens
+          print("User want to Build Home")
+        },
+      ),
+    );
+  }
+
+  Widget _getProffessionals() {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+          child: CustomListTile(
+        backgroundColor: AppColors.kAliceBlue,
+        leading: customIconSquare(
+          backgroundColor: AppColors.kPureWhite,
+          iconAsset: HelloIcons.profile_bold_icon,
+          iconColor: AppColors.kAlmostBlack,
+          backgroundSize: 40,
+          iconSize: 24,
+          isCustomIcon: true,
+        ),
+        titleText: Text(
+          "Professionals",
+          style: AppThemes.normalTextStyle
+              .copyWith(fontSize: 14, fontWeight: FontWeight.bold),
+        ),
+        subTitle: Text(
+          "Professionals",
+          style: AppThemes.normalTextStyle
+              .copyWith(color: AppColors.kDarkTextColor, fontSize: 12),
+        ),
+        onTap: () => {
+          //TODO: Add Navigation to Professionals Screen
+          print("User want to Navigate to Proffessionals Screen")
+        },
+      ),
+    );
+  }
+
+  Widget _getDesignAndPlans() {
+     return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+       child: CustomListTile(
+        backgroundColor: AppColors.kAliceBlue,
+        leading: customIconSquare(
+          backgroundColor: AppColors.kPureWhite,
+          iconAsset: HelloIcons.chart_bold_icon,
+          iconColor: AppColors.kAlmostBlack,
+          backgroundSize: 40,
+          iconSize: 24,
+          isCustomIcon: true,
+        ),
+        titleText: Text(
+          "Design and Plans",
+          style: AppThemes.normalTextStyle
+              .copyWith(fontSize: 14, fontWeight: FontWeight.bold),
+        ),
+        subTitle: _HorizontalSeparatedTextItems(
+          items: ["Creative", "Pocket friendly"],
+        ),
+        onTap: () => {
+          //TODO: Add Navigation to Design and Plans
+          print("User want to Navigate to Design and Plans")
+        },
+    ),
+     );
+  }
+  Widget _getHomeStores() {
+     return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+       child: CustomListTile(
+        backgroundColor: AppColors.kAliceBlue,
+        leading: customIconSquare(
+          backgroundColor: AppColors.kPureWhite,
+          iconAsset: HelloIcons.chart_bold_icon,
+          iconColor: AppColors.kAlmostBlack,
+          backgroundSize: 40,
+          iconSize: 24,
+          isCustomIcon: true,
+        ),
+        titleText: Text(
+          "Home Stores",
+          style: AppThemes.normalTextStyle
+              .copyWith(fontSize: 14, fontWeight: FontWeight.bold),
+        ),
+        subTitle: _HorizontalSeparatedTextItems(
+          items: ["Nearest Stores", "Latest Offers"],
+        ),
+        onTap: () => {
+          //TODO: Add Navigation to Home Stores
+          print("User want to Navigate to Homes Stores")
+        },
+    ),
+     );
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: getServicesOffered(),
     );
   }
 }
