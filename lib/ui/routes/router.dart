@@ -27,7 +27,7 @@ import 'package:hellohuts_app/ui/screens/welcome_page.dart';
  CustomRoute(page: MoreItems, transitionsBuilder: TransitionsBuilders.fadeIn ),
   CustomRoute(page: Materials, name:"materials",transitionsBuilder: TransitionsBuilders.fadeIn ),
 AdaptiveRoute(page: PhoneAuthGetPhone),
-CustomRoute(page: ServicesOffered, transitionsBuilder:  TransitionsBuilders.slideLeftWithFade),
+CustomRoute(page: ServicesOffered, transitionsBuilder:  TransitionsBuilders.slideLeft),
   ]
 )
 class $Router {}

@@ -197,7 +197,7 @@ class Router extends RouterBase {
         pageBuilder: (context, animation, secondaryAnimation) =>
             const ServicesOffered(),
         settings: data,
-        transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
+        transitionsBuilder: TransitionsBuilders.slideLeft,
       );
     },
   };

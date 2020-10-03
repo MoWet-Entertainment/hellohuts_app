@@ -1,4 +1,4 @@
-class Strings {
+class AppStrings {
   // Generic strings
   static const String ok = 'OK';
   static const String cancel = 'Cancel';
@@ -90,4 +90,8 @@ class Strings {
 
   //Search Screen
   static const String searchHintText = "Where do you want your home?";
+
+  //Services Offered
+  static String servicesOffered_WhatCanWeHelpWithText(String location) =>
+      "What can we help you find in "+location+"?";
 }
