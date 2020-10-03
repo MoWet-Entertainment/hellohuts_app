@@ -9,7 +9,8 @@ import 'package:hellohuts_app/ui/screens/feed_posts/widgets/comments/post_commen
 import 'package:hellohuts_app/ui/screens/quick_items/quick_items.dart';
 import 'package:hellohuts_app/ui/screens/search/search_detail.dart';
 import 'package:hellohuts_app/ui/screens/search/search_screen.dart';
-import 'package:hellohuts_app/ui/screens/search/services_offered.dart';
+import 'package:hellohuts_app/ui/screens/services_offered/build_my_home/add_details.dart';
+import 'package:hellohuts_app/ui/screens/services_offered/services_offered_base_page.dart';
 import 'package:hellohuts_app/ui/screens/welcome_page.dart';
 
 
@@ -27,7 +28,8 @@ import 'package:hellohuts_app/ui/screens/welcome_page.dart';
  CustomRoute(page: MoreItems, transitionsBuilder: TransitionsBuilders.fadeIn ),
   CustomRoute(page: Materials, name:"materials",transitionsBuilder: TransitionsBuilders.fadeIn ),
 AdaptiveRoute(page: PhoneAuthGetPhone),
-CustomRoute(page: ServicesOffered, transitionsBuilder:  TransitionsBuilders.slideLeft),
+CustomRoute(page: ServicesOfferedBasePage, transitionsBuilder:  TransitionsBuilders.slideLeft),
+CustomRoute(page: AddDetailsForHome, transitionsBuilder: TransitionsBuilders.fadeIn),
   ]
 )
 class $Router {}
