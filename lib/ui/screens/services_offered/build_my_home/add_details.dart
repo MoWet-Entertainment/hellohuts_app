@@ -67,7 +67,11 @@ class _AddDetailsBody extends StatelessWidget {
                 SizedBox(
                   height: 12,
                 ),
-               StoreySection(),
+                _StoreySelectionSection(),
+                SizedBox(
+                  height: 32,
+                ),
+                _BedroomSelectionSection(),
               ],
             ),
           )
@@ -77,8 +81,8 @@ class _AddDetailsBody extends StatelessWidget {
   }
 }
 
-class StoreySection extends StatelessWidget {
-  const StoreySection({
+class _StoreySelectionSection extends StatelessWidget {
+  const _StoreySelectionSection({
     Key key,
   }) : super(key: key);
   @override
@@ -86,15 +90,15 @@ class StoreySection extends StatelessWidget {
     return Container(
       child: Column(
         children: [
-           Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text("Storey",
-                        style: AppThemes.normalTextStyle.copyWith(
-                            fontWeight: FontWeight.bold, fontSize: 16))),
-                SizedBox(
-                  height: 16.h,
-                ),
-                _StoreyContainer(),
+          Align(
+              alignment: Alignment.centerLeft,
+              child: Text("Storey",
+                  style: AppThemes.normalTextStyle
+                      .copyWith(fontWeight: FontWeight.bold, fontSize: 16))),
+          SizedBox(
+            height: 16.h,
+          ),
+          _StoreyContainer(),
         ],
       ),
     );
@@ -241,5 +245,38 @@ class __StoreyContainerWidgetState extends State<_StoreyContainerWidget>
       );
     }
     return _listOfWidgets;
+  }
+}
+
+class _RoomSelectionSection extends StatelessWidget {
+  const _RoomSelectionSection(
+      {Key key,
+      this.roomTypeName,
+      this.minVisibleValue,
+      this.maxVisibleValue,
+      this.minValue,
+      this.maxValue})
+      : super(key: key);
+
+  ///Example : Bedroom, Bathroom etc
+  final String roomTypeName;
+
+///Minimum value to be displayed on the screen when the app launches
+  final int minVisibleValue;
+
+  ///Maximum value to be displaed on the screen when the app launches
+  final int maxVisibleValue;
+
+  ///Minimum value upto which user can go, manually
+  final int minValue;
+
+  ///Maximum value upto which the user can go, manually
+  final int maxValue;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: child,
+    );
   }
 }
