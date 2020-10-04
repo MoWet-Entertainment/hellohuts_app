@@ -85,6 +85,10 @@ class HelloIcons {
   static const String up_arrow_light_icon = _iconsRoot + "Arrow_up_icon.png";
   static const String down_arrow_light_icon =
       _iconsRoot + "Arrow_down_icon.png";
+
+//Add Details Services Offered Screen
+  static const String minus_light_icon = _iconsRoot + "Minus_light_icon.png";
+  static const String plus_light_icon = _iconsRoot + "Plus_light_icon.png";
 }
 
 class SessionData {

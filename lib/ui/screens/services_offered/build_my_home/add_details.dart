@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hellohuts_app/constants/constants.dart';
+import 'package:hellohuts_app/ui/common_widgets/number_picker.dart';
 import 'package:provider/provider.dart';
 
 import 'package:hellohuts_app/states/cost_estimate_state.dart';
@@ -65,13 +67,18 @@ class _AddDetailsBody extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(
-                  height: 12,
+                  height: 4,
                 ),
                 _StoreySelectionSection(),
                 SizedBox(
                   height: 32,
                 ),
-                _BedroomSelectionSection(),
+                _RoomSelectionSection(
+                  roomTypeName: "Bedrooms",
+                ),
+                _RoomSelectionSection(
+                  roomTypeName: "Bathrooms",
+                )
               ],
             ),
           )
@@ -248,20 +255,21 @@ class __StoreyContainerWidgetState extends State<_StoreyContainerWidget>
   }
 }
 
-class _RoomSelectionSection extends StatelessWidget {
-  const _RoomSelectionSection(
+class _RoomSelectionSection extends StatefulWidget {
+  ///Custom class for selecting the count of the specified room types
+  _RoomSelectionSection(
       {Key key,
-      this.roomTypeName,
-      this.minVisibleValue,
+      this.roomTypeName = "",
+      this.minVisibleValue = 2,
       this.maxVisibleValue,
-      this.minValue,
-      this.maxValue})
+      this.minValue = 1,
+      this.maxValue = 12})
       : super(key: key);
 
   ///Example : Bedroom, Bathroom etc
   final String roomTypeName;
 
-///Minimum value to be displayed on the screen when the app launches
+  ///Minimum value to be displayed on the screen when the app launches
   final int minVisibleValue;
 
   ///Maximum value to be displaed on the screen when the app launches
@@ -274,9 +282,82 @@ class _RoomSelectionSection extends StatelessWidget {
   final int maxValue;
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: child,
+  __RoomSelectionSectionState createState() => __RoomSelectionSectionState();
+}
+
+class __RoomSelectionSectionState extends State<_RoomSelectionSection> {
+  NumberPicker horizontalNumberPicker;
+  int _currentValue = 4;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void intialiseNumberPicker() {
+    horizontalNumberPicker = new NumberPicker.horizontal(
+      highlightSelectedValue: true,
+      initialValue: _currentValue,
+      minValue: 1,
+      maxValue: 10,
+      step: 1,
+      zeroPad: true,
+      onChanged: (value) {
+        setState(() => _currentValue = value);
+      },
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    intialiseNumberPicker();
+    ScreenUtil.init(context, designSize: Size(375.0, 801.0));
+    return Container(
+      child: Column(
+        children: [
+          Align(
+              alignment: Alignment.centerLeft,
+              child: Text(widget.roomTypeName,
+                  style: AppThemes.normalTextStyle
+                      .copyWith(fontWeight: FontWeight.bold, fontSize: 16))),
+          SizedBox(
+            height: 16.h,
+          ),
+          Row(
+            children: [
+              customIconSquare(
+                  iconAsset: HelloIcons.minus_light_icon,
+                  iconColor: AppColors.kDarkGrey),
+              horizontalNumberPicker,
+              customIconSquare(
+                  iconAsset: HelloIcons.plus_light_icon,
+                  iconColor: AppColors.kDarkGrey),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  _getNumberWidgetsInSquareBox(int minimumVal, int maxValue) {
+    List<Widget> list = [];
+    for (int i = widget.minValue; i <= maxValue; i++) {
+      list.add(Container(
+        height: 40,
+        width: 40,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12.0),
+          color: AppColors.kAliceBlue,
+        ),
+        child: Center(
+          child: Text(
+            i.toString(),
+            style: AppThemes.normalSecondaryTextStyle
+                .copyWith(fontWeight: FontWeight.bold, fontSize: 16),
+          ),
+        ),
+      ));
+    }
+    return list;
   }
 }
