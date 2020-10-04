@@ -34,18 +34,22 @@ class AddDetailsForHome extends StatelessWidget {
                     fontSize: 18,
                     color: AppColors.kDarkTextColor),
               ),
-              actions: Padding(
-                padding: EdgeInsets.only(right: 24),
-                child: Align(
-                    alignment: Alignment.centerRight,
-                    child: Text(
-                      "Reset",
-                      style: AppThemes.normalTextStyle.copyWith(
-                          fontSize: 14, color: AppColors.kDarkTextColor),
-                    )),
-              ),
-              onActionPressed: costEstimateState.resetAddDetailsPage,
-              onBackButtonPressed: ExtendedNavigator.of(context).pop,
+              // actions: Padding(
+              //   padding: EdgeInsets.only(right: 24),
+              //   child: Align(
+              //       alignment: Alignment.centerRight,
+              //       child: Text(
+              //         "Reset",
+              //         style: AppThemes.normalTextStyle.copyWith(
+              //             fontSize: 14, color: AppColors.kDarkTextColor),
+              //       )),
+              // ),
+              // onActionPressed: () => {
+              //   costEstimateState.resetAddDetailsPage()},
+              onBackButtonPressed: () => {
+                costEstimateState.resetAddDetailsPage(),
+                ExtendedNavigator.of(context).pop()
+              },
             ),
             body: _AddDetailsBody()),
       ),
@@ -73,12 +77,12 @@ class _AddDetailsBody extends StatelessWidget {
                 SizedBox(
                   height: 32,
                 ),
-                _RoomSelectionSection(
-                  roomTypeName: "Bedrooms",
+                _BedroomSelectionSection(),
+                SizedBox(
+                  height: 32,
                 ),
-                _RoomSelectionSection(
-                  roomTypeName: "Bathrooms",
-                )
+                _BathroomSelectionSection(),
+                _OtherDetailsSelectionSection(),
               ],
             ),
           )
@@ -228,7 +232,7 @@ class __StoreyContainerWidgetState extends State<_StoreyContainerWidget>
             ],
           ),
         ),
-        onTap: () => {state.setSelectedNumberOfStoreys = widget.storeyCount});
+        onTap: () => {state.setNumberOfStoreys = widget.storeyCount});
   }
 
   ///Outputs a list of Colours as per the [number] input
@@ -255,107 +259,209 @@ class __StoreyContainerWidgetState extends State<_StoreyContainerWidget>
   }
 }
 
-class _RoomSelectionSection extends StatefulWidget {
-  ///Custom class for selecting the count of the specified room types
-  _RoomSelectionSection(
-      {Key key,
-      this.roomTypeName = "",
-      this.minVisibleValue = 2,
-      this.maxVisibleValue,
-      this.minValue = 1,
-      this.maxValue = 12})
-      : super(key: key);
-
-  ///Example : Bedroom, Bathroom etc
-  final String roomTypeName;
-
-  ///Minimum value to be displayed on the screen when the app launches
-  final int minVisibleValue;
-
-  ///Maximum value to be displaed on the screen when the app launches
-  final int maxVisibleValue;
-
-  ///Minimum value upto which user can go, manually
-  final int minValue;
-
-  ///Maximum value upto which the user can go, manually
-  final int maxValue;
-
-  @override
-  __RoomSelectionSectionState createState() => __RoomSelectionSectionState();
-}
-
-class __RoomSelectionSectionState extends State<_RoomSelectionSection> {
-  NumberPicker horizontalNumberPicker;
-  int _currentValue = 4;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  void intialiseNumberPicker() {
-    horizontalNumberPicker = new NumberPicker.horizontal(
-      highlightSelectedValue: true,
-      initialValue: _currentValue,
-      minValue: 1,
-      maxValue: 10,
-      step: 1,
-      zeroPad: true,
-      onChanged: (value) {
-        setState(() => _currentValue = value);
-      },
-    );
-  }
+class _BedroomSelectionSection extends StatelessWidget {
+  _BedroomSelectionSection({
+    Key key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    intialiseNumberPicker();
+    var state = Provider.of<CostEstimateState>(context);
+    int _currentValue = state.selectedNumberOfBedrooms;
     ScreenUtil.init(context, designSize: Size(375.0, 801.0));
     return Container(
       child: Column(
         children: [
           Align(
               alignment: Alignment.centerLeft,
-              child: Text(widget.roomTypeName,
+              child: Text("Bedrooms",
                   style: AppThemes.normalTextStyle
                       .copyWith(fontWeight: FontWeight.bold, fontSize: 16))),
           SizedBox(
             height: 16.h,
           ),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              customIconSquare(
-                  iconAsset: HelloIcons.minus_light_icon,
-                  iconColor: AppColors.kDarkGrey),
-              horizontalNumberPicker,
-              customIconSquare(
-                  iconAsset: HelloIcons.plus_light_icon,
-                  iconColor: AppColors.kDarkGrey),
+              Spacer(),
+              NumberPicker.horizontal(
+                highlightSelectedValue: true,
+                initialValue: _currentValue,
+                minValue: 1,
+                maxValue: 10,
+                step: 1,
+                zeroPad: true,
+                onChanged: (value) {
+                  state.setNumberOfBedrooms = value;
+                },
+              ),
+              Spacer(),
             ],
           )
         ],
       ),
     );
   }
+}
 
-  _getNumberWidgetsInSquareBox(int minimumVal, int maxValue) {
-    List<Widget> list = [];
-    for (int i = widget.minValue; i <= maxValue; i++) {
-      list.add(Container(
-        height: 40,
-        width: 40,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12.0),
-          color: AppColors.kAliceBlue,
-        ),
-        child: Center(
-          child: Text(
-            i.toString(),
-            style: AppThemes.normalSecondaryTextStyle
-                .copyWith(fontWeight: FontWeight.bold, fontSize: 16),
+class _BathroomSelectionSection extends StatelessWidget {
+  _BathroomSelectionSection({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    var state = Provider.of<CostEstimateState>(context);
+    int _currentValue = state.selectedNumberOfBathrooms;
+    ScreenUtil.init(context, designSize: Size(375.0, 801.0));
+    return Container(
+      child: Column(
+        children: [
+          Align(
+              alignment: Alignment.centerLeft,
+              child: Text("Bathrooms",
+                  style: AppThemes.normalTextStyle
+                      .copyWith(fontWeight: FontWeight.bold, fontSize: 16))),
+          SizedBox(
+            height: 16.h,
           ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Spacer(),
+              NumberPicker.horizontal(
+                highlightSelectedValue: true,
+                initialValue: _currentValue,
+                minValue: 1,
+                maxValue: 10,
+                step: 1,
+                zeroPad: true,
+                onChanged: (value) {
+                  state.setNumberOfBathrooms = value;
+                },
+              ),
+              Spacer(),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class _OtherDetailsSelectionSection extends StatelessWidget {
+  const _OtherDetailsSelectionSection({
+    Key key,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: [
+          Align(
+              alignment: Alignment.centerLeft,
+              child: Text("Other Details",
+                  style: AppThemes.normalTextStyle
+                      .copyWith(fontWeight: FontWeight.bold, fontSize: 16))),
+          SizedBox(
+            height: 16.h,
+          ),
+          _OtherDetailsContainer(),
+        ],
+      ),
+    );
+  }
+}
+
+class _OtherDetailsContainer extends StatelessWidget {
+  _OtherDetailsContainer({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    double widthOfContainer = (fullWidth(context) - (2 * 40) - (2 * 20)) / 3;
+    return Container(
+      child: Row( mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        _OtherDetailsContainerWidget(
+          width: widthOfContainer,
+          details: pack1,
         ),
+        _OtherDetailsContainerWidget(
+          width: widthOfContainer,
+          details: pack2,
+        ),
+        _OtherDetailsContainerWidget(
+          width: widthOfContainer,
+          details: pack1,
+        ),
+      ]),
+    );
+  }
+
+  final List<String> pack1 = [
+    "Kitchen",
+    "Living Room",
+    "Dining Room",
+    "Porch",
+    "Sitout",
+    "Store Room"
+  ];
+
+  final List<String> pack2 = [
+    "Kitchen",
+    "Living + Dining Room",
+    "Porch",
+    "Sitout",
+    "Balcony"
+  ];
+}
+
+class _OtherDetailsContainerWidget extends StatelessWidget {
+  final double width;
+  final List<String> details;
+  _OtherDetailsContainerWidget({Key key, this.width, this.details})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: width ?? 80,
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+      decoration: BoxDecoration(
+        color: AppColors.kAliceBlue,
+        borderRadius: BorderRadius.circular(12.0),
+      ),
+      child: Column(
+crossAxisAlignment: CrossAxisAlignment.start,
+        children: _getDetailedListWidget(details),
+      ),
+    );
+  }
+
+  List<Widget> _getDetailedListWidget(List<String> items) {
+    List<Widget> list = [];
+    for (String item in items) {
+      list.add(Row(
+        children: [
+          Align(
+            alignment: Alignment.topRight,
+                      child: FilledCircle(
+              size: 4.0,
+              color: AppColors.kDarkTextColor,
+            ),
+          ),
+          SizedBox(
+            width: 8,
+          ),
+          Expanded(
+                      child: Text(
+              item,
+              style: AppThemes.normalSecondaryTextStyle
+                  .copyWith(color: AppColors.kDarkTextColor, fontSize: 10,),
+         maxLines: 2,
+         overflow: TextOverflow.ellipsis,
+            ),
+          )
+        ],
       ));
     }
     return list;
