@@ -134,7 +134,7 @@ class NumberPicker extends StatelessWidget {
 
   ///called when selected value changes
   final ValueChanged<num> onChanged;
-
+ 
   ///min value user can pick
   final int minValue;
 
@@ -197,6 +197,7 @@ class NumberPicker extends StatelessWidget {
   ///Whether to trigger haptic pulses or not
   final bool haptics;
 
+///C
 
   /// Used to animate integer number picker to new selected value
   void animateInt(int valueToSelect) {
