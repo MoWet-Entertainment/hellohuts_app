@@ -66,6 +66,11 @@ class AppThemes {
     textStyle:
         TextStyle(fontWeight: FontWeight.w400, color: AppColors.kDarkGrey),
   );
+    static final TextStyle normalSecondaryTextStyle = GoogleFonts.muli(
+    fontSize: 12.0,
+    textStyle:
+        TextStyle(fontWeight: FontWeight.w400, color: AppColors.kDarkTextColor),
+  );
 
   static final TextStyle appBarDefaultText = GoogleFonts.openSans(
       fontSize: 16,
