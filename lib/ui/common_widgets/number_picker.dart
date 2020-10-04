@@ -20,7 +20,7 @@ class NumberPicker extends StatelessWidget {
 
   ///width of list view for normal number picker
   ///height of list view for horizontal number picker
-  static const double kDefaultListViewCrossAxisSize = 60.0;
+  static const double kDefaultListViewCrossAxisSize = 100.0;
 
   ///constructor for horizontal number picker
   NumberPicker.horizontal({
@@ -32,7 +32,6 @@ class NumberPicker extends StatelessWidget {
     this.textMapper,
     this.itemExtent = kDefaultItemExtent,
     this.listViewHeight = kDefaultListViewCrossAxisSize,
-    this.listViewWidth = 3.5 * 60,
     this.step = 1,
     this.zeroPad = false,
     this.highlightSelectedValue = true,
@@ -52,6 +51,7 @@ class NumberPicker extends StatelessWidget {
         ),
         scrollDirection = Axis.horizontal,
         decimalScrollController = null,
+        listViewWidth = 4 * itemExtent,
         infiniteLoop = false,
         integerItemCount = (maxValue - minValue) ~/ step + 1,
         super(key: key);
@@ -250,9 +250,9 @@ class NumberPicker extends StatelessWidget {
     TextStyle defaultStyle = AppThemes.normalSecondaryTextStyle
         .copyWith(fontWeight: FontWeight.bold, fontSize: 16);
     TextStyle selectedStyle = AppThemes.normalSecondaryTextStyle
-        .copyWith(fontWeight: FontWeight.bold, fontSize: 16);
+        .copyWith(fontWeight: FontWeight.bold, fontSize: 18);
 
-    var listItemCount = integerItemCount + 2;
+    var listItemCount = integerItemCount + 3;
     // var listItemCount = integerItemCount;
 
     return Listener(
@@ -285,7 +285,7 @@ class NumberPicker extends StatelessWidget {
                         ? selectedStyle
                         : defaultStyle;
 
-                bool isExtra = index == 0 || index == listItemCount - 1;
+                bool isExtra = index == 0 ||index ==listItemCount -2 || index == listItemCount-1 ;
 
                 return isExtra
                     ? Container() //empty first and last element
@@ -295,8 +295,8 @@ class NumberPicker extends StatelessWidget {
                             child: Container(
                               child: AnimatedContainer(
                                 duration: Duration(milliseconds: 200),
-                                height: value == selectedIntValue ? 48 : 40,
-                                width: value == selectedIntValue ? 48 : 40,
+                                height: value == selectedIntValue ? 52 : 40,
+                                width: value == selectedIntValue ? 52 : 40,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(12),
                                   color: value == selectedIntValue
@@ -308,6 +308,7 @@ class NumberPicker extends StatelessWidget {
                                     // getDisplayedValue(value),
                                     value.toString(),
                                     style: itemStyle,
+
                                   ),
                                 ),
                               ),

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/ui/common_widgets/number_picker.dart';
+import 'package:hellohuts_app/ui/common_widgets/scroll_behavior/neat_scroll_behavior.dart';
 import 'package:provider/provider.dart';
 
 import 'package:hellohuts_app/states/cost_estimate_state.dart';
@@ -75,13 +76,16 @@ class _AddDetailsBody extends StatelessWidget {
                 ),
                 _StoreySelectionSection(),
                 SizedBox(
-                  height: 32,
+                  height: 24,
                 ),
                 _BedroomSelectionSection(),
                 SizedBox(
-                  height: 32,
+                  height: 24,
                 ),
                 _BathroomSelectionSection(),
+                SizedBox(
+                  height: 24,
+                ),
                 _OtherDetailsSelectionSection(),
               ],
             ),
@@ -268,6 +272,7 @@ class _BedroomSelectionSection extends StatelessWidget {
   Widget build(BuildContext context) {
     var state = Provider.of<CostEstimateState>(context);
     int _currentValue = state.selectedNumberOfBedrooms;
+    var width = fullWidth(context);
     ScreenUtil.init(context, designSize: Size(375.0, 801.0));
     return Container(
       child: Column(
@@ -287,9 +292,12 @@ class _BedroomSelectionSection extends StatelessWidget {
               NumberPicker.horizontal(
                 highlightSelectedValue: true,
                 initialValue: _currentValue,
+                itemExtent: 60,
                 minValue: 1,
-                maxValue: 10,
+                maxValue: 12,
                 step: 1,
+                listViewHeight: 60,
+                haptics: true,
                 zeroPad: true,
                 onChanged: (value) {
                   state.setNumberOfBedrooms = value;
@@ -332,9 +340,12 @@ class _BathroomSelectionSection extends StatelessWidget {
               NumberPicker.horizontal(
                 highlightSelectedValue: true,
                 initialValue: _currentValue,
+                itemExtent: 60,
                 minValue: 1,
-                maxValue: 10,
+                maxValue: 12,
                 step: 1,
+                listViewHeight: 60,
+                haptics: true,
                 zeroPad: true,
                 onChanged: (value) {
                   state.setNumberOfBathrooms = value;
@@ -380,20 +391,31 @@ class _OtherDetailsContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     double widthOfContainer = (fullWidth(context) - (2 * 40) - (2 * 20)) / 3;
     return Container(
-      child: Row( mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        _OtherDetailsContainerWidget(
-          width: widthOfContainer,
-          details: pack1,
-        ),
-        _OtherDetailsContainerWidget(
-          width: widthOfContainer,
-          details: pack2,
-        ),
-        _OtherDetailsContainerWidget(
-          width: widthOfContainer,
-          details: pack1,
-        ),
-      ]),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _OtherDetailsContainerWidget(
+            width: widthOfContainer,
+            details: pack1,
+            packId: 1,
+          ),
+          _OtherDetailsContainerWidget(
+            width: widthOfContainer,
+            details: pack2,
+            packId: 2,
+          ),
+          Container(
+            width: widthOfContainer,
+            height: 115,
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+            decoration: BoxDecoration(
+              color: AppColors.kAliceBlue,
+              borderRadius: BorderRadius.circular(12.0),
+            ),
+          )
+        ],
+      ),
     );
   }
 
@@ -411,29 +433,65 @@ class _OtherDetailsContainer extends StatelessWidget {
     "Living + Dining Room",
     "Porch",
     "Sitout",
-    "Balcony"
+    "Balcony",
   ];
 }
 
 class _OtherDetailsContainerWidget extends StatelessWidget {
   final double width;
+  final int packId;
   final List<String> details;
-  _OtherDetailsContainerWidget({Key key, this.width, this.details})
+  _OtherDetailsContainerWidget({Key key, this.width, this.details, this.packId})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: width ?? 80,
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-      decoration: BoxDecoration(
-        color: AppColors.kAliceBlue,
-        borderRadius: BorderRadius.circular(12.0),
-      ),
-      child: Column(
-crossAxisAlignment: CrossAxisAlignment.start,
-        children: _getDetailedListWidget(details),
-      ),
+    var state = Provider.of<CostEstimateState>(context);
+    return Column(
+      children: [
+        GestureDetector(
+          child: AnimatedContainer(
+            duration: Duration(milliseconds: 300),
+            width: width ?? 80,
+            height: 115,
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+            decoration: BoxDecoration(
+              color: state.getSelectedPack == packId
+                  ? AppColors.kLavender
+                  : AppColors.kAliceBlue,
+              borderRadius: BorderRadius.circular(12.0),
+            ),
+            child: ScrollConfiguration(
+              behavior: NeatScrollBehavior(),
+              child: ListView(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+// crossAxisAlignment: CrossAxisAlignment.start,
+// mainAxisAlignment: MainAxisAlignment.start,
+                children: _getDetailedListWidget(details),
+              ),
+            ),
+          ),
+          onTap: () {
+            state.setSelectedPack = packId;
+          },
+        ),
+       SizedBox(
+                height: 8.0,
+              ),
+              Align(
+                  alignment: Alignment.bottomCenter,
+                  child: AnimatedContainer(
+                    duration: Duration(milliseconds: 300),
+                    color: AppColors.kDarkGreen,
+                    curve: Curves.fastOutSlowIn,
+                    height: 2.0,
+                    width: state.getSelectedPack == packId
+                        ? 32.0
+                        : 0,
+                  ))
+        
+      ],
     );
   }
 
@@ -441,24 +499,24 @@ crossAxisAlignment: CrossAxisAlignment.start,
     List<Widget> list = [];
     for (String item in items) {
       list.add(Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Align(
-            alignment: Alignment.topRight,
-                      child: FilledCircle(
-              size: 4.0,
-              color: AppColors.kDarkTextColor,
-            ),
+          FilledCircle(
+            size: 4.0,
+            color: AppColors.kDarkTextColor,
           ),
           SizedBox(
             width: 8,
           ),
           Expanded(
-                      child: Text(
+            child: Text(
               item,
-              style: AppThemes.normalSecondaryTextStyle
-                  .copyWith(color: AppColors.kDarkTextColor, fontSize: 10,),
-         maxLines: 2,
-         overflow: TextOverflow.ellipsis,
+              style: AppThemes.normalSecondaryTextStyle.copyWith(
+                color: AppColors.kDarkTextColor,
+                fontSize: 10,
+              ),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
             ),
           )
         ],
