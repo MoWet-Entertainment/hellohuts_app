@@ -17,6 +17,7 @@ class CostEstimateState extends AppState {
     _needReset = value;
     notifyListeners();
   }
+
   get getNeedReset => _needReset;
 
   //Number of Storeys  section
@@ -43,10 +44,19 @@ class CostEstimateState extends AppState {
     notifyListeners();
   }
 
+//Other Details
+  int _selectedPack = 1;
+  get getSelectedPack => _selectedPack;
+  set setSelectedPack(int number) {
+    _selectedPack = number;
+    notifyListeners();
+  }
+
   void resetAddDetailsPage() {
     setNumberOfStoreys = 2;
     setNumberOfBedrooms = 4;
     setNumberOfBathrooms = 3;
+    setSelectedPack = 1;
     //TODO: Implement Reset actions
     print("User wants to reset the customizations");
   }
