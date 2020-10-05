@@ -65,32 +65,22 @@ class _AddDetailsBody extends StatelessWidget {
     return Container(
       width: fullWidth(context),
       color: AppColors.kPureWhite,
+      child: Container(
+      padding: const EdgeInsets.symmetric(horizontal: 32),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 32),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 4,
-                ),
-                _StoreySelectionSection(),
-                SizedBox(
-                  height: 24,
-                ),
-                _BedroomSelectionSection(),
-                SizedBox(
-                  height: 24,
-                ),
-                _BathroomSelectionSection(),
-                SizedBox(
-                  height: 24,
-                ),
-                _OtherDetailsSelectionSection(),
-              ],
-            ),
-          )
+          _StoreySelectionSection(),
+        
+          _BedroomSelectionSection(),
+       
+          _BathroomSelectionSection(),
+       
+          _OtherDetailsSelectionSection(),
+
         ],
+      ),
       ),
     );
   }
@@ -103,6 +93,7 @@ class _StoreySelectionSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.only(bottom: 8.0),
       child: Column(
         children: [
           Align(
@@ -275,6 +266,7 @@ class _BedroomSelectionSection extends StatelessWidget {
     var width = fullWidth(context);
     ScreenUtil.init(context, designSize: Size(375.0, 801.0));
     return Container(
+      padding: const EdgeInsets.only(bottom: 8.0),
       child: Column(
         children: [
           Align(
@@ -289,7 +281,7 @@ class _BedroomSelectionSection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Spacer(),
-              NumberPicker.horizontal(
+             new  NumberPicker.horizontal(
                 highlightSelectedValue: true,
                 initialValue: _currentValue,
                 itemExtent: 60,
@@ -323,6 +315,7 @@ class _BathroomSelectionSection extends StatelessWidget {
     int _currentValue = state.selectedNumberOfBathrooms;
     ScreenUtil.init(context, designSize: Size(375.0, 801.0));
     return Container(
+      padding: const EdgeInsets.only(bottom:8.0),
       child: Column(
         children: [
           Align(
@@ -337,11 +330,11 @@ class _BathroomSelectionSection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Spacer(),
-              NumberPicker.horizontal(
+             new  NumberPicker.horizontal(
                 highlightSelectedValue: true,
                 initialValue: _currentValue,
                 itemExtent: 60,
-                minValue: 1,
+                minValue: 5,
                 maxValue: 12,
                 step: 1,
                 listViewHeight: 60,
@@ -389,7 +382,8 @@ class _OtherDetailsContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double widthOfContainer = (fullWidth(context) - (2 * 40) - (2 * 20)) / 3;
+    final state = Provider.of<CostEstimateState>(context);
+    double widthOfContainer = (fullWidth(context) - (2 * 32) - (2 * 8)) / 3;
     return Container(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -405,15 +399,58 @@ class _OtherDetailsContainer extends StatelessWidget {
             details: pack2,
             packId: 2,
           ),
-          Container(
-            width: widthOfContainer,
-            height: 115,
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-            decoration: BoxDecoration(
-              color: AppColors.kAliceBlue,
-              borderRadius: BorderRadius.circular(12.0),
+          Column(children: [
+            GestureDetector(
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                width: widthOfContainer,
+                height: 115,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+                decoration: BoxDecoration(
+                  color: state.getSelectedPack == 3
+                      ? AppColors.kLavender
+                      : AppColors.kAliceBlue,
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                child: Center(
+                  child: Column(
+                    children: [
+                      customIconSquare(
+                          iconAsset: HelloIcons.plus_light_icon,
+                          iconColor: AppColors.kDarkestGrey,
+                          iconSize: 24,
+                          backgroundColor: state.getSelectedPack == 3
+                              ? AppColors.kLavender
+                              : AppColors.kAliceBlue,
+                          backgroundSize: 24),
+                      Text(
+                        "Custom",
+                        style: AppThemes.normalSecondaryTextStyle
+                            .copyWith(fontSize: 12),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              onTap: () {
+                state.setSelectedPack = 3;
+                print("Custom");
+              },
             ),
-          )
+            SizedBox(
+              height: 8.0,
+            ),
+            Align(
+                alignment: Alignment.bottomCenter,
+                child: AnimatedContainer(
+                  duration: Duration(milliseconds: 300),
+                  color: AppColors.kDarkGreen,
+                  curve: Curves.fastOutSlowIn,
+                  height: 2.0,
+                  width: state.getSelectedPack == 3 ? 32.0 : 0,
+                ))
+          ])
         ],
       ),
     );
@@ -476,21 +513,18 @@ class _OtherDetailsContainerWidget extends StatelessWidget {
             state.setSelectedPack = packId;
           },
         ),
-       SizedBox(
-                height: 8.0,
-              ),
-              Align(
-                  alignment: Alignment.bottomCenter,
-                  child: AnimatedContainer(
-                    duration: Duration(milliseconds: 300),
-                    color: AppColors.kDarkGreen,
-                    curve: Curves.fastOutSlowIn,
-                    height: 2.0,
-                    width: state.getSelectedPack == packId
-                        ? 32.0
-                        : 0,
-                  ))
-        
+        SizedBox(
+          height: 8.0,
+        ),
+        Align(
+            alignment: Alignment.bottomCenter,
+            child: AnimatedContainer(
+              duration: Duration(milliseconds: 300),
+              color: AppColors.kDarkGreen,
+              curve: Curves.fastOutSlowIn,
+              height: 2.0,
+              width: state.getSelectedPack == packId ? 32.0 : 0,
+            ))
       ],
     );
   }
@@ -513,7 +547,7 @@ class _OtherDetailsContainerWidget extends StatelessWidget {
               item,
               style: AppThemes.normalSecondaryTextStyle.copyWith(
                 color: AppColors.kDarkTextColor,
-                fontSize: 10,
+                fontSize: 12,
               ),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
