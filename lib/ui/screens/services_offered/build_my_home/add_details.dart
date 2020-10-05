@@ -334,7 +334,7 @@ class _BathroomSelectionSection extends StatelessWidget {
                 highlightSelectedValue: true,
                 initialValue: _currentValue,
                 itemExtent: 60,
-                minValue: 5,
+                minValue: 1,
                 maxValue: 12,
                 step: 1,
                 listViewHeight: 60,
