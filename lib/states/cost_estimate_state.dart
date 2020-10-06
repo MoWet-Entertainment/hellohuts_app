@@ -18,7 +18,7 @@ class CostEstimateState extends AppState {
     notifyListeners();
   }
 
-  get getNeedReset => _needReset;
+  get needReset => _needReset;
 
   //Number of Storeys  section
   int _selectedNumberOfStoreys = 2;
@@ -46,9 +46,17 @@ class CostEstimateState extends AppState {
 
 //Other Details
   int _selectedPack = 1;
-  get getSelectedPack => _selectedPack;
+  get selectedPack => _selectedPack;
   set setSelectedPack(int number) {
     _selectedPack = number;
+    notifyListeners();
+  }
+
+  //Custom Other details
+  bool _isCustomOtherDetails = false;
+  get isCustomOtherDetails => _isCustomOtherDetails;
+  set setIsCustomOtherDetails(bool value) {
+    _isCustomOtherDetails = value;
     notifyListeners();
   }
 

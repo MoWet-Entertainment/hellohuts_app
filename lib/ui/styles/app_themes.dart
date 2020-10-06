@@ -10,8 +10,13 @@ class AppThemes {
     buttonColor: AppColors.kPrimaryColor,
     canvasColor: AppColors.kPureWhite,
     bottomAppBarColor: AppColors.kPrimaryColor,
-  );
+    scaffoldBackgroundColor: AppColors.kPureWhite,
+    appBarTheme: appBarTheme,
+    backgroundColor:  AppColors.kPureWhite,
 
+  );
+ static final AppBarTheme appBarTheme  = AppBarTheme(color: AppColors.kPureWhite,brightness: Brightness.dark);
+ 
   static final TextStyle postDateAndCategoryStyle = GoogleFonts.openSans(
     textStyle: TextStyle(
         color: AppColors.kDarkGrey,
