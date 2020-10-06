@@ -2,10 +2,12 @@ import 'dart:ui';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/ui/common_widgets/number_picker.dart';
 import 'package:hellohuts_app/ui/common_widgets/scroll_behavior/neat_scroll_behavior.dart';
+import 'package:hellohuts_app/ui/screens/feed_posts/widgets/board/add_to_board.dart';
 import 'package:provider/provider.dart';
 
 import 'package:hellohuts_app/states/cost_estimate_state.dart';
@@ -15,46 +17,64 @@ import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
 
-class AddDetailsForHome extends StatelessWidget {
+class AddDetailsForHome extends StatefulWidget {
   const AddDetailsForHome({Key key}) : super(key: key);
+
+  @override
+  _AddDetailsForHomeState createState() => _AddDetailsForHomeState();
+}
+
+class _AddDetailsForHomeState extends State<AddDetailsForHome> {
+  @override
+  void initState() {
+    super.initState();
+  }
 
   Widget build(BuildContext context) {
     var state = Provider.of<SearchState>(context);
     var costEstimateState = Provider.of<CostEstimateState>(context);
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: SafeArea(
-        child: Scaffold(
-            appBar: CustomAppBar(
-              isBackButton: true,
-              centerTitle: true,
-              title: Text(
-                "Add Details",
-                style: AppThemes.normalTextStyle.copyWith(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                    color: AppColors.kDarkTextColor),
-              ),
-              // actions: Padding(
-              //   padding: EdgeInsets.only(right: 24),
-              //   child: Align(
-              //       alignment: Alignment.centerRight,
-              //       child: Text(
-              //         "Reset",
-              //         style: AppThemes.normalTextStyle.copyWith(
-              //             fontSize: 14, color: AppColors.kDarkTextColor),
-              //       )),
-              // ),
-              // onActionPressed: () => {
-              //   costEstimateState.resetAddDetailsPage()},
-              onBackButtonPressed: () => {
-                costEstimateState.resetAddDetailsPage(),
-                ExtendedNavigator.of(context).pop()
-              },
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+          body: AnnotatedRegion<SystemUiOverlayStyle>(
+            value: SystemUiOverlayStyle.dark
+                .copyWith(statusBarColor: Colors.transparent),
+            child: SafeArea(
+              child: Scaffold(
+                  backgroundColor: AppColors.kPureWhite,
+                  appBar: CustomAppBar(
+                    isBackButton: true,
+                    centerTitle: true,
+                    title: Text(
+                      "Add Details",
+                      style: AppThemes.normalTextStyle.copyWith(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                          color: AppColors.kDarkTextColor),
+                    ),
+                    // actions: Padding(
+                    //   padding: EdgeInsets.only(right: 24),
+                    //   child: Align(
+                    //       alignment: Alignment.centerRight,
+                    //       child: Text(
+                    //         "Reset",
+                    //         style: AppThemes.normalTextStyle.copyWith(
+                    //             fontSize: 14, color: AppColors.kDarkTextColor),
+                    //       )),
+                    // ),
+                    // onActionPressed: () => {
+                    //   costEstimateState.resetAddDetailsPage()
+          
+                    // },
+                    onBackButtonPressed: () => {
+                      costEstimateState.resetAddDetailsPage(),
+                      ExtendedNavigator.of(context).pop()
+                    },
+                  ),
+                  body: _AddDetailsBody()),
             ),
-            body: _AddDetailsBody()),
-      ),
-    );
+          ),
+        ));
   }
 }
 
@@ -66,21 +86,17 @@ class _AddDetailsBody extends StatelessWidget {
       width: fullWidth(context),
       color: AppColors.kPureWhite,
       child: Container(
-      padding: const EdgeInsets.symmetric(horizontal: 32),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _StoreySelectionSection(),
-        
-          _BedroomSelectionSection(),
-       
-          _BathroomSelectionSection(),
-       
-          _OtherDetailsSelectionSection(),
-
-        ],
-      ),
+        padding: const EdgeInsets.symmetric(horizontal: 32),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _StoreySelectionSection(),
+            _BedroomSelectionSection(),
+            _BathroomSelectionSection(),
+            _OtherDetailsSelectionSection(),
+          ],
+        ),
       ),
     );
   }
@@ -281,7 +297,7 @@ class _BedroomSelectionSection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Spacer(),
-             new  NumberPicker.horizontal(
+              new NumberPicker.horizontal(
                 highlightSelectedValue: true,
                 initialValue: _currentValue,
                 itemExtent: 60,
@@ -315,7 +331,7 @@ class _BathroomSelectionSection extends StatelessWidget {
     int _currentValue = state.selectedNumberOfBathrooms;
     ScreenUtil.init(context, designSize: Size(375.0, 801.0));
     return Container(
-      padding: const EdgeInsets.only(bottom:8.0),
+      padding: const EdgeInsets.only(bottom: 8.0),
       child: Column(
         children: [
           Align(
@@ -330,7 +346,7 @@ class _BathroomSelectionSection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Spacer(),
-             new  NumberPicker.horizontal(
+              new NumberPicker.horizontal(
                 highlightSelectedValue: true,
                 initialValue: _currentValue,
                 itemExtent: 60,
@@ -393,67 +409,178 @@ class _OtherDetailsContainer extends StatelessWidget {
             width: widthOfContainer,
             details: pack1,
             packId: 1,
+            onTap: () => {
+              state.setSelectedPack = 1,
+              state.setIsCustomOtherDetails = false,
+              state.resetCustomDetail,
+            },
           ),
           _OtherDetailsContainerWidget(
             width: widthOfContainer,
             details: pack2,
             packId: 2,
+            onTap: () => {
+              state.setSelectedPack = 2,
+              state.setIsCustomOtherDetails = false,
+              state.resetCustomDetail,
+            },
           ),
-          Column(children: [
-            GestureDetector(
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
-                width: widthOfContainer,
-                height: 115,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-                decoration: BoxDecoration(
-                  color: state.getSelectedPack == 3
-                      ? AppColors.kLavender
-                      : AppColors.kAliceBlue,
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
-                child: Center(
-                  child: Column(
-                    children: [
-                      customIconSquare(
-                          iconAsset: HelloIcons.plus_light_icon,
-                          iconColor: AppColors.kDarkestGrey,
-                          iconSize: 24,
-                          backgroundColor: state.getSelectedPack == 3
-                              ? AppColors.kLavender
-                              : AppColors.kAliceBlue,
-                          backgroundSize: 24),
-                      Text(
-                        "Custom",
-                        style: AppThemes.normalSecondaryTextStyle
-                            .copyWith(fontSize: 12),
+          state.isCustomOtherDetails && state.selectedDetailsItems.length != 0
+              ? _OtherDetailsContainerWidget(
+                  width: widthOfContainer,
+                  details: state.selectedDetailsItems,
+                  packId: 3,
+                  onTap: () => {
+                    state.setSelectedPack = 3,
+                    state.setIsCustomOtherDetails = true,
+                    _showCustomBottomSheet(context),
+                  },
+                )
+              : Column(children: [
+                  GestureDetector(
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 200),
+                      width: widthOfContainer,
+                      height: 115,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 12),
+                      decoration: BoxDecoration(
+                        color: state.selectedPack == 3
+                            ? AppColors.kLavender
+                            : AppColors.kAliceBlue,
+                        borderRadius: BorderRadius.circular(12.0),
                       ),
-                    ],
+                      child: Center(
+                        child: Column(
+                          children: [
+                            customIconSquare(
+                                iconAsset: HelloIcons.plus_light_icon,
+                                iconColor: AppColors.kDarkestGrey,
+                                iconSize: 24,
+                                backgroundColor: state.selectedPack == 3
+                                    ? AppColors.kLavender
+                                    : AppColors.kAliceBlue,
+                                backgroundSize: 24),
+                            Text(
+                              "Custom",
+                              style: AppThemes.normalSecondaryTextStyle
+                                  .copyWith(fontSize: 12),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    onTap: () {
+                      state.setSelectedPack = 3;
+                      state.setIsCustomOtherDetails = true;
+                      state.resetCustomDetail();
+                      _showCustomBottomSheet(context);
+                      print("Custom");
+                    },
                   ),
-                ),
-              ),
-              onTap: () {
-                state.setSelectedPack = 3;
-                print("Custom");
-              },
-            ),
-            SizedBox(
-              height: 8.0,
-            ),
-            Align(
-                alignment: Alignment.bottomCenter,
-                child: AnimatedContainer(
-                  duration: Duration(milliseconds: 300),
-                  color: AppColors.kDarkGreen,
-                  curve: Curves.fastOutSlowIn,
-                  height: 2.0,
-                  width: state.getSelectedPack == 3 ? 32.0 : 0,
-                ))
-          ])
+                  SizedBox(
+                    height: 8.0,
+                  ),
+                  Align(
+                      alignment: Alignment.bottomCenter,
+                      child: AnimatedContainer(
+                        duration: Duration(milliseconds: 300),
+                        color: AppColors.kDarkGreen,
+                        curve: Curves.fastOutSlowIn,
+                        height: 2.0,
+                        width: state.selectedPack == 3 ? 32.0 : 0,
+                      ))
+                ])
         ],
       ),
     );
+  }
+
+  void _showCustomBottomSheet(BuildContext context,
+      {List<Widget> listOfWidgets}) {
+    var state = Provider.of<CostEstimateState>(context, listen: false);
+    showModalBottomSheet(
+        context: context,
+        backgroundColor: Colors.transparent,
+        builder: (BuildContext context) {
+          return Container(
+              padding: EdgeInsets.only(top: 8, bottom: 0),
+              height: fullHeight(context) * 0.6,
+              width: fullWidth(context),
+              decoration: BoxDecoration(
+                  color: AppColors.kPureWhite,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20))),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    width: fullWidth(context) * .15,
+                    height: 5,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).dividerColor,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 16),
+                          child: Align(
+                              alignment: Alignment.topLeft,
+                              child: Text("Select as per your requirements",
+                                  style: AppThemes.normalTextStyle.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16))),
+                        ),
+                        SizedBox(
+                          height: 16,
+                        ),
+                        MultiSelectChip(
+                          itemList: state.listForCustomSelection,
+                          alreadySelected: state.selectedDetailsItems,
+                          onSelectionChanged: (list) {
+                            state.setSelectedDetailsItems = list;
+                          },
+                        ),
+                      SizedBox(height:32),
+                        Align(
+                          alignment: Alignment.bottomRight,
+                       
+                                                  child: GestureDetector(
+                                                                                                      child: Container(
+                                                      padding: EdgeInsets.all(8.0),
+                                                      child:Container(
+                                                         padding: EdgeInsets.all(8.0),
+                                                        height: 32,
+                                                        width: 68,
+                                                        decoration: BoxDecoration(
+                                                           color: AppColors.kPrimaryYellow,
+                                                           borderRadius: BorderRadius.circular(12)
+                                                        ),
+                            child: Center(child: Text("Done")),
+                           
+                              
+                                                      ),
+                          ),
+                          onTap: ()=>Navigator.pop(context),
+                                                  ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ));
+        });
   }
 
   final List<String> pack1 = [
@@ -478,7 +605,9 @@ class _OtherDetailsContainerWidget extends StatelessWidget {
   final double width;
   final int packId;
   final List<String> details;
-  _OtherDetailsContainerWidget({Key key, this.width, this.details, this.packId})
+  final GestureTapCallback onTap;
+  _OtherDetailsContainerWidget(
+      {Key key, this.width, this.details, this.packId, this.onTap})
       : super(key: key);
 
   @override
@@ -487,32 +616,29 @@ class _OtherDetailsContainerWidget extends StatelessWidget {
     return Column(
       children: [
         GestureDetector(
-          child: AnimatedContainer(
-            duration: Duration(milliseconds: 300),
-            width: width ?? 80,
-            height: 115,
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-            decoration: BoxDecoration(
-              color: state.getSelectedPack == packId
-                  ? AppColors.kLavender
-                  : AppColors.kAliceBlue,
-              borderRadius: BorderRadius.circular(12.0),
-            ),
-            child: ScrollConfiguration(
-              behavior: NeatScrollBehavior(),
-              child: ListView(
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
+            child: AnimatedContainer(
+              duration: Duration(milliseconds: 300),
+              width: width ?? 80,
+              height: 115,
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+              decoration: BoxDecoration(
+                color: state.selectedPack == packId
+                    ? AppColors.kLavender
+                    : AppColors.kAliceBlue,
+                borderRadius: BorderRadius.circular(12.0),
+              ),
+              child: ScrollConfiguration(
+                behavior: NeatScrollBehavior(),
+                child: ListView(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
 // crossAxisAlignment: CrossAxisAlignment.start,
 // mainAxisAlignment: MainAxisAlignment.start,
-                children: _getDetailedListWidget(details),
+                  children: _getDetailedListWidget(details),
+                ),
               ),
             ),
-          ),
-          onTap: () {
-            state.setSelectedPack = packId;
-          },
-        ),
+            onTap: onTap),
         SizedBox(
           height: 8.0,
         ),
@@ -523,7 +649,7 @@ class _OtherDetailsContainerWidget extends StatelessWidget {
               color: AppColors.kDarkGreen,
               curve: Curves.fastOutSlowIn,
               height: 2.0,
-              width: state.getSelectedPack == packId ? 32.0 : 0,
+              width: state.selectedPack == packId ? 32.0 : 0,
             ))
       ],
     );

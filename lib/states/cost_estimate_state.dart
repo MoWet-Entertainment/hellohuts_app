@@ -60,12 +60,44 @@ class CostEstimateState extends AppState {
     notifyListeners();
   }
 
+  List<String> _selectedDetailsItems = [];
+  get selectedDetailsItems => _selectedDetailsItems;
+  set setSelectedDetailsItems(List list) {
+    _selectedDetailsItems = list;
+    notifyListeners();
+  }
+
   void resetAddDetailsPage() {
     setNumberOfStoreys = 2;
     setNumberOfBedrooms = 4;
     setNumberOfBathrooms = 3;
     setSelectedPack = 1;
+    resetCustomDetail();
     //TODO: Implement Reset actions
     print("User wants to reset the customizations");
   }
+
+//To reset the details if selected any
+  void resetCustomDetail() {
+    List<String> list = [];
+    setSelectedDetailsItems = list;
+  }
+
+  //For custom Selection
+  final List<String> _listForCustomSelection = [
+    "Dining Room",
+    "Living Room",
+    "Living + Dining",
+    "Kitchen",
+    "Open Kitchen",
+    "Balcony",
+    "Dressing area",
+    "Store Room",
+    "Prayer Room",
+    "Study Room",
+    "Upper Living Room",
+    "Game Room",
+  ];
+
+  get listForCustomSelection => _listForCustomSelection;
 }
