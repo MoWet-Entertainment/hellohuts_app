@@ -5,7 +5,7 @@ import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:provider/provider.dart';
 
-void openBottonSheet(BuildContext context, FeedModel model) async {
+void openBottomSheet(BuildContext context, FeedModel model) async {
   
   //TODO: Play with Auth State somewhere here
     var state = Provider.of<PopupState>(context, listen: false);

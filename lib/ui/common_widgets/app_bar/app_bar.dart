@@ -80,7 +80,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.onCrossButtonPressed,
     this.onActionPressed,
     this.backgroundColor,
-    this.centerTitle = true,
+    this.centerTitle = true, 
+    this.brightness = Brightness.light
   }) : super(key: key);
 
   ///if the leading is a BackButton. Defaults to arrow based button(as in iOS). By default this will be [false]
@@ -107,12 +108,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final GestureTapCallback onActionPressed;
   final Size appBarHeight = Size.fromHeight(72.0);
   final Color backgroundColor;
+  final Brightness brightness;
 
   @override
   Size get preferredSize => appBarHeight;
   @override
   Widget build(BuildContext context) {
     return AppBar(
+       
+      brightness: Brightness.light,
       backgroundColor: backgroundColor ?? AppColors.kPureWhite,
       elevation: 0,
       leading: isBackButton

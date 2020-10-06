@@ -32,9 +32,9 @@ class _BasePageState extends State<BasePage> {
   @override
   void initState() {
 
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: AppColors.kPureWhite,
-        statusBarIconBrightness: Brightness.dark));
+    // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    //     statusBarColor: AppColors.kPureWhite,
+    //     statusBarIconBrightness: Brightness.dark));
     WidgetsBinding.instance.addPostFrameCallback((_) {
       //TODO: Initialise all the db functionalities here
       initFeedPosts();
@@ -127,7 +127,9 @@ class _BasePageState extends State<BasePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      body: _body(Provider.of<AppState>(context).pageIndex),
+      body: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle.dark.copyWith(statusBarColor: AppColors.kPureWhite),
+        child: _body(Provider.of<AppState>(context).pageIndex)),
       extendBody: true,
       backgroundColor: AppColors.kPureWhite,
       bottomNavigationBar: BottomNavBar(pageController: _pageController,),

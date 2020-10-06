@@ -18,7 +18,7 @@ class CostEstimateState extends AppState {
     notifyListeners();
   }
 
-  get getNeedReset => _needReset;
+  get needReset => _needReset;
 
   //Number of Storeys  section
   int _selectedNumberOfStoreys = 2;
@@ -46,9 +46,24 @@ class CostEstimateState extends AppState {
 
 //Other Details
   int _selectedPack = 1;
-  get getSelectedPack => _selectedPack;
+  get selectedPack => _selectedPack;
   set setSelectedPack(int number) {
     _selectedPack = number;
+    notifyListeners();
+  }
+
+  //Custom Other details
+  bool _isCustomOtherDetails = false;
+  get isCustomOtherDetails => _isCustomOtherDetails;
+  set setIsCustomOtherDetails(bool value) {
+    _isCustomOtherDetails = value;
+    notifyListeners();
+  }
+
+  List<String> _selectedDetailsItems = [];
+  get selectedDetailsItems => _selectedDetailsItems;
+  set setSelectedDetailsItems(List list) {
+    _selectedDetailsItems = list;
     notifyListeners();
   }
 
@@ -57,7 +72,32 @@ class CostEstimateState extends AppState {
     setNumberOfBedrooms = 4;
     setNumberOfBathrooms = 3;
     setSelectedPack = 1;
+    resetCustomDetail();
     //TODO: Implement Reset actions
     print("User wants to reset the customizations");
   }
+
+//To reset the details if selected any
+  void resetCustomDetail() {
+    List<String> list = [];
+    setSelectedDetailsItems = list;
+  }
+
+  //For custom Selection
+  final List<String> _listForCustomSelection = [
+    "Dining Room",
+    "Living Room",
+    "Living + Dining",
+    "Kitchen",
+    "Open Kitchen",
+    "Balcony",
+    "Dressing area",
+    "Store Room",
+    "Prayer Room",
+    "Study Room",
+    "Upper Living Room",
+    "Game Room",
+  ];
+
+  get listForCustomSelection => _listForCustomSelection;
 }
