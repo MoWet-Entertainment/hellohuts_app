@@ -254,7 +254,7 @@ Widget customIconSquare({
   double iconSize = 24,
   Color iconColor = AppColors.kDarkTextColor,
   double borderRadius = 12,
-  Function actionCall,
+  GestureTapCallback actionCall,
 }) {
   return Stack(
     alignment: Alignment.center,
@@ -281,9 +281,7 @@ Widget customIconSquare({
                   color: iconColor,
                   size: iconSize,
                 ),
-          onPressed: () => {
-                if (actionCall != null) {actionCall()}
-              }),
+          onPressed: actionCall),
     ],
   );
 }
@@ -342,39 +340,35 @@ class CustomListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-          child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
-        height: height ?? 64,
-        width: width ?? fullWidth(context),
-        decoration: BoxDecoration(
-          borderRadius: borderRadius ?? BorderRadius.circular(16.0),
-          color: backgroundColor ?? AppColors.kSmokedWhite,
-        ),
-        child: Row(
-          children: [
-            leading ?? SizedBox(),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 2),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  titleText ?? SizedBox(),
-                  subTitle ?? SizedBox(),
-                ],
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+          height: height ?? 64,
+          width: width ?? fullWidth(context),
+          decoration: BoxDecoration(
+            borderRadius: borderRadius ?? BorderRadius.circular(16.0),
+            color: backgroundColor ?? AppColors.kSmokedWhite,
+          ),
+          child: Row(
+            children: [
+              leading ?? SizedBox(),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 2),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    titleText ?? SizedBox(),
+                    subTitle ?? SizedBox(),
+                  ],
+                ),
               ),
-            ),
-            Spacer(),
-            trailing ?? SizedBox(),
-          ],
+              Spacer(),
+              trailing ?? SizedBox(),
+            ],
+          ),
         ),
-      ),
-      onTap: onTap,
-      onLongPress: onLongPress
-      );
-
-      
-   
+        onTap: onTap,
+        onLongPress: onLongPress);
   }
 }
 
@@ -401,4 +395,65 @@ class FilledCircle extends StatelessWidget {
   }
 }
 
+class MultiSelectChip extends StatefulWidget {
+  final List<String> itemList;
+  final List<String> alreadySelected;
+  final Function(List<String>) onSelectionChanged;
+  final Color backgroundColor;
+  final Color selectedColor;
 
+  MultiSelectChip({
+    this.itemList,
+    this.alreadySelected,
+    this.onSelectionChanged,
+    this.backgroundColor = AppColors.kAliceBlue,
+    this.selectedColor = AppColors.kLavender,
+  });
+
+  @override
+  _MultiSelectChipState createState() => _MultiSelectChipState();
+}
+
+class _MultiSelectChipState extends State<MultiSelectChip> {
+  // String selectedChoice = "";
+  List<String> selectedChoices = List();
+
+  _buildChoiceList() {
+    List<Widget> choices = List();
+    selectedChoices = widget.alreadySelected;
+    widget.itemList.forEach((item) {
+      choices.add(Container(
+        padding: const EdgeInsets.all(4.0),
+        child: ChoiceChip(
+          label: Text(
+            item,
+            style: selectedChoices.contains(item)? AppThemes.normalSecondaryTextStyle
+                .copyWith(fontSize: 12, color: AppColors.kDarkTextColor, fontWeight: FontWeight.bold):AppThemes.normalSecondaryTextStyle
+                .copyWith(fontSize: 12, color: AppColors.kDarkTextColor),
+          ),
+        
+          backgroundColor: widget.backgroundColor,
+          selectedColor: widget.selectedColor,
+          selected: selectedChoices.contains(item),
+          onSelected: (selected) {
+            setState(() {
+              selectedChoices.contains(item)
+                  ? selectedChoices.remove(item)
+                  : selectedChoices.add(item);
+              widget.onSelectionChanged(selectedChoices);
+            });
+          },
+        ),
+      ));
+    });
+
+    return choices;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      children: _buildChoiceList(),
+    );
+  }
+}
