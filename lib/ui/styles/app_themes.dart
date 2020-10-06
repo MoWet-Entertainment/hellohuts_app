@@ -13,9 +13,12 @@ class AppThemes {
     scaffoldBackgroundColor: AppColors.kPureWhite,
     appBarTheme: appBarTheme,
     backgroundColor:  AppColors.kPureWhite,
+     bottomSheetTheme: bottomSheetThemeData
 
   );
- static final AppBarTheme appBarTheme  = AppBarTheme(color: AppColors.kPureWhite,brightness: Brightness.dark);
+
+  static final BottomSheetThemeData bottomSheetThemeData = BottomSheetThemeData(backgroundColor: AppColors.kPureWhite);
+ static final AppBarTheme appBarTheme  = AppBarTheme(color: AppColors.kPureWhite,brightness: Brightness.light);
  
   static final TextStyle postDateAndCategoryStyle = GoogleFonts.openSans(
     textStyle: TextStyle(

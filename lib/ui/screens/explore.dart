@@ -27,7 +27,9 @@ class ExplorePage extends StatefulWidget {
   ExplorePage({Key key, this.scaffoldKey}) : super(key: key);
 
   @override
-  void initState() {}
+  void initState() {
+    
+  }
 
   @override
   _ExplorePageState createState() => _ExplorePageState();
@@ -40,15 +42,22 @@ class _ExplorePageState extends State<ExplorePage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        primary: false,
         extendBody: true,
         backgroundColor: AppColors.kPureWhite,
-        body: SafeArea(
-          child: _FeedWidgetBody(
-            key: widget.key,
-            scaffoldKey: widget.scaffoldKey,
+        body:
+          AnnotatedRegion<SystemUiOverlayStyle>(
+          value: SystemUiOverlayStyle.dark.copyWith(statusBarColor: AppColors.kPureWhite),
+          child: SafeArea(
+       
+            child: _FeedWidgetBody(
+              key: widget.key,
+              scaffoldKey: widget.scaffoldKey,
+            ),
           ),
         ),
       ),

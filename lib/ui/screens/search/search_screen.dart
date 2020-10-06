@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/constants/hello_icons.dart';
 import 'package:hellohuts_app/constants/strings.dart';
@@ -34,6 +35,7 @@ class _SearchPageState extends State<SearchPage> {
       state.resetSearch();
       //TODO: initialise Search State here and show user specific filter conditions
     });
+
     super.initState();
   }
 
@@ -42,10 +44,16 @@ class _SearchPageState extends State<SearchPage> {
     print("building parent");
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SafeArea(
-        child: Scaffold(
-          appBar: CustomSearchBar(hintText: AppStrings.searchHintText),
-          body: SearchBody(),
+      home: Scaffold(
+        body: AnnotatedRegion<SystemUiOverlayStyle>(
+          value: SystemUiOverlayStyle.dark
+              .copyWith(statusBarColor: AppColors.kPureWhite),
+          child: SafeArea(
+            child: Scaffold(
+              appBar: CustomSearchBar(hintText: AppStrings.searchHintText),
+              body: SearchBody(),
+            ),
+          ),
         ),
       ),
     );
@@ -93,10 +101,10 @@ class __ShowResultsState extends State<_ShowResults> {
     return Container(
       padding: const EdgeInsets.only(top: 12.0),
       child: ListView.builder(
-              itemCount: results?.length ?? 0,
-              itemBuilder: (context, index) {
-                return _SearchResultsCard(item: results[index]);
-              }),
+          itemCount: results?.length ?? 0,
+          itemBuilder: (context, index) {
+            return _SearchResultsCard(item: results[index]);
+          }),
     );
   }
 }

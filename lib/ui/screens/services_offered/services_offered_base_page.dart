@@ -18,13 +18,15 @@ class ServicesOfferedBasePage extends StatelessWidget {
     var state = Provider.of<SearchState>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SafeArea(
-        child: Scaffold(
-            appBar: CustomAppBar(
-              isBackButton: true,
-              onBackButtonPressed: ExtendedNavigator.of(context).pop,
-            ),
-            body: _ServicesOfferedBody()),
+      home: Scaffold(
+              body: SafeArea(
+          child: Scaffold(
+              appBar: CustomAppBar(
+                isBackButton: true,
+                onBackButtonPressed: ExtendedNavigator.of(context).pop,
+              ),
+              body: _ServicesOfferedBody()),
+        ),
       ),
     );
   }
