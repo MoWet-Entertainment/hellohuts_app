@@ -1,4 +1,4 @@
-import 'package:hellohuts_app/states/cost_estimate_state.dart';
+import 'package:hellohuts_app/states/collect_details_states/cost_estimate_state.dart';
 import 'package:hellohuts_app/states/countries.dart';
 import 'package:hellohuts_app/states/feed_state.dart';
 import 'package:hellohuts_app/states/auth_states/phone_auth.dart';

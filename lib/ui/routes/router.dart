@@ -30,6 +30,7 @@ import 'package:hellohuts_app/ui/screens/welcome_page.dart';
 AdaptiveRoute(page: PhoneAuthGetPhone),
 CustomRoute(page: ServicesOfferedBasePage, transitionsBuilder:  TransitionsBuilders.slideLeft),
 CustomRoute(page: AddDetailsForHome, transitionsBuilder: TransitionsBuilders.fadeIn),
+CustomRoute(page: CollectDetailsSection)
   ]
 )
 class $Router {}

@@ -8,15 +8,25 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/ui/common_widgets/number_picker.dart';
 import 'package:hellohuts_app/ui/common_widgets/scroll_behavior/neat_scroll_behavior.dart';
+import 'package:hellohuts_app/ui/routes/router.gr.dart';
 import 'package:hellohuts_app/ui/screens/feed_posts/widgets/board/add_to_board.dart';
 import 'package:provider/provider.dart';
 
-import 'package:hellohuts_app/states/cost_estimate_state.dart';
+import 'package:hellohuts_app/states/collect_details_states/cost_estimate_state.dart';
 import 'package:hellohuts_app/states/search_state.dart';
 import 'package:hellohuts_app/ui/common_widgets/app_bar/app_bar.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
+
+class CollectDetailsSection extends StatelessWidget {
+  const CollectDetailsSection({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AddDetailsForHome();
+  }
+}
 
 class AddDetailsForHome extends StatefulWidget {
   const AddDetailsForHome({Key key}) : super(key: key);
@@ -37,42 +47,65 @@ class _AddDetailsForHomeState extends State<AddDetailsForHome> {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-          body: AnnotatedRegion<SystemUiOverlayStyle>(
-            value: SystemUiOverlayStyle.dark
-                .copyWith(statusBarColor: Colors.transparent),
-            child: SafeArea(
-              child: Scaffold(
-                  backgroundColor: AppColors.kPureWhite,
-                  appBar: CustomAppBar(
-                    isBackButton: true,
-                    centerTitle: true,
-                    title: Text(
-                      "Add Details",
-                      style: AppThemes.normalTextStyle.copyWith(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          color: AppColors.kDarkTextColor),
-                    ),
-                    // actions: Padding(
-                    //   padding: EdgeInsets.only(right: 24),
-                    //   child: Align(
-                    //       alignment: Alignment.centerRight,
-                    //       child: Text(
-                    //         "Reset",
-                    //         style: AppThemes.normalTextStyle.copyWith(
-                    //             fontSize: 14, color: AppColors.kDarkTextColor),
-                    //       )),
-                    // ),
-                    // onActionPressed: () => {
-                    //   costEstimateState.resetAddDetailsPage()
+           appBar: CustomAppBar(
+                            isBackButton: true,
+                            centerTitle: true,
+                            title: Text(
+                              "Add Details",
+                              style: AppThemes.normalTextStyle.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: AppColors.kDarkTextColor),
+                            ),
+                            // actions: Padding(
+                            //   padding: EdgeInsets.only(right: 24),
+                            //   child: Align(
+                            //       alignment: Alignment.centerRight,
+                            //       child: Text(
+                            //         "Reset",
+                            //         style: AppThemes.normalTextStyle.copyWith(
+                            //             fontSize: 14, color: AppColors.kDarkTextColor),
+                            //       )),
+                            // ),
+                            // onActionPressed: () => {
+                            //   costEstimateState.resetAddDetailsPage()
 
-                    // },
-                    onBackButtonPressed: () => {
-                      costEstimateState.resetAddDetailsPage(),
-                      ExtendedNavigator.of(context).pop()
-                    },
+                            // },
+                            onBackButtonPressed: () => {
+                              costEstimateState.resetAddDetailsPage(),
+                              ExtendedNavigator.of(context).pop()
+                            },
+                          ),
+  bottomNavigationBar: Container(width: fullWidth(context), height: 40,color: AppColors.kDarkGrey,),
+                  body: ScrollConfiguration(
+            behavior: NeatScrollBehavior(),
+            child: PageView(
+              children: [
+                Scaffold(
+                  body: AnnotatedRegion<SystemUiOverlayStyle>(
+                    value: SystemUiOverlayStyle.dark
+                        .copyWith(statusBarColor: Colors.transparent),
+                    child: SafeArea(
+                      child: Scaffold(
+                          backgroundColor: AppColors.kPureWhite,
+                         
+                          body: _AddDetailsBody()),
+                    ),
                   ),
-                  body: _AddDetailsBody()),
+               
+                ),
+                Scaffold(
+                  body: AnnotatedRegion<SystemUiOverlayStyle>(
+                    value: SystemUiOverlayStyle.dark
+                        .copyWith(statusBarColor: Colors.transparent),
+                    child: SafeArea(
+                      child: Scaffold(
+                          backgroundColor: AppColors.kPureWhite,
+                          body: _AddDetailsBody()),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ));
@@ -98,19 +131,20 @@ class _AddDetailsBody extends StatelessWidget {
             _OtherDetailsSelectionSection(),
             Spacer(),
             Padding(
-              padding: const EdgeInsets.only(top:16, bottom: 12  ),
-                          child: Align(
+              padding: const EdgeInsets.only(top: 16, bottom: 12),
+              child: Align(
                 alignment: Alignment.bottomRight,
-                            child: CupertinoButton(
-                              borderRadius: BorderRadius.circular(12),
-                  color: AppColors.kPrimaryDarkBlue,
-                  child: Text("Next", style: AppThemes.normalTextStyle.copyWith(fontSize: 14, color: AppColors.kAccentColor),),
-                  onPressed: () => {
-                    print("next")
-                  },
-                ),
+                child: CupertinoButton(
+                    borderRadius: BorderRadius.circular(12),
+                    color: AppColors.kPrimaryDarkBlue,
+                    child: Text(
+                      "Next",
+                      style: AppThemes.normalTextStyle.copyWith(
+                          fontSize: 14, color: AppColors.kAccentColor),
+                    ),
+                    onPressed: () => {print("next")}),
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -585,7 +619,8 @@ class _OtherDetailsContainer extends StatelessWidget {
                                 ),
                                 padding: EdgeInsets.all(8.0),
                                 decoration: BoxDecoration(
-                                    color: AppColors.kDarkGreen.withOpacity(0.2),
+                                    color:
+                                        AppColors.kDarkGreen.withOpacity(0.2),
                                     // border: Border.all(
                                     //     color: AppColors.kDarkGreen, width: 1),
                                     borderRadius: BorderRadius.circular(12)),
@@ -601,7 +636,6 @@ class _OtherDetailsContainer extends StatelessWidget {
                             ),
                             onTap: () => Navigator.pop(context),
                           ),
-                      
                         )
                       ],
                     )
