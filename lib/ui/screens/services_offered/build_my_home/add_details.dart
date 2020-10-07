@@ -36,85 +36,103 @@ class AddDetailsForHome extends StatefulWidget {
 }
 
 class _AddDetailsForHomeState extends State<AddDetailsForHome> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  int pageIndex = 0;
+  final PageController _pageController = PageController(
+    initialPage: 0,
+    keepPage: true,
+  );
+
   @override
   void initState() {
     super.initState();
   }
 
   Widget build(BuildContext context) {
-    var state = Provider.of<SearchState>(context);
     var costEstimateState = Provider.of<CostEstimateState>(context);
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-           appBar: CustomAppBar(
-                            isBackButton: true,
-                            centerTitle: true,
-                            title: Text(
-                              "Add Details",
-                              style: AppThemes.normalTextStyle.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  color: AppColors.kDarkTextColor),
-                            ),
-                            // actions: Padding(
-                            //   padding: EdgeInsets.only(right: 24),
-                            //   child: Align(
-                            //       alignment: Alignment.centerRight,
-                            //       child: Text(
-                            //         "Reset",
-                            //         style: AppThemes.normalTextStyle.copyWith(
-                            //             fontSize: 14, color: AppColors.kDarkTextColor),
-                            //       )),
-                            // ),
-                            // onActionPressed: () => {
-                            //   costEstimateState.resetAddDetailsPage()
-
-                            // },
-                            onBackButtonPressed: () => {
-                              costEstimateState.resetAddDetailsPage(),
-                              ExtendedNavigator.of(context).pop()
-                            },
-                          ),
-  bottomNavigationBar: Container(width: fullWidth(context), height: 40,color: AppColors.kDarkGrey,),
-                  body: ScrollConfiguration(
-            behavior: NeatScrollBehavior(),
-            child: PageView(
-              children: [
-                Scaffold(
-                  body: AnnotatedRegion<SystemUiOverlayStyle>(
-                    value: SystemUiOverlayStyle.dark
-                        .copyWith(statusBarColor: Colors.transparent),
-                    child: SafeArea(
-                      child: Scaffold(
-                          backgroundColor: AppColors.kPureWhite,
-                         
-                          body: _AddDetailsBody()),
-                    ),
-                  ),
-               
-                ),
-                Scaffold(
-                  body: AnnotatedRegion<SystemUiOverlayStyle>(
-                    value: SystemUiOverlayStyle.dark
-                        .copyWith(statusBarColor: Colors.transparent),
-                    child: SafeArea(
-                      child: Scaffold(
-                          backgroundColor: AppColors.kPureWhite,
-                          body: _AddDetailsBody()),
-                    ),
-                  ),
-                ),
-              ],
+          appBar: CustomAppBar(
+            isBackButton: true,
+            centerTitle: true,
+            title: Text(
+              "Add Details",
+              style: AppThemes.normalTextStyle.copyWith(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  color: AppColors.kDarkTextColor),
             ),
+            // actions: Padding(
+            //   padding: EdgeInsets.only(right: 24),
+            //   child: Align(
+            //       alignment: Alignment.centerRight,
+            //       child: Text(
+            //         "Reset",
+            //         style: AppThemes.normalTextStyle.copyWith(
+            //             fontSize: 14, color: AppColors.kDarkTextColor),
+            //       )),
+            // ),
+            // onActionPressed: () => {
+            //   costEstimateState.resetAddDetailsPage()
+
+            // },
+            onBackButtonPressed: () => {
+              costEstimateState.resetAddDetailsPage(),
+              ExtendedNavigator.of(context).pop()
+            },
+          ),
+          bottomNavigationBar: Container(
+            width: fullWidth(context),
+            height: 40,
+            color: AppColors.kDarkGrey,
+          ),
+          body: PageView(
+            controller: _pageController,
+            onPageChanged: (page) {
+              costEstimateState.setPageIndexOfCollectSection = page;
+            },
+            physics: NeverScrollableScrollPhysics(),
+            children: [
+              Scaffold(
+                body: AnnotatedRegion<SystemUiOverlayStyle>(
+                  value: SystemUiOverlayStyle.dark
+                      .copyWith(statusBarColor: Colors.transparent),
+                  child: SafeArea(
+                    child: Scaffold(
+                        backgroundColor: AppColors.kPureWhite,
+                        body: _AddDetailsBody(
+                          pageController: _pageController,
+                        )),
+                  ),
+                ),
+              ),
+              Scaffold(
+                body: AnnotatedRegion<SystemUiOverlayStyle>(
+                  value: SystemUiOverlayStyle.dark
+                      .copyWith(statusBarColor: Colors.transparent),
+                  child: SafeArea(
+                    child: Scaffold(
+                        backgroundColor: AppColors.kPureWhite,
+                        body: _AddDetailsBody(
+                          pageController: _pageController,
+                        )),
+                  ),
+                ),
+              ),
+            ],
           ),
         ));
   }
 }
 
 class _AddDetailsBody extends StatelessWidget {
+  final PageController pageController;
+
+  _AddDetailsBody({Key key, @required this.pageController});
   @override
   Widget build(BuildContext context) {
+    final state = Provider.of<CostEstimateState>(context);
     ScreenUtil.init(context, designSize: Size(375.0, 801.0));
     return Container(
       width: fullWidth(context),
@@ -142,7 +160,11 @@ class _AddDetailsBody extends StatelessWidget {
                       style: AppThemes.normalTextStyle.copyWith(
                           fontSize: 14, color: AppColors.kAccentColor),
                     ),
-                    onPressed: () => {print("next")}),
+                    onPressed: () => {
+                          print("User Clicked Next"),
+                          state.setPageIndexOfCollectSection = 1,
+                          pageController.jumpToPage(1),
+                        }),
               ),
             ),
           ],
@@ -733,5 +755,122 @@ class _OtherDetailsContainerWidget extends StatelessWidget {
       ));
     }
     return list;
+  }
+}
+
+class _CustomizeDetailsBody extends StatelessWidget {
+  final PageController pageController;
+
+  _CustomizeDetailsBody({Key key, @required this.pageController});
+  @override
+  Widget build(BuildContext context) {
+    final state = Provider.of<CostEstimateState>(context);
+    ScreenUtil.init(context, designSize: Size(375.0, 801.0));
+    return Container(
+      width: fullWidth(context),
+      color: AppColors.kPureWhite,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 32),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _BuildingMaterialsSelectSection(),
+            _BedroomSelectionSection(),
+            _BathroomSelectionSection(),
+            _OtherDetailsSelectionSection(),
+            Spacer(),
+            Padding(
+              padding: const EdgeInsets.only(top: 16, bottom: 12),
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: CupertinoButton(
+                    borderRadius: BorderRadius.circular(12),
+                    color: AppColors.kPrimaryDarkBlue,
+                    child: Text(
+                      "Next",
+                      style: AppThemes.normalTextStyle.copyWith(
+                          fontSize: 14, color: AppColors.kAccentColor),
+                    ),
+                    onPressed: () => {
+                          print("User Clicked Next"),
+                          state.setPageIndexOfCollectSection = 2,
+                          pageController.jumpToPage(2),
+                        }),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _BuildingMaterialsSelectSection extends StatelessWidget {
+  const _BuildingMaterialsSelectSection({
+    Key key,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: Column(
+        children: [
+          Align(
+              alignment: Alignment.centerLeft,
+              child: Text("Building Materials",
+                  style: AppThemes.normalTextStyle
+                      .copyWith(fontWeight: FontWeight.bold, fontSize: 16))),
+          SizedBox(
+            height: 16.h,
+          ),
+          _BuildingMaterialsSelectSectionContainer(),
+        ],
+      ),
+    );
+  }
+}
+
+class _BuildingMaterialsSelectSectionContainer extends StatelessWidget {
+  const _BuildingMaterialsSelectSectionContainer({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        _StoreyContainerWidget(
+          storeyCount: 1,
+          storeyTextFirstLine: "Single",
+          storeyTextSecondLine: "Storey",
+        ),
+        _StoreyContainerWidget(
+          storeyCount: 2,
+          storeyTextFirstLine: "Double",
+          storeyTextSecondLine: "Storey",
+        ),
+        _StoreyContainerWidget(
+          storeyCount: 3,
+          storeyTextFirstLine: "Triple",
+          storeyTextSecondLine: "Storey",
+        ),
+      ]),
+    );
+  }
+}
+
+class _RoundedSelectableContainer extends StatefulWidget {
+final 
+final VoidCallback onPressed;
+
+  @override
+  __RoundedSelectableContainerState createState() =>
+      __RoundedSelectableContainerState();
+}
+
+class __RoundedSelectableContainerState
+    extends State<_RoundedSelectableContainer> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }
