@@ -20,6 +20,27 @@ class JsonConstants {
   static const String createdAt = 'created_at';
   static const String profLastUpdatedAt = "prof_last_updated_at";
   static const String lastLoginAt = 'last_login_at';
+
+  //COST ESTIMATION TYPES
+  static const String buildingMaterialsType =
+      "customization_building_materials";
+  static const String flooringType = "customization_flooring";
+  static const String electricalsType = "customization_electricals";
+  static const String plumbingType = "customization_plumbing";
+  static const String doorsAndWindowsType = "customization_doors_and_windows";
+  static const String kitchenDecorType = "customization_kitchen_decor";
+    static const String exteriorDecorType = "customization_exterior_decor";
+  static const String interiorDecorType = "customization_interior_decor";
+
+
+  //CUSTOMIZATION CONSTANTS
+  static const String budgetType = "budget";
+  static const String balancedType = "balanced";
+  static const String bestType = "best";
+  static const String none = "none";
+  static const String basic = "basic";
+  static const String standard = "standard";
+  static const String classic = "classic";
 }
 
 class AppFeedConstants {

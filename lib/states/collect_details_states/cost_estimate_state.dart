@@ -1,14 +1,5 @@
 import 'package:hellohuts_app/states/app_state.dart';
 
-enum RoomTypes {
-  Bedroom,
-  Bathroom,
-  Livingroom,
-  Kitchen,
-  Sitout,
-  Diningroom,
-  Storeroom
-}
 
 class CostEstimateState extends AppState {
   bool _needReset = false;
@@ -20,7 +11,7 @@ class CostEstimateState extends AppState {
 
   get needReset => _needReset;
 
-  //Number of Storeys  section
+  ///Number of Storeys  section
   int _selectedNumberOfStoreys = 2;
   get selectedNumberOfStoryes => _selectedNumberOfStoreys;
   set setNumberOfStoreys(int noOfStoreys) {
@@ -28,7 +19,7 @@ class CostEstimateState extends AppState {
     notifyListeners();
   }
 
-//Number of Bedrooms
+  ///Number of Bedrooms
   int _selectedNumberOfBedrooms = 4;
   get selectedNumberOfBedrooms => _selectedNumberOfBedrooms;
   set setNumberOfBedrooms(int noOfBedrooms) {
@@ -36,7 +27,7 @@ class CostEstimateState extends AppState {
     notifyListeners();
   }
 
-//Number of Bathrooms
+  ///Number of Bathrooms
   int _selectedNumberOfBathrooms = 3;
   get selectedNumberOfBathrooms => _selectedNumberOfBathrooms;
   set setNumberOfBathrooms(int noOfBathrooms) {
@@ -44,7 +35,7 @@ class CostEstimateState extends AppState {
     notifyListeners();
   }
 
-//Other Details
+  ///Other Details
   int _selectedPack = 1;
   get selectedPack => _selectedPack;
   set setSelectedPack(int number) {
@@ -52,7 +43,7 @@ class CostEstimateState extends AppState {
     notifyListeners();
   }
 
-  //Custom Other details
+  ///Custom Other details
   bool _isCustomOtherDetails = false;
   get isCustomOtherDetails => _isCustomOtherDetails;
   set setIsCustomOtherDetails(bool value) {
@@ -77,13 +68,13 @@ class CostEstimateState extends AppState {
     print("User wants to reset the customizations");
   }
 
-//To reset the details if selected any
+  ///To reset the details if selected any
   void resetCustomDetail() {
     List<String> list = [];
     setSelectedDetailsItems = list;
   }
 
-  //For custom Selection
+  ///For custom Selection
   final List<String> _listForCustomSelection = [
     "Dining Room",
     "Living Room",
@@ -101,8 +92,7 @@ class CostEstimateState extends AppState {
 
   get listForCustomSelection => _listForCustomSelection;
 
-
-   final List<String> pack1 = [
+  final List<String> pack1 = [
     "Kitchen",
     "Living Room",
     "Dining Room",
@@ -119,4 +109,12 @@ class CostEstimateState extends AppState {
     "Balcony",
   ];
 
+  ///to determine the current page of the Collect details section\
+  int _pageIndexOfCollectSection = 0;
+  int get pageIndexOfCollectSection => _pageIndexOfCollectSection;
+
+  set setPageIndexOfCollectSection(int index) {
+    _pageIndexOfCollectSection = index;
+    notifyListeners();
+  }
 }
