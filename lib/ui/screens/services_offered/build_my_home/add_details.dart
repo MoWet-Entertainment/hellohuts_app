@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hellohuts_app/constants/constants.dart';
+import 'package:hellohuts_app/models/cost_estimation/cost_estimation.dart';
 import 'package:hellohuts_app/ui/common_widgets/number_picker.dart';
 import 'package:hellohuts_app/ui/common_widgets/scroll_behavior/neat_scroll_behavior.dart';
 import 'package:hellohuts_app/ui/routes/router.gr.dart';
@@ -114,7 +115,7 @@ class _AddDetailsForHomeState extends State<AddDetailsForHome> {
                   child: SafeArea(
                     child: Scaffold(
                         backgroundColor: AppColors.kPureWhite,
-                        body: _AddDetailsBody(
+                        body: _CustomizeDetailsBody(
                           pageController: _pageController,
                         )),
                   ),
@@ -837,40 +838,97 @@ class _BuildingMaterialsSelectSectionContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        _StoreyContainerWidget(
-          storeyCount: 1,
-          storeyTextFirstLine: "Single",
-          storeyTextSecondLine: "Storey",
-        ),
-        _StoreyContainerWidget(
-          storeyCount: 2,
-          storeyTextFirstLine: "Double",
-          storeyTextSecondLine: "Storey",
-        ),
-        _StoreyContainerWidget(
-          storeyCount: 3,
-          storeyTextFirstLine: "Triple",
-          storeyTextSecondLine: "Storey",
-        ),
-      ]),
+      child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            _RoundedSelectableContainer(
+              optionName: "Budget",
+              optionType: CustomizeOptions.Budget,
+            ),
+            _RoundedSelectableContainer(
+              optionName: "Balanced",
+              optionType: CustomizeOptions.Balanced,
+            ),
+            _RoundedSelectableContainer(
+              optionName: "Best",
+              optionType: CustomizeOptions.Best,
+            ),
+          ]),
     );
   }
 }
 
 class _RoundedSelectableContainer extends StatefulWidget {
-final 
-final VoidCallback onPressed;
+  final CustomizeOptions optionType;
+  final String optionName;
+  final double width;
+  final double height;
+  final VoidCallback onPressed;
+
+  const _RoundedSelectableContainer(
+      {Key key,
+      this.optionType,
+      this.optionName,
+      this.width,
+      this.height,
+      this.onPressed})
+      : super(key: key);
 
   @override
-  __RoundedSelectableContainerState createState() =>
-      __RoundedSelectableContainerState();
+  _RoundedSelectableContainerState createState() =>
+      _RoundedSelectableContainerState();
 }
 
-class __RoundedSelectableContainerState
+class _RoundedSelectableContainerState
     extends State<_RoundedSelectableContainer> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    bool isSelected = false;
+    return GestureDetector(
+        child: Padding(
+          padding: const EdgeInsets.only(right: 18.0),
+          child: Column(
+            children: [
+              AnimatedContainer(
+                duration: Duration(milliseconds: 300),
+                padding: const EdgeInsets.all(8.0),
+                curve: Curves.bounceInOut,
+                height: widget.height ?? 40,
+                width: widget.width ?? 88,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12.0),
+                  color:
+                      isSelected ? AppColors.kLavender : AppColors.kAliceBlue,
+                ),
+                child: Center(
+                  child: Text(
+                    widget.optionName,
+                    style: AppThemes.normalSecondaryTextStyle
+                        .copyWith(fontSize: 12),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 8.0,
+              ),
+              Align(
+                  alignment: Alignment.bottomCenter,
+                  child: AnimatedContainer(
+                    duration: Duration(milliseconds: 300),
+                    color: AppColors.kDarkGreen,
+                    curve: Curves.fastOutSlowIn,
+                    height: 2.0,
+                    width: isSelected ? 24.0 : 0,
+                  ))
+            ],
+          ),
+        ),
+        onTap: () => {
+              setState(() {
+                isSelected = true;
+                print("test");
+              }),
+            });
   }
 }
