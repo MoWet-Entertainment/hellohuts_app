@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -64,7 +65,7 @@ class _AddDetailsForHomeState extends State<AddDetailsForHome> {
                     // ),
                     // onActionPressed: () => {
                     //   costEstimateState.resetAddDetailsPage()
-          
+
                     // },
                     onBackButtonPressed: () => {
                       costEstimateState.resetAddDetailsPage(),
@@ -95,6 +96,21 @@ class _AddDetailsBody extends StatelessWidget {
             _BedroomSelectionSection(),
             _BathroomSelectionSection(),
             _OtherDetailsSelectionSection(),
+            Spacer(),
+            Padding(
+              padding: const EdgeInsets.only(top:16, bottom: 12  ),
+                          child: Align(
+                alignment: Alignment.bottomRight,
+                            child: CupertinoButton(
+                              borderRadius: BorderRadius.circular(12),
+                  color: AppColors.kPrimaryDarkBlue,
+                  child: Text("Next", style: AppThemes.normalTextStyle.copyWith(fontSize: 14, color: AppColors.kAccentColor),),
+                  onPressed: () => {
+                    print("next")
+                  },
+                ),
+              ),
+            )
           ],
         ),
       ),
@@ -407,7 +423,7 @@ class _OtherDetailsContainer extends StatelessWidget {
         children: [
           _OtherDetailsContainerWidget(
             width: widthOfContainer,
-            details: pack1,
+            details: state.pack1,
             packId: 1,
             onTap: () => {
               state.setSelectedPack = 1,
@@ -417,7 +433,7 @@ class _OtherDetailsContainer extends StatelessWidget {
           ),
           _OtherDetailsContainerWidget(
             width: widthOfContainer,
-            details: pack2,
+            details: state.pack2,
             packId: 2,
             onTap: () => {
               state.setSelectedPack = 2,
@@ -502,48 +518,49 @@ class _OtherDetailsContainer extends StatelessWidget {
     showModalBottomSheet(
         context: context,
         backgroundColor: Colors.transparent,
+        isScrollControlled: true,
         builder: (BuildContext context) {
-          return Container(
-              padding: EdgeInsets.only(top: 8, bottom: 0),
-              height: fullHeight(context) * 0.6,
-              width: fullWidth(context),
-              decoration: BoxDecoration(
-                  color: AppColors.kPureWhite,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20))),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    width: fullWidth(context) * .15,
-                    height: 5,
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).dividerColor,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
+          return Wrap(
+            children: [
+              Container(
+                padding: EdgeInsets.only(top: 8, bottom: 0),
+                // height: fullHeight(context) * 0.9,
+                width: fullWidth(context),
+                decoration: BoxDecoration(
+                    color: AppColors.kPureWhite,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20))),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      width: fullWidth(context) * .15,
+                      height: 5,
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).dividerColor,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
+                    SizedBox(
+                      height: 40,
+                    ),
+                    Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 16),
+                          padding: const EdgeInsets.symmetric(horizontal: 24),
                           child: Align(
                               alignment: Alignment.topLeft,
-                              child: Text("Select as per your requirements",
+                              child: Text("Custom Select",
                                   style: AppThemes.normalTextStyle.copyWith(
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 16))),
+                                      fontSize: 24))),
                         ),
                         SizedBox(
-                          height: 16,
+                          height: 24,
                         ),
                         MultiSelectChip(
                           itemList: state.listForCustomSelection,
@@ -552,53 +569,49 @@ class _OtherDetailsContainer extends StatelessWidget {
                             state.setSelectedDetailsItems = list;
                           },
                         ),
-                      SizedBox(height:32),
+                        SizedBox(height: 32),
                         Align(
                           alignment: Alignment.bottomRight,
-                       
-                                                  child: GestureDetector(
-                                                                                                      child: Container(
-                                                      padding: EdgeInsets.all(8.0),
-                                                      child:Container(
-                                                         padding: EdgeInsets.all(8.0),
-                                                        height: 32,
-                                                        width: 68,
-                                                        decoration: BoxDecoration(
-                                                           color: AppColors.kPrimaryYellow,
-                                                           borderRadius: BorderRadius.circular(12)
-                                                        ),
-                            child: Center(child: Text("Done")),
-                           
-                              
-                                                      ),
+                          child: GestureDetector(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(bottom: 32, right: 16),
+                              child: Container(
+                                constraints: BoxConstraints(
+                                  maxWidth: fullWidth(context) * 0.3,
+                                  maxHeight: 40,
+                                  minHeight: 40,
+                                  minWidth: 60,
+                                ),
+                                padding: EdgeInsets.all(8.0),
+                                decoration: BoxDecoration(
+                                    color: AppColors.kDarkGreen.withOpacity(0.2),
+                                    // border: Border.all(
+                                    //     color: AppColors.kDarkGreen, width: 1),
+                                    borderRadius: BorderRadius.circular(12)),
+                                child: Center(
+                                    child: Text(
+                                  "Done",
+                                  style: AppThemes.normalTextStyle.copyWith(
+                                      fontSize: 14,
+                                      color: AppColors.kDarkGreen,
+                                      fontWeight: FontWeight.bold),
+                                )),
+                              ),
+                            ),
+                            onTap: () => Navigator.pop(context),
                           ),
-                          onTap: ()=>Navigator.pop(context),
-                                                  ),
+                      
                         )
                       ],
-                    ),
-                  )
-                ],
-              ));
+                    )
+                  ],
+                ),
+              ),
+            ],
+          );
         });
   }
-
-  final List<String> pack1 = [
-    "Kitchen",
-    "Living Room",
-    "Dining Room",
-    "Porch",
-    "Sitout",
-    "Store Room"
-  ];
-
-  final List<String> pack2 = [
-    "Kitchen",
-    "Living + Dining Room",
-    "Porch",
-    "Sitout",
-    "Balcony",
-  ];
 }
 
 class _OtherDetailsContainerWidget extends StatelessWidget {
@@ -616,25 +629,28 @@ class _OtherDetailsContainerWidget extends StatelessWidget {
     return Column(
       children: [
         GestureDetector(
-            child: AnimatedContainer(
-              duration: Duration(milliseconds: 300),
-              width: width ?? 80,
-              height: 115,
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-              decoration: BoxDecoration(
-                color: state.selectedPack == packId
-                    ? AppColors.kLavender
-                    : AppColors.kAliceBlue,
-                borderRadius: BorderRadius.circular(12.0),
-              ),
-              child: ScrollConfiguration(
-                behavior: NeatScrollBehavior(),
-                child: ListView(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
+            child: CupertinoScrollbar(
+              child: AnimatedContainer(
+                duration: Duration(milliseconds: 300),
+                width: width ?? 80,
+                constraints: BoxConstraints(minHeight: 115, maxHeight: 130),
+                padding: const EdgeInsets.only(
+                    left: 8, right: 12, top: 12, bottom: 12),
+                decoration: BoxDecoration(
+                  color: state.selectedPack == packId
+                      ? AppColors.kLavender
+                      : AppColors.kAliceBlue,
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                child: ScrollConfiguration(
+                  behavior: NeatScrollBehavior(),
+                  child: ListView(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
 // crossAxisAlignment: CrossAxisAlignment.start,
 // mainAxisAlignment: MainAxisAlignment.start,
-                  children: _getDetailedListWidget(details),
+                    children: _getDetailedListWidget(details),
+                  ),
                 ),
               ),
             ),

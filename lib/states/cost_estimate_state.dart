@@ -100,4 +100,23 @@ class CostEstimateState extends AppState {
   ];
 
   get listForCustomSelection => _listForCustomSelection;
+
+
+   final List<String> pack1 = [
+    "Kitchen",
+    "Living Room",
+    "Dining Room",
+    "Porch",
+    "Sitout",
+    "Store Room"
+  ];
+
+  final List<String> pack2 = [
+    "Kitchen",
+    "Living + Dining Room",
+    "Porch",
+    "Sitout",
+    "Balcony",
+  ];
+
 }

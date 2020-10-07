@@ -428,7 +428,7 @@ class _MultiSelectChipState extends State<MultiSelectChip> {
           label: Text(
             item,
             style: selectedChoices.contains(item)? AppThemes.normalSecondaryTextStyle
-                .copyWith(fontSize: 12, color: AppColors.kDarkTextColor, fontWeight: FontWeight.bold):AppThemes.normalSecondaryTextStyle
+                .copyWith(fontSize: 12, color: AppColors.kDarkTextColor):AppThemes.normalSecondaryTextStyle
                 .copyWith(fontSize: 12, color: AppColors.kDarkTextColor),
           ),
         
