@@ -153,7 +153,7 @@ class _AddDetailsBody extends StatelessWidget {
                     onPressed: () => {
                           print("User Clicked Next"),
                           state.setPageIndexOfCollectSection = 1,
-                          pageController.jumpToPage(1),
+                             pageController.animateToPage(1, duration: const Duration(milliseconds: 400), curve: Curves.easeInOutSine)
                         }),
               ),
             ),
@@ -766,7 +766,34 @@ class _CustomizeDetailsBody extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             _BuildingMaterialsSelectSection(),
-            _BedroomSelectionSection(),
+            _ItemTypeSelectSection(
+              nameOfTheSection: "Flooring",
+              selectedItem: state.flooringTypeSelected,
+              detailsList: [
+                _ItemSelectionModel(
+                    optionName: "Budget",
+                    optionType: CustomizeOptions.Budget,
+                    selecteItem: state.flooringTypeSelected,
+                    onTap: () => {
+                          state.setFlooringTypeSelected =
+                              CustomizeOptions.Budget
+                        }),
+                _ItemSelectionModel(
+                    optionName: "Balanced",
+                    optionType: CustomizeOptions.Balanced,
+                    selecteItem: state.flooringTypeSelected,
+                    onTap: () => {
+                          state.setFlooringTypeSelected =
+                              CustomizeOptions.Balanced
+                        }),
+                _ItemSelectionModel(
+                    optionName: "Best",
+                    optionType: CustomizeOptions.Best,
+                    selecteItem: state.flooringTypeSelected,
+                    onTap: () =>
+                        {state.setFlooringTypeSelected = CustomizeOptions.Best})
+              ],
+            ),
             _BathroomSelectionSection(),
             _OtherDetailsSelectionSection(),
             Spacer(),
@@ -785,7 +812,7 @@ class _CustomizeDetailsBody extends StatelessWidget {
                     onPressed: () => {
                           print("User Clicked Next"),
                           state.setPageIndexOfCollectSection = 2,
-                          pageController.jumpToPage(2),
+                          pageController.animateToPage(2, duration: const Duration(milliseconds: 400), curve: Curves.easeInOutSine)
                         }),
               ),
             ),
@@ -796,16 +823,84 @@ class _CustomizeDetailsBody extends StatelessWidget {
   }
 }
 
-
-class TestModel {
+///For resuability of the code, 
+class _ItemSelectionModel {
   final String optionName;
   final CustomizeOptions optionType;
   final CustomizeOptions selecteItem;
+  final VoidCallback onTap;
 
-  TestModel({
-    @required this.optionName, 
-    @required this.optionType, 
-    @required this.selecteItem});
+  _ItemSelectionModel({
+    @required this.optionName,
+    @required this.optionType,
+    @required this.selecteItem,
+    @required this.onTap,
+  });
+}
+
+class _ItemTypeSelectSection extends StatelessWidget {
+  final String nameOfTheSection;
+  final List<_ItemSelectionModel> detailsList;
+  final CustomizeOptions selectedItem;
+
+  const _ItemTypeSelectSection({
+    Key key,
+    @required this.nameOfTheSection,
+    @required this.detailsList,
+    this.selectedItem,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: Column(
+        children: [
+          Align(
+              alignment: Alignment.centerLeft,
+              child: Text(nameOfTheSection,
+                  style: AppThemes.normalTextStyle
+                      .copyWith(fontWeight: FontWeight.bold, fontSize: 16))),
+          SizedBox(
+            height: 16.h,
+          ),
+          _CustomSelectItemsBody(
+            detailsList: detailsList,
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class _CustomSelectItemsBody extends StatelessWidget {
+  final List<_ItemSelectionModel> detailsList;
+  const _CustomSelectItemsBody({Key key, @required this.detailsList})
+      : super(key: key);
+
+  List<Widget> _buildListOfWidget() {
+    List<Widget> list = [];
+    detailsList.forEach((element) {
+      list.add(_RoundedSelectableContainer(
+          optionName: element.optionName,
+          optionType: element.optionType,
+          selected: element.selecteItem,
+          onPressed: element.onTap));
+    });
+    return list;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final state = Provider.of<CostEstimateState>(context);
+    final _selectedItem = state.buildingMaterialTypeSelected;
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: _buildListOfWidget(),
+      ),
+    );
+  }
 }
 
 class _BuildingMaterialsSelectSection extends StatelessWidget {
@@ -833,24 +928,13 @@ class _BuildingMaterialsSelectSection extends StatelessWidget {
   }
 }
 
-class TestModel {
-  final String optionName;
-  final CustomizeOptions optionType;
-  final CustomizeOptions selecteItem;
-
-  TestModel({
-    @required this.optionName, 
-    @required this.optionType, 
-    @required this.selecteItem});
-}
-
 class _BuildingMaterialsSelectSectionContainer extends StatelessWidget {
   const _BuildingMaterialsSelectSectionContainer({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<CostEstimateState>(context);
-    final _selectedItem = state.buildingMaterialSelected;
+    final _selectedItem = state.buildingMaterialTypeSelected;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12.0),
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
@@ -859,7 +943,7 @@ class _BuildingMaterialsSelectSectionContainer extends StatelessWidget {
           optionType: CustomizeOptions.Budget,
           selected: _selectedItem,
           onPressed: () => {
-            state.setBuildingMaterialSelected = CustomizeOptions.Budget,
+            state.setBuildingMaterialTypeSelected = CustomizeOptions.Budget,
           },
         ),
         _RoundedSelectableContainer(
@@ -867,7 +951,7 @@ class _BuildingMaterialsSelectSectionContainer extends StatelessWidget {
           optionType: CustomizeOptions.Balanced,
           selected: _selectedItem,
           onPressed: () => {
-            state.setBuildingMaterialSelected = CustomizeOptions.Balanced,
+            state.setBuildingMaterialTypeSelected = CustomizeOptions.Balanced,
           },
         ),
         _RoundedSelectableContainer(
@@ -875,7 +959,7 @@ class _BuildingMaterialsSelectSectionContainer extends StatelessWidget {
           optionType: CustomizeOptions.Best,
           selected: _selectedItem,
           onPressed: () => {
-            state.setBuildingMaterialSelected = CustomizeOptions.Best,
+            state.setBuildingMaterialTypeSelected = CustomizeOptions.Best,
           },
         ),
       ]),

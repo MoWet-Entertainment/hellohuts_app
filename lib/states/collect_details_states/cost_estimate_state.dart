@@ -119,11 +119,20 @@ class CostEstimateState extends AppState {
   }
 
   ///Building materials Selected Option
-  CustomizeOptions _buildingMaterialSelected = CustomizeOptions.Best;
-  get buildingMaterialSelected => _buildingMaterialSelected;
+  CustomizeOptions _buildingMaterialTypeSelected = CustomizeOptions.Best;
+  get buildingMaterialTypeSelected => _buildingMaterialTypeSelected;
 
-  set setBuildingMaterialSelected(CustomizeOptions option) {
-    _buildingMaterialSelected = option;
+  set setBuildingMaterialTypeSelected(CustomizeOptions option) {
+    _buildingMaterialTypeSelected = option;
+    notifyListeners();
+  }
+
+   ///Flooring Selected Option
+  CustomizeOptions _flooringTypeSelected = CustomizeOptions.Best;
+  get flooringTypeSelected => _flooringTypeSelected;
+
+  set setFlooringTypeSelected(CustomizeOptions option) {
+    _flooringTypeSelected = option;
     notifyListeners();
   }
 }
