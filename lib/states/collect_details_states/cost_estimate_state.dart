@@ -40,8 +40,18 @@ class CostEstimateState extends ChangeNotifier {
   int _selectedPack = 1;
   get selectedPack => _selectedPack;
   set setSelectedPack(int number) {
+    if (number != 3) {
+      _lastSelectedPack = number;
+    }
     _selectedPack = number;
     notifyListeners();
+  }
+
+  ///For going back to the last selected pack
+  int _lastSelectedPack = 1;
+  get lastSelectedPack => _lastSelectedPack;
+  set setLastSelectedPack(int number) {
+    _lastSelectedPack = number;
   }
 
   ///Custom Other details
@@ -128,7 +138,7 @@ class CostEstimateState extends ChangeNotifier {
     notifyListeners();
   }
 
-   ///Flooring Types Selected Option
+  ///Flooring Types Selected Option
   CustomizeOptions _flooringTypeSelected = CustomizeOptions.Balanced;
   get flooringTypeSelected => _flooringTypeSelected;
 
@@ -137,7 +147,7 @@ class CostEstimateState extends ChangeNotifier {
     notifyListeners();
   }
 
-    ///Electricals Selected Option
+  ///Electricals Selected Option
   CustomizeOptions _electricalsTypeSelected = CustomizeOptions.Best;
   get electricalsTypeSelected => _electricalsTypeSelected;
 
@@ -146,7 +156,7 @@ class CostEstimateState extends ChangeNotifier {
     notifyListeners();
   }
 
-      ///plumbing Selected Option
+  ///plumbing Selected Option
   CustomizeOptions _plumbingTypeSelected = CustomizeOptions.Balanced;
   get plumbingTypeSelected => _plumbingTypeSelected;
 
@@ -155,7 +165,7 @@ class CostEstimateState extends ChangeNotifier {
     notifyListeners();
   }
 
-        ///Doors and Windows types Selected Option
+  ///Doors and Windows types Selected Option
   CustomizeOptions _doorsAndWindowsTypeSelected = CustomizeOptions.Balanced;
   get doorsAndWindowsTypeSelected => _doorsAndWindowsTypeSelected;
 
@@ -164,9 +174,10 @@ class CostEstimateState extends ChangeNotifier {
     notifyListeners();
   }
 
- ///Optional Categores
- ///Kitchen Decor Selection Types
-  CustomizeOptionalCategories _kitchenDecorTypeSelected = CustomizeOptionalCategories.Standard;
+  ///Optional Categores
+  ///Kitchen Decor Selection Types
+  CustomizeOptionalCategories _kitchenDecorTypeSelected =
+      CustomizeOptionalCategories.Standard;
   get kitchenDecorTypeSelected => _kitchenDecorTypeSelected;
 
   set setKitchenDecorTypeSelected(CustomizeOptionalCategories option) {
@@ -174,8 +185,9 @@ class CostEstimateState extends ChangeNotifier {
     notifyListeners();
   }
 
-   ///Interior Decor Selection Types
-  CustomizeOptionalCategories _interiorDecorTypeSelected = CustomizeOptionalCategories.Standard;
+  ///Interior Decor Selection Types
+  CustomizeOptionalCategories _interiorDecorTypeSelected =
+      CustomizeOptionalCategories.Standard;
   get interiorDecorTypeSelected => _interiorDecorTypeSelected;
 
   set setInteriorDecorTypeSelected(CustomizeOptionalCategories option) {
@@ -183,8 +195,9 @@ class CostEstimateState extends ChangeNotifier {
     notifyListeners();
   }
 
-     ///Exterior Decor Selection Types
-  CustomizeOptionalCategories _exteriorDecorTypeSelected = CustomizeOptionalCategories.Standard;
+  ///Exterior Decor Selection Types
+  CustomizeOptionalCategories _exteriorDecorTypeSelected =
+      CustomizeOptionalCategories.Standard;
   get exteriorDecorTypeSelected => _exteriorDecorTypeSelected;
 
   set setExteriorDecorTypeSelected(CustomizeOptionalCategories option) {
@@ -193,10 +206,9 @@ class CostEstimateState extends ChangeNotifier {
   }
 }
 
-
-enum CostEstimatePageTypes{
-AddDetailsPage,
-CustomizeItemsPage,
-NiceToHaveItmesPage,
-CostDisplayPage,
+enum CostEstimatePageTypes {
+  AddDetailsPage,
+  CustomizeItemsPage,
+  NiceToHaveItmesPage,
+  CostDisplayPage,
 }

@@ -91,7 +91,13 @@ class _AddDetailsForHomeState extends State<AddDetailsForHome> {
                 // },
                 onBackButtonPressed: () => {
                   // costEstimateState.resetAddDetailsPage(),
-                  ExtendedNavigator.of(context).pop()
+                  if (costEstimateState.pageIndexOfCollectSection == 0) {
+                      ExtendedNavigator.of(context).pop()
+                      }else{
+                        print(costEstimateState.pageIndexOfCollectSection),
+                        _pageController.animateToPage(costEstimateState.pageIndexOfCollectSection-1, duration: const Duration(milliseconds: 400), curve: Curves.easeInOutSine)
+
+                    }
                 },
               ),
               bottomNavigationBar: Container(
@@ -110,6 +116,9 @@ class _AddDetailsForHomeState extends State<AddDetailsForHome> {
                     pageController: _pageController,
                   ),
                   _CustomizeDetailsBody(
+                    pageController: _pageController,
+                  ),
+                   _NiceToHaveDetailsBody(
                     pageController: _pageController,
                   )
                 ],
@@ -672,7 +681,7 @@ class _OtherDetailsContainer extends StatelessWidget {
           state.isCustomOtherDetails) {
         state.setSelectedPack = 3;
       } else {
-         state.setSelectedPack = 1;
+        state.setSelectedPack = state.lastSelectedPack;
       }
     });
   }
@@ -1071,45 +1080,57 @@ class _DoorsAndWindowsSelectSection extends StatelessWidget {
   }
 }
 
-class _BuildingMaterialsSelectSectionContainer extends StatelessWidget {
-  const _BuildingMaterialsSelectSectionContainer({Key key}) : super(key: key);
+class _NiceToHaveDetailsBody extends StatelessWidget {
+    final PageController pageController;
 
+  const _NiceToHaveDetailsBody({Key key, @required this.pageController}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<CostEstimateState>(context);
-    final _selectedItem = state.buildingMaterialTypeSelected;
+    ScreenUtil.init(context, designSize: Size(375.0, 801.0));
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12.0),
-      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        _RoundedSelectableContainer(
-          optionName: "Budget",
-          optionType: CustomizeOptions.Budget,
-          selected: _selectedItem,
-          onPressed: () => {
-            state.setBuildingMaterialTypeSelected = CustomizeOptions.Budget,
-          },
+      width: fullWidth(context),
+      color: AppColors.kPureWhite,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 32),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _BuildingMaterialsSelectSection(),
+            _FlooringTypeSelectSection(),
+            _ElectricalsTypeSelectSection(),
+            _PlumbingTypeSelectSection(),
+            _DoorsAndWindowsSelectSection(),
+            Spacer(),
+            // Spacer(),
+            Padding(
+              padding: const EdgeInsets.only(top: 16, bottom: 12),
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: CupertinoButton(
+                    borderRadius: BorderRadius.circular(12),
+                    color: AppColors.kPrimaryDarkBlue,
+                    child: Text(
+                      "Next",
+                      style: AppThemes.normalTextStyle.copyWith(
+                          fontSize: 14, color: AppColors.kAccentColor),
+                    ),
+                    onPressed: () => {
+                          print("User Clicked Next"),
+                          state.setPageIndexOfCollectSection = 2,
+                          pageController.animateToPage(2,
+                              duration: const Duration(milliseconds: 400),
+                              curve: Curves.easeInOutSine)
+                        }),
+              ),
+            ),
+          ],
         ),
-        _RoundedSelectableContainer(
-          optionName: "Balanced",
-          optionType: CustomizeOptions.Balanced,
-          selected: _selectedItem,
-          onPressed: () => {
-            state.setBuildingMaterialTypeSelected = CustomizeOptions.Balanced,
-          },
-        ),
-        _RoundedSelectableContainer(
-          optionName: "Best",
-          optionType: CustomizeOptions.Best,
-          selected: _selectedItem,
-          onPressed: () => {
-            state.setBuildingMaterialTypeSelected = CustomizeOptions.Best,
-          },
-        ),
-      ]),
+      ),
     );
   }
 }
-
 class _RoundedSelectableContainer extends StatelessWidget {
   final CustomizeOptions optionType;
   final String optionName;
