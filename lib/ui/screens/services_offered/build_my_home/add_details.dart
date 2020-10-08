@@ -51,82 +51,122 @@ class _AddDetailsForHomeState extends State<AddDetailsForHome> {
 
   Widget build(BuildContext context) {
     var costEstimateState = Provider.of<CostEstimateState>(context);
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: AnnotatedRegion<SystemUiOverlayStyle>(
-          value: SystemUiOverlayStyle.dark
-              .copyWith(statusBarColor: Colors.transparent),
-          child: SafeArea(
-            child: Scaffold(
-              appBar: CustomAppBar(
-                isBackButton: true,
-                centerTitle: true,
-                title: Text(
-                  costEstimateState.pageIndexOfCollectSection == 0
-                      ? "Add Details"
-                      : costEstimateState.pageIndexOfCollectSection == 1
-                          ? "Customize"
-                          : costEstimateState.pageIndexOfCollectSection == 2
-                              ? "Nice to Have"
-                              : "",
-                  style: AppThemes.normalTextStyle.copyWith(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                      color: AppColors.kDarkTextColor),
-                ),
-                // actions: Padding(
-                //   padding: EdgeInsets.only(right: 24),
-                //   child: Align(
-                //       alignment: Alignment.centerRight,
-                //       child: Text(
-                //         "Reset",
-                //         style: AppThemes.normalTextStyle.copyWith(
-                //             fontSize: 14, color: AppColors.kDarkTextColor),
-                //       )),
-                // ),
-                // onActionPressed: () => {
-                //   costEstimateState.resetAddDetailsPage()
+    return WillPopScope(
+   
+          child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+          body: AnnotatedRegion<SystemUiOverlayStyle>(
+            value: SystemUiOverlayStyle.dark
+                .copyWith(statusBarColor: Colors.transparent),
+            child: SafeArea(
+              child: Scaffold(
+                appBar: CustomAppBar(
+                  isBackButton: true,
+                  centerTitle: true,
+                  title: AnimatedSwitcher(
+                    switchInCurve: Curves.easeInSine,
+                    switchOutCurve: Curves.easeOutSine,
+                    duration: Duration(milliseconds: 500),
+                    child: costEstimateState.pageIndexOfCollectSection == 0
+                        ? Text(
+                            "Add Details",
+                            style: AppThemes.normalTextStyle.copyWith(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                color: AppColors.kDarkTextColor),
+                          )
+                        : costEstimateState.pageIndexOfCollectSection == 1
+                            ? Text(
+                                "Customize",
+                                style: AppThemes.normalTextStyle.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                    color: AppColors.kDarkTextColor),
+                                key: ValueKey<int>(1),
+                              )
+                            : costEstimateState.pageIndexOfCollectSection == 2
+                                ? Text(
+                                    "Nice to Have",
+                                    style: AppThemes.normalTextStyle.copyWith(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                        color: AppColors.kDarkTextColor),
+                                    key: ValueKey<int>(2),
+                                  )
+                                : Text("", key: ValueKey<int>(3)),
+                  ),
 
-                // },
-                onBackButtonPressed: () => {
-                  // costEstimateState.resetAddDetailsPage(),
-                  if (costEstimateState.pageIndexOfCollectSection == 0) {
-                      ExtendedNavigator.of(context).pop()
-                      }else{
+                  // actions: Padding(
+                  //   padding: EdgeInsets.only(right: 24),
+                  //   child: Align(
+                  //       alignment: Alignment.centerRight,
+                  //       child: Text(
+                  //         "Reset",
+                  //         style: AppThemes.normalTextStyle.copyWith(
+                  //             fontSize: 14, color: AppColors.kDarkTextColor),
+                  //       )),
+                  // ),
+                  // onActionPressed: () => {
+                  //   costEstimateState.resetAddDetailsPage()
+
+                  // },
+                  onBackButtonPressed: () => {
+                    // costEstimateState.resetAddDetailsPage(),
+                    if (costEstimateState.pageIndexOfCollectSection == 0)
+                      {ExtendedNavigator.of(context).pop()}
+                    else
+                      {
                         print(costEstimateState.pageIndexOfCollectSection),
-                        _pageController.animateToPage(costEstimateState.pageIndexOfCollectSection-1, duration: const Duration(milliseconds: 400), curve: Curves.easeInOutSine)
-
-                    }
-                },
-              ),
-              bottomNavigationBar: Container(
-                width: fullWidth(context),
-                height: 40,
-                color: AppColors.kDarkGrey,
-              ),
-              body: PageView(
-                controller: _pageController,
-                onPageChanged: (page) {
-                  costEstimateState.setPageIndexOfCollectSection = page;
-                },
-                physics: NeverScrollableScrollPhysics(),
-                children: [
-                  _AddDetailsBody(
-                    pageController: _pageController,
-                  ),
-                  _CustomizeDetailsBody(
-                    pageController: _pageController,
-                  ),
-                   _NiceToHaveDetailsBody(
-                    pageController: _pageController,
-                  )
-                ],
+                        costEstimateState.setPageIndexOfCollectSection =
+                            costEstimateState.pageIndexOfCollectSection - 1,
+                        _pageController.previousPage(
+                            duration: const Duration(milliseconds: 400),
+                            curve: Curves.easeInOutSine)
+                      }
+                  },
+                ),
+                bottomNavigationBar: Container(
+                  width: fullWidth(context),
+                  height: 40,
+                  color: AppColors.kDarkGrey,
+                ),
+                body: PageView(
+                  controller: _pageController,
+                  onPageChanged: (page) {
+                    costEstimateState.setPageIndexOfCollectSection = page;
+                  },
+                  physics: NeverScrollableScrollPhysics(),
+                  children: [
+                    _AddDetailsBody(
+                      pageController: _pageController,
+                    ),
+                    _CustomizeDetailsBody(
+                      pageController: _pageController,
+                    ),
+                    _NiceToHaveDetailsBody(
+                      pageController: _pageController,
+                    )
+                  ],
+                ),
               ),
             ),
           ),
         ),
       ),
+           onWillPop: () {
+            if (costEstimateState.pageIndexOfCollectSection == 0) {
+              return Future.sync(() => true);
+            } else {
+              print(costEstimateState.pageIndexOfCollectSection);
+              costEstimateState.setPageIndexOfCollectSection =
+                  costEstimateState.pageIndexOfCollectSection - 1;
+              _pageController.previousPage(
+                  duration: const Duration(milliseconds: 400),
+                  curve: Curves.easeInOutSine);
+              return Future.sync(() => false);
+            }
+          }
     );
   }
 }
@@ -168,7 +208,7 @@ class _AddDetailsBody extends StatelessWidget {
                     onPressed: () => {
                           print("User Clicked Next"),
                           state.setPageIndexOfCollectSection = 1,
-                          pageController.animateToPage(1,
+                          pageController.nextPage(
                               duration: const Duration(milliseconds: 400),
                               curve: Curves.easeInOutSine)
                         }),
@@ -814,7 +854,7 @@ class _CustomizeDetailsBody extends StatelessWidget {
                     onPressed: () => {
                           print("User Clicked Next"),
                           state.setPageIndexOfCollectSection = 2,
-                          pageController.animateToPage(2,
+                          pageController.nextPage(
                               duration: const Duration(milliseconds: 400),
                               curve: Curves.easeInOutSine)
                         }),
@@ -1081,9 +1121,10 @@ class _DoorsAndWindowsSelectSection extends StatelessWidget {
 }
 
 class _NiceToHaveDetailsBody extends StatelessWidget {
-    final PageController pageController;
+  final PageController pageController;
 
-  const _NiceToHaveDetailsBody({Key key, @required this.pageController}) : super(key: key);
+  const _NiceToHaveDetailsBody({Key key, @required this.pageController})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<CostEstimateState>(context);
@@ -1119,7 +1160,7 @@ class _NiceToHaveDetailsBody extends StatelessWidget {
                     onPressed: () => {
                           print("User Clicked Next"),
                           state.setPageIndexOfCollectSection = 2,
-                          pageController.animateToPage(2,
+                          pageController.nextPage(
                               duration: const Duration(milliseconds: 400),
                               curve: Curves.easeInOutSine)
                         }),
@@ -1131,6 +1172,7 @@ class _NiceToHaveDetailsBody extends StatelessWidget {
     );
   }
 }
+
 class _RoundedSelectableContainer extends StatelessWidget {
   final CustomizeOptions optionType;
   final String optionName;
