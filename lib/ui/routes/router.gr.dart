@@ -38,7 +38,6 @@ class Routes {
   static const String phoneAuthGetPhone = '/phone-auth-get-phone';
   static const String servicesOfferedBasePage = '/services-offered-base-page';
   static const String addDetailsForHome = '/add-details-for-home';
-  static const String collectDetailsSection = '/collect-details-section';
   static const all = <String>{
     basePage,
     explorePage,
@@ -54,7 +53,6 @@ class Routes {
     phoneAuthGetPhone,
     servicesOfferedBasePage,
     addDetailsForHome,
-    collectDetailsSection,
   };
 }
 
@@ -76,7 +74,6 @@ class Router extends RouterBase {
     RouteDef(Routes.phoneAuthGetPhone, page: PhoneAuthGetPhone),
     RouteDef(Routes.servicesOfferedBasePage, page: ServicesOfferedBasePage),
     RouteDef(Routes.addDetailsForHome, page: AddDetailsForHome),
-    RouteDef(Routes.collectDetailsSection, page: CollectDetailsSection),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -204,7 +201,7 @@ class Router extends RouterBase {
         pageBuilder: (context, animation, secondaryAnimation) =>
             const ServicesOfferedBasePage(),
         settings: data,
-        transitionsBuilder: TransitionsBuilders.slideLeft,
+        transitionsBuilder: TransitionsBuilders.fadeIn,
       );
     },
     AddDetailsForHome: (data) {
@@ -212,14 +209,7 @@ class Router extends RouterBase {
         pageBuilder: (context, animation, secondaryAnimation) =>
             const AddDetailsForHome(),
         settings: data,
-        transitionsBuilder: TransitionsBuilders.fadeIn,
-      );
-    },
-    CollectDetailsSection: (data) {
-      return PageRouteBuilder<dynamic>(
-        pageBuilder: (context, animation, secondaryAnimation) =>
-            const CollectDetailsSection(),
-        settings: data,
+        transitionsBuilder: TransitionsBuilders.slideLeft,
       );
     },
   };

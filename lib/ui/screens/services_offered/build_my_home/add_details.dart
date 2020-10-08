@@ -20,15 +20,6 @@ import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
 
-class CollectDetailsSection extends StatelessWidget {
-  const CollectDetailsSection({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return AddDetailsForHome();
-  }
-}
-
 class AddDetailsForHome extends StatefulWidget {
   const AddDetailsForHome({Key key}) : super(key: key);
 
@@ -52,122 +43,131 @@ class _AddDetailsForHomeState extends State<AddDetailsForHome> {
   Widget build(BuildContext context) {
     var costEstimateState = Provider.of<CostEstimateState>(context);
     return WillPopScope(
-   
-          child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Scaffold(
-          body: AnnotatedRegion<SystemUiOverlayStyle>(
-            value: SystemUiOverlayStyle.dark
-                .copyWith(statusBarColor: Colors.transparent),
-            child: SafeArea(
-              child: Scaffold(
-                appBar: CustomAppBar(
-                  isBackButton: true,
-                  centerTitle: true,
-                  title: AnimatedSwitcher(
-                    switchInCurve: Curves.easeInSine,
-                    switchOutCurve: Curves.easeOutSine,
-                    duration: Duration(milliseconds: 500),
-                    child: costEstimateState.pageIndexOfCollectSection == 0
-                        ? Text(
-                            "Add Details",
-                            style: AppThemes.normalTextStyle.copyWith(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: AppColors.kDarkTextColor),
-                          )
-                        : costEstimateState.pageIndexOfCollectSection == 1
-                            ? Text(
-                                "Customize",
-                                style: AppThemes.normalTextStyle.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                    color: AppColors.kDarkTextColor),
-                                key: ValueKey<int>(1),
-                              )
-                            : costEstimateState.pageIndexOfCollectSection == 2
-                                ? Text(
-                                    "Nice to Have",
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: Scaffold(
+            body: AnnotatedRegion<SystemUiOverlayStyle>(
+              value: SystemUiOverlayStyle.dark
+                  .copyWith(statusBarColor: Colors.transparent),
+              child: SafeArea(
+                child: Scaffold(
+                  appBar: CustomAppBar(
+                    isBackButton: true,
+                    centerTitle: true,
+                    title: AnimatedSwitcher(
+                      switchInCurve: Curves.easeInSine,
+                      switchOutCurve: Curves.easeOutSine,
+                      duration: Duration(milliseconds: 500),
+                      child: costEstimateState.pageIndexOfCollectSection == 0
+                          ? Text(
+                              "Add Details",
+                              style: AppThemes.normalTextStyle.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: AppColors.kDarkTextColor),
+                            )
+                          : costEstimateState.pageIndexOfCollectSection == 1
+                              ? Text(
+                                  "Customize",
+                                  style: AppThemes.normalTextStyle.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                      color: AppColors.kDarkTextColor),
+                                  key: ValueKey<int>(1),
+                                )
+                              : costEstimateState.pageIndexOfCollectSection == 2
+                                  ? Text(
+                                      "Nice to Have",
+                                      style: AppThemes.normalTextStyle.copyWith(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18,
+                                          color: AppColors.kDarkTextColor),
+                                      key: ValueKey<int>(2),
+                                    )
+                                  : Text("", key: ValueKey<int>(3)),
+                    ),
+                    actions: costEstimateState.pageIndexOfCollectSection != 0
+                        ? AnimatedSwitcher(
+                            switchInCurve: Curves.easeInSine,
+                            switchOutCurve: Curves.easeOutSine,
+                            duration: Duration(milliseconds: 500),
+                            child: Padding(
+                              padding: EdgeInsets.only(right: 24),
+                              child: Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Text(
+                                    "Reset",
                                     style: AppThemes.normalTextStyle.copyWith(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18,
+                                        fontSize: 14,
                                         color: AppColors.kDarkTextColor),
-                                    key: ValueKey<int>(2),
-                                  )
-                                : Text("", key: ValueKey<int>(3)),
-                  ),
+                                  )),
+                            ),
+                          )
+                        : Container(),
+                    onActionPressed: () => {
+                      if (costEstimateState.pageIndexOfCollectSection == 1)
+                        {costEstimateState.resetCustomizePage()}
+                      else if (costEstimateState.pageIndexOfCollectSection == 2){
+                        costEstimateState.resetNiceToHave()
 
-                  // actions: Padding(
-                  //   padding: EdgeInsets.only(right: 24),
-                  //   child: Align(
-                  //       alignment: Alignment.centerRight,
-                  //       child: Text(
-                  //         "Reset",
-                  //         style: AppThemes.normalTextStyle.copyWith(
-                  //             fontSize: 14, color: AppColors.kDarkTextColor),
-                  //       )),
-                  // ),
-                  // onActionPressed: () => {
-                  //   costEstimateState.resetAddDetailsPage()
-
-                  // },
-                  onBackButtonPressed: () => {
-                    // costEstimateState.resetAddDetailsPage(),
-                    if (costEstimateState.pageIndexOfCollectSection == 0)
-                      {ExtendedNavigator.of(context).pop()}
-                    else
-                      {
-                        print(costEstimateState.pageIndexOfCollectSection),
-                        costEstimateState.setPageIndexOfCollectSection =
-                            costEstimateState.pageIndexOfCollectSection - 1,
-                        _pageController.previousPage(
-                            duration: const Duration(milliseconds: 400),
-                            curve: Curves.easeInOutSine)
                       }
-                  },
-                ),
-                bottomNavigationBar: Container(
-                  width: fullWidth(context),
-                  height: 40,
-                  color: AppColors.kDarkGrey,
-                ),
-                body: PageView(
-                  controller: _pageController,
-                  onPageChanged: (page) {
-                    costEstimateState.setPageIndexOfCollectSection = page;
-                  },
-                  physics: NeverScrollableScrollPhysics(),
-                  children: [
-                    _AddDetailsBody(
-                      pageController: _pageController,
-                    ),
-                    _CustomizeDetailsBody(
-                      pageController: _pageController,
-                    ),
-                    _NiceToHaveDetailsBody(
-                      pageController: _pageController,
-                    )
-                  ],
+                    },
+                    onBackButtonPressed: () => {
+                      // costEstimateState.resetAddDetailsPage(),
+                      if (costEstimateState.pageIndexOfCollectSection == 0)
+                        {ExtendedNavigator.of(context).pop()}
+                      else
+                        {
+                          print(costEstimateState.pageIndexOfCollectSection),
+                          costEstimateState.setPageIndexOfCollectSection =
+                              costEstimateState.pageIndexOfCollectSection - 1,
+                          _pageController.previousPage(
+                              duration: const Duration(milliseconds: 400),
+                              curve: Curves.easeInOutSine)
+                        }
+                    },
+                  ),
+                  bottomNavigationBar: Container(
+                    width: fullWidth(context),
+                    height: 40,
+                    color: AppColors.kDarkGrey,
+                  ),
+                  body: PageView(
+                    controller: _pageController,
+                    onPageChanged: (page) {
+                      costEstimateState.setPageIndexOfCollectSection = page;
+                    },
+                    physics: NeverScrollableScrollPhysics(),
+                    children: [
+                      _AddDetailsBody(
+                        pageController: _pageController,
+                      ),
+                      _CustomizeDetailsBody(
+                        pageController: _pageController,
+                      ),
+                      _NiceToHaveDetailsBody(
+                        pageController: _pageController,
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
         ),
-      ),
-           onWillPop: () {
-            if (costEstimateState.pageIndexOfCollectSection == 0) {
-              return Future.sync(() => true);
-            } else {
-              print(costEstimateState.pageIndexOfCollectSection);
-              costEstimateState.setPageIndexOfCollectSection =
-                  costEstimateState.pageIndexOfCollectSection - 1;
-              _pageController.previousPage(
-                  duration: const Duration(milliseconds: 400),
-                  curve: Curves.easeInOutSine);
-              return Future.sync(() => false);
-            }
+        onWillPop: () {
+          if (costEstimateState.pageIndexOfCollectSection == 0) {
+            return Future.sync(() => true);
+          } else {
+            print(costEstimateState.pageIndexOfCollectSection);
+            costEstimateState.setPageIndexOfCollectSection =
+                costEstimateState.pageIndexOfCollectSection - 1;
+            _pageController.previousPage(
+                duration: const Duration(milliseconds: 400),
+                curve: Curves.easeInOutSine);
+            return Future.sync(() => false);
           }
-    );
+        });
   }
 }
 
@@ -760,8 +760,6 @@ class _OtherDetailsContainerWidget extends StatelessWidget {
                   child: ListView(
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
-// crossAxisAlignment: CrossAxisAlignment.start,
-// mainAxisAlignment: MainAxisAlignment.start,
                     children: _getDetailedListWidget(details),
                   ),
                 ),
@@ -837,10 +835,17 @@ class _CustomizeDetailsBody extends StatelessWidget {
             _ElectricalsTypeSelectSection(),
             _PlumbingTypeSelectSection(),
             _DoorsAndWindowsSelectSection(),
-            Spacer(),
             // Spacer(),
+            // Spacer(),
+            Expanded(
+              child: Container(
+                constraints: BoxConstraints(
+                  maxHeight: fullHeight(context) * 0.2,
+                ),
+              ),
+            ),
             Padding(
-              padding: const EdgeInsets.only(top: 16, bottom: 12),
+              padding: const EdgeInsets.only(bottom: 12),
               child: Align(
                 alignment: Alignment.bottomRight,
                 child: CupertinoButton(

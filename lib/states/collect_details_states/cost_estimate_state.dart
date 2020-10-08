@@ -79,6 +79,24 @@ class CostEstimateState extends ChangeNotifier {
     print("User wants to reset the customizations");
   }
 
+
+///to reset the Cutomize Page to the initial state
+  void resetCustomizePage() {
+    setBuildingMaterialTypeSelected = CustomizeOptions.Best;
+    setFlooringTypeSelected = CustomizeOptions.Balanced;
+    setElectricalsTypeSelected = CustomizeOptions.Best;
+    setPlumbingTypeSelected = CustomizeOptions.Balanced;
+    setDoorsAndWindowsTypeSelected = CustomizeOptions.Balanced;
+  }
+
+
+///to reset the NiceToHave Page to the initial state
+  void resetNiceToHave() {
+    setKitchenDecorTypeSelected = CustomizeOptionalCategories.Standard;
+    setInteriorDecorTypeSelected = CustomizeOptionalCategories.Standard;
+    setExteriorDecorTypeSelected = CustomizeOptionalCategories.None;
+  }
+
   ///To reset the details if selected any
   void resetCustomDetail() {
     List<String> list = [];
