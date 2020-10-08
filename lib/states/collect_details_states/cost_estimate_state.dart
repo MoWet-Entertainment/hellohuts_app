@@ -92,9 +92,9 @@ class CostEstimateState extends ChangeNotifier {
 
 ///to reset the NiceToHave Page to the initial state
   void resetNiceToHave() {
-    setKitchenDecorTypeSelected = CustomizeOptionalCategories.Standard;
-    setInteriorDecorTypeSelected = CustomizeOptionalCategories.Standard;
-    setExteriorDecorTypeSelected = CustomizeOptionalCategories.None;
+    setKitchenDecorTypeSelected = CustomizeOptions.Standard;
+    setInteriorDecorTypeSelected = CustomizeOptions.Standard;
+    setExteriorDecorTypeSelected = CustomizeOptions.None;
   }
 
   ///To reset the details if selected any
@@ -194,36 +194,38 @@ class CostEstimateState extends ChangeNotifier {
 
   ///Optional Categores
   ///Kitchen Decor Selection Types
-  CustomizeOptionalCategories _kitchenDecorTypeSelected =
-      CustomizeOptionalCategories.Standard;
+  CustomizeOptions _kitchenDecorTypeSelected =
+      CustomizeOptions.Standard;
   get kitchenDecorTypeSelected => _kitchenDecorTypeSelected;
 
-  set setKitchenDecorTypeSelected(CustomizeOptionalCategories option) {
+  set setKitchenDecorTypeSelected(CustomizeOptions option) {
     _kitchenDecorTypeSelected = option;
     notifyListeners();
   }
 
   ///Interior Decor Selection Types
-  CustomizeOptionalCategories _interiorDecorTypeSelected =
-      CustomizeOptionalCategories.Standard;
+  CustomizeOptions _interiorDecorTypeSelected =
+      CustomizeOptions.Standard;
   get interiorDecorTypeSelected => _interiorDecorTypeSelected;
 
-  set setInteriorDecorTypeSelected(CustomizeOptionalCategories option) {
+  set setInteriorDecorTypeSelected(CustomizeOptions option) {
     _interiorDecorTypeSelected = option;
     notifyListeners();
   }
 
   ///Exterior Decor Selection Types
-  CustomizeOptionalCategories _exteriorDecorTypeSelected =
-      CustomizeOptionalCategories.Standard;
+  CustomizeOptions _exteriorDecorTypeSelected =
+      CustomizeOptions.Standard;
   get exteriorDecorTypeSelected => _exteriorDecorTypeSelected;
 
-  set setExteriorDecorTypeSelected(CustomizeOptionalCategories option) {
+  set setExteriorDecorTypeSelected(CustomizeOptions option) {
     _exteriorDecorTypeSelected = option;
     notifyListeners();
   }
 }
 
+
+///Page Types
 enum CostEstimatePageTypes {
   AddDetailsPage,
   CustomizeItemsPage,

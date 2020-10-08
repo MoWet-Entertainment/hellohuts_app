@@ -107,10 +107,8 @@ class _AddDetailsForHomeState extends State<AddDetailsForHome> {
                     onActionPressed: () => {
                       if (costEstimateState.pageIndexOfCollectSection == 1)
                         {costEstimateState.resetCustomizePage()}
-                      else if (costEstimateState.pageIndexOfCollectSection == 2){
-                        costEstimateState.resetNiceToHave()
-
-                      }
+                      else if (costEstimateState.pageIndexOfCollectSection == 2)
+                        {costEstimateState.resetNiceToHave()}
                     },
                     onBackButtonPressed: () => {
                       // costEstimateState.resetAddDetailsPage(),
@@ -926,10 +924,12 @@ class _CustomSelectItemsBody extends StatelessWidget {
   const _CustomSelectItemsBody({Key key, @required this.detailsList})
       : super(key: key);
 
-  List<Widget> _buildListOfWidget() {
+  List<Widget> _buildListOfWidget(BuildContext context) {
+    final width = (fullWidth(context) - 96.0 - (detailsList.length - 1) * 12)/detailsList.length;
     List<Widget> list = [];
     detailsList.forEach((element) {
       list.add(_RoundedSelectableContainer(
+        width: width,
           optionName: element.optionName,
           optionType: element.optionType,
           selected: element.selecteItem,
@@ -946,7 +946,7 @@ class _CustomSelectItemsBody extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: _buildListOfWidget(),
+        children: _buildListOfWidget(context),
       ),
     );
   }
@@ -1174,6 +1174,44 @@ class _NiceToHaveDetailsBody extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+class _KitchenDecorTypeSelectSection extends StatelessWidget {
+  const _KitchenDecorTypeSelectSection({
+    Key key,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    final state = Provider.of<CostEstimateState>(context);
+    return _ItemTypeSelectSection(
+      nameOfTheSection: "Building Materials",
+      selectedItem: state.flooringTypeSelected,
+      detailsList: [
+        _ItemSelectionModel(
+            optionName: "Budget",
+            optionType: CustomizeOptions.Budget,
+            selecteItem: state.buildingMaterialTypeSelected,
+            onTap: () => {
+                  state.setBuildingMaterialTypeSelected =
+                      CustomizeOptions.Budget
+                }),
+        _ItemSelectionModel(
+            optionName: "Balanced",
+            optionType: CustomizeOptions.Balanced,
+            selecteItem: state.buildingMaterialTypeSelected,
+            onTap: () => {
+                  state.setBuildingMaterialTypeSelected =
+                      CustomizeOptions.Balanced
+                }),
+        _ItemSelectionModel(
+            optionName: "Best",
+            optionType: CustomizeOptions.Best,
+            selecteItem: state.buildingMaterialTypeSelected,
+            onTap: () => {
+                  state.setBuildingMaterialTypeSelected = CustomizeOptions.Best
+                }),
+      ],
     );
   }
 }
