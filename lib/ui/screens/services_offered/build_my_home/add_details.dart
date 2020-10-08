@@ -51,79 +51,123 @@ class _AddDetailsForHomeState extends State<AddDetailsForHome> {
 
   Widget build(BuildContext context) {
     var costEstimateState = Provider.of<CostEstimateState>(context);
-    return MaterialApp(
+    return WillPopScope(
+   
+          child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
-          appBar: CustomAppBar(
-            isBackButton: true,
-            centerTitle: true,
-            title: Text(
-              "Add Details",
-              style: AppThemes.normalTextStyle.copyWith(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                  color: AppColors.kDarkTextColor),
-            ),
-            // actions: Padding(
-            //   padding: EdgeInsets.only(right: 24),
-            //   child: Align(
-            //       alignment: Alignment.centerRight,
-            //       child: Text(
-            //         "Reset",
-            //         style: AppThemes.normalTextStyle.copyWith(
-            //             fontSize: 14, color: AppColors.kDarkTextColor),
-            //       )),
-            // ),
-            // onActionPressed: () => {
-            //   costEstimateState.resetAddDetailsPage()
+          body: AnnotatedRegion<SystemUiOverlayStyle>(
+            value: SystemUiOverlayStyle.dark
+                .copyWith(statusBarColor: Colors.transparent),
+            child: SafeArea(
+              child: Scaffold(
+                appBar: CustomAppBar(
+                  isBackButton: true,
+                  centerTitle: true,
+                  title: AnimatedSwitcher(
+                    switchInCurve: Curves.easeInSine,
+                    switchOutCurve: Curves.easeOutSine,
+                    duration: Duration(milliseconds: 500),
+                    child: costEstimateState.pageIndexOfCollectSection == 0
+                        ? Text(
+                            "Add Details",
+                            style: AppThemes.normalTextStyle.copyWith(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                color: AppColors.kDarkTextColor),
+                          )
+                        : costEstimateState.pageIndexOfCollectSection == 1
+                            ? Text(
+                                "Customize",
+                                style: AppThemes.normalTextStyle.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                    color: AppColors.kDarkTextColor),
+                                key: ValueKey<int>(1),
+                              )
+                            : costEstimateState.pageIndexOfCollectSection == 2
+                                ? Text(
+                                    "Nice to Have",
+                                    style: AppThemes.normalTextStyle.copyWith(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                        color: AppColors.kDarkTextColor),
+                                    key: ValueKey<int>(2),
+                                  )
+                                : Text("", key: ValueKey<int>(3)),
+                  ),
 
-            // },
-            onBackButtonPressed: () => {
-              costEstimateState.resetAddDetailsPage(),
-              ExtendedNavigator.of(context).pop()
-            },
-          ),
-          bottomNavigationBar: Container(
-            width: fullWidth(context),
-            height: 40,
-            color: AppColors.kDarkGrey,
-          ),
-          body: PageView(
-            controller: _pageController,
-            onPageChanged: (page) {
-              costEstimateState.setPageIndexOfCollectSection = page;
-            },
-            physics: NeverScrollableScrollPhysics(),
-            children: [
-              Scaffold(
-                body: AnnotatedRegion<SystemUiOverlayStyle>(
-                  value: SystemUiOverlayStyle.dark
-                      .copyWith(statusBarColor: Colors.transparent),
-                  child: SafeArea(
-                    child: Scaffold(
-                        backgroundColor: AppColors.kPureWhite,
-                        body: _AddDetailsBody(
-                          pageController: _pageController,
-                        )),
-                  ),
+                  // actions: Padding(
+                  //   padding: EdgeInsets.only(right: 24),
+                  //   child: Align(
+                  //       alignment: Alignment.centerRight,
+                  //       child: Text(
+                  //         "Reset",
+                  //         style: AppThemes.normalTextStyle.copyWith(
+                  //             fontSize: 14, color: AppColors.kDarkTextColor),
+                  //       )),
+                  // ),
+                  // onActionPressed: () => {
+                  //   costEstimateState.resetAddDetailsPage()
+
+                  // },
+                  onBackButtonPressed: () => {
+                    // costEstimateState.resetAddDetailsPage(),
+                    if (costEstimateState.pageIndexOfCollectSection == 0)
+                      {ExtendedNavigator.of(context).pop()}
+                    else
+                      {
+                        print(costEstimateState.pageIndexOfCollectSection),
+                        costEstimateState.setPageIndexOfCollectSection =
+                            costEstimateState.pageIndexOfCollectSection - 1,
+                        _pageController.previousPage(
+                            duration: const Duration(milliseconds: 400),
+                            curve: Curves.easeInOutSine)
+                      }
+                  },
+                ),
+                bottomNavigationBar: Container(
+                  width: fullWidth(context),
+                  height: 40,
+                  color: AppColors.kDarkGrey,
+                ),
+                body: PageView(
+                  controller: _pageController,
+                  onPageChanged: (page) {
+                    costEstimateState.setPageIndexOfCollectSection = page;
+                  },
+                  physics: NeverScrollableScrollPhysics(),
+                  children: [
+                    _AddDetailsBody(
+                      pageController: _pageController,
+                    ),
+                    _CustomizeDetailsBody(
+                      pageController: _pageController,
+                    ),
+                    _NiceToHaveDetailsBody(
+                      pageController: _pageController,
+                    )
+                  ],
                 ),
               ),
-              Scaffold(
-                body: AnnotatedRegion<SystemUiOverlayStyle>(
-                  value: SystemUiOverlayStyle.dark
-                      .copyWith(statusBarColor: Colors.transparent),
-                  child: SafeArea(
-                    child: Scaffold(
-                        backgroundColor: AppColors.kPureWhite,
-                        body: _CustomizeDetailsBody(
-                          pageController: _pageController,
-                        )),
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
-        ));
+        ),
+      ),
+           onWillPop: () {
+            if (costEstimateState.pageIndexOfCollectSection == 0) {
+              return Future.sync(() => true);
+            } else {
+              print(costEstimateState.pageIndexOfCollectSection);
+              costEstimateState.setPageIndexOfCollectSection =
+                  costEstimateState.pageIndexOfCollectSection - 1;
+              _pageController.previousPage(
+                  duration: const Duration(milliseconds: 400),
+                  curve: Curves.easeInOutSine);
+              return Future.sync(() => false);
+            }
+          }
+    );
   }
 }
 
@@ -164,7 +208,9 @@ class _AddDetailsBody extends StatelessWidget {
                     onPressed: () => {
                           print("User Clicked Next"),
                           state.setPageIndexOfCollectSection = 1,
-                          pageController.jumpToPage(1),
+                          pageController.nextPage(
+                              duration: const Duration(milliseconds: 400),
+                              curve: Curves.easeInOutSine)
                         }),
               ),
             ),
@@ -544,8 +590,8 @@ class _OtherDetailsContainer extends StatelessWidget {
                       ),
                     ),
                     onTap: () {
-                      state.setSelectedPack = 3;
-                      state.setIsCustomOtherDetails = true;
+                      // state.setSelectedPack = 3;
+                      // state.setIsCustomOtherDetails = true;
                       state.resetCustomDetail();
                       _showCustomBottomSheet(context);
                       print("Custom");
@@ -572,6 +618,7 @@ class _OtherDetailsContainer extends StatelessWidget {
   void _showCustomBottomSheet(BuildContext context,
       {List<Widget> listOfWidgets}) {
     var state = Provider.of<CostEstimateState>(context, listen: false);
+    state.setIsCustomOtherDetails = true;
     showModalBottomSheet(
         context: context,
         backgroundColor: Colors.transparent,
@@ -657,7 +704,9 @@ class _OtherDetailsContainer extends StatelessWidget {
                                 )),
                               ),
                             ),
-                            onTap: () => Navigator.pop(context),
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
                           ),
                         )
                       ],
@@ -667,7 +716,14 @@ class _OtherDetailsContainer extends StatelessWidget {
               ),
             ],
           );
-        });
+        }).whenComplete(() {
+      if (state.selectedDetailsItems.length != 0 &&
+          state.isCustomOtherDetails) {
+        state.setSelectedPack = 3;
+      } else {
+        state.setSelectedPack = state.lastSelectedPack;
+      }
+    });
   }
 }
 
@@ -777,10 +833,12 @@ class _CustomizeDetailsBody extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             _BuildingMaterialsSelectSection(),
-            _BedroomSelectionSection(),
-            _BathroomSelectionSection(),
-            _OtherDetailsSelectionSection(),
+            _FlooringTypeSelectSection(),
+            _ElectricalsTypeSelectSection(),
+            _PlumbingTypeSelectSection(),
+            _DoorsAndWindowsSelectSection(),
             Spacer(),
+            // Spacer(),
             Padding(
               padding: const EdgeInsets.only(top: 16, bottom: 12),
               child: Align(
@@ -796,12 +854,94 @@ class _CustomizeDetailsBody extends StatelessWidget {
                     onPressed: () => {
                           print("User Clicked Next"),
                           state.setPageIndexOfCollectSection = 2,
-                          pageController.jumpToPage(2),
+                          pageController.nextPage(
+                              duration: const Duration(milliseconds: 400),
+                              curve: Curves.easeInOutSine)
                         }),
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+///For resuability of the code,
+class _ItemSelectionModel {
+  final String optionName;
+  final CustomizeOptions optionType;
+  final CustomizeOptions selecteItem;
+  final VoidCallback onTap;
+
+  _ItemSelectionModel({
+    @required this.optionName,
+    @required this.optionType,
+    @required this.selecteItem,
+    @required this.onTap,
+  });
+}
+
+class _ItemTypeSelectSection extends StatelessWidget {
+  final String nameOfTheSection;
+  final List<_ItemSelectionModel> detailsList;
+  final CustomizeOptions selectedItem;
+
+  const _ItemTypeSelectSection({
+    Key key,
+    @required this.nameOfTheSection,
+    @required this.detailsList,
+    this.selectedItem,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(bottom: 16.0),
+      child: Column(
+        children: [
+          Align(
+              alignment: Alignment.centerLeft,
+              child: Text(nameOfTheSection,
+                  style: AppThemes.normalTextStyle
+                      .copyWith(fontWeight: FontWeight.bold, fontSize: 16))),
+          SizedBox(
+            height: 16.h,
+          ),
+          _CustomSelectItemsBody(
+            detailsList: detailsList,
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class _CustomSelectItemsBody extends StatelessWidget {
+  final List<_ItemSelectionModel> detailsList;
+  const _CustomSelectItemsBody({Key key, @required this.detailsList})
+      : super(key: key);
+
+  List<Widget> _buildListOfWidget() {
+    List<Widget> list = [];
+    detailsList.forEach((element) {
+      list.add(_RoundedSelectableContainer(
+          optionName: element.optionName,
+          optionType: element.optionType,
+          selected: element.selecteItem,
+          onPressed: element.onTap));
+    });
+    return list;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final state = Provider.of<CostEstimateState>(context);
+    final _selectedItem = state.buildingMaterialTypeSelected;
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: _buildListOfWidget(),
       ),
     );
   }
@@ -813,97 +953,266 @@ class _BuildingMaterialsSelectSection extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final state = Provider.of<CostEstimateState>(context);
+    return _ItemTypeSelectSection(
+      nameOfTheSection: "Building Materials",
+      selectedItem: state.flooringTypeSelected,
+      detailsList: [
+        _ItemSelectionModel(
+            optionName: "Budget",
+            optionType: CustomizeOptions.Budget,
+            selecteItem: state.buildingMaterialTypeSelected,
+            onTap: () => {
+                  state.setBuildingMaterialTypeSelected =
+                      CustomizeOptions.Budget
+                }),
+        _ItemSelectionModel(
+            optionName: "Balanced",
+            optionType: CustomizeOptions.Balanced,
+            selecteItem: state.buildingMaterialTypeSelected,
+            onTap: () => {
+                  state.setBuildingMaterialTypeSelected =
+                      CustomizeOptions.Balanced
+                }),
+        _ItemSelectionModel(
+            optionName: "Best",
+            optionType: CustomizeOptions.Best,
+            selecteItem: state.buildingMaterialTypeSelected,
+            onTap: () => {
+                  state.setBuildingMaterialTypeSelected = CustomizeOptions.Best
+                }),
+      ],
+    );
+  }
+}
+
+class _FlooringTypeSelectSection extends StatelessWidget {
+  const _FlooringTypeSelectSection({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final state = Provider.of<CostEstimateState>(context);
+    return _ItemTypeSelectSection(
+        nameOfTheSection: "Flooring",
+        selectedItem: state.flooringTypeSelected,
+        detailsList: [
+          _ItemSelectionModel(
+              optionName: "Budget",
+              optionType: CustomizeOptions.Budget,
+              selecteItem: state.flooringTypeSelected,
+              onTap: () =>
+                  {state.setFlooringTypeSelected = CustomizeOptions.Budget}),
+          _ItemSelectionModel(
+              optionName: "Balanced",
+              optionType: CustomizeOptions.Balanced,
+              selecteItem: state.flooringTypeSelected,
+              onTap: () =>
+                  {state.setFlooringTypeSelected = CustomizeOptions.Balanced}),
+          _ItemSelectionModel(
+              optionName: "Best",
+              optionType: CustomizeOptions.Best,
+              selecteItem: state.flooringTypeSelected,
+              onTap: () =>
+                  {state.setFlooringTypeSelected = CustomizeOptions.Best}),
+        ]);
+  }
+}
+
+class _ElectricalsTypeSelectSection extends StatelessWidget {
+  const _ElectricalsTypeSelectSection({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final state = Provider.of<CostEstimateState>(context);
+    return _ItemTypeSelectSection(
+        nameOfTheSection: "Electricals",
+        selectedItem: state.electricalsTypeSelected,
+        detailsList: [
+          _ItemSelectionModel(
+              optionName: "Budget",
+              optionType: CustomizeOptions.Budget,
+              selecteItem: state.electricalsTypeSelected,
+              onTap: () =>
+                  {state.setElectricalsTypeSelected = CustomizeOptions.Budget}),
+          _ItemSelectionModel(
+              optionName: "Balanced",
+              optionType: CustomizeOptions.Balanced,
+              selecteItem: state.electricalsTypeSelected,
+              onTap: () => {
+                    state.setElectricalsTypeSelected = CustomizeOptions.Balanced
+                  }),
+          _ItemSelectionModel(
+              optionName: "Best",
+              optionType: CustomizeOptions.Best,
+              selecteItem: state.electricalsTypeSelected,
+              onTap: () =>
+                  {state.setElectricalsTypeSelected = CustomizeOptions.Best}),
+        ]);
+  }
+}
+
+class _PlumbingTypeSelectSection extends StatelessWidget {
+  const _PlumbingTypeSelectSection({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final state = Provider.of<CostEstimateState>(context);
+    return _ItemTypeSelectSection(
+        nameOfTheSection: "Plumbing",
+        selectedItem: state.plumbingTypeSelected,
+        detailsList: [
+          _ItemSelectionModel(
+              optionName: "Budget",
+              optionType: CustomizeOptions.Budget,
+              selecteItem: state.plumbingTypeSelected,
+              onTap: () =>
+                  {state.setPlumbingTypeSelected = CustomizeOptions.Budget}),
+          _ItemSelectionModel(
+              optionName: "Balanced",
+              optionType: CustomizeOptions.Balanced,
+              selecteItem: state.plumbingTypeSelected,
+              onTap: () =>
+                  {state.setPlumbingTypeSelected = CustomizeOptions.Balanced}),
+          _ItemSelectionModel(
+              optionName: "Best",
+              optionType: CustomizeOptions.Best,
+              selecteItem: state.plumbingTypeSelected,
+              onTap: () =>
+                  {state.setPlumbingTypeSelected = CustomizeOptions.Best}),
+        ]);
+  }
+}
+
+class _DoorsAndWindowsSelectSection extends StatelessWidget {
+  const _DoorsAndWindowsSelectSection({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final state = Provider.of<CostEstimateState>(context);
+    return _ItemTypeSelectSection(
+        nameOfTheSection: "Doors and Windows",
+        selectedItem: state.doorsAndWindowsTypeSelected,
+        detailsList: [
+          _ItemSelectionModel(
+              optionName: "Budget",
+              optionType: CustomizeOptions.Budget,
+              selecteItem: state.doorsAndWindowsTypeSelected,
+              onTap: () => {
+                    state.setDoorsAndWindowsTypeSelected =
+                        CustomizeOptions.Budget
+                  }),
+          _ItemSelectionModel(
+              optionName: "Balanced",
+              optionType: CustomizeOptions.Balanced,
+              selecteItem: state.doorsAndWindowsTypeSelected,
+              onTap: () => {
+                    state.setDoorsAndWindowsTypeSelected =
+                        CustomizeOptions.Balanced
+                  }),
+          _ItemSelectionModel(
+              optionName: "Best",
+              optionType: CustomizeOptions.Best,
+              selecteItem: state.doorsAndWindowsTypeSelected,
+              onTap: () => {
+                    state.setDoorsAndWindowsTypeSelected = CustomizeOptions.Best
+                  }),
+        ]);
+  }
+}
+
+class _NiceToHaveDetailsBody extends StatelessWidget {
+  final PageController pageController;
+
+  const _NiceToHaveDetailsBody({Key key, @required this.pageController})
+      : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    final state = Provider.of<CostEstimateState>(context);
+    ScreenUtil.init(context, designSize: Size(375.0, 801.0));
     return Container(
-      padding: const EdgeInsets.only(bottom: 8.0),
-      child: Column(
-        children: [
-          Align(
-              alignment: Alignment.centerLeft,
-              child: Text("Building Materials",
-                  style: AppThemes.normalTextStyle
-                      .copyWith(fontWeight: FontWeight.bold, fontSize: 16))),
-          SizedBox(
-            height: 16.h,
-          ),
-          _BuildingMaterialsSelectSectionContainer(),
-        ],
+      width: fullWidth(context),
+      color: AppColors.kPureWhite,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 32),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _BuildingMaterialsSelectSection(),
+            _FlooringTypeSelectSection(),
+            _ElectricalsTypeSelectSection(),
+            _PlumbingTypeSelectSection(),
+            _DoorsAndWindowsSelectSection(),
+            Spacer(),
+            // Spacer(),
+            Padding(
+              padding: const EdgeInsets.only(top: 16, bottom: 12),
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: CupertinoButton(
+                    borderRadius: BorderRadius.circular(12),
+                    color: AppColors.kPrimaryDarkBlue,
+                    child: Text(
+                      "Next",
+                      style: AppThemes.normalTextStyle.copyWith(
+                          fontSize: 14, color: AppColors.kAccentColor),
+                    ),
+                    onPressed: () => {
+                          print("User Clicked Next"),
+                          state.setPageIndexOfCollectSection = 2,
+                          pageController.nextPage(
+                              duration: const Duration(milliseconds: 400),
+                              curve: Curves.easeInOutSine)
+                        }),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 }
 
-class _BuildingMaterialsSelectSectionContainer extends StatelessWidget {
-  const _BuildingMaterialsSelectSectionContainer({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            _RoundedSelectableContainer(
-              optionName: "Budget",
-              optionType: CustomizeOptions.Budget,
-            ),
-            _RoundedSelectableContainer(
-              optionName: "Balanced",
-              optionType: CustomizeOptions.Balanced,
-            ),
-            _RoundedSelectableContainer(
-              optionName: "Best",
-              optionType: CustomizeOptions.Best,
-            ),
-          ]),
-    );
-  }
-}
-
-class _RoundedSelectableContainer extends StatefulWidget {
+class _RoundedSelectableContainer extends StatelessWidget {
   final CustomizeOptions optionType;
   final String optionName;
+  final CustomizeOptions selected;
   final double width;
   final double height;
   final VoidCallback onPressed;
 
-  const _RoundedSelectableContainer(
-      {Key key,
-      this.optionType,
-      this.optionName,
-      this.width,
-      this.height,
-      this.onPressed})
-      : super(key: key);
+  const _RoundedSelectableContainer({
+    Key key,
+    this.optionType,
+    this.optionName,
+    this.width,
+    this.height,
+    this.selected,
+    this.onPressed,
+  }) : super(key: key);
 
-  @override
-  _RoundedSelectableContainerState createState() =>
-      _RoundedSelectableContainerState();
-}
-
-class _RoundedSelectableContainerState
-    extends State<_RoundedSelectableContainer> {
   @override
   Widget build(BuildContext context) {
-    bool isSelected = false;
+    bool _isSelected = selected == optionType ? true : false;
     return GestureDetector(
         child: Padding(
-          padding: const EdgeInsets.only(right: 18.0),
+          padding: const EdgeInsets.only(right: 0.0),
           child: Column(
             children: [
               AnimatedContainer(
                 duration: Duration(milliseconds: 300),
                 padding: const EdgeInsets.all(8.0),
                 curve: Curves.bounceInOut,
-                height: widget.height ?? 40,
-                width: widget.width ?? 88,
+                height: height ?? 40,
+                width: width ?? 88,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12.0),
                   color:
-                      isSelected ? AppColors.kLavender : AppColors.kAliceBlue,
+                      _isSelected ? AppColors.kLavender : AppColors.kAliceBlue,
                 ),
                 child: Center(
                   child: Text(
-                    widget.optionName,
+                    optionName,
                     style: AppThemes.normalSecondaryTextStyle
                         .copyWith(fontSize: 12),
                   ),
@@ -919,16 +1228,11 @@ class _RoundedSelectableContainerState
                     color: AppColors.kDarkGreen,
                     curve: Curves.fastOutSlowIn,
                     height: 2.0,
-                    width: isSelected ? 24.0 : 0,
+                    width: _isSelected ? 24.0 : 0,
                   ))
             ],
           ),
         ),
-        onTap: () => {
-              setState(() {
-                isSelected = true;
-                print("test");
-              }),
-            });
+        onTap: onPressed);
   }
 }

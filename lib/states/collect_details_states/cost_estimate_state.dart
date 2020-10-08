@@ -1,7 +1,8 @@
+import 'package:flutter/cupertino.dart';
+import 'package:hellohuts_app/models/cost_estimation/cost_estimation.dart';
 import 'package:hellohuts_app/states/app_state.dart';
 
-
-class CostEstimateState extends AppState {
+class CostEstimateState extends ChangeNotifier {
   bool _needReset = false;
 
   set setReset(bool value) {
@@ -39,8 +40,18 @@ class CostEstimateState extends AppState {
   int _selectedPack = 1;
   get selectedPack => _selectedPack;
   set setSelectedPack(int number) {
+    if (number != 3) {
+      _lastSelectedPack = number;
+    }
     _selectedPack = number;
     notifyListeners();
+  }
+
+  ///For going back to the last selected pack
+  int _lastSelectedPack = 1;
+  get lastSelectedPack => _lastSelectedPack;
+  set setLastSelectedPack(int number) {
+    _lastSelectedPack = number;
   }
 
   ///Custom Other details
@@ -109,7 +120,7 @@ class CostEstimateState extends AppState {
     "Balcony",
   ];
 
-  ///to determine the current page of the Collect details section\
+  ///to determine the current page of the Collect details section
   int _pageIndexOfCollectSection = 0;
   int get pageIndexOfCollectSection => _pageIndexOfCollectSection;
 
@@ -117,4 +128,87 @@ class CostEstimateState extends AppState {
     _pageIndexOfCollectSection = index;
     notifyListeners();
   }
+
+  ///Building materials Selected Option
+  CustomizeOptions _buildingMaterialTypeSelected = CustomizeOptions.Best;
+  get buildingMaterialTypeSelected => _buildingMaterialTypeSelected;
+
+  set setBuildingMaterialTypeSelected(CustomizeOptions option) {
+    _buildingMaterialTypeSelected = option;
+    notifyListeners();
+  }
+
+  ///Flooring Types Selected Option
+  CustomizeOptions _flooringTypeSelected = CustomizeOptions.Balanced;
+  get flooringTypeSelected => _flooringTypeSelected;
+
+  set setFlooringTypeSelected(CustomizeOptions option) {
+    _flooringTypeSelected = option;
+    notifyListeners();
+  }
+
+  ///Electricals Selected Option
+  CustomizeOptions _electricalsTypeSelected = CustomizeOptions.Best;
+  get electricalsTypeSelected => _electricalsTypeSelected;
+
+  set setElectricalsTypeSelected(CustomizeOptions option) {
+    _electricalsTypeSelected = option;
+    notifyListeners();
+  }
+
+  ///plumbing Selected Option
+  CustomizeOptions _plumbingTypeSelected = CustomizeOptions.Balanced;
+  get plumbingTypeSelected => _plumbingTypeSelected;
+
+  set setPlumbingTypeSelected(CustomizeOptions option) {
+    _plumbingTypeSelected = option;
+    notifyListeners();
+  }
+
+  ///Doors and Windows types Selected Option
+  CustomizeOptions _doorsAndWindowsTypeSelected = CustomizeOptions.Balanced;
+  get doorsAndWindowsTypeSelected => _doorsAndWindowsTypeSelected;
+
+  set setDoorsAndWindowsTypeSelected(CustomizeOptions option) {
+    _doorsAndWindowsTypeSelected = option;
+    notifyListeners();
+  }
+
+  ///Optional Categores
+  ///Kitchen Decor Selection Types
+  CustomizeOptionalCategories _kitchenDecorTypeSelected =
+      CustomizeOptionalCategories.Standard;
+  get kitchenDecorTypeSelected => _kitchenDecorTypeSelected;
+
+  set setKitchenDecorTypeSelected(CustomizeOptionalCategories option) {
+    _kitchenDecorTypeSelected = option;
+    notifyListeners();
+  }
+
+  ///Interior Decor Selection Types
+  CustomizeOptionalCategories _interiorDecorTypeSelected =
+      CustomizeOptionalCategories.Standard;
+  get interiorDecorTypeSelected => _interiorDecorTypeSelected;
+
+  set setInteriorDecorTypeSelected(CustomizeOptionalCategories option) {
+    _interiorDecorTypeSelected = option;
+    notifyListeners();
+  }
+
+  ///Exterior Decor Selection Types
+  CustomizeOptionalCategories _exteriorDecorTypeSelected =
+      CustomizeOptionalCategories.Standard;
+  get exteriorDecorTypeSelected => _exteriorDecorTypeSelected;
+
+  set setExteriorDecorTypeSelected(CustomizeOptionalCategories option) {
+    _exteriorDecorTypeSelected = option;
+    notifyListeners();
+  }
+}
+
+enum CostEstimatePageTypes {
+  AddDetailsPage,
+  CustomizeItemsPage,
+  NiceToHaveItmesPage,
+  CostDisplayPage,
 }
