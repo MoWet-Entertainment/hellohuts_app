@@ -107,10 +107,8 @@ class _AddDetailsForHomeState extends State<AddDetailsForHome> {
                     onActionPressed: () => {
                       if (costEstimateState.pageIndexOfCollectSection == 1)
                         {costEstimateState.resetCustomizePage()}
-                      else if (costEstimateState.pageIndexOfCollectSection == 2){
-                        costEstimateState.resetNiceToHave()
-
-                      }
+                      else if (costEstimateState.pageIndexOfCollectSection == 2)
+                        {costEstimateState.resetNiceToHave()}
                     },
                     onBackButtonPressed: () => {
                       // costEstimateState.resetAddDetailsPage(),
@@ -127,11 +125,7 @@ class _AddDetailsForHomeState extends State<AddDetailsForHome> {
                         }
                     },
                   ),
-                  bottomNavigationBar: Container(
-                    width: fullWidth(context),
-                    height: 40,
-                    color: AppColors.kDarkGrey,
-                  ),
+                  bottomNavigationBar: _AddDetailsProgressIndicator(),
                   body: PageView(
                     controller: _pageController,
                     onPageChanged: (page) {
@@ -171,6 +165,108 @@ class _AddDetailsForHomeState extends State<AddDetailsForHome> {
   }
 }
 
+class _AddDetailsProgressIndicator extends StatelessWidget {
+  const _AddDetailsProgressIndicator({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final state = Provider.of<CostEstimateState>(context);
+    ScreenUtil.init(context, designSize: Size(375.0, 801.0));
+    final screenWidth = fullWidth(context);
+    final widthExtent = (screenWidth * 0.8) / 4;
+    return Container(
+      width: screenWidth,
+      height: 60,
+      color: AppColors.kPureWhite,
+      child: Stack(
+        alignment: Alignment.centerLeft,
+        children: [
+          Container(
+            height: 2.0,
+            color: AppColors.kDarkGrey,
+            width: widthExtent *4,
+          ),
+           Container(
+            height: 2.0,
+            color:  state.pageIndexOfCollectSection >=1? AppColors.kPrimaryDarkBlue: AppColors.kPrimaryYellow,
+            width: widthExtent *1,
+          ),
+           Positioned(
+             left: widthExtent,
+                        child: Container(
+              height: 2.0,
+              color: state.pageIndexOfCollectSection >1? AppColors.kPrimaryDarkBlue: AppColors.kPrimaryYellow,
+              width: state.pageIndexOfCollectSection >=1? widthExtent:0
+          ),
+           ),
+                  Positioned(
+             left: widthExtent,
+                        child: Container(
+              height: 2.0,
+              color: AppColors.kPrimaryYellow,
+              width: state.pageIndexOfCollectSection >=1? widthExtent:0
+          ),
+           ),
+              Positioned(
+             left: 2*widthExtent,
+                        child: Container(
+              height: 2.0,
+              color: AppColors.kPrimaryYellow,
+              width: state.pageIndexOfCollectSection >=2? widthExtent:0
+          ),
+           ),
+          Positioned(
+            left: widthExtent,
+            child: FilledCircle(
+              size: 24,
+              color: state.pageIndexOfCollectSection ==0? AppColors.kPrimaryYellow:AppColors.kPrimaryDarkBlue,
+              child: Center(
+                child: Text("1",
+                    style: AppThemes.normalSecondaryTextStyle
+                        .copyWith(fontSize: 12, color: AppColors.kPureWhite)),
+              ),
+            ),
+          ),
+          Positioned(
+            left:2*widthExtent,
+            child: FilledCircle(
+              size: 24,
+              color:  state.pageIndexOfCollectSection >=2? AppColors.kPrimaryDarkBlue: AppColors.kPrimaryYellow,
+              child: Center(
+                child: Text("2",
+                    style: AppThemes.normalSecondaryTextStyle
+                        .copyWith(fontSize: 12, color: AppColors.kPureWhite)),
+              ),
+            ),
+          ),
+          Positioned(
+            left: 3 * widthExtent,
+            child: FilledCircle(
+              size: 24,
+              color: state.pageIndexOfCollectSection ==2? AppColors.kPrimaryYellow:AppColors.kPrimaryDarkBlue,
+              child: Center(
+                child: Text("3",
+                    style: AppThemes.normalSecondaryTextStyle
+                        .copyWith(fontSize: 12, color: AppColors.kPureWhite)),
+              ),
+            ),
+          ),
+          Positioned(
+            left: 4*widthExtent,
+            child: FilledCircle(
+              size: 24,
+              color: AppColors.kDarkGrey,
+              child: Center(
+                child: Image.asset(HelloIcons.home_bold_icon,height: 14,color: AppColors.kPureWhite,),),
+              ),
+            ),
+          
+        ],
+      ),
+    );
+  }
+}
+
 class _AddDetailsBody extends StatelessWidget {
   final PageController pageController;
 
@@ -192,7 +288,13 @@ class _AddDetailsBody extends StatelessWidget {
             _BedroomSelectionSection(),
             _BathroomSelectionSection(),
             _OtherDetailsSelectionSection(),
-            Spacer(),
+            Expanded(
+              child: Container(
+                constraints: BoxConstraints(
+                  maxHeight: fullHeight(context) * 0.2,
+                ),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 16, bottom: 12),
               child: Align(
@@ -876,13 +978,13 @@ class _CustomizeDetailsBody extends StatelessWidget {
 class _ItemSelectionModel {
   final String optionName;
   final CustomizeOptions optionType;
-  final CustomizeOptions selecteItem;
+  final CustomizeOptions selectedItem;
   final VoidCallback onTap;
 
   _ItemSelectionModel({
     @required this.optionName,
     @required this.optionType,
-    @required this.selecteItem,
+    @required this.selectedItem,
     @required this.onTap,
   });
 }
@@ -926,13 +1028,16 @@ class _CustomSelectItemsBody extends StatelessWidget {
   const _CustomSelectItemsBody({Key key, @required this.detailsList})
       : super(key: key);
 
-  List<Widget> _buildListOfWidget() {
+  List<Widget> _buildListOfWidget(BuildContext context) {
+    final width = (fullWidth(context) - 88.0 - (detailsList.length - 1) * 10) /
+        detailsList.length;
     List<Widget> list = [];
     detailsList.forEach((element) {
       list.add(_RoundedSelectableContainer(
+          width: width,
           optionName: element.optionName,
           optionType: element.optionType,
-          selected: element.selecteItem,
+          selected: element.selectedItem,
           onPressed: element.onTap));
     });
     return list;
@@ -946,7 +1051,7 @@ class _CustomSelectItemsBody extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: _buildListOfWidget(),
+        children: _buildListOfWidget(context),
       ),
     );
   }
@@ -961,12 +1066,12 @@ class _BuildingMaterialsSelectSection extends StatelessWidget {
     final state = Provider.of<CostEstimateState>(context);
     return _ItemTypeSelectSection(
       nameOfTheSection: "Building Materials",
-      selectedItem: state.flooringTypeSelected,
+      selectedItem: state.buildingMaterialTypeSelected,
       detailsList: [
         _ItemSelectionModel(
             optionName: "Budget",
             optionType: CustomizeOptions.Budget,
-            selecteItem: state.buildingMaterialTypeSelected,
+            selectedItem: state.buildingMaterialTypeSelected,
             onTap: () => {
                   state.setBuildingMaterialTypeSelected =
                       CustomizeOptions.Budget
@@ -974,7 +1079,7 @@ class _BuildingMaterialsSelectSection extends StatelessWidget {
         _ItemSelectionModel(
             optionName: "Balanced",
             optionType: CustomizeOptions.Balanced,
-            selecteItem: state.buildingMaterialTypeSelected,
+            selectedItem: state.buildingMaterialTypeSelected,
             onTap: () => {
                   state.setBuildingMaterialTypeSelected =
                       CustomizeOptions.Balanced
@@ -982,7 +1087,7 @@ class _BuildingMaterialsSelectSection extends StatelessWidget {
         _ItemSelectionModel(
             optionName: "Best",
             optionType: CustomizeOptions.Best,
-            selecteItem: state.buildingMaterialTypeSelected,
+            selectedItem: state.buildingMaterialTypeSelected,
             onTap: () => {
                   state.setBuildingMaterialTypeSelected = CustomizeOptions.Best
                 }),
@@ -1004,19 +1109,19 @@ class _FlooringTypeSelectSection extends StatelessWidget {
           _ItemSelectionModel(
               optionName: "Budget",
               optionType: CustomizeOptions.Budget,
-              selecteItem: state.flooringTypeSelected,
+              selectedItem: state.flooringTypeSelected,
               onTap: () =>
                   {state.setFlooringTypeSelected = CustomizeOptions.Budget}),
           _ItemSelectionModel(
               optionName: "Balanced",
               optionType: CustomizeOptions.Balanced,
-              selecteItem: state.flooringTypeSelected,
+              selectedItem: state.flooringTypeSelected,
               onTap: () =>
                   {state.setFlooringTypeSelected = CustomizeOptions.Balanced}),
           _ItemSelectionModel(
               optionName: "Best",
               optionType: CustomizeOptions.Best,
-              selecteItem: state.flooringTypeSelected,
+              selectedItem: state.flooringTypeSelected,
               onTap: () =>
                   {state.setFlooringTypeSelected = CustomizeOptions.Best}),
         ]);
@@ -1036,20 +1141,20 @@ class _ElectricalsTypeSelectSection extends StatelessWidget {
           _ItemSelectionModel(
               optionName: "Budget",
               optionType: CustomizeOptions.Budget,
-              selecteItem: state.electricalsTypeSelected,
+              selectedItem: state.electricalsTypeSelected,
               onTap: () =>
                   {state.setElectricalsTypeSelected = CustomizeOptions.Budget}),
           _ItemSelectionModel(
               optionName: "Balanced",
               optionType: CustomizeOptions.Balanced,
-              selecteItem: state.electricalsTypeSelected,
+              selectedItem: state.electricalsTypeSelected,
               onTap: () => {
                     state.setElectricalsTypeSelected = CustomizeOptions.Balanced
                   }),
           _ItemSelectionModel(
               optionName: "Best",
               optionType: CustomizeOptions.Best,
-              selecteItem: state.electricalsTypeSelected,
+              selectedItem: state.electricalsTypeSelected,
               onTap: () =>
                   {state.setElectricalsTypeSelected = CustomizeOptions.Best}),
         ]);
@@ -1069,19 +1174,19 @@ class _PlumbingTypeSelectSection extends StatelessWidget {
           _ItemSelectionModel(
               optionName: "Budget",
               optionType: CustomizeOptions.Budget,
-              selecteItem: state.plumbingTypeSelected,
+              selectedItem: state.plumbingTypeSelected,
               onTap: () =>
                   {state.setPlumbingTypeSelected = CustomizeOptions.Budget}),
           _ItemSelectionModel(
               optionName: "Balanced",
               optionType: CustomizeOptions.Balanced,
-              selecteItem: state.plumbingTypeSelected,
+              selectedItem: state.plumbingTypeSelected,
               onTap: () =>
                   {state.setPlumbingTypeSelected = CustomizeOptions.Balanced}),
           _ItemSelectionModel(
               optionName: "Best",
               optionType: CustomizeOptions.Best,
-              selecteItem: state.plumbingTypeSelected,
+              selectedItem: state.plumbingTypeSelected,
               onTap: () =>
                   {state.setPlumbingTypeSelected = CustomizeOptions.Best}),
         ]);
@@ -1101,7 +1206,7 @@ class _DoorsAndWindowsSelectSection extends StatelessWidget {
           _ItemSelectionModel(
               optionName: "Budget",
               optionType: CustomizeOptions.Budget,
-              selecteItem: state.doorsAndWindowsTypeSelected,
+              selectedItem: state.doorsAndWindowsTypeSelected,
               onTap: () => {
                     state.setDoorsAndWindowsTypeSelected =
                         CustomizeOptions.Budget
@@ -1109,7 +1214,7 @@ class _DoorsAndWindowsSelectSection extends StatelessWidget {
           _ItemSelectionModel(
               optionName: "Balanced",
               optionType: CustomizeOptions.Balanced,
-              selecteItem: state.doorsAndWindowsTypeSelected,
+              selectedItem: state.doorsAndWindowsTypeSelected,
               onTap: () => {
                     state.setDoorsAndWindowsTypeSelected =
                         CustomizeOptions.Balanced
@@ -1117,7 +1222,7 @@ class _DoorsAndWindowsSelectSection extends StatelessWidget {
           _ItemSelectionModel(
               optionName: "Best",
               optionType: CustomizeOptions.Best,
-              selecteItem: state.doorsAndWindowsTypeSelected,
+              selectedItem: state.doorsAndWindowsTypeSelected,
               onTap: () => {
                     state.setDoorsAndWindowsTypeSelected = CustomizeOptions.Best
                   }),
@@ -1143,13 +1248,16 @@ class _NiceToHaveDetailsBody extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           mainAxisSize: MainAxisSize.min,
           children: [
-            _BuildingMaterialsSelectSection(),
-            _FlooringTypeSelectSection(),
-            _ElectricalsTypeSelectSection(),
-            _PlumbingTypeSelectSection(),
-            _DoorsAndWindowsSelectSection(),
-            Spacer(),
-            // Spacer(),
+            _KitchenDecorTypeSelectSection(),
+            _InteriorDecorTypeSelectSection(),
+            _ExteriorDecorTypeSelectSection(),
+            Expanded(
+              child: Container(
+                constraints: BoxConstraints(
+                  maxHeight: fullHeight(context) * 0.2,
+                ),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 16, bottom: 12),
               child: Align(
@@ -1178,6 +1286,131 @@ class _NiceToHaveDetailsBody extends StatelessWidget {
   }
 }
 
+class _KitchenDecorTypeSelectSection extends StatelessWidget {
+  const _KitchenDecorTypeSelectSection({
+    Key key,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    final state = Provider.of<CostEstimateState>(context);
+    return _ItemTypeSelectSection(
+      nameOfTheSection: "Kitchen Decor",
+      selectedItem: state.kitchenDecorTypeSelected,
+      detailsList: [
+        _ItemSelectionModel(
+            optionName: "None",
+            optionType: CustomizeOptions.None,
+            selectedItem: state.kitchenDecorTypeSelected,
+            onTap: () =>
+                {state.setKitchenDecorTypeSelected = CustomizeOptions.None}),
+        _ItemSelectionModel(
+            optionName: "Basic",
+            optionType: CustomizeOptions.Basic,
+            selectedItem: state.kitchenDecorTypeSelected,
+            onTap: () =>
+                {state.setKitchenDecorTypeSelected = CustomizeOptions.Basic}),
+        _ItemSelectionModel(
+            optionName: "Standard",
+            optionType: CustomizeOptions.Standard,
+            selectedItem: state.kitchenDecorTypeSelected,
+            onTap: () => {
+                  state.setKitchenDecorTypeSelected = CustomizeOptions.Standard
+                }),
+        _ItemSelectionModel(
+            optionName: "Classic",
+            optionType: CustomizeOptions.Classic,
+            selectedItem: state.kitchenDecorTypeSelected,
+            onTap: () =>
+                {state.setKitchenDecorTypeSelected = CustomizeOptions.Classic}),
+      ],
+    );
+  }
+}
+
+class _InteriorDecorTypeSelectSection extends StatelessWidget {
+  const _InteriorDecorTypeSelectSection({
+    Key key,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    final state = Provider.of<CostEstimateState>(context);
+    return _ItemTypeSelectSection(
+      nameOfTheSection: "Interior Decor",
+      selectedItem: state.interiorDecorTypeSelected,
+      detailsList: [
+        _ItemSelectionModel(
+            optionName: "None",
+            optionType: CustomizeOptions.None,
+            selectedItem: state.interiorDecorTypeSelected,
+            onTap: () =>
+                {state.setInteriorDecorTypeSelected = CustomizeOptions.None}),
+        _ItemSelectionModel(
+            optionName: "Basic",
+            optionType: CustomizeOptions.Basic,
+            selectedItem: state.interiorDecorTypeSelected,
+            onTap: () =>
+                {state.setInteriorDecorTypeSelected = CustomizeOptions.Basic}),
+        _ItemSelectionModel(
+            optionName: "Standard",
+            optionType: CustomizeOptions.Standard,
+            selectedItem: state.interiorDecorTypeSelected,
+            onTap: () => {
+                  state.setInteriorDecorTypeSelected = CustomizeOptions.Standard
+                }),
+        _ItemSelectionModel(
+            optionName: "Classic",
+            optionType: CustomizeOptions.Classic,
+            selectedItem: state.interiorDecorTypeSelected,
+            onTap: () => {
+                  state.setInteriorDecorTypeSelected = CustomizeOptions.Classic
+                }),
+      ],
+    );
+  }
+}
+
+class _ExteriorDecorTypeSelectSection extends StatelessWidget {
+  const _ExteriorDecorTypeSelectSection({
+    Key key,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    final state = Provider.of<CostEstimateState>(context);
+    return _ItemTypeSelectSection(
+      nameOfTheSection: "Exterior Decor",
+      selectedItem: state.exteriorDecorTypeSelected,
+      detailsList: [
+        _ItemSelectionModel(
+            optionName: "None",
+            optionType: CustomizeOptions.None,
+            selectedItem: state.exteriorDecorTypeSelected,
+            onTap: () =>
+                {state.setExteriorDecorTypeSelected = CustomizeOptions.None}),
+        _ItemSelectionModel(
+            optionName: "Basic",
+            optionType: CustomizeOptions.Basic,
+            selectedItem: state.exteriorDecorTypeSelected,
+            onTap: () =>
+                {state.setExteriorDecorTypeSelected = CustomizeOptions.Basic}),
+        _ItemSelectionModel(
+            optionName: "Standard",
+            optionType: CustomizeOptions.Standard,
+            selectedItem: state.exteriorDecorTypeSelected,
+            onTap: () => {
+                  state.setExteriorDecorTypeSelected = CustomizeOptions.Standard
+                }),
+        _ItemSelectionModel(
+            optionName: "Classic",
+            optionType: CustomizeOptions.Classic,
+            selectedItem: state.exteriorDecorTypeSelected,
+            onTap: () => {
+                  state.setExteriorDecorTypeSelected = CustomizeOptions.Classic
+                }),
+      ],
+    );
+  }
+}
+
 class _RoundedSelectableContainer extends StatelessWidget {
   final CustomizeOptions optionType;
   final String optionName;
@@ -1200,43 +1433,39 @@ class _RoundedSelectableContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     bool _isSelected = selected == optionType ? true : false;
     return GestureDetector(
-        child: Padding(
-          padding: const EdgeInsets.only(right: 0.0),
-          child: Column(
-            children: [
-              AnimatedContainer(
-                duration: Duration(milliseconds: 300),
-                padding: const EdgeInsets.all(8.0),
-                curve: Curves.bounceInOut,
-                height: height ?? 40,
-                width: width ?? 88,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12.0),
-                  color:
-                      _isSelected ? AppColors.kLavender : AppColors.kAliceBlue,
-                ),
-                child: Center(
-                  child: Text(
-                    optionName,
-                    style: AppThemes.normalSecondaryTextStyle
-                        .copyWith(fontSize: 12),
-                  ),
+        child: Column(
+          children: [
+            AnimatedContainer(
+              duration: Duration(milliseconds: 300),
+              padding: const EdgeInsets.all(8.0),
+              curve: Curves.bounceInOut,
+              height: height ?? 40,
+              width: width ?? 88,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12.0),
+                color: _isSelected ? AppColors.kLavender : AppColors.kAliceBlue,
+              ),
+              child: Center(
+                child: Text(
+                  optionName,
+                  style:
+                      AppThemes.normalSecondaryTextStyle.copyWith(fontSize: 12),
                 ),
               ),
-              SizedBox(
-                height: 8.0,
-              ),
-              Align(
-                  alignment: Alignment.bottomCenter,
-                  child: AnimatedContainer(
-                    duration: Duration(milliseconds: 300),
-                    color: AppColors.kDarkGreen,
-                    curve: Curves.fastOutSlowIn,
-                    height: 2.0,
-                    width: _isSelected ? 24.0 : 0,
-                  ))
-            ],
-          ),
+            ),
+            SizedBox(
+              height: 8.0,
+            ),
+            Align(
+                alignment: Alignment.bottomCenter,
+                child: AnimatedContainer(
+                  duration: Duration(milliseconds: 300),
+                  color: AppColors.kDarkGreen,
+                  curve: Curves.fastOutSlowIn,
+                  height: 2.0,
+                  width: _isSelected ? 24.0 : 0,
+                ))
+          ],
         ),
         onTap: onPressed);
   }

@@ -379,9 +379,11 @@ class FilledCircle extends StatelessWidget {
     Key key,
     this.color = AppColors.kAlmostBlack,
     this.size = 2.0,
+    this.child,
   }) : super(key: key);
   final double size;
   final Color color;
+  final Widget child;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -390,7 +392,9 @@ class FilledCircle extends StatelessWidget {
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: color,
+      
       ),
+      child: child??Container(),
     );
   }
 }
@@ -427,11 +431,12 @@ class _MultiSelectChipState extends State<MultiSelectChip> {
         child: ChoiceChip(
           label: Text(
             item,
-            style: selectedChoices.contains(item)? AppThemes.normalSecondaryTextStyle
-                .copyWith(fontSize: 12, color: AppColors.kDarkTextColor):AppThemes.normalSecondaryTextStyle
-                .copyWith(fontSize: 12, color: AppColors.kDarkTextColor),
+            style: selectedChoices.contains(item)
+                ? AppThemes.normalSecondaryTextStyle
+                    .copyWith(fontSize: 12, color: AppColors.kDarkTextColor)
+                : AppThemes.normalSecondaryTextStyle
+                    .copyWith(fontSize: 12, color: AppColors.kDarkTextColor),
           ),
-        
           backgroundColor: widget.backgroundColor,
           selectedColor: widget.selectedColor,
           selected: selectedChoices.contains(item),
