@@ -18,14 +18,13 @@ enum CustomizeOptions {
   Budget,
   Balanced,
   Best,
-}
-
-enum CustomizeOptionalCategories {
   None,
   Basic,
   Standard,
   Classic,
 }
+
+
 
 class CostEstimation extends Equatable {
   final CustomizeOptions buildingMaterialsType;
@@ -33,9 +32,9 @@ class CostEstimation extends Equatable {
   final CustomizeOptions electricalsType;
   final CustomizeOptions plumbingType;
   final CustomizeOptions doorsAndWindowsType;
-  final CustomizeOptionalCategories kitchenDeorType;
-  final CustomizeOptionalCategories interiorDecorType;
-  final CustomizeOptionalCategories exteriorDecorType;
+  final CustomizeOptions kitchenDeorType;
+  final CustomizeOptions interiorDecorType;
+  final CustomizeOptions exteriorDecorType;
 
   CostEstimation({
     @required this.buildingMaterialsType,
@@ -68,11 +67,11 @@ class CostEstimation extends Equatable {
         doorsAndWindowsType =
             _setCustomizeOptions(data[JsonConstants.doorsAndWindowsType]),
         kitchenDeorType =
-            _setCustomizeOptional(data[JsonConstants.kitchenDecorType]),
+            _setCustomizeOptions(data[JsonConstants.kitchenDecorType]),
         interiorDecorType =
-            _setCustomizeOptional(data[JsonConstants.interiorDecorType]),
+            _setCustomizeOptions(data[JsonConstants.interiorDecorType]),
         exteriorDecorType =
-            _setCustomizeOptional(data[JsonConstants.exteriorDecorType]);
+            _setCustomizeOptions(data[JsonConstants.exteriorDecorType]);
 
   static CustomizeOptions _setCustomizeOptions(String dataVal) {
     if (dataVal == JsonConstants.bestType) {
@@ -81,49 +80,42 @@ class CostEstimation extends Equatable {
       return CustomizeOptions.Balanced;
     } else if (dataVal == JsonConstants.budgetType) {
       return CustomizeOptions.Budget;
+    }  if (dataVal == JsonConstants.none) {
+      return CustomizeOptions.None;
+    } else if (dataVal == JsonConstants.basic) {
+      return CustomizeOptions.Basic;
+    } else if (dataVal == JsonConstants.standard) {
+      return CustomizeOptions.Standard;
+    } else if (dataVal == JsonConstants.classic) {
+      return CustomizeOptions.Classic;
     } else {
       return null;
     }
   }
 
-  static CustomizeOptionalCategories _setCustomizeOptional(String dataVal) {
-    if (dataVal == JsonConstants.none) {
-      return CustomizeOptionalCategories.None;
-    } else if (dataVal == JsonConstants.basic) {
-      return CustomizeOptionalCategories.Basic;
-    } else if (dataVal == JsonConstants.standard) {
-      return CustomizeOptionalCategories.Standard;
-    } else if (dataVal == JsonConstants.classic) {
-      return CustomizeOptionalCategories.Classic;
-    } else {
-      return null;
-    }
-  }
 
   String _getCustomizeOption(CustomizeOptions option) {
+
     if (option == CustomizeOptions.Budget) {
       return JsonConstants.budgetType;
     } else if (option == CustomizeOptions.Balanced) {
       return JsonConstants.balancedType;
     } else if (option == CustomizeOptions.Best) {
       return JsonConstants.bestType;
-    }
-    return "";
-  }
-
-  String _getCustomizeOptionalCategories(CustomizeOptionalCategories option) {
-    if (option == CustomizeOptionalCategories.Basic) {
+    } if (option == CustomizeOptions.Basic) {
       return JsonConstants.basic;
-    } else if (option == CustomizeOptionalCategories.None) {
+    } else if (option == CustomizeOptions.None) {
       return JsonConstants.none;
-    } else if (option == CustomizeOptionalCategories.Standard) {
+    } else if (option == CustomizeOptions.Standard) {
       return JsonConstants.standard;
-    } else if (option == CustomizeOptionalCategories.Classic) {
+    } else if (option == CustomizeOptions.Classic) {
       return JsonConstants.classic;
     } else {
       return null;
     }
+   
   }
+
 
   @override
   List<Object> get props => [
