@@ -1,5 +1,5 @@
+import 'package:hellohuts_app/models/cost_estimation/cost_estimation.dart';
 import 'package:hellohuts_app/states/app_state.dart';
-
 
 class CostEstimateState extends AppState {
   bool _needReset = false;
@@ -115,6 +115,15 @@ class CostEstimateState extends AppState {
 
   set setPageIndexOfCollectSection(int index) {
     _pageIndexOfCollectSection = index;
+    notifyListeners();
+  }
+
+  ///Building materials Selected Option
+  CustomizeOptions _buildingMaterialSelected = CustomizeOptions.Best;
+  get buildingMaterialSelected => _buildingMaterialSelected;
+
+  set setBuildingMaterialSelected(CustomizeOptions option) {
+    _buildingMaterialSelected = option;
     notifyListeners();
   }
 }

@@ -52,78 +52,67 @@ class _AddDetailsForHomeState extends State<AddDetailsForHome> {
   Widget build(BuildContext context) {
     var costEstimateState = Provider.of<CostEstimateState>(context);
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Scaffold(
-          appBar: CustomAppBar(
-            isBackButton: true,
-            centerTitle: true,
-            title: Text(
-              "Add Details",
-              style: AppThemes.normalTextStyle.copyWith(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                  color: AppColors.kDarkTextColor),
-            ),
-            // actions: Padding(
-            //   padding: EdgeInsets.only(right: 24),
-            //   child: Align(
-            //       alignment: Alignment.centerRight,
-            //       child: Text(
-            //         "Reset",
-            //         style: AppThemes.normalTextStyle.copyWith(
-            //             fontSize: 14, color: AppColors.kDarkTextColor),
-            //       )),
-            // ),
-            // onActionPressed: () => {
-            //   costEstimateState.resetAddDetailsPage()
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: AnnotatedRegion<SystemUiOverlayStyle>(
+          value: SystemUiOverlayStyle.dark
+              .copyWith(statusBarColor: Colors.transparent),
+          child: SafeArea(
+            child: Scaffold(
+              appBar: CustomAppBar(
+                isBackButton: true,
+                centerTitle: true,
+                title: Text(
+                  "Add Details",
+                  style: AppThemes.normalTextStyle.copyWith(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: AppColors.kDarkTextColor),
+                ),
+                // actions: Padding(
+                //   padding: EdgeInsets.only(right: 24),
+                //   child: Align(
+                //       alignment: Alignment.centerRight,
+                //       child: Text(
+                //         "Reset",
+                //         style: AppThemes.normalTextStyle.copyWith(
+                //             fontSize: 14, color: AppColors.kDarkTextColor),
+                //       )),
+                // ),
+                // onActionPressed: () => {
+                //   costEstimateState.resetAddDetailsPage()
 
-            // },
-            onBackButtonPressed: () => {
-              costEstimateState.resetAddDetailsPage(),
-              ExtendedNavigator.of(context).pop()
-            },
-          ),
-          bottomNavigationBar: Container(
-            width: fullWidth(context),
-            height: 40,
-            color: AppColors.kDarkGrey,
-          ),
-          body: PageView(
-            controller: _pageController,
-            onPageChanged: (page) {
-              costEstimateState.setPageIndexOfCollectSection = page;
-            },
-            physics: NeverScrollableScrollPhysics(),
-            children: [
-              Scaffold(
-                body: AnnotatedRegion<SystemUiOverlayStyle>(
-                  value: SystemUiOverlayStyle.dark
-                      .copyWith(statusBarColor: Colors.transparent),
-                  child: SafeArea(
-                    child: Scaffold(
-                        backgroundColor: AppColors.kPureWhite,
-                        body: _AddDetailsBody(
-                          pageController: _pageController,
-                        )),
-                  ),
-                ),
+                // },
+                onBackButtonPressed: () => {
+                  costEstimateState.resetAddDetailsPage(),
+                  ExtendedNavigator.of(context).pop()
+                },
               ),
-              Scaffold(
-                body: AnnotatedRegion<SystemUiOverlayStyle>(
-                  value: SystemUiOverlayStyle.dark
-                      .copyWith(statusBarColor: Colors.transparent),
-                  child: SafeArea(
-                    child: Scaffold(
-                        backgroundColor: AppColors.kPureWhite,
-                        body: _CustomizeDetailsBody(
-                          pageController: _pageController,
-                        )),
-                  ),
-                ),
+              bottomNavigationBar: Container(
+                width: fullWidth(context),
+                height: 40,
+                color: AppColors.kDarkGrey,
               ),
-            ],
+              body: PageView(
+                controller: _pageController,
+                onPageChanged: (page) {
+                  costEstimateState.setPageIndexOfCollectSection = page;
+                },
+                physics: NeverScrollableScrollPhysics(),
+                children: [
+                  _AddDetailsBody(
+                    pageController: _pageController,
+                  ),
+                  _CustomizeDetailsBody(
+                    pageController: _pageController,
+                  )
+                ],
+              ),
+            ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
 
@@ -807,6 +796,18 @@ class _CustomizeDetailsBody extends StatelessWidget {
   }
 }
 
+
+class TestModel {
+  final String optionName;
+  final CustomizeOptions optionType;
+  final CustomizeOptions selecteItem;
+
+  TestModel({
+    @required this.optionName, 
+    @required this.optionType, 
+    @required this.selecteItem});
+}
+
 class _BuildingMaterialsSelectSection extends StatelessWidget {
   const _BuildingMaterialsSelectSection({
     Key key,
@@ -832,78 +833,96 @@ class _BuildingMaterialsSelectSection extends StatelessWidget {
   }
 }
 
+class TestModel {
+  final String optionName;
+  final CustomizeOptions optionType;
+  final CustomizeOptions selecteItem;
+
+  TestModel({
+    @required this.optionName, 
+    @required this.optionType, 
+    @required this.selecteItem});
+}
+
 class _BuildingMaterialsSelectSectionContainer extends StatelessWidget {
   const _BuildingMaterialsSelectSectionContainer({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final state = Provider.of<CostEstimateState>(context);
+    final _selectedItem = state.buildingMaterialSelected;
     return Container(
-      child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            _RoundedSelectableContainer(
-              optionName: "Budget",
-              optionType: CustomizeOptions.Budget,
-            ),
-            _RoundedSelectableContainer(
-              optionName: "Balanced",
-              optionType: CustomizeOptions.Balanced,
-            ),
-            _RoundedSelectableContainer(
-              optionName: "Best",
-              optionType: CustomizeOptions.Best,
-            ),
-          ]),
+      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        _RoundedSelectableContainer(
+          optionName: "Budget",
+          optionType: CustomizeOptions.Budget,
+          selected: _selectedItem,
+          onPressed: () => {
+            state.setBuildingMaterialSelected = CustomizeOptions.Budget,
+          },
+        ),
+        _RoundedSelectableContainer(
+          optionName: "Balanced",
+          optionType: CustomizeOptions.Balanced,
+          selected: _selectedItem,
+          onPressed: () => {
+            state.setBuildingMaterialSelected = CustomizeOptions.Balanced,
+          },
+        ),
+        _RoundedSelectableContainer(
+          optionName: "Best",
+          optionType: CustomizeOptions.Best,
+          selected: _selectedItem,
+          onPressed: () => {
+            state.setBuildingMaterialSelected = CustomizeOptions.Best,
+          },
+        ),
+      ]),
     );
   }
 }
 
-class _RoundedSelectableContainer extends StatefulWidget {
+class _RoundedSelectableContainer extends StatelessWidget {
   final CustomizeOptions optionType;
   final String optionName;
+  final CustomizeOptions selected;
   final double width;
   final double height;
   final VoidCallback onPressed;
 
-  const _RoundedSelectableContainer(
-      {Key key,
-      this.optionType,
-      this.optionName,
-      this.width,
-      this.height,
-      this.onPressed})
-      : super(key: key);
+  const _RoundedSelectableContainer({
+    Key key,
+    this.optionType,
+    this.optionName,
+    this.width,
+    this.height,
+    this.selected,
+    this.onPressed,
+  }) : super(key: key);
 
-  @override
-  _RoundedSelectableContainerState createState() =>
-      _RoundedSelectableContainerState();
-}
-
-class _RoundedSelectableContainerState
-    extends State<_RoundedSelectableContainer> {
   @override
   Widget build(BuildContext context) {
-    bool isSelected = false;
+    bool _isSelected = selected == optionType ? true : false;
     return GestureDetector(
         child: Padding(
-          padding: const EdgeInsets.only(right: 18.0),
+          padding: const EdgeInsets.only(right: 0.0),
           child: Column(
             children: [
               AnimatedContainer(
                 duration: Duration(milliseconds: 300),
                 padding: const EdgeInsets.all(8.0),
                 curve: Curves.bounceInOut,
-                height: widget.height ?? 40,
-                width: widget.width ?? 88,
+                height: height ?? 40,
+                width: width ?? 88,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12.0),
                   color:
-                      isSelected ? AppColors.kLavender : AppColors.kAliceBlue,
+                      _isSelected ? AppColors.kLavender : AppColors.kAliceBlue,
                 ),
                 child: Center(
                   child: Text(
-                    widget.optionName,
+                    optionName,
                     style: AppThemes.normalSecondaryTextStyle
                         .copyWith(fontSize: 12),
                   ),
@@ -919,16 +938,11 @@ class _RoundedSelectableContainerState
                     color: AppColors.kDarkGreen,
                     curve: Curves.fastOutSlowIn,
                     height: 2.0,
-                    width: isSelected ? 24.0 : 0,
+                    width: _isSelected ? 24.0 : 0,
                   ))
             ],
           ),
         ),
-        onTap: () => {
-              setState(() {
-                isSelected = true;
-                print("test");
-              }),
-            });
+        onTap: onPressed);
   }
 }
