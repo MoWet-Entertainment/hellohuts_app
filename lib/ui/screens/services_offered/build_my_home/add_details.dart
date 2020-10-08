@@ -63,7 +63,13 @@ class _AddDetailsForHomeState extends State<AddDetailsForHome> {
                 isBackButton: true,
                 centerTitle: true,
                 title: Text(
-                  "Add Details",
+                  costEstimateState.pageIndexOfCollectSection == 0
+                      ? "Add Details"
+                      : costEstimateState.pageIndexOfCollectSection == 1
+                          ? "Customize"
+                          : costEstimateState.pageIndexOfCollectSection == 2
+                              ? "Nice to Have"
+                              : "",
                   style: AppThemes.normalTextStyle.copyWith(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
@@ -84,7 +90,7 @@ class _AddDetailsForHomeState extends State<AddDetailsForHome> {
 
                 // },
                 onBackButtonPressed: () => {
-                  costEstimateState.resetAddDetailsPage(),
+                  // costEstimateState.resetAddDetailsPage(),
                   ExtendedNavigator.of(context).pop()
                 },
               ),
@@ -153,7 +159,9 @@ class _AddDetailsBody extends StatelessWidget {
                     onPressed: () => {
                           print("User Clicked Next"),
                           state.setPageIndexOfCollectSection = 1,
-                             pageController.animateToPage(1, duration: const Duration(milliseconds: 400), curve: Curves.easeInOutSine)
+                          pageController.animateToPage(1,
+                              duration: const Duration(milliseconds: 400),
+                              curve: Curves.easeInOutSine)
                         }),
               ),
             ),
@@ -533,8 +541,8 @@ class _OtherDetailsContainer extends StatelessWidget {
                       ),
                     ),
                     onTap: () {
-                      state.setSelectedPack = 3;
-                      state.setIsCustomOtherDetails = true;
+                      // state.setSelectedPack = 3;
+                      // state.setIsCustomOtherDetails = true;
                       state.resetCustomDetail();
                       _showCustomBottomSheet(context);
                       print("Custom");
@@ -561,6 +569,7 @@ class _OtherDetailsContainer extends StatelessWidget {
   void _showCustomBottomSheet(BuildContext context,
       {List<Widget> listOfWidgets}) {
     var state = Provider.of<CostEstimateState>(context, listen: false);
+    state.setIsCustomOtherDetails = true;
     showModalBottomSheet(
         context: context,
         backgroundColor: Colors.transparent,
@@ -646,7 +655,9 @@ class _OtherDetailsContainer extends StatelessWidget {
                                 )),
                               ),
                             ),
-                            onTap: () => Navigator.pop(context),
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
                           ),
                         )
                       ],
@@ -656,7 +667,14 @@ class _OtherDetailsContainer extends StatelessWidget {
               ),
             ],
           );
-        });
+        }).whenComplete(() {
+      if (state.selectedDetailsItems.length != 0 &&
+          state.isCustomOtherDetails) {
+        state.setSelectedPack = 3;
+      } else {
+         state.setSelectedPack = 1;
+      }
+    });
   }
 }
 
@@ -766,37 +784,12 @@ class _CustomizeDetailsBody extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             _BuildingMaterialsSelectSection(),
-            _ItemTypeSelectSection(
-              nameOfTheSection: "Flooring",
-              selectedItem: state.flooringTypeSelected,
-              detailsList: [
-                _ItemSelectionModel(
-                    optionName: "Budget",
-                    optionType: CustomizeOptions.Budget,
-                    selecteItem: state.flooringTypeSelected,
-                    onTap: () => {
-                          state.setFlooringTypeSelected =
-                              CustomizeOptions.Budget
-                        }),
-                _ItemSelectionModel(
-                    optionName: "Balanced",
-                    optionType: CustomizeOptions.Balanced,
-                    selecteItem: state.flooringTypeSelected,
-                    onTap: () => {
-                          state.setFlooringTypeSelected =
-                              CustomizeOptions.Balanced
-                        }),
-                _ItemSelectionModel(
-                    optionName: "Best",
-                    optionType: CustomizeOptions.Best,
-                    selecteItem: state.flooringTypeSelected,
-                    onTap: () =>
-                        {state.setFlooringTypeSelected = CustomizeOptions.Best})
-              ],
-            ),
-            _BathroomSelectionSection(),
-            _OtherDetailsSelectionSection(),
+            _FlooringTypeSelectSection(),
+            _ElectricalsTypeSelectSection(),
+            _PlumbingTypeSelectSection(),
+            _DoorsAndWindowsSelectSection(),
             Spacer(),
+            // Spacer(),
             Padding(
               padding: const EdgeInsets.only(top: 16, bottom: 12),
               child: Align(
@@ -812,7 +805,9 @@ class _CustomizeDetailsBody extends StatelessWidget {
                     onPressed: () => {
                           print("User Clicked Next"),
                           state.setPageIndexOfCollectSection = 2,
-                          pageController.animateToPage(2, duration: const Duration(milliseconds: 400), curve: Curves.easeInOutSine)
+                          pageController.animateToPage(2,
+                              duration: const Duration(milliseconds: 400),
+                              curve: Curves.easeInOutSine)
                         }),
               ),
             ),
@@ -823,7 +818,7 @@ class _CustomizeDetailsBody extends StatelessWidget {
   }
 }
 
-///For resuability of the code, 
+///For resuability of the code,
 class _ItemSelectionModel {
   final String optionName;
   final CustomizeOptions optionType;
@@ -852,7 +847,7 @@ class _ItemTypeSelectSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(bottom: 8.0),
+      padding: const EdgeInsets.only(bottom: 16.0),
       child: Column(
         children: [
           Align(
@@ -909,22 +904,170 @@ class _BuildingMaterialsSelectSection extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(bottom: 8.0),
-      child: Column(
-        children: [
-          Align(
-              alignment: Alignment.centerLeft,
-              child: Text("Building Materials",
-                  style: AppThemes.normalTextStyle
-                      .copyWith(fontWeight: FontWeight.bold, fontSize: 16))),
-          SizedBox(
-            height: 16.h,
-          ),
-          _BuildingMaterialsSelectSectionContainer(),
-        ],
-      ),
+    final state = Provider.of<CostEstimateState>(context);
+    return _ItemTypeSelectSection(
+      nameOfTheSection: "Building Materials",
+      selectedItem: state.flooringTypeSelected,
+      detailsList: [
+        _ItemSelectionModel(
+            optionName: "Budget",
+            optionType: CustomizeOptions.Budget,
+            selecteItem: state.buildingMaterialTypeSelected,
+            onTap: () => {
+                  state.setBuildingMaterialTypeSelected =
+                      CustomizeOptions.Budget
+                }),
+        _ItemSelectionModel(
+            optionName: "Balanced",
+            optionType: CustomizeOptions.Balanced,
+            selecteItem: state.buildingMaterialTypeSelected,
+            onTap: () => {
+                  state.setBuildingMaterialTypeSelected =
+                      CustomizeOptions.Balanced
+                }),
+        _ItemSelectionModel(
+            optionName: "Best",
+            optionType: CustomizeOptions.Best,
+            selecteItem: state.buildingMaterialTypeSelected,
+            onTap: () => {
+                  state.setBuildingMaterialTypeSelected = CustomizeOptions.Best
+                }),
+      ],
     );
+  }
+}
+
+class _FlooringTypeSelectSection extends StatelessWidget {
+  const _FlooringTypeSelectSection({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final state = Provider.of<CostEstimateState>(context);
+    return _ItemTypeSelectSection(
+        nameOfTheSection: "Flooring",
+        selectedItem: state.flooringTypeSelected,
+        detailsList: [
+          _ItemSelectionModel(
+              optionName: "Budget",
+              optionType: CustomizeOptions.Budget,
+              selecteItem: state.flooringTypeSelected,
+              onTap: () =>
+                  {state.setFlooringTypeSelected = CustomizeOptions.Budget}),
+          _ItemSelectionModel(
+              optionName: "Balanced",
+              optionType: CustomizeOptions.Balanced,
+              selecteItem: state.flooringTypeSelected,
+              onTap: () =>
+                  {state.setFlooringTypeSelected = CustomizeOptions.Balanced}),
+          _ItemSelectionModel(
+              optionName: "Best",
+              optionType: CustomizeOptions.Best,
+              selecteItem: state.flooringTypeSelected,
+              onTap: () =>
+                  {state.setFlooringTypeSelected = CustomizeOptions.Best}),
+        ]);
+  }
+}
+
+class _ElectricalsTypeSelectSection extends StatelessWidget {
+  const _ElectricalsTypeSelectSection({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final state = Provider.of<CostEstimateState>(context);
+    return _ItemTypeSelectSection(
+        nameOfTheSection: "Electricals",
+        selectedItem: state.electricalsTypeSelected,
+        detailsList: [
+          _ItemSelectionModel(
+              optionName: "Budget",
+              optionType: CustomizeOptions.Budget,
+              selecteItem: state.electricalsTypeSelected,
+              onTap: () =>
+                  {state.setElectricalsTypeSelected = CustomizeOptions.Budget}),
+          _ItemSelectionModel(
+              optionName: "Balanced",
+              optionType: CustomizeOptions.Balanced,
+              selecteItem: state.electricalsTypeSelected,
+              onTap: () => {
+                    state.setElectricalsTypeSelected = CustomizeOptions.Balanced
+                  }),
+          _ItemSelectionModel(
+              optionName: "Best",
+              optionType: CustomizeOptions.Best,
+              selecteItem: state.electricalsTypeSelected,
+              onTap: () =>
+                  {state.setElectricalsTypeSelected = CustomizeOptions.Best}),
+        ]);
+  }
+}
+
+class _PlumbingTypeSelectSection extends StatelessWidget {
+  const _PlumbingTypeSelectSection({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final state = Provider.of<CostEstimateState>(context);
+    return _ItemTypeSelectSection(
+        nameOfTheSection: "Plumbing",
+        selectedItem: state.plumbingTypeSelected,
+        detailsList: [
+          _ItemSelectionModel(
+              optionName: "Budget",
+              optionType: CustomizeOptions.Budget,
+              selecteItem: state.plumbingTypeSelected,
+              onTap: () =>
+                  {state.setPlumbingTypeSelected = CustomizeOptions.Budget}),
+          _ItemSelectionModel(
+              optionName: "Balanced",
+              optionType: CustomizeOptions.Balanced,
+              selecteItem: state.plumbingTypeSelected,
+              onTap: () =>
+                  {state.setPlumbingTypeSelected = CustomizeOptions.Balanced}),
+          _ItemSelectionModel(
+              optionName: "Best",
+              optionType: CustomizeOptions.Best,
+              selecteItem: state.plumbingTypeSelected,
+              onTap: () =>
+                  {state.setPlumbingTypeSelected = CustomizeOptions.Best}),
+        ]);
+  }
+}
+
+class _DoorsAndWindowsSelectSection extends StatelessWidget {
+  const _DoorsAndWindowsSelectSection({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final state = Provider.of<CostEstimateState>(context);
+    return _ItemTypeSelectSection(
+        nameOfTheSection: "Doors and Windows",
+        selectedItem: state.doorsAndWindowsTypeSelected,
+        detailsList: [
+          _ItemSelectionModel(
+              optionName: "Budget",
+              optionType: CustomizeOptions.Budget,
+              selecteItem: state.doorsAndWindowsTypeSelected,
+              onTap: () => {
+                    state.setDoorsAndWindowsTypeSelected =
+                        CustomizeOptions.Budget
+                  }),
+          _ItemSelectionModel(
+              optionName: "Balanced",
+              optionType: CustomizeOptions.Balanced,
+              selecteItem: state.doorsAndWindowsTypeSelected,
+              onTap: () => {
+                    state.setDoorsAndWindowsTypeSelected =
+                        CustomizeOptions.Balanced
+                  }),
+          _ItemSelectionModel(
+              optionName: "Best",
+              optionType: CustomizeOptions.Best,
+              selecteItem: state.doorsAndWindowsTypeSelected,
+              onTap: () => {
+                    state.setDoorsAndWindowsTypeSelected = CustomizeOptions.Best
+                  }),
+        ]);
   }
 }
 
