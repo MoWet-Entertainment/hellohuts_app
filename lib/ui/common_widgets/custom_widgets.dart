@@ -54,7 +54,9 @@ Widget customIcon(BuildContext context,
               ? 'TwitterIcon'
               : isFontAwesomeRegular
                   ? 'AwesomeRegular'
-                  : isFontAwesomeSolid ? 'AwesomeSolid' : 'Fontello',
+                  : isFontAwesomeSolid
+                      ? 'AwesomeSolid'
+                      : 'Fontello',
         ),
         size: size,
         color: isEnable ? Theme.of(context).primaryColor : iconColor,
@@ -412,7 +414,6 @@ class FilledCircle extends StatelessWidget {
           color: color,
         ),
         child: child ?? Container(),
-
       );
     } else {
       return Container(
@@ -488,6 +489,25 @@ class _MultiSelectChipState extends State<MultiSelectChip> {
   Widget build(BuildContext context) {
     return Wrap(
       children: _buildChoiceList(),
+    );
+  }
+}
+
+class RoundedContainer extends StatelessWidget {
+  final Widget child;
+  final double borderRadius;
+  final Color backGroundColor;
+  const RoundedContainer({Key key, this.child, this.borderRadius, this.backGroundColor})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius:  BorderRadius.circular(borderRadius?? 12.0),
+        color: backGroundColor??AppColors.kPureWhite,
+      ),
+      child: child??Container(),
     );
   }
 }
