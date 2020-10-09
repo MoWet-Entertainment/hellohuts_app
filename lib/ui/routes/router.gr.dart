@@ -20,6 +20,7 @@ import '../screens/quick_items/quick_items.dart';
 import '../screens/search/search_detail.dart';
 import '../screens/search/search_screen.dart';
 import '../screens/services_offered/build_my_home/add_details.dart';
+import '../screens/services_offered/build_my_home/pages/cost_estimate_screen.dart';
 import '../screens/services_offered/services_offered_base_page.dart';
 import '../screens/welcome_page.dart';
 
@@ -38,6 +39,7 @@ class Routes {
   static const String phoneAuthGetPhone = '/phone-auth-get-phone';
   static const String servicesOfferedBasePage = '/services-offered-base-page';
   static const String addDetailsForHome = '/add-details-for-home';
+  static const String costEstimateScreen = '/cost-estimate-screen';
   static const all = <String>{
     basePage,
     explorePage,
@@ -53,6 +55,7 @@ class Routes {
     phoneAuthGetPhone,
     servicesOfferedBasePage,
     addDetailsForHome,
+    costEstimateScreen,
   };
 }
 
@@ -74,6 +77,7 @@ class Router extends RouterBase {
     RouteDef(Routes.phoneAuthGetPhone, page: PhoneAuthGetPhone),
     RouteDef(Routes.servicesOfferedBasePage, page: ServicesOfferedBasePage),
     RouteDef(Routes.addDetailsForHome, page: AddDetailsForHome),
+    RouteDef(Routes.costEstimateScreen, page: CostEstimateScreen),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -210,6 +214,14 @@ class Router extends RouterBase {
             const AddDetailsForHome(),
         settings: data,
         transitionsBuilder: TransitionsBuilders.slideLeft,
+      );
+    },
+    CostEstimateScreen: (data) {
+      return PageRouteBuilder<dynamic>(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            const CostEstimateScreen(),
+        settings: data,
+        transitionsBuilder: TransitionsBuilders.fadeIn,
       );
     },
   };

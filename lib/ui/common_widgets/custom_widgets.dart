@@ -375,27 +375,56 @@ class CustomListTile extends StatelessWidget {
 class FilledCircle extends StatelessWidget {
   //FilledCircle is a simple widgte which creates a circle with color
 
+  const FilledCircle.animated(
+      {Key key,
+      this.size,
+      this.color,
+      this.child,
+      this.curve = Curves.easeInOutSine,
+      this.duration = const Duration(milliseconds: 400)})
+      : isAnimated = true,
+        super(key: key);
   const FilledCircle({
     Key key,
     this.color = AppColors.kAlmostBlack,
     this.size = 2.0,
     this.child,
-  }) : super(key: key);
+  })  : isAnimated = false,
+        curve = null,
+        duration = null,
+        super(key: key);
   final double size;
   final Color color;
   final Widget child;
+  final bool isAnimated;
+  final dynamic curve;
+  final Duration duration;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: size,
-      height: size,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: color,
-      
-      ),
-      child: child??Container(),
-    );
+    if (isAnimated) {
+      return AnimatedContainer(
+        duration: duration,
+        curve: curve,
+        width: size,
+        height: size,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: color,
+        ),
+        child: child ?? Container(),
+
+      );
+    } else {
+      return Container(
+        width: size,
+        height: size,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: color,
+        ),
+        child: child ?? Container(),
+      );
+    }
   }
 }
 
