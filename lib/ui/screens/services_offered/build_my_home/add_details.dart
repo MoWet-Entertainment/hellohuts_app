@@ -112,7 +112,9 @@ class _AddDetailsForHomeState extends State<AddDetailsForHome> {
                     onBackButtonPressed: () => {
                       // costEstimateState.resetAddDetailsPage(),
                       if (costEstimateState.pageIndexOfCollectSection == 0)
-                        {ExtendedNavigator.of(context).pop()}
+                        {
+                            costEstimateState.resetCostEstimateSectionAllPages(),
+                          ExtendedNavigator.of(context).pop()}
                       else
                         {
                           print(costEstimateState.pageIndexOfCollectSection),
@@ -150,6 +152,7 @@ class _AddDetailsForHomeState extends State<AddDetailsForHome> {
         ),
         onWillPop: () {
           if (costEstimateState.pageIndexOfCollectSection == 0) {
+            costEstimateState.resetCostEstimateSectionAllPages();
             return Future.sync(() => true);
           } else {
             print(costEstimateState.pageIndexOfCollectSection);
@@ -183,13 +186,15 @@ class AddDetailsProgressIndicator extends StatelessWidget {
           Container(
             height: 2.0,
             color: AppColors.kDarkGrey,
-            width: widthExtent *4,
+            width: widthExtent * 4,
           ),
           Positioned(
             left: widthExtent,
             child: FilledCircle.animated(
-              size: state.pageIndexOfCollectSection ==1?26:24,
-              color: state.pageIndexOfCollectSection ==0?AppColors.kPrimaryYellow: AppColors.kPrimaryDarkBlue,
+              size: state.pageIndexOfCollectSection == 1 ? 26 : 24,
+              color: state.pageIndexOfCollectSection == 0
+                  ? AppColors.kPrimaryYellow
+                  : AppColors.kPrimaryDarkBlue,
               child: Center(
                 child: Text("1",
                     style: AppThemes.normalSecondaryTextStyle
@@ -198,10 +203,12 @@ class AddDetailsProgressIndicator extends StatelessWidget {
             ),
           ),
           Positioned(
-            left:2*widthExtent,
+            left: 2 * widthExtent,
             child: FilledCircle.animated(
               size: 24,
-              color:state.pageIndexOfCollectSection ==1?AppColors.kPrimaryYellow: AppColors.kPrimaryDarkBlue,
+              color: state.pageIndexOfCollectSection == 1
+                  ? AppColors.kPrimaryYellow
+                  : AppColors.kPrimaryDarkBlue,
               child: Center(
                 child: Text("2",
                     style: AppThemes.normalSecondaryTextStyle
@@ -212,8 +219,10 @@ class AddDetailsProgressIndicator extends StatelessWidget {
           Positioned(
             left: 3 * widthExtent,
             child: FilledCircle.animated(
-              size: state.pageIndexOfCollectSection ==2?26:24,
-              color: state.pageIndexOfCollectSection ==2?AppColors.kPrimaryYellow: AppColors.kPrimaryDarkBlue,
+              size: state.pageIndexOfCollectSection == 2 ? 26 : 24,
+              color: state.pageIndexOfCollectSection == 2
+                  ? AppColors.kPrimaryYellow
+                  : AppColors.kPrimaryDarkBlue,
               child: Center(
                 child: Text("3",
                     style: AppThemes.normalSecondaryTextStyle
@@ -222,23 +231,21 @@ class AddDetailsProgressIndicator extends StatelessWidget {
             ),
           ),
           Positioned(
-            left: 4*widthExtent,
+            left: 4 * widthExtent,
             child: FilledCircle.animated(
-              size: state.pageIndexOfCollectSection ==3?26:24,
+              size: state.pageIndexOfCollectSection == 3 ? 26 : 24,
               color: AppColors.kDarkGrey,
               child: Center(
-                child: Image.asset(HelloIcons.home_bold_icon,height: 14,color: AppColors.kPureWhite,),),
+                child: Image.asset(
+                  HelloIcons.home_bold_icon,
+                  height: 14,
+                  color: AppColors.kPureWhite,
+                ),
               ),
             ),
-          
+          ),
         ],
       ),
     );
   }
 }
-
-
-
-
-
-

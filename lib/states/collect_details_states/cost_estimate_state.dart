@@ -69,18 +69,21 @@ class CostEstimateState extends ChangeNotifier {
     notifyListeners();
   }
 
+  void resetCostEstimateSectionAllPages() {
+    resetAddDetailsPage();
+    resetCustomizePage();
+    resetNiceToHave();
+  }
+
   void resetAddDetailsPage() {
     setNumberOfStoreys = 2;
     setNumberOfBedrooms = 4;
     setNumberOfBathrooms = 3;
     setSelectedPack = 1;
     resetCustomDetail();
-    //TODO: Implement Reset actions
-    print("User wants to reset the customizations");
   }
 
-
-///to reset the Cutomize Page to the initial state
+  ///to reset the Cutomize Page to the initial state
   void resetCustomizePage() {
     setBuildingMaterialTypeSelected = CustomizeOptions.Best;
     setFlooringTypeSelected = CustomizeOptions.Balanced;
@@ -89,8 +92,7 @@ class CostEstimateState extends ChangeNotifier {
     setDoorsAndWindowsTypeSelected = CustomizeOptions.Balanced;
   }
 
-
-///to reset the NiceToHave Page to the initial state
+  ///to reset the NiceToHave Page to the initial state
   void resetNiceToHave() {
     setKitchenDecorTypeSelected = CustomizeOptions.Standard;
     setInteriorDecorTypeSelected = CustomizeOptions.Standard;
@@ -194,8 +196,7 @@ class CostEstimateState extends ChangeNotifier {
 
   ///Optional Categores
   ///Kitchen Decor Selection Types
-  CustomizeOptions _kitchenDecorTypeSelected =
-      CustomizeOptions.Standard;
+  CustomizeOptions _kitchenDecorTypeSelected = CustomizeOptions.Standard;
   get kitchenDecorTypeSelected => _kitchenDecorTypeSelected;
 
   set setKitchenDecorTypeSelected(CustomizeOptions option) {
@@ -204,8 +205,7 @@ class CostEstimateState extends ChangeNotifier {
   }
 
   ///Interior Decor Selection Types
-  CustomizeOptions _interiorDecorTypeSelected =
-      CustomizeOptions.Standard;
+  CustomizeOptions _interiorDecorTypeSelected = CustomizeOptions.Standard;
   get interiorDecorTypeSelected => _interiorDecorTypeSelected;
 
   set setInteriorDecorTypeSelected(CustomizeOptions option) {
@@ -214,8 +214,7 @@ class CostEstimateState extends ChangeNotifier {
   }
 
   ///Exterior Decor Selection Types
-  CustomizeOptions _exteriorDecorTypeSelected =
-      CustomizeOptions.Standard;
+  CustomizeOptions _exteriorDecorTypeSelected = CustomizeOptions.Standard;
   get exteriorDecorTypeSelected => _exteriorDecorTypeSelected;
 
   set setExteriorDecorTypeSelected(CustomizeOptions option) {
@@ -223,7 +222,6 @@ class CostEstimateState extends ChangeNotifier {
     notifyListeners();
   }
 }
-
 
 ///Page Types
 enum CostEstimatePageTypes {
