@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/models/cost_estimation/cost_estimation.dart';
+import 'package:hellohuts_app/ui/routes/router.gr.dart';
 import 'package:hellohuts_app/ui/screens/services_offered/build_my_home/pages/add_details_body.dart';
 import 'package:hellohuts_app/ui/screens/services_offered/build_my_home/pages/customize_screen.dart';
 import 'package:hellohuts_app/ui/screens/services_offered/build_my_home/pages/nice_to_have_screen.dart';
@@ -173,7 +174,54 @@ class _AddDetailsForHomeState extends State<AddDetailsForHome> {
         });
   }
 }
+class CallToActionButtonCostEstimate extends StatelessWidget {
+  const CallToActionButtonCostEstimate({
+    Key key,
+    @required this.pageController,
+  }) : super(key: key);
 
+  final PageController pageController;
+
+
+  @override
+  Widget build(BuildContext context) {
+    final state = Provider.of<CostEstimateState>(context);
+    bool isLastPageOfSection =
+        state.pageIndexOfCollectSection == state.lastPageIndexOfTheSection
+            ? true
+            : false;
+    return Padding(
+      padding: const EdgeInsets.only(top: 16, bottom: 12,right: 32),
+      child: Align(
+        alignment: Alignment.bottomRight,
+        child: CupertinoButton(
+            borderRadius: BorderRadius.circular(12),
+            color: AppColors.kPrimaryDarkBlue,
+            child: Text(
+              isLastPageOfSection ? "Calculate Rate" : "Next",
+              style: AppThemes.normalTextStyle
+                  .copyWith(fontSize: 14, color: AppColors.kAccentColor),
+            ),
+            onPressed: () => {
+                  print("User Clicked Next"),
+                  if (!isLastPageOfSection)
+                    {
+                      state.setPageIndexOfCollectSection =
+                          state.pageIndexOfCollectSection + 1,
+                      pageController.nextPage(
+                          duration: const Duration(milliseconds: 400),
+                          curve: Curves.easeInOutSine)
+                    }
+                  else
+                    {
+                      print("User Wants to Calculate the Rate"),
+                      ExtendedNavigator.root.push(Routes.costEstimateScreen),
+                    }
+                }),
+      ),
+    );
+  }
+}
 class AddDetailsProgressIndicator extends StatelessWidget {
   const AddDetailsProgressIndicator({Key key}) : super(key: key);
 

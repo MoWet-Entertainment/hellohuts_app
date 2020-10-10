@@ -41,41 +41,13 @@ class CustomizeDetailsBody extends StatelessWidget {
                 ),
               ),
             ),
-            // Padding(
-            //   padding: const EdgeInsets.only(bottom: 12),
-            //   child: Align(
-            //     alignment: Alignment.bottomRight,
-            //     child: CupertinoButton(
-            //         borderRadius: BorderRadius.circular(12),
-            //         color: AppColors.kPrimaryDarkBlue,
-            //         child: Text(
-            //           "Next",
-            //           style: AppThemes.normalTextStyle.copyWith(
-            //               fontSize: 14, color: AppColors.kAccentColor),
-            //         ),
-            //         onPressed: () => {
-            //               print("User Clicked Next"),
-            //               state.setPageIndexOfCollectSection = 2,
-            //               pageController.nextPage(
-            //                   duration: const Duration(milliseconds: 400),
-            //                   curve: Curves.easeInOutSine)
-            //             }),
-            //   ),
-            // ),
+        
           ],
         ),
       ),
     );
   }
-    _navigateToNextScreen(CostEstimateState state) {
-    print("User Clicked Next");
-
-    state.setPageIndexOfCollectSection = state.pageIndexOfCollectSection + 1;
-
-    pageController.nextPage(
-        duration: const Duration(milliseconds: 400),
-        curve: Curves.easeInOutSine);
-  }
+ 
 }
 
 
