@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,6 +7,7 @@ import 'package:hellohuts_app/states/collect_details_states/cost_estimate_state.
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
 import 'package:hellohuts_app/ui/common_widgets/number_picker.dart';
 import 'package:hellohuts_app/ui/common_widgets/scroll_behavior/neat_scroll_behavior.dart';
+import 'package:hellohuts_app/ui/routes/router.gr.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
 import 'package:provider/provider.dart';
@@ -38,29 +40,89 @@ class AddDetailsBody extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16, bottom: 12),
-              child: Align(
-                alignment: Alignment.bottomRight,
-                child: CupertinoButton(
-                    borderRadius: BorderRadius.circular(12),
-                    color: AppColors.kPrimaryDarkBlue,
-                    child: Text(
-                      "Next",
-                      style: AppThemes.normalTextStyle.copyWith(
-                          fontSize: 14, color: AppColors.kAccentColor),
-                    ),
-                    onPressed: () => {
-                          print("User Clicked Next"),
-                          state.setPageIndexOfCollectSection = 1,
-                          pageController.nextPage(
-                              duration: const Duration(milliseconds: 400),
-                              curve: Curves.easeInOutSine)
-                        }),
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.only(top: 16, bottom: 12),
+            //   child: Align(
+            //     alignment: Alignment.bottomRight,
+            //     child: CupertinoButton(
+            //         borderRadius: BorderRadius.circular(12),
+            //         color: AppColors.kPrimaryDarkBlue,
+            //         child: Text(
+            //           "Next",
+            //           style: AppThemes.normalTextStyle.copyWith(
+            //               fontSize: 14, color: AppColors.kAccentColor),
+            //         ),
+            //         onPressed: () => {
+            //               print("User Clicked Next"),
+            //               state.setPageIndexOfCollectSection =
+            //                   state.pageIndexOfCollectSection + 1,
+            //               pageController.nextPage(
+            //                   duration: const Duration(milliseconds: 400),
+            //                   curve: Curves.easeInOutSine)
+            //             }),
+            //   ),
+            // ),
           ],
         ),
+      ),
+    );
+  }
+
+  _navigateToNextScreen(CostEstimateState state) {
+    print("User Clicked Next");
+
+    state.setPageIndexOfCollectSection = state.pageIndexOfCollectSection + 1;
+
+    pageController.nextPage(
+        duration: const Duration(milliseconds: 400),
+        curve: Curves.easeInOutSine);
+  }
+}
+
+class CallToActionButtonCostEstimate extends StatelessWidget {
+  const CallToActionButtonCostEstimate({
+    Key key,
+    @required this.pageController,
+  }) : super(key: key);
+
+  final PageController pageController;
+
+
+  @override
+  Widget build(BuildContext context) {
+    final state = Provider.of<CostEstimateState>(context);
+    bool isLastPageOfSection =
+        state.pageIndexOfCollectSection == state.lastPageIndexOfTheSection
+            ? true
+            : false;
+    return Padding(
+      padding: const EdgeInsets.only(top: 16, bottom: 12,right: 32),
+      child: Align(
+        alignment: Alignment.bottomRight,
+        child: CupertinoButton(
+            borderRadius: BorderRadius.circular(12),
+            color: AppColors.kPrimaryDarkBlue,
+            child: Text(
+              isLastPageOfSection ? "Calculate Rate" : "Next",
+              style: AppThemes.normalTextStyle
+                  .copyWith(fontSize: 14, color: AppColors.kAccentColor),
+            ),
+            onPressed: () => {
+                  print("User Clicked Next"),
+                  if (!isLastPageOfSection)
+                    {
+                      state.setPageIndexOfCollectSection =
+                          state.pageIndexOfCollectSection + 1,
+                      pageController.nextPage(
+                          duration: const Duration(milliseconds: 400),
+                          curve: Curves.easeInOutSine)
+                    }
+                  else
+                    {
+                      print("User Wants to Calculate the Rate"),
+                      ExtendedNavigator.root.push(Routes.costEstimateScreen),
+                    }
+                }),
       ),
     );
   }

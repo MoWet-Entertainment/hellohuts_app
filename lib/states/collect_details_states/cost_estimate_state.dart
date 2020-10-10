@@ -73,6 +73,7 @@ class CostEstimateState extends ChangeNotifier {
     resetAddDetailsPage();
     resetCustomizePage();
     resetNiceToHave();
+    setPageIndexOfCollectSection = 0;
   }
 
   void resetAddDetailsPage() {
@@ -148,6 +149,9 @@ class CostEstimateState extends ChangeNotifier {
     _pageIndexOfCollectSection = index;
     notifyListeners();
   }
+
+  int _lastPageIndexOfTheSection = 2;
+  int get lastPageIndexOfTheSection => _lastPageIndexOfTheSection;
 
   ///Building materials Selected Option
   CustomizeOptions _buildingMaterialTypeSelected = CustomizeOptions.Best;

@@ -50,6 +50,7 @@ class _AddDetailsForHomeState extends State<AddDetailsForHome> {
                   .copyWith(statusBarColor: Colors.transparent),
               child: SafeArea(
                 child: Scaffold(
+                  backgroundColor: AppColors.kPureWhite,
                   appBar: CustomAppBar(
                     isBackButton: true,
                     centerTitle: true,
@@ -126,7 +127,13 @@ class _AddDetailsForHomeState extends State<AddDetailsForHome> {
                         }
                     },
                   ),
-                  bottomNavigationBar: AddDetailsProgressIndicator(),
+                  bottomNavigationBar: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children:[
+                    CallToActionButtonCostEstimate(pageController: _pageController),
+                    AddDetailsProgressIndicator()
+                    ]),
                   body: PageView(
                     controller: _pageController,
                     onPageChanged: (page) {
