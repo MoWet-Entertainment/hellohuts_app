@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hellohuts_app/models/cost_estimation/cost_estimation.dart';
 import 'package:hellohuts_app/states/collect_details_states/cost_estimate_state.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
+import 'package:hellohuts_app/ui/screens/services_offered/build_my_home/pages/add_details_body.dart';
 import 'package:hellohuts_app/ui/screens/services_offered/build_my_home/widgets.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
@@ -40,31 +41,40 @@ class CustomizeDetailsBody extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 12),
-              child: Align(
-                alignment: Alignment.bottomRight,
-                child: CupertinoButton(
-                    borderRadius: BorderRadius.circular(12),
-                    color: AppColors.kPrimaryDarkBlue,
-                    child: Text(
-                      "Next",
-                      style: AppThemes.normalTextStyle.copyWith(
-                          fontSize: 14, color: AppColors.kAccentColor),
-                    ),
-                    onPressed: () => {
-                          print("User Clicked Next"),
-                          state.setPageIndexOfCollectSection = 2,
-                          pageController.nextPage(
-                              duration: const Duration(milliseconds: 400),
-                              curve: Curves.easeInOutSine)
-                        }),
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.only(bottom: 12),
+            //   child: Align(
+            //     alignment: Alignment.bottomRight,
+            //     child: CupertinoButton(
+            //         borderRadius: BorderRadius.circular(12),
+            //         color: AppColors.kPrimaryDarkBlue,
+            //         child: Text(
+            //           "Next",
+            //           style: AppThemes.normalTextStyle.copyWith(
+            //               fontSize: 14, color: AppColors.kAccentColor),
+            //         ),
+            //         onPressed: () => {
+            //               print("User Clicked Next"),
+            //               state.setPageIndexOfCollectSection = 2,
+            //               pageController.nextPage(
+            //                   duration: const Duration(milliseconds: 400),
+            //                   curve: Curves.easeInOutSine)
+            //             }),
+            //   ),
+            // ),
           ],
         ),
       ),
     );
+  }
+    _navigateToNextScreen(CostEstimateState state) {
+    print("User Clicked Next");
+
+    state.setPageIndexOfCollectSection = state.pageIndexOfCollectSection + 1;
+
+    pageController.nextPage(
+        duration: const Duration(milliseconds: 400),
+        curve: Curves.easeInOutSine);
   }
 }
 
