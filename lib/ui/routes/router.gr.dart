@@ -13,6 +13,7 @@ import '../../models/test.dart';
 import '../../models/user_feed/comments.dart';
 import '../screens/auth/phone_auth/get_phone.dart';
 import '../screens/base_page.dart';
+import '../screens/categories/categories_screen.dart';
 import '../screens/explore.dart';
 import '../screens/feed_posts/feed_post_detail.dart';
 import '../screens/feed_posts/widgets/comments/post_comments_deatil.dart';
@@ -40,6 +41,7 @@ class Routes {
   static const String servicesOfferedBasePage = '/services-offered-base-page';
   static const String addDetailsForHome = '/add-details-for-home';
   static const String costEstimateScreen = '/cost-estimate-screen';
+  static const String categoriesScreen = '/categories-screen';
   static const all = <String>{
     basePage,
     explorePage,
@@ -56,10 +58,11 @@ class Routes {
     servicesOfferedBasePage,
     addDetailsForHome,
     costEstimateScreen,
+    categoriesScreen,
   };
 }
 
-class Router extends RouterBase {
+class AppRouter extends RouterBase {
   @override
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
@@ -78,6 +81,7 @@ class Router extends RouterBase {
     RouteDef(Routes.servicesOfferedBasePage, page: ServicesOfferedBasePage),
     RouteDef(Routes.addDetailsForHome, page: AddDetailsForHome),
     RouteDef(Routes.costEstimateScreen, page: CostEstimateScreen),
+    RouteDef(Routes.categoriesScreen, page: CategoriesScreen),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -224,6 +228,18 @@ class Router extends RouterBase {
         transitionsBuilder: TransitionsBuilders.fadeIn,
       );
     },
+    CategoriesScreen: (data) {
+      final args = data.getArgs<CategoriesScreenArguments>(
+        orElse: () => CategoriesScreenArguments(),
+      );
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => CategoriesScreen(
+          key: args.key,
+          scaffoldKey: args.scaffoldKey,
+        ),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -271,4 +287,11 @@ class PostCommentsDetailArguments {
   final String commentsParentPostId;
   PostCommentsDetailArguments(
       {this.key, this.model, this.commentsParentPostId});
+}
+
+/// CategoriesScreen arguments holder class
+class CategoriesScreenArguments {
+  final Key key;
+  final GlobalKey<ScaffoldState> scaffoldKey;
+  CategoriesScreenArguments({this.key, this.scaffoldKey});
 }

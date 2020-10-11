@@ -3,6 +3,7 @@ import 'package:auto_route/auto_route_annotations.dart';
 import 'package:hellohuts_app/models/user_feed/post_detail.dart';
 import 'package:hellohuts_app/ui/screens/auth/phone_auth/get_phone.dart';
 import 'package:hellohuts_app/ui/screens/base_page.dart';
+import 'package:hellohuts_app/ui/screens/categories/categories_screen.dart';
 import 'package:hellohuts_app/ui/screens/explore.dart';
 import 'package:hellohuts_app/ui/screens/feed_posts/feed_post_detail.dart';
 import 'package:hellohuts_app/ui/screens/feed_posts/widgets/comments/post_comments_deatil.dart';
@@ -32,9 +33,11 @@ AdaptiveRoute(page: PhoneAuthGetPhone),
 CustomRoute(page: ServicesOfferedBasePage, transitionsBuilder:  TransitionsBuilders.fadeIn),
 CustomRoute(page: AddDetailsForHome, transitionsBuilder: TransitionsBuilders.slideLeft),
 CustomRoute(page:CostEstimateScreen,transitionsBuilder: TransitionsBuilders.fadeIn),
+    AdaptiveRoute(page: CategoriesScreen),
+
   ]
 )
-class $Router {}
+class $AppRouter {}
 
 
 // @MaterialAutoRouter()

@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/screenutil.dart';
 import 'package:hellohuts_app/states/app_state.dart';
 import 'package:hellohuts_app/states/feed_state.dart';
 import 'package:hellohuts_app/ui/common_widgets/bottom_navbar/bottom_navbar.dart';
+import 'package:hellohuts_app/ui/screens/categories/categories_screen.dart';
 import 'package:hellohuts_app/ui/screens/explore.dart';
 import 'package:hellohuts_app/ui/screens/search/search_screen.dart';
 import 'package:hellohuts_app/ui/screens/testpage.dart';
@@ -61,7 +62,7 @@ class _BasePageState extends State<BasePage> {
       physics: NeverScrollableScrollPhysics(),
       children: <Widget>[
         ExplorePage(),
-        WelcomePage(),
+        CategoriesScreen(),
         FirstPage(),
         FirstPage()
       ],
