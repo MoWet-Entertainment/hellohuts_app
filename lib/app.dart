@@ -7,9 +7,10 @@ import 'package:hellohuts_app/locators.dart';
 import 'package:hellohuts_app/providers/providers.dart';
 import 'package:hellohuts_app/services/firestore_services/analytics_service.dart';
 import 'package:hellohuts_app/ui/routes/guards/auth_guards.dart';
+import 'package:hellohuts_app/ui/routes/guards/auth_guards.dart';
+import 'package:hellohuts_app/ui/routes/router.gr.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
 import 'package:provider/provider.dart';
-import 'package:hellohuts_app/ui/routes/router.gr.dart' as route;
 
 class App extends StatelessWidget {
   App({Key key}) : super(key: key);
@@ -44,8 +45,8 @@ class App extends StatelessWidget {
               title: Provider.of<AppConfig>(context).appTitle,
               theme: AppThemes.defaultTheme,
               home: Container(),
-              builder: ExtendedNavigator.builder<route.Router>(
-                router: route.Router(),
+              builder: ExtendedNavigator.builder<AppRouter>(
+                router: AppRouter(),
                 guards: [AuthGuard()],
               ),
               navigatorObservers: <NavigatorObserver>[
