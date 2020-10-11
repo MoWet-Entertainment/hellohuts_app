@@ -50,8 +50,8 @@ class _SearchPageState extends State<SearchPage> {
               .copyWith(statusBarColor: AppColors.kPureWhite),
           child: SafeArea(
             child: Scaffold(
-              appBar: CustomSearchBar(hintText: AppStrings.searchHintText),
-              body: SearchBody(),
+              appBar: CustomSearchBar(hintText: AppStrings.searchHintTextForExplore),
+              body: _SearchBody(),
             ),
           ),
         ),
@@ -66,14 +66,14 @@ class _SearchPageState extends State<SearchPage> {
   }
 }
 
-class SearchBody extends StatefulWidget {
-  const SearchBody({Key key}) : super(key: key);
+class _SearchBody extends StatefulWidget {
+  const _SearchBody({Key key}) : super(key: key);
 
   @override
   _SearchBodyState createState() => _SearchBodyState();
 }
 
-class _SearchBodyState extends State<SearchBody> {
+class _SearchBodyState extends State<_SearchBody> {
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<SearchState>(context);

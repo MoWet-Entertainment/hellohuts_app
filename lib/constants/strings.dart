@@ -89,9 +89,10 @@ class AppStrings {
   static const String mock = 'Mock';
 
   //Search Screen
-  static const String searchHintText = "Where do you want your home?";
+  static const String searchHintTextForExplore = "Where do you want your home?";
+  static const String searchHintTextForCategories= "Search like Living room design";
 
   //Services Offered
   static String servicesOffered_WhatCanWeHelpWithText(String location) =>
-      "What can we help you find in "+location+"?";
+      "What can we help you find in " + location + "?";
 }
