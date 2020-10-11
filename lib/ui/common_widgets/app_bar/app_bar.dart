@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hellohuts_app/constants/app_constants.dart';
 import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/constants/hello_icons.dart';
 import 'package:hellohuts_app/states/search_state.dart';
@@ -69,20 +70,20 @@ Widget appBarIcon(
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   ///CustomAppBar is the default appbar for Hellohuts Pages .
-  CustomAppBar({
-    Key key,
-    this.isBackButton = false,
-    this.isCrossButton = false,
-    this.title,
-    this.actions,
-    this.onBackButtonPressed,
-    this.customBackButton,
-    this.onCrossButtonPressed,
-    this.onActionPressed,
-    this.backgroundColor,
-    this.centerTitle = true, 
-    this.brightness = Brightness.light
-  }) : super(key: key);
+  CustomAppBar(
+      {Key key,
+      this.isBackButton = false,
+      this.isCrossButton = false,
+      this.title,
+      this.actions,
+      this.onBackButtonPressed,
+      this.customBackButton,
+      this.onCrossButtonPressed,
+      this.onActionPressed,
+      this.backgroundColor,
+      this.centerTitle = true,
+      this.brightness = Brightness.light})
+      : super(key: key);
 
   ///if the leading is a BackButton. Defaults to arrow based button(as in iOS). By default this will be [false]
   final bool isBackButton;
@@ -115,7 +116,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-       
       brightness: Brightness.light,
       backgroundColor: backgroundColor ?? AppColors.kPureWhite,
       elevation: 0,
@@ -167,6 +167,10 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
   final ValueChanged<String> onSearchChanged;
   String searchText = '';
   bool isAnyTextPresent = false;
+
+  ///To find from which page the search bar is called from
+  final AppPageNames pageNameInContext;
+
   CustomSearchBar({
     Key key,
     this.actions,
@@ -180,6 +184,7 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
     this.title,
     this.hintText = '',
     this.onSearchChanged,
+    this.pageNameInContext,
   }) : super(key: key);
 
   Widget _searchField(BuildContext context, TextEditingController controller) {

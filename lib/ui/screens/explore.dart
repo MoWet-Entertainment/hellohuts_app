@@ -172,7 +172,7 @@ class _AppBarTop extends StatelessWidget {
                   iconColor: AppColors.kDarkTextColor,
                   iconSize: 24.0,
                   backgroundSize: 40.0,
-                  backgroundColor: AppColors.kLightGrey,
+                  backgroundColor: AppColors.kAliceBlue,
                   borderRadius: 12.0,
                   actionCall: () {
                     //TODO: Add App drawer code here
@@ -188,7 +188,7 @@ class _AppBarTop extends StatelessWidget {
                     iconColor: AppColors.kDarkTextColor,
                     iconSize: 24.0,
                     backgroundSize: 40.0,
-                    backgroundColor: AppColors.kLightGrey,
+                    backgroundColor: AppColors.kAliceBlue,
                     borderRadius: 12.0,
                     actionCall: () {
                       ExtendedNavigator.of(context).push(Routes.searchPage);

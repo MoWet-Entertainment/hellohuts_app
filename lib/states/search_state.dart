@@ -1,3 +1,4 @@
+import 'package:hellohuts_app/constants/app_constants.dart';
 import 'package:hellohuts_app/constants/mock_search.dart';
 import 'package:hellohuts_app/helper/logger.dart';
 import 'package:hellohuts_app/models/search/search_item.dart';

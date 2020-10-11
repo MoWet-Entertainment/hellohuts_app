@@ -39,31 +39,13 @@ class NiceToHaveDetailsBody extends StatelessWidget {
                 ),
               ),
             ),
-            // Padding(
-            //   padding: const EdgeInsets.only(top: 16, bottom: 12),
-            //   child: Align(
-            //     alignment: Alignment.bottomRight,
-            //     child: CupertinoButton(
-            //         borderRadius: BorderRadius.circular(12),
-            //         color: AppColors.kPrimaryDarkBlue,
-            //         child: Text(
-            //           "Calculate Rate",
-            //           style: AppThemes.normalTextStyle.copyWith(
-            //               fontSize: 14, color: AppColors.kAccentColor),
-            //         ),
-            //         onPressed:_navigateToCostimateScreen,
-            //     )
-            //   ),
-            // ),
+   
           ],
         ),
       ),
     );
   }
-  void _navigateToCostimateScreen() {
-  print("User Wants to Calculate the Rate");
-  ExtendedNavigator.root.push(Routes.costEstimateScreen);
-}
+
 }
 
 
