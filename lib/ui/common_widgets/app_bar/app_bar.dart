@@ -4,7 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hellohuts_app/constants/app_constants.dart';
 import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/constants/hello_icons.dart';
-import 'package:hellohuts_app/states/search_state.dart';
+import 'package:hellohuts_app/states/search/search_state_main.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
@@ -159,7 +159,7 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
   final bool isBottomLine;
   final bool isCrossButton;
   final Widget leading;
-  final Function onActionPressed;
+  final VoidCallback onActionPressed;
 
   final GlobalKey<ScaffoldState> scaffoldKey;
   final Widget title;
@@ -171,6 +171,10 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
   ///To find from which page the search bar is called from
   final AppPageNames pageNameInContext;
 
+  ///to call the logic when the user clicked reset search by [x] suffix icon
+  final VoidCallback resetSearchCallback;
+
+
   CustomSearchBar({
     Key key,
     this.actions,
@@ -179,16 +183,16 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
     this.isBottomLine = false,
     this.isCrossButton = false,
     this.leading,
-    this.onActionPressed,
+    @required this.onActionPressed,
     this.scaffoldKey,
     this.title,
     this.hintText = '',
     this.onSearchChanged,
     this.pageNameInContext,
+    @required this.resetSearchCallback,
   }) : super(key: key);
 
   Widget _searchField(BuildContext context, TextEditingController controller) {
-    final state = Provider.of<SearchState>(context);
     return Container(
       height: 64,
       padding: const EdgeInsets.only(top: 16, bottom: 8.0, left: 24, right: 16),
@@ -199,7 +203,7 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
         textCapitalization: TextCapitalization.words,
         cursorColor: AppColors.kDarkGrey,
         onChanged: (text) {
-          state.setSearchText(text);
+          onSearchChanged(text);
         },
         controller: controller,
         keyboardType: TextInputType.text,
@@ -240,7 +244,7 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
                     ),
                     onTap: () {
                       controller.text = '';
-                      state.resetSearch();
+                      resetSearchCallback();
                     }),
             contentPadding: const EdgeInsets.only(left: 5, right: 4),
             suffixIconConstraints: BoxConstraints(maxWidth: 40, maxHeight: 40)),
@@ -273,10 +277,7 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final state = Provider.of<SearchState>(context);
     final controller = useTextEditingController();
-    final update = useValueListenable(controller);
-
     return AppBar(
       titleSpacing: 8.0,
       backgroundColor: AppColors.kPureWhite,
@@ -309,7 +310,7 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
           child: GestureDetector(
             onTap: () {
               FocusScope.of(context).unfocus();
-              state.resetSearch();
+              onActionPressed();
               ExtendedNavigator.of(context).pop();
             },
             child: Container(

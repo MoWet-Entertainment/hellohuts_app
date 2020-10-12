@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/constants/strings.dart';
-import 'package:hellohuts_app/states/search_state.dart';
+import 'package:hellohuts_app/states/search/search_state_main.dart';
 import 'package:hellohuts_app/ui/common_widgets/app_bar/app_bar.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
 import 'package:hellohuts_app/ui/routes/router.gr.dart';
@@ -15,7 +15,7 @@ class ServicesOfferedBasePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var state = Provider.of<SearchState>(context);
+    var state = Provider.of<SearchStateMain>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -37,7 +37,7 @@ class _ServicesOfferedBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var searchState = Provider.of<SearchState>(context);
+    var searchState = Provider.of<SearchStateMain>(context);
     return Container(
       color: AppColors.kPureWhite,
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),

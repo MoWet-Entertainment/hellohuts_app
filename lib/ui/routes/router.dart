@@ -4,11 +4,11 @@ import 'package:hellohuts_app/models/user_feed/post_detail.dart';
 import 'package:hellohuts_app/ui/screens/auth/phone_auth/get_phone.dart';
 import 'package:hellohuts_app/ui/screens/base_page.dart';
 import 'package:hellohuts_app/ui/screens/categories/categories_screen.dart';
+import 'package:hellohuts_app/ui/screens/categories/categories_search/categories_search_screen.dart';
 import 'package:hellohuts_app/ui/screens/explore.dart';
 import 'package:hellohuts_app/ui/screens/feed_posts/feed_post_detail.dart';
 import 'package:hellohuts_app/ui/screens/feed_posts/widgets/comments/post_comments_deatil.dart';
 import 'package:hellohuts_app/ui/screens/quick_items/quick_items.dart';
-import 'package:hellohuts_app/ui/screens/search/search_detail.dart';
 import 'package:hellohuts_app/ui/screens/search/search_screen.dart';
 import 'package:hellohuts_app/ui/screens/services_offered/build_my_home/add_details.dart';
 import 'package:hellohuts_app/ui/screens/services_offered/build_my_home/pages/cost_estimate_screen.dart';
@@ -22,7 +22,8 @@ import 'package:hellohuts_app/ui/screens/welcome_page.dart';
     AdaptiveRoute(page: ExplorePage  ),
     CustomRoute(page: WelcomePage, transitionsBuilder: TransitionsBuilders.slideBottom ),
     CustomRoute(page: SearchPage, transitionsBuilder: TransitionsBuilders.fadeIn ),
-     CustomRoute(page: SearchDetail, transitionsBuilder: TransitionsBuilders.slideLeft ),
+        CustomRoute(page: CategoriesSearchPage, transitionsBuilder: TransitionsBuilders.fadeIn ),
+
      AdaptiveRoute(page: PostDetailScreen ),
  CustomRoute(page: PostCommentsDetail, name: "commentsDetail", transitionsBuilder: TransitionsBuilders.slideBottom ),
       CustomRoute(page: CostEstimate, transitionsBuilder: TransitionsBuilders.fadeIn ),

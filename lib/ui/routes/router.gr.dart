@@ -14,11 +14,11 @@ import '../../models/user_feed/comments.dart';
 import '../screens/auth/phone_auth/get_phone.dart';
 import '../screens/base_page.dart';
 import '../screens/categories/categories_screen.dart';
+import '../screens/categories/categories_search/categories_search_screen.dart';
 import '../screens/explore.dart';
 import '../screens/feed_posts/feed_post_detail.dart';
 import '../screens/feed_posts/widgets/comments/post_comments_deatil.dart';
 import '../screens/quick_items/quick_items.dart';
-import '../screens/search/search_detail.dart';
 import '../screens/search/search_screen.dart';
 import '../screens/services_offered/build_my_home/add_details.dart';
 import '../screens/services_offered/build_my_home/pages/cost_estimate_screen.dart';
@@ -30,7 +30,7 @@ class Routes {
   static const String explorePage = '/explore-page';
   static const String welcomePage = '/welcome-page';
   static const String searchPage = '/search-page';
-  static const String searchDetail = '/search-detail';
+  static const String categoriesSearchPage = '/categories-search-page';
   static const String postDetailScreen = '/post-detail-screen';
   static const String commentsDetail = '/post-comments-detail';
   static const String costEstimate = '/cost-estimate';
@@ -47,7 +47,7 @@ class Routes {
     explorePage,
     welcomePage,
     searchPage,
-    searchDetail,
+    categoriesSearchPage,
     postDetailScreen,
     commentsDetail,
     costEstimate,
@@ -70,7 +70,7 @@ class AppRouter extends RouterBase {
     RouteDef(Routes.explorePage, page: ExplorePage),
     RouteDef(Routes.welcomePage, page: WelcomePage),
     RouteDef(Routes.searchPage, page: SearchPage),
-    RouteDef(Routes.searchDetail, page: SearchDetail),
+    RouteDef(Routes.categoriesSearchPage, page: CategoriesSearchPage),
     RouteDef(Routes.postDetailScreen, page: PostDetailScreen),
     RouteDef(Routes.commentsDetail, page: PostCommentsDetail),
     RouteDef(Routes.costEstimate, page: CostEstimate),
@@ -131,12 +131,18 @@ class AppRouter extends RouterBase {
         transitionsBuilder: TransitionsBuilders.fadeIn,
       );
     },
-    SearchDetail: (data) {
+    CategoriesSearchPage: (data) {
+      final args = data.getArgs<CategoriesSearchPageArguments>(
+        orElse: () => CategoriesSearchPageArguments(),
+      );
       return PageRouteBuilder<dynamic>(
         pageBuilder: (context, animation, secondaryAnimation) =>
-            const SearchDetail(),
+            CategoriesSearchPage(
+          key: args.key,
+          scaffoldKey: args.scaffoldKey,
+        ),
         settings: data,
-        transitionsBuilder: TransitionsBuilders.slideLeft,
+        transitionsBuilder: TransitionsBuilders.fadeIn,
       );
     },
     PostDetailScreen: (data) {
@@ -271,6 +277,13 @@ class SearchPageArguments {
   final Key key;
   final GlobalKey<ScaffoldState> scaffoldKey;
   SearchPageArguments({this.key, this.scaffoldKey});
+}
+
+/// CategoriesSearchPage arguments holder class
+class CategoriesSearchPageArguments {
+  final Key key;
+  final GlobalKey<ScaffoldState> scaffoldKey;
+  CategoriesSearchPageArguments({this.key, this.scaffoldKey});
 }
 
 /// PostDetailScreen arguments holder class
