@@ -7,6 +7,7 @@ import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/constants/mock1.dart';
 import 'package:hellohuts_app/constants/strings.dart';
 import 'package:hellohuts_app/ui/common_widgets/app_bar/app_bar.dart';
+import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
 import 'package:hellohuts_app/ui/common_widgets/scroll_behavior/neat_scroll_behavior.dart';
 import 'package:hellohuts_app/ui/routes/router.gr.dart';
 import 'package:hellohuts_app/ui/screens/search/search_screen.dart';
@@ -35,53 +36,65 @@ class _CategoriesScreenState extends State<CategoriesScreen>
               .copyWith(statusBarColor: AppColors.kPureWhite),
           child: SafeArea(
             child: Scaffold(
-              body:  NestedScrollView(
-      ///This can be used to achieve floating app bar,
-      ///but currently this also floats the [_HeaderSection] which is undesirable
-      ///Therefore given false for now
-      floatHeaderSlivers: true,
-
-      headerSliverBuilder: (context, bool innerBoxIsScrolled) {
-        return <Widget>[
-         SliverAppBar(
-                titleSpacing: 8.0,
-                backgroundColor: AppColors.kPureWhite,
-                elevation: 0,
-                bottom: PreferredSize(
-                  preferredSize: Size.fromHeight(8.0),
-                  child: Container(
-                    height: 8.0,
-                  ),
+              body: NestedScrollView(
+                ///This can be used to achieve floating app bar,
+                ///but currently this also floats the [_HeaderSection] which is undesirable
+                ///Therefore given false for now
+                floatHeaderSlivers: true,
+                headerSliverBuilder: (context, bool innerBoxIsScrolled) {
+                  return <Widget>[
+                    SliverOverlapAbsorber(
+                      handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                          context),
+                      sliver: SliverSafeArea(
+                        sliver: SliverAppBar(
+                          pinned: false,
+                          snap: false,
+                          floating: true,
+                          titleSpacing: 8.0,
+                          backgroundColor: AppColors.kPureWhite,
+                          elevation: 0,
+                          bottom: PreferredSize(
+                            preferredSize: Size.fromHeight(8.0),
+                            child: Container(
+                              height: 8.0,
+                            ),
+                          ),
+                          title: _searchField(context),
+                        ),
+                      ),
+                    ),
+                    SliverToBoxAdapter(
+                      child: Container(
+                        height: 40,
+                        color: AppColors.kDarkGreen,
+                      ),
+                    ),
+                  ];
+                },
+                body: _SearchBodyCategories(
+                  scaffoldKey: widget.scaffoldKey,
                 ),
-                title: _searchField(context),
               ),
-          SliverToBoxAdapter(child: Container(height: 30, color: AppColors.kDarkGreen,),),
-        ];
-      },
-        body:  _SearchBodyCategories(
-            scaffoldKey: widget.scaffoldKey,
-          ),
-      ),
-    ),
-  
-              // appBar: AppBar(
-              //   titleSpacing: 8.0,
-              //   backgroundColor: AppColors.kPureWhite,
-              //   elevation: 0,
-              //   bottom: PreferredSize(
-              //     preferredSize: Size.fromHeight(8.0),
-              //     child: Container(
-              //       height: 8.0,
-              //     ),
-              //   ),
-              //   title: _searchField(context),
-              // ),
-              // // actions: _getActionButtons(context),
-              // body: _SearchBodyCategories(),
             ),
+
+            // appBar: AppBar(
+            //   titleSpacing: 8.0,
+            //   backgroundColor: AppColors.kPureWhite,
+            //   elevation: 0,
+            //   bottom: PreferredSize(
+            //     preferredSize: Size.fromHeight(8.0),
+            //     child: Container(
+            //       height: 8.0,
+            //     ),
+            //   ),
+            //   title: _searchField(context),
+            // ),
+            // // actions: _getActionButtons(context),
+            // body: _SearchBodyCategories(),
           ),
         ),
-      
+      ),
     );
   }
 
@@ -136,7 +149,7 @@ class _CategoriesScreenState extends State<CategoriesScreen>
 }
 
 class _SearchBodyCategories extends StatelessWidget {
-    final GlobalKey<ScaffoldState> scaffoldKey;
+  final GlobalKey<ScaffoldState> scaffoldKey;
 
   const _SearchBodyCategories({Key key, this.scaffoldKey}) : super(key: key);
 
@@ -148,22 +161,24 @@ class _SearchBodyCategories extends StatelessWidget {
       PinterestGrid(),
       StandardStaggeredGrid(),
     ];
-    return Container(
+    return Scaffold(
+      body: Container(
         child: ScrollConfiguration(
-      behavior: NeatScrollBehavior(),
-      child: 
-                 PageView(
-                  
-                   children: [
-        StandardGrid(),
-          InstagramSearchGrid(),
-         PinterestGrid(),
-        StandardStaggeredGrid(),
-        ]),
-               ),
+          behavior: NeatScrollBehavior(),
+          child: PageView(
+            children: [
+              StandardGrid(),
+              InstagramSearchGrid(),
+              PinterestGrid(),
+              StandardStaggeredGrid(),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
+
 
 class StandardGrid extends StatelessWidget {
   const StandardGrid({Key key}) : super(key: key);
@@ -190,7 +205,7 @@ class StandardStaggeredGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-        print("StandardStaggeredGrid  Created");
+    print("StandardStaggeredGrid  Created");
 
     return StaggeredGridView.countBuilder(
       crossAxisCount: 3,
@@ -210,7 +225,7 @@ class InstagramSearchGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-            print("InstagramSearchGrid  Created");
+    print("InstagramSearchGrid  Created");
 
     return StaggeredGridView.countBuilder(
       crossAxisCount: 3,
@@ -231,11 +246,9 @@ class PinterestGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-                print("PinterestGrid  Created");
+    print("PinterestGrid  Created");
 
     return StaggeredGridView.countBuilder(
-
-      
       crossAxisCount: 2,
       itemCount: imageList.length,
       itemBuilder: (context, index) => ImageCard(
