@@ -4,8 +4,8 @@ import 'package:hellohuts_app/helper/logger.dart';
 import 'package:hellohuts_app/models/search/search_item.dart';
 import 'package:hellohuts_app/states/app_state.dart';
 
-class SearchState extends AppState {
-  var logger = getLogger('AuthState');
+class SearchStateMain extends AppState {
+  var logger = getLogger('SearchStateMain');
 
   bool _isSearching = false;
   String _searchText = '';

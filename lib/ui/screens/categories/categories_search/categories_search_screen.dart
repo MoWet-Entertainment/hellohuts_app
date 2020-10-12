@@ -5,6 +5,7 @@ import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/constants/hello_icons.dart';
 import 'package:hellohuts_app/constants/strings.dart';
 import 'package:hellohuts_app/models/search/search_item.dart';
+import 'package:hellohuts_app/states/search/search_categories_state.dart';
 import 'package:hellohuts_app/ui/common_widgets/app_bar/app_bar.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
 import 'package:hellohuts_app/ui/routes/router.gr.dart';
@@ -13,15 +14,15 @@ import 'package:hellohuts_app/ui/styles/app_themes.dart';
 import 'package:provider/provider.dart';
 import 'package:hellohuts_app/states/search/search_state_main.dart';
 
-class SearchPage extends StatefulWidget {
+class CategoriesSearchPage extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
-  SearchPage({Key key, this.scaffoldKey}) : super(key: key);
+  CategoriesSearchPage({Key key, this.scaffoldKey}) : super(key: key);
 
   @override
-  _SearchPageState createState() => _SearchPageState();
+  _CategoriesSearchPageState createState() => _CategoriesSearchPageState();
 }
 
-class _SearchPageState extends State<SearchPage> {
+class _CategoriesSearchPageState extends State<CategoriesSearchPage> {
   bool flag = true;
   void onFilterPressed() {
     //TODO: Add filter here
@@ -31,7 +32,7 @@ class _SearchPageState extends State<SearchPage> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final state = Provider.of<SearchStateMain>(context, listen: false);
+      final state = Provider.of<SearchCategoriesState>(context, listen: false);
       state.resetSearch();
       //TODO: initialise Search State here and show user specific filter conditions
     });
@@ -41,8 +42,8 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    final state = Provider.of<SearchStateMain>(context);
     print("building parent");
+    final state = Provider.of<SearchCategoriesState>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -52,10 +53,10 @@ class _SearchPageState extends State<SearchPage> {
           child: SafeArea(
             child: Scaffold(
               appBar: CustomSearchBar(
-                hintText: AppStrings.searchHintTextForExplore,
-                onSearchChanged: (text) => state.setSearchText(text),
-                resetSearchCallback: ()=> state.resetSearch(),
-                onActionPressed: () =>state.resetSearch(),
+                hintText: AppStrings.searchHintTextForCategories,
+                onSearchChanged: (text) =>state.setSearchText(text),
+                resetSearchCallback: () =>state.resetSearch(),
+                onActionPressed: ()=>state.resetSearch(),  
               ),
               body: _SearchBody(),
             ),
@@ -64,10 +65,6 @@ class _SearchPageState extends State<SearchPage> {
       ),
     );
   }
-
-  
-
-
 
   @override
   void dispose() {
@@ -86,7 +83,7 @@ class _SearchBody extends StatefulWidget {
 class _SearchBodyState extends State<_SearchBody> {
   @override
   Widget build(BuildContext context) {
-    final state = Provider.of<SearchStateMain>(context);
+    final state = Provider.of<SearchCategoriesState>(context);
     final bool isSearching = state.isSearching;
     return Container(
       color: state.isSearching ? AppColors.kAliceBlue : AppColors.kPureWhite,
@@ -106,7 +103,7 @@ class _ShowResults extends StatefulWidget {
 class __ShowResultsState extends State<_ShowResults> {
   @override
   Widget build(BuildContext context) {
-    final state = Provider.of<SearchStateMain>(context);
+    final state = Provider.of<SearchCategoriesState>(context);
     final results = state.getSearchResults();
     return Container(
       padding: const EdgeInsets.only(top: 12.0),
@@ -125,7 +122,7 @@ class _SearchResultsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var state = Provider.of<SearchStateMain>(context);
+    var state = Provider.of<SearchCategoriesState>(context);
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
       child: InkWell(
