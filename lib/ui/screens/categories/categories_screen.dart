@@ -27,11 +27,6 @@ class CategoriesScreen extends StatefulWidget {
 class _CategoriesScreenState extends State<CategoriesScreen>
     with AutomaticKeepAliveClientMixin, SingleTickerProviderStateMixin {
   TabController _tabController;
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 5, vsync: this);
-  }
 
   final List<String> _tabs = <String>[
     "Featured",
@@ -41,6 +36,18 @@ class _CategoriesScreenState extends State<CategoriesScreen>
     "Fantastics",
     "Brilliant",
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: _tabs.length, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,129 +61,132 @@ class _CategoriesScreenState extends State<CategoriesScreen>
           child: SafeArea(
             child: Scaffold(
               backgroundColor: AppColors.kPureWhite,
-              body: DefaultTabController(
-                length: _tabs.length, // This is the number of tabs.
-                child: NestedScrollView(
-                  floatHeaderSlivers: true,
-                  headerSliverBuilder:
-                      (BuildContext context, bool innerBoxIsScrolled) {
-                    // These are the slivers that show up in the "outer" scroll view.
-                    return <Widget>[
-                      SliverOverlapAbsorber(
-                        // This widget takes the overlapping behavior of the SliverAppBar,
-                        // and redirects it to the SliverOverlapInjector below. If it is
-                        // missing, then it is possible for the nested "inner" scroll view
-                        // below to end up under the SliverAppBar even when the inner
-                        // scroll view thinks it has not been scrolled.
-                        // This is not necessary if the "headerSliverBuilder" only builds
-                        // widgets that do not overlap the next sliver.
-                        handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
-                            context),
-                        sliver: SliverSafeArea(
-                          top: false,
-                          sliver: SliverAppBar(
-                            backgroundColor: AppColors.kPureWhite,
-                            title: _searchField(context),
-                            floating: true,
-                            pinned: true,
-                            snap: false,
-                            primary: true,
-                            forceElevated: innerBoxIsScrolled,
-                            bottom: TabBar(
-                              isScrollable: true,
-                              indicatorPadding: const EdgeInsets.only(bottom: 4,left: 16, right: 8),
-                              indicatorColor: AppColors.kAccentColor,
-                              labelStyle: AppThemes.normalTextStyle.copyWith(fontSize: 14, color: AppColors.kDarkTextColor,fontWeight: FontWeight.bold),
-                              // These are the widgets to put in each tab in the tab bar.
-                              tabs: _tabs
-                                  .map((String name) => Tab(
-                                        child: Text(
-                                          name,
-                                          style: AppThemes.normalTextStyle
-                                              .copyWith(fontSize: 14),
-                                        ),
-                                      ))
-                                  .toList(),
-                            ),
+              body: NestedScrollView(
+                floatHeaderSlivers: true,
+                headerSliverBuilder:
+                    (BuildContext context, bool innerBoxIsScrolled) {
+                  // These are the slivers that show up in the "outer" scroll view.
+                  return <Widget>[
+                    SliverOverlapAbsorber(
+                      // This widget takes the overlapping behavior of the SliverAppBar,
+                      // and redirects it to the SliverOverlapInjector below. If it is
+                      // missing, then it is possible for the nested "inner" scroll view
+                      // below to end up under the SliverAppBar even when the inner
+                      // scroll view thinks it has not been scrolled.
+                      // This is not necessary if the "headerSliverBuilder" only builds
+                      // widgets that do not overlap the next sliver.
+                      handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                          context),
+                      sliver: SliverSafeArea(
+                        top: false,
+                        sliver: SliverAppBar(
+                          backgroundColor: AppColors.kPureWhite,
+                          title: _searchField(context),
+                          floating: true,
+                          pinned: true,
+                          snap: false,
+                          primary: true,
+                          forceElevated: innerBoxIsScrolled,
+                          bottom: TabBar(
+                            controller: _tabController,
+                            isScrollable: true,
+                            indicatorPadding: const EdgeInsets.only(
+                                bottom: 4, left: 16, right: 8),
+                            indicatorColor: AppColors.kAccentColor,
+                            labelColor: AppColors.kDarkTextColor,
+                            unselectedLabelColor: AppColors.kDarkestGrey,
+                            labelStyle: AppThemes.normalTextStyle.copyWith(
+                                fontSize: 14, fontWeight: FontWeight.bold),
+                            unselectedLabelStyle: AppThemes.normalTextStyle
+                                .copyWith(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.normal),
+                            // These are the widgets to put in each tab in the tab bar.
+                            tabs: _tabs
+                                .map((String name) => Tab(
+                                      text: name,
+                                    ))
+                                .toList(),
                           ),
                         ),
                       ),
-                    ];
-                  },
-                  body: TabBarView(
-                    // These are the contents of the tab views, below the tabs.
-                    children: [
-                      InstagramSearchGrid(),
-                      PinterestGrid(),
-                      StandardGrid(),
-                      StandardStaggeredGrid(),
-                      InstagramSearchGrid(),
-                      PinterestGrid(),
-                    ],
-                    // children: _tabs.map((String name) {
-                    //   return SafeArea(
-                    //     top: false,
-                    //     bottom: false,
-                    //     child: InstagramSearchGrid(),
-                    //     // child: Builder(
-                    //     //   // This Builder is needed to provide a BuildContext that is "inside"
-                    //     //   // the NestedScrollView, so that sliverOverlapAbsorberHandleFor() can
-                    //     //   // find the NestedScrollView.
-                    //     //   builder: (BuildContext context) {
-                    //     //     return CustomScrollView(
-                    //     //       // The "controller" and "primary" members should be left
-                    //     //       // unset, so that the NestedScrollView can control this
-                    //     //       // inner scroll view.
-                    //     //       // If the "controller" property is set, then this scroll
-                    //     //       // view will not be associated with the NestedScrollView.
-                    //     //       // The PageStorageKey should be unique to this ScrollView;
-                    //     //       // it allows the list to remember its scroll position when
-                    //     //       // the tab view is not on the screen.
-                    //     //       key: PageStorageKey<String>(name),
-                    //     //       slivers: <Widget>[
-                    //     //         SliverOverlapInjector(
-                    //     //           // This is the flip side of the SliverOverlapAbsorber above.
-                    //     //           handle: NestedScrollView
-                    //     //               .sliverOverlapAbsorberHandleFor(context),
-                    //     //         ),
-                    //     //         SliverPadding(
-                    //     //           padding: const EdgeInsets.all(8.0),
-                    //     //           // In this example, the inner scroll view has
-                    //     //           // fixed-height list items, hence the use of
-                    //     //           // SliverFixedExtentList. However, one could use any
-                    //     //           // sliver widget here, e.g. SliverList or SliverGrid.
-                    //     //           sliver: SliverFixedExtentList(
-                    //     //             // The items in this example are fixed to 48 pixels
-                    //     //             // high. This matches the Material Design spec for
-                    //     //             // ListTile widgets.
-                    //     //             itemExtent: 60.0,
-                    //     //             delegate: SliverChildBuilderDelegate(
-                    //     //               (BuildContext context, int index) {
-                    //     //                 // This builder is called for each child.
-                    //     //                 // In this example, we just number each list item.
-                    //     //                 return Container(
-                    //     //                     color: Color((math.Random()
-                    //     //                                         .nextDouble() *
-                    //     //                                     0xFFFFFF)
-                    //     //                                 .toInt() <<
-                    //     //                             0)
-                    //     //                         .withOpacity(1.0));
-                    //     //               },
-                    //     //               // The childCount of the SliverChildBuilderDelegate
-                    //     //               // specifies how many children this inner list
-                    //     //               // has. In this example, each tab has a list of
-                    //     //               // exactly 30 items, but this is arbitrary.
-                    //     //               childCount: 30,
-                    //     //             ),
-                    //     //           ),
-                    //     //         ),
-                    //     //       ],
-                    //     //     );
-                    //     //   },
-                    //     // ),
-                    //   );
-                    // }).toList(),
-                  ),
+                    ),
+                  ];
+                },
+                body: TabBarView(
+                  controller: _tabController,
+                  // These are the contents of the tab views, below the tabs.
+                  children: [
+                    InstagramSearchGrid(),
+                    PinterestGrid(),
+                    StandardGrid(),
+                    StandardStaggeredGrid(),
+                    InstagramSearchGrid(),
+                    PinterestGrid(),
+                  ],
+                  // children: _tabs.map((String name) {
+                  //   return SafeArea(
+                  //     top: false,
+                  //     bottom: false,
+                  //     child: InstagramSearchGrid(),
+                  //     // child: Builder(
+                  //     //   // This Builder is needed to provide a BuildContext that is "inside"
+                  //     //   // the NestedScrollView, so that sliverOverlapAbsorberHandleFor() can
+                  //     //   // find the NestedScrollView.
+                  //     //   builder: (BuildContext context) {
+                  //     //     return CustomScrollView(
+                  //     //       // The "controller" and "primary" members should be left
+                  //     //       // unset, so that the NestedScrollView can control this
+                  //     //       // inner scroll view.
+                  //     //       // If the "controller" property is set, then this scroll
+                  //     //       // view will not be associated with the NestedScrollView.
+                  //     //       // The PageStorageKey should be unique to this ScrollView;
+                  //     //       // it allows the list to remember its scroll position when
+                  //     //       // the tab view is not on the screen.
+                  //     //       key: PageStorageKey<String>(name),
+                  //     //       slivers: <Widget>[
+                  //     //         SliverOverlapInjector(
+                  //     //           // This is the flip side of the SliverOverlapAbsorber above.
+                  //     //           handle: NestedScrollView
+                  //     //               .sliverOverlapAbsorberHandleFor(context),
+                  //     //         ),
+                  //     //         SliverPadding(
+                  //     //           padding: const EdgeInsets.all(8.0),
+                  //     //           // In this example, the inner scroll view has
+                  //     //           // fixed-height list items, hence the use of
+                  //     //           // SliverFixedExtentList. However, one could use any
+                  //     //           // sliver widget here, e.g. SliverList or SliverGrid.
+                  //     //           sliver: SliverFixedExtentList(
+                  //     //             // The items in this example are fixed to 48 pixels
+                  //     //             // high. This matches the Material Design spec for
+                  //     //             // ListTile widgets.
+                  //     //             itemExtent: 60.0,
+                  //     //             delegate: SliverChildBuilderDelegate(
+                  //     //               (BuildContext context, int index) {
+                  //     //                 // This builder is called for each child.
+                  //     //                 // In this example, we just number each list item.
+                  //     //                 return Container(
+                  //     //                     color: Color((math.Random()
+                  //     //                                         .nextDouble() *
+                  //     //                                     0xFFFFFF)
+                  //     //                                 .toInt() <<
+                  //     //                             0)
+                  //     //                         .withOpacity(1.0));
+                  //     //               },
+                  //     //               // The childCount of the SliverChildBuilderDelegate
+                  //     //               // specifies how many children this inner list
+                  //     //               // has. In this example, each tab has a list of
+                  //     //               // exactly 30 items, but this is arbitrary.
+                  //     //               childCount: 30,
+                  //     //             ),
+                  //     //           ),
+                  //     //         ),
+                  //     //       ],
+                  //     //     );
+                  //     //   },
+                  //     // ),
+                  //   );
+                  // }).toList(),
                 ),
               ),
             ),
@@ -321,7 +331,12 @@ class InstagramSearchGrid extends StatelessWidget {
         imageData: imageList[index],
       ),
       staggeredTileBuilder: (index) => StaggeredTile.count(
-          (index % 7 == 0) ? 2 : 1, (index % 7 == 0) ? 2 :(index%3 ==0)?2: 1),
+          (index % 7 == 0) ? 2 : 1,
+          (index % 7 == 0)
+              ? 2
+              : (index % 3 == 0)
+                  ? 2
+                  : 1),
       mainAxisSpacing: 4.0,
       crossAxisSpacing: 4.0,
     );
@@ -335,15 +350,18 @@ class PinterestGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     print("PinterestGrid  Created");
 
-    return StaggeredGridView.countBuilder(
-      crossAxisCount: 2,
-      itemCount: imageList.length,
-      itemBuilder: (context, index) => ImageCard(
-        imageData: imageList[index],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal:8.0,vertical: 8.0),
+      child: StaggeredGridView.countBuilder(
+        crossAxisCount: 2,
+        itemCount: imageList.length,
+        itemBuilder: (context, index) => ImageCard1(
+          imageData: imageList[index],
+        ),
+        staggeredTileBuilder: (index) => StaggeredTile.fit(1),
+        mainAxisSpacing: 8.0,
+        crossAxisSpacing: 8.0,
       ),
-      staggeredTileBuilder: (index) => StaggeredTile.fit(1),
-      mainAxisSpacing: 8.0,
-      crossAxisSpacing: 8.0,
     );
   }
 }
@@ -360,5 +378,20 @@ class ImageCard extends StatelessWidget {
     //   child: Image.network(imageData.imageUrl, fit: BoxFit.cover),
     // );
     return Image.network(imageData.imageUrl, fit: BoxFit.cover);
+  }
+}
+
+class ImageCard1 extends StatelessWidget {
+  const ImageCard1({this.imageData});
+
+  final ImageData imageData;
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(16.0),
+      child: Image.network(imageData.imageUrl, fit: BoxFit.cover),
+    );
+    // return Image.network(imageData.imageUrl, fit: BoxFit.cover);
   }
 }
