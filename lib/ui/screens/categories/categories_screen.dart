@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:hellohuts_app/constants/app_constants.dart';
@@ -57,7 +58,7 @@ class _CategoriesScreenState extends State<CategoriesScreen>
       home: Scaffold(
         body: AnnotatedRegion<SystemUiOverlayStyle>(
           value: SystemUiOverlayStyle.dark
-              .copyWith(statusBarColor: AppColors.kPureWhite),
+              .copyWith(statusBarColor: Colors.transparent),
           child: SafeArea(
             child: Scaffold(
               backgroundColor: AppColors.kPureWhite,
@@ -259,17 +260,21 @@ class _SearchBodyCategories extends StatelessWidget {
       PinterestGrid(),
       StandardStaggeredGrid(),
     ];
-    return Scaffold(
-      body: Container(
-        child: ScrollConfiguration(
-          behavior: NeatScrollBehavior(),
-          child: PageView(
-            children: [
-              StandardGrid(),
-              InstagramSearchGrid(),
-              PinterestGrid(),
-              StandardStaggeredGrid(),
-            ],
+    return AnnotatedRegion(
+      value: SystemUiOverlayStyle.dark
+          .copyWith(statusBarColor: Colors.transparent),
+      child: Scaffold(
+        body: Container(
+          child: ScrollConfiguration(
+            behavior: NeatScrollBehavior(),
+            child: PageView(
+              children: [
+                StandardGrid(),
+                InstagramSearchGrid(),
+                PinterestGrid(),
+                StandardStaggeredGrid(),
+              ],
+            ),
           ),
         ),
       ),
@@ -327,7 +332,7 @@ class InstagramSearchGrid extends StatelessWidget {
     return StaggeredGridView.countBuilder(
       crossAxisCount: 3,
       itemCount: imageList.length,
-      itemBuilder: (context, index) => ImageCard(
+      itemBuilder: (context, index) => ImageCard1(
         imageData: imageList[index],
       ),
       staggeredTileBuilder: (index) => StaggeredTile.count(
@@ -351,7 +356,7 @@ class PinterestGrid extends StatelessWidget {
     print("PinterestGrid  Created");
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal:8.0,vertical: 8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
       child: StaggeredGridView.countBuilder(
         crossAxisCount: 2,
         itemCount: imageList.length,
@@ -377,21 +382,175 @@ class ImageCard extends StatelessWidget {
     //   borderRadius: BorderRadius.circular(16.0),
     //   child: Image.network(imageData.imageUrl, fit: BoxFit.cover),
     // );
-    return Image.network(imageData.imageUrl, fit: BoxFit.cover);
+    return Container(
+        child: Image.network(imageData.imageUrl, fit: BoxFit.cover));
   }
 }
 
-class ImageCard1 extends StatelessWidget {
+class ImageCard1 extends StatefulWidget {
   const ImageCard1({this.imageData});
-
   final ImageData imageData;
+
+  @override
+  _ImageCard1State createState() => _ImageCard1State();
+}
+
+class _ImageCard1State extends State<ImageCard1> {
+  OverlayEntry _popupDialog;
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(16.0),
-      child: Image.network(imageData.imageUrl, fit: BoxFit.cover),
-    );
+        borderRadius: BorderRadius.circular(0.0),
+        child: GestureDetector(
+          child: Hero(
+              tag: widget.imageData.id,
+              child:
+                  Image.network(widget.imageData.imageUrl, fit: BoxFit.cover)),
+          onTap: () => {
+            print("user tapped"),
+            ExtendedNavigator.root.push(Routes.postImageWidget,
+                arguments:
+                    PostImageWidgetArguments(imageData: widget.imageData))
+          },
+          onLongPress: () => {
+            _popupDialog = _createPopupDialog(widget.imageData),
+            Overlay.of(context).insert(_popupDialog),
+          },
+          onLongPressEnd: (details) => _popupDialog?.remove(),
+        ));
+
     // return Image.network(imageData.imageUrl, fit: BoxFit.cover);
+  }
+
+  OverlayEntry _createPopupDialog(ImageData imageData) {
+    return OverlayEntry(
+      builder: (context) => AnimatedDialog(
+        child: _createPopupContent(imageData),
+      ),
+    );
+  }
+
+
+  Widget _createPopupContent(ImageData imageData) {
+    return Builder(
+      builder: (context) {
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(16.0),
+          child: Container(
+            // height: fullHeight(context)*0.7,
+            width: fullWidth(context) * 0.8,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _createPhotoTitle(),
+                Image.network(imageData.imageUrl, fit: BoxFit.fitHeight),
+                _createActionBar(),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _createPhotoTitle() => Container(
+        padding: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
+        width: double.infinity,
+        color: AppColors.kPureWhite,
+        child: Text('this is a large image',
+            style: TextStyle(color: Colors.black)),
+      );
+
+  Widget _createActionBar() => Container(
+        padding: EdgeInsets.symmetric(vertical: 5.0),
+        color: AppColors.kPureWhite,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Icon(
+              Icons.favorite_border,
+              color: Colors.black,
+            ),
+            Icon(
+              Icons.chat_bubble_outline,
+              color: Colors.black,
+            ),
+            Icon(
+              Icons.send,
+              color: Colors.black,
+            ),
+          ],
+        ),
+      );
+}
+
+class PostImageWidget extends StatelessWidget {
+  final ImageData imageData;
+  const PostImageWidget({Key key, @required this.imageData}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Hero(
+          tag: imageData.id,
+          child: Image.network(
+            imageData.imageUrl,
+            fit: BoxFit.cover,
+          )),
+    );
+  }
+}
+
+class AnimatedDialog extends StatefulWidget {
+  const AnimatedDialog({Key key, this.child}) : super(key: key);
+
+  final Widget child;
+
+  @override
+  State<StatefulWidget> createState() => AnimatedDialogState();
+}
+
+class AnimatedDialogState extends State<AnimatedDialog>
+    with SingleTickerProviderStateMixin {
+  AnimationController controller;
+  Animation<double> opacityAnimation;
+  Animation<double> scaleAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    controller = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 400));
+    scaleAnimation =
+        CurvedAnimation(parent: controller, curve: Curves.easeOutExpo);
+    opacityAnimation = Tween<double>(begin: 0.0, end: 0.6).animate(
+        CurvedAnimation(parent: controller, curve: Curves.easeOutExpo));
+
+    controller.addListener(() => setState(() {}));
+    controller.forward();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.black.withOpacity(opacityAnimation.value),
+      child: Center(
+        child: FadeTransition(
+          opacity: scaleAnimation,
+          child: ScaleTransition(
+            scale: scaleAnimation,
+            child: widget.child,
+          ),
+        ),
+      ),
+    );
   }
 }

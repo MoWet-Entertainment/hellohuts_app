@@ -9,6 +9,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+import '../../constants/mock1.dart';
 import '../../models/test.dart';
 import '../../models/user_feed/comments.dart';
 import '../screens/auth/phone_auth/get_phone.dart';
@@ -42,6 +43,7 @@ class Routes {
   static const String addDetailsForHome = '/add-details-for-home';
   static const String costEstimateScreen = '/cost-estimate-screen';
   static const String categoriesScreen = '/categories-screen';
+  static const String postImageWidget = '/post-image-widget';
   static const all = <String>{
     basePage,
     explorePage,
@@ -59,6 +61,7 @@ class Routes {
     addDetailsForHome,
     costEstimateScreen,
     categoriesScreen,
+    postImageWidget,
   };
 }
 
@@ -82,6 +85,7 @@ class AppRouter extends RouterBase {
     RouteDef(Routes.addDetailsForHome, page: AddDetailsForHome),
     RouteDef(Routes.costEstimateScreen, page: CostEstimateScreen),
     RouteDef(Routes.categoriesScreen, page: CategoriesScreen),
+    RouteDef(Routes.postImageWidget, page: PostImageWidget),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -246,6 +250,17 @@ class AppRouter extends RouterBase {
         settings: data,
       );
     },
+    PostImageWidget: (data) {
+      final args = data.getArgs<PostImageWidgetArguments>(nullOk: false);
+      return PageRouteBuilder<dynamic>(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            PostImageWidget(
+          key: args.key,
+          imageData: args.imageData,
+        ),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -307,4 +322,11 @@ class CategoriesScreenArguments {
   final Key key;
   final GlobalKey<ScaffoldState> scaffoldKey;
   CategoriesScreenArguments({this.key, this.scaffoldKey});
+}
+
+/// PostImageWidget arguments holder class
+class PostImageWidgetArguments {
+  final Key key;
+  final ImageData imageData;
+  PostImageWidgetArguments({this.key, @required this.imageData});
 }
