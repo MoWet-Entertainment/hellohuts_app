@@ -13,6 +13,7 @@ import 'package:hellohuts_app/ui/routes/router.gr.dart';
 import 'package:hellohuts_app/ui/screens/search/search_screen.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
+import 'dart:math' as math;
 
 class CategoriesScreen extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
@@ -24,7 +25,23 @@ class CategoriesScreen extends StatefulWidget {
 }
 
 class _CategoriesScreenState extends State<CategoriesScreen>
-    with AutomaticKeepAliveClientMixin {
+    with AutomaticKeepAliveClientMixin, SingleTickerProviderStateMixin {
+  TabController _tabController;
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 5, vsync: this);
+  }
+
+  final List<String> _tabs = <String>[
+    "Featured",
+    "Popular",
+    "Latest",
+    "Trending",
+    "Fantastics",
+    "Brilliant",
+  ];
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -36,62 +53,133 @@ class _CategoriesScreenState extends State<CategoriesScreen>
               .copyWith(statusBarColor: AppColors.kPureWhite),
           child: SafeArea(
             child: Scaffold(
-              body: NestedScrollView(
-                ///This can be used to achieve floating app bar,
-                ///but currently this also floats the [_HeaderSection] which is undesirable
-                ///Therefore given false for now
-                floatHeaderSlivers: true,
-                headerSliverBuilder: (context, bool innerBoxIsScrolled) {
-                  return <Widget>[
-                    SliverOverlapAbsorber(
-                      handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
-                          context),
-                      sliver: SliverSafeArea(
-                        sliver: SliverAppBar(
-                          pinned: false,
-                          snap: false,
-                          floating: true,
-                          titleSpacing: 8.0,
-                          backgroundColor: AppColors.kPureWhite,
-                          elevation: 0,
-                          bottom: PreferredSize(
-                            preferredSize: Size.fromHeight(8.0),
-                            child: Container(
-                              height: 8.0,
+              backgroundColor: AppColors.kPureWhite,
+              body: DefaultTabController(
+                length: _tabs.length, // This is the number of tabs.
+                child: NestedScrollView(
+                  floatHeaderSlivers: true,
+                  headerSliverBuilder:
+                      (BuildContext context, bool innerBoxIsScrolled) {
+                    // These are the slivers that show up in the "outer" scroll view.
+                    return <Widget>[
+                      SliverOverlapAbsorber(
+                        // This widget takes the overlapping behavior of the SliverAppBar,
+                        // and redirects it to the SliverOverlapInjector below. If it is
+                        // missing, then it is possible for the nested "inner" scroll view
+                        // below to end up under the SliverAppBar even when the inner
+                        // scroll view thinks it has not been scrolled.
+                        // This is not necessary if the "headerSliverBuilder" only builds
+                        // widgets that do not overlap the next sliver.
+                        handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                            context),
+                        sliver: SliverSafeArea(
+                          top: false,
+                          sliver: SliverAppBar(
+                            backgroundColor: AppColors.kPureWhite,
+                            title: _searchField(context),
+                            floating: true,
+                            pinned: true,
+                            snap: false,
+                            primary: true,
+                            forceElevated: innerBoxIsScrolled,
+                            bottom: TabBar(
+                              isScrollable: true,
+                              indicatorPadding: const EdgeInsets.only(bottom: 4,left: 16, right: 8),
+                              indicatorColor: AppColors.kAccentColor,
+                              labelStyle: AppThemes.normalTextStyle.copyWith(fontSize: 14, color: AppColors.kDarkTextColor,fontWeight: FontWeight.bold),
+                              // These are the widgets to put in each tab in the tab bar.
+                              tabs: _tabs
+                                  .map((String name) => Tab(
+                                        child: Text(
+                                          name,
+                                          style: AppThemes.normalTextStyle
+                                              .copyWith(fontSize: 14),
+                                        ),
+                                      ))
+                                  .toList(),
                             ),
                           ),
-                          title: _searchField(context),
                         ),
                       ),
-                    ),
-                    SliverToBoxAdapter(
-                      child: Container(
-                        height: 40,
-                        color: AppColors.kDarkGreen,
-                      ),
-                    ),
-                  ];
-                },
-                body: _SearchBodyCategories(
-                  scaffoldKey: widget.scaffoldKey,
+                    ];
+                  },
+                  body: TabBarView(
+                    // These are the contents of the tab views, below the tabs.
+                    children: [
+                      InstagramSearchGrid(),
+                      PinterestGrid(),
+                      StandardGrid(),
+                      StandardStaggeredGrid(),
+                      InstagramSearchGrid(),
+                      PinterestGrid(),
+                    ],
+                    // children: _tabs.map((String name) {
+                    //   return SafeArea(
+                    //     top: false,
+                    //     bottom: false,
+                    //     child: InstagramSearchGrid(),
+                    //     // child: Builder(
+                    //     //   // This Builder is needed to provide a BuildContext that is "inside"
+                    //     //   // the NestedScrollView, so that sliverOverlapAbsorberHandleFor() can
+                    //     //   // find the NestedScrollView.
+                    //     //   builder: (BuildContext context) {
+                    //     //     return CustomScrollView(
+                    //     //       // The "controller" and "primary" members should be left
+                    //     //       // unset, so that the NestedScrollView can control this
+                    //     //       // inner scroll view.
+                    //     //       // If the "controller" property is set, then this scroll
+                    //     //       // view will not be associated with the NestedScrollView.
+                    //     //       // The PageStorageKey should be unique to this ScrollView;
+                    //     //       // it allows the list to remember its scroll position when
+                    //     //       // the tab view is not on the screen.
+                    //     //       key: PageStorageKey<String>(name),
+                    //     //       slivers: <Widget>[
+                    //     //         SliverOverlapInjector(
+                    //     //           // This is the flip side of the SliverOverlapAbsorber above.
+                    //     //           handle: NestedScrollView
+                    //     //               .sliverOverlapAbsorberHandleFor(context),
+                    //     //         ),
+                    //     //         SliverPadding(
+                    //     //           padding: const EdgeInsets.all(8.0),
+                    //     //           // In this example, the inner scroll view has
+                    //     //           // fixed-height list items, hence the use of
+                    //     //           // SliverFixedExtentList. However, one could use any
+                    //     //           // sliver widget here, e.g. SliverList or SliverGrid.
+                    //     //           sliver: SliverFixedExtentList(
+                    //     //             // The items in this example are fixed to 48 pixels
+                    //     //             // high. This matches the Material Design spec for
+                    //     //             // ListTile widgets.
+                    //     //             itemExtent: 60.0,
+                    //     //             delegate: SliverChildBuilderDelegate(
+                    //     //               (BuildContext context, int index) {
+                    //     //                 // This builder is called for each child.
+                    //     //                 // In this example, we just number each list item.
+                    //     //                 return Container(
+                    //     //                     color: Color((math.Random()
+                    //     //                                         .nextDouble() *
+                    //     //                                     0xFFFFFF)
+                    //     //                                 .toInt() <<
+                    //     //                             0)
+                    //     //                         .withOpacity(1.0));
+                    //     //               },
+                    //     //               // The childCount of the SliverChildBuilderDelegate
+                    //     //               // specifies how many children this inner list
+                    //     //               // has. In this example, each tab has a list of
+                    //     //               // exactly 30 items, but this is arbitrary.
+                    //     //               childCount: 30,
+                    //     //             ),
+                    //     //           ),
+                    //     //         ),
+                    //     //       ],
+                    //     //     );
+                    //     //   },
+                    //     // ),
+                    //   );
+                    // }).toList(),
+                  ),
                 ),
               ),
             ),
-
-            // appBar: AppBar(
-            //   titleSpacing: 8.0,
-            //   backgroundColor: AppColors.kPureWhite,
-            //   elevation: 0,
-            //   bottom: PreferredSize(
-            //     preferredSize: Size.fromHeight(8.0),
-            //     child: Container(
-            //       height: 8.0,
-            //     ),
-            //   ),
-            //   title: _searchField(context),
-            // ),
-            // // actions: _getActionButtons(context),
-            // body: _SearchBodyCategories(),
           ),
         ),
       ),
@@ -179,7 +267,6 @@ class _SearchBodyCategories extends StatelessWidget {
   }
 }
 
-
 class StandardGrid extends StatelessWidget {
   const StandardGrid({Key key}) : super(key: key);
 
@@ -234,9 +321,9 @@ class InstagramSearchGrid extends StatelessWidget {
         imageData: imageList[index],
       ),
       staggeredTileBuilder: (index) => StaggeredTile.count(
-          (index % 7 == 0) ? 2 : 1, (index % 7 == 0) ? 2 : 1),
-      mainAxisSpacing: 8.0,
-      crossAxisSpacing: 8.0,
+          (index % 7 == 0) ? 2 : 1, (index % 7 == 0) ? 2 :(index%3 ==0)?2: 1),
+      mainAxisSpacing: 4.0,
+      crossAxisSpacing: 4.0,
     );
   }
 }
@@ -268,9 +355,10 @@ class ImageCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(16.0),
-      child: Image.network(imageData.imageUrl, fit: BoxFit.cover),
-    );
+    // return ClipRRect(
+    //   borderRadius: BorderRadius.circular(16.0),
+    //   child: Image.network(imageData.imageUrl, fit: BoxFit.cover),
+    // );
+    return Image.network(imageData.imageUrl, fit: BoxFit.cover);
   }
 }
