@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -355,24 +356,28 @@ class PinterestGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     print("PinterestGrid  Created");
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
-      child: StaggeredGridView.countBuilder(
-        crossAxisCount: 2,
-        itemCount: imageList.length,
-        itemBuilder: (context, index) => ImageCard1(
-          imageData: imageList[index],
+    return ScrollConfiguration(
+      behavior: NeatScrollBehavior(),
+          child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 0.0),
+        child: StaggeredGridView.countBuilder(
+          crossAxisCount: 2,
+          itemCount: imageList.length,
+          itemBuilder: (context, index) => ImageCard(
+            imageData: imageList[index],
+          ),
+          staggeredTileBuilder: (index) => StaggeredTile.fit(1),
+          mainAxisSpacing: 12.0,
+          crossAxisSpacing: 8.0,
+          padding: const EdgeInsets.symmetric(vertical: 16.0),
         ),
-        staggeredTileBuilder: (index) => StaggeredTile.fit(1),
-        mainAxisSpacing: 8.0,
-        crossAxisSpacing: 8.0,
       ),
     );
   }
 }
 
-class ImageCard extends StatelessWidget {
-  const ImageCard({this.imageData});
+class ImageCard2 extends StatelessWidget {
+  const ImageCard2({this.imageData});
 
   final ImageData imageData;
 
@@ -385,6 +390,102 @@ class ImageCard extends StatelessWidget {
     return Container(
         child: Image.network(imageData.imageUrl, fit: BoxFit.cover));
   }
+}
+
+class ImageCard extends StatefulWidget {
+  const ImageCard({this.imageData});
+  final ImageData imageData;
+
+  @override
+  _ImageCardState createState() => _ImageCardState();
+}
+
+class _ImageCardState extends State<ImageCard> {
+  OverlayEntry _popupDialog;
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+        borderRadius: BorderRadius.circular(12.0),
+        child: GestureDetector(
+          child: Hero(
+              tag: widget.imageData.id,
+              child:
+                  Image.network(widget.imageData.imageUrl, fit: BoxFit.cover)),
+          onTap: () => {
+            print("user tapped"),
+            ExtendedNavigator.root.push(Routes.postImageWidget,
+                arguments:
+                    PostImageWidgetArguments(imageData: widget.imageData))
+          },
+          onLongPress: () => {
+            _popupDialog = _createPopupDialog(widget.imageData),
+            Overlay.of(context).insert(_popupDialog),
+          },
+          onLongPressEnd: (details) => _popupDialog?.remove(),
+        ));
+
+    // return Image.network(imageData.imageUrl, fit: BoxFit.cover);
+  }
+   OverlayEntry _createPopupDialog(ImageData imageData) {
+    return OverlayEntry(
+      builder: (context) => AnimatedDialog(
+        child: _createPopupContent(imageData),
+      ),
+    );
+  }
+
+  Widget _createPopupContent(ImageData imageData) {
+    return Builder(
+      builder: (context) {
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(16.0),
+          child: Container(
+            // height: fullHeight(context)*0.7,
+            width: fullWidth(context) * 0.8,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _createPhotoTitle(),
+                Image.network(imageData.imageUrl, fit: BoxFit.fitHeight),
+                _createActionBar(),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _createPhotoTitle() => Container(
+        padding: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
+        width: double.infinity,
+        color: AppColors.kPureWhite,
+        child: Text('this is a large image',
+            style: TextStyle(color: Colors.black)),
+      );
+
+  Widget _createActionBar() => Container(
+        padding: EdgeInsets.symmetric(vertical: 5.0),
+        color: AppColors.kPureWhite,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Icon(
+              Icons.favorite_border,
+              color: Colors.black,
+            ),
+            Icon(
+              Icons.chat_bubble_outline,
+              color: Colors.black,
+            ),
+            Icon(
+              Icons.send,
+              color: Colors.black,
+            ),
+          ],
+        ),
+      );
 }
 
 class ImageCard1 extends StatefulWidget {
@@ -430,7 +531,6 @@ class _ImageCard1State extends State<ImageCard1> {
       ),
     );
   }
-
 
   Widget _createPopupContent(ImageData imageData) {
     return Builder(
@@ -491,14 +591,18 @@ class PostImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Hero(
-          tag: imageData.id,
-          child: Image.network(
-            imageData.imageUrl,
-            fit: BoxFit.cover,
-          )),
-    );
+    return 
+         Container(
+            child: Hero(
+                tag: imageData.id,
+                child: InteractiveViewer(
+                                  child: Image.network(
+                    imageData.imageUrl,
+                    fit: BoxFit.cover,
+                  ),
+                )),
+          
+         );
   }
 }
 
