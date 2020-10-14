@@ -35,7 +35,7 @@ CustomRoute(page: ServicesOfferedBasePage, transitionsBuilder:  TransitionsBuild
 CustomRoute(page: AddDetailsForHome, transitionsBuilder: TransitionsBuilders.slideLeft),
 CustomRoute(page:CostEstimateScreen,transitionsBuilder: TransitionsBuilders.fadeIn),
     AdaptiveRoute(page: CategoriesScreen),
-    CustomRoute(page:PostImageWidget,)
+    CupertinoRoute(page:PostImageWidget, )
 
   ]
 )

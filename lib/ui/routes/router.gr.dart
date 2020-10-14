@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/mock1.dart';
@@ -252,9 +253,8 @@ class AppRouter extends RouterBase {
     },
     PostImageWidget: (data) {
       final args = data.getArgs<PostImageWidgetArguments>(nullOk: false);
-      return PageRouteBuilder<dynamic>(
-        pageBuilder: (context, animation, secondaryAnimation) =>
-            PostImageWidget(
+      return CupertinoPageRoute<dynamic>(
+        builder: (context) => PostImageWidget(
           key: args.key,
           imageData: args.imageData,
         ),
