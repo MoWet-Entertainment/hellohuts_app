@@ -348,10 +348,14 @@ class Mock {
 class ImageData {
   final String id;
   final String imageUrl;
+  final String countOfImages;
+  final bool isTrending;
 
   const ImageData({
     @required this.id,
     @required this.imageUrl,
+    this.countOfImages = '1',
+    this.isTrending = false,
   });
 }
 
@@ -370,11 +374,13 @@ const imageList = [
   ),
   ImageData(
     id: 'id-004',
+    countOfImages: '2',
     imageUrl: 'https://picsum.photos/seed/image004/500/900',
   ),
   ImageData(
     id: 'id-005',
     imageUrl: 'https://picsum.photos/seed/image005/500/600',
+    isTrending: true,
   ),
   ImageData(
     id: 'id-006',
@@ -382,6 +388,7 @@ const imageList = [
   ),
   ImageData(
     id: 'id-007',
+    countOfImages: '2',
     imageUrl: 'https://picsum.photos/seed/image007/500/400',
   ),
   ImageData(
@@ -390,6 +397,7 @@ const imageList = [
   ),
   ImageData(
     id: 'id-009',
+    countOfImages: '3',
     imageUrl: 'https://picsum.photos/seed/image009/500/600',
   ),
   ImageData(
@@ -402,6 +410,7 @@ const imageList = [
   ),
   ImageData(
     id: 'id-012',
+    countOfImages: '3',
     imageUrl: 'https://picsum.photos/seed/image012/500/700',
   ),
   ImageData(
@@ -410,6 +419,8 @@ const imageList = [
   ),
   ImageData(
     id: 'id-014',
+    isTrending: true,
+    countOfImages: '2',
     imageUrl: 'https://picsum.photos/seed/image014/500/800',
   ),
   ImageData(
@@ -422,6 +433,7 @@ const imageList = [
   ),
   ImageData(
     id: 'id-017',
+    countOfImages: '2',
     imageUrl: 'https://picsum.photos/seed/image017/500/600',
   ),
   ImageData(
@@ -430,6 +442,7 @@ const imageList = [
   ),
   ImageData(
     id: 'id-019',
+    isTrending: true,
     imageUrl: 'https://picsum.photos/seed/image019/500/800',
   ),
   ImageData(
@@ -446,14 +459,17 @@ const imageList = [
   ),
   ImageData(
     id: 'id-024',
+    countOfImages: '2',
     imageUrl: 'https://picsum.photos/seed/image004/500/900',
   ),
   ImageData(
     id: 'id-025',
+    countOfImages: '3',
     imageUrl: 'https://picsum.photos/seed/image005/500/600',
   ),
   ImageData(
     id: 'id-026',
+    isTrending: true,
     imageUrl: 'https://picsum.photos/seed/image006/500/500',
   ),
   ImageData(
@@ -474,6 +490,7 @@ const imageList = [
   ),
   ImageData(
     id: 'id-031',
+    isTrending: true,
     imageUrl: 'https://picsum.photos/seed/image011/500/900',
   ),
   ImageData(
@@ -486,6 +503,7 @@ const imageList = [
   ),
   ImageData(
     id: 'id-01421',
+    countOfImages: '3',
     imageUrl: 'https://picsum.photos/seed/image014/500/800',
   ),
   ImageData(
@@ -502,12 +520,12 @@ const imageList = [
   ),
   ImageData(
     id: 'id-01812',
+    isTrending: true,
     imageUrl: 'https://picsum.photos/seed/image018/500/900',
   ),
   ImageData(
     id: 'id-01915',
+    countOfImages: '3',
     imageUrl: 'https://picsum.photos/seed/image019/500/800',
   ),
-
 ];
-

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hellohuts_app/constants/app_constants.dart';
 import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/constants/mock1.dart';
@@ -119,11 +120,11 @@ class _CategoriesScreenState extends State<CategoriesScreen>
                   controller: _tabController,
                   // These are the contents of the tab views, below the tabs.
                   children: [
+                    PinterestGrid(),
+                    PinterestGrid(),
+                    PinterestGrid(),
                     InstagramSearchGrid(),
                     PinterestGrid(),
-                    StandardGrid(),
-                    StandardStaggeredGrid(),
-                    InstagramSearchGrid(),
                     PinterestGrid(),
                   ],
                   // children: _tabs.map((String name) {
@@ -340,7 +341,7 @@ class InstagramSearchGrid extends StatelessWidget {
           (index % 7 == 0) ? 2 : 1,
           (index % 7 == 0)
               ? 2
-              : (index % 3 == 0)
+              : (index % 9 == 0)
                   ? 2
                   : 1),
       mainAxisSpacing: 4.0,
@@ -358,7 +359,7 @@ class PinterestGrid extends StatelessWidget {
 
     return ScrollConfiguration(
       behavior: NeatScrollBehavior(),
-          child: Padding(
+      child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 0.0),
         child: StaggeredGridView.countBuilder(
           crossAxisCount: 2,
@@ -408,10 +409,58 @@ class _ImageCardState extends State<ImageCard> {
     return ClipRRect(
         borderRadius: BorderRadius.circular(12.0),
         child: GestureDetector(
-          child: Hero(
-              tag: widget.imageData.id,
-              child:
-                  Image.network(widget.imageData.imageUrl, fit: BoxFit.cover)),
+          child: Stack(
+            children: [
+              Hero(
+                  tag: widget.imageData.id,
+                  child: Image.network(widget.imageData.imageUrl,
+                      fit: BoxFit.cover)),
+                     widget.imageData.isTrending?Positioned(
+                        right:8,
+                        top: 8,
+                        child: Container(
+                          height: 18,
+                          width: 18,
+                        decoration: BoxDecoration(
+                          color: AppColors.kPrimaryYellow.withOpacity(0.4),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child:Center(child: SvgPicture.asset(HelloIcons.flame_bold_icon, color: AppColors.kLightGrey,height: 12,)),
+                      )):SizedBox(),
+              Positioned(
+                right:  8,
+                bottom: 16,
+                child: int.parse(widget.imageData.countOfImages) > 1
+                    ? 
+                    Row(
+                        children: [
+                  
+                          Container(
+                            height: 4,
+                            width: 8,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              color: AppColors.kLightGrey.withOpacity(0.6),
+                            ),
+                           
+                          ),
+                          SizedBox(width: 2,),
+                          Container(
+                            height: 4,
+                            width: 4,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              color: AppColors.kLightGrey.withOpacity(0.6),
+                            ),
+                          
+                          ),
+                        ],
+                      )
+                   
+                    : SizedBox(),
+              ),
+            ],
+          ),
           onTap: () => {
             print("user tapped"),
             ExtendedNavigator.root.push(Routes.postImageWidget,
@@ -427,7 +476,8 @@ class _ImageCardState extends State<ImageCard> {
 
     // return Image.network(imageData.imageUrl, fit: BoxFit.cover);
   }
-   OverlayEntry _createPopupDialog(ImageData imageData) {
+
+  OverlayEntry _createPopupDialog(ImageData imageData) {
     return OverlayEntry(
       builder: (context) => AnimatedDialog(
         child: _createPopupContent(imageData),
@@ -591,18 +641,16 @@ class PostImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return 
-         Container(
-            child: Hero(
-                tag: imageData.id,
-                child: InteractiveViewer(
-                                  child: Image.network(
-                    imageData.imageUrl,
-                    fit: BoxFit.cover,
-                  ),
-                )),
-          
-         );
+    return Container(
+      child: Hero(
+          tag: imageData.id,
+          child: InteractiveViewer(
+            child: Image.network(
+              imageData.imageUrl,
+              fit: BoxFit.cover,
+            ),
+          )),
+    );
   }
 }
 
