@@ -415,26 +415,32 @@ class _ImageCardState extends State<ImageCard> {
                   tag: widget.imageData.id,
                   child: Image.network(widget.imageData.imageUrl,
                       fit: BoxFit.cover)),
-                     widget.imageData.isTrending?Positioned(
-                        right:8,
-                        top: 8,
-                        child: Container(
-                          height: 18,
-                          width: 18,
+              widget.imageData.isTrending
+                  ? Positioned(
+                      right: 8,
+                      top: 8,
+                      child: Container(
+                        height: 18,
+                        width: 18,
                         decoration: BoxDecoration(
                           color: AppColors.kPrimaryYellow.withOpacity(0.4),
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child:Center(child: SvgPicture.asset(HelloIcons.flame_bold_icon, color: AppColors.kLightGrey,height: 12,)),
-                      )):SizedBox(),
+                        child: Center(
+                            child: SvgPicture.asset(
+                          HelloIcons.flame_bold_icon,
+                          color: AppColors.kLightGrey,
+                          height: 12,
+                        )),
+                      ))
+                  : SizedBox(),
               Positioned(
-                right:  8,
+                right: 8,
                 bottom: 16,
+                //TODO: Change the indicator of number of imgaes to more like an icon
                 child: int.parse(widget.imageData.countOfImages) > 1
-                    ? 
-                    Row(
+                    ? Row(
                         children: [
-                  
                           Container(
                             height: 4,
                             width: 8,
@@ -442,9 +448,10 @@ class _ImageCardState extends State<ImageCard> {
                               borderRadius: BorderRadius.circular(12),
                               color: AppColors.kLightGrey.withOpacity(0.6),
                             ),
-                           
                           ),
-                          SizedBox(width: 2,),
+                          SizedBox(
+                            width: 2,
+                          ),
                           Container(
                             height: 4,
                             width: 4,
@@ -452,11 +459,9 @@ class _ImageCardState extends State<ImageCard> {
                               borderRadius: BorderRadius.circular(12),
                               color: AppColors.kLightGrey.withOpacity(0.6),
                             ),
-                          
                           ),
                         ],
                       )
-                   
                     : SizedBox(),
               ),
             ],
@@ -641,15 +646,36 @@ class PostImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Hero(
-          tag: imageData.id,
-          child: InteractiveViewer(
-            child: Image.network(
-              imageData.imageUrl,
-              fit: BoxFit.cover,
-            ),
-          )),
+    final index = imageList.indexOf(imageData);
+    print("index is " + index.toString());
+    return Scaffold(
+      appBar: CustomAppBar(
+        isBackButton: true,
+        onBackButtonPressed: ()=>ExtendedNavigator.of(context).pop(),
+      ),
+          body: PageView.builder(
+          itemCount: imageList.length,
+          controller: PageController(initialPage: index),
+          itemBuilder: (context, index) {
+            return Scaffold(
+          
+                          body: Container(
+                child: InteractiveViewer(
+                  constrained: false,
+                  child: Hero(
+                    tag: imageData.id,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20),),
+                                                                child: Image.network(
+                        imageList[index].imageUrl,
+                        fit: BoxFit.fitWidth,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            );
+          }),
     );
   }
 }
