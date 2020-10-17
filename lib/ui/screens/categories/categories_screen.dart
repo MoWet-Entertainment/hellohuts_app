@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -120,11 +121,11 @@ class _CategoriesScreenState extends State<CategoriesScreen>
                   controller: _tabController,
                   // These are the contents of the tab views, below the tabs.
                   children: [
-                    PinterestGrid(),
-                    PinterestGrid(),
-                    PinterestGrid(),
+                InstagramSearchGrid(),
                     InstagramSearchGrid(),
                     PinterestGrid(),
+                    InstagramSearchGrid(),
+                    InstagramSearchGrid(),
                     PinterestGrid(),
                   ],
                   // children: _tabs.map((String name) {
@@ -353,28 +354,25 @@ class InstagramSearchGrid extends StatelessWidget {
 class PinterestGrid extends StatelessWidget {
   const PinterestGrid({Key key}) : super(key: key);
 
+ 
   @override
   Widget build(BuildContext context) {
+
     print("PinterestGrid  Created");
 
-    return ScrollConfiguration(
-      behavior: NeatScrollBehavior(),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 0.0),
-        child: StaggeredGridView.countBuilder(
-          crossAxisCount: 2,
-          itemCount: imageList.length,
-          itemBuilder: (context, index) => ImageCard(
-            imageData: imageList[index],
-          ),
-          staggeredTileBuilder: (index) => StaggeredTile.fit(1),
-          mainAxisSpacing: 12.0,
-          crossAxisSpacing: 8.0,
-          padding: const EdgeInsets.symmetric(vertical: 16.0),
-        ),
+    return StaggeredGridView.countBuilder(
+      crossAxisCount: 2,
+      itemCount: imageList.length,
+      itemBuilder: (context, index) => ImageCard(
+        imageData: imageList[index],
       ),
+      staggeredTileBuilder: (index) => StaggeredTile.fit(1),
+      mainAxisSpacing: 12.0,
+      crossAxisSpacing: 8.0,
+      padding: const EdgeInsets.symmetric(vertical: 16.0),
     );
   }
+
 }
 
 class ImageCard2 extends StatelessWidget {
@@ -389,12 +387,12 @@ class ImageCard2 extends StatelessWidget {
     //   child: Image.network(imageData.imageUrl, fit: BoxFit.cover),
     // );
     return Container(
-        child: Image.network(imageData.imageUrl, fit: BoxFit.cover));
+        child: Image.network(imageData.imageUrlList[0], fit: BoxFit.cover));
   }
 }
 
 class ImageCard extends StatefulWidget {
-  const ImageCard({this.imageData});
+  ImageCard({this.imageData});
   final ImageData imageData;
 
   @override
@@ -413,7 +411,7 @@ class _ImageCardState extends State<ImageCard> {
             children: [
               Hero(
                   tag: widget.imageData.id,
-                  child: Image.network(widget.imageData.imageUrl,
+                  child: Image.network(widget.imageData.imageUrlList[0],
                       fit: BoxFit.cover)),
               widget.imageData.isTrending
                   ? Positioned(
@@ -471,6 +469,7 @@ class _ImageCardState extends State<ImageCard> {
             ExtendedNavigator.root.push(Routes.postImageWidget,
                 arguments:
                     PostImageWidgetArguments(imageData: widget.imageData))
+            //  Navigator.push(context,MaterialPageRoute(builder:(context) =>MyAppTest() ))
           },
           onLongPress: () => {
             _popupDialog = _createPopupDialog(widget.imageData),
@@ -502,7 +501,7 @@ class _ImageCardState extends State<ImageCard> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 _createPhotoTitle(),
-                Image.network(imageData.imageUrl, fit: BoxFit.fitHeight),
+                Image.network(imageData.imageUrlList[0], fit: BoxFit.fitHeight),
                 _createActionBar(),
               ],
             ),
@@ -552,6 +551,7 @@ class ImageCard1 extends StatefulWidget {
 }
 
 class _ImageCard1State extends State<ImageCard1> {
+  
   OverlayEntry _popupDialog;
 
   @override
@@ -561,8 +561,8 @@ class _ImageCard1State extends State<ImageCard1> {
         child: GestureDetector(
           child: Hero(
               tag: widget.imageData.id,
-              child:
-                  Image.network(widget.imageData.imageUrl, fit: BoxFit.cover)),
+              child: Image.network(widget.imageData.imageUrlList[0],
+                  fit: BoxFit.cover)),
           onTap: () => {
             print("user tapped"),
             ExtendedNavigator.root.push(Routes.postImageWidget,
@@ -594,12 +594,12 @@ class _ImageCard1State extends State<ImageCard1> {
           borderRadius: BorderRadius.circular(16.0),
           child: Container(
             // height: fullHeight(context)*0.7,
-            width: fullWidth(context) * 0.8,
+            width: fullWidth(context) * 0.9,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 _createPhotoTitle(),
-                Image.network(imageData.imageUrl, fit: BoxFit.fitHeight),
+                Image.network(imageData.imageUrlList[0], fit: BoxFit.fitHeight),
                 _createActionBar(),
               ],
             ),
@@ -646,36 +646,128 @@ class PostImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final index = imageList.indexOf(imageData);
-    print("index is " + index.toString());
+    // final itemIndex = imageList.indexOf(imageData);
+    // print("index is " + itemIndex.toString());
     return Scaffold(
-      appBar: CustomAppBar(
-        isBackButton: true,
-        onBackButtonPressed: ()=>ExtendedNavigator.of(context).pop(),
-      ),
-          body: PageView.builder(
-          itemCount: imageList.length,
-          controller: PageController(initialPage: index),
-          itemBuilder: (context, index) {
-            return Scaffold(
-          
-                          body: Container(
-                child: InteractiveViewer(
-                  constrained: false,
-                  child: Hero(
-                    tag: imageData.id,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20),),
-                                                                child: Image.network(
-                        imageList[index].imageUrl,
-                        fit: BoxFit.fitWidth,
-                      ),
-                    ),
+        appBar: CustomAppBar(
+          isBackButton: true,
+          onBackButtonPressed: () => ExtendedNavigator.of(context).pop(),
+          appBarHeight: Size.fromHeight(60.0),
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              PostImage(imageData: imageData),
+            ],
+          ),
+        ));
+  }
+}
+
+class PostImage extends StatelessWidget {
+  const PostImage({Key key, this.imageData}) : super(key: key);
+  final ImageData imageData;
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: const BorderRadius.all(Radius.circular(16)),
+      child: imageData.imageUrlList.length > 1
+          ? CarouselSlider.builder(
+              itemCount: imageData.imageUrlList.length,
+              options: CarouselOptions(
+                autoPlay: false,
+                enableInfiniteScroll: false,
+                viewportFraction: 1,
+                scrollDirection: Axis.horizontal,
+                aspectRatio: 1,
+                onPageChanged: (index, reason) {
+                  print('Current Page: ${index.toString()}');
+                  // feedState.updatePostActivePage(model, index);
+                },
+              ),
+              itemBuilder: (BuildContext context, int itemIndex) => Container(
+                padding: const EdgeInsets.symmetric(horizontal: 0),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: Image.network(
+                    imageData.imageUrlList[itemIndex],
+                    fit: BoxFit.fitWidth,
+                    loadingBuilder: (BuildContext context, Widget child,
+                        ImageChunkEvent loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return Center(
+                        child: CircularProgressIndicator(
+                          value: loadingProgress.expectedTotalBytes != null
+                              ? loadingProgress.cumulativeBytesLoaded /
+                                  loadingProgress.expectedTotalBytes
+                              : null,
+                        ),
+                      );
+                    },
                   ),
                 ),
               ),
-            );
-          }),
+            )
+          : Container(
+              width: MediaQuery.of(context).size.width,
+              child: Image.network(
+                imageData.imageUrlList[0],
+                fit: BoxFit.cover,
+                loadingBuilder: (BuildContext context, Widget child,
+                    ImageChunkEvent loadingProgress) {
+                  if (loadingProgress == null) return child;
+                  return Center(
+                    child: CircularProgressIndicator(
+                      value: loadingProgress.expectedTotalBytes != null
+                          ? loadingProgress.cumulativeBytesLoaded /
+                              loadingProgress.expectedTotalBytes
+                          : null,
+                    ),
+                  );
+                },
+              ),
+            ),
+    );
+  }
+}
+
+class PostImageFullView extends StatefulWidget {
+  const PostImageFullView({
+    Key key,
+    @required this.image,
+  }) : super(key: key);
+
+  final ImageData image;
+  @override
+  _PostImageFullViewState createState() => _PostImageFullViewState();
+}
+
+class _PostImageFullViewState extends State<PostImageFullView> {
+  @override
+  Widget build(BuildContext context) {
+    final transformationController = TransformationController();
+
+    return Padding(
+      padding: const EdgeInsets.all(0.0),
+      child: InteractiveViewer(
+        panEnabled: false,
+        transformationController: transformationController,
+        onInteractionEnd: (details) {
+          setState(() {
+            transformationController.toScene(Offset.zero);
+          });
+        },
+        boundaryMargin: EdgeInsets.all(20.0),
+        minScale: 0.1,
+        maxScale: 6,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(18.0),
+          child: Image.network(
+            widget.image.imageUrlList[0],
+            fit: BoxFit.fitWidth,
+          ),
+        ),
+      ),
     );
   }
 }
