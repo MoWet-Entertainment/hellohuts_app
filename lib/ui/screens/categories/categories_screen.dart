@@ -121,7 +121,7 @@ class _CategoriesScreenState extends State<CategoriesScreen>
                   controller: _tabController,
                   // These are the contents of the tab views, below the tabs.
                   children: [
-                InstagramSearchGrid(),
+                    InstagramSearchGrid(),
                     InstagramSearchGrid(),
                     PinterestGrid(),
                     InstagramSearchGrid(),
@@ -354,10 +354,8 @@ class InstagramSearchGrid extends StatelessWidget {
 class PinterestGrid extends StatelessWidget {
   const PinterestGrid({Key key}) : super(key: key);
 
- 
   @override
   Widget build(BuildContext context) {
-
     print("PinterestGrid  Created");
 
     return StaggeredGridView.countBuilder(
@@ -372,7 +370,6 @@ class PinterestGrid extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 16.0),
     );
   }
-
 }
 
 class ImageCard2 extends StatelessWidget {
@@ -551,7 +548,6 @@ class ImageCard1 extends StatefulWidget {
 }
 
 class _ImageCard1State extends State<ImageCard1> {
-  
   OverlayEntry _popupDialog;
 
   @override
@@ -649,84 +645,184 @@ class PostImageWidget extends StatelessWidget {
     // final itemIndex = imageList.indexOf(imageData);
     // print("index is " + itemIndex.toString());
     return Scaffold(
-        appBar: CustomAppBar(
-          isBackButton: true,
-          onBackButtonPressed: () => ExtendedNavigator.of(context).pop(),
-          appBarHeight: Size.fromHeight(60.0),
+     
+      body: _scrollBody(),
+    );
+  }
+
+  Widget _buildViewWithStaticCategories() {
+    return Column(
+      children: <Widget>[
+        _buildCategoriesCard(),
+        Expanded(
+          child: ListView.builder(
+              itemCount: 20, // records.length
+              itemBuilder: (BuildContext context, int index) {
+                return Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.00),
+                    child: Text(index.toString()),
+                  ),
+                );
+              }),
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              PostImage(imageData: imageData),
-            ],
-          ),
-        ));
+      ],
+    );
+  }
+
+    Widget _scrollBody() {
+      return Stack(
+        children: [
+      
+          CustomScrollView(
+          slivers: [
+            SliverGrid.count(crossAxisCount: 3,),
+           SliverToBoxAdapter(
+             child: ImageCard(imageData: imageData,),
+           ),
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+              (context,index) =>  Container(
+                height: 40,
+                color: Colors.primaries[math.Random().nextInt(Colors.primaries.length)]
+              ),
+                       childCount: imageList.take(40).length,
+
+            )),
+          
+          ],
+        ),
+            Positioned(
+            top: 20,
+            left: 20,
+            child: CircleAvatar(backgroundColor: Colors.yellow, radius: 30,)),
+        ]);
+    }
+  }
+
+  Widget _buildViewWithScrollingCategories() {
+    return ListView.builder(
+      itemCount: 21, // records.length + 1 for the Categories card
+      itemBuilder: (BuildContext context, int index) {
+        return index == 0
+            ? _buildCategoriesCard()
+            : Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.00),
+                  child: Text(index.toString()),
+                ),
+              );
+      },
+    );
+  }
+
+  Widget _buildCategoriesCard() {
+    return Card(
+      elevation: 3,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text('one'), // Category( ...
+          SizedBox(width: 10.0),
+          Text('two'), // Category( ...
+          SizedBox(width: 10.0),
+          Text('three'), // Category( ...
+        ],
+      ),
+    );
+  }
+
+class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
+  _SliverAppBarDelegate({
+    @required this.minHeight,
+    @required this.maxHeight,
+    this.child,
+  });
+  final double minHeight;
+  final double maxHeight;
+  final Widget child;
+  @override
+  double get minExtent => minHeight;
+  @override
+  double get maxExtent => math.max(maxHeight, minHeight);
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return new SizedBox.expand(child: child);
+  }
+
+  @override
+  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
+    return maxHeight != oldDelegate.maxHeight ||
+        minHeight != oldDelegate.minHeight ||
+        child != oldDelegate.child;
   }
 }
-
 class PostImage extends StatelessWidget {
   const PostImage({Key key, this.imageData}) : super(key: key);
   final ImageData imageData;
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: const BorderRadius.all(Radius.circular(16)),
-      child: imageData.imageUrlList.length > 1
-          ? CarouselSlider.builder(
-              itemCount: imageData.imageUrlList.length,
-              options: CarouselOptions(
-                autoPlay: false,
-                enableInfiniteScroll: false,
-                viewportFraction: 1,
-                scrollDirection: Axis.horizontal,
-                aspectRatio: 1,
-                onPageChanged: (index, reason) {
-                  print('Current Page: ${index.toString()}');
-                  // feedState.updatePostActivePage(model, index);
-                },
-              ),
-              itemBuilder: (BuildContext context, int itemIndex) => Container(
-                padding: const EdgeInsets.symmetric(horizontal: 0),
-                child: Container(
+    return InteractiveViewer(
+          child: ClipRRect(
+        borderRadius: const BorderRadius.all(Radius.circular(16)),
+        child: imageData.imageUrlList.length > 1
+            ? CarouselSlider.builder(
+                  itemCount: imageData.imageUrlList.length,
+                  options: CarouselOptions(
+                    autoPlay: false,
+                    enableInfiniteScroll: false,
+                    viewportFraction: 1,
+                    scrollDirection: Axis.horizontal,
+                    aspectRatio: 1,
+                    onPageChanged: (index, reason) {
+                      print('Current Page: ${index.toString()}');
+                      // feedState.updatePostActivePage(model, index);
+                    },
+                  ),
+                  itemBuilder: (BuildContext context, int itemIndex) => Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 0),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: Image.network(
+            imageData.imageUrlList[itemIndex],
+            fit: BoxFit.fitWidth,
+            loadingBuilder: (BuildContext context, Widget child,
+                ImageChunkEvent loadingProgress) {
+              if (loadingProgress == null) return child;
+              return Center(
+                child: CircularProgressIndicator(
+                  value: loadingProgress.expectedTotalBytes != null
+                      ? loadingProgress.cumulativeBytesLoaded /
+                          loadingProgress.expectedTotalBytes
+                      : null,
+                ),
+              );
+            },
+                      ),
+                    ),
+                  ),
+                )
+            : Container(
                   width: MediaQuery.of(context).size.width,
                   child: Image.network(
-                    imageData.imageUrlList[itemIndex],
-                    fit: BoxFit.fitWidth,
+                    imageData.imageUrlList[0],
+                    fit: BoxFit.cover,
                     loadingBuilder: (BuildContext context, Widget child,
-                        ImageChunkEvent loadingProgress) {
+            ImageChunkEvent loadingProgress) {
                       if (loadingProgress == null) return child;
                       return Center(
-                        child: CircularProgressIndicator(
-                          value: loadingProgress.expectedTotalBytes != null
-                              ? loadingProgress.cumulativeBytesLoaded /
-                                  loadingProgress.expectedTotalBytes
-                              : null,
-                        ),
+            child: CircularProgressIndicator(
+              value: loadingProgress.expectedTotalBytes != null
+                  ? loadingProgress.cumulativeBytesLoaded /
+                      loadingProgress.expectedTotalBytes
+                  : null,
+            ),
                       );
                     },
                   ),
                 ),
-              ),
-            )
-          : Container(
-              width: MediaQuery.of(context).size.width,
-              child: Image.network(
-                imageData.imageUrlList[0],
-                fit: BoxFit.cover,
-                loadingBuilder: (BuildContext context, Widget child,
-                    ImageChunkEvent loadingProgress) {
-                  if (loadingProgress == null) return child;
-                  return Center(
-                    child: CircularProgressIndicator(
-                      value: loadingProgress.expectedTotalBytes != null
-                          ? loadingProgress.cumulativeBytesLoaded /
-                              loadingProgress.expectedTotalBytes
-                          : null,
-                    ),
-                  );
-                },
-              ),
-            ),
+      ),
     );
   }
 }
