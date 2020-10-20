@@ -869,11 +869,11 @@ class PostImage extends StatelessWidget {
             ? CarouselSlider.builder(
                 itemCount: imageData.imageUrlList.length,
                 options: CarouselOptions(
-                  autoPlay: false,
+                  autoPlay: true,
                   enableInfiniteScroll: false,
                   viewportFraction: 1,
+                  aspectRatio: 0.75,
                   scrollDirection: Axis.horizontal,
-                  aspectRatio: 1,
                   onPageChanged: (index, reason) {
                     print('Current Page: ${index.toString()}');
                     // feedState.updatePostActivePage(model, index);
