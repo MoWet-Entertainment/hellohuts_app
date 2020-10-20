@@ -10,6 +10,7 @@ import 'package:hellohuts_app/constants/app_constants.dart';
 import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/constants/mock1.dart';
 import 'package:hellohuts_app/constants/strings.dart';
+import 'package:hellohuts_app/helper/utilities.dart';
 import 'package:hellohuts_app/ui/common_widgets/app_bar/app_bar.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
 import 'package:hellohuts_app/ui/common_widgets/scroll_behavior/neat_scroll_behavior.dart';
@@ -18,6 +19,8 @@ import 'package:hellohuts_app/ui/screens/search/search_screen.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
 import 'dart:math' as math;
+
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class CategoriesScreen extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
@@ -351,6 +354,44 @@ class InstagramSearchGrid extends StatelessWidget {
   }
 }
 
+List<StaggeredTile> _staggeredTileList = const <StaggeredTile>[
+  const StaggeredTile.count(1, 1),
+  const StaggeredTile.count(2, 2),
+  const StaggeredTile.count(1, 1),
+  const StaggeredTile.count(1, 2),
+  const StaggeredTile.count(1, 1),
+  const StaggeredTile.count(1, 1),
+  const StaggeredTile.count(2, 1),
+  const StaggeredTile.count(1, 1),
+  const StaggeredTile.count(2, 2),
+  const StaggeredTile.count(1, 1),
+  const StaggeredTile.count(1, 1),
+  const StaggeredTile.count(1, 1),
+  const StaggeredTile.count(1, 1),
+  const StaggeredTile.count(1, 1)
+];
+
+class NormalGrid extends StatelessWidget {
+  const NormalGrid({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    print("Custom Grid");
+    return SliverStaggeredGrid.countBuilder(
+        crossAxisCount: 2,
+        staggeredTileBuilder: (index) => StaggeredTile.count(1, 1),
+        itemBuilder: (context, index) => Container(
+              color: randomOpaqueColor(),
+              child: Center(
+                child: CircleAvatar(
+                  child: Center(child: Text(index.toString())),
+                ),
+              ),
+            ),
+        itemCount: 20);
+  }
+}
+
 class PinterestGrid extends StatelessWidget {
   const PinterestGrid({Key key}) : super(key: key);
 
@@ -402,7 +443,7 @@ class _ImageCardState extends State<ImageCard> {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-        borderRadius: BorderRadius.circular(12.0),
+        borderRadius: BorderRadius.circular(0.0),
         child: GestureDetector(
           child: Stack(
             children: [
@@ -644,9 +685,9 @@ class PostImageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     // final itemIndex = imageList.indexOf(imageData);
     // print("index is " + itemIndex.toString());
+
     return Scaffold(
-     
-      body: _scrollBody(),
+      body: _scrollBody(context),
     );
   }
 
@@ -670,67 +711,127 @@ class PostImageWidget extends StatelessWidget {
     );
   }
 
-    Widget _scrollBody() {
-      return Stack(
-        children: [
-      
-          CustomScrollView(
-          slivers: [
-            SliverGrid.count(crossAxisCount: 3,),
-           SliverToBoxAdapter(
-             child: ImageCard(imageData: imageData,),
-           ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-              (context,index) =>  Container(
-                height: 40,
-                color: Colors.primaries[math.Random().nextInt(Colors.primaries.length)]
-              ),
-                       childCount: imageList.take(40).length,
+  Widget _scrollBody(BuildContext context) {
+    return Stack(
+      children: [
+        ScrollConfiguration(
+          behavior: NeatScrollBehavior(),
+          child: CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                // backgroundColor: AppColors.kDarkGreen,
+                leading: IconButton(
+                    icon: Icon(Icons.arrow_back),
+                    onPressed: () => ExtendedNavigator.of(context).pop()),
+                floating: false,
+                pinned: true,
 
-            )),
-          
-          ],
-        ),
-            Positioned(
-            top: 20,
-            left: 20,
-            child: CircleAvatar(backgroundColor: Colors.yellow, radius: 30,)),
-        ]);
-    }
-  }
-
-  Widget _buildViewWithScrollingCategories() {
-    return ListView.builder(
-      itemCount: 21, // records.length + 1 for the Categories card
-      itemBuilder: (BuildContext context, int index) {
-        return index == 0
-            ? _buildCategoriesCard()
-            : Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.00),
-                  child: Text(index.toString()),
+                expandedHeight: 500,
+                flexibleSpace: DecoratedBox(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: <Color>[
+                        AppColors.kPrimaryYellow,
+                        AppColors.kPrimaryYellow,
+                      ],
+                    ),
+                  ),
+                  child: FlexibleSpaceBar(
+                    collapseMode: CollapseMode.parallax,
+                    background: PostImage(
+                      imageData: imageData,
+                    ),
+                  ),
                 ),
-              );
-      },
-    );
-  }
+              ),
+              SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                (context, index) => Container(
+                    height: 40,
+                    color: Colors.primaries[
+                        math.Random().nextInt(Colors.primaries.length)]),
+                childCount: imageList.take(40).length,
+              )),
+              NormalGrid(),
+            ],
+          ),
+        ),
 
-  Widget _buildCategoriesCard() {
-    return Card(
-      elevation: 3,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text('one'), // Category( ...
-          SizedBox(width: 10.0),
-          Text('two'), // Category( ...
-          SizedBox(width: 10.0),
-          Text('three'), // Category( ...
-        ],
-      ),
+//         Container(
+//           height: 80,
+//           child: AnimatedBuilder(
+//             animation: _colorAnimationController,
+//             builder: (context, child) => AppBar(
+//                 backgroundColor: _colorTween.value,
+//                 elevation: 0,
+//                 titleSpacing: 0.0,
+//                 title: Transform.translate(
+//                   offset: _transTween.value,
+//                   child: Text(
+//                     "Vinoop",
+//                     style: TextStyle(
+//                         color: Colors.white,
+//                         fontWeight: FontWeight.bold,
+//                         fontSize: 16),
+//                   ),
+//                 ),
+//                 iconTheme: IconThemeData(
+//                   color: _iconColorTween.value,
+//                 ),
+//                 actions: <Widget>[
+//                   IconButton(
+//                     icon: Icon(
+//                       Icons.local_grocery_store,
+//                     ),
+//                     onPressed: () {
+// //                          Navigator.of(context).push(TutorialOverlay());
+//                     },
+//                   ),
+//                   IconButton(
+//                     icon: Icon(
+//                       Icons.more_vert,
+//                     ),
+//                     onPressed: () {},
+//                   ),
+//                 ]),
+//           ),
+//         ),
+      ],
     );
   }
+}
+
+Widget _buildViewWithScrollingCategories() {
+  return ListView.builder(
+    itemCount: 21, // records.length + 1 for the Categories card
+    itemBuilder: (BuildContext context, int index) {
+      return index == 0
+          ? _buildCategoriesCard()
+          : Card(
+              child: Padding(
+                padding: const EdgeInsets.all(16.00),
+                child: Text(index.toString()),
+              ),
+            );
+    },
+  );
+}
+
+Widget _buildCategoriesCard() {
+  return Card(
+    elevation: 3,
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text('one'), // Category( ...
+        SizedBox(width: 10.0),
+        Text('two'), // Category( ...
+        SizedBox(width: 10.0),
+        Text('three'), // Category( ...
+      ],
+    ),
+  );
+}
 
 class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   _SliverAppBarDelegate({
@@ -758,70 +859,124 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
         child != oldDelegate.child;
   }
 }
-class PostImage extends StatelessWidget {
+
+class PostImage extends StatefulWidget {
   const PostImage({Key key, this.imageData}) : super(key: key);
   final ImageData imageData;
+
+  @override
+  _PostImageState createState() => _PostImageState();
+}
+
+class _PostImageState extends State<PostImage> with TickerProviderStateMixin {
+  AnimationController _animationController;
+  Animation<double> animation;
+  int _activeIndex = 0;
+  int animationSeconds = 4;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // _animationController = new AnimationController(
+    //     vsync: this, duration: Duration(seconds: animationSeconds))
+    //   ..repeat();
+  }
+
+  @override
+  void dispose() {
+    // // TODO: implement dispose
+    // _animationController.dispose();
+    // super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return InteractiveViewer(
-          child: ClipRRect(
-        borderRadius: const BorderRadius.all(Radius.circular(16)),
-        child: imageData.imageUrlList.length > 1
-            ? CarouselSlider.builder(
-                  itemCount: imageData.imageUrlList.length,
-                  options: CarouselOptions(
-                    autoPlay: false,
-                    enableInfiniteScroll: false,
-                    viewportFraction: 1,
-                    scrollDirection: Axis.horizontal,
-                    aspectRatio: 1,
-                    onPageChanged: (index, reason) {
-                      print('Current Page: ${index.toString()}');
-                      // feedState.updatePostActivePage(model, index);
-                    },
-                  ),
-                  itemBuilder: (BuildContext context, int itemIndex) => Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 0),
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: Image.network(
-            imageData.imageUrlList[itemIndex],
-            fit: BoxFit.fitWidth,
-            loadingBuilder: (BuildContext context, Widget child,
-                ImageChunkEvent loadingProgress) {
-              if (loadingProgress == null) return child;
-              return Center(
-                child: CircularProgressIndicator(
-                  value: loadingProgress.expectedTotalBytes != null
-                      ? loadingProgress.cumulativeBytesLoaded /
-                          loadingProgress.expectedTotalBytes
-                      : null,
-                ),
-              );
-            },
+      child: ClipRRect(
+        borderRadius: const BorderRadius.all(Radius.circular(0)),
+        child: widget.imageData.imageUrlList.length > 1
+            ? Stack(
+                children: [
+                  CarouselSlider.builder(
+                    itemCount: widget.imageData.imageUrlList.length,
+                    options: CarouselOptions(
+                      autoPlay: true,
+                      autoPlayInterval: Duration(seconds: 4),
+                      enableInfiniteScroll: false,
+                      viewportFraction: 1,
+                      aspectRatio: 0.75,
+                      scrollDirection: Axis.horizontal,
+                      onPageChanged: (index, reason) {
+                        setState(() {
+                          _activeIndex = index;
+                        });
+                        // feedState.updatePostActivePage(model, index);
+                      },
+                    ),
+                    itemBuilder: (BuildContext context, int itemIndex) =>
+                        Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 0),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: Image.network(
+                          widget.imageData.imageUrlList[itemIndex],
+                          fit: BoxFit.cover,
+                          loadingBuilder: (BuildContext context, Widget child,
+                              ImageChunkEvent loadingProgress) {
+                            if (loadingProgress == null) return child;
+                            return Center(
+                              child: CircularProgressIndicator(
+                                value: loadingProgress.expectedTotalBytes !=
+                                        null
+                                    ? loadingProgress.cumulativeBytesLoaded /
+                                        loadingProgress.expectedTotalBytes
+                                    : null,
+                              ),
+                            );
+                          },
+                        ),
                       ),
                     ),
                   ),
-                )
+                  Positioned(
+                    bottom: 16.0,
+                    right: 12.0,
+                    child: Container(
+                      padding: EdgeInsets.only(right: 16.0),
+                      child: AnimatedSmoothIndicator(
+                        count: widget.imageData.imageUrlList.length,
+                        activeIndex: _activeIndex,
+                        effect: ExpandingDotsEffect(
+                            dotHeight: 8,
+                            dotWidth: 12,
+                            spacing: 4,
+                            dotColor: AppColors.kDarkGrey,
+                            activeDotColor: AppColors.kMediumGrey,
+                            expansionFactor: 3),
+                      ),
+                    ),
+                  )
+                ],
+              )
             : Container(
-                  width: MediaQuery.of(context).size.width,
-                  child: Image.network(
-                    imageData.imageUrlList[0],
-                    fit: BoxFit.cover,
-                    loadingBuilder: (BuildContext context, Widget child,
-            ImageChunkEvent loadingProgress) {
-                      if (loadingProgress == null) return child;
-                      return Center(
-            child: CircularProgressIndicator(
-              value: loadingProgress.expectedTotalBytes != null
-                  ? loadingProgress.cumulativeBytesLoaded /
-                      loadingProgress.expectedTotalBytes
-                  : null,
-            ),
-                      );
-                    },
-                  ),
+                width: MediaQuery.of(context).size.width,
+                child: Image.network(
+                  widget.imageData.imageUrlList[0],
+                  fit: BoxFit.cover,
+                  loadingBuilder: (BuildContext context, Widget child,
+                      ImageChunkEvent loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return Center(
+                      child: CircularProgressIndicator(
+                        value: loadingProgress.expectedTotalBytes != null
+                            ? loadingProgress.cumulativeBytesLoaded /
+                                loadingProgress.expectedTotalBytes
+                            : null,
+                      ),
+                    );
+                  },
                 ),
+              ),
       ),
     );
   }

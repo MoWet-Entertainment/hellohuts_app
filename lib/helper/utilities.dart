@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
 import 'package:intl/intl.dart';
@@ -107,6 +109,12 @@ launchURL(String url) async {
   cprint('Yet to implement');
 }
 
+  Color randomColor() {
+    return Color(Random().nextInt(0xffffffff));
+  }
+  Color randomOpaqueColor() {
+  return Color(Random().nextInt(0xffffffff)).withAlpha(0xff);
+}
 /*
 void main() {
   var testDate = "2020-04-04T10:10:20Z";
