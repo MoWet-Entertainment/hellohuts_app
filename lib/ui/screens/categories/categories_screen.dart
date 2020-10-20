@@ -20,6 +20,8 @@ import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
 import 'dart:math' as math;
 
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
 class CategoriesScreen extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
 
@@ -679,8 +681,6 @@ class PostImageWidget extends StatelessWidget {
   final ImageData imageData;
   const PostImageWidget({Key key, @required this.imageData}) : super(key: key);
 
-
-
   @override
   Widget build(BuildContext context) {
     // final itemIndex = imageList.indexOf(imageData);
@@ -717,30 +717,33 @@ class PostImageWidget extends StatelessWidget {
         ScrollConfiguration(
           behavior: NeatScrollBehavior(),
           child: CustomScrollView(
-           
             slivers: [
               SliverAppBar(
                 // backgroundColor: AppColors.kDarkGreen,
-                leading: IconButton(icon: Icon(Icons.arrow_back), onPressed: ()=>ExtendedNavigator.of(context).pop()),
+                leading: IconButton(
+                    icon: Icon(Icons.arrow_back),
+                    onPressed: () => ExtendedNavigator.of(context).pop()),
                 floating: false,
-                pinned:true,
-              
+                pinned: true,
+
                 expandedHeight: 500,
                 flexibleSpace: DecoratedBox(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-            colors: <Color>[
-            AppColors.kPrimaryYellow,
-             AppColors.kPrimaryYellow,
-            ],
-         ),
+                      colors: <Color>[
+                        AppColors.kPrimaryYellow,
+                        AppColors.kPrimaryYellow,
+                      ],
+                    ),
                   ),
-                child: FlexibleSpaceBar(
-               collapseMode: CollapseMode.parallax,
-               background: PostImage(imageData: imageData,),
-               ),
+                  child: FlexibleSpaceBar(
+                    collapseMode: CollapseMode.parallax,
+                    background: PostImage(
+                      imageData: imageData,
+                    ),
+                  ),
                 ),
-                ),
+              ),
               SliverList(
                   delegate: SliverChildBuilderDelegate(
                 (context, index) => Container(
@@ -857,55 +860,108 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   }
 }
 
-class PostImage extends StatelessWidget {
+class PostImage extends StatefulWidget {
   const PostImage({Key key, this.imageData}) : super(key: key);
   final ImageData imageData;
+
+  @override
+  _PostImageState createState() => _PostImageState();
+}
+
+class _PostImageState extends State<PostImage> with TickerProviderStateMixin {
+  AnimationController _animationController;
+  Animation<double> animation;
+  int _activeIndex = 0;
+  int animationSeconds = 4;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // _animationController = new AnimationController(
+    //     vsync: this, duration: Duration(seconds: animationSeconds))
+    //   ..repeat();
+  }
+
+  @override
+  void dispose() {
+    // // TODO: implement dispose
+    // _animationController.dispose();
+    // super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return InteractiveViewer(
       child: ClipRRect(
         borderRadius: const BorderRadius.all(Radius.circular(0)),
-        child: imageData.imageUrlList.length > 1
-            ? CarouselSlider.builder(
-                itemCount: imageData.imageUrlList.length,
-                options: CarouselOptions(
-                  autoPlay: true,
-                  enableInfiniteScroll: false,
-                  viewportFraction: 1,
-                  aspectRatio: 0.75,
-                  scrollDirection: Axis.horizontal,
-                  onPageChanged: (index, reason) {
-                    print('Current Page: ${index.toString()}');
-                    // feedState.updatePostActivePage(model, index);
-                  },
-                ),
-                itemBuilder: (BuildContext context, int itemIndex) => Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 0),
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    child: Image.network(
-                      imageData.imageUrlList[itemIndex],
-                      fit: BoxFit.cover,
-                      loadingBuilder: (BuildContext context, Widget child,
-                          ImageChunkEvent loadingProgress) {
-                        if (loadingProgress == null) return child;
-                        return Center(
-                          child: CircularProgressIndicator(
-                            value: loadingProgress.expectedTotalBytes != null
-                                ? loadingProgress.cumulativeBytesLoaded /
-                                    loadingProgress.expectedTotalBytes
-                                : null,
-                          ),
-                        );
+        child: widget.imageData.imageUrlList.length > 1
+            ? Stack(
+                children: [
+                  CarouselSlider.builder(
+                    itemCount: widget.imageData.imageUrlList.length,
+                    options: CarouselOptions(
+                      autoPlay: true,
+                      autoPlayInterval: Duration(seconds: 4),
+                      enableInfiniteScroll: false,
+                      viewportFraction: 1,
+                      aspectRatio: 0.75,
+                      scrollDirection: Axis.horizontal,
+                      onPageChanged: (index, reason) {
+                        setState(() {
+                          _activeIndex = index;
+                        });
+                        // feedState.updatePostActivePage(model, index);
                       },
                     ),
+                    itemBuilder: (BuildContext context, int itemIndex) =>
+                        Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 0),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: Image.network(
+                          widget.imageData.imageUrlList[itemIndex],
+                          fit: BoxFit.cover,
+                          loadingBuilder: (BuildContext context, Widget child,
+                              ImageChunkEvent loadingProgress) {
+                            if (loadingProgress == null) return child;
+                            return Center(
+                              child: CircularProgressIndicator(
+                                value: loadingProgress.expectedTotalBytes !=
+                                        null
+                                    ? loadingProgress.cumulativeBytesLoaded /
+                                        loadingProgress.expectedTotalBytes
+                                    : null,
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                  Positioned(
+                    bottom: 16.0,
+                    right: 12.0,
+                    child: Container(
+                      padding: EdgeInsets.only(right: 16.0),
+                      child: AnimatedSmoothIndicator(
+                        count: widget.imageData.imageUrlList.length,
+                        activeIndex: _activeIndex,
+                        effect: ExpandingDotsEffect(
+                            dotHeight: 8,
+                            dotWidth: 12,
+                            spacing: 4,
+                            dotColor: AppColors.kDarkGrey,
+                            activeDotColor: AppColors.kMediumGrey,
+                            expansionFactor: 3),
+                      ),
+                    ),
+                  )
+                ],
               )
             : Container(
                 width: MediaQuery.of(context).size.width,
                 child: Image.network(
-                  imageData.imageUrlList[0],
+                  widget.imageData.imageUrlList[0],
                   fit: BoxFit.cover,
                   loadingBuilder: (BuildContext context, Widget child,
                       ImageChunkEvent loadingProgress) {
