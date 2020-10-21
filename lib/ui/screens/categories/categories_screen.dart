@@ -726,7 +726,7 @@ class PostImageWidget extends StatelessWidget {
                 floating: false,
                 pinned: true,
 
-                expandedHeight: 500,
+                expandedHeight: fullHeight(context)*0.7,
                 flexibleSpace: DecoratedBox(
                   decoration: BoxDecoration(
                     // gradient: LinearGradient(
@@ -738,7 +738,10 @@ class PostImageWidget extends StatelessWidget {
                     color: Colors.black
                   ),
                   child: FlexibleSpaceBar(
-                    collapseMode: CollapseMode.parallax,
+                    stretchModes: [
+                      StretchMode.zoomBackground
+                    ],
+                    collapseMode: CollapseMode.pin,
                     background: PostImage(
                       imageData: imageData,
                     ),
@@ -925,7 +928,7 @@ class _PostImageState extends State<PostImage> with TickerProviderStateMixin {
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
       colors: [Colors.black,Colors.black, Colors.black,  Colors.transparent],
-    ).createShader(Rect.fromLTRB(0, 0, rect.width, rect.height));
+    ).createShader(Rect.fromLTRB(rect.width/2,rect.height/2, rect.width, rect.height));
   },
   blendMode: BlendMode.dstIn,
                                                   child: Image.network(
@@ -957,13 +960,15 @@ class _PostImageState extends State<PostImage> with TickerProviderStateMixin {
                       child: AnimatedSmoothIndicator(
                         count: widget.imageData.imageUrlList.length,
                         activeIndex: _activeIndex,
+
                         effect: ExpandingDotsEffect(
-                            dotHeight: 8,
+
+                            dotHeight: 6,
                             dotWidth: 12,
                             spacing: 4,
                             dotColor: AppColors.kDarkGrey,
                             activeDotColor: AppColors.kMediumGrey,
-                            expansionFactor: 3),
+                            expansionFactor: 2),
                       ),
                     ),
                   )
