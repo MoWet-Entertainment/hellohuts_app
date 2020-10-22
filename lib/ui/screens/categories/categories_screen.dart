@@ -749,9 +749,8 @@ class PostImageWidget extends StatelessWidget {
                   delegate: SliverChildBuilderDelegate(
                 (context, index) => Container(
                     height: 40,
-                    color: Colors.primaries[
-                        math.Random().nextInt(Colors.primaries.length)]),
-                childCount: imageList.take(40).length,
+                    color: Colors.black,),
+                childCount: imageList.take(6).length,
               )),
               NormalGrid(),
             ],
@@ -894,7 +893,7 @@ class _PostImageState extends State<PostImage> with TickerProviderStateMixin {
                       autoPlayInterval: Duration(seconds: 4),
                       enableInfiniteScroll: false,
                       viewportFraction: 1,
-                      aspectRatio: 0.75,
+                      aspectRatio: 0.7,
                       scrollDirection: Axis.horizontal,
                       onPageChanged: (index, reason) {
                         setState(() {
@@ -908,21 +907,7 @@ class _PostImageState extends State<PostImage> with TickerProviderStateMixin {
                       padding: const EdgeInsets.symmetric(horizontal: 0),
                       child: Container(
                         width: MediaQuery.of(context).size.width,
-                        child: ShaderMask(
-                          shaderCallback: (rect) {
-                            return LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                Colors.black,
-                                Colors.black,
-                                Colors.black,
-                                Colors.transparent
-                              ],
-                            ).createShader(Rect.fromLTRB(rect.width / 2,
-                                rect.height / 2, rect.width, rect.height));
-                          },
-                          blendMode: BlendMode.dstIn,
+                
                           child: TweenAnimationBuilder(
                             curve: Curves.linear,
                             duration: Duration(seconds: animationSeconds),
@@ -956,7 +941,7 @@ class _PostImageState extends State<PostImage> with TickerProviderStateMixin {
                         ),
                       ),
                     ),
-                  ),
+               
                   Positioned(
                     bottom: 16.0,
                     right: 12.0,
