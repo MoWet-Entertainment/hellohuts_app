@@ -726,21 +726,18 @@ class PostImageWidget extends StatelessWidget {
                 floating: false,
                 pinned: true,
 
-                expandedHeight: fullHeight(context)*0.7,
+                expandedHeight: fullHeight(context) * 0.7,
                 flexibleSpace: DecoratedBox(
                   decoration: BoxDecoration(
-                    // gradient: LinearGradient(
-                    //   colors: <Color>[
-                    //     AppColors.kPrimaryYellow,
-                    //     AppColors.kPrimaryYellow,
-                    //   ],
-                    // ),
-                    color: Colors.black
-                  ),
+                      // gradient: LinearGradient(
+                      //   colors: <Color>[
+                      //     AppColors.kPrimaryYellow,
+                      //     AppColors.kPrimaryYellow,
+                      //   ],
+                      // ),
+                      color: Colors.black),
                   child: FlexibleSpaceBar(
-                    stretchModes: [
-                      StretchMode.zoomBackground
-                    ],
+                    stretchModes: [StretchMode.zoomBackground],
                     collapseMode: CollapseMode.pin,
                     background: PostImage(
                       imageData: imageData,
@@ -873,24 +870,13 @@ class PostImage extends StatefulWidget {
 }
 
 class _PostImageState extends State<PostImage> with TickerProviderStateMixin {
-  AnimationController _animationController;
-  Animation<double> animation;
   int _activeIndex = 0;
   int animationSeconds = 4;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    // _animationController = new AnimationController(
-    //     vsync: this, duration: Duration(seconds: animationSeconds))
-    //   ..repeat();
-  }
-
-  @override
-  void dispose() {
-    // // TODO: implement dispose
-    // _animationController.dispose();
-    // super.dispose();
+  
   }
 
   @override
@@ -924,29 +910,48 @@ class _PostImageState extends State<PostImage> with TickerProviderStateMixin {
                         width: MediaQuery.of(context).size.width,
                         child: ShaderMask(
                           shaderCallback: (rect) {
-    return LinearGradient(
-      begin: Alignment.topCenter,
-      end: Alignment.bottomCenter,
-      colors: [Colors.black,Colors.black, Colors.black,  Colors.transparent],
-    ).createShader(Rect.fromLTRB(rect.width/2,rect.height/2, rect.width, rect.height));
-  },
-  blendMode: BlendMode.dstIn,
-                                                  child: Image.network(
-                            widget.imageData.imageUrlList[itemIndex],
-                            fit: BoxFit.cover,
-                            loadingBuilder: (BuildContext context, Widget child,
-                                ImageChunkEvent loadingProgress) {
-                              if (loadingProgress == null) return child;
-                              return Center(
-                                child: CircularProgressIndicator(
-                                  value: loadingProgress.expectedTotalBytes !=
-                                          null
-                                      ? loadingProgress.cumulativeBytesLoaded /
-                                          loadingProgress.expectedTotalBytes
-                                      : null,
-                                ),
+                            return LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [
+                                Colors.black,
+                                Colors.black,
+                                Colors.black,
+                                Colors.transparent
+                              ],
+                            ).createShader(Rect.fromLTRB(rect.width / 2,
+                                rect.height / 2, rect.width, rect.height));
+                          },
+                          blendMode: BlendMode.dstIn,
+                          child: TweenAnimationBuilder(
+                            curve: Curves.linear,
+                            duration: Duration(seconds: animationSeconds),
+                            tween: Tween<double>(begin: 1, end: 1.1),
+                            builder: (context, double scale, child) {
+                              return Transform.scale(
+                                scale: scale,
+                                child: child,
                               );
                             },
+                            child: Image.network(
+                              widget.imageData.imageUrlList[itemIndex],
+                              fit: BoxFit.cover,
+                              loadingBuilder: (BuildContext context,
+                                  Widget child,
+                                  ImageChunkEvent loadingProgress) {
+                                if (loadingProgress == null) return child;
+                                return Center(
+                                  child: CircularProgressIndicator(
+                                    value: loadingProgress.expectedTotalBytes !=
+                                            null
+                                        ? loadingProgress
+                                                .cumulativeBytesLoaded /
+                                            loadingProgress.expectedTotalBytes
+                                        : null,
+                                  ),
+                                );
+                              },
+                            ),
                           ),
                         ),
                       ),
@@ -960,9 +965,7 @@ class _PostImageState extends State<PostImage> with TickerProviderStateMixin {
                       child: AnimatedSmoothIndicator(
                         count: widget.imageData.imageUrlList.length,
                         activeIndex: _activeIndex,
-
                         effect: ExpandingDotsEffect(
-
                             dotHeight: 6,
                             dotWidth: 12,
                             spacing: 4,
