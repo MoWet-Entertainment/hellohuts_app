@@ -726,19 +726,19 @@ class PostImageWidget extends StatelessWidget {
                 floating: false,
                 pinned: true,
 
-                expandedHeight: 500,
+                expandedHeight: fullHeight(context) * 0.7,
                 flexibleSpace: DecoratedBox(
                   decoration: BoxDecoration(
-                    // gradient: LinearGradient(
-                    //   colors: <Color>[
-                    //     AppColors.kPrimaryYellow,
-                    //     AppColors.kPrimaryYellow,
-                    //   ],
-                    // ),
-                    color: Colors.black
-                  ),
+                      // gradient: LinearGradient(
+                      //   colors: <Color>[
+                      //     AppColors.kPrimaryYellow,
+                      //     AppColors.kPrimaryYellow,
+                      //   ],
+                      // ),
+                      color: Colors.black),
                   child: FlexibleSpaceBar(
-                    collapseMode: CollapseMode.parallax,
+                    stretchModes: [StretchMode.zoomBackground],
+                    collapseMode: CollapseMode.pin,
                     background: PostImage(
                       imageData: imageData,
                     ),
@@ -749,9 +749,8 @@ class PostImageWidget extends StatelessWidget {
                   delegate: SliverChildBuilderDelegate(
                 (context, index) => Container(
                     height: 40,
-                    color: Colors.primaries[
-                        math.Random().nextInt(Colors.primaries.length)]),
-                childCount: imageList.take(40).length,
+                    color: Colors.black,),
+                childCount: imageList.take(6).length,
               )),
               NormalGrid(),
             ],
@@ -870,24 +869,13 @@ class PostImage extends StatefulWidget {
 }
 
 class _PostImageState extends State<PostImage> with TickerProviderStateMixin {
-  AnimationController _animationController;
-  Animation<double> animation;
   int _activeIndex = 0;
   int animationSeconds = 4;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    // _animationController = new AnimationController(
-    //     vsync: this, duration: Duration(seconds: animationSeconds))
-    //   ..repeat();
-  }
-
-  @override
-  void dispose() {
-    // // TODO: implement dispose
-    // _animationController.dispose();
-    // super.dispose();
+  
   }
 
   @override
@@ -905,7 +893,7 @@ class _PostImageState extends State<PostImage> with TickerProviderStateMixin {
                       autoPlayInterval: Duration(seconds: 4),
                       enableInfiniteScroll: false,
                       viewportFraction: 1,
-                      aspectRatio: 0.75,
+                      aspectRatio: 0.7,
                       scrollDirection: Axis.horizontal,
                       onPageChanged: (index, reason) {
                         setState(() {
@@ -919,36 +907,41 @@ class _PostImageState extends State<PostImage> with TickerProviderStateMixin {
                       padding: const EdgeInsets.symmetric(horizontal: 0),
                       child: Container(
                         width: MediaQuery.of(context).size.width,
-                        child: ShaderMask(
-                          shaderCallback: (rect) {
-    return LinearGradient(
-      begin: Alignment.topCenter,
-      end: Alignment.bottomCenter,
-      colors: [Colors.black,Colors.black, Colors.black,  Colors.transparent],
-    ).createShader(Rect.fromLTRB(0, 0, rect.width, rect.height));
-  },
-  blendMode: BlendMode.dstIn,
-                                                  child: Image.network(
-                            widget.imageData.imageUrlList[itemIndex],
-                            fit: BoxFit.cover,
-                            loadingBuilder: (BuildContext context, Widget child,
-                                ImageChunkEvent loadingProgress) {
-                              if (loadingProgress == null) return child;
-                              return Center(
-                                child: CircularProgressIndicator(
-                                  value: loadingProgress.expectedTotalBytes !=
-                                          null
-                                      ? loadingProgress.cumulativeBytesLoaded /
-                                          loadingProgress.expectedTotalBytes
-                                      : null,
-                                ),
+                
+                          child: TweenAnimationBuilder(
+                            curve: Curves.linear,
+                            duration: Duration(seconds: animationSeconds),
+                            tween: Tween<double>(begin: 1, end: 1.1),
+                            builder: (context, double scale, child) {
+                              return Transform.scale(
+                                scale: scale,
+                                child: child,
                               );
                             },
+                            child: Image.network(
+                              widget.imageData.imageUrlList[itemIndex],
+                              fit: BoxFit.cover,
+                              loadingBuilder: (BuildContext context,
+                                  Widget child,
+                                  ImageChunkEvent loadingProgress) {
+                                if (loadingProgress == null) return child;
+                                return Center(
+                                  child: CircularProgressIndicator(
+                                    value: loadingProgress.expectedTotalBytes !=
+                                            null
+                                        ? loadingProgress
+                                                .cumulativeBytesLoaded /
+                                            loadingProgress.expectedTotalBytes
+                                        : null,
+                                  ),
+                                );
+                              },
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
+               
                   Positioned(
                     bottom: 16.0,
                     right: 12.0,
@@ -958,12 +951,12 @@ class _PostImageState extends State<PostImage> with TickerProviderStateMixin {
                         count: widget.imageData.imageUrlList.length,
                         activeIndex: _activeIndex,
                         effect: ExpandingDotsEffect(
-                            dotHeight: 8,
+                            dotHeight: 6,
                             dotWidth: 12,
                             spacing: 4,
                             dotColor: AppColors.kDarkGrey,
                             activeDotColor: AppColors.kMediumGrey,
-                            expansionFactor: 3),
+                            expansionFactor: 2),
                       ),
                     ),
                   )

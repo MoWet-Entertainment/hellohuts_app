@@ -41,24 +41,27 @@ class _ServicesOfferedBody extends StatelessWidget {
     return Container(
       color: AppColors.kPureWhite,
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            AppStrings.servicesOffered_WhatCanWeHelpWithText(
-                searchState.getSelectedItem.searchString),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: AppThemes.normalTextStyle.copyWith(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-                color: AppColors.kDarkTextColor),
-          ),
-          SizedBox(
-            height: 32,
-          ),
-         ServicesOffferedItems(),
-        ],
+      child: Flexible(
+   flex: 1,
+              child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              AppStrings.servicesOffered_WhatCanWeHelpWithText(
+                  searchState.getSelectedItem.searchString),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: AppThemes.normalTextStyle.copyWith(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  color: AppColors.kDarkTextColor),
+            ),
+            SizedBox(
+              height: 32,
+            ),
+           ServicesOffferedItems(),
+          ],
+        ),
       ),
     );
   }
