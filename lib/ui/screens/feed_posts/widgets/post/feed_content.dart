@@ -80,7 +80,6 @@ class _FeedPostMiddleSection extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: const BorderRadius.all(Radius.circular(16)),
-           
             child: CarouselSlider.builder(
               itemCount: imageListTemp.length,
               options: CarouselOptions(
@@ -232,8 +231,10 @@ class PlusButton extends StatelessWidget {
 }
 
 class ShareWidget extends StatelessWidget {
+  final Color color;
+  final double size;
   const ShareWidget({
-    Key key,
+    Key key, this.color, this.size,
   }) : super(key: key);
 
   @override
@@ -241,8 +242,8 @@ class ShareWidget extends StatelessWidget {
     return GestureDetector(
       child: Image.asset(
         HelloIcons.share_bold_icon,
-        color: AppColors.kDarkestGrey,
-        height: 22,
+        color: color??AppColors.kDarkestGrey,
+        height:size?? 22,
       ),
       onTap: () {
         print('User wants to Share');
