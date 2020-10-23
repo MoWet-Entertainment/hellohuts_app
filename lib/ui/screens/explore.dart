@@ -111,10 +111,10 @@ class _ExplorePostsFeed extends StatelessWidget {
         borderRadius: const BorderRadius.only(
             topLeft: const Radius.circular(20.0),
             topRight: const Radius.circular(20.0)),
-        color: AppColors.kAliceBlue,
+        color: AppColors.kLavender,
       ),
       child: Padding(
-        padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
+        padding: EdgeInsets.fromLTRB(2, 0, 2, 0),
         child: ScrollConfiguration(
           behavior: NeatScrollBehavior(),
           child: ListView.builder(

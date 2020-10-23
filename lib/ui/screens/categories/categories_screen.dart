@@ -748,8 +748,9 @@ class PostImageWidget extends StatelessWidget {
               SliverList(
                   delegate: SliverChildBuilderDelegate(
                 (context, index) => Container(
-                    height: 40,
-                    color: Colors.black,),
+                  height: 40,
+                  color: Colors.black,
+                ),
                 childCount: imageList.take(6).length,
               )),
               NormalGrid(),
@@ -875,7 +876,6 @@ class _PostImageState extends State<PostImage> with TickerProviderStateMixin {
   void initState() {
     // TODO: implement initState
     super.initState();
-  
   }
 
   @override
@@ -886,32 +886,40 @@ class _PostImageState extends State<PostImage> with TickerProviderStateMixin {
         child: widget.imageData.imageUrlList.length > 1
             ? Stack(
                 children: [
-                  CarouselSlider.builder(
-                    itemCount: widget.imageData.imageUrlList.length,
-                    options: CarouselOptions(
-                      autoPlay: true,
-                      autoPlayInterval: Duration(seconds: 4),
-                      enableInfiniteScroll: false,
-                      viewportFraction: 1,
-                      aspectRatio: 0.7,
-                      scrollDirection: Axis.horizontal,
-                      onPageChanged: (index, reason) {
-                        setState(() {
-                          _activeIndex = index;
-                        });
-                        // feedState.updatePostActivePage(model, index);
-                      },
-                    ),
-                    itemBuilder: (BuildContext context, int itemIndex) =>
-                        Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 0),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                
+                  ShaderMask(
+                    shaderCallback: (Rect rect) {
+                      return LinearGradient(
+                              begin: Alignment.center,
+                              end: Alignment.bottomCenter,
+                              colors: [Colors.transparent,Colors.transparent,Colors.black])
+                          .createShader(rect);
+                    },
+                    blendMode: BlendMode.darken,
+                    child: CarouselSlider.builder(
+                      itemCount: widget.imageData.imageUrlList.length,
+                      options: CarouselOptions(
+                        autoPlay: true,
+                        autoPlayInterval: Duration(seconds: 4),
+                        enableInfiniteScroll: false,
+                        viewportFraction: 1,
+                        aspectRatio: 0.7,
+                        scrollDirection: Axis.horizontal,
+                        onPageChanged: (index, reason) {
+                          setState(() {
+                            _activeIndex = index;
+                          });
+                          // feedState.updatePostActivePage(model, index);
+                        },
+                      ),
+                      itemBuilder: (BuildContext context, int itemIndex) =>
+                          Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 0),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
                           child: TweenAnimationBuilder(
                             curve: Curves.linear,
                             duration: Duration(seconds: animationSeconds),
-                            tween: Tween<double>(begin: 1, end: 1.1),
+                            tween: Tween<double>(begin: 1, end: 1.07),
                             builder: (context, double scale, child) {
                               return Transform.scale(
                                 scale: scale,
@@ -941,7 +949,7 @@ class _PostImageState extends State<PostImage> with TickerProviderStateMixin {
                         ),
                       ),
                     ),
-               
+                  ),
                   Positioned(
                     bottom: 16.0,
                     right: 12.0,
