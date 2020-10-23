@@ -26,12 +26,34 @@ class CostEstimateScreen extends StatelessWidget {
               .copyWith(statusBarColor: AppColors.kPureWhite),
           child: SafeArea(
             child: Scaffold(
-                backgroundColor: AppColors.kPureWhite,
-                appBar: CustomAppBar(
-                  isBackButton: true,
-                  onBackButtonPressed: ExtendedNavigator.of(context).pop,
+              backgroundColor: AppColors.kPureWhite,
+              appBar: CustomAppBar(
+                isBackButton: true,
+                onBackButtonPressed: ExtendedNavigator.of(context).pop,
+              ),
+              body: _CostEstimateScreenBody(),
+              bottomNavigationBar: Padding(
+                padding: const EdgeInsets.only(left:24.0,right:24,top:12,bottom: 40.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CupertinoButton(
+                      child: Text(
+                        "Connect with HelloTeam",
+                        style: AppThemes.normalTextStyle.copyWith(
+                            color: AppColors.kPrimaryYellow,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      color: AppColors.kPrimaryDarkBlue,
+                      onPressed: () {
+                        //TODO: Add onPressed action whhen user clicks on Connect with HelloTeam button
+                      },
+                    ),
+                  ],
                 ),
-                body: _CostEstimateScreenBody()),
+              ),
+            ),
           ),
         ),
       ),
@@ -47,7 +69,7 @@ class _CostEstimateScreenBody extends StatelessWidget {
     ScreenUtil.init(context, designSize: Size(375.0, 801.0));
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 40),
-      child: Column(
+      child: ScrollableColumn(
         children: [
           Container(
             alignment: Alignment.centerLeft,
@@ -205,25 +227,15 @@ class _CostEstimateScreenBody extends StatelessWidget {
                   title: "5 Year HelloCare  Extensive Warranty",
                   subTitle: "Long term support, even after project completion",
                 ),
+                 SizedBox(
+                  height: 12,
+                ),  
               ],
             ),
           ),
           SizedBox(
             height: 54.h,
           ),
-          CupertinoButton(
-            child: Text(
-              "Connect with HelloTeam",
-              style: AppThemes.normalTextStyle.copyWith(
-                  color: AppColors.kPrimaryYellow,
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold),
-            ),
-            color: AppColors.kPrimaryDarkBlue,
-            onPressed: () {
-              //TODO: Add onPressed action whhen user clicks on Connect with HelloTeam button
-            },
-          )
         ],
       ),
     );

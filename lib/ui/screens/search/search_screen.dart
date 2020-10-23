@@ -54,8 +54,8 @@ class _SearchPageState extends State<SearchPage> {
               appBar: CustomSearchBar(
                 hintText: AppStrings.searchHintTextForExplore,
                 onSearchChanged: (text) => state.setSearchText(text),
-                resetSearchCallback: ()=> state.resetSearch(),
-                onActionPressed: () =>state.resetSearch(),
+                resetSearchCallback: () => state.resetSearch(),
+                onActionPressed: () => state.resetSearch(),
               ),
               body: _SearchBody(),
             ),
@@ -64,10 +64,6 @@ class _SearchPageState extends State<SearchPage> {
       ),
     );
   }
-
-  
-
-
 
   @override
   void dispose() {
@@ -136,6 +132,8 @@ class _SearchResultsCard extends StatelessWidget {
         onTap: () {
           state.setSelectedItem(item);
           print("User wishes to navigate to " + item.searchString + " page");
+          FocusScope.of(context).unfocus();
+
           ExtendedNavigator.of(context).push(Routes.servicesOfferedBasePage);
         },
       ),

@@ -19,31 +19,29 @@ class AddDetailsBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<CostEstimateState>(context);
-    ScreenUtil.init(context, designSize: Size(375.0, 801.0));
     return Container(
       width: fullWidth(context),
       color: AppColors.kPureWhite,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 32),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            _StoreySelectionSection(),
-            _BedroomSelectionSection(),
-            _BathroomSelectionSection(),
-            _OtherDetailsSelectionSection(),
-            Expanded(
-              child: Container(
-                constraints: BoxConstraints(
-                  maxHeight: fullHeight(context) * 0.2,
-                ),
+          padding: const EdgeInsets.symmetric(horizontal: 32),
+          child: ScrollableColumn(
+      shrinkWrap: true,
+      children: [
+        _StoreySelectionSection(),
+        _BedroomSelectionSection(),
+        _BathroomSelectionSection(),
+        _OtherDetailsSelectionSection(),
+        // Expanded(
+        //     child: Container(
+        //     constraints: BoxConstraints(
+        //       maxHeight: fullHeight(context) * 0.1,
+        //     ),
+        //     ),
+        // ),
+        
+      ],
               ),
-            ),
-      
-          ],
         ),
-      ),
     );
   }
 }

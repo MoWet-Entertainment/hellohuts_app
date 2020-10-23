@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
@@ -497,17 +498,92 @@ class RoundedContainer extends StatelessWidget {
   final Widget child;
   final double borderRadius;
   final Color backGroundColor;
-  const RoundedContainer({Key key, this.child, this.borderRadius, this.backGroundColor})
+  const RoundedContainer(
+      {Key key, this.child, this.borderRadius, this.backGroundColor})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius:  BorderRadius.circular(borderRadius?? 12.0),
-        color: backGroundColor??AppColors.kPureWhite,
+        borderRadius: BorderRadius.circular(borderRadius ?? 12.0),
+        color: backGroundColor ?? AppColors.kPureWhite,
       ),
-      child: child??Container(),
+      child: child ?? Container(),
     );
+  }
+}
+
+class ScrollableColumn extends StatelessWidget {
+  ///Overflow Glow Behaviour. This is false by default
+  final bool overFlowGlow;
+  Axis scrollDirection;
+  bool reverse;
+  ScrollController controller;
+  bool primary;
+  ScrollPhysics physics;
+  bool shrinkWrap;
+  EdgeInsetsGeometry padding;
+  bool addAutomaticKeepAlives;
+  bool addRepaintBoundaries;
+  bool addSemanticIndexes;
+  double cacheExtent;
+  List<Widget> children;
+  int semanticChildCount;
+  DragStartBehavior dragStartBehavior;
+  ScrollViewKeyboardDismissBehavior keyboardDismissBehavior;
+  String restorationId;
+  Clip clipBehavior = Clip.hardEdge;
+  ScrollableColumn({
+    Key key,
+    this.overFlowGlow = false,
+    this.scrollDirection = Axis.vertical,
+    this.reverse = false,
+    this.controller,
+    this.primary,
+    this.physics,
+    this.shrinkWrap = false,
+    this.padding,
+    this.addAutomaticKeepAlives = true,
+    this.addRepaintBoundaries = true,
+    this.addSemanticIndexes = true,
+    this.cacheExtent,
+    this.children = const <Widget>[],
+    this.semanticChildCount,
+    this.dragStartBehavior = DragStartBehavior.start,
+    this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
+    this.restorationId,
+    this.clipBehavior = Clip.hardEdge,
+  }) : super(
+          key: key,
+        );
+
+  @override
+  Widget build(BuildContext context) {
+   return NotificationListener<OverscrollIndicatorNotification>(
+        onNotification: (overscroll) {
+          if (!overFlowGlow) {
+            overscroll.disallowGlow();
+          }
+        },
+        child: ListView(
+          shrinkWrap: shrinkWrap,
+          scrollDirection: scrollDirection,
+          controller: controller,
+          children: children,
+    reverse :reverse,
+    primary:primary,
+    physics:physics,
+    padding:padding,
+    addAutomaticKeepAlives:addAutomaticKeepAlives,
+    addRepaintBoundaries :addRepaintBoundaries,
+    addSemanticIndexes:addSemanticIndexes,
+    cacheExtent:cacheExtent,
+    semanticChildCount:semanticChildCount,
+    dragStartBehavior:dragStartBehavior,
+    keyboardDismissBehavior:keyboardDismissBehavior,
+    restorationId:restorationId,
+    clipBehavior:clipBehavior
+        ));
   }
 }

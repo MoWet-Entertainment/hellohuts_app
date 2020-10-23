@@ -8,11 +8,14 @@ import 'package:hellohuts_app/ui/styles/app_themes.dart';
 
 class CommentButton extends StatelessWidget {
   final String postId;
-   String commentCount;
-   CommentButton({
+  String commentCount;
+  final double size;
+  final Color color;
+  CommentButton({
     Key key,
     this.postId,
     this.commentCount = '',
+    this.color, this.size,
   }) : super(key: key);
 
   @override
@@ -21,13 +24,17 @@ class CommentButton extends StatelessWidget {
     return GestureDetector(
       child: Row(
         children: <Widget>[
-         Image.asset(HelloIcons.comment_bold_icon, color: AppColors.kDarkestGrey, height: 22,),
+          Image.asset(
+            HelloIcons.comment_bold_icon,
+            color: color ?? AppColors.kDarkestGrey,
+            height: size??22,
+          ),
           SizedBox(
             width: 4.0,
           ),
           Text(
             commentCount,
-            style: AppThemes.normalTextStyle,
+            style: AppThemes.normalTextStyle.copyWith(color: color??AppColors.kDarkTextColor),
           )
         ],
       ),

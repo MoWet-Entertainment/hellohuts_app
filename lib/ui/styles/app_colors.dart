@@ -16,6 +16,7 @@ class AppColors {
   static const kLavender = Color(0xffDDDDF3);
   static const kSmokedWhite = Color(0xffF6F7F9);
   static const kAliceBlue = Color(0xffF2F5FC);
+
   static const kPrimaryRed = Color(0xffEF5B5B);
   static const kPrimaryYellow = Color(0xffFCA311);
   static const kPrimaryDarkBlue = Color(0xff200E32);

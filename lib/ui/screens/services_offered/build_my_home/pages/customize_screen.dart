@@ -23,9 +23,9 @@ class CustomizeDetailsBody extends StatelessWidget {
       color: AppColors.kPureWhite,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 32),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          mainAxisSize: MainAxisSize.min,
+        child: ScrollableColumn(
+          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          // mainAxisSize: MainAxisSize.min,
           children: [
             _BuildingMaterialsSelectSection(),
             _FlooringTypeSelectSection(),
@@ -34,13 +34,13 @@ class CustomizeDetailsBody extends StatelessWidget {
             _DoorsAndWindowsSelectSection(),
             // Spacer(),
             // Spacer(),
-            Expanded(
-              child: Container(
-                constraints: BoxConstraints(
-                  maxHeight: fullHeight(context) * 0.2,
-                ),
-              ),
-            ),
+            // Expanded(
+            //   child: Container(
+            //     constraints: BoxConstraints(
+            //       maxHeight: fullHeight(context) * 0.2,
+            //     ),
+            //   ),
+            // ),
         
           ],
         ),

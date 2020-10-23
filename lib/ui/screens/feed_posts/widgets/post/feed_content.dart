@@ -67,7 +67,7 @@ class _FeedPostMiddleSection extends StatelessWidget {
   Widget build(BuildContext context) {
     //TODO: Add a method to pick the aspect ratio from JSON
     final feedState = Provider.of<FeedState>(context);
-    final bool _customAspectRatio = false;
+    final bool _customAspectRatio = true;
     List<String> imageListTemp = [
       "https://images.unsplash.com/photo-1575379047099-155c957f7bab?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80",
       "https://images.unsplash.com/photo-1564078516393-cf04bd966897?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80",
@@ -81,7 +81,6 @@ class _FeedPostMiddleSection extends StatelessWidget {
           ClipRRect(
             borderRadius: const BorderRadius.all(Radius.circular(16)),
             child: CarouselSlider.builder(
-              
               itemCount: imageListTemp.length,
               options: CarouselOptions(
                 autoPlay: false,
@@ -93,28 +92,28 @@ class _FeedPostMiddleSection extends StatelessWidget {
                   print('Current Page: ${index.toString()}');
                   feedState.updatePostActivePage(model, index);
                 },
-                aspectRatio: _customAspectRatio ? 1 : (327.w / 243.w),
+                aspectRatio: _customAspectRatio ? 0.9 : (327.w / 243.w),
               ),
               itemBuilder: (BuildContext context, int itemIndex) => Container(
                 padding: const EdgeInsets.symmetric(horizontal: 0),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   child: Image.network(
-                      imageListTemp[itemIndex],
-                      fit: BoxFit.cover,
-                      loadingBuilder: (BuildContext context, Widget child,
-                          ImageChunkEvent loadingProgress) {
-                        if (loadingProgress == null) return child;
-                        return Center(
-                          child: CircularProgressIndicator(
-                            value: loadingProgress.expectedTotalBytes != null
-                                ? loadingProgress.cumulativeBytesLoaded /
-                                    loadingProgress.expectedTotalBytes
-                                : null,
-                          ),
-                        );
-                      },
-                    ),
+                    imageListTemp[itemIndex],
+                    fit: BoxFit.cover,
+                    loadingBuilder: (BuildContext context, Widget child,
+                        ImageChunkEvent loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return Center(
+                        child: CircularProgressIndicator(
+                          value: loadingProgress.expectedTotalBytes != null
+                              ? loadingProgress.cumulativeBytesLoaded /
+                                  loadingProgress.expectedTotalBytes
+                              : null,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ),
             ),
@@ -232,8 +231,10 @@ class PlusButton extends StatelessWidget {
 }
 
 class ShareWidget extends StatelessWidget {
+  final Color color;
+  final double size;
   const ShareWidget({
-    Key key,
+    Key key, this.color, this.size,
   }) : super(key: key);
 
   @override
@@ -241,8 +242,8 @@ class ShareWidget extends StatelessWidget {
     return GestureDetector(
       child: Image.asset(
         HelloIcons.share_bold_icon,
-        color: AppColors.kDarkestGrey,
-        height: 22,
+        color: color??AppColors.kDarkestGrey,
+        height:size?? 22,
       ),
       onTap: () {
         print('User wants to Share');
