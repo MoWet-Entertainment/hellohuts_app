@@ -683,38 +683,21 @@ class _ImageCard1State extends State<ImageCard1> {
       );
 }
 
-class PostImageWidget extends StatelessWidget {
+class PostDetailWidget extends StatelessWidget {
   final ImageData imageData;
-  const PostImageWidget({Key key, @required this.imageData}) : super(key: key);
+  const PostDetailWidget({Key key, @required this.imageData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     // final itemIndex = imageList.indexOf(imageData);
     // print("index is " + itemIndex.toString());
 
-    return Scaffold(
-      backgroundColor: AppColors.kPureBlack,
-      body: _scrollBody(context),
-    );
-  }
-
-  Widget _buildViewWithStaticCategories() {
-    return Column(
-      children: <Widget>[
-        _buildCategoriesCard(),
-        Expanded(
-          child: ListView.builder(
-              itemCount: 20, // records.length
-              itemBuilder: (BuildContext context, int index) {
-                return Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.00),
-                    child: Text(index.toString()),
-                  ),
-                );
-              }),
-        ),
-      ],
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+          home: Scaffold(
+        backgroundColor: AppColors.kPureBlack,
+        body: _scrollBody(context),
+      ),
     );
   }
 
@@ -728,9 +711,19 @@ class PostImageWidget extends StatelessWidget {
               SliverAppBar(
                 backgroundColor: AppColors.kPureBlack,
                 elevation: 0,
-                leading: IconButton(
-                    icon: Icon(Icons.arrow_back),
-                    onPressed: () => ExtendedNavigator.of(context).pop()),
+                leading: Container(
+                  decoration: BoxDecoration(
+                      // color: Colors.black.withOpacity(0.1),
+                      gradient:
+                          RadialGradient(center: Alignment.center, colors: [
+                        Colors.black.withOpacity(0.1),
+                        Colors.transparent,
+                      ]),
+                      borderRadius: BorderRadius.circular(40)),
+                  child: IconButton(
+                      icon: Icon(Icons.arrow_back),
+                      onPressed: () => ExtendedNavigator.of(context).pop()),
+                ),
                 floating: false,
                 pinned: true,
                 expandedHeight: fullHeight(context) * 0.8,
@@ -743,7 +736,9 @@ class PostImageWidget extends StatelessWidget {
                       //   ],
                       // ),
                       color: Colors.black),
+                    
                   child: FlexibleSpaceBar(
+
                     stretchModes: [StretchMode.zoomBackground],
                     collapseMode: CollapseMode.pin,
                     background: PostImage(
@@ -891,74 +886,129 @@ class _PostImageState extends State<PostImage> with TickerProviderStateMixin {
     return ClipRRect(
       borderRadius: const BorderRadius.all(Radius.circular(0)),
       child: widget.imageData.imageUrlList.length > 1
-          ? Stack(
+          ? Column(
               children: [
-                ShaderMask(
-                  shaderCallback: (Rect rect) {
-                    return LinearGradient(
-                        begin: Alignment.center,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Colors.transparent,
-                          Colors.transparent,
-                          Colors.black.withOpacity(0.6)
-                        ]).createShader(rect);
-                  },
-                  blendMode: BlendMode.darken,
-                  child: CarouselSlider.builder(
-                    itemCount: widget.imageData.imageUrlList.length,
-                    options: CarouselOptions(
-                      autoPlay: true,
-                      autoPlayInterval: Duration(seconds: 4),
-                      enableInfiniteScroll: false,
-                      viewportFraction: 1,
-                      height: fullHeight(context) * 0.8,
-                      // aspectRatio: 0.7,
-                      scrollDirection: Axis.horizontal,
-                      onPageChanged: (index, reason) {
-                        setState(() {
-                          _activeIndex = index;
-                        });
-                        // feedState.updatePostActivePage(model, index);
-                      },
-                    ),
-                    itemBuilder: (BuildContext context, int itemIndex) =>
-                        Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 0),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        child: TweenAnimationBuilder(
-                          curve: Curves.linear,
-                          duration: Duration(seconds: animationSeconds),
-                          tween: Tween<double>(begin: 1, end: 1.05),
-                          builder: (context, double scale, child) {
-                            return Transform.scale(
-                              scale: scale,
-                              child: child,
-                            );
-                          },
-                          child: Image.network(
-                            widget.imageData.imageUrlList[itemIndex],
-                            fit: BoxFit.cover,
-                            loadingBuilder: (BuildContext context, Widget child,
-                                ImageChunkEvent loadingProgress) {
-                              if (loadingProgress == null) return child;
-                              return Center(
-                                child: CircularProgressIndicator(
-                                  value: loadingProgress.expectedTotalBytes !=
-                                          null
-                                      ? loadingProgress.cumulativeBytesLoaded /
-                                          loadingProgress.expectedTotalBytes
-                                      : null,
-                                ),
-                              );
+                Flexible(
+                  flex: 1,
+                  child: Stack(
+                    children: [
+                      ShaderMask(
+                        shaderCallback: (Rect rect) {
+                          return LinearGradient(
+                              begin: Alignment.center,
+                              end: Alignment.bottomCenter,
+                              colors: [
+                                Colors.transparent,
+                                Colors.transparent,
+                                Colors.black.withOpacity(0.6)
+                              ]).createShader(rect);
+                        },
+                        blendMode: BlendMode.darken,
+                        child: CarouselSlider.builder(
+                          itemCount: widget.imageData.imageUrlList.length,
+                          options: CarouselOptions(
+                            autoPlay: true,
+                            autoPlayInterval: Duration(seconds: 4),
+                            enableInfiniteScroll: false,
+                            viewportFraction: 1,
+                            height: fullHeight(context) * 0.8,
+                            // aspectRatio: 0.7,
+                            scrollDirection: Axis.horizontal,
+                            onPageChanged: (index, reason) {
+                              setState(() {
+                                _activeIndex = index;
+                              });
+                              // feedState.updatePostActivePage(model, index);
                             },
+                          ),
+                          itemBuilder: (BuildContext context, int itemIndex) =>
+                              Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 0),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width,
+                              child: TweenAnimationBuilder(
+                                curve: Curves.linear,
+                                duration: Duration(seconds: animationSeconds),
+                                tween: Tween<double>(begin: 1, end: 1.07),
+                                builder: (context, double scale, child) {
+                                  return Transform.scale(
+                                    scale: scale,
+                                    child: child,
+                                  );
+                                },
+                                child: Image.network(
+                                  widget.imageData.imageUrlList[itemIndex],
+                                  fit: BoxFit.cover,
+                                  loadingBuilder: (BuildContext context,
+                                      Widget child,
+                                      ImageChunkEvent loadingProgress) {
+                                    if (loadingProgress == null) return child;
+                                    return Center(
+                                      child: CircularProgressIndicator(
+                                        value: loadingProgress
+                                                    .expectedTotalBytes !=
+                                                null
+                                            ? loadingProgress
+                                                    .cumulativeBytesLoaded /
+                                                loadingProgress
+                                                    .expectedTotalBytes
+                                            : null,
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    ),
+                      Positioned(
+                        bottom: 12,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          // height: 100,
+                          width: fullWidth(context),
+                          child: Row(
+                            children: [
+                              LikeButton(
+                                isLiked: true,
+                                likeCount: '918',
+                                fontSize: 12,
+                                sizeOfIcon: 24,
+                                defaultIconColor: AppColors.kPureWhite,
+                                defaultTextColor: AppColors.kPureWhite,
+                                likedBackgroundColor: AppColors.kDarkRed.withOpacity(0.8),
+                                defaultBackgroundColor: AppColors.kDarkGrey.withOpacity(0.5),
+                              ),
+                              SizedBox(
+                                width: 12.0,
+                              ),
+                              CommentButton(
+                                color: AppColors.kPureWhite,
+                              ),
+                              SizedBox(
+                                width: 10.0,
+                              ),
+                              ShareWidget(
+                                color: AppColors.kPureWhite,
+                              ),
+                              Spacer(),
+                              PlusButton(
+                                postId: '',
+                                addedToBoard: true,
+                                defaultIconColor: AppColors.kPureWhite,
+                                addedToBoardBackGroundColor: AppColors.kAccentColor.withOpacity(0.7),
+                                addedToBoardColor: AppColors.kPureWhite,
+                                defaultBackgroundColor: AppColors.kDarkGrey.withOpacity(0.5),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
+                SizedBox(height: 4.0),
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
@@ -974,42 +1024,6 @@ class _PostImageState extends State<PostImage> with TickerProviderStateMixin {
                           dotColor: AppColors.kDarkGrey,
                           activeDotColor: AppColors.kMediumGrey,
                           expansionFactor: 2),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  bottom: 32,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    // height: 100,
-                    width: fullWidth(context),
-                    child: Row(
-                      children: [
-                        
-                            LikeButton(
-                            isLiked: true,
-                            likeCount: '918',
-                            fontSize: 12,
-                            sizeOfIcon: 24,
-                            ),
-                        SizedBox(
-                          width: 12.0,
-                        ),
-                        CommentButton(
-                          color: AppColors.kPureWhite,
-                        ),
-                        SizedBox(
-                          width: 10.0,
-                        ),
-                        ShareWidget(
-                          color: AppColors.kPureWhite,
-                        ),
-                        Spacer(),
-                        PlusButton(
-                          postId: '',
-                          addedToBoard: true,
-                        ),
-                      ],
                     ),
                   ),
                 ),

@@ -85,7 +85,7 @@ class AppRouter extends RouterBase {
     RouteDef(Routes.addDetailsForHome, page: AddDetailsForHome),
     RouteDef(Routes.costEstimateScreen, page: CostEstimateScreen),
     RouteDef(Routes.categoriesScreen, page: CategoriesScreen),
-    RouteDef(Routes.postImageWidget, page: PostImageWidget),
+    RouteDef(Routes.postImageWidget, page: PostDetailWidget),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -250,10 +250,10 @@ class AppRouter extends RouterBase {
         settings: data,
       );
     },
-    PostImageWidget: (data) {
+    PostDetailWidget: (data) {
       final args = data.getArgs<PostImageWidgetArguments>(nullOk: false);
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => PostImageWidget(
+        builder: (context) => PostDetailWidget(
           key: args.key,
           imageData: args.imageData,
         ),
