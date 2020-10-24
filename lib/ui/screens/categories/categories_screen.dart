@@ -693,6 +693,7 @@ class PostImageWidget extends StatelessWidget {
     // print("index is " + itemIndex.toString());
 
     return Scaffold(
+      backgroundColor: AppColors.kPureBlack,
       body: _scrollBody(context),
     );
   }
@@ -725,14 +726,13 @@ class PostImageWidget extends StatelessWidget {
           child: CustomScrollView(
             slivers: [
               SliverAppBar(
+                backgroundColor: AppColors.kPureBlack,
                 elevation: 0,
-                // backgroundColor: AppColors.kDarkGreen,
                 leading: IconButton(
                     icon: Icon(Icons.arrow_back),
                     onPressed: () => ExtendedNavigator.of(context).pop()),
                 floating: false,
                 pinned: true,
-
                 expandedHeight: fullHeight(context) * 0.8,
                 flexibleSpace: DecoratedBox(
                   decoration: BoxDecoration(
@@ -757,9 +757,8 @@ class PostImageWidget extends StatelessWidget {
                   color: AppColors.kPureBlack,
                   height: 100,
                   width: fullWidth(context),
-                 
                 ),
-                 ),
+              ),
               NormalGrid(),
             ],
           ),
@@ -897,10 +896,13 @@ class _PostImageState extends State<PostImage> with TickerProviderStateMixin {
                 ShaderMask(
                   shaderCallback: (Rect rect) {
                     return LinearGradient(
-                            begin: Alignment.center,
-                            end: Alignment.bottomCenter,
-                            colors: [Colors.transparent,Colors.transparent,Colors.black.withOpacity(0.6)])
-                        .createShader(rect);
+                        begin: Alignment.center,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.transparent,
+                          Colors.transparent,
+                          Colors.black.withOpacity(0.6)
+                        ]).createShader(rect);
                   },
                   blendMode: BlendMode.darken,
                   child: CarouselSlider.builder(
@@ -910,7 +912,7 @@ class _PostImageState extends State<PostImage> with TickerProviderStateMixin {
                       autoPlayInterval: Duration(seconds: 4),
                       enableInfiniteScroll: false,
                       viewportFraction: 1,
-                      height: fullHeight(context)*0.8,
+                      height: fullHeight(context) * 0.8,
                       // aspectRatio: 0.7,
                       scrollDirection: Axis.horizontal,
                       onPageChanged: (index, reason) {
@@ -938,16 +940,14 @@ class _PostImageState extends State<PostImage> with TickerProviderStateMixin {
                           child: Image.network(
                             widget.imageData.imageUrlList[itemIndex],
                             fit: BoxFit.cover,
-                            loadingBuilder: (BuildContext context,
-                                Widget child,
+                            loadingBuilder: (BuildContext context, Widget child,
                                 ImageChunkEvent loadingProgress) {
                               if (loadingProgress == null) return child;
                               return Center(
                                 child: CircularProgressIndicator(
                                   value: loadingProgress.expectedTotalBytes !=
                                           null
-                                      ? loadingProgress
-                                              .cumulativeBytesLoaded /
+                                      ? loadingProgress.cumulativeBytesLoaded /
                                           loadingProgress.expectedTotalBytes
                                       : null,
                                 ),
@@ -959,11 +959,11 @@ class _PostImageState extends State<PostImage> with TickerProviderStateMixin {
                     ),
                   ),
                 ),
-           
                 Align(
                   alignment: Alignment.bottomCenter,
-                                  child: Container(
-                                    padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8.0),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 8, horizontal: 8.0),
                     child: AnimatedSmoothIndicator(
                       count: widget.imageData.imageUrlList.length,
                       activeIndex: _activeIndex,
@@ -977,41 +977,57 @@ class _PostImageState extends State<PostImage> with TickerProviderStateMixin {
                     ),
                   ),
                 ),
-              Positioned(
-                bottom: 0,
-                              child: Container(
+                Positioned(
+                  bottom: 32,
+                  child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
-                    height: 100,
+                    // height: 100,
                     width: fullWidth(context),
                     child: Row(
                       children: [
-                        LikeButton(model: new FeedModel(userLiked: false),state: null,),
-                          SizedBox(
-                    width: 12.0,
-                  ),
-                        CommentButton(color: AppColors.kPureWhite,),
-                          SizedBox(
-                    width: 10.0,
-                  ),
-                        ShareWidget(color: AppColors.kPureWhite,),
+                        
+                            LikeButton(
+                            isLiked: true,
+                            likeCount: '918',
+                            fontSize: 12,
+                            sizeOfIcon: 24,
+                            ),
+                        SizedBox(
+                          width: 12.0,
+                        ),
+                        CommentButton(
+                          color: AppColors.kPureWhite,
+                        ),
+                        SizedBox(
+                          width: 10.0,
+                        ),
+                        ShareWidget(
+                          color: AppColors.kPureWhite,
+                        ),
                         Spacer(),
-                        PlusButton(model: new FeedModel(userLiked: false),),
+                        PlusButton(
+                          postId: '',
+                          addedToBoard: true,
+                        ),
                       ],
                     ),
                   ),
-              ),
+                ),
               ],
             )
-          :  ShaderMask(
-                  shaderCallback: (Rect rect) {
-                    return LinearGradient(
-                            begin: Alignment.center,
-                            end: Alignment.bottomCenter,
-                            colors: [Colors.transparent,Colors.transparent,Colors.black.withOpacity(0.6)])
-                        .createShader(rect);
-                  },
-                  blendMode: BlendMode.darken,
-                      child: Container(
+          : ShaderMask(
+              shaderCallback: (Rect rect) {
+                return LinearGradient(
+                    begin: Alignment.center,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Colors.transparent,
+                      Colors.transparent,
+                      Colors.black.withOpacity(0.6)
+                    ]).createShader(rect);
+              },
+              blendMode: BlendMode.darken,
+              child: Container(
                 width: MediaQuery.of(context).size.width,
                 child: Image.network(
                   widget.imageData.imageUrlList[0],
@@ -1030,7 +1046,7 @@ class _PostImageState extends State<PostImage> with TickerProviderStateMixin {
                   },
                 ),
               ),
-          ),
+            ),
     );
   }
 }

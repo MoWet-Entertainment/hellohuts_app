@@ -9,13 +9,17 @@ import 'package:hellohuts_app/ui/styles/app_themes.dart';
 class CommentButton extends StatelessWidget {
   final String postId;
   String commentCount;
-  final double size;
+  final double sizeOfIcon;
+  final double fontSize;
   final Color color;
+  final VoidCallback onTap;
   CommentButton({
     Key key,
     this.postId,
     this.commentCount = '',
-    this.color, this.size,
+    this.color,
+    this.sizeOfIcon = 24,
+    this.onTap, this.fontSize=12,
   }) : super(key: key);
 
   @override
@@ -27,20 +31,21 @@ class CommentButton extends StatelessWidget {
           Image.asset(
             HelloIcons.comment_bold_icon,
             color: color ?? AppColors.kDarkestGrey,
-            height: size??22,
+            height: sizeOfIcon,
           ),
           SizedBox(
             width: 4.0,
           ),
           Text(
             commentCount,
-            style: AppThemes.normalTextStyle.copyWith(color: color??AppColors.kDarkTextColor),
+            style: AppThemes.normalTextStyle.copyWith(
+                fontSize: fontSize, color: color ?? AppColors.kDarkTextColor),
           )
         ],
       ),
       onTap: () {
         print('User wants to see comments');
-        ExtendedNavigator.of(context).push(Routes.commentsDetail);
+        onTap();
       },
     );
   }

@@ -60,12 +60,12 @@ class AppThemes {
   );
 
   static final TextStyle normalTextStyle = GoogleFonts.lato(
-      fontSize: 10.0,
+      fontSize: 14.0,
       textStyle: TextStyle(
           fontWeight: FontWeight.normal, color: AppColors.kDarkTextColor));
 
           static final TextStyle normalTextLightStyle = GoogleFonts.lato(
-      fontSize: 10.0,
+      fontSize: 12.0,
       textStyle: TextStyle(
           fontWeight: FontWeight.w300, color: AppColors.kDarkTextColor));
 

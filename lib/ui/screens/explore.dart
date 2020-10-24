@@ -111,7 +111,7 @@ class _ExplorePostsFeed extends StatelessWidget {
         borderRadius: const BorderRadius.only(
             topLeft: const Radius.circular(20.0),
             topRight: const Radius.circular(20.0)),
-        color: AppColors.kLavender,
+        color: AppColors.kLavender.withOpacity(0.7)
       ),
       child: Padding(
         padding: EdgeInsets.fromLTRB(2, 0, 2, 0),

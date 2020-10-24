@@ -145,11 +145,17 @@ class _FeedPostBottomSection extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                LikeButton(model: model, state: state),
+                LikeButton(
+                  isLiked: model.userLiked,
+                  onLikedCallback: () => state.addLikeToPost(model, '1234'),
+                ),
                 SizedBox(
                   width: 12.0,
                 ),
-                CommentButton(),
+                CommentButton(
+                  onTap: () =>
+                      ExtendedNavigator.root.push(Routes.commentsDetail),
+                ),
                 SizedBox(
                   width: 12.0,
                 ),
@@ -160,24 +166,17 @@ class _FeedPostBottomSection extends StatelessWidget {
                 ),
                 Spacer(),
                 PlusButton(
-                  model: model,
+                  postId: '',
+                  onTap: () => {
+                    print('User wants to add the post to the saved boards'),
+                  },
                 ),
               ],
             ),
             SizedBox(
-              height: 10.0,
-            ),
-            Container(
-              height: 1.0,
-              color: AppColors.kMediumGrey,
-            ),
-            SizedBox(
-              height: 8.0,
+              height: 12.0,
             ),
             Row(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 FeedPostTitleDetails(model: model),
                 // FeedPostLikeSection(
@@ -196,10 +195,14 @@ class _FeedPostBottomSection extends StatelessWidget {
 }
 
 class PlusButton extends StatelessWidget {
-  FeedModel model;
+  final String postId;
+  final bool addedToBoard;
+  final VoidCallback onTap;
   PlusButton({
     Key key,
-    this.model,
+    @required this.postId,
+    this.addedToBoard = false,
+    this.onTap,
   }) : super(key: key);
 
   @override
@@ -212,7 +215,7 @@ class PlusButton extends StatelessWidget {
             color: AppColors.kAliceBlue,
           ),
           //TODO: Change userLiked to userBookMarked or not
-          child: model.userLiked
+          child: addedToBoard
               ? Image.asset(
                   HelloIcons.bookmark_bold_icon,
                   color: AppColors.kAccentColor,
@@ -223,9 +226,7 @@ class PlusButton extends StatelessWidget {
                   color: AppColors.kDarkestGrey,
                   height: 22.0,
                 )),
-      onTap: () {
-        print('User wants to see comments');
-      },
+      onTap: onTap,
     );
   }
 }
@@ -234,7 +235,9 @@ class ShareWidget extends StatelessWidget {
   final Color color;
   final double size;
   const ShareWidget({
-    Key key, this.color, this.size,
+    Key key,
+    this.color,
+    this.size = 24,
   }) : super(key: key);
 
   @override
@@ -242,8 +245,8 @@ class ShareWidget extends StatelessWidget {
     return GestureDetector(
       child: Image.asset(
         HelloIcons.share_bold_icon,
-        color: color??AppColors.kDarkestGrey,
-        height:size?? 22,
+        color: color ?? AppColors.kDarkestGrey,
+        height: size,
       ),
       onTap: () {
         print('User wants to Share');
