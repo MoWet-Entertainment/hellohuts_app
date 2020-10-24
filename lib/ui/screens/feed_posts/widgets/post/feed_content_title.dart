@@ -17,38 +17,27 @@ class FeedPostTitleDetails extends StatelessWidget {
       flex: 4,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
+          Padding(padding: const EdgeInsets.only(top:4),
+          child: Text(model.postedUser,maxLines: 1,overflow: TextOverflow.ellipsis, style: AppThemes.normalTextStyle.copyWith(fontSize: 14, fontWeight: FontWeight.bold),),),
           Padding(
             padding: const EdgeInsets.only(top: 4),
             child: Container(
               constraints: BoxConstraints(maxWidth: 333.w),
               child: RichText(
-                maxLines: 2,
-                text: TextSpan(children: <InlineSpan>[
-                  //  TextSpan(text: model.postedUser,style: AppThemes.postHeadLineStyle.copyWith(fontWeight: FontWeight.w500)),
-                  WidgetSpan(
-                    alignment: PlaceholderAlignment.middle,
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 4.0),
-                      child: Text(
-                        model.postedUser,
-                        style: AppThemes.postHeadLineUserStyle,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                      ),
-                    ),
-                  ),
-                  WidgetSpan(
-                      alignment: PlaceholderAlignment.middle,
-                      child: ExpandableText(
-                        model.postTitle,
-                        expandText: "more",
-                        collapseText: '',
-                        linkColor: AppColors.kDarkGrey,
-                        style: AppThemes.postHeadLineStyle,
-                      )),
-                ]),
+          maxLines: 2,
+          text: TextSpan(children: <InlineSpan>[
+            //  TextSpan(text: model.postedUser,style: AppThemes.postHeadLineStyle.copyWith(fontWeight: FontWeight.w500)),
+            WidgetSpan(
+          alignment: PlaceholderAlignment.middle,
+          child: ExpandableText(
+              model.postTitle,
+              expandText: "more",
+              collapseText: '',
+              linkColor: AppColors.kDarkGrey,
+              style: AppThemes.normalTextStyle.copyWith(fontSize: 14)
+          )),
+          ]),
               ),
             ),
           ),

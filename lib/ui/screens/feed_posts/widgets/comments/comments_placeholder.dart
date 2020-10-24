@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hellohuts_app/models/test.dart';
+import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
 import 'package:hellohuts_app/ui/routes/router.gr.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
@@ -18,8 +19,8 @@ class PostCommentsPlaceholder extends StatelessWidget {
         GestureDetector(
           child: Container(
             child: Text('See all comments',
-                style: AppThemes.postHeadLineStyle.copyWith(
-                    fontWeight: FontWeight.w300, color: AppColors.kDarkGrey)),
+                style: AppThemes.normalTextStyle
+                    .copyWith(fontSize: 14, color: AppColors.kDarkGrey)),
           ),
           onTap: () {
             //TODO: Add Navigation to the Comment Section here
@@ -28,31 +29,98 @@ class PostCommentsPlaceholder extends StatelessWidget {
           },
         ),
         SizedBox(
-          height: 2.0,
+          height: 8.0,
         ),
-        Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Container(
-              //TODO: This should be picked up from each individual posts
-              child: RichText(
-                text: TextSpan(children: <InlineSpan>[
-                  WidgetSpan(
-                    child: Text('Afsal Kp',
-                        style: AppThemes.postHeadLineUserStyle),
-                  ),
-                  TextSpan(text: ' '),
-                  TextSpan(
-                      text:
-                          'Can\'t wait to build thisNow you can browse privately, and other people who use this device won\'t see your activity. However, downloads and bookmarks will be saved!',
-                      style: AppThemes.postHeadLineStyle),
-                ]),
-              ),
+        UsersCommentsWidget(),
+        SizedBox(
+          height: 8.0,
+        ),
+      ],
+    );
+  }
+}
+
+class UsersCommentsWidget extends StatelessWidget {
+  final String avatarUrl;
+  final String userName;
+  final String comment;
+  const UsersCommentsWidget({
+    Key key,
+    this.avatarUrl ="http://www.gravatar.com/avatar/?d=identicon",
+    this.userName = "Cody Doe",
+    this.comment ="I would love to try this. Can we connect? 😍😍",
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal:8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 2.0),
+            child: CircleAvatar(
+              radius: 6,
+              backgroundColor: AppColors.kDarkGrey,
+              backgroundImage:
+                  //TODO:Add Real user image
+                  NetworkImage(avatarUrl),
             ),
-          ],
-        )
+          ),
+          SizedBox(width: 6.0),
+          Flexible(
+                      child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  //TODO:Pass real user name via model
+                  Text(userName,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppThemes.normalTextStyle
+                          .copyWith(fontWeight: FontWeight.bold, fontSize: 12)),
+                  Text(comment,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppThemes.normalTextStyle
+                          .copyWith(fontWeight: FontWeight.normal, fontSize: 14))
+                ]),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class IndividualComments extends StatelessWidget {
+  const IndividualComments({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Container(
+          //TODO: This should be picked up from each individual posts
+          child: RichText(
+            text: TextSpan(children: <InlineSpan>[
+              WidgetSpan(
+                child: Text('Afsal Kp', style: AppThemes.postHeadLineUserStyle),
+              ),
+              TextSpan(text: ' '),
+              TextSpan(
+                  text:
+                      'Can\'t wait to build thisNow you can browse privately, and other people who use this device won\'t see your activity. However, downloads and bookmarks will be saved!',
+                  style: AppThemes.postHeadLineStyle),
+            ]),
+          ),
+        ),
       ],
     );
   }
