@@ -32,9 +32,7 @@ class PostCommentsPlaceholder extends StatelessWidget {
           height: 8.0,
         ),
         UsersCommentsWidget(),
-        SizedBox(
-          height: 8.0,
-        ),
+      
       ],
     );
   }

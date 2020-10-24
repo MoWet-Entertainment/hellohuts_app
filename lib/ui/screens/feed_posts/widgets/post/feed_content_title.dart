@@ -48,7 +48,7 @@ class FeedPostTitleDetails extends StatelessWidget {
           //comments are present in the post or not
           PostCommentsPlaceholder(model: model),
           Padding(
-            padding: const EdgeInsets.only(top: 4, bottom: 8.0),
+            padding: const EdgeInsets.only(top: 12, bottom: 8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
