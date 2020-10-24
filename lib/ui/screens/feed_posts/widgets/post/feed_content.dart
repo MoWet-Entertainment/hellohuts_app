@@ -174,7 +174,14 @@ class _FeedPostBottomSection extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height: 12.0,
+              height: 8.0,
+            ),
+            // Container(
+            //   height: 1.0,
+            //   color: AppColors.kMediumGrey,
+            // ),
+            SizedBox(
+              height: 4.0,
             ),
             Row(
               children: <Widget>[
@@ -198,11 +205,21 @@ class PlusButton extends StatelessWidget {
   final String postId;
   final bool addedToBoard;
   final VoidCallback onTap;
+  final Color defaultBackgroundColor;
+  final Color addedToBoardColor;
+  final Color defaultIconColor;
+  final Color addedToBoardBackGroundColor;
+  final double iconSize;
   PlusButton({
     Key key,
     @required this.postId,
     this.addedToBoard = false,
     this.onTap,
+    this.defaultBackgroundColor = AppColors.kAliceBlue,
+    this.addedToBoardColor = AppColors.kAccentColor,
+    this.defaultIconColor = AppColors.kDarkGrey,
+    this.addedToBoardBackGroundColor = AppColors.kAliceBlue,
+    this.iconSize = 22,
   }) : super(key: key);
 
   @override
@@ -212,18 +229,18 @@ class PlusButton extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.0),
-            color: AppColors.kAliceBlue,
+            color: addedToBoard?addedToBoardBackGroundColor: defaultBackgroundColor,
           ),
           //TODO: Change userLiked to userBookMarked or not
           child: addedToBoard
               ? Image.asset(
                   HelloIcons.bookmark_bold_icon,
-                  color: AppColors.kAccentColor,
+                  color: addedToBoardColor,
                   height: 22.0,
                 )
               : Image.asset(
                   HelloIcons.bookmark_light_icon,
-                  color: AppColors.kDarkestGrey,
+                  color: defaultIconColor,
                   height: 22.0,
                 )),
       onTap: onTap,

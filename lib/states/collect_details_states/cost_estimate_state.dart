@@ -218,7 +218,7 @@ class CostEstimateState extends ChangeNotifier {
   }
 
   ///Exterior Decor Selection Types
-  CustomizeOptions _exteriorDecorTypeSelected = CustomizeOptions.Standard;
+  CustomizeOptions _exteriorDecorTypeSelected = CustomizeOptions.None;
   get exteriorDecorTypeSelected => _exteriorDecorTypeSelected;
 
   set setExteriorDecorTypeSelected(CustomizeOptions option) {

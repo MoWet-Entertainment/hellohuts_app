@@ -92,6 +92,8 @@ class UsersCommentsWidget extends StatelessWidget {
   }
 }
 
+
+//TODO: NOT USING THIS - CAN BE REMOVED
 class IndividualComments extends StatelessWidget {
   const IndividualComments({
     Key key,
