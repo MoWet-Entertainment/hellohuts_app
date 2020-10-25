@@ -76,11 +76,15 @@ class HelloIcons {
 //Add Details Services Offered Screen
   static const String minus_light_icon = _iconsRoot + "Minus_light_icon.png";
   static const String plus_light_icon = _iconsRoot + "Plus_light_icon.png";
+  static const String plus_bold_icon = _iconsRoot + "Plus_bold_icon.png";
 
   //Categories Icons
   static const String flame_bold_icon = _iconsRoot + "Flame_bold_icon.svg";
   static const String flame_light_icon = _iconsRoot + "Flame_light_icon.svg";
   static const String layers_bold_icon = _iconsRoot + "Layers_filled_icon.svg";
+
+  //Post Detail icons
+  static const String three_dots_icon = _iconsRoot + "Three-dots-bold_icon.png";
 }
 
 class SessionData {
