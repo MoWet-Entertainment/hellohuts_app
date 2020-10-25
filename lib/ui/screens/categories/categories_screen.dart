@@ -724,6 +724,9 @@ class PostDetailWidget extends StatelessWidget {
                       icon: Icon(Icons.arrow_back),
                       onPressed: () => ExtendedNavigator.of(context).pop()),
                 ),
+//               actions: [
+// IconButton(icon: Icon(Icons.more_horiz, color: AppColors.kPureWhite,), onPressed: null)
+//                ],
                 floating: false,
                 pinned: true,
                 expandedHeight: fullHeight(context) * 0.8,
@@ -758,46 +761,6 @@ class PostDetailWidget extends StatelessWidget {
             ],
           ),
         ),
-
-//         Container(
-//           height: 80,
-//           child: AnimatedBuilder(
-//             animation: _colorAnimationController,
-//             builder: (context, child) => AppBar(
-//                 backgroundColor: _colorTween.value,
-//                 elevation: 0,
-//                 titleSpacing: 0.0,
-//                 title: Transform.translate(
-//                   offset: _transTween.value,
-//                   child: Text(
-//                     "Vinoop",
-//                     style: TextStyle(
-//                         color: Colors.white,
-//                         fontWeight: FontWeight.bold,
-//                         fontSize: 16),
-//                   ),
-//                 ),
-//                 iconTheme: IconThemeData(
-//                   color: _iconColorTween.value,
-//                 ),
-//                 actions: <Widget>[
-//                   IconButton(
-//                     icon: Icon(
-//                       Icons.local_grocery_store,
-//                     ),
-//                     onPressed: () {
-// //                          Navigator.of(context).push(TutorialOverlay());
-//                     },
-//                   ),
-//                   IconButton(
-//                     icon: Icon(
-//                       Icons.more_vert,
-//                     ),
-//                     onPressed: () {},
-//                   ),
-//                 ]),
-//           ),
-//         ),
       ],
     );
   }
@@ -882,7 +845,6 @@ class _PostImageState extends State<PostImage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     final state = Provider.of<FeedState>(context);
     bool isCarousel = widget.imageData.imageUrlList.length>1?true:false;
-    FeedModel model = new FeedModel(userLiked: false);
     return ClipRRect(
       borderRadius: const BorderRadius.all(Radius.circular(0)),
       child:  Column(
