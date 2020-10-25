@@ -183,8 +183,11 @@ dynamic customAdvanceNetworkImage(String path) {
 
 Widget postedUserSection(BuildContext context,
     {String imagePath = "http://www.gravatar.com/avatar/?d=identicon",
-    String postedUser,
-    String userTitle,
+    String postedUser='',
+    TextStyle postedUserTextStyle,
+    String userTitle='',
+    TextStyle userTitleTextStyle,
+
     double radiusOfAvatar = 8}) {
   return Container(
     child: InkWell(
@@ -218,7 +221,7 @@ Widget postedUserSection(BuildContext context,
                     postedUser,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: AppThemes.postedAuthorTextMainHeadStyle,
+                    style: postedUserTextStyle?? AppThemes.postedAuthorTextMainHeadStyle,
                   ),
                 ),
                 Container(
@@ -227,7 +230,7 @@ Widget postedUserSection(BuildContext context,
                   child: Text(userTitle,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: AppThemes.postedAuthorTextSubHeadStyle),
+                      style: userTitleTextStyle?? AppThemes.postedAuthorTextSubHeadStyle),
                 ),
               ]),
         ],
