@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -385,15 +386,19 @@ class NormalGrid extends StatelessWidget {
     print("Custom Grid");
     return SliverStaggeredGrid.countBuilder(
         crossAxisCount: 2,
+        crossAxisSpacing: 4,
+        mainAxisSpacing: 4,
         staggeredTileBuilder: (index) => StaggeredTile.count(1, 1),
-        itemBuilder: (context, index) => Container(
-              color: randomOpaqueColor(),
-              child: Center(
-                child: CircleAvatar(
-                  child: Center(child: Text(index.toString())),
-                ),
-              ),
-            ),
+        itemBuilder: (context, index) => 
+      Image.network(imageList[index].imageUrlList[0], fit:BoxFit.cover),
+        // Container(
+        //       color: randomOpaqueColor(),
+        //       child: Center(
+        //         child: CircleAvatar(
+        //           child: Center(child: Text(index.toString())),
+        //         ),
+        //       ),
+        //     ),
         itemCount: 20);
   }
 }
@@ -694,7 +699,7 @@ class PostDetailWidget extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-          home: Scaffold(
+      home: Scaffold(
         backgroundColor: AppColors.kPureBlack,
         body: _scrollBody(context),
       ),
@@ -739,9 +744,7 @@ class PostDetailWidget extends StatelessWidget {
                       //   ],
                       // ),
                       color: Colors.black),
-                    
                   child: FlexibleSpaceBar(
-
                     stretchModes: [StretchMode.zoomBackground],
                     collapseMode: CollapseMode.pin,
                     background: PostImage(
@@ -752,10 +755,94 @@ class PostDetailWidget extends StatelessWidget {
               ),
               SliverToBoxAdapter(
                 child: Container(
+                  alignment: Alignment.topLeft,
                   color: AppColors.kPureBlack,
-                  height: 100,
                   width: fullWidth(context),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 8.0, horizontal: 16),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        postedUserSection(context,
+                            postedUser: 'Harry James Potter',
+                            radiusOfAvatar: 16,
+                            postedUserTextStyle: AppThemes.normalTextStyle
+                                .copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14,
+                                    color: AppColors.kPureWhite),
+                            userTitle: 'Architect',
+                            userTitleTextStyle: AppThemes
+                                .normalSecondaryTextStyle
+                                .copyWith(color: AppColors.kDarkGrey)),
+                        Spacer(),
+                        Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 8),
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12.0),
+                              color: AppColors.kNavBarColor,
+                            ),
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  HelloIcons.plus_bold_icon,
+                                  color: AppColors.kLightGrey,
+                                  height: 15,
+                                ),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                Text(
+                                  'Follow',
+                                  style: AppThemes.normalTextStyle
+                                      .copyWith(color: AppColors.kPureWhite),
+                                )
+                              ],
+                            )),
+                      ],
+                    ),
+                  ),
                 ),
+              ),
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                  child: Column(
+                    children: [
+                      //TODO:Chnage hardcoded text
+                      Text(
+                        'Simple, but elegant living room interior at a low cost',
+                        style: AppThemes.normalTextStyle.copyWith(
+                            fontSize: 18,
+                            color: AppColors.kPureWhite,
+                            fontWeight: FontWeight.bold),
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      SizedBox(
+                        height: 8.0,
+                      ),
+                      ExpandableText(
+                          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. And its so confusing to see molecules getting robbed. But game of thrones was a good theory. Tellus molestie enim et turpis sagittis blandit aliquam. Ullamcorper dis sed integer velit nisi, maecenas diam sed nunc. Nibh lobortis egestas et, integer non at. Et mauris fermentum habitant tellus auctor in arcu, sodales a.ctor in arcu",
+                          style: AppThemes.normalSecondaryTextStyle
+                              .copyWith(color: AppColors.kPureWhite,fontSize: 14),
+                              maxLines: 6,
+                          expandText: 'more',
+                          linkColor: AppColors.kLavender,
+                          collapseText: ''),
+                    ],
+                  ),
+                ),
+              ),
+              SliverToBoxAdapter(
+                child:SizedBox(
+                  height:24,
+                )
               ),
               NormalGrid(),
             ],
@@ -841,174 +928,186 @@ class _PostImageState extends State<PostImage> with TickerProviderStateMixin {
     // TODO: implement initState
     super.initState();
   }
-   @override
+
+  @override
   Widget build(BuildContext context) {
     final state = Provider.of<FeedState>(context);
-    bool isCarousel = widget.imageData.imageUrlList.length>1?true:false;
+    bool isCarousel = widget.imageData.imageUrlList.length > 1 ? true : false;
     return ClipRRect(
-      borderRadius: const BorderRadius.all(Radius.circular(0)),
-      child:  Column(
-              children: [
-                Flexible(
-                  flex: 1,
-                  child: Stack(
-                    children: [
-                      ShaderMask(
-                        shaderCallback: (Rect rect) {
-                          return LinearGradient(
-                              begin: Alignment.center,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                Colors.transparent,
-                                Colors.transparent,
-                                Colors.black.withOpacity(0.6)
-                              ]).createShader(rect);
-                        },
-                        blendMode: BlendMode.darken,
-                        child:widget.imageData.imageUrlList.length > 1? CarouselSlider.builder(
-                          itemCount: widget.imageData.imageUrlList.length,
-                          options: CarouselOptions(
-                            autoPlay: true,
-                            autoPlayInterval: Duration(seconds: 4),
-                            enableInfiniteScroll: false,
-                            viewportFraction: 1,
-                            height: fullHeight(context) * 0.8,
-                            // aspectRatio: 0.7,
-                            scrollDirection: Axis.horizontal,
-                            onPageChanged: (index, reason) {
-                              setState(() {
-                                _activeIndex = index;
-                              });
-                              // feedState.updatePostActivePage(model, index);
-                            },
-                          ),
-                          itemBuilder: (BuildContext context, int itemIndex) =>
-                              Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 0),
-                            child: Container(
-                              width: MediaQuery.of(context).size.width,
-                              child: TweenAnimationBuilder(
-                                curve: Curves.linear,
-                                duration: Duration(seconds: animationSeconds),
-                                tween: Tween<double>(begin: 1, end: 1.06),
-                                builder: (context, double scale, child) {
-                                  return Transform.scale(
-                                    scale: scale,
-                                    child: child,
-                                  );
-                                },
-                                child: Image.network(
-                                  widget.imageData.imageUrlList[itemIndex],
-                                  fit: BoxFit.cover,
-                                  loadingBuilder: (BuildContext context,
-                                      Widget child,
-                                      ImageChunkEvent loadingProgress) {
-                                    if (loadingProgress == null) return child;
-                                    return Center(
-                                      child: CircularProgressIndicator(
-                                        value: loadingProgress
-                                                    .expectedTotalBytes !=
-                                                null
-                                            ? loadingProgress
-                                                    .cumulativeBytesLoaded /
-                                                loadingProgress
-                                                    .expectedTotalBytes
-                                            : null,
-                                      ),
+        borderRadius: const BorderRadius.all(Radius.circular(0)),
+        child: Column(
+          children: [
+            Flexible(
+              flex: 1,
+              child: Stack(
+                children: [
+                  ShaderMask(
+                    shaderCallback: (Rect rect) {
+                      return LinearGradient(
+                          begin: Alignment.center,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Colors.transparent,
+                            Colors.transparent,
+                            Colors.black.withOpacity(0.6)
+                          ]).createShader(rect);
+                    },
+                    blendMode: BlendMode.darken,
+                    child: widget.imageData.imageUrlList.length > 1
+                        ? CarouselSlider.builder(
+                            itemCount: widget.imageData.imageUrlList.length,
+                            options: CarouselOptions(
+                              autoPlay: true,
+                              autoPlayInterval: Duration(seconds: 4),
+                              enableInfiniteScroll: false,
+                              viewportFraction: 1,
+                              height: fullHeight(context) * 0.8,
+                              // aspectRatio: 0.7,
+                              scrollDirection: Axis.horizontal,
+                              onPageChanged: (index, reason) {
+                                setState(() {
+                                  _activeIndex = index;
+                                });
+                                // feedState.updatePostActivePage(model, index);
+                              },
+                            ),
+                            itemBuilder:
+                                (BuildContext context, int itemIndex) =>
+                                    Container(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 0),
+                              child: Container(
+                                width: MediaQuery.of(context).size.width,
+                                child: TweenAnimationBuilder(
+                                  curve: Curves.linear,
+                                  duration: Duration(seconds: animationSeconds),
+                                  tween: Tween<double>(begin: 1, end: 1.06),
+                                  builder: (context, double scale, child) {
+                                    return Transform.scale(
+                                      scale: scale,
+                                      child: child,
                                     );
                                   },
+                                  child: Image.network(
+                                    widget.imageData.imageUrlList[itemIndex],
+                                    fit: BoxFit.cover,
+                                    loadingBuilder: (BuildContext context,
+                                        Widget child,
+                                        ImageChunkEvent loadingProgress) {
+                                      if (loadingProgress == null) return child;
+                                      return Center(
+                                        child: CircularProgressIndicator(
+                                          value: loadingProgress
+                                                      .expectedTotalBytes !=
+                                                  null
+                                              ? loadingProgress
+                                                      .cumulativeBytesLoaded /
+                                                  loadingProgress
+                                                      .expectedTotalBytes
+                                              : null,
+                                        ),
+                                      );
+                                    },
+                                  ),
                                 ),
                               ),
                             ),
+                          )
+                        : Container(
+                            width: MediaQuery.of(context).size.width,
+                            child: Image.network(
+                              widget.imageData.imageUrlList[0],
+                              fit: BoxFit.cover,
+                              height: fullHeight(context) * 0.8,
+                              loadingBuilder: (BuildContext context,
+                                  Widget child,
+                                  ImageChunkEvent loadingProgress) {
+                                if (loadingProgress == null) return child;
+                                return Center(
+                                  child: CircularProgressIndicator(
+                                    value: loadingProgress.expectedTotalBytes !=
+                                            null
+                                        ? loadingProgress
+                                                .cumulativeBytesLoaded /
+                                            loadingProgress.expectedTotalBytes
+                                        : null,
+                                  ),
+                                );
+                              },
+                            ),
                           ),
-                        ):  Container(
-                width: MediaQuery.of(context).size.width,
-                child: Image.network(
-                  widget.imageData.imageUrlList[0],
-                  fit: BoxFit.cover,
-                  height:  fullHeight(context) * 0.8,
-                  loadingBuilder: (BuildContext context, Widget child,
-                      ImageChunkEvent loadingProgress) {
-                    if (loadingProgress == null) return child;
-                    return Center(
-                      child: CircularProgressIndicator(
-                        value: loadingProgress.expectedTotalBytes != null
-                            ? loadingProgress.cumulativeBytesLoaded /
-                                loadingProgress.expectedTotalBytes
-                            : null,
-                      ),
-                    );
-                  },
-                ),
-              ),
-                      ),
-                      Positioned(
-                        bottom: 12,
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          // height: 100,
-                          width: fullWidth(context),
-                          child: Row(
-                            children: [
-                              LikeButton(
-                                isLiked: true,
-                                likeCount: '918',
-                                fontSize: 12,
-                                sizeOfIcon: 24,
-                                defaultIconColor: AppColors.kPureWhite,
-                                defaultTextColor: AppColors.kPureWhite,
-                                likedBackgroundColor: AppColors.kDarkRed.withOpacity(0.8),
-                                defaultBackgroundColor: AppColors.kDarkGrey.withOpacity(0.5),
-                              ),
-                              SizedBox(
-                                width: 12.0,
-                              ),
-                              CommentButton(
-                                color: AppColors.kPureWhite,
-                              ),
-                              SizedBox(
-                                width: 10.0,
-                              ),
-                              ShareWidget(
-                                color: AppColors.kPureWhite,
-                              ),
-                              Spacer(),
-                              PlusButton(
-                                postId: '',
-                                addedToBoard: true,
-                                defaultIconColor: AppColors.kPureWhite,
-                                addedToBoardBackGroundColor: AppColors.kAccentColor.withOpacity(0.7),
-                                addedToBoardColor: AppColors.kPureWhite,
-                                defaultBackgroundColor: AppColors.kDarkGrey.withOpacity(0.5),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
                   ),
-                ),
-                SizedBox(height: 4.0),
-               isCarousel? Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 8, horizontal: 8.0),
-                    child: AnimatedSmoothIndicator(
-                      count: widget.imageData.imageUrlList.length,
-                      activeIndex: _activeIndex,
-                      effect: ExpandingDotsEffect(
-                          dotHeight: 6,
-                          dotWidth: 12,
-                          spacing: 4,
-                          dotColor: AppColors.kDarkGrey,
-                          activeDotColor: AppColors.kMediumGrey,
-                          expansionFactor: 2),
+                  Positioned(
+                    bottom: 12,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      // height: 100,
+                      width: fullWidth(context),
+                      child: Row(
+                        children: [
+                          LikeButton(
+                            isLiked: true,
+                            likeCount: '918',
+                            fontSize: 12,
+                            sizeOfIcon: 24,
+                            defaultIconColor: AppColors.kPureWhite,
+                            defaultTextColor: AppColors.kPureWhite,
+                            likedBackgroundColor:
+                                AppColors.kDarkRed.withOpacity(0.8),
+                            defaultBackgroundColor:
+                                AppColors.kDarkGrey.withOpacity(0.5),
+                          ),
+                          SizedBox(
+                            width: 12.0,
+                          ),
+                          CommentButton(
+                            color: AppColors.kPureWhite,
+                          ),
+                          SizedBox(
+                            width: 10.0,
+                          ),
+                          ShareWidget(
+                            color: AppColors.kPureWhite,
+                          ),
+                          Spacer(),
+                          PlusButton(
+                            postId: '',
+                            addedToBoard: false,
+                            defaultIconColor: AppColors.kPureWhite,
+                            addedToBoardBackGroundColor: Colors.transparent,
+                            addedToBoardColor: AppColors.kAccentColor,
+                            defaultBackgroundColor: Colors.transparent,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ):SizedBox()
-              ],
-          ));
+                ],
+              ),
+            ),
+            SizedBox(height: 4.0),
+            isCarousel
+                ? Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8, horizontal: 8.0),
+                      child: AnimatedSmoothIndicator(
+                        count: widget.imageData.imageUrlList.length,
+                        activeIndex: _activeIndex,
+                        effect: ExpandingDotsEffect(
+                            dotHeight: 6,
+                            dotWidth: 12,
+                            spacing: 4,
+                            dotColor: AppColors.kDarkGrey,
+                            activeDotColor: AppColors.kMediumGrey,
+                            expansionFactor: 2),
+                      ),
+                    ),
+                  )
+                : SizedBox()
+          ],
+        ));
   }
 }
 

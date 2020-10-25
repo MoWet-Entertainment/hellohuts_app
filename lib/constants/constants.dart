@@ -76,6 +76,7 @@ class HelloIcons {
 //Add Details Services Offered Screen
   static const String minus_light_icon = _iconsRoot + "Minus_light_icon.png";
   static const String plus_light_icon = _iconsRoot + "Plus_light_icon.png";
+  static const String plus_bold_icon = _iconsRoot + "Plus_bold_icon.png";
 
   //Categories Icons
   static const String flame_bold_icon = _iconsRoot + "Flame_bold_icon.svg";
