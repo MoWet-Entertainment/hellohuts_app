@@ -19,6 +19,7 @@ import 'package:hellohuts_app/ui/common_widgets/app_bar/app_bar.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
 import 'package:hellohuts_app/ui/common_widgets/scroll_behavior/neat_scroll_behavior.dart';
 import 'package:hellohuts_app/ui/routes/router.gr.dart';
+import 'package:hellohuts_app/ui/screens/feed_posts/widgets/board/add_to_board.dart';
 import 'package:hellohuts_app/ui/screens/feed_posts/widgets/comments/comments_placeholder.dart';
 import 'package:hellohuts_app/ui/screens/feed_posts/widgets/comments/feed_comment.dart';
 import 'package:hellohuts_app/ui/screens/feed_posts/widgets/likes/feed_like_section.dart';
@@ -767,25 +768,121 @@ class PostDetailWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       GestureDetector(
-                        child: Container(
-                            width: fullWidth(context),
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 12, vertical: 12),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(14.0),
-                              color:AppColors.kDarkAccent,
-                            ),
-                            child: Row(
-                              children: [
-                                //TODO:Add UserImage to avatar, instead of the placeholder
-                               CustomAvatar(radius:10),
-                               SizedBox(width: 12),
-                                Text('Add Comment', style:AppThemes.normalSecondaryTextStyle.copyWith(color:AppColors.kDarkGrey) ,),
-                                Spacer(),
-                                Image.asset(HelloIcons.send_bold_icon, height:22,color: AppColors.kDarkGrey,),
-                              ],
-                            )),
-                      )
+                          child: Container(
+                              width: fullWidth(context),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 12, vertical: 12),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(14.0),
+                                color: AppColors.kDarkAccent,
+                              ),
+                              child: Row(
+                                children: [
+                                  //TODO:Add UserImage to avatar, instead of the placeholder
+                                  CustomAvatar(radius: 10),
+                                  SizedBox(width: 12),
+                                  Text(
+                                    'Add Comment',
+                                    style: AppThemes.normalSecondaryTextStyle
+                                        .copyWith(color: AppColors.kDarkGrey),
+                                  ),
+                                  Spacer(),
+                                  Image.asset(
+                                    HelloIcons.send_bold_icon,
+                                    height: 22,
+                                    color: AppColors.kDarkGrey,
+                                  ),
+                                ],
+                              )),
+                          onTap: () => {
+                                showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  backgroundColor: Colors.transparent,
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      DraggableScrollableSheet(
+                                    initialChildSize: 0.5,
+                                    maxChildSize: 1,
+                                    builder: (BuildContext context,
+                                        ScrollController scrollController) {
+                                      return Stack(
+                                        children: [
+                                          Container(
+                                            width: fullWidth(context),
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(20),
+                                                topRight: Radius.circular(20),
+                                              ),
+                                              color: AppColors.kSmokedWhite,
+                                            ),
+                                            child: Container(
+                                              padding: const EdgeInsets.only(top:8),
+                                              child: Column(
+                                                children: [
+                                                  Container(
+                                                    width:
+                                                        fullWidth(context) * .15,
+                                                    height: 5,
+                                                    decoration: BoxDecoration(
+                                                      color: Theme.of(context)
+                                                          .dividerColor,
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                        Radius.circular(10),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          Positioned(
+                                            bottom: MediaQuery.of(context).viewInsets.bottom,
+                                            left: 0,
+                                            right: 0,
+                                                                                      child: Container(
+                                                                                        padding: const EdgeInsets.only(left: 16,top:14, right:16, bottom:20),
+                                                decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.only(
+                                                    topLeft: Radius.circular(20),
+                                                    topRight: Radius.circular(20),
+                                                  ),
+                                                  color: AppColors.kPureWhite,
+                                                ),
+                                                child: Container(
+                                                 decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.circular(20),
+                                                  color: AppColors.kAliceBlue,
+                                                ),
+
+                                                  child: TextField(
+                                                  
+                                                    
+                                                    decoration: InputDecoration(
+                                                    prefixIcon: CustomAvatar(radius:10),
+                                                    prefixIconConstraints: BoxConstraints(
+                                                      maxWidth: 20,
+                                                      maxHeight: 20
+                                                    ),
+                                                     border: OutlineInputBorder(
+              borderSide: const BorderSide(width: 0, style: BorderStyle.none),
+              borderRadius: const BorderRadius.all(
+                const Radius.circular(20.0),
+              ),
+            ),
+            fillColor: AppColors.kPureWhite,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                          )
+                                        ],
+                                      );
+                                    },
+                                  ),
+                                ),
+                              }),
                     ]),
               )),
               SliverToBoxAdapter(
@@ -852,7 +949,8 @@ class _PostDetailTitleHeaders extends StatelessWidget {
         alignment: Alignment.topLeft,
         color: AppColors.kPureBlack,
         child: Padding(
-          padding: const EdgeInsets.only(top: 24.0, left: 16,right:16, bottom: 8),
+          padding:
+              const EdgeInsets.only(top: 24.0, left: 16, right: 16, bottom: 8),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -914,17 +1012,21 @@ class _FollowButtonState extends State<FollowButton> {
         if (widget.onPressed != null) widget.onPressed(),
         _toggleFollowFollowing(),
       },
-
-      child:AnimatedContainer(
-         duration: const Duration(milliseconds: 200),
-        curve: Curves.easeInCirc,
-              padding: _isFollowing?const EdgeInsets.symmetric(horizontal: 16, vertical: 8):const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12.0),
-                color:_isFollowing? AppColors.kDarkGreen.withOpacity(0.2):AppColors.kPrimaryYellow.withOpacity(0.2),
-              ),
-              child: _isFollowing?Row(
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.bounceIn,
+        padding: _isFollowing
+            ? const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8)
+            : const EdgeInsets.only(left: 14, right: 16, top: 8, bottom: 8),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12.0),
+          color: _isFollowing
+              ? AppColors.kDarkGreen.withOpacity(0.2)
+              : AppColors.kPrimaryYellow.withOpacity(0.2),
+        ),
+        child: _isFollowing
+            ? Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
@@ -933,7 +1035,8 @@ class _FollowButtonState extends State<FollowButton> {
                         .copyWith(color: AppColors.kDarkGreen),
                   )
                 ],
-              ):Row(
+              )
+            : Row(
                 children: [
                   Image.asset(
                     HelloIcons.plus_bold_icon,
@@ -949,7 +1052,9 @@ class _FollowButtonState extends State<FollowButton> {
                         .copyWith(color: AppColors.kPrimaryYellow),
                   )
                 ],
-              ),),);
+              ),
+      ),
+    );
   }
 }
 
