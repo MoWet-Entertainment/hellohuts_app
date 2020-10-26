@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hellohuts_app/constants/app_constants.dart';
@@ -389,8 +390,8 @@ class NormalGrid extends StatelessWidget {
         crossAxisSpacing: 4,
         mainAxisSpacing: 4,
         staggeredTileBuilder: (index) => StaggeredTile.count(1, 1),
-        itemBuilder: (context, index) => 
-      Image.network(imageList[index].imageUrlList[0], fit:BoxFit.cover),
+        itemBuilder: (context, index) =>
+            Image.network(imageList[index].imageUrlList[0], fit: BoxFit.cover),
         // Container(
         //       color: randomOpaqueColor(),
         //       child: Center(
@@ -690,12 +691,14 @@ class _ImageCard1State extends State<ImageCard1> {
 
 class PostDetailWidget extends StatelessWidget {
   final ImageData imageData;
-  const PostDetailWidget({Key key, @required this.imageData}) : super(key: key);
-
+  double _heightOfAppBar;
+  PostDetailWidget({Key key, @required this.imageData}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     // final itemIndex = imageList.indexOf(imageData);
     // print("index is " + itemIndex.toString());
+    _heightOfAppBar = fullHeight(context) * 0.7;
+    print('Height of AppBar ' + _heightOfAppBar.toString());
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -734,7 +737,7 @@ class PostDetailWidget extends StatelessWidget {
 //                ],
                 floating: false,
                 pinned: true,
-                expandedHeight: fullHeight(context) * 0.8,
+                expandedHeight: _heightOfAppBar,
                 flexibleSpace: DecoratedBox(
                   decoration: BoxDecoration(
                       // gradient: LinearGradient(
@@ -753,102 +756,152 @@ class PostDetailWidget extends StatelessWidget {
                   ),
                 ),
               ),
+              _PostDetailTitleHeaders(),
+              _PostDetailContent(),
+
               SliverToBoxAdapter(
                 child: Container(
-                  alignment: Alignment.topLeft,
-                  color: AppColors.kPureBlack,
-                  width: fullWidth(context),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 8.0, horizontal: 16),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        postedUserSection(context,
-                            postedUser: 'Harry James Potter',
-                            radiusOfAvatar: 16,
-                            postedUserTextStyle: AppThemes.normalTextStyle
-                                .copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14,
-                                    color: AppColors.kPureWhite),
-                            userTitle: 'Architect',
-                            userTitleTextStyle: AppThemes
-                                .normalSecondaryTextStyle
-                                .copyWith(color: AppColors.kDarkGrey)),
-                        Spacer(),
-                        Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 8),
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12.0),
-                              color: AppColors.kNavBarColor,
-                            ),
-                            child: Row(
-                              children: [
-                                Image.asset(
-                                  HelloIcons.plus_bold_icon,
-                                  color: AppColors.kLightGrey,
-                                  height: 15,
-                                ),
-                                SizedBox(
-                                  width: 8,
-                                ),
-                                Text(
-                                  'Follow',
-                                  style: AppThemes.normalTextStyle
-                                      .copyWith(color: AppColors.kPureWhite),
-                                )
-                              ],
-                            )),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical:16),
                   child: Column(
-                    children: [
-                      //TODO:Chnage hardcoded text
-                      Text(
-                        'Simple, but elegant living room interior at a low cost',
-                        style: AppThemes.normalTextStyle.copyWith(
-                            fontSize: 18,
-                            color: AppColors.kPureWhite,
-                            fontWeight: FontWeight.bold),
-                        maxLines: 3,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      SizedBox(
-                        height: 8.0,
-                      ),
-                      ExpandableText(
-                          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. And its so confusing to see molecules getting robbed. But game of thrones was a good theory. Tellus molestie enim et turpis sagittis blandit aliquam. Ullamcorper dis sed integer velit nisi, maecenas diam sed nunc. Nibh lobortis egestas et, integer non at. Et mauris fermentum habitant tellus auctor in arcu, sodales a.ctor in arcu",
-                          style: AppThemes.normalSecondaryTextStyle
-                              .copyWith(color: AppColors.kPureWhite,fontSize: 14),
-                              maxLines: 6,
-                          expandText: 'more',
-                          linkColor: AppColors.kLavender,
-                          collapseText: ''),
-                    ],
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children:[
+                      GestureDetector(
+                                              child: Container(
+                         width: fullWidth(context),
+                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(14.0),
+                            color: AppColors.kDarkTextColor,
+                           
+                          ),
+                           child: Text('Show all comments')
+                        ),
+                      )
+                    ]
                   ),
-                ),
+
+                )
+
               ),
               SliverToBoxAdapter(
-                child:SizedBox(
-                  height:24,
-                )
-              ),
+                  child: SizedBox(
+                height: 24,
+              )),
               NormalGrid(),
             ],
           ),
         ),
       ],
+    );
+  }
+}
+
+class _PostDetailContent extends StatelessWidget {
+  const _PostDetailContent({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: Container(
+        color: AppColors.kPureBlack,
+        child: Padding(
+          padding:
+              const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              //TODO:Chnage hardcoded text
+              Text(
+                'Simple, but elegant living room interior at a low cost',
+                style: AppThemes.normalTextStyle.copyWith(
+                    fontSize: 18,
+                    color: AppColors.kPureWhite,
+                    fontWeight: FontWeight.bold),
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
+              ),
+              SizedBox(
+                height: 8.0,
+              ),
+              ExpandableText(
+                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. And its so confusing to see molecules getting robbed. But game of thrones was a good theory. Tellus molestie enim et turpis sagittis blandit aliquam. Ullamcorper dis sed integer velit nisi, maecenas diam sed nunc. Nibh lobortis egestas et, integer non at. Et mauris fermentum habitant tellus auctor in arcu, sodales a.ctor in arcu",
+                  style: AppThemes.normalSecondaryTextStyle.copyWith(
+                      color: AppColors.kPureWhite, fontSize: 14),
+                  maxLines: 6,
+                  expandText: 'more',
+                  linkColor: AppColors.kLavender,
+                  collapseText: ''),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _PostDetailTitleHeaders extends StatelessWidget {
+  const _PostDetailTitleHeaders({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: Container(
+        alignment: Alignment.topLeft,
+        color: AppColors.kPureBlack,
+        width: fullWidth(context),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+              vertical: 8.0, horizontal: 16),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              postedUserSection(context,
+                  postedUser: 'Harry James Potter',
+                  radiusOfAvatar: 16,
+                  postedUserTextStyle: AppThemes.normalTextStyle
+                      .copyWith(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                          color: AppColors.kPureWhite),
+                  userTitle: 'Architect',
+                  userTitleTextStyle: AppThemes
+                      .normalSecondaryTextStyle
+                      .copyWith(color: AppColors.kDarkGrey)),
+              Spacer(),
+              Container(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 8, vertical: 8),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12.0),
+                    color: AppColors.kNavBarColor,
+                  ),
+                  child: Row(
+                    children: [
+                      Image.asset(
+                        HelloIcons.plus_bold_icon,
+                        color: AppColors.kPrimaryYellow,
+                        height: 15,
+                      ),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      Text(
+                        'Follow',
+                        style: AppThemes.normalTextStyle
+                            .copyWith(color: AppColors.kPrimaryYellow),
+                      )
+                    ],
+                  )),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
@@ -883,6 +936,58 @@ Widget _buildCategoriesCard() {
       ],
     ),
   );
+}
+
+class AppBarTitle extends StatefulWidget {
+  final ScrollController controller;
+  final String titleText;
+  final TextStyle titleTextStyle;
+  final double scrollHeightToTrigger;
+  AppBarTitle(
+      {Key key,
+      @required this.controller,
+      this.titleText = '',
+      this.titleTextStyle,
+      this.scrollHeightToTrigger =700.0})
+      : super(key: key);
+
+  @override
+  _AppBarTitleState createState() => _AppBarTitleState();
+}
+
+class _AppBarTitleState extends State<AppBarTitle> {
+  bool _scrollFlag = false;
+  @override
+  void initState() {
+    widget.controller.addListener(() {
+      if (_scrollFlag == false && widget.controller.position.pixels > widget.scrollHeightToTrigger) {
+        setState(() {
+          _scrollFlag = true;
+        });
+      }
+
+      if (_scrollFlag == true && widget.controller.position.pixels <= widget.scrollHeightToTrigger) {
+        setState(() {
+          _scrollFlag = false;
+        });
+      }
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    widget.controller.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(_scrollFlag ? widget.titleText : '',
+        style: widget.titleTextStyle ??
+            AppThemes.normalTextStyle
+                .copyWith(fontSize: 14, fontWeight: FontWeight.bold));
+  }
 }
 
 class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
