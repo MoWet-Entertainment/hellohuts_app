@@ -920,44 +920,6 @@ class _FollowButtonState extends State<FollowButton> {
     return buildGestureDetector();
   }
 
-  GestureDetector buildGestureDetector1() {
-    return GestureDetector(
-    onTap: () => {
-      if (widget.onPressed != null) widget.onPressed(),
-      print("Whats happening!"),
-      _toggleFollowFollowing(),
-    },
-    child: AnimatedContainer(
-      duration: Duration(milliseconds: 400),
-      curve: Curves.easeInSine,
-      child: _isFollowing
-          ? Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12.0),
-                color: AppColors.kNavBarColor,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Following',
-                    style: AppThemes.normalTextStyle
-                        .copyWith(color: AppColors.kDarkGreen),
-                  )
-                ],
-              ),
-            )
-          : Container(
-              width: 70,
-              height: 20,
-              color: Colors.blue,
-            ),
-    ),
-  );
-  }
-
   GestureDetector buildGestureDetector() {
     return GestureDetector(
       onTap: () => {
