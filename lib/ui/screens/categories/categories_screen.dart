@@ -758,31 +758,26 @@ class PostDetailWidget extends StatelessWidget {
               ),
               _PostDetailTitleHeaders(),
               _PostDetailContent(),
-
               SliverToBoxAdapter(
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical:16),
-                  child: Column(
+                  child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children:[
+                    children: [
                       GestureDetector(
-                                              child: Container(
-                         width: fullWidth(context),
-                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(14.0),
-                            color: AppColors.kDarkTextColor,
-                           
-                          ),
-                           child: Text('Show all comments')
-                        ),
+                        child: Container(
+                            width: fullWidth(context),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 12, vertical: 12),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(14.0),
+                              color: AppColors.kDarkTextColor,
+                            ),
+                            child: Text('Show all comments')),
                       )
-                    ]
-                  ),
-
-                )
-
-              ),
+                    ]),
+              )),
               SliverToBoxAdapter(
                   child: SizedBox(
                 height: 24,
@@ -807,8 +802,7 @@ class _PostDetailContent extends StatelessWidget {
       child: Container(
         color: AppColors.kPureBlack,
         child: Padding(
-          padding:
-              const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -827,8 +821,8 @@ class _PostDetailContent extends StatelessWidget {
               ),
               ExpandableText(
                   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. And its so confusing to see molecules getting robbed. But game of thrones was a good theory. Tellus molestie enim et turpis sagittis blandit aliquam. Ullamcorper dis sed integer velit nisi, maecenas diam sed nunc. Nibh lobortis egestas et, integer non at. Et mauris fermentum habitant tellus auctor in arcu, sodales a.ctor in arcu",
-                  style: AppThemes.normalSecondaryTextStyle.copyWith(
-                      color: AppColors.kPureWhite, fontSize: 14),
+                  style: AppThemes.normalSecondaryTextStyle
+                      .copyWith(color: AppColors.kPureWhite, fontSize: 14),
                   maxLines: 6,
                   expandText: 'more',
                   linkColor: AppColors.kLavender,
@@ -842,67 +836,170 @@ class _PostDetailContent extends StatelessWidget {
 }
 
 class _PostDetailTitleHeaders extends StatelessWidget {
-  const _PostDetailTitleHeaders({
-    Key key,
-  }) : super(key: key);
-
-  @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: Container(
         alignment: Alignment.topLeft,
         color: AppColors.kPureBlack,
-        width: fullWidth(context),
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-              vertical: 8.0, horizontal: 16),
+          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               postedUserSection(context,
                   postedUser: 'Harry James Potter',
                   radiusOfAvatar: 16,
-                  postedUserTextStyle: AppThemes.normalTextStyle
-                      .copyWith(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                          color: AppColors.kPureWhite),
+                  postedUserTextStyle: AppThemes.normalTextStyle.copyWith(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                      color: AppColors.kPureWhite),
                   userTitle: 'Architect',
-                  userTitleTextStyle: AppThemes
-                      .normalSecondaryTextStyle
+                  userTitleTextStyle: AppThemes.normalSecondaryTextStyle
                       .copyWith(color: AppColors.kDarkGrey)),
-              Spacer(),
-              Container(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 8, vertical: 8),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12.0),
-                    color: AppColors.kNavBarColor,
-                  ),
-                  child: Row(
-                    children: [
-                      Image.asset(
-                        HelloIcons.plus_bold_icon,
-                        color: AppColors.kPrimaryYellow,
-                        height: 15,
-                      ),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      Text(
-                        'Follow',
-                        style: AppThemes.normalTextStyle
-                            .copyWith(color: AppColors.kPrimaryYellow),
-                      )
-                    ],
-                  )),
+
+              //         Container(
+              //           color: Colors.blue,
+              //           height: 20,
+              //           constraints: BoxConstraints(minWidth: 120),
+              // child: Row(
+              //       children: [
+              //                Image.asset(
+              //                 HelloIcons.plus_bold_icon,
+              //                 color: AppColors.kPrimaryYellow,
+              //                 height: 15,
+              //               ),
+              //               SizedBox(
+              //                 width: 8,
+              //               ),
+              //               Text(
+              //                 'Follow',
+              //                 style: AppThemes.normalTextStyle
+              //                     .copyWith(color: AppColors.kPrimaryYellow),
+              //               )
+              //             ],
+              //     ),),
+              FollowButton(),
             ],
           ),
         ),
       ),
     );
+  }
+}
+
+class FollowButton extends StatefulWidget {
+  final bool isFollowing;
+  final VoidCallback onPressed;
+  const FollowButton({
+    Key key,
+    this.isFollowing = false,
+    this.onPressed,
+  }) : super(key: key);
+
+  @override
+  _FollowButtonState createState() => _FollowButtonState();
+}
+
+class _FollowButtonState extends State<FollowButton> {
+  bool _isFollowing;
+  @override
+  void initState() {
+    _isFollowing = widget.isFollowing;
+    super.initState();
+  }
+
+  _toggleFollowFollowing() {
+    setState(() {
+      _isFollowing = !_isFollowing;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return buildGestureDetector();
+  }
+
+  GestureDetector buildGestureDetector1() {
+    return GestureDetector(
+    onTap: () => {
+      if (widget.onPressed != null) widget.onPressed(),
+      print("Whats happening!"),
+      _toggleFollowFollowing(),
+    },
+    child: AnimatedContainer(
+      duration: Duration(milliseconds: 400),
+      curve: Curves.easeInSine,
+      child: _isFollowing
+          ? Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12.0),
+                color: AppColors.kNavBarColor,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Following',
+                    style: AppThemes.normalTextStyle
+                        .copyWith(color: AppColors.kDarkGreen),
+                  )
+                ],
+              ),
+            )
+          : Container(
+              width: 70,
+              height: 20,
+              color: Colors.blue,
+            ),
+    ),
+  );
+  }
+
+  GestureDetector buildGestureDetector() {
+    return GestureDetector(
+      onTap: () => {
+        if (widget.onPressed != null) widget.onPressed(),
+        _toggleFollowFollowing(),
+      },
+
+      child:AnimatedContainer(
+         duration: const Duration(milliseconds: 200),
+        curve: Curves.easeInCirc,
+              padding: _isFollowing?const EdgeInsets.symmetric(horizontal: 16, vertical: 8):const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12.0),
+                color: AppColors.kNavBarColor,
+              ),
+              child: _isFollowing?Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Following',
+                    style: AppThemes.normalTextStyle
+                        .copyWith(color: AppColors.kDarkGreen),
+                  )
+                ],
+              ):Row(
+                children: [
+                  Image.asset(
+                    HelloIcons.plus_bold_icon,
+                    color: AppColors.kPrimaryYellow,
+                    height: 15,
+                  ),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Text(
+                    'Follow',
+                    style: AppThemes.normalTextStyle
+                        .copyWith(color: AppColors.kPrimaryYellow),
+                  )
+                ],
+              ),),);
   }
 }
 
@@ -948,7 +1045,7 @@ class AppBarTitle extends StatefulWidget {
       @required this.controller,
       this.titleText = '',
       this.titleTextStyle,
-      this.scrollHeightToTrigger =700.0})
+      this.scrollHeightToTrigger = 700.0})
       : super(key: key);
 
   @override
@@ -960,13 +1057,15 @@ class _AppBarTitleState extends State<AppBarTitle> {
   @override
   void initState() {
     widget.controller.addListener(() {
-      if (_scrollFlag == false && widget.controller.position.pixels > widget.scrollHeightToTrigger) {
+      if (_scrollFlag == false &&
+          widget.controller.position.pixels > widget.scrollHeightToTrigger) {
         setState(() {
           _scrollFlag = true;
         });
       }
 
-      if (_scrollFlag == true && widget.controller.position.pixels <= widget.scrollHeightToTrigger) {
+      if (_scrollFlag == true &&
+          widget.controller.position.pixels <= widget.scrollHeightToTrigger) {
         setState(() {
           _scrollFlag = false;
         });
