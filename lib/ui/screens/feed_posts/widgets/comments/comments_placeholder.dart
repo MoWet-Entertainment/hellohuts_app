@@ -32,7 +32,6 @@ class PostCommentsPlaceholder extends StatelessWidget {
           height: 8.0,
         ),
         UsersCommentsWidget(),
-      
       ],
     );
   }
@@ -44,32 +43,26 @@ class UsersCommentsWidget extends StatelessWidget {
   final String comment;
   const UsersCommentsWidget({
     Key key,
-    this.avatarUrl ="http://www.gravatar.com/avatar/?d=identicon",
+    this.avatarUrl = "http://www.gravatar.com/avatar/?d=identicon",
     this.userName = "Cody Doe",
-    this.comment ="I would love to try this. Can we connect? 😍😍",
+    this.comment = "I would love to try this. Can we connect? 😍😍",
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal:8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 2.0),
-            child: CircleAvatar(
-              radius: 6,
-              backgroundColor: AppColors.kDarkGrey,
-              backgroundImage:
-                  //TODO:Add Real user image
-                  NetworkImage(avatarUrl),
-            ),
+            child: CustomAvatar(avatarUrl: avatarUrl,radius: 6,),
           ),
           SizedBox(width: 6.0),
           Flexible(
-                      child: Column(
+            child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -82,8 +75,8 @@ class UsersCommentsWidget extends StatelessWidget {
                   Text(comment,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: AppThemes.normalTextStyle
-                          .copyWith(fontWeight: FontWeight.normal, fontSize: 14))
+                      style: AppThemes.normalTextStyle.copyWith(
+                          fontWeight: FontWeight.normal, fontSize: 14))
                 ]),
           )
         ],
@@ -92,8 +85,28 @@ class UsersCommentsWidget extends StatelessWidget {
   }
 }
 
+class CustomAvatar extends StatelessWidget {
+  const CustomAvatar({
+    Key key,
+   this.avatarUrl = "http://www.gravatar.com/avatar/?d=identicon", this.radius=10, this.backgroundColor=AppColors.kDarkGrey,
+  }) : super(key: key);
 
-//TODO: NOT USING THIS - CAN BE REMOVED
+  final String avatarUrl;
+  final double radius;
+  final Color backgroundColor;
+  @override
+  Widget build(BuildContext context) {
+    return CircleAvatar(
+      radius: radius,
+      backgroundColor: backgroundColor,
+      backgroundImage:
+          //TODO:Add Real user image
+          NetworkImage(avatarUrl),
+    );
+  }
+}
+
+//TODO: NOT USING THIS - CAN BE
 class IndividualComments extends StatelessWidget {
   const IndividualComments({
     Key key,
