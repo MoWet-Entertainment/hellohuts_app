@@ -183,12 +183,13 @@ dynamic customAdvanceNetworkImage(String path) {
 
 Widget postedUserSection(BuildContext context,
     {String imagePath = "http://www.gravatar.com/avatar/?d=identicon",
-    String postedUser='',
+    String postedUser = '',
     TextStyle postedUserTextStyle,
-    String userTitle='',
+    String userTitle = '',
     TextStyle userTitleTextStyle,
-
-    double radiusOfAvatar = 8}) {
+    double extraGap = 2,
+    double radiusOfAvatar = 8,
+    VoidCallback onTap}) {
   return Container(
     child: InkWell(
       splashColor: Colors.transparent,
@@ -196,17 +197,25 @@ Widget postedUserSection(BuildContext context,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Container(
-            width: 2 * (radiusOfAvatar + 2),
+            width: 2 * (radiusOfAvatar + extraGap),
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
                   color: AppColors.kAccentColor,
                   width: 2.0,
                 )),
-            child: CircleAvatar(
-              radius: radiusOfAvatar,
-              backgroundColor: AppColors.kDarkGrey,
-              backgroundImage: NetworkImage(imagePath),
+            child: Container(
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: Colors.transparent,
+                    width: 1.0,
+                  )),
+              child: CircleAvatar(
+                radius: radiusOfAvatar,
+                backgroundColor: AppColors.kDarkGrey,
+                backgroundImage: NetworkImage(imagePath),
+              ),
             ),
           ),
           spacer(width: 8.0),
@@ -221,7 +230,8 @@ Widget postedUserSection(BuildContext context,
                     postedUser,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: postedUserTextStyle?? AppThemes.postedAuthorTextMainHeadStyle,
+                    style: postedUserTextStyle ??
+                        AppThemes.postedAuthorTextMainHeadStyle,
                   ),
                 ),
                 Container(
@@ -230,16 +240,18 @@ Widget postedUserSection(BuildContext context,
                   child: Text(userTitle,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: userTitleTextStyle?? AppThemes.postedAuthorTextSubHeadStyle),
+                      style: userTitleTextStyle ??
+                          AppThemes.postedAuthorTextSubHeadStyle),
                 ),
               ]),
         ],
       ),
       onTap: () {
-        //TODO: Write a method to navigate to the Posted User
+        if (onTap != null) onTap();
         print(
-            "This should navigate the user to the post Authors Profile page ");
+            'User wants to navigate to user profile. A page which is yet to implement. Cause Vinoop is too busy watching netflix :D');
       },
+      //TODO: Add Navigation to the user profile
     ),
   );
 }
@@ -563,30 +575,29 @@ class ScrollableColumn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   return NotificationListener<OverscrollIndicatorNotification>(
+    return NotificationListener<OverscrollIndicatorNotification>(
         onNotification: (overscroll) {
           if (!overFlowGlow) {
             overscroll.disallowGlow();
           }
         },
         child: ListView(
-          shrinkWrap: shrinkWrap,
-          scrollDirection: scrollDirection,
-          controller: controller,
-          children: children,
-    reverse :reverse,
-    primary:primary,
-    physics:physics,
-    padding:padding,
-    addAutomaticKeepAlives:addAutomaticKeepAlives,
-    addRepaintBoundaries :addRepaintBoundaries,
-    addSemanticIndexes:addSemanticIndexes,
-    cacheExtent:cacheExtent,
-    semanticChildCount:semanticChildCount,
-    dragStartBehavior:dragStartBehavior,
-    keyboardDismissBehavior:keyboardDismissBehavior,
-    restorationId:restorationId,
-    clipBehavior:clipBehavior
-        ));
+            shrinkWrap: shrinkWrap,
+            scrollDirection: scrollDirection,
+            controller: controller,
+            children: children,
+            reverse: reverse,
+            primary: primary,
+            physics: physics,
+            padding: padding,
+            addAutomaticKeepAlives: addAutomaticKeepAlives,
+            addRepaintBoundaries: addRepaintBoundaries,
+            addSemanticIndexes: addSemanticIndexes,
+            cacheExtent: cacheExtent,
+            semanticChildCount: semanticChildCount,
+            dragStartBehavior: dragStartBehavior,
+            keyboardDismissBehavior: keyboardDismissBehavior,
+            restorationId: restorationId,
+            clipBehavior: clipBehavior));
   }
 }
