@@ -22,4 +22,5 @@ class AppColors {
   static const kPrimaryDarkBlue = Color(0xff200E32);
   static const kDarkGreen = Color(0xff219653);
   static const kGreyWhite = Color(0xffECF0F5);
+  static const kDarkAccent = Color(0xff222831);
 }

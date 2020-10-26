@@ -85,6 +85,9 @@ class HelloIcons {
 
   //Post Detail icons
   static const String three_dots_icon = _iconsRoot + "Three-dots-bold_icon.png";
+
+  //Comment
+  static const String send_bold_icon = _iconsRoot + "Send_bold_icon.png";
 }
 
 class SessionData {

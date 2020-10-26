@@ -19,6 +19,7 @@ import 'package:hellohuts_app/ui/common_widgets/app_bar/app_bar.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
 import 'package:hellohuts_app/ui/common_widgets/scroll_behavior/neat_scroll_behavior.dart';
 import 'package:hellohuts_app/ui/routes/router.gr.dart';
+import 'package:hellohuts_app/ui/screens/feed_posts/widgets/comments/comments_placeholder.dart';
 import 'package:hellohuts_app/ui/screens/feed_posts/widgets/comments/feed_comment.dart';
 import 'package:hellohuts_app/ui/screens/feed_posts/widgets/likes/feed_like_section.dart';
 import 'package:hellohuts_app/ui/screens/feed_posts/widgets/post/feed_content.dart';
@@ -772,9 +773,18 @@ class PostDetailWidget extends StatelessWidget {
                                 horizontal: 12, vertical: 12),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(14.0),
-                              color: AppColors.kDarkTextColor,
+                              color:AppColors.kDarkAccent,
                             ),
-                            child: Text('Show all comments')),
+                            child: Row(
+                              children: [
+                                //TODO:Add UserImage to avatar, instead of the placeholder
+                               CustomAvatar(radius:10),
+                               SizedBox(width: 12),
+                                Text('Add Comment', style:AppThemes.normalSecondaryTextStyle.copyWith(color:AppColors.kDarkGrey) ,),
+                                Spacer(),
+                                Image.asset(HelloIcons.send_bold_icon, height:22,color: AppColors.kDarkGrey,),
+                              ],
+                            )),
                       )
                     ]),
               )),
@@ -842,7 +852,7 @@ class _PostDetailTitleHeaders extends StatelessWidget {
         alignment: Alignment.topLeft,
         color: AppColors.kPureBlack,
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+          padding: const EdgeInsets.only(top: 24.0, left: 16,right:16, bottom: 8),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -857,28 +867,6 @@ class _PostDetailTitleHeaders extends StatelessWidget {
                   userTitle: 'Architect',
                   userTitleTextStyle: AppThemes.normalSecondaryTextStyle
                       .copyWith(color: AppColors.kDarkGrey)),
-
-              //         Container(
-              //           color: Colors.blue,
-              //           height: 20,
-              //           constraints: BoxConstraints(minWidth: 120),
-              // child: Row(
-              //       children: [
-              //                Image.asset(
-              //                 HelloIcons.plus_bold_icon,
-              //                 color: AppColors.kPrimaryYellow,
-              //                 height: 15,
-              //               ),
-              //               SizedBox(
-              //                 width: 8,
-              //               ),
-              //               Text(
-              //                 'Follow',
-              //                 style: AppThemes.normalTextStyle
-              //                     .copyWith(color: AppColors.kPrimaryYellow),
-              //               )
-              //             ],
-              //     ),),
               FollowButton(),
             ],
           ),
@@ -934,7 +922,7 @@ class _FollowButtonState extends State<FollowButton> {
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12.0),
-                color: AppColors.kNavBarColor,
+                color:_isFollowing? AppColors.kDarkGreen.withOpacity(0.2):AppColors.kPrimaryYellow.withOpacity(0.2),
               ),
               child: _isFollowing?Row(
                 mainAxisAlignment: MainAxisAlignment.center,
