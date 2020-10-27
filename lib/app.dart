@@ -6,19 +6,36 @@ import 'package:hellohuts_app/helper/logger.dart';
 import 'package:hellohuts_app/locators.dart';
 import 'package:hellohuts_app/providers/providers.dart';
 import 'package:hellohuts_app/services/firestore_services/analytics_service.dart';
+import 'package:hellohuts_app/states/theme_state.dart';
 import 'package:hellohuts_app/ui/routes/guards/auth_guards.dart';
 import 'package:hellohuts_app/ui/routes/guards/auth_guards.dart';
 import 'package:hellohuts_app/ui/routes/router.gr.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
 import 'package:provider/provider.dart';
 
-class App extends StatelessWidget {
+class App extends StatefulWidget {
   App({Key key}) : super(key: key);
 
+  @override
+  _AppState createState() => _AppState();
+}
+
+class _AppState extends State<App> {
   var log = getLogger('FireBaseAuthService');
 
-  //Bootstrap FlutterFire
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+  DarkThemeProvider themeChangeProvider = new DarkThemeProvider();
+
+  @override
+  void initState() {
+    super.initState();
+    getCurrentAppTheme();
+  }
+
+  void getCurrentAppTheme() async {
+    themeChangeProvider.darkTheme =
+        await themeChangeProvider.darkThemePreference.getTheme();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +60,7 @@ class App extends StatelessWidget {
             child: MaterialApp(
               debugShowCheckedModeBanner: false,
               title: Provider.of<AppConfig>(context).appTitle,
-              theme: AppThemes.defaultTheme,
+              theme: AppThemes.themeData(themeChangeProvider.darkTheme, context),
               home: Container(),
               builder: ExtendedNavigator.builder<AppRouter>(
                 router: AppRouter(),

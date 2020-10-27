@@ -8,6 +8,11 @@ class AppConstants {
 }
 
 enum AppPageNames {
-ExplorePage,
-CategoriesPage,
+  ExplorePage,
+  CategoriesPage,
+}
+
+class StorageConstants {
+    static const THEME_STATUS = "THEME_STATUS";
+
 }
