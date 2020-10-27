@@ -5,21 +5,77 @@ import 'package:google_fonts/google_fonts.dart';
 class AppThemes {
   static BuildContext context;
   static final ThemeData defaultTheme = ThemeData(
-    primaryColor: AppColors.kPrimaryColor,
-    accentColor: AppColors.kAccentColor,
-    buttonColor: AppColors.kPrimaryColor,
-    canvasColor: AppColors.kPureWhite,
-    bottomAppBarColor: AppColors.kPrimaryColor,
-    scaffoldBackgroundColor: AppColors.kPureWhite,
-    appBarTheme: appBarTheme,
-    backgroundColor:  AppColors.kPureWhite,
-     bottomSheetTheme: bottomSheetThemeData
+      primaryColor: AppColors.kPrimaryColor,
+      accentColor: AppColors.kAccentColor,
+      buttonColor: AppColors.kPrimaryColor,
+      canvasColor: AppColors.kPureWhite,
+      bottomAppBarColor: AppColors.kPrimaryColor,
+      scaffoldBackgroundColor: AppColors.kPureWhite,
+      appBarTheme: appBarTheme,
+      backgroundColor: AppColors.kPureWhite,
+      bottomSheetTheme: bottomSheetThemeData);
 
-  );
+  static ThemeData themeData(bool isDarkTheme, BuildContext context) {
+    return ThemeData(
+        primarySwatch: Colors.yellow,
+        indicatorColor: AppColors.kPrimaryYellow,
+        buttonColor: isDarkTheme
+            ? AppColors.kButtonColorDark
+            : AppColors.kButtonColorLight,
+        hintColor:
+            isDarkTheme ? AppColors.kHintColorDark : AppColors.kHintColorLight,
+        textSelectionColor:
+            isDarkTheme ? AppColors.kPureWhite : AppColors.kPureBlack,
+        cardColor:
+            isDarkTheme ? AppColors.kCardColorDark : AppColors.kCardColorLight,
+        canvasColor: isDarkTheme
+            ? AppColors.kCanvasColorDark
+            : AppColors.kCanvasColorLight,
+        buttonTheme: Theme.of(context).buttonTheme.copyWith(
+            colorScheme:
+                isDarkTheme ? ColorScheme.dark() : ColorScheme.light()),
+        appBarTheme: AppBarTheme(
+          elevation: 0.0,
+        ),
+        accentColor: isDarkTheme
+            ? AppColors.kAccentColorDark
+            : AppColors.kAccentColorDark,
+        bottomAppBarColor: isDarkTheme
+            ? AppColors.kAccentColorDark
+            : AppColors.kAccentColorDark,
+        bottomSheetTheme: Theme.of(context).bottomSheetTheme.copyWith(
+              modalBackgroundColor: isDarkTheme
+                  ? AppColors.kAccentColorDark
+                  : AppColors.kPureWhite,
+              modalElevation: 1,
+            ),
+        colorScheme: ColorScheme(
+          background: isDarkTheme
+              ? AppColors.kPrimaryColorDark
+              : AppColors.kPrimaryColorLight,
+          brightness: isDarkTheme ? Brightness.dark : Brightness.light,
+          error: isDarkTheme ? AppColors.kDarkRed : AppColors.kDarkRed,
+          onError: isDarkTheme ? AppColors.kPureWhite : AppColors.kPureBlack,
+          surface:
+              isDarkTheme ? AppColors.kDark_4 : AppColors.kPrimaryColorLight,
+          primary: isDarkTheme
+              ? AppColors.kPrimaryColorDark
+              : AppColors.kPrimaryColorLight,
+          onPrimary: isDarkTheme ? Colors.white : Colors.black,
+          primaryVariant: isDarkTheme? AppColors.kDark_1:AppColors.kAliceBlue,
+          secondary: isDarkTheme? AppColors.kDark_3:AppColors.kPrimaryColorLight,
+          secondaryVariant: isDarkTheme? AppColors.kDark_2:AppColors.kLavender,
+          onSecondary: isDarkTheme?Colors.white:Colors.black,
+          onBackground:isDarkTheme?Colors.white:Colors.black,
+          onSurface: isDarkTheme?Colors.white:Colors.black, 
+        ));
+  }
 
-  static final BottomSheetThemeData bottomSheetThemeData = BottomSheetThemeData(backgroundColor: AppColors.kPureWhite);
- static final AppBarTheme appBarTheme  = AppBarTheme(color: AppColors.kPureWhite,brightness: Brightness.light);
- 
+  static final BottomSheetThemeData bottomSheetThemeData =
+      BottomSheetThemeData(backgroundColor: AppColors.kPureWhite);
+  static final AppBarTheme appBarTheme =
+      AppBarTheme(color: AppColors.kPureWhite, brightness: Brightness.light);
+
   static final TextStyle postDateAndCategoryStyle = GoogleFonts.openSans(
     textStyle: TextStyle(
         color: AppColors.kDarkGrey,
@@ -64,7 +120,7 @@ class AppThemes {
       textStyle: TextStyle(
           fontWeight: FontWeight.normal, color: AppColors.kDarkTextColor));
 
-          static final TextStyle normalTextLightStyle = GoogleFonts.lato(
+  static final TextStyle normalTextLightStyle = GoogleFonts.lato(
       fontSize: 12.0,
       textStyle: TextStyle(
           fontWeight: FontWeight.w300, color: AppColors.kDarkTextColor));
@@ -74,7 +130,7 @@ class AppThemes {
     textStyle:
         TextStyle(fontWeight: FontWeight.w400, color: AppColors.kDarkGrey),
   );
-    static final TextStyle normalSecondaryTextStyle = GoogleFonts.muli(
+  static final TextStyle normalSecondaryTextStyle = GoogleFonts.muli(
     fontSize: 12.0,
     textStyle:
         TextStyle(fontWeight: FontWeight.w400, color: AppColors.kDarkTextColor),
