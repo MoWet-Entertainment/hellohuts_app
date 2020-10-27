@@ -68,7 +68,8 @@ class AppThemes {
           onSecondary: isDarkTheme?Colors.white:Colors.black,
           onBackground:isDarkTheme?Colors.white:Colors.black,
           onSurface: isDarkTheme?Colors.white:Colors.black, 
-        ));
+        ),
+      );
   }
 
   static final BottomSheetThemeData bottomSheetThemeData =
