@@ -32,7 +32,6 @@ class _BasePageState extends State<BasePage> {
 
   @override
   void initState() {
-
     // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     //     statusBarColor: AppColors.kPureWhite,
     //     statusBarIconBrightness: Brightness.dark));
@@ -67,7 +66,6 @@ class _BasePageState extends State<BasePage> {
         FirstPage()
       ],
       controller: _pageController,
-      
       onPageChanged: (page) {
         state.setPageIndex = page;
       },
@@ -126,14 +124,16 @@ class _BasePageState extends State<BasePage> {
   // }
   @override
   Widget build(BuildContext context) {
+    print(
+        "Primary is " + Theme.of(context).colorScheme.primary.toString());
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.primary,
       key: _scaffoldKey,
-      body: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle.dark.copyWith(statusBarColor: AppColors.kPureWhite),
-        child: _body(Provider.of<AppState>(context).pageIndex)),
+      body: _body(Provider.of<AppState>(context).pageIndex),
       extendBody: true,
-      backgroundColor: AppColors.kPureWhite,
-      bottomNavigationBar: BottomNavBar(pageController: _pageController,),
+      bottomNavigationBar: BottomNavBar(
+        pageController: _pageController,
+      ),
     );
   }
 }

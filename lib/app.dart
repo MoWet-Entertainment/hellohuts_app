@@ -12,6 +12,7 @@ import 'package:hellohuts_app/ui/routes/guards/auth_guards.dart';
 import 'package:hellohuts_app/ui/routes/router.gr.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
 import 'package:provider/provider.dart';
+import 'package:stacked_themes/stacked_themes.dart';
 
 class App extends StatefulWidget {
   App({Key key}) : super(key: key);
@@ -24,22 +25,10 @@ class _AppState extends State<App> {
   var log = getLogger('FireBaseAuthService');
 
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
-  DarkThemeProvider themeChangeProvider = new DarkThemeProvider();
-
-  @override
-  void initState() {
-    super.initState();
-    getCurrentAppTheme();
-  }
-
-  void getCurrentAppTheme() async {
-    themeChangeProvider.darkTheme =
-        await themeChangeProvider.darkThemePreference.getTheme();
-  }
 
   @override
   Widget build(BuildContext context) {
-    AppThemes.context = context;
+  
     return FutureBuilder(
       //initialize FlutterFire
       future: _initialization,
@@ -57,18 +46,27 @@ class _AppState extends State<App> {
         if (snapshot.connectionState == ConnectionState.done) {
           return MultiProvider(
             providers: providers,
-            child: MaterialApp(
-              debugShowCheckedModeBanner: false,
-              title: Provider.of<AppConfig>(context).appTitle,
-              theme: AppThemes.themeData(themeChangeProvider.darkTheme, context),
-              home: Container(),
-              builder: ExtendedNavigator.builder<AppRouter>(
-                router: AppRouter(),
-                guards: [AuthGuard()],
+            child: ThemeBuilder(
+              // statusBarColorBuilder: (theme) =>theme.colorScheme.primary,
+             darkTheme :AppThemes.darkTheme,
+             lightTheme: AppThemes.lightTheme,
+              builder: (context,lightTheme, darkTheme, themeMode) =>
+                        MaterialApp(
+                debugShowCheckedModeBanner: false,
+                title: Provider.of<AppConfig>(context).appTitle,
+                theme: lightTheme,
+                darkTheme: darkTheme,
+                themeMode: themeMode,
+                home: Container(),
+                builder: ExtendedNavigator.builder<AppRouter>(
+                
+                  router: AppRouter(),
+                  guards: [AuthGuard()],
+                ),
+                navigatorObservers: <NavigatorObserver>[
+                  locator<AnalyticsService>().getAnalyticsObserver(),
+                ],
               ),
-              navigatorObservers: <NavigatorObserver>[
-                locator<AnalyticsService>().getAnalyticsObserver(),
-              ],
             ),
           );
         }

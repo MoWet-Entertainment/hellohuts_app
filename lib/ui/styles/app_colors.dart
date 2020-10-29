@@ -3,7 +3,6 @@ import 'package:hellohuts_app/ui/styles/app_themes.dart';
 
 class AppColors {
   //TODO: This contains Junk Values .Need to Tweak for correct needs. Refactor later
-  static const kPrimaryColor = Color(0xff200E32);
   static const kAccentColor = Color(0xffFCA311);
   static const kPureBlack = Color(0xff000000);
   static const kAlmostBlack = Color(0xff00142F);
@@ -14,7 +13,6 @@ class AppColors {
   static const kDarkGrey = Color(0xff989898);
   static const kDarkestGrey = Color(0xff595360);
   static const kDarkTextColor = Color(0xff00142F);
-  static const kNavBarColor = Color(0xff14213D);
   static const kDarkRed = Color(0xffEB5757);
   static const kLavender = Color(0xffDDDDF3);
   static const kSmokedWhite = Color(0xffF6F7F9);
