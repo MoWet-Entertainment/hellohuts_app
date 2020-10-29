@@ -5,6 +5,7 @@ import 'package:hellohuts_app/constants/app_constants.dart';
 import 'package:hellohuts_app/helper/app_config.dart';
 import 'package:hellohuts_app/locators.dart';
 import 'package:provider/provider.dart';
+import 'package:stacked_themes/stacked_themes.dart';
 
 void main() async {
   /**
@@ -19,7 +20,7 @@ void main() async {
   // FlutterError.onError = Crashlytics.instance.recordFlutterError;
   WidgetsFlutterBinding.ensureInitialized();
   await setUpLocator();
-
+  await ThemeManager.initialise();
   runApp(Provider<AppConfig>(
     create: (context) => AppConfig(
       appTitle: AppConstants.appNameDev,

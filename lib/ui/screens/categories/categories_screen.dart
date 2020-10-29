@@ -774,7 +774,7 @@ class PostDetailWidget extends StatelessWidget {
                                   horizontal: 12, vertical: 12),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(14.0),
-                                color: AppColors.kDarkAccent,
+                                color: AppColors.kDark_2,
                               ),
                               child: Row(
                                 children: [

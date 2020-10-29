@@ -21,15 +21,14 @@ import 'package:hellohuts_app/ui/screens/feed_posts/feed_post.dart';
 import 'package:hellohuts_app/ui/screens/search/search_screen.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
+import 'package:stacked_themes/stacked_themes.dart';
 
 class ExplorePage extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
   ExplorePage({Key key, this.scaffoldKey}) : super(key: key);
 
   @override
-  void initState() {
-    
-  }
+  void initState() {}
 
   @override
   _ExplorePageState createState() => _ExplorePageState();
@@ -42,25 +41,19 @@ class _ExplorePageState extends State<ExplorePage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+
+    return 
+      Scaffold(
         primary: false,
         extendBody: true,
-        backgroundColor: AppColors.kPureWhite,
-        body:
-          AnnotatedRegion<SystemUiOverlayStyle>(
-          value: SystemUiOverlayStyle.dark.copyWith(statusBarColor: AppColors.kPureWhite),
-          child: SafeArea(
-       
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        body: SafeArea(
             child: _FeedWidgetBody(
               key: widget.key,
               scaffoldKey: widget.scaffoldKey,
             ),
           ),
-        ),
-      ),
+        
     );
   }
 
@@ -108,11 +101,10 @@ class _ExplorePostsFeed extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        borderRadius: const BorderRadius.only(
-            topLeft: const Radius.circular(20.0),
-            topRight: const Radius.circular(20.0)),
-        color: AppColors.kLavender.withOpacity(0.7)
-      ),
+          borderRadius: const BorderRadius.only(
+              topLeft: const Radius.circular(20.0),
+              topRight: const Radius.circular(20.0)),
+          color: AppColors.kLavender.withOpacity(0.7)),
       child: Padding(
         padding: EdgeInsets.fromLTRB(2, 0, 2, 0),
         child: ScrollConfiguration(
@@ -162,7 +154,6 @@ class _AppBarTop extends StatelessWidget {
             forceElevated: innerBoxIsScrolled,
             elevation: 1.0,
             brightness: Brightness.light,
-            backgroundColor: AppColors.kPureWhite,
 
             leading: Padding(
               padding: const EdgeInsets.only(left: 16.0),
@@ -196,7 +187,8 @@ class _AppBarTop extends StatelessWidget {
               ),
             ],
             centerTitle: true,
-            title: Text(AppConstants.appName.toLowerCase(), style: AppThemes.appBarDefaultText),
+            title: Text(AppConstants.appName.toLowerCase(),
+                style: AppThemes.appBarDefaultText),
           ),
         ),
       ),

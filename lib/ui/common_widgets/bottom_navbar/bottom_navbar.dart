@@ -42,7 +42,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
           ? EdgeInsets.symmetric(horizontal: 0.25 * width)
           : EdgeInsets.symmetric(horizontal: 0.1 * width),
       decoration: BoxDecoration(
-        color: AppColors.kPrimaryColor,
+        color: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(24.0), topRight: Radius.circular(24.0)),
       ),
@@ -100,18 +100,18 @@ class _BottomNavBarState extends State<BottomNavBar> {
           duration: Duration(milliseconds: ANIM_DURATION),
           opacity: ALPHA_ON,
           child: IconButton(
-            highlightColor: AppColors.kAccentColor,
+            highlightColor: Theme.of(context).colorScheme.primary,
             color: index == state.pageIndex
-                ? AppColors.kAccentColor
-                : AppColors.kPureWhite,
+                ? Theme.of(context).bottomNavigationBarTheme.selectedItemColor
+                : Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
             padding: EdgeInsets.all(0),
             alignment: Alignment(0, 0),
             icon: isCustomIcon
                 ? Image.asset(
                     icon,
                     color: index == state.pageIndex
-                        ? AppColors.kAccentColor
-                        : AppColors.kPureWhite,
+                        ?Theme.of(context).bottomNavigationBarTheme.selectedItemColor
+                        : Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
                     height: iconSize,
                   )
                 : Icon(iconData),
@@ -135,10 +135,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(color: Colors.transparent, boxShadow: [
+      decoration:
+          BoxDecoration(color: Colors.transparent, boxShadow: [
         BoxShadow(
-          color: Colors.black12,
-          blurRadius: 32,
+          color:Theme.of(context).shadowColor.withOpacity(0.6),
+          blurRadius: 16,
           offset: Offset(0, -2),
         ),
       ]),
