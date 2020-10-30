@@ -31,7 +31,7 @@ class _FeedPostState extends State<FeedPost> {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(20.0)),
-          color: AppColors.kPureWhite,
+          color: Theme.of(context).colorScheme.secondary
         ),
         child: Column(
           children: <Widget>[

@@ -19,7 +19,7 @@ class FeedPostTitleDetails extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Padding(padding: const EdgeInsets.only(top:4),
-          child: Text(model.postedUser,maxLines: 1,overflow: TextOverflow.ellipsis, style: AppThemes.normalTextStyle.copyWith(fontSize: 14, fontWeight: FontWeight.bold),),),
+          child: Text(model.postedUser,maxLines: 1,overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 14, fontWeight: FontWeight.bold),),),
           Padding(
             padding: const EdgeInsets.only(top: 4),
             child: Container(
@@ -35,7 +35,7 @@ class FeedPostTitleDetails extends StatelessWidget {
               expandText: "more",
               collapseText: '',
               linkColor: AppColors.kDarkGrey,
-              style: AppThemes.normalTextStyle.copyWith(fontSize: 14)
+              style :Theme.of(context).textTheme.bodyText1
           )),
           ]),
               ),

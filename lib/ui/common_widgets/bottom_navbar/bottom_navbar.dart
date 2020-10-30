@@ -138,7 +138,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       decoration:
           BoxDecoration(color: Colors.transparent, boxShadow: [
         BoxShadow(
-          color:Theme.of(context).shadowColor.withOpacity(0.6),
+          color:Theme.of(context).shadowColor.withOpacity(0.2),
           blurRadius: 16,
           offset: Offset(0, -2),
         ),

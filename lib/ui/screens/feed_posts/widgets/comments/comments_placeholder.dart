@@ -19,7 +19,7 @@ class PostCommentsPlaceholder extends StatelessWidget {
         GestureDetector(
           child: Container(
             child: Text('See all comments',
-                style: AppThemes.normalTextStyle
+                style: Theme.of(context).textTheme.bodyText1
                     .copyWith(fontSize: 14, color: AppColors.kDarkGrey)),
           ),
           onTap: () {
@@ -70,12 +70,12 @@ class UsersCommentsWidget extends StatelessWidget {
                   Text(userName,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: AppThemes.normalTextStyle
+                      style: Theme.of(context).textTheme.bodyText1
                           .copyWith(fontWeight: FontWeight.bold, fontSize: 12)),
                   Text(comment,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: AppThemes.normalTextStyle.copyWith(
+                      style: Theme.of(context).textTheme.bodyText1.copyWith(
                           fontWeight: FontWeight.normal, fontSize: 14))
                 ]),
           )

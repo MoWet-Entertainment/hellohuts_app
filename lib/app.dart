@@ -47,11 +47,11 @@ class _AppState extends State<App> {
           return MultiProvider(
             providers: providers,
             child: ThemeBuilder(
-              // statusBarColorBuilder: (theme) =>theme.colorScheme.primary,
              darkTheme :AppThemes.darkTheme,
              lightTheme: AppThemes.lightTheme,
               builder: (context,lightTheme, darkTheme, themeMode) =>
                         MaterialApp(
+                  
                 debugShowCheckedModeBanner: false,
                 title: Provider.of<AppConfig>(context).appTitle,
                 theme: lightTheme,

@@ -139,7 +139,7 @@ class AppThemes {
   static final TextStyle appBarDefaultText = GoogleFonts.openSans(
       fontSize: 16,
       textStyle: TextStyle(
-          fontWeight: FontWeight.bold, color: AppColors.kDarkTextColor));
+          fontWeight: FontWeight.bold));
 
   static final darkTheme = ThemeData(
      bottomNavigationBarTheme: BottomNavigationBarThemeData(
@@ -148,13 +148,19 @@ class AppThemes {
           selectedItemColor: AppColors.kPrimaryYellow,
           unselectedItemColor: AppColors.kPureWhite,
         ),
-    
+    appBarTheme: AppBarTheme(
+        textTheme: TextTheme(
+          headline6: appBarDefaultText.copyWith(color: AppColors.kPrimaryYellow)
+        )
+      ),
+      textTheme: _normalTextTheme,
+      
     colorScheme: ColorScheme(
       background: AppColors.kNavbarColorDark,
       brightness: Brightness.dark,
       error: AppColors.kDarkRed,
       onError: AppColors.kPureWhite,
-      surface: AppColors.kDark_4,
+      surface: AppColors.kDark_2,
       primary: AppColors.kPrimaryColorDark,
       onPrimary: Colors.white,
       primaryVariant: AppColors.kDark_1,
@@ -173,12 +179,18 @@ class AppThemes {
           selectedItemColor: AppColors.kPrimaryYellow,
           unselectedItemColor: AppColors.kPureWhite,
         ),
+      appBarTheme: AppBarTheme(
+        textTheme: TextTheme(
+          headline6: appBarDefaultText.copyWith(color: AppColors.kPureBlack)
+        )
+      ),
+      textTheme: _normalTextTheme,
     colorScheme: ColorScheme(
       background: AppColors.kPrimaryColorLight,
       brightness: Brightness.light,
       error: AppColors.kDarkRed,
       onError: AppColors.kPureWhite,
-      surface: AppColors.kPrimaryColorLight,
+      surface: AppColors.kAliceBlue,
       primary: AppColors.kPrimaryColorLight,
       onPrimary: Colors.black,
       primaryVariant: AppColors.kAliceBlue,
@@ -190,3 +202,19 @@ class AppThemes {
     ),
   );
 }
+
+final TextTheme _normalTextTheme = TextTheme(
+        headline6: GoogleFonts.lato(
+          fontSize: 12,
+        ),
+        caption: GoogleFonts.lato(
+          fontSize:12,
+        ),
+        bodyText1: GoogleFonts.lato(
+          fontSize: 14,
+        ),
+        bodyText2: GoogleFonts.muli(
+          fontSize: 14,
+        ),
+        
+        );

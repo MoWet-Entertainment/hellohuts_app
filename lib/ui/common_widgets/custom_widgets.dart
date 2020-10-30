@@ -231,7 +231,7 @@ Widget postedUserSection(BuildContext context,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: postedUserTextStyle ??
-                        AppThemes.postedAuthorTextMainHeadStyle,
+                       Theme.of(context).textTheme.headline6,
                   ),
                 ),
                 Container(

@@ -148,11 +148,15 @@ class _FeedPostBottomSection extends StatelessWidget {
                 LikeButton(
                   isLiked: model.userLiked,
                   onLikedCallback: () => state.addLikeToPost(model, '1234'),
+                  defaultBackgroundColor: Theme.of(context).colorScheme.primaryVariant,
+                  defaultIconColor: AppColors.kDarkGrey,
+                  defaultTextColor: AppColors.kDarkGrey,
                 ),
                 SizedBox(
                   width: 12.0,
                 ),
                 CommentButton(
+                  color: AppColors.kDarkGrey,
                   onTap: () =>
                       ExtendedNavigator.root.push(Routes.commentsDetail),
                 ),
@@ -160,12 +164,16 @@ class _FeedPostBottomSection extends StatelessWidget {
                   width: 12.0,
                 ),
                 // PinnedWidget(),
-                ShareWidget(),
+                ShareWidget(
+                  color: AppColors.kDarkGrey,
+                ),
                 SizedBox(
                   width: 10.0,
                 ),
                 Spacer(),
                 PlusButton(
+                  defaultBackgroundColor: Theme.of(context).colorScheme.primaryVariant,
+                     addedToBoardBackGroundColor: Theme.of(context).colorScheme.primaryVariant,
                   postId: '',
                   onTap: () => {
                     print('User wants to add the post to the saved boards'),
@@ -213,7 +221,7 @@ class PlusButton extends StatelessWidget {
   PlusButton({
     Key key,
     @required this.postId,
-    this.addedToBoard = false,
+    this.addedToBoard = true,
     this.onTap,
     this.defaultBackgroundColor = AppColors.kAliceBlue,
     this.addedToBoardColor = AppColors.kAccentColor,
