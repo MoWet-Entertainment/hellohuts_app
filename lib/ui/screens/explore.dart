@@ -40,20 +40,25 @@ class _ExplorePageState extends State<ExplorePage>
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkTheme =
+        Theme.of(context).colorScheme.brightness == Brightness.dark
+            ? true
+            : false;
     super.build(context);
 
-    return 
-      Scaffold(
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: AppThemes.uiOverlayStyle(isDarkTheme, context),
+      child: Scaffold(
         primary: false,
         extendBody: true,
         backgroundColor: Theme.of(context).colorScheme.primary,
         body: SafeArea(
-            child: _FeedWidgetBody(
-              key: widget.key,
-              scaffoldKey: widget.scaffoldKey,
-            ),
+          child: _FeedWidgetBody(
+            key: widget.key,
+            scaffoldKey: widget.scaffoldKey,
           ),
-        
+        ),
+      ),
     );
   }
 
@@ -104,7 +109,8 @@ class _ExplorePostsFeed extends StatelessWidget {
           borderRadius: const BorderRadius.only(
               topLeft: const Radius.circular(20.0),
               topRight: const Radius.circular(20.0)),
-          color: AppColors.kLavender.withOpacity(0.7)),
+          // color: AppColors.kLavender.withOpacity(0.7)),
+          color:Theme.of(context).colorScheme.primaryVariant),
       child: Padding(
         padding: EdgeInsets.fromLTRB(2, 0, 2, 0),
         child: ScrollConfiguration(
@@ -145,51 +151,51 @@ class _AppBarTop extends StatelessWidget {
         sliver: SliverPadding(
           padding: EdgeInsets.only(bottom: 16.0),
           sliver: SliverAppBar(
-            floating: true,
-            pinned: true,
+              backgroundColor: Theme.of(context).colorScheme.primary,
+              floating: true,
+              pinned: true,
 
-            ///set `snap` false, when flutter verion `1.17.4` is upgraded
-            snap: false,
-            primary: true,
-            forceElevated: innerBoxIsScrolled,
-            elevation: 1.0,
-            brightness: Brightness.light,
-
-            leading: Padding(
-              padding: const EdgeInsets.only(left: 16.0),
-              child: customIconSquare(
-                  isCustomIcon: true,
-                  iconAsset: HelloIcons.menu_icon,
-                  iconColor: AppColors.kDarkTextColor,
-                  iconSize: 24.0,
-                  backgroundSize: 40.0,
-                  backgroundColor: AppColors.kAliceBlue,
-                  borderRadius: 12.0,
-                  actionCall: () {
-                    //TODO: Add App drawer code here
-                    print("User clicked on App Drawer");
-                  }),
-            ),
-            actions: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(right: 16.0),
+              ///set `snap` false, when flutter verion `1.17.4` is upgraded
+              snap: false,
+              primary: true,
+              forceElevated: innerBoxIsScrolled,
+              elevation: 1.0,
+              brightness: Theme.of(context).colorScheme.brightness,
+              leading: Padding(
+                padding: const EdgeInsets.only(left: 16.0),
                 child: customIconSquare(
                     isCustomIcon: true,
-                    iconAsset: HelloIcons.search_icon,
-                    iconColor: AppColors.kDarkTextColor,
+                    iconAsset: HelloIcons.menu_icon,
+                    iconColor: Theme.of(context).colorScheme.onPrimary,
                     iconSize: 24.0,
                     backgroundSize: 40.0,
-                    backgroundColor: AppColors.kAliceBlue,
+                    backgroundColor: Theme.of(context).colorScheme.surface,
                     borderRadius: 12.0,
                     actionCall: () {
-                      ExtendedNavigator.of(context).push(Routes.searchPage);
+                      //TODO: Add App drawer code here
+                      print("User clicked on App Drawer");
                     }),
               ),
-            ],
-            centerTitle: true,
-            title: Text(AppConstants.appName.toLowerCase(),
-                style: AppThemes.appBarDefaultText),
-          ),
+              actions: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(right: 16.0),
+                  child: customIconSquare(
+                      isCustomIcon: true,
+                      iconAsset: HelloIcons.search_icon,
+                      iconColor: Theme.of(context).colorScheme.onPrimary,
+                      iconSize: 24.0,
+                      backgroundSize: 40.0,
+                      backgroundColor: Theme.of(context).colorScheme.surface,
+                      borderRadius: 12.0,
+                      actionCall: () {
+                        ExtendedNavigator.of(context).push(Routes.searchPage);
+                      }),
+                ),
+              ],
+              centerTitle: true,
+              title: Text(
+                AppConstants.appName.toLowerCase(),
+              )),
         ),
       ),
     );
@@ -234,7 +240,7 @@ class _UsersGreet extends StatelessWidget {
         children: <Widget>[
           _userHello(user),
           spacer(height: 4.0),
-          _userQuestion(),
+          _userQuestion(context),
         ],
       ),
     );
@@ -242,11 +248,11 @@ class _UsersGreet extends StatelessWidget {
 
   Widget _userHello(String user) {
     return Text("Hi " + user,
-        style: GoogleFonts.openSans(
-            textStyle: TextStyle(fontSize: 13, color: AppColors.kDarkGrey)));
+        style: GoogleFonts.muli(
+            textStyle: TextStyle(fontSize: 13, color: AppColors.kDarkGrey_new)));
   }
 
-  Widget _userQuestion() {
+  Widget _userQuestion(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -254,13 +260,13 @@ class _UsersGreet extends StatelessWidget {
             style: GoogleFonts.lato(
                 textStyle: TextStyle(
                     fontSize: 24,
-                    color: AppColors.kDarkTextColor,
+                    color: Theme.of(context).colorScheme.onPrimary,
                     fontWeight: FontWeight.bold))),
         Text("We’ve got you covered!",
             style: GoogleFonts.lato(
                 textStyle: TextStyle(
                     fontSize: 24,
-                    color: AppColors.kDarkTextColor,
+                    color: Theme.of(context).colorScheme.onPrimary,
                     fontWeight: FontWeight.bold))),
       ],
     );
@@ -277,7 +283,7 @@ class _QuickPicks extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(20.0)),
-          color: AppColors.kAliceBlue,
+          color: Theme.of(context).colorScheme.primaryVariant
         ),
         child: Center(
           child: Padding(
@@ -357,10 +363,10 @@ class _QuickPicksItem extends StatelessWidget {
               iconAsset: iconAsset,
               isCustomIcon: true,
               iconSize: 24.0,
-              iconColor: AppColors.kAlmostBlack,
+              iconColor: Theme.of(context).colorScheme.onPrimary,
               backgroundSize: 56,
               borderRadius: 16.0,
-              backgroundColor: AppColors.kPureWhite,
+              backgroundColor: Theme.of(context).colorScheme.secondary,
               actionCall: call,
             ),
             spacer(height: 8.0),
@@ -373,7 +379,7 @@ class _QuickPicksItem extends StatelessWidget {
                           fontWeight: FontWeight.w400,
                           color: textColor != null
                               ? textColor
-                              : AppColors.kDarkTextColor))
+                              : Theme.of(context).colorScheme.onPrimary))
                   : Container(),
             )
           ],

@@ -73,7 +73,7 @@ class _LikeButtonState extends State<LikeButton> {
                 width: 4.0,
               ),
               Text(widget.likeCount ?? '1.2K',
-                  style: AppThemes.normalTextStyle.copyWith(
+                  style: Theme.of(context).textTheme.bodyText1.copyWith(
                     fontSize: widget.fontSize ,
                       color: widget.isLiked
                           ? widget.likedTextColor

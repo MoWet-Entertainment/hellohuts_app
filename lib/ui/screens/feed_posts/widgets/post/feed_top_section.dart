@@ -49,11 +49,11 @@ class FeedPostTopSection extends StatelessWidget {
                 count: 4,
                 activeIndex: model.activePage,
                 effect: ExpandingDotsEffect(
-                    dotHeight: 4,
-                    dotWidth: 6,
+                    dotHeight: 5,
+                    dotWidth: 7,
                     spacing: 3,
                     dotColor: AppColors.kDarkGrey,
-                    activeDotColor: AppColors.kDarkestGrey,
+                    activeDotColor: AppColors.kAccentColor,
                     expansionFactor: 2),
               ),
             )
