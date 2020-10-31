@@ -125,10 +125,7 @@ class _BasePageState extends State<BasePage> {
   @override
   Widget build(BuildContext context) {
     print("Primary is " + Theme.of(context).colorScheme.primary.toString());
-    return FutureBuilder(
-        future: Future.delayed(const Duration(milliseconds: 500)),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
+ 
             return Scaffold(
               backgroundColor: Theme.of(context).colorScheme.primary,
               key: _scaffoldKey,
@@ -138,18 +135,5 @@ class _BasePageState extends State<BasePage> {
                 pageController: _pageController,
               ),
             );
-          }
-
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Scaffold(
-              body:Container( 
-                child:Center(
-                  child:Text("hellohuts..."),
-                )
-
-              )
-            );
-          }
-        });
   }
 }
