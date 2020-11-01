@@ -77,7 +77,7 @@ class _CategoriesScreenState extends State<CategoriesScreen>
               .copyWith(statusBarColor: Colors.transparent),
           child: SafeArea(
             child: Scaffold(
-              backgroundColor: AppColors.kPureWhite,
+              backgroundColor: AppColors.kbPureWhite,
               body: NestedScrollView(
                 floatHeaderSlivers: true,
                 headerSliverBuilder:
@@ -97,7 +97,7 @@ class _CategoriesScreenState extends State<CategoriesScreen>
                       sliver: SliverSafeArea(
                         top: false,
                         sliver: SliverAppBar(
-                          backgroundColor: AppColors.kPureWhite,
+                          backgroundColor: AppColors.kbPureWhite,
                           title: _searchField(context),
                           floating: true,
                           pinned: true,
@@ -109,9 +109,9 @@ class _CategoriesScreenState extends State<CategoriesScreen>
                             isScrollable: true,
                             indicatorPadding: const EdgeInsets.only(
                                 bottom: 4, left: 16, right: 8),
-                            indicatorColor: AppColors.kAccentColor,
-                            labelColor: AppColors.kDarkTextColor,
-                            unselectedLabelColor: AppColors.kDarkestGrey,
+                            indicatorColor: AppColors.kbAccentColor,
+                            labelColor: AppColors.kbDarkTextColor,
+                            unselectedLabelColor: AppColors.kbDarkestGrey,
                             labelStyle: AppThemes.normalTextStyle.copyWith(
                                 fontSize: 14, fontWeight: FontWeight.bold),
                             unselectedLabelStyle: AppThemes.normalTextStyle
@@ -225,7 +225,7 @@ class _CategoriesScreenState extends State<CategoriesScreen>
         child: TextField(
           enabled: false,
           style: AppThemes.searchHintStyle
-              .copyWith(color: AppColors.kDarkTextColor, fontSize: 14),
+              .copyWith(color: AppColors.kbDarkTextColor, fontSize: 14),
           autofocus: true,
           keyboardType: TextInputType.text,
           decoration: InputDecoration(
@@ -235,20 +235,20 @@ class _CategoriesScreenState extends State<CategoriesScreen>
                   const Radius.circular(20.0),
                 ),
               ),
-              fillColor: AppColors.kAliceBlue,
+              fillColor: AppColors.kbAliceBlue,
               // isDense: true,
               prefixIcon: Padding(
                   padding: EdgeInsets.only(left: 12.0, right: 8.0),
                   child: Image.asset(
                     HelloIcons.search_icon,
-                    color: AppColors.kDarkGrey,
+                    color: AppColors.kbDarkGrey,
                     height: 22,
                   )),
               prefixIconConstraints:
                   BoxConstraints(maxHeight: 44, maxWidth: 44),
               hintText: AppStrings.searchHintTextForCategories,
               hintStyle: AppThemes.searchHintStyle,
-              focusColor: AppColors.kPureWhite,
+              focusColor: AppColors.kbPureWhite,
               filled: true,
               contentPadding: const EdgeInsets.only(left: 5, right: 4),
               suffixIconConstraints:
@@ -473,13 +473,13 @@ class _ImageCardState extends State<ImageCard> {
                         height: 18,
                         width: 18,
                         decoration: BoxDecoration(
-                          color: AppColors.kPrimaryYellow.withOpacity(0.4),
+                          color: AppColors.kbPrimaryYellow.withOpacity(0.4),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Center(
                             child: SvgPicture.asset(
                           HelloIcons.flame_bold_icon,
-                          color: AppColors.kLightGrey,
+                          color: AppColors.kbLightGrey,
                           height: 12,
                         )),
                       ))
@@ -496,7 +496,7 @@ class _ImageCardState extends State<ImageCard> {
                             width: 8,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12),
-                              color: AppColors.kLightGrey.withOpacity(0.6),
+                              color: AppColors.kbLightGrey.withOpacity(0.6),
                             ),
                           ),
                           SizedBox(
@@ -507,7 +507,7 @@ class _ImageCardState extends State<ImageCard> {
                             width: 4,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12),
-                              color: AppColors.kLightGrey.withOpacity(0.6),
+                              color: AppColors.kbLightGrey.withOpacity(0.6),
                             ),
                           ),
                         ],
@@ -566,14 +566,14 @@ class _ImageCardState extends State<ImageCard> {
   Widget _createPhotoTitle() => Container(
         padding: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
         width: double.infinity,
-        color: AppColors.kPureWhite,
+        color: AppColors.kbPureWhite,
         child: Text('this is a large image',
             style: TextStyle(color: Colors.black)),
       );
 
   Widget _createActionBar() => Container(
         padding: EdgeInsets.symmetric(vertical: 5.0),
-        color: AppColors.kPureWhite,
+        color: AppColors.kbPureWhite,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -663,14 +663,14 @@ class _ImageCard1State extends State<ImageCard1> {
   Widget _createPhotoTitle() => Container(
         padding: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
         width: double.infinity,
-        color: AppColors.kPureWhite,
+        color: AppColors.kbPureWhite,
         child: Text('this is a large image',
             style: TextStyle(color: Colors.black)),
       );
 
   Widget _createActionBar() => Container(
         padding: EdgeInsets.symmetric(vertical: 5.0),
-        color: AppColors.kPureWhite,
+        color: AppColors.kbPureWhite,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -705,7 +705,7 @@ class PostDetailWidget extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: AppColors.kPureBlack,
+        backgroundColor: AppColors.kbPureBlack,
         body: _scrollBody(context),
       ),
     );
@@ -719,7 +719,7 @@ class PostDetailWidget extends StatelessWidget {
           child: CustomScrollView(
             slivers: [
               SliverAppBar(
-                backgroundColor: AppColors.kPureBlack,
+                backgroundColor: AppColors.kbPureBlack,
                 elevation: 0,
                 leading: Container(
                   decoration: BoxDecoration(
@@ -774,7 +774,7 @@ class PostDetailWidget extends StatelessWidget {
                                   horizontal: 12, vertical: 12),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(14.0),
-                                color: AppColors.kDark_2,
+                                color: AppColors.kbDark_2,
                               ),
                               child: Row(
                                 children: [
@@ -784,13 +784,13 @@ class PostDetailWidget extends StatelessWidget {
                                   Text(
                                     'Add Comment',
                                     style: AppThemes.normalSecondaryTextStyle
-                                        .copyWith(color: AppColors.kDarkGrey),
+                                        .copyWith(color: AppColors.kbDarkGrey),
                                   ),
                                   Spacer(),
                                   Image.asset(
                                     HelloIcons.send_bold_icon,
                                     height: 22,
-                                    color: AppColors.kDarkGrey,
+                                    color: AppColors.kbDarkGrey,
                                   ),
                                 ],
                               )),
@@ -814,7 +814,7 @@ class PostDetailWidget extends StatelessWidget {
                                                 topLeft: Radius.circular(20),
                                                 topRight: Radius.circular(20),
                                               ),
-                                              color: AppColors.kSmokedWhite,
+                                              color: AppColors.kbSmokedWhite,
                                             ),
                                             child: Container(
                                               padding: const EdgeInsets.only(top:8),
@@ -848,12 +848,12 @@ class PostDetailWidget extends StatelessWidget {
                                                     topLeft: Radius.circular(20),
                                                     topRight: Radius.circular(20),
                                                   ),
-                                                  color: AppColors.kPureWhite,
+                                                  color: AppColors.kbPureWhite,
                                                 ),
                                                 child: Container(
                                                  decoration: BoxDecoration(
                                                   borderRadius: BorderRadius.circular(20),
-                                                  color: AppColors.kAliceBlue,
+                                                  color: AppColors.kbAliceBlue,
                                                 ),
 
                                                   child: TextField(
@@ -871,7 +871,7 @@ class PostDetailWidget extends StatelessWidget {
                 const Radius.circular(20.0),
               ),
             ),
-            fillColor: AppColors.kPureWhite,
+            fillColor: AppColors.kbPureWhite,
                                                     ),
                                                   ),
                                                 ),
@@ -907,7 +907,7 @@ class _PostDetailContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: Container(
-        color: AppColors.kPureBlack,
+        color: AppColors.kbPureBlack,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
           child: Column(
@@ -918,7 +918,7 @@ class _PostDetailContent extends StatelessWidget {
                 'Simple, but elegant living room interior at a low cost',
                 style: AppThemes.normalTextStyle.copyWith(
                     fontSize: 18,
-                    color: AppColors.kPureWhite,
+                    color: AppColors.kbPureWhite,
                     fontWeight: FontWeight.bold),
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
@@ -929,10 +929,10 @@ class _PostDetailContent extends StatelessWidget {
               ExpandableText(
                   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. And its so confusing to see molecules getting robbed. But game of thrones was a good theory. Tellus molestie enim et turpis sagittis blandit aliquam. Ullamcorper dis sed integer velit nisi, maecenas diam sed nunc. Nibh lobortis egestas et, integer non at. Et mauris fermentum habitant tellus auctor in arcu, sodales a.ctor in arcu",
                   style: AppThemes.normalSecondaryTextStyle
-                      .copyWith(color: AppColors.kPureWhite, fontSize: 14),
+                      .copyWith(color: AppColors.kbPureWhite, fontSize: 14),
                   maxLines: 6,
                   expandText: 'more',
-                  linkColor: AppColors.kLavender,
+                  linkColor: AppColors.kbLavender,
                   collapseText: ''),
             ],
           ),
@@ -947,7 +947,7 @@ class _PostDetailTitleHeaders extends StatelessWidget {
     return SliverToBoxAdapter(
       child: Container(
         alignment: Alignment.topLeft,
-        color: AppColors.kPureBlack,
+        color: AppColors.kbPureBlack,
         child: Padding(
           padding:
               const EdgeInsets.only(top: 24.0, left: 16, right: 16, bottom: 8),
@@ -961,10 +961,10 @@ class _PostDetailTitleHeaders extends StatelessWidget {
                   postedUserTextStyle: AppThemes.normalTextStyle.copyWith(
                       fontWeight: FontWeight.bold,
                       fontSize: 14,
-                      color: AppColors.kPureWhite),
+                      color: AppColors.kbPureWhite),
                   userTitle: 'Architect',
                   userTitleTextStyle: AppThemes.normalSecondaryTextStyle
-                      .copyWith(color: AppColors.kDarkGrey)),
+                      .copyWith(color: AppColors.kbDarkGrey)),
               FollowButton(),
             ],
           ),
@@ -1022,8 +1022,8 @@ class _FollowButtonState extends State<FollowButton> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.0),
           color: _isFollowing
-              ? AppColors.kDarkGreen.withOpacity(0.2)
-              : AppColors.kPrimaryYellow.withOpacity(0.2),
+              ? AppColors.kbDarkGreen.withOpacity(0.2)
+              : AppColors.kbPrimaryYellow.withOpacity(0.2),
         ),
         child: _isFollowing
             ? Row(
@@ -1032,7 +1032,7 @@ class _FollowButtonState extends State<FollowButton> {
                   Text(
                     'Following',
                     style: AppThemes.normalTextStyle
-                        .copyWith(color: AppColors.kDarkGreen),
+                        .copyWith(color: AppColors.kbDarkGreen),
                   )
                 ],
               )
@@ -1040,7 +1040,7 @@ class _FollowButtonState extends State<FollowButton> {
                 children: [
                   Image.asset(
                     HelloIcons.plus_bold_icon,
-                    color: AppColors.kPrimaryYellow,
+                    color: AppColors.kbPrimaryYellow,
                     height: 15,
                   ),
                   SizedBox(
@@ -1049,7 +1049,7 @@ class _FollowButtonState extends State<FollowButton> {
                   Text(
                     'Follow',
                     style: AppThemes.normalTextStyle
-                        .copyWith(color: AppColors.kPrimaryYellow),
+                        .copyWith(color: AppColors.kbPrimaryYellow),
                   )
                 ],
               ),
@@ -1309,32 +1309,32 @@ class _PostImageState extends State<PostImage> with TickerProviderStateMixin {
                             likeCount: '918',
                             fontSize: 12,
                             sizeOfIcon: 24,
-                            defaultIconColor: AppColors.kPureWhite,
-                            defaultTextColor: AppColors.kPureWhite,
+                            defaultIconColor: AppColors.kbPureWhite,
+                            defaultTextColor: AppColors.kbPureWhite,
                             likedBackgroundColor:
-                                AppColors.kDarkRed.withOpacity(0.8),
+                                AppColors.kbDarkRed.withOpacity(0.8),
                             defaultBackgroundColor:
-                                AppColors.kDarkGrey.withOpacity(0.5),
+                                AppColors.kbDarkGrey.withOpacity(0.5),
                           ),
                           SizedBox(
                             width: 12.0,
                           ),
                           CommentButton(
-                            color: AppColors.kPureWhite,
+                            color: AppColors.kbPureWhite,
                           ),
                           SizedBox(
                             width: 10.0,
                           ),
                           ShareWidget(
-                            color: AppColors.kPureWhite,
+                            color: AppColors.kbPureWhite,
                           ),
                           Spacer(),
                           PlusButton(
                             postId: '',
                             addedToBoard: false,
-                            defaultIconColor: AppColors.kPureWhite,
+                            defaultIconColor: AppColors.kbPureWhite,
                             addedToBoardBackGroundColor: Colors.transparent,
-                            addedToBoardColor: AppColors.kAccentColor,
+                            addedToBoardColor: AppColors.kbAccentColor,
                             defaultBackgroundColor: Colors.transparent,
                           ),
                         ],
@@ -1358,8 +1358,8 @@ class _PostImageState extends State<PostImage> with TickerProviderStateMixin {
                             dotHeight: 6,
                             dotWidth: 12,
                             spacing: 4,
-                            dotColor: AppColors.kDarkGrey,
-                            activeDotColor: AppColors.kMediumGrey,
+                            dotColor: AppColors.kbDarkGrey,
+                            activeDotColor: AppColors.kbMediumGrey,
                             expansionFactor: 2),
                       ),
                     ),

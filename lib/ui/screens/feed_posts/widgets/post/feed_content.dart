@@ -2,6 +2,7 @@ import 'dart:math' as math;
 import 'dart:ui';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -98,21 +99,29 @@ class _FeedPostMiddleSection extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 0),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  child: Image.network(
-                    imageListTemp[itemIndex],
+                  // child: Image.network(
+                  //   imageListTemp[itemIndex],
+                  //   fit: BoxFit.cover,
+                  //   loadingBuilder: (BuildContext context, Widget child,
+                  //       ImageChunkEvent loadingProgress) {
+                  //     if (loadingProgress == null) return child;
+                  //     return Center(
+                  //       child: CircularProgressIndicator(
+                  //         value: loadingProgress.expectedTotalBytes != null
+                  //             ? loadingProgress.cumulativeBytesLoaded /
+                  //                 loadingProgress.expectedTotalBytes
+                  //             : null,
+                  //       ),
+                  //     );
+                  //   },
+                  // ),
+                  child: CachedNetworkImage(
+                    imageUrl: imageListTemp[itemIndex],
                     fit: BoxFit.cover,
-                    loadingBuilder: (BuildContext context, Widget child,
-                        ImageChunkEvent loadingProgress) {
-                      if (loadingProgress == null) return child;
-                      return Center(
-                        child: CircularProgressIndicator(
-                          value: loadingProgress.expectedTotalBytes != null
-                              ? loadingProgress.cumulativeBytesLoaded /
-                                  loadingProgress.expectedTotalBytes
-                              : null,
-                        ),
-                      );
-                    },
+                    progressIndicatorBuilder: (context, url, downloadProgress) => 
+                Center(child: CircularProgressIndicator(value: downloadProgress.progress)),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+
                   ),
                 ),
               ),
@@ -149,14 +158,14 @@ class _FeedPostBottomSection extends StatelessWidget {
                   isLiked: model.userLiked,
                   onLikedCallback: () => state.addLikeToPost(model, '1234'),
                   defaultBackgroundColor: Theme.of(context).colorScheme.primaryVariant,
-                  defaultIconColor: AppColors.kDarkGrey,
-                  defaultTextColor: AppColors.kDarkGrey,
+                  defaultIconColor: AppColors.kbDarkGrey,
+                  defaultTextColor: AppColors.kbDarkGrey,
                 ),
                 SizedBox(
                   width: 12.0,
                 ),
                 CommentButton(
-                  color: AppColors.kDarkGrey,
+                  color: AppColors.kbDarkGrey,
                   onTap: () =>
                       ExtendedNavigator.root.push(Routes.commentsDetail),
                 ),
@@ -165,7 +174,7 @@ class _FeedPostBottomSection extends StatelessWidget {
                 ),
                 // PinnedWidget(),
                 ShareWidget(
-                  color: AppColors.kDarkGrey,
+                  color: AppColors.kbDarkGrey,
                 ),
                 SizedBox(
                   width: 10.0,
@@ -223,10 +232,10 @@ class PlusButton extends StatelessWidget {
     @required this.postId,
     this.addedToBoard = true,
     this.onTap,
-    this.defaultBackgroundColor = AppColors.kAliceBlue,
-    this.addedToBoardColor = AppColors.kAccentColor,
-    this.defaultIconColor = AppColors.kDarkGrey,
-    this.addedToBoardBackGroundColor = AppColors.kAliceBlue,
+    this.defaultBackgroundColor = AppColors.kbAliceBlue,
+    this.addedToBoardColor = AppColors.kbAccentColor,
+    this.defaultIconColor = AppColors.kbDarkGrey,
+    this.addedToBoardBackGroundColor = AppColors.kbAliceBlue,
     this.iconSize = 22,
   }) : super(key: key);
 
@@ -270,7 +279,7 @@ class ShareWidget extends StatelessWidget {
     return GestureDetector(
       child: Image.asset(
         HelloIcons.share_bold_icon,
-        color: color ?? AppColors.kDarkestGrey,
+        color: color ?? AppColors.kbDarkestGrey,
         height: size,
       ),
       onTap: () {

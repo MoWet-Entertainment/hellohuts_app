@@ -39,7 +39,7 @@ class RoundedSelectableContainer extends StatelessWidget {
               width: width ?? 88,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12.0),
-                color: _isSelected ? AppColors.kLavender : AppColors.kAliceBlue,
+                color: _isSelected ? AppColors.kbLavender : AppColors.kbAliceBlue,
               ),
               child: Center(
                 child: Text(
@@ -56,7 +56,7 @@ class RoundedSelectableContainer extends StatelessWidget {
                 alignment: Alignment.bottomCenter,
                 child: AnimatedContainer(
                   duration: Duration(milliseconds: 300),
-                  color: AppColors.kDarkGreen,
+                  color: AppColors.kbDarkGreen,
                   curve: Curves.fastOutSlowIn,
                   height: 2.0,
                   width: _isSelected ? 24.0 : 0,

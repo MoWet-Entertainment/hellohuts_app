@@ -8,53 +8,53 @@ class AppThemes {
 
   static ThemeData themeData(bool isDarkTheme, BuildContext context) {
     return ThemeData(
-      primaryColor: AppColors.kPureWhite,
-      indicatorColor: AppColors.kPrimaryYellow,
+      primaryColor: AppColors.kbPureWhite,
+      indicatorColor: AppColors.kbPrimaryYellow,
       buttonColor: isDarkTheme
-          ? AppColors.kButtonColorDark
-          : AppColors.kButtonColorLight,
+          ? AppColors.kbButtonColorDark
+          : AppColors.kbButtonColorLight,
       hintColor:
-          isDarkTheme ? AppColors.kHintColorDark : AppColors.kHintColorLight,
+          isDarkTheme ? AppColors.kbHintColorDark : AppColors.kbHintColorLight,
       textSelectionColor:
-          isDarkTheme ? AppColors.kPureWhite : AppColors.kPureBlack,
+          isDarkTheme ? AppColors.kbPureWhite : AppColors.kbPureBlack,
       cardColor:
-          isDarkTheme ? AppColors.kCardColorDark : AppColors.kCardColorLight,
+          isDarkTheme ? AppColors.kbCardColorDark : AppColors.kbCardColorLight,
       canvasColor: isDarkTheme
-          ? AppColors.kCanvasColorDark
-          : AppColors.kCanvasColorLight,
+          ? AppColors.kbCanvasColorDark
+          : AppColors.kbCanvasColorLight,
       buttonTheme: Theme.of(context).buttonTheme.copyWith(
           colorScheme: isDarkTheme ? ColorScheme.dark() : ColorScheme.light()),
       appBarTheme: AppBarTheme(
         color: isDarkTheme
-            ? AppColors.kPrimaryColorDark
-            : AppColors.kPrimaryColorLight,
+            ? AppColors.kbPrimaryColorDark
+            : AppColors.kbPrimaryColorLight,
         elevation: 0.0,
       ),
       accentColor:
-          isDarkTheme ? AppColors.kAccentColorDark : AppColors.kAccentColorDark,
+          isDarkTheme ? AppColors.kbAccentColorDark : AppColors.kbAccentColorDark,
       bottomAppBarColor:
-          isDarkTheme ? AppColors.kAccentColorDark : AppColors.kAccentColorDark,
+          isDarkTheme ? AppColors.kbAccentColorDark : AppColors.kbAccentColorDark,
       bottomSheetTheme: Theme.of(context).bottomSheetTheme.copyWith(
             modalBackgroundColor:
-                isDarkTheme ? AppColors.kAccentColorDark : AppColors.kPureWhite,
+                isDarkTheme ? AppColors.kbAccentColorDark : AppColors.kbPureWhite,
             modalElevation: 1,
           ),
       colorScheme: ColorScheme(
         background: isDarkTheme
-            ? AppColors.kPrimaryColorDark
-            : AppColors.kPrimaryColorLight,
+            ? AppColors.kbPrimaryColorDark
+            : AppColors.kbPrimaryColorLight,
         brightness: isDarkTheme ? Brightness.dark : Brightness.light,
-        error: isDarkTheme ? AppColors.kDarkRed : AppColors.kDarkRed,
-        onError: isDarkTheme ? AppColors.kPureWhite : AppColors.kPureBlack,
-        surface: isDarkTheme ? AppColors.kDark_4 : AppColors.kPrimaryColorLight,
+        error: isDarkTheme ? AppColors.kbDarkRed : AppColors.kbDarkRed,
+        onError: isDarkTheme ? AppColors.kbPureWhite : AppColors.kbPureBlack,
+        surface: isDarkTheme ? AppColors.kbDark_4 : AppColors.kbPrimaryColorLight,
         primary: isDarkTheme
-            ? AppColors.kPrimaryColorDark
-            : AppColors.kPrimaryColorLight,
+            ? AppColors.kbPrimaryColorDark
+            : AppColors.kbPrimaryColorLight,
         onPrimary: isDarkTheme ? Colors.white : Colors.black,
-        primaryVariant: isDarkTheme ? AppColors.kDark_1 : AppColors.kAliceBlue,
+        primaryVariant: isDarkTheme ? AppColors.kbDark_1 : AppColors.kbAliceBlue,
         secondary:
-            isDarkTheme ? AppColors.kDark_3 : AppColors.kPrimaryColorLight,
-        secondaryVariant: isDarkTheme ? AppColors.kDark_2 : AppColors.kLavender,
+            isDarkTheme ? AppColors.kbDark_3 : AppColors.kbPrimaryColorLight,
+        secondaryVariant: isDarkTheme ? AppColors.kbDark_2 : AppColors.kbLavender,
         onSecondary: isDarkTheme ? Colors.white : Colors.black,
         onBackground: isDarkTheme ? Colors.white : Colors.black,
         onSurface: isDarkTheme ? Colors.white : Colors.black,
@@ -63,13 +63,13 @@ class AppThemes {
   }
 
   static final BottomSheetThemeData bottomSheetThemeData =
-      BottomSheetThemeData(backgroundColor: AppColors.kPureWhite);
+      BottomSheetThemeData(backgroundColor: AppColors.kbPureWhite);
   static final AppBarTheme appBarTheme =
-      AppBarTheme(color: AppColors.kPureWhite, brightness: Brightness.light);
+      AppBarTheme(color: AppColors.kbPureWhite, brightness: Brightness.light);
 
   static final TextStyle postDateAndCategoryStyle = GoogleFonts.openSans(
     textStyle: TextStyle(
-        color: AppColors.kDarkGrey,
+        color: AppColors.kbDarkGrey,
         fontSize: 10.0,
         fontWeight: FontWeight.w400),
   );
@@ -78,27 +78,27 @@ class AppThemes {
       bool isDarkTheme, BuildContext context) {
     return isDarkTheme
         ? SystemUiOverlayStyle.light
-            .copyWith(statusBarColor: AppColors.kPrimaryColorDark)
+            .copyWith(statusBarColor: AppColors.kbPrimaryColorDark)
         : SystemUiOverlayStyle.dark
-            .copyWith(statusBarColor: AppColors.kPureWhite);
+            .copyWith(statusBarColor: AppColors.kbPureWhite);
   }
 
   static final TextStyle popUpStyle = GoogleFonts.roboto(
     textStyle: TextStyle(
-        color: AppColors.kDarkGrey,
+        color: AppColors.kbDarkGrey,
         fontSize: 14.0,
         fontWeight: FontWeight.w400),
   );
   static final TextStyle postHeadLineUserStyle = GoogleFonts.roboto(
     textStyle: TextStyle(
-        color: AppColors.kDarkTextColor,
+        color: AppColors.kbDarkTextColor,
         fontSize: 13,
         fontWeight: FontWeight.w500),
   );
 
   static final TextStyle postHeadLineStyle = GoogleFonts.roboto(
     textStyle: TextStyle(
-        color: AppColors.kDarkTextColor,
+        color: AppColors.kbDarkTextColor,
         fontSize: 13,
         fontWeight: FontWeight.w400),
   );
@@ -106,34 +106,34 @@ class AppThemes {
   static final TextStyle postedAuthorTextMainHeadStyle = GoogleFonts.lato(
     fontSize: 12.0,
     textStyle:
-        TextStyle(fontWeight: FontWeight.w400, color: AppColors.kDarkTextColor),
+        TextStyle(fontWeight: FontWeight.w400, color: AppColors.kbDarkTextColor),
   );
 
   static final TextStyle postedAuthorTextSubHeadStyle = GoogleFonts.lato(
     fontSize: 10.0,
     textStyle:
-        TextStyle(fontWeight: FontWeight.w400, color: AppColors.kDarkGrey),
+        TextStyle(fontWeight: FontWeight.w400, color: AppColors.kbDarkGrey),
   );
 
   static final TextStyle normalTextStyle = GoogleFonts.lato(
       fontSize: 14.0,
       textStyle: TextStyle(
-          fontWeight: FontWeight.normal, color: AppColors.kDarkTextColor));
+          fontWeight: FontWeight.normal, color: AppColors.kbDarkTextColor));
 
   static final TextStyle normalTextLightStyle = GoogleFonts.lato(
       fontSize: 12.0,
       textStyle: TextStyle(
-          fontWeight: FontWeight.w300, color: AppColors.kDarkTextColor));
+          fontWeight: FontWeight.w300, color: AppColors.kbDarkTextColor));
 
   static final TextStyle searchHintStyle = GoogleFonts.muli(
     fontSize: 12.0,
     textStyle:
-        TextStyle(fontWeight: FontWeight.w400, color: AppColors.kDarkGrey),
+        TextStyle(fontWeight: FontWeight.w400, color: AppColors.kbDarkGrey),
   );
   static final TextStyle normalSecondaryTextStyle = GoogleFonts.muli(
     fontSize: 12.0,
     textStyle:
-        TextStyle(fontWeight: FontWeight.w400, color: AppColors.kDarkTextColor),
+        TextStyle(fontWeight: FontWeight.w400, color: AppColors.kbDarkTextColor),
   );
 
   static final TextStyle appBarDefaultText = GoogleFonts.openSans(
@@ -143,29 +143,29 @@ class AppThemes {
 
   static final darkTheme = ThemeData(
      bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          backgroundColor: AppColors.kNavbarColorDark,
+          backgroundColor: AppColors.kbNavbarColorDark,
           elevation: 1,
-          selectedItemColor: AppColors.kPrimaryYellow,
-          unselectedItemColor: AppColors.kPureWhite,
+          selectedItemColor: AppColors.kbPrimaryYellow,
+          unselectedItemColor: AppColors.kbPureWhite,
         ),
     appBarTheme: AppBarTheme(
         textTheme: TextTheme(
-          headline6: appBarDefaultText.copyWith(color: AppColors.kPrimaryYellow)
+          headline6: appBarDefaultText.copyWith(color: AppColors.kbPrimaryYellow)
         )
       ),
       textTheme: _normalTextTheme,
       
     colorScheme: ColorScheme(
-      background: AppColors.kNavbarColorDark,
+      background: AppColors.kbNavbarColorDark,
       brightness: Brightness.dark,
-      error: AppColors.kDarkRed,
-      onError: AppColors.kPureWhite,
-      surface: AppColors.kDark_2,
-      primary: AppColors.kPrimaryColorDark,
+      error: AppColors.kbDarkRed,
+      onError: AppColors.kbPureWhite,
+      surface: AppColors.kbDark_2,
+      primary: AppColors.kbPrimaryColorDark,
       onPrimary: Colors.white,
-      primaryVariant: AppColors.kDark_1,
-      secondary: AppColors.kDark_3,
-      secondaryVariant: AppColors.kDark_2,
+      primaryVariant: AppColors.kbDark_1,
+      secondary: AppColors.kbDark_3,
+      secondaryVariant: AppColors.kbDark_2,
       onSecondary: Colors.white,
       onBackground: Colors.white,
       onSurface: Colors.white,
@@ -174,36 +174,59 @@ class AppThemes {
 
   static final lightTheme = ThemeData(
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          backgroundColor: AppColors.kNavbarColorLight,
+          backgroundColor: AppColors.kbNavbarColorLight,
           elevation: 1,
-          selectedItemColor: AppColors.kPrimaryYellow,
-          unselectedItemColor: AppColors.kPureWhite,
+          selectedItemColor: AppColors.kbPrimaryYellow,
+          unselectedItemColor: AppColors.kbPureWhite,
         ),
       appBarTheme: AppBarTheme(
         textTheme: TextTheme(
-          headline6: appBarDefaultText.copyWith(color: AppColors.kPureBlack)
+          headline6: appBarDefaultText.copyWith(color: AppColors.kbPureBlack)
         )
       ),
       textTheme: _normalTextTheme,
     colorScheme: ColorScheme(
-      background: AppColors.kPrimaryColorLight,
+      background: AppColors.kbPrimaryColorLight,
       brightness: Brightness.light,
-      error: AppColors.kDarkRed,
-      onError: AppColors.kPureWhite,
-      surface: AppColors.kAliceBlue,
-      primary: AppColors.kPrimaryColorLight,
+      error: AppColors.kbDarkRed,
+      onError: AppColors.kbPureWhite,
+      surface: AppColors.kbAliceBlue,
+      primary: AppColors.kbPrimaryColorLight,
       onPrimary: Colors.black,
-      primaryVariant: AppColors.kAliceBlue,
-      secondary: AppColors.kPrimaryColorLight,
-      secondaryVariant: AppColors.kLavender,
+      primaryVariant: AppColors.kbAliceBlue,
+      secondary: AppColors.kbPrimaryColorLight,
+      secondaryVariant: AppColors.kbLavender,
       onSecondary: Colors.black,
       onBackground: Colors.black,
       onSurface: Colors.black,
     ),
   );
+
+
+          /// Creates a [MaterialColor] based on the supplied [Color]
+  static MaterialColor createMaterialColor(Color color) {
+    List strengths = <double>[.05];
+    Map swatch = <int, Color>{};
+    final r = color.red, g = color.green, b = color.blue;
+
+    for (var i = 1; i < 10; i++) {
+      strengths.add(0.1 * i);
+    }
+    for (var strength in strengths) {
+      final ds = 0.5 - strength;
+      swatch[(strength * 1000).round()] = Color.fromRGBO(
+        r + ((ds < 0 ? r : (255 - r)) * ds).round(),
+        g + ((ds < 0 ? g : (255 - g)) * ds).round(),
+        b + ((ds < 0 ? b : (255 - b)) * ds).round(),
+        1,
+      );
+    }
+    return MaterialColor(color.value, swatch);
+  }
+
 }
 
-final TextTheme _normalTextTheme = TextTheme(
+  final TextTheme _normalTextTheme = TextTheme(
         headline6: GoogleFonts.lato(
           fontSize: 12,
         ),

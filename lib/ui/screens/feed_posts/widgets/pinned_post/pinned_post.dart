@@ -15,7 +15,7 @@ class PinnedWidget extends StatelessWidget {
           Icon(
             HelloIconsOld.paperclip,
             size: 21,
-            color: AppColors.kAlmostBlack,
+            color: AppColors.kbAlmostBlack,
           ),
           SizedBox(
             width: 4.0,
@@ -46,7 +46,7 @@ class ViewsCountWidget extends StatelessWidget {
           Icon(
             HelloIconsOld.eye,
             size: 21,
-            color: AppColors.kAlmostBlack,
+            color: AppColors.kbAlmostBlack,
           ),
           SizedBox(
             width: 4.0,

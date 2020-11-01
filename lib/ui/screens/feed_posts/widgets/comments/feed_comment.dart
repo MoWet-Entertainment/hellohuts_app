@@ -30,7 +30,7 @@ class CommentButton extends StatelessWidget {
         children: <Widget>[
           Image.asset(
             HelloIcons.comment_bold_icon,
-            color: color ?? AppColors.kDarkestGrey,
+            color: color ?? AppColors.kbDarkestGrey,
             height: sizeOfIcon,
           ),
           SizedBox(
@@ -39,7 +39,7 @@ class CommentButton extends StatelessWidget {
           Text(
             commentCount,
             style: AppThemes.normalTextStyle.copyWith(
-                fontSize: fontSize, color: color ?? AppColors.kDarkTextColor),
+                fontSize: fontSize, color: color ?? AppColors.kbDarkTextColor),
           )
         ],
       ),

@@ -48,7 +48,7 @@ class _SearchPageState extends State<SearchPage> {
       home: Scaffold(
         body: AnnotatedRegion<SystemUiOverlayStyle>(
           value: SystemUiOverlayStyle.dark
-              .copyWith(statusBarColor: AppColors.kPureWhite),
+              .copyWith(statusBarColor: AppColors.kbPureWhite),
           child: SafeArea(
             child: Scaffold(
               appBar: CustomSearchBar(
@@ -85,7 +85,7 @@ class _SearchBodyState extends State<_SearchBody> {
     final state = Provider.of<SearchStateMain>(context);
     final bool isSearching = state.isSearching;
     return Container(
-      color: state.isSearching ? AppColors.kAliceBlue : AppColors.kPureWhite,
+      color: state.isSearching ? AppColors.kbAliceBlue : AppColors.kbPureWhite,
       padding: const EdgeInsets.symmetric(horizontal: 18),
       child: isSearching ? _ShowResults() : _BuildSuggestions(),
     );
@@ -143,22 +143,22 @@ class _SearchResultsCard extends StatelessWidget {
   Widget _searchResult(SearchItem item) {
     return CustomListTile(
       leading: customIconSquare(
-        backgroundColor: AppColors.kAliceBlue,
+        backgroundColor: AppColors.kbAliceBlue,
         iconAsset: _getLeadingIcon(item),
-        iconColor: AppColors.kAlmostBlack,
+        iconColor: AppColors.kbAlmostBlack,
         backgroundSize: 40,
         iconSize: 24,
         isCustomIcon: true,
       ),
       titleText: Text(item.searchString,
           style: AppThemes.normalTextStyle
-              .copyWith(fontSize: 14, color: AppColors.kDarkTextColor)),
+              .copyWith(fontSize: 14, color: AppColors.kbDarkTextColor)),
       subTitle: Text(
         item.searchType.toString(),
         style: AppThemes.normalTextLightStyle
-            .copyWith(fontSize: 12, color: AppColors.kDarkTextColor),
+            .copyWith(fontSize: 12, color: AppColors.kbDarkTextColor),
       ),
-      backgroundColor: AppColors.kPureWhite,
+      backgroundColor: AppColors.kbPureWhite,
     );
   }
 
@@ -182,7 +182,7 @@ class _SearchResultsCard extends StatelessWidget {
 }
 
 Widget _customIconForSeach(IconData iconData,
-    {size = 16.0, Color color = AppColors.kAlmostBlack}) {
+    {size = 16.0, Color color = AppColors.kbAlmostBlack}) {
   return Icon(
     iconData,
     size: size,

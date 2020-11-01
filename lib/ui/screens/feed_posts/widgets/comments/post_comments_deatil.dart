@@ -17,11 +17,11 @@ class PostCommentsDetail extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             titleSpacing: 8.0,
-            backgroundColor: AppColors.kPureWhite,
+            backgroundColor: AppColors.kbPureWhite,
             elevation: 1,
 
             leading: BackButton(
-              color: AppColors.kDarkGrey,
+              color: AppColors.kbDarkGrey,
               onPressed: () {
                 FocusScope.of(context).unfocus();
                 ExtendedNavigator.of(context).pop();

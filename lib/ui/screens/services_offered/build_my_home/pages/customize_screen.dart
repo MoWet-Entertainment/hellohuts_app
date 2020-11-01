@@ -20,7 +20,7 @@ class CustomizeDetailsBody extends StatelessWidget {
     ScreenUtil.init(context, designSize: Size(375.0, 801.0));
     return Container(
       width: fullWidth(context),
-      color: AppColors.kPureWhite,
+      color: AppColors.kbPureWhite,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 32),
         child: ScrollableColumn(

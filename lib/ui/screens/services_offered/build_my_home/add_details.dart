@@ -51,7 +51,7 @@ class _AddDetailsForHomeState extends State<AddDetailsForHome> {
                   .copyWith(statusBarColor: Colors.transparent),
               child: SafeArea(
                 child: Scaffold(
-                  backgroundColor: AppColors.kPureWhite,
+                  backgroundColor: AppColors.kbPureWhite,
                   appBar: CustomAppBar(
                     isBackButton: true,
                     centerTitle: true,
@@ -65,7 +65,7 @@ class _AddDetailsForHomeState extends State<AddDetailsForHome> {
                               style: AppThemes.normalTextStyle.copyWith(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18,
-                                  color: AppColors.kDarkTextColor),
+                                  color: AppColors.kbDarkTextColor),
                             )
                           : costEstimateState.pageIndexOfCollectSection == 1
                               ? Text(
@@ -73,7 +73,7 @@ class _AddDetailsForHomeState extends State<AddDetailsForHome> {
                                   style: AppThemes.normalTextStyle.copyWith(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 18,
-                                      color: AppColors.kDarkTextColor),
+                                      color: AppColors.kbDarkTextColor),
                                   key: ValueKey<int>(1),
                                 )
                               : costEstimateState.pageIndexOfCollectSection == 2
@@ -82,7 +82,7 @@ class _AddDetailsForHomeState extends State<AddDetailsForHome> {
                                       style: AppThemes.normalTextStyle.copyWith(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 18,
-                                          color: AppColors.kDarkTextColor),
+                                          color: AppColors.kbDarkTextColor),
                                       key: ValueKey<int>(2),
                                     )
                                   : Text("", key: ValueKey<int>(3)),
@@ -100,7 +100,7 @@ class _AddDetailsForHomeState extends State<AddDetailsForHome> {
                                     "Reset",
                                     style: AppThemes.normalTextStyle.copyWith(
                                         fontSize: 14,
-                                        color: AppColors.kDarkTextColor),
+                                        color: AppColors.kbDarkTextColor),
                                   )),
                             ),
                           )
@@ -196,11 +196,11 @@ class CallToActionButtonCostEstimate extends StatelessWidget {
         alignment: Alignment.bottomRight,
         child: CupertinoButton(
             borderRadius: BorderRadius.circular(12),
-            color: AppColors.kPrimaryDarkBlue,
+            color: AppColors.kbPrimaryDarkBlue,
             child: Text(
               isLastPageOfSection ? "Calculate Rate" : "Next",
               style: AppThemes.normalTextStyle
-                  .copyWith(fontSize: 14, color: AppColors.kAccentColor),
+                  .copyWith(fontSize: 14, color: AppColors.kbAccentColor),
             ),
             onPressed: () => {
                   print("User Clicked Next"),
@@ -234,13 +234,13 @@ class AddDetailsProgressIndicator extends StatelessWidget {
     return Container(
       width: screenWidth,
       height: 60,
-      color: AppColors.kPureWhite,
+      color: AppColors.kbPureWhite,
       child: Stack(
         alignment: Alignment.centerLeft,
         children: [
           Container(
             height: 2.0,
-            color: AppColors.kDarkGrey,
+            color: AppColors.kbDarkGrey,
             width: widthExtent * 4,
           ),
           Positioned(
@@ -248,12 +248,12 @@ class AddDetailsProgressIndicator extends StatelessWidget {
             child: FilledCircle.animated(
               size: state.pageIndexOfCollectSection == 1 ? 26 : 24,
               color: state.pageIndexOfCollectSection == 0
-                  ? AppColors.kPrimaryYellow
-                  : AppColors.kPrimaryDarkBlue,
+                  ? AppColors.kbPrimaryYellow
+                  : AppColors.kbPrimaryDarkBlue,
               child: Center(
                 child: Text("1",
                     style: AppThemes.normalSecondaryTextStyle
-                        .copyWith(fontSize: 12, color: AppColors.kPureWhite)),
+                        .copyWith(fontSize: 12, color: AppColors.kbPureWhite)),
               ),
             ),
           ),
@@ -262,12 +262,12 @@ class AddDetailsProgressIndicator extends StatelessWidget {
             child: FilledCircle.animated(
               size: 24,
               color: state.pageIndexOfCollectSection == 1
-                  ? AppColors.kPrimaryYellow
-                  : AppColors.kPrimaryDarkBlue,
+                  ? AppColors.kbPrimaryYellow
+                  : AppColors.kbPrimaryDarkBlue,
               child: Center(
                 child: Text("2",
                     style: AppThemes.normalSecondaryTextStyle
-                        .copyWith(fontSize: 12, color: AppColors.kPureWhite)),
+                        .copyWith(fontSize: 12, color: AppColors.kbPureWhite)),
               ),
             ),
           ),
@@ -276,12 +276,12 @@ class AddDetailsProgressIndicator extends StatelessWidget {
             child: FilledCircle.animated(
               size: state.pageIndexOfCollectSection == 2 ? 26 : 24,
               color: state.pageIndexOfCollectSection == 2
-                  ? AppColors.kPrimaryYellow
-                  : AppColors.kPrimaryDarkBlue,
+                  ? AppColors.kbPrimaryYellow
+                  : AppColors.kbPrimaryDarkBlue,
               child: Center(
                 child: Text("3",
                     style: AppThemes.normalSecondaryTextStyle
-                        .copyWith(fontSize: 12, color: AppColors.kPureWhite)),
+                        .copyWith(fontSize: 12, color: AppColors.kbPureWhite)),
               ),
             ),
           ),
@@ -289,12 +289,12 @@ class AddDetailsProgressIndicator extends StatelessWidget {
             left: 4 * widthExtent,
             child: FilledCircle.animated(
               size: state.pageIndexOfCollectSection == 3 ? 26 : 24,
-              color: AppColors.kDarkGrey,
+              color: AppColors.kbDarkGrey,
               child: Center(
                 child: Image.asset(
                   HelloIcons.home_bold_icon,
                   height: 14,
-                  color: AppColors.kPureWhite,
+                  color: AppColors.kbPureWhite,
                 ),
               ),
             ),

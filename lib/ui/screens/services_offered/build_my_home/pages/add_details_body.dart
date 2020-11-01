@@ -21,7 +21,7 @@ class AddDetailsBody extends StatelessWidget {
     final state = Provider.of<CostEstimateState>(context);
     return Container(
       width: fullWidth(context),
-      color: AppColors.kPureWhite,
+      color: AppColors.kbPureWhite,
       child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 32),
           child: ScrollableColumn(
@@ -139,8 +139,8 @@ class __StoreyContainerWidgetState extends State<_StoreyContainerWidget>
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12.0),
                   color: state.selectedNumberOfStoryes == widget.storeyCount
-                      ? AppColors.kLavender
-                      : AppColors.kAliceBlue,
+                      ? AppColors.kbLavender
+                      : AppColors.kbAliceBlue,
                 ),
                 child: Column(
                   children: [
@@ -179,7 +179,7 @@ class __StoreyContainerWidgetState extends State<_StoreyContainerWidget>
                   alignment: Alignment.bottomCenter,
                   child: AnimatedContainer(
                     duration: Duration(milliseconds: 300),
-                    color: AppColors.kDarkGreen,
+                    color: AppColors.kbDarkGreen,
                     curve: Curves.fastOutSlowIn,
                     height: 2.0,
                     width: state.selectedNumberOfStoryes == widget.storeyCount
@@ -195,9 +195,9 @@ class __StoreyContainerWidgetState extends State<_StoreyContainerWidget>
   ///Outputs a list of Colours as per the [number] input
   List<Widget> _getCircleIndicatorWidgets(int number) {
     List<Color> _colorsList = [
-      AppColors.kPrimaryYellow,
-      AppColors.kDarkRed,
-      AppColors.kPrimaryDarkBlue
+      AppColors.kbPrimaryYellow,
+      AppColors.kbDarkRed,
+      AppColors.kbPrimaryDarkBlue
     ];
     List<Widget> _listOfWidgets = [];
 
@@ -392,8 +392,8 @@ class _OtherDetailsContainer extends StatelessWidget {
                           horizontal: 8, vertical: 12),
                       decoration: BoxDecoration(
                         color: state.selectedPack == 3
-                            ? AppColors.kLavender
-                            : AppColors.kAliceBlue,
+                            ? AppColors.kbLavender
+                            : AppColors.kbAliceBlue,
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                       child: Center(
@@ -401,11 +401,11 @@ class _OtherDetailsContainer extends StatelessWidget {
                           children: [
                             customIconSquare(
                                 iconAsset: HelloIcons.plus_light_icon,
-                                iconColor: AppColors.kDarkestGrey,
+                                iconColor: AppColors.kbDarkestGrey,
                                 iconSize: 24,
                                 backgroundColor: state.selectedPack == 3
-                                    ? AppColors.kLavender
-                                    : AppColors.kAliceBlue,
+                                    ? AppColors.kbLavender
+                                    : AppColors.kbAliceBlue,
                                 backgroundSize: 24),
                             Text(
                               "Custom",
@@ -431,7 +431,7 @@ class _OtherDetailsContainer extends StatelessWidget {
                       alignment: Alignment.bottomCenter,
                       child: AnimatedContainer(
                         duration: Duration(milliseconds: 300),
-                        color: AppColors.kDarkGreen,
+                        color: AppColors.kbDarkGreen,
                         curve: Curves.fastOutSlowIn,
                         height: 2.0,
                         width: state.selectedPack == 3 ? 32.0 : 0,
@@ -458,7 +458,7 @@ class _OtherDetailsContainer extends StatelessWidget {
                 // height: fullHeight(context) * 0.9,
                 width: fullWidth(context),
                 decoration: BoxDecoration(
-                    color: AppColors.kPureWhite,
+                    color: AppColors.kbPureWhite,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20),
                         topRight: Radius.circular(20))),
@@ -517,7 +517,7 @@ class _OtherDetailsContainer extends StatelessWidget {
                                 padding: EdgeInsets.all(8.0),
                                 decoration: BoxDecoration(
                                     color:
-                                        AppColors.kDarkGreen.withOpacity(0.2),
+                                        AppColors.kbDarkGreen.withOpacity(0.2),
                                     // border: Border.all(
                                     //     color: AppColors.kDarkGreen, width: 1),
                                     borderRadius: BorderRadius.circular(12)),
@@ -526,7 +526,7 @@ class _OtherDetailsContainer extends StatelessWidget {
                                   "Done",
                                   style: AppThemes.normalTextStyle.copyWith(
                                       fontSize: 14,
-                                      color: AppColors.kDarkGreen,
+                                      color: AppColors.kbDarkGreen,
                                       fontWeight: FontWeight.bold),
                                 )),
                               ),
@@ -578,8 +578,8 @@ class _OtherDetailsContainerWidget extends StatelessWidget {
                     left: 8, right: 12, top: 12, bottom: 12),
                 decoration: BoxDecoration(
                   color: state.selectedPack == packId
-                      ? AppColors.kLavender
-                      : AppColors.kAliceBlue,
+                      ? AppColors.kbLavender
+                      : AppColors.kbAliceBlue,
                   borderRadius: BorderRadius.circular(12.0),
                 ),
                 child: ScrollConfiguration(
@@ -600,7 +600,7 @@ class _OtherDetailsContainerWidget extends StatelessWidget {
             alignment: Alignment.bottomCenter,
             child: AnimatedContainer(
               duration: Duration(milliseconds: 300),
-              color: AppColors.kDarkGreen,
+              color: AppColors.kbDarkGreen,
               curve: Curves.fastOutSlowIn,
               height: 2.0,
               width: state.selectedPack == packId ? 32.0 : 0,
@@ -617,7 +617,7 @@ class _OtherDetailsContainerWidget extends StatelessWidget {
         children: [
           FilledCircle(
             size: 4.0,
-            color: AppColors.kDarkTextColor,
+            color: AppColors.kbDarkTextColor,
           ),
           SizedBox(
             width: 8,
@@ -626,7 +626,7 @@ class _OtherDetailsContainerWidget extends StatelessWidget {
             child: Text(
               item,
               style: AppThemes.normalSecondaryTextStyle.copyWith(
-                color: AppColors.kDarkTextColor,
+                color: AppColors.kbDarkTextColor,
                 fontSize: 12,
               ),
               maxLines: 2,

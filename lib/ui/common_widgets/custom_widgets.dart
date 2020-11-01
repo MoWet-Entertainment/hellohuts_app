@@ -201,7 +201,7 @@ Widget postedUserSection(BuildContext context,
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: AppColors.kAccentColor,
+                  color: AppColors.kbAccentColor,
                   width: 2.0,
                 )),
             child: Container(
@@ -213,7 +213,7 @@ Widget postedUserSection(BuildContext context,
                   )),
               child: CircleAvatar(
                 radius: radiusOfAvatar,
-                backgroundColor: AppColors.kDarkGrey,
+                backgroundColor: AppColors.kbDarkGrey,
                 backgroundImage: NetworkImage(imagePath),
               ),
             ),
@@ -268,9 +268,9 @@ Widget customIconSquare({
   bool isCustomIcon = true,
   String iconAsset,
   double backgroundSize = 30,
-  Color backgroundColor = AppColors.kSmokedWhite,
+  Color backgroundColor = AppColors.kbSmokedWhite,
   double iconSize = 24,
-  Color iconColor = AppColors.kDarkTextColor,
+  Color iconColor = AppColors.kbDarkTextColor,
   double borderRadius = 12,
   GestureTapCallback actionCall,
 }) {
@@ -364,7 +364,7 @@ class CustomListTile extends StatelessWidget {
           width: width ?? fullWidth(context),
           decoration: BoxDecoration(
             borderRadius: borderRadius ?? BorderRadius.circular(16.0),
-            color: backgroundColor ?? AppColors.kSmokedWhite,
+            color: backgroundColor ?? AppColors.kbSmokedWhite,
           ),
           child: Row(
             children: [
@@ -404,7 +404,7 @@ class FilledCircle extends StatelessWidget {
         super(key: key);
   const FilledCircle({
     Key key,
-    this.color = AppColors.kAlmostBlack,
+    this.color = AppColors.kbAlmostBlack,
     this.size = 2.0,
     this.child,
   })  : isAnimated = false,
@@ -456,8 +456,8 @@ class MultiSelectChip extends StatefulWidget {
     this.itemList,
     this.alreadySelected,
     this.onSelectionChanged,
-    this.backgroundColor = AppColors.kAliceBlue,
-    this.selectedColor = AppColors.kLavender,
+    this.backgroundColor = AppColors.kbAliceBlue,
+    this.selectedColor = AppColors.kbLavender,
   });
 
   @override
@@ -479,9 +479,9 @@ class _MultiSelectChipState extends State<MultiSelectChip> {
             item,
             style: selectedChoices.contains(item)
                 ? AppThemes.normalSecondaryTextStyle
-                    .copyWith(fontSize: 12, color: AppColors.kDarkTextColor)
+                    .copyWith(fontSize: 12, color: AppColors.kbDarkTextColor)
                 : AppThemes.normalSecondaryTextStyle
-                    .copyWith(fontSize: 12, color: AppColors.kDarkTextColor),
+                    .copyWith(fontSize: 12, color: AppColors.kbDarkTextColor),
           ),
           backgroundColor: widget.backgroundColor,
           selectedColor: widget.selectedColor,
@@ -522,7 +522,7 @@ class RoundedContainer extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(borderRadius ?? 12.0),
-        color: backGroundColor ?? AppColors.kPureWhite,
+        color: backGroundColor ?? AppColors.kbPureWhite,
       ),
       child: child ?? Container(),
     );
