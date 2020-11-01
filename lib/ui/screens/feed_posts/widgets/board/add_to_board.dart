@@ -22,7 +22,7 @@ state.setFeedModel = model;
           //TODO: Maintain heigt as per options
           width: fullWidth(context),
           decoration: BoxDecoration(
-            color: AppColors.kPureWhite,
+            color: AppColors.kbPureWhite,
             borderRadius: const BorderRadius.only(
               topLeft: const Radius.circular(20),
               topRight: const Radius.circular(20),

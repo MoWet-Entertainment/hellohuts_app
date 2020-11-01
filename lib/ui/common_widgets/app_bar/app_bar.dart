@@ -24,7 +24,7 @@ Widget appBarIcon(
       Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.0),
-          color: AppColors.kLightGrey,
+          color: AppColors.kbLightGrey,
         ),
         height: 40.0,
         width: 40.0,
@@ -32,7 +32,7 @@ Widget appBarIcon(
       IconButton(
         icon: Icon(
           icon,
-          color: color ?? AppColors.kPureBlack,
+          color: color ?? AppColors.kbPureBlack,
           size: size,
         ),
         onPressed: actionCall,
@@ -44,7 +44,7 @@ Widget appBarIcon(
               child: new Container(
                 padding: EdgeInsets.all(1),
                 decoration: new BoxDecoration(
-                  color: AppColors.kPureWhite,
+                  color: AppColors.kbPureWhite,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 constraints: BoxConstraints(
@@ -53,7 +53,7 @@ Widget appBarIcon(
                 ),
                 child: Container(
                   decoration: new BoxDecoration(
-                    color: AppColors.kAccentColor,
+                    color: AppColors.kbAccentColor,
                     borderRadius: BorderRadius.circular(6),
                   ),
                   constraints: BoxConstraints(
@@ -118,14 +118,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       brightness: Brightness.light,
-      backgroundColor: backgroundColor ?? AppColors.kPureWhite,
+      backgroundColor: backgroundColor ?? AppColors.kbPureWhite,
       elevation: 0,
       leading: isBackButton
           ? GestureDetector(
               child: customBackButton ??
                   Icon(
                     Icons.arrow_back_ios,
-                    color: AppColors.kAlmostBlack,
+                    color: AppColors.kbAlmostBlack,
                   ),
               onTap: onBackButtonPressed,
             )
@@ -199,10 +199,10 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
       padding: const EdgeInsets.only(top: 16, bottom: 8.0, left: 24, right: 16),
       child: TextField(
         style: AppThemes.searchHintStyle
-            .copyWith(color: AppColors.kDarkTextColor, fontSize: 14),
+            .copyWith(color: AppColors.kbDarkTextColor, fontSize: 14),
         autofocus: true,
         textCapitalization: TextCapitalization.words,
-        cursorColor: AppColors.kDarkGrey,
+        cursorColor: AppColors.kbDarkGrey,
         onChanged: (text) {
           onSearchChanged(text);
         },
@@ -215,20 +215,20 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
                 const Radius.circular(20.0),
               ),
             ),
-            fillColor: AppColors.kAliceBlue,
+            fillColor: AppColors.kbAliceBlue,
             // isDense: true,
             prefixIcon: leading ??
                 Padding(
                     padding: EdgeInsets.only(left: 12.0, right: 8.0),
                     child: Image.asset(
                       HelloIcons.search_icon,
-                      color: AppColors.kDarkGrey,
+                      color: AppColors.kbDarkGrey,
                       height: 22,
                     )),
             prefixIconConstraints: BoxConstraints(maxHeight: 44, maxWidth: 44),
             hintText: hintText,
             hintStyle: AppThemes.searchHintStyle,
-            focusColor: AppColors.kPureWhite,
+            focusColor: AppColors.kbPureWhite,
             filled: true,
             suffixIcon: (controller.text.trim().length == 0)
                 ? Container(
@@ -239,7 +239,7 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
                       padding: const EdgeInsets.only(left: 4, right: 12.0),
                       child: Image.asset(
                         HelloIcons.close_circle_bold_icon,
-                        color: AppColors.kDarkGrey,
+                        color: AppColors.kbDarkGrey,
                         height: 16,
                       ),
                     ),
@@ -268,7 +268,7 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
                   child: Icon(
                     iconData,
                     size: 24,
-                    color: AppColors.kAccentColor,
+                    color: AppColors.kbAccentColor,
                   ),
                 ),
               ),
@@ -281,7 +281,7 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
     final controller = useTextEditingController();
     return AppBar(
       titleSpacing: 8.0,
-      backgroundColor: AppColors.kPureWhite,
+      backgroundColor: AppColors.kbPureWhite,
       elevation: 0,
 
       // leading: isBackButton
@@ -318,7 +318,7 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
               padding: const EdgeInsets.only(right: 24, top: 4.0, bottom: 4.0),
               child: Text('Cancel',
                   style: AppThemes.normalTextStyle.copyWith(
-                      color: AppColors.kDarkTextColor, fontSize: 12.0)),
+                      color: AppColors.kbDarkTextColor, fontSize: 12.0)),
             ),
           ),
         )

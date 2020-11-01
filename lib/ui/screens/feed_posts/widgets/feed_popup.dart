@@ -19,7 +19,7 @@ void showPopupMenu(
   await showMenu(
     context: context,
     position: RelativeRect.fromLTRB(left, top, 16, 0),
-    color: AppColors.kLightGrey.withOpacity(0.95),
+    color: AppColors.kbLightGrey.withOpacity(0.95),
     elevation: 1,
     useRootNavigator: true,
     shape: RoundedRectangleBorder(
@@ -31,7 +31,7 @@ void showPopupMenu(
           dense: true,
           contentPadding: const EdgeInsets.symmetric(horizontal: 8.0),
           trailing: Icon(HelloIconsOld.plus_circle,
-              size: 16.0, color: AppColors.kDarkGrey),
+              size: 16.0, color: AppColors.kbDarkGrey),
           title: Text(
             "Add to board",
             style: AppThemes.popUpStyle,
@@ -46,7 +46,7 @@ void showPopupMenu(
           trailing: Icon(
             HelloIconsOld.share,
             size: 16.0,
-            color: AppColors.kDarkGrey,
+            color: AppColors.kbDarkGrey,
           ),
           contentPadding: const EdgeInsets.symmetric(horizontal: 8.0),
           title: Text(
@@ -63,7 +63,7 @@ void showPopupMenu(
           trailing: Icon(
             HelloIconsOld.thumbs_down,
             size: 16.0,
-            color: AppColors.kDarkGrey,
+            color: AppColors.kbDarkGrey,
           ),
           contentPadding: const EdgeInsets.symmetric(horizontal: 8.0),
           title: Text(
@@ -80,7 +80,7 @@ void showPopupMenu(
           trailing: Icon(
             HelloIconsOld.eye,
             size: 16.0,
-            color: AppColors.kDarkGrey,
+            color: AppColors.kbDarkGrey,
           ),
           contentPadding: const EdgeInsets.symmetric(horizontal: 8.0),
           title: Text(
@@ -111,7 +111,7 @@ state.setFeedModel = model;
           //TODO: Maintain heigt as per options
           width: fullWidth(context),
           decoration: BoxDecoration(
-            color: AppColors.kPureWhite,
+            color: AppColors.kbPureWhite,
             borderRadius: const BorderRadius.only(
               topLeft: const Radius.circular(20),
               topRight: const Radius.circular(20),
@@ -166,7 +166,7 @@ state.setFeedModel = model;
           padding: EdgeInsets.symmetric(horizontal: 20),
           child: Row(
             children: <Widget>[
-              Icon(iconData,size: 24, color:AppColors.kDarkGrey,),
+              Icon(iconData,size: 24, color:AppColors.kbDarkGrey,),
               SizedBox(
                 width: 15,
               ),
@@ -175,7 +175,7 @@ state.setFeedModel = model;
                 context: context,
                 style: TextStyle(
                   
-                  color:isEnable ? AppColors.kDarkGrey : AppColors.kMediumGrey,
+                  color:isEnable ? AppColors.kbDarkGrey : AppColors.kbMediumGrey,
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
                 ),

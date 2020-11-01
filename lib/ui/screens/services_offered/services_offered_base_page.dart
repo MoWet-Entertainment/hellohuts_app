@@ -39,7 +39,7 @@ class _ServicesOfferedBody extends StatelessWidget {
   Widget build(BuildContext context) {
     var searchState = Provider.of<SearchStateMain>(context);
     return Container(
-      color: AppColors.kPureWhite,
+      color: AppColors.kbPureWhite,
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
       child:  ScrollableColumn(
             // crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,7 +52,7 @@ class _ServicesOfferedBody extends StatelessWidget {
         style: AppThemes.normalTextStyle.copyWith(
             fontWeight: FontWeight.bold,
             fontSize: 18,
-            color: AppColors.kDarkTextColor),
+            color: AppColors.kbDarkTextColor),
       ),
       SizedBox(
         height: 32,
@@ -81,11 +81,11 @@ class ServicesOffferedItems extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 12),
 
           child: CustomListTile(
-        backgroundColor: AppColors.kAliceBlue,
+        backgroundColor: AppColors.kbAliceBlue,
         leading: customIconSquare(
-          backgroundColor: AppColors.kPureWhite,
+          backgroundColor: AppColors.kbPureWhite,
           iconAsset: HelloIcons.home_bold_icon,
-          iconColor: AppColors.kAlmostBlack,
+          iconColor: AppColors.kbAlmostBlack,
           backgroundSize: 40,
           iconSize: 24,
           isCustomIcon: true,
@@ -109,11 +109,11 @@ class ServicesOffferedItems extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
           child: CustomListTile(
-        backgroundColor: AppColors.kAliceBlue,
+        backgroundColor: AppColors.kbAliceBlue,
         leading: customIconSquare(
-          backgroundColor: AppColors.kPureWhite,
+          backgroundColor: AppColors.kbPureWhite,
           iconAsset: HelloIcons.profile_bold_icon,
-          iconColor: AppColors.kAlmostBlack,
+          iconColor: AppColors.kbAlmostBlack,
           backgroundSize: 40,
           iconSize: 24,
           isCustomIcon: true,
@@ -126,7 +126,7 @@ class ServicesOffferedItems extends StatelessWidget {
         subTitle: Text(
           "Professionals",
           style: AppThemes.normalTextStyle
-              .copyWith(color: AppColors.kDarkTextColor, fontSize: 12),
+              .copyWith(color: AppColors.kbDarkTextColor, fontSize: 12),
         ),
         onTap: () => {
           //TODO: Add Navigation to Professionals Screen
@@ -140,11 +140,11 @@ class ServicesOffferedItems extends StatelessWidget {
      return Padding(
       padding: const EdgeInsets.only(bottom: 12),
        child: CustomListTile(
-        backgroundColor: AppColors.kAliceBlue,
+        backgroundColor: AppColors.kbAliceBlue,
         leading: customIconSquare(
-          backgroundColor: AppColors.kPureWhite,
+          backgroundColor: AppColors.kbPureWhite,
           iconAsset: HelloIcons.chart_bold_icon,
-          iconColor: AppColors.kAlmostBlack,
+          iconColor: AppColors.kbAlmostBlack,
           backgroundSize: 40,
           iconSize: 24,
           isCustomIcon: true,
@@ -168,11 +168,11 @@ class ServicesOffferedItems extends StatelessWidget {
      return Padding(
       padding: const EdgeInsets.only(bottom: 12),
        child: CustomListTile(
-        backgroundColor: AppColors.kAliceBlue,
+        backgroundColor: AppColors.kbAliceBlue,
         leading: customIconSquare(
-          backgroundColor: AppColors.kPureWhite,
+          backgroundColor: AppColors.kbPureWhite,
           iconAsset: HelloIcons.chart_bold_icon,
-          iconColor: AppColors.kAlmostBlack,
+          iconColor: AppColors.kbAlmostBlack,
           backgroundSize: 40,
           iconSize: 24,
           isCustomIcon: true,
@@ -239,7 +239,7 @@ class _HorizontalSeparatedTextItems extends StatelessWidget {
       if (i != items.length - 1) {
         listOfItems.add(FilledCircle(
           size: 3.0,
-          color: AppColors.kDarkTextColor,
+          color: AppColors.kbDarkTextColor,
         ));
       }
     }

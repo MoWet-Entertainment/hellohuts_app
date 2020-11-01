@@ -34,7 +34,7 @@ class FeedPostTitleDetails extends StatelessWidget {
               model.postTitle,
               expandText: "more",
               collapseText: '',
-              linkColor: AppColors.kDarkGrey,
+              linkColor: AppColors.kbDarkGrey,
               style :Theme.of(context).textTheme.bodyText1
           )),
           ]),

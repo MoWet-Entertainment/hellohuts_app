@@ -193,8 +193,8 @@ class NumberPicker extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(12),
                                   color: value == selectedIntValue
-                                      ? AppColors.kLavender
-                                      : AppColors.kAliceBlue,
+                                      ? AppColors.kbLavender
+                                      : AppColors.kbAliceBlue,
                                 ),
                                 child: Center(
                                   child: Text(
@@ -218,7 +218,7 @@ class NumberPicker extends StatelessWidget {
                             width: value == selectedIntValue ? 10 : 0,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.0),
-                                color: AppColors.kDarkGreen),
+                                color: AppColors.kbDarkGreen),
                           )
                         ],
                       );

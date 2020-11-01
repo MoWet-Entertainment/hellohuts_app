@@ -23,10 +23,10 @@ class CostEstimateScreen extends StatelessWidget {
       home: Scaffold(
         body: AnnotatedRegion<SystemUiOverlayStyle>(
           value: SystemUiOverlayStyle.dark
-              .copyWith(statusBarColor: AppColors.kPureWhite),
+              .copyWith(statusBarColor: AppColors.kbPureWhite),
           child: SafeArea(
             child: Scaffold(
-              backgroundColor: AppColors.kPureWhite,
+              backgroundColor: AppColors.kbPureWhite,
               appBar: CustomAppBar(
                 isBackButton: true,
                 onBackButtonPressed: ExtendedNavigator.of(context).pop,
@@ -41,11 +41,11 @@ class CostEstimateScreen extends StatelessWidget {
                       child: Text(
                         "Connect with HelloTeam",
                         style: AppThemes.normalTextStyle.copyWith(
-                            color: AppColors.kPrimaryYellow,
+                            color: AppColors.kbPrimaryYellow,
                             fontSize: 14,
                             fontWeight: FontWeight.bold),
                       ),
-                      color: AppColors.kPrimaryDarkBlue,
+                      color: AppColors.kbPrimaryDarkBlue,
                       onPressed: () {
                         //TODO: Add onPressed action whhen user clicks on Connect with HelloTeam button
                       },
@@ -94,7 +94,7 @@ class _CostEstimateScreenBody extends StatelessWidget {
           ),
           RoundedContainer(
               borderRadius: 20,
-              backGroundColor: AppColors.kAliceBlue,
+              backGroundColor: AppColors.kbAliceBlue,
               child: Container(
                 constraints: BoxConstraints(
                   maxHeight: fullHeight(context) * 0.25,
@@ -189,7 +189,7 @@ class _CostEstimateScreenBody extends StatelessWidget {
                 Text(
                   "Features",
                   style: AppThemes.normalTextStyle
-                      .copyWith(fontSize: 14, color: AppColors.kDarkGrey),
+                      .copyWith(fontSize: 14, color: AppColors.kbDarkGrey),
                 ),
                 SizedBox(
                   height: 12,

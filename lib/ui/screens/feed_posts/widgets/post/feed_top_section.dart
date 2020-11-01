@@ -52,8 +52,8 @@ class FeedPostTopSection extends StatelessWidget {
                     dotHeight: 5,
                     dotWidth: 7,
                     spacing: 3,
-                    dotColor: AppColors.kDarkGrey,
-                    activeDotColor: AppColors.kAccentColor,
+                    dotColor: AppColors.kbDarkGrey,
+                    activeDotColor: AppColors.kbAccentColor,
                     expansionFactor: 2),
               ),
             )

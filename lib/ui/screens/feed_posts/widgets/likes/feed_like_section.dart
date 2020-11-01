@@ -18,12 +18,12 @@ class LikeButton extends StatefulWidget {
     this.onLikedCallback,
     this.sizeOfIcon=24,
     this.fontSize=12,
-    this.likedIconColor= AppColors.kPureWhite,
-    this.likedBackgroundColor= AppColors.kPrimaryRed,
-    this.defaultIconColor=AppColors.kDarkestGrey,
-    this.defaultBackgroundColor =AppColors.kAliceBlue, 
-    this.likedTextColor =AppColors.kPureWhite,
-     this.defaultTextColor=AppColors.kDarkestGrey,
+    this.likedIconColor= AppColors.kbPureWhite,
+    this.likedBackgroundColor= AppColors.kbPrimaryRed,
+    this.defaultIconColor=AppColors.kbDarkestGrey,
+    this.defaultBackgroundColor =AppColors.kbAliceBlue, 
+    this.likedTextColor =AppColors.kbPureWhite,
+     this.defaultTextColor=AppColors.kbDarkestGrey,
   }) : super(key: key);
 
   final bool isLiked;

@@ -249,7 +249,7 @@ class _UsersGreet extends StatelessWidget {
   Widget _userHello(String user) {
     return Text("Hi " + user,
         style: GoogleFonts.muli(
-            textStyle: TextStyle(fontSize: 13, color: AppColors.kDarkGrey_new)));
+            textStyle: TextStyle(fontSize: 13, color: AppColors.kbDarkGrey_new)));
   }
 
   Widget _userQuestion(BuildContext context) {
@@ -397,7 +397,7 @@ class _SearchBar extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.0),
-          color: AppColors.kLightGrey,
+          color: AppColors.kbLightGrey,
         ),
         height: 48,
         width: double.infinity,
@@ -409,14 +409,14 @@ class _SearchBar extends StatelessWidget {
               Icon(
                 HelloIconsOld.search,
                 size: 16,
-                color: AppColors.kAccentColor,
+                color: AppColors.kbAccentColor,
               ),
               spacer(width: 8),
               Text("Search for designs, plans etc",
                   style: GoogleFonts.openSans(
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
-                      color: AppColors.kDarkGrey)),
+                      color: AppColors.kbDarkGrey)),
               Spacer(),
             ],
           ),

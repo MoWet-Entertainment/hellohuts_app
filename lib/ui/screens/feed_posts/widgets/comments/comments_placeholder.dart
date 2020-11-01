@@ -20,7 +20,7 @@ class PostCommentsPlaceholder extends StatelessWidget {
           child: Container(
             child: Text('See all comments',
                 style: Theme.of(context).textTheme.bodyText1
-                    .copyWith(fontSize: 14, color: AppColors.kDarkGrey)),
+                    .copyWith(fontSize: 14, color: AppColors.kbDarkGrey)),
           ),
           onTap: () {
             //TODO: Add Navigation to the Comment Section here
@@ -88,7 +88,7 @@ class UsersCommentsWidget extends StatelessWidget {
 class CustomAvatar extends StatelessWidget {
   const CustomAvatar({
     Key key,
-   this.avatarUrl = "http://www.gravatar.com/avatar/?d=identicon", this.radius=10, this.backgroundColor=AppColors.kDarkGrey,
+   this.avatarUrl = "http://www.gravatar.com/avatar/?d=identicon", this.radius=10, this.backgroundColor=AppColors.kbDarkGrey,
   }) : super(key: key);
 
   final String avatarUrl;
