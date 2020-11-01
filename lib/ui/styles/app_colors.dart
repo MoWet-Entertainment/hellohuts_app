@@ -64,8 +64,11 @@ class AppColors {
   static const kSecondaryDark = Color(0xffD2D2EF);
   static const kSecondaryVariantDark = Color(0xffF2F5FC);
 
-  static const kLightFillColor = Colors.white;
-  static const kDarkFillColor = Colors.black;
+  static const kPureWhite = Colors.white;
+  static const kPureBlack = Colors.black;
+
+  static final kLightFocusColor = Colors.black.withOpacity(0.12);
+  static final kDarkFocusColor = Colors.white.withOpacity(0.12);
 
   static const kRed = Color(0xffEF5B5B);
   static const kRedLightShade = Color(0xffFF8D88);
@@ -87,4 +90,15 @@ class AppColors {
 
   static const kGreenLight = Color(0xff3AB795);
   static const kGreenDark = Color(0xff54C9AA);
+
+  static const kDark_1 = Color(0xff121212);
+  static const kDark_2 = Color(0xff1F1F1F);
+  static const kDark_3 = Color(0xff222222);
+  static const kDark_4 = Color(0xff242424);
+  static const kDark_5 = Color(0xff272727);
+  static const kDark_6 = Color(0xff2C2C2C);
+  static const kDark_7 = Color(0xff2E2E2E);
+  static const kDark_8 = Color(0xff333333);
+  static const kDark_9 = Color(0xff343434);
+  static const kDark_10 = Color(0xff383838);
 }
