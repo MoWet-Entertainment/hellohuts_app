@@ -84,7 +84,7 @@ class AppThemes {
       bool isDarkTheme, BuildContext context) {
     return isDarkTheme
         ? SystemUiOverlayStyle.light
-            .copyWith(statusBarColor: AppColors.kbPrimaryColorDark)
+            .copyWith(statusBarColor: AppColors.kDark_1)
         : SystemUiOverlayStyle.dark
             .copyWith(statusBarColor: AppColors.kbPureWhite);
   }
@@ -221,8 +221,8 @@ class AppThemes {
     return MaterialColor(color.value, swatch);
   }
 
-  static ThemeData lightThemedata =
-      themeData(lightColorScheme, _appBarThemeLight, AppColors.kLightFocusColor);
+  static ThemeData lightThemeData = themeData(
+      lightColorScheme, _appBarThemeLight, AppColors.kLightFocusColor);
 
   static ThemeData darkThemeData =
       themeData(darkColorScheme, _appBarThemeDark, AppColors.kDarkFocusColor);
@@ -230,25 +230,30 @@ class AppThemes {
   static ThemeData themeData(
       ColorScheme colorScheme, AppBarTheme appbarTheme, Color focusColor) {
     return ThemeData(
+      backgroundColor: colorScheme.background,
+      buttonColor: colorScheme.primary,
       colorScheme: colorScheme,
       textTheme: _textTheme,
       primaryColor: colorScheme.primary,
-      appBarTheme: appbarTheme.copyWith(color: colorScheme.background, brightness: colorScheme.brightness),
+      appBarTheme: appbarTheme.copyWith(
+          color: colorScheme.background, brightness: colorScheme.brightness),
       iconTheme: IconThemeData(color: colorScheme.onPrimary),
+      
       canvasColor: colorScheme.background,
       scaffoldBackgroundColor: colorScheme.background,
       highlightColor: Colors.transparent,
       accentColor: colorScheme.primary,
       focusColor: focusColor,
-
     );
   }
+
+ 
 
   static final TextStyle _appBarDefaultText = GoogleFonts.openSans(
       fontSize: 16, textStyle: TextStyle(fontWeight: FontWeight.bold));
 
   static AppBarTheme _appBarThemeLight = AppBarTheme(
-    elevation: 0,
+      elevation: 0,
       textTheme: TextTheme(
           headline6:
               _appBarDefaultText.copyWith(color: AppColors.kbPureBlack)));
@@ -256,7 +261,6 @@ class AppThemes {
       textTheme: TextTheme(
           headline6:
               _appBarDefaultText.copyWith(color: AppColors.kbPrimaryYellow)));
-
 
   static const _light = FontWeight.w300;
   static const _regular = FontWeight.w400;

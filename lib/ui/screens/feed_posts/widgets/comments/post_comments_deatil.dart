@@ -30,7 +30,7 @@ class PostCommentsDetail extends StatelessWidget {
             centerTitle: true,
             title: Text(
               'Comments',
-              style: AppThemes.appBarDefaultText,
+              style: AppThemes.normalSecondaryTextStyle,
             ),
             // actions: _getActionButtons(context),
             actions: <Widget>[

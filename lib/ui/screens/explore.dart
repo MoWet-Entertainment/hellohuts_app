@@ -51,7 +51,7 @@ class _ExplorePageState extends State<ExplorePage>
       child: Scaffold(
         primary: false,
         extendBody: true,
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        backgroundColor: Theme.of(context).colorScheme.background,
         body: SafeArea(
           child: _FeedWidgetBody(
             key: widget.key,
@@ -110,7 +110,7 @@ class _ExplorePostsFeed extends StatelessWidget {
               topLeft: const Radius.circular(20.0),
               topRight: const Radius.circular(20.0)),
           // color: AppColors.kLavender.withOpacity(0.7)),
-          color:Theme.of(context).colorScheme.primaryVariant),
+          color: Theme.of(context).colorScheme.background),
       child: Padding(
         padding: EdgeInsets.fromLTRB(2, 0, 2, 0),
         child: ScrollConfiguration(
@@ -118,7 +118,7 @@ class _ExplorePostsFeed extends StatelessWidget {
           child: ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             padding:
-                EdgeInsets.only(top: 32.w, bottom: 64, left: 12.w, right: 12.w),
+                EdgeInsets.only(top: 24, bottom: 64, left: 12.w, right: 12.w),
             scrollDirection: Axis.vertical,
             itemCount: list.length,
             itemBuilder: (context, index) {
@@ -151,7 +151,6 @@ class _AppBarTop extends StatelessWidget {
         sliver: SliverPadding(
           padding: EdgeInsets.only(bottom: 16.0),
           sliver: SliverAppBar(
-              backgroundColor: Theme.of(context).colorScheme.primary,
               floating: true,
               pinned: true,
 
@@ -166,7 +165,7 @@ class _AppBarTop extends StatelessWidget {
                 child: customIconSquare(
                     isCustomIcon: true,
                     iconAsset: HelloIcons.menu_icon,
-                    iconColor: Theme.of(context).colorScheme.onPrimary,
+                    iconColor: Theme.of(context).colorScheme.onSurface,
                     iconSize: 24.0,
                     backgroundSize: 40.0,
                     backgroundColor: Theme.of(context).colorScheme.surface,
@@ -182,7 +181,7 @@ class _AppBarTop extends StatelessWidget {
                   child: customIconSquare(
                       isCustomIcon: true,
                       iconAsset: HelloIcons.search_icon,
-                      iconColor: Theme.of(context).colorScheme.onPrimary,
+                      iconColor: Theme.of(context).colorScheme.onSurface,
                       iconSize: 24.0,
                       backgroundSize: 40.0,
                       backgroundColor: Theme.of(context).colorScheme.surface,
@@ -216,7 +215,7 @@ class _HeaderSection extends StatelessWidget {
             _UsersGreet(),
             // spacer(height: 24),
             // _SearchBar(),
-            spacer(height: 16),
+            spacer(height: 24),
             _QuickPicks(),
             spacer(height: 32),
           ],
@@ -238,7 +237,7 @@ class _UsersGreet extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          _userHello(user),
+          _userHello(user,context),
           spacer(height: 4.0),
           _userQuestion(context),
         ],
@@ -246,10 +245,11 @@ class _UsersGreet extends StatelessWidget {
     );
   }
 
-  Widget _userHello(String user) {
-    return Text("Hi " + user,
-        style: GoogleFonts.muli(
-            textStyle: TextStyle(fontSize: 13, color: AppColors.kbDarkGrey_new)));
+  Widget _userHello(String user,BuildContext context) {
+    return Text(
+      "Hi " + user,
+      style:Theme.of(context).textTheme.bodyText2,
+    );
   }
 
   Widget _userQuestion(BuildContext context) {
@@ -257,17 +257,10 @@ class _UsersGreet extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text("Building a new home?",
-            style: GoogleFonts.lato(
-                textStyle: TextStyle(
-                    fontSize: 24,
-                    color: Theme.of(context).colorScheme.onPrimary,
-                    fontWeight: FontWeight.bold))),
+        style: Theme.of(context).textTheme.headline2.copyWith(color: Theme.of(context).colorScheme.onBackground),
+        ),
         Text("We’ve got you covered!",
-            style: GoogleFonts.lato(
-                textStyle: TextStyle(
-                    fontSize: 24,
-                    color: Theme.of(context).colorScheme.onPrimary,
-                    fontWeight: FontWeight.bold))),
+        style: Theme.of(context).textTheme.headline2.copyWith(color: Theme.of(context).colorScheme.onBackground),),
       ],
     );
   }
@@ -282,9 +275,8 @@ class _QuickPicks extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 4),
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(20.0)),
-          color: Theme.of(context).colorScheme.primaryVariant
-        ),
+            borderRadius: const BorderRadius.all(Radius.circular(20.0)),
+            color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.15)),
         child: Center(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 32, vertical: 22),
@@ -363,10 +355,10 @@ class _QuickPicksItem extends StatelessWidget {
               iconAsset: iconAsset,
               isCustomIcon: true,
               iconSize: 24.0,
-              iconColor: Theme.of(context).colorScheme.onPrimary,
+              iconColor: Theme.of(context).colorScheme.onBackground,
               backgroundSize: 56,
               borderRadius: 16.0,
-              backgroundColor: Theme.of(context).colorScheme.secondary,
+              backgroundColor: Theme.of(context).colorScheme.background,
               actionCall: call,
             ),
             spacer(height: 8.0),
@@ -379,7 +371,7 @@ class _QuickPicksItem extends StatelessWidget {
                           fontWeight: FontWeight.w400,
                           color: textColor != null
                               ? textColor
-                              : Theme.of(context).colorScheme.onPrimary))
+                              : Theme.of(context).colorScheme.onBackground))
                   : Container(),
             )
           ],
