@@ -118,7 +118,7 @@ class _ExplorePostsFeed extends StatelessWidget {
           child: ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             padding:
-                EdgeInsets.only(top: 32.w, bottom: 64, left: 12.w, right: 12.w),
+                EdgeInsets.only(top: 24, bottom: 64, left: 12.w, right: 12.w),
             scrollDirection: Axis.vertical,
             itemCount: list.length,
             itemBuilder: (context, index) {
