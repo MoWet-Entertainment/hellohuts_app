@@ -47,8 +47,8 @@ class _AppState extends State<App> {
           return MultiProvider(
             providers: providers,
             child: ThemeBuilder(
-             darkTheme :AppThemes.darkTheme,
-             lightTheme: AppThemes.lightTheme,
+             darkTheme :AppThemes.darkThemeData,
+             lightTheme: AppThemes.lightThemeData,
               builder: (context,lightTheme, darkTheme, themeMode) =>
                         MaterialApp(
                   
