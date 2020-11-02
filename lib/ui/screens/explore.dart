@@ -217,7 +217,7 @@ class _HeaderSection extends StatelessWidget {
             // _SearchBar(),
             spacer(height: 24),
             _QuickPicks(),
-            spacer(height: 32),
+          
           ],
         ),
       ),

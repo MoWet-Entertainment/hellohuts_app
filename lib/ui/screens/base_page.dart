@@ -127,7 +127,7 @@ class _BasePageState extends State<BasePage> {
     print("Primary is " + Theme.of(context).colorScheme.primary.toString());
  
             return Scaffold(
-              backgroundColor: Theme.of(context).colorScheme.primary,
+              backgroundColor: Theme.of(context).colorScheme.background,
               key: _scaffoldKey,
               body: _body(Provider.of<AppState>(context).pageIndex),
               extendBody: true,

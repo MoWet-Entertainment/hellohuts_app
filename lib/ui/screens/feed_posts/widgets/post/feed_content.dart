@@ -157,7 +157,7 @@ class _FeedPostBottomSection extends StatelessWidget {
                 LikeButton(
                   isLiked: model.userLiked,
                   onLikedCallback: () => state.addLikeToPost(model, '1234'),
-                  defaultBackgroundColor: Theme.of(context).colorScheme.primaryVariant,
+                  defaultBackgroundColor: Theme.of(context).colorScheme.secondaryVariant,
                   defaultIconColor: AppColors.kbDarkGrey,
                   defaultTextColor: AppColors.kbDarkGrey,
                 ),
@@ -181,8 +181,8 @@ class _FeedPostBottomSection extends StatelessWidget {
                 ),
                 Spacer(),
                 PlusButton(
-                  defaultBackgroundColor: Theme.of(context).colorScheme.primaryVariant,
-                     addedToBoardBackGroundColor: Theme.of(context).colorScheme.primaryVariant,
+                  defaultBackgroundColor: Colors.transparent,
+                     addedToBoardBackGroundColor: Colors.transparent,
                   postId: '',
                   onTap: () => {
                     print('User wants to add the post to the saved boards'),

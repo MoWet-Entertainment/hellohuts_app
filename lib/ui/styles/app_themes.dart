@@ -238,7 +238,7 @@ class AppThemes {
       appBarTheme: appbarTheme.copyWith(
           color: colorScheme.background, brightness: colorScheme.brightness),
       iconTheme: IconThemeData(color: colorScheme.onPrimary),
-      
+
       canvasColor: colorScheme.background,
       scaffoldBackgroundColor: colorScheme.background,
       highlightColor: Colors.transparent,
@@ -300,7 +300,7 @@ class AppThemes {
       onError: AppColors.kPureWhite,
       onPrimary: AppColors.kPureWhite,
       onSecondary: AppColors.kPureBlack,
-      surface: AppColors.kbSmokedWhite,
+      surface: AppColors.kPureWhite,
       onSurface: AppColors.kPureBlack,
       brightness: Brightness.light);
 

@@ -42,7 +42,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
           ? EdgeInsets.symmetric(horizontal: 0.25 * width)
           : EdgeInsets.symmetric(horizontal: 0.1 * width),
       decoration: BoxDecoration(
-        color: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(24.0), topRight: Radius.circular(24.0)),
       ),
@@ -138,7 +138,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       decoration:
           BoxDecoration(color: Colors.transparent, boxShadow: [
         BoxShadow(
-          color:Theme.of(context).shadowColor.withOpacity(0.2),
+          color:Theme.of(context).shadowColor.withOpacity(0.1),
           blurRadius: 16,
           offset: Offset(0, -2),
         ),
