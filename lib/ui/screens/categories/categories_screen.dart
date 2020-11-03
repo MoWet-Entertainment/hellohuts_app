@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/cupertino.dart';
@@ -463,8 +464,10 @@ class _ImageCardState extends State<ImageCard> {
             children: [
               Hero(
                   tag: widget.imageData.id,
-                  child: Image.network(widget.imageData.imageUrlList[0],
-                      fit: BoxFit.cover)),
+                  child: CachedNetworkImage(
+                imageUrl: widget.imageData.imageUrlList[0],
+                fit:BoxFit.cover,
+              ),),
               widget.imageData.isTrending
                   ? Positioned(
                       right: 8,
@@ -612,8 +615,11 @@ class _ImageCard1State extends State<ImageCard1> {
         child: GestureDetector(
           child: Hero(
               tag: widget.imageData.id,
-              child: Image.network(widget.imageData.imageUrlList[0],
-                  fit: BoxFit.cover)),
+              child:CachedNetworkImage(
+                imageUrl: widget.imageData.imageUrlList[0],
+                fit:BoxFit.cover,
+              ),
+              ),
           onTap: () => {
             print("user tapped"),
             ExtendedNavigator.root.push(Routes.postImageWidget,

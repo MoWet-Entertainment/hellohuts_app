@@ -62,7 +62,7 @@ class AppColors {
   static const kSecondaryVariantLight = Color(0xffF2F5FC);
 
   static const kSecondaryDark = Color(0xffA27EC9);
-  static const kSecondaryVariantDark = Color(0xff333333);
+  static const kSecondaryVariantDark = Color(0xff2C2C2C);
 
   static const kPureWhite = Colors.white;
   static const kPureBlack = Colors.black;

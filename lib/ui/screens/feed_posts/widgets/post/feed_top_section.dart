@@ -14,7 +14,6 @@ class FeedPostTopSection extends StatelessWidget {
   const FeedPostTopSection({Key key, this.model}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final feedState = Provider.of<FeedState>(context);
     return _feedPostTopSection(context, model);
   }
 
@@ -53,7 +52,7 @@ class FeedPostTopSection extends StatelessWidget {
                     dotWidth: 7,
                     spacing: 3,
                     dotColor: AppColors.kbDarkGrey,
-                    activeDotColor: AppColors.kbAccentColor,
+                    activeDotColor: Theme.of(context).indicatorColor,
                     expansionFactor: 2),
               ),
             )

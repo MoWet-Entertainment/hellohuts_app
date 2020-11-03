@@ -201,7 +201,7 @@ Widget postedUserSection(BuildContext context,
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: AppColors.kbAccentColor,
+                  color: AppColors.kYellowLight,
                   width: 2.0,
                 )),
             child: Container(
@@ -230,8 +230,7 @@ Widget postedUserSection(BuildContext context,
                     postedUser,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: postedUserTextStyle ??
-                       Theme.of(context).textTheme.headline6,
+                    style:postedUserTextStyle??Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 12)
                   ),
                 ),
                 Container(
@@ -241,7 +240,7 @@ Widget postedUserSection(BuildContext context,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: userTitleTextStyle ??
-                          AppThemes.postedAuthorTextSubHeadStyle),
+                       Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 10)),
                 ),
               ]),
         ],

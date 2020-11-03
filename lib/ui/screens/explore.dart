@@ -113,10 +113,13 @@ class _ExplorePostsFeed extends StatelessWidget {
           color: Theme.of(context).colorScheme.background),
       child: Padding(
         padding: EdgeInsets.fromLTRB(2, 0, 2, 0),
-        child: ScrollConfiguration(
-          behavior: NeatScrollBehavior(),
+        child: NotificationListener<OverscrollIndicatorNotification>(
+         onNotification: (overscroll){
+           overscroll.disallowGlow();
+         }
+      ,
           child: ListView.builder(
-            physics: NeverScrollableScrollPhysics(),
+            // physics: NeverScrollableScrollPhysics(),
             padding:
                 EdgeInsets.only(top: 24, bottom: 64, left: 12.w, right: 12.w),
             scrollDirection: Axis.vertical,
@@ -217,7 +220,7 @@ class _HeaderSection extends StatelessWidget {
             // _SearchBar(),
             spacer(height: 24),
             _QuickPicks(),
-            spacer(height: 32),
+          
           ],
         ),
       ),
@@ -276,7 +279,7 @@ class _QuickPicks extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(20.0)),
-            color: Theme.of(context).colorScheme.primaryVariant.withOpacity(0.15)),
+            color:Theme.of(context).colorScheme.secondaryVariant),
         child: Center(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 32, vertical: 22),
@@ -358,7 +361,7 @@ class _QuickPicksItem extends StatelessWidget {
               iconColor: Theme.of(context).colorScheme.onBackground,
               backgroundSize: 56,
               borderRadius: 16.0,
-              backgroundColor: Theme.of(context).colorScheme.background,
+              backgroundColor: Theme.of(context).colorScheme.surface,
               actionCall: call,
             ),
             spacer(height: 8.0),

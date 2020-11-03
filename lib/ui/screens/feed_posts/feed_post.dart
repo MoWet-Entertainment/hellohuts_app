@@ -30,8 +30,9 @@ class _FeedPostState extends State<FeedPost> {
       padding: const EdgeInsets.only(bottom: 8.0),
       child: Container(
         decoration: BoxDecoration(
+          border: Border.all(color: Theme.of(context).dividerColor,width: 0.8),
           borderRadius: const BorderRadius.all(Radius.circular(20.0)),
-          color: Theme.of(context).colorScheme.secondary
+          color: Theme.of(context).colorScheme.surface
         ),
         child: Column(
           children: <Widget>[

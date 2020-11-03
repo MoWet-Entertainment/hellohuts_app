@@ -43,10 +43,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
           : EdgeInsets.symmetric(horizontal: 0.1 * width),
       decoration: BoxDecoration(
         color: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(24.0), topRight: Radius.circular(24.0)),
+        // borderRadius: BorderRadius.only(
+        //     topLeft: Radius.circular(24.0), topRight: Radius.circular(24.0)),
       ),
-      height: (height * 0.07) > 64 ? 80 : 64,
+      height: (height * 0.07) > 56 ? 64 : 56,
       width: width > 500 ? 0.5 * width : width,
       child: Row(
         mainAxisSize: MainAxisSize.max,
@@ -100,7 +100,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
           duration: Duration(milliseconds: ANIM_DURATION),
           opacity: ALPHA_ON,
           child: IconButton(
-            highlightColor: Theme.of(context).colorScheme.primary,
+            highlightColor:Colors.transparent,
             color: index == state.pageIndex
                 ? Theme.of(context).bottomNavigationBarTheme.selectedItemColor
                 : Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
@@ -138,8 +138,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
       decoration:
           BoxDecoration(color: Colors.transparent, boxShadow: [
         BoxShadow(
-          color:Theme.of(context).shadowColor.withOpacity(0.2),
-          blurRadius: 16,
+          color:Theme.of(context).shadowColor.withOpacity(0.06),
+          blurRadius: 8,
           offset: Offset(0, -2),
         ),
       ]),
