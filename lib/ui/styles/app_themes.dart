@@ -83,8 +83,7 @@ class AppThemes {
   static SystemUiOverlayStyle uiOverlayStyle(
       bool isDarkTheme, BuildContext context) {
     return isDarkTheme
-        ? SystemUiOverlayStyle.light
-            .copyWith(statusBarColor: AppColors.kDark_1)
+        ? SystemUiOverlayStyle.light.copyWith(statusBarColor: AppColors.kDark_1)
         : SystemUiOverlayStyle.dark
             .copyWith(statusBarColor: AppColors.kbPureWhite);
   }
@@ -222,23 +221,35 @@ class AppThemes {
   }
 
   static ThemeData lightThemeData = themeData(
-      lightColorScheme, _appBarThemeLight, AppColors.kLightFocusColor);
+      colorScheme: lightColorScheme,
+      appbarTheme: _appBarThemeLight,
+      focusColor: AppColors.kLightFocusColor);
 
-  static ThemeData darkThemeData =
-      themeData(darkColorScheme, _appBarThemeDark, AppColors.kDarkFocusColor);
+  static ThemeData darkThemeData = themeData(
+      colorScheme: darkColorScheme,
+      appbarTheme: _appBarThemeDark,
+      focusColor: AppColors.kDarkFocusColor);
 
   static ThemeData themeData(
-      ColorScheme colorScheme, AppBarTheme appbarTheme, Color focusColor) {
+      {ColorScheme colorScheme, AppBarTheme appbarTheme, Color focusColor}) {
     return ThemeData(
       backgroundColor: colorScheme.background,
       buttonColor: colorScheme.primary,
       colorScheme: colorScheme,
       textTheme: _textTheme,
       primaryColor: colorScheme.primary,
+      indicatorColor: colorScheme.onSurface.withOpacity(0.7),
+      accentIconTheme: IconThemeData(
+          color: colorScheme.brightness == Brightness.dark
+              ? AppColors.kbDarkGrey
+              : AppColors.kbDarkestGrey.withOpacity(0.8)),
       appBarTheme: appbarTheme.copyWith(
           color: colorScheme.background, brightness: colorScheme.brightness),
-      iconTheme: IconThemeData(color: colorScheme.onPrimary),
+      bottomNavigationBarTheme: _bottomNavigationBarTheme.copyWith(
 
+        backgroundColor:colorScheme.background,
+          unselectedItemColor: colorScheme.onBackground),
+      iconTheme: IconThemeData(color: colorScheme.onPrimary),
       canvasColor: colorScheme.background,
       scaffoldBackgroundColor: colorScheme.background,
       highlightColor: Colors.transparent,
@@ -246,8 +257,6 @@ class AppThemes {
       focusColor: focusColor,
     );
   }
-
- 
 
   static final TextStyle _appBarDefaultText = GoogleFonts.openSans(
       fontSize: 16, textStyle: TextStyle(fontWeight: FontWeight.bold));
@@ -257,10 +266,17 @@ class AppThemes {
       textTheme: TextTheme(
           headline6:
               _appBarDefaultText.copyWith(color: AppColors.kbPureBlack)));
+
   static AppBarTheme _appBarThemeDark = AppBarTheme(
-      textTheme: TextTheme(
-          headline6:
-              _appBarDefaultText.copyWith(color: AppColors.kbPrimaryYellow)));
+    textTheme: TextTheme(
+      headline6: _appBarDefaultText.copyWith(color: AppColors.kbPrimaryYellow),
+    ),
+  );
+
+  static BottomNavigationBarThemeData _bottomNavigationBarTheme =
+      BottomNavigationBarThemeData(
+    selectedItemColor: AppColors.kYellowLight,
+  );
 
   static const _light = FontWeight.w300;
   static const _regular = FontWeight.w400;

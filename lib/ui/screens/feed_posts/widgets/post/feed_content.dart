@@ -133,7 +133,6 @@ class _FeedPostMiddleSection extends StatelessWidget {
   }
 }
 
-Widget _feedPostMiddleSection(FeedModel list) {}
 
 class _FeedPostBottomSection extends StatelessWidget {
   final FeedModel model;
@@ -158,14 +157,14 @@ class _FeedPostBottomSection extends StatelessWidget {
                   isLiked: model.userLiked,
                   onLikedCallback: () => state.addLikeToPost(model, '1234'),
                   defaultBackgroundColor: Theme.of(context).colorScheme.secondaryVariant,
-                  defaultIconColor: AppColors.kbDarkGrey,
-                  defaultTextColor: AppColors.kbDarkGrey,
+                  defaultIconColor: Theme.of(context).accentIconTheme.color,
+                  defaultTextColor: Theme.of(context).accentIconTheme.color,
                 ),
                 SizedBox(
                   width: 12.0,
                 ),
                 CommentButton(
-                  color: AppColors.kbDarkGrey,
+                  color: Theme.of(context).accentIconTheme.color,
                   onTap: () =>
                       ExtendedNavigator.root.push(Routes.commentsDetail),
                 ),
@@ -174,15 +173,15 @@ class _FeedPostBottomSection extends StatelessWidget {
                 ),
                 // PinnedWidget(),
                 ShareWidget(
-                  color: AppColors.kbDarkGrey,
+                  color: Theme.of(context).accentIconTheme.color,
                 ),
                 SizedBox(
                   width: 10.0,
                 ),
                 Spacer(),
                 PlusButton(
-                  defaultBackgroundColor: Colors.transparent,
-                     addedToBoardBackGroundColor: Colors.transparent,
+                  defaultBackgroundColor: Theme.of(context).colorScheme.secondaryVariant,
+                     addedToBoardBackGroundColor: Theme.of(context).colorScheme.secondaryVariant,
                   postId: '',
                   onTap: () => {
                     print('User wants to add the post to the saved boards'),
@@ -230,11 +229,11 @@ class PlusButton extends StatelessWidget {
   PlusButton({
     Key key,
     @required this.postId,
-    this.addedToBoard = true,
+    this.addedToBoard = false,
     this.onTap,
     this.defaultBackgroundColor = AppColors.kbAliceBlue,
     this.addedToBoardColor = AppColors.kbAccentColor,
-    this.defaultIconColor = AppColors.kbDarkGrey,
+    this.defaultIconColor,
     this.addedToBoardBackGroundColor = AppColors.kbAliceBlue,
     this.iconSize = 22,
   }) : super(key: key);
@@ -243,7 +242,7 @@ class PlusButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.0),
             color: addedToBoard?addedToBoardBackGroundColor: defaultBackgroundColor,
@@ -253,12 +252,12 @@ class PlusButton extends StatelessWidget {
               ? Image.asset(
                   HelloIcons.bookmark_bold_icon,
                   color: addedToBoardColor,
-                  height: 22.0,
+                  height: 24.0,
                 )
               : Image.asset(
                   HelloIcons.bookmark_light_icon,
-                  color: defaultIconColor,
-                  height: 22.0,
+                  color: defaultIconColor??Theme.of(context).accentIconTheme.color,
+                  height: 24.0,
                 )),
       onTap: onTap,
     );
