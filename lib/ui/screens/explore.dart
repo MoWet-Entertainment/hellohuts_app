@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hellohuts_app/constants/app_constants.dart';
+import 'package:hellohuts_app/ui/styles/themes/theme_manager.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
@@ -21,7 +22,6 @@ import 'package:hellohuts_app/ui/screens/feed_posts/feed_post.dart';
 import 'package:hellohuts_app/ui/screens/search/search_screen.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
-import 'package:stacked_themes/stacked_themes.dart';
 
 class ExplorePage extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
@@ -114,10 +114,9 @@ class _ExplorePostsFeed extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.fromLTRB(2, 0, 2, 0),
         child: NotificationListener<OverscrollIndicatorNotification>(
-         onNotification: (overscroll){
-           overscroll.disallowGlow();
-         }
-      ,
+          onNotification: (overscroll) {
+            overscroll.disallowGlow();
+          },
           child: ListView.builder(
             // physics: NeverScrollableScrollPhysics(),
             padding:
@@ -176,6 +175,7 @@ class _AppBarTop extends StatelessWidget {
                     actionCall: () {
                       //TODO: Add App drawer code here
                       print("User clicked on App Drawer");
+                      getThemeManager(context).toggleDarkLightTheme();
                     }),
               ),
               actions: <Widget>[
@@ -220,7 +220,6 @@ class _HeaderSection extends StatelessWidget {
             // _SearchBar(),
             spacer(height: 24),
             _QuickPicks(),
-          
           ],
         ),
       ),
@@ -240,7 +239,7 @@ class _UsersGreet extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          _userHello(user,context),
+          _userHello(user, context),
           spacer(height: 4.0),
           _userQuestion(context),
         ],
@@ -248,10 +247,10 @@ class _UsersGreet extends StatelessWidget {
     );
   }
 
-  Widget _userHello(String user,BuildContext context) {
+  Widget _userHello(String user, BuildContext context) {
     return Text(
       "Hi " + user,
-      style:Theme.of(context).textTheme.bodyText2,
+      style: Theme.of(context).textTheme.bodyText2,
     );
   }
 
@@ -259,11 +258,20 @@ class _UsersGreet extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text("Building a new home?",
-        style: Theme.of(context).textTheme.headline2.copyWith(color: Theme.of(context).colorScheme.onBackground),
+        Text(
+          "Building a new home?",
+          style: Theme.of(context)
+              .textTheme
+              .headline2
+              .copyWith(color: Theme.of(context).colorScheme.onBackground),
         ),
-        Text("We’ve got you covered!",
-        style: Theme.of(context).textTheme.headline2.copyWith(color: Theme.of(context).colorScheme.onBackground),),
+        Text(
+          "We’ve got you covered!",
+          style: Theme.of(context)
+              .textTheme
+              .headline2
+              .copyWith(color: Theme.of(context).colorScheme.onBackground),
+        ),
       ],
     );
   }
@@ -279,7 +287,7 @@ class _QuickPicks extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(20.0)),
-            color:Theme.of(context).colorScheme.secondaryVariant),
+            color: Theme.of(context).colorScheme.secondaryVariant),
         child: Center(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 32, vertical: 22),
