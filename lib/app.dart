@@ -1,7 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/helper/app_config.dart';
 import 'package:hellohuts_app/helper/logger.dart';
 import 'package:hellohuts_app/locators.dart';
@@ -12,6 +14,7 @@ import 'package:hellohuts_app/ui/routes/guards/auth_guards.dart';
 import 'package:hellohuts_app/ui/routes/guards/auth_guards.dart';
 import 'package:hellohuts_app/ui/routes/router.gr.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
+import 'package:hellohuts_app/ui/styles/theme_options.dart';
 import 'package:provider/provider.dart';
 import 'package:theme_provider/theme_provider.dart';
 
@@ -29,6 +32,7 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
+    ThemeMode _themeMode;
     return FutureBuilder(
       //initialize FlutterFire
       future: _initialization,
@@ -50,14 +54,23 @@ class _AppState extends State<App> {
               saveThemesOnChange: true,
               onInitCallback: (controller, previouslySavedThemeFuture) async {
                 String savedTheme = await previouslySavedThemeFuture;
+                print("Saved Theme: " + savedTheme);
                 if (savedTheme != null) {
                   controller.setTheme(savedTheme);
+                  if (savedTheme.contains('dark')) {
+                    _themeMode = ThemeMode.dark;
+                  } else {
+                    _themeMode = ThemeMode.light;
+                  }
                 } else {
                   Brightness platformBrighteness =
                       SchedulerBinding.instance.window.platformBrightness;
                   if (platformBrighteness == Brightness.dark) {
+                    _themeMode = ThemeMode.dark;
+
                     controller.setTheme('dark_theme');
                   } else {
+                    _themeMode = ThemeMode.light;
                     controller.setTheme('light_theme');
                   }
                   // controller.forgetSavedTheme();
@@ -78,23 +91,34 @@ class _AppState extends State<App> {
               child: ThemeConsumer(
                 child: Builder(
                   builder: (themeContext) {
-                    return MaterialApp(
-                      debugShowCheckedModeBanner: false,
-                      title: Provider.of<AppConfig>(context).appTitle,
-                      theme: ThemeProvider.themeOf(themeContext).data,
-                      home: Container(),
-                      builder: ExtendedNavigator.builder<AppRouter>(
-                        router: AppRouter(),
-                        guards: [AuthGuard()],
+                    return ModelBinding(
+                      initialModel: ThemeOptions(
+                        themeMode: _themeMode,
+                        textScaleFactor: UIConstants.systemTextScaleFactorOption,
+                        customTextDirection: CustomTextDirection.localeBased,
+                        locale: null,
+                        timeDilation: timeDilation,
+                        platform: defaultTargetPlatform,
+
                       ),
-                      navigatorObservers: <NavigatorObserver>[
-                        locator<AnalyticsService>().getAnalyticsObserver(),
-                      ],
+                      child: MaterialApp(
+                        debugShowCheckedModeBanner: false,
+                        title: Provider.of<AppConfig>(context).appTitle,
+                        theme: ThemeProvider.themeOf(themeContext).data,
+                        home: Container(),
+                        builder: ExtendedNavigator.builder<AppRouter>(
+                          router: AppRouter(),
+                          guards: [AuthGuard()],
+                        ),
+                        navigatorObservers: <NavigatorObserver>[
+                          locator<AnalyticsService>().getAnalyticsObserver(),
+                        ],
+                      ),
                     );
                   },
                 ),
               ),
-          ),
+            ),
           );
         }
         //TODO: Change Circular Progress indicator to custom loading screen

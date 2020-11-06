@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hellohuts_app/constants/app_constants.dart';
+import 'package:hellohuts_app/ui/screens/drawer/custom_drawer.dart';
+import 'package:hellohuts_app/ui/styles/theme_options.dart';
 import 'package:provider/provider.dart';
 
 import 'package:hellohuts_app/constants/constants.dart';
@@ -43,16 +45,17 @@ class _ExplorePageState extends State<ExplorePage>
     super.build(context);
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: AppThemes.uiOverlayStyle(isDarkTheme, context),
-      child: Scaffold(
-        primary: false,
-        extendBody: true,
-        backgroundColor: Theme.of(context).colorScheme.background,
-        body: SafeArea(
-          child: _FeedWidgetBody(
-            key: widget.key,
-            scaffoldKey: widget.scaffoldKey,
-          ),
+      value:AppThemes.uiOverlayStyle(isDarkTheme, context),
+      // child: Scaffold(
+
+      //   primary: false,
+      //   extendBody: true,
+
+      //   backgroundColor: Theme.of(context).colorScheme.background,
+      child: SafeArea(
+        child: _FeedWidgetBody(
+          key: widget.key,
+          scaffoldKey: widget.scaffoldKey,
         ),
       ),
     );

@@ -94,3 +94,8 @@ class SessionData {
   static String countriesJson;
   static List<Country> countries;
 }
+
+class UIConstants {
+  // Sentinel value for the system text scale factor option.
+static const  double systemTextScaleFactorOption = -1;
+}

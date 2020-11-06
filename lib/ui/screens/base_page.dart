@@ -6,6 +6,7 @@ import 'package:hellohuts_app/states/app_state.dart';
 import 'package:hellohuts_app/states/feed_state.dart';
 import 'package:hellohuts_app/ui/common_widgets/bottom_navbar/bottom_navbar.dart';
 import 'package:hellohuts_app/ui/screens/categories/categories_screen.dart';
+import 'package:hellohuts_app/ui/screens/drawer/custom_drawer.dart';
 import 'package:hellohuts_app/ui/screens/explore.dart';
 import 'package:hellohuts_app/ui/screens/search/search_screen.dart';
 import 'package:hellohuts_app/ui/screens/testpage.dart';
@@ -123,14 +124,13 @@ class _BasePageState extends State<BasePage> {
   //   );
   // }
   @override
-  Widget build(BuildContext context) {
-    print("Primary is " + Theme.of(context).colorScheme.primary.toString());
- 
+  Widget build(BuildContext context) { 
             return Scaffold(
+              drawer: SidebarMenu(),
               backgroundColor: Theme.of(context).colorScheme.background,
-              key: _scaffoldKey,
               body: _body(Provider.of<AppState>(context).pageIndex),
               extendBody: true,
+              key: _scaffoldKey,
               bottomNavigationBar: BottomNavBar(
                 pageController: _pageController,
               ),
