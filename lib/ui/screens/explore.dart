@@ -5,8 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hellohuts_app/constants/app_constants.dart';
-import 'package:hellohuts_app/ui/styles/themes/theme_manager.dart';
-import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
 import 'package:hellohuts_app/constants/constants.dart';
@@ -14,14 +12,12 @@ import 'package:hellohuts_app/constants/hello_icons.dart';
 import 'package:hellohuts_app/models/test.dart';
 import 'package:hellohuts_app/states/auth_states/auth_state.dart';
 import 'package:hellohuts_app/states/feed_state.dart';
-import 'package:hellohuts_app/ui/common_widgets/app_bar/app_bar.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
-import 'package:hellohuts_app/ui/common_widgets/scroll_behavior/neat_scroll_behavior.dart';
 import 'package:hellohuts_app/ui/routes/router.gr.dart';
 import 'package:hellohuts_app/ui/screens/feed_posts/feed_post.dart';
-import 'package:hellohuts_app/ui/screens/search/search_screen.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
+import 'package:theme_provider/theme_provider.dart';
 
 class ExplorePage extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
@@ -175,7 +171,7 @@ class _AppBarTop extends StatelessWidget {
                     actionCall: () {
                       //TODO: Add App drawer code here
                       print("User clicked on App Drawer");
-                      getThemeManager(context).toggleDarkLightTheme();
+                      ThemeProvider.controllerOf(context).nextTheme();
                     }),
               ),
               actions: <Widget>[
