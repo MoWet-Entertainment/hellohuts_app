@@ -10,6 +10,7 @@ import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
 import 'package:hellohuts_app/ui/routes/router.gr.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
+import 'package:hellohuts_app/ui/styles/theme_options.dart';
 import 'package:provider/provider.dart';
 import 'package:hellohuts_app/states/search/search_state_main.dart';
 
@@ -43,23 +44,17 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     final state = Provider.of<SearchStateMain>(context);
     print("building parent");
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: AnnotatedRegion<SystemUiOverlayStyle>(
-          value: SystemUiOverlayStyle.dark
-              .copyWith(statusBarColor: AppColors.kbPureWhite),
-          child: SafeArea(
-            child: Scaffold(
-              appBar: CustomSearchBar(
-                hintText: AppStrings.searchHintTextForExplore,
-                onSearchChanged: (text) => state.setSearchText(text),
-                resetSearchCallback: () => state.resetSearch(),
-                onActionPressed: () => state.resetSearch(),
-              ),
-              body: _SearchBody(),
-            ),
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: ThemeOptions.of(context).getSystemUIOverlayStyle(context),
+      child: SafeArea(
+        child: Scaffold(
+          appBar: CustomSearchBar(
+            hintText: AppStrings.searchHintTextForExplore,
+            onSearchChanged: (text) => state.setSearchText(text),
+            resetSearchCallback: () => state.resetSearch(),
+            onActionPressed: () => state.resetSearch(),
           ),
+          body: _SearchBody(),
         ),
       ),
     );
@@ -82,11 +77,14 @@ class _SearchBody extends StatefulWidget {
 class _SearchBodyState extends State<_SearchBody> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final state = Provider.of<SearchStateMain>(context);
     final bool isSearching = state.isSearching;
     return Container(
-      color: state.isSearching ? AppColors.kbAliceBlue : AppColors.kbPureWhite,
-      padding: const EdgeInsets.symmetric(horizontal: 18),
+      color: state.isSearching
+          ? theme.colorScheme.secondaryVariant
+          : theme.colorScheme.background,
+      // padding: const EdgeInsets.symmetric(horizontal: 18),
       child: isSearching ? _ShowResults() : _BuildSuggestions(),
     );
   }
@@ -123,7 +121,7 @@ class _SearchResultsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     var state = Provider.of<SearchStateMain>(context);
     return Padding(
-      padding: const EdgeInsets.only(bottom: 8.0),
+      padding: const EdgeInsets.only(bottom: 2.0),
       child: InkWell(
         splashColor: Colors.transparent,
         child: Container(
@@ -141,25 +139,32 @@ class _SearchResultsCard extends StatelessWidget {
   }
 
   Widget _searchResult(SearchItem item) {
-    return CustomListTile(
-      leading: customIconSquare(
-        backgroundColor: AppColors.kbAliceBlue,
-        iconAsset: _getLeadingIcon(item),
-        iconColor: AppColors.kbAlmostBlack,
-        backgroundSize: 40,
-        iconSize: 24,
-        isCustomIcon: true,
-      ),
-      titleText: Text(item.searchString,
-          style: AppThemes.normalTextStyle
-              .copyWith(fontSize: 14, color: AppColors.kbDarkTextColor)),
-      subTitle: Text(
-        item.searchType.toString(),
-        style: AppThemes.normalTextLightStyle
-            .copyWith(fontSize: 12, color: AppColors.kbDarkTextColor),
-      ),
-      backgroundColor: AppColors.kbPureWhite,
-    );
+    return Builder(builder: (BuildContext context) {
+      
+      final theme = Theme.of(context);
+      final isDarkTheme =ThemeOptions.of(context).isDarkTheme(context);
+      return CustomListTile(
+        tilePadding: 16,
+        borderRadius: BorderRadius.zero,
+        leading: customIconSquare(
+          backgroundColor:isDarkTheme? AppColors.kDark_7: theme.colorScheme.secondaryVariant,
+          iconAsset: _getLeadingIcon(item),
+          iconColor: isDarkTheme?AppColors.kbDarkGrey: theme.colorScheme.onBackground,
+          backgroundSize: 40,
+          iconSize: 24,
+          isCustomIcon: true,
+          
+        ),
+        titleText: Text(item.searchString,
+            style: theme.textTheme.bodyText1),
+        subTitle: Text(
+          item.searchType.toString(),
+          style: theme.textTheme.bodyText1
+              .copyWith(fontSize: 12, fontWeight: FontWeight.w300),
+        ),
+        backgroundColor: theme.colorScheme.surface,
+      );
+    });
   }
 
   String _getLeadingIcon(SearchItem item) {

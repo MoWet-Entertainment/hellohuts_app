@@ -163,45 +163,65 @@ class _SidebarMenuState extends State<SidebarMenu> {
 
   @override
   Widget build(BuildContext context) {
-      bool isDarkTheme =
+    bool isDarkTheme =
         Theme.of(context).colorScheme.brightness == Brightness.dark
             ? true
             : false;
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: AppThemes.uiOverlayStyle(isDarkTheme, context).copyWith(statusBarColor: Colors.transparent),
-          child: Drawer(
-          child: Stack(
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(bottom: 45),
-                child: ListView(
-                  physics: BouncingScrollPhysics(),
-                  children: <Widget>[
-                    Container(
-                      child: _menuHeader(),
-                    ),
-                    Divider(),
-                    _menuListRowButton("Pofile"),
-                    _menuListRowButton('Lists'),
-                    _menuListRowButton('Bookmark'),
-                    _menuListRowButton('Moments'),
-                    _menuListRowButton('Fwitter ads'),
-                    Divider(),
-                    _menuListRowButton('Settings and privacy', isEnable: true,
-                        onPressed: () {
-                      _navigateTo('SettingsAndPrivacyPage');
-                    }),
-                    _menuListRowButton('Help Center'),
-                    Divider(),
-                    _menuListRowButton('Logout',
-                        icon: null, onPressed: _logOut, isEnable: true),
-                  ],
-                ),
+    return Drawer(
+      child: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: ThemeOptions.of(context).getSystemUIOverlayStyle(context)
+            .copyWith(statusBarColor: Colors.transparent),
+        child: Stack(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(bottom: 45),
+              child: ListView(
+                physics: BouncingScrollPhysics(),
+                children: <Widget>[
+                  Container(
+                    child: _menuHeader(),
+                  ),
+                  Divider(),
+                  CycleThemeIconButton1(),
+                  _menuListRowButton("Pofile"),
+                  _menuListRowButton('Lists'),
+                  _menuListRowButton('Bookmark'),
+                  _menuListRowButton('Moments'),
+                  _menuListRowButton('Fwitter ads'),
+                  Divider(),
+                  _menuListRowButton('Settings and privacy', isEnable: true,
+                      onPressed: () {
+                    _navigateTo('SettingsAndPrivacyPage');
+                  }),
+                  _menuListRowButton('Help Center'),
+                  Divider(),
+                  _menuListRowButton('Logout',
+                      icon: null, onPressed: _logOut, isEnable: true),
+                ],
               ),
-              _footer()
-            ],
-          ),
+            ),
+            _footer()
+          ],
         ),
+      ),
+    );
+  }
+}
+class CycleThemeIconButton1 extends StatelessWidget {
+  final IconData icon;
+
+  const CycleThemeIconButton1({Key key, this.icon = Icons.palette})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      onTap:  ThemeProvider.controllerOf(context).nextTheme,
+           title: Text("Change Theme"),
+          trailing: IconButton(
+        icon: Icon(icon,color: Theme.of(context).colorScheme.onBackground,),
+        onPressed: ThemeProvider.controllerOf(context).nextTheme,
+      ),
     );
   }
 }

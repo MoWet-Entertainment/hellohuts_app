@@ -5,6 +5,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
+import 'package:theme_provider/theme_provider.dart';
 
 enum CustomTextDirection {
   localeBased,
@@ -37,8 +38,7 @@ class ThemeOptions {
   final TargetPlatform platform;
 
   const ThemeOptions(
-      {
-      this.themeMode,
+      {this.themeMode,
       double textScaleFactor,
       this.customTextDirection,
       Locale locale,
@@ -95,13 +95,44 @@ class ThemeOptions {
       default:
         brightness = WidgetsBinding.instance.window.platformBrightness;
     }
-
     final overlayStyle = brightness == Brightness.dark
         ? SystemUiOverlayStyle.light.copyWith(statusBarColor: AppColors.kDark_1)
         : SystemUiOverlayStyle.dark
             .copyWith(statusBarColor: AppColors.kPureWhite);
 
     return overlayStyle;
+  }
+
+  SystemUiOverlayStyle getSystemUIOverlayStyle(BuildContext context) {
+    Brightness brightness;
+    brightness =
+        ThemeProvider.controllerOf(context).theme.data.colorScheme.brightness;
+    final overlayStyle = brightness == Brightness.dark
+        ? SystemUiOverlayStyle.light.copyWith(statusBarColor: AppColors.kDark_1)
+        : SystemUiOverlayStyle.dark
+            .copyWith(statusBarColor: AppColors.kPureWhite);
+
+    return overlayStyle;
+  }
+
+  ThemeMode selectedThemeMode(BuildContext context) {
+    Brightness brightness;
+    brightness =
+        ThemeProvider.controllerOf(context).theme.data.colorScheme.brightness;
+    if (brightness == Brightness.light) {
+      return ThemeMode.light;
+    }
+    return ThemeMode.dark;
+  }
+
+  bool isDarkTheme(BuildContext context) {
+    Brightness brightness;
+    brightness =
+        ThemeProvider.controllerOf(context).theme.data.colorScheme.brightness;
+    if (brightness == Brightness.dark) {
+      return true;
+    }
+    return false;
   }
 
   ThemeOptions copyWith({

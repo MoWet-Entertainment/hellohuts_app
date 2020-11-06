@@ -113,7 +113,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Brightness brightness;
 
   @override
-  Size get preferredSize => appBarHeight?? Size.fromHeight(72.0);
+  Size get preferredSize => appBarHeight ?? Size.fromHeight(72.0);
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -175,7 +175,6 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
   ///to call the logic when the user clicked reset search by [x] suffix icon
   final VoidCallback resetSearchCallback;
 
-
   CustomSearchBar({
     Key key,
     this.actions,
@@ -194,15 +193,16 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
   }) : super(key: key);
 
   Widget _searchField(BuildContext context, TextEditingController controller) {
+    final theme = Theme.of(context);
     return Container(
       height: 64,
+      width: fullWidth(context),
       padding: const EdgeInsets.only(top: 16, bottom: 8.0, left: 24, right: 16),
       child: TextField(
-        style: AppThemes.searchHintStyle
-            .copyWith(color: AppColors.kbDarkTextColor, fontSize: 14),
+        style: theme.textTheme.bodyText2.copyWith(fontSize: 14,),
         autofocus: true,
         textCapitalization: TextCapitalization.words,
-        cursorColor: AppColors.kbDarkGrey,
+        cursorColor:theme.colorScheme.onBackground.withOpacity(0.5),
         onChanged: (text) {
           onSearchChanged(text);
         },
@@ -215,20 +215,20 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
                 const Radius.circular(20.0),
               ),
             ),
-            fillColor: AppColors.kbAliceBlue,
+            fillColor: Theme.of(context).colorScheme.secondaryVariant,
             // isDense: true,
             prefixIcon: leading ??
                 Padding(
                     padding: EdgeInsets.only(left: 12.0, right: 8.0),
                     child: Image.asset(
                       HelloIcons.search_icon,
-                      color: AppColors.kbDarkGrey,
+                      color: theme.colorScheme.onBackground.withOpacity(0.5),
                       height: 22,
                     )),
             prefixIconConstraints: BoxConstraints(maxHeight: 44, maxWidth: 44),
             hintText: hintText,
-            hintStyle: AppThemes.searchHintStyle,
-            focusColor: AppColors.kbPureWhite,
+            hintStyle: theme.textTheme.bodyText2.copyWith(fontSize: 12, color: theme.colorScheme.onBackground.withOpacity(0.5),),
+          
             filled: true,
             suffixIcon: (controller.text.trim().length == 0)
                 ? Container(
@@ -239,7 +239,7 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
                       padding: const EdgeInsets.only(left: 4, right: 12.0),
                       child: Image.asset(
                         HelloIcons.close_circle_bold_icon,
-                        color: AppColors.kbDarkGrey,
+                        color:  theme.colorScheme.onBackground.withOpacity(0.5),
                         height: 16,
                       ),
                     ),
@@ -278,11 +278,14 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(Theme.of(context).colorScheme.secondaryVariant);
     final controller = useTextEditingController();
     return AppBar(
       titleSpacing: 8.0,
-      backgroundColor: AppColors.kbPureWhite,
+      backgroundColor: Theme.of(context).colorScheme.background,
+      centerTitle: false,
       elevation: 0,
+      automaticallyImplyLeading: false,
 
       // leading: isBackButton
       //     ? BackButton(
@@ -316,9 +319,15 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
             },
             child: Container(
               padding: const EdgeInsets.only(right: 24, top: 4.0, bottom: 4.0),
-              child: Text('Cancel',
-                  style: AppThemes.normalTextStyle.copyWith(
-                      color: AppColors.kbDarkTextColor, fontSize: 12.0)),
+              child: Text(
+                'Cancel',
+                style: Theme.of(context).textTheme.bodyText1.copyWith(
+                    fontSize: 12,
+                    color: Theme.of(context)
+                        .colorScheme
+                        .onBackground
+                        .withOpacity(0.8)),
+              ),
             ),
           ),
         )

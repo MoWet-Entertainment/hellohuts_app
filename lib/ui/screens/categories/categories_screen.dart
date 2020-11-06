@@ -520,10 +520,7 @@ class _ImageCardState extends State<ImageCard> {
             ],
           ),
           onTap: () => {
-            print("user tapped"),
-            ExtendedNavigator.root.push(Routes.postImageWidget,
-                arguments:
-                    PostImageWidgetArguments(imageData: widget.imageData))
+     
             //  Navigator.push(context,MaterialPageRoute(builder:(context) =>MyAppTest() ))
           },
           onLongPress: () => {
@@ -622,9 +619,6 @@ class _ImageCard1State extends State<ImageCard1> {
               ),
           onTap: () => {
             print("user tapped"),
-            ExtendedNavigator.root.push(Routes.postImageWidget,
-                arguments:
-                    PostImageWidgetArguments(imageData: widget.imageData))
           },
           onLongPress: () => {
             _popupDialog = _createPopupDialog(widget.imageData),

@@ -22,9 +22,10 @@ class BasePage extends StatefulWidget {
 }
 
 class _BasePageState extends State<BasePage> {
-  final PageStorageBucket bucket = PageStorageBucket();
 
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+     final refreshIndicatorKey = new GlobalKey<RefreshIndicatorState>();
+
   int pageIndex = 0;
   final PageController _pageController = PageController(
     initialPage: 0,
@@ -61,7 +62,8 @@ class _BasePageState extends State<BasePage> {
     return PageView(
       physics: NeverScrollableScrollPhysics(),
       children: <Widget>[
-        ExplorePage(),
+        ExplorePage(scaffoldKey: _scaffoldKey,
+        refreshIndicatorKey: refreshIndicatorKey),
         CategoriesScreen(),
         FirstPage(),
         FirstPage()
@@ -126,14 +128,16 @@ class _BasePageState extends State<BasePage> {
   @override
   Widget build(BuildContext context) { 
             return Scaffold(
-              drawer: SidebarMenu(),
+            drawerEnableOpenDragGesture:false ,
+              key: _scaffoldKey,
               backgroundColor: Theme.of(context).colorScheme.background,
               body: _body(Provider.of<AppState>(context).pageIndex),
               extendBody: true,
-              key: _scaffoldKey,
+            
               bottomNavigationBar: BottomNavBar(
                 pageController: _pageController,
               ),
+              drawer: SidebarMenu(),
             );
   }
 }

@@ -43,7 +43,7 @@ class Routes {
   static const String addDetailsForHome = '/add-details-for-home';
   static const String costEstimateScreen = '/cost-estimate-screen';
   static const String categoriesScreen = '/categories-screen';
-  static const String postImageWidget = '/post-image-widget';
+  static const String postDetailWidget = '/post-detail-widget';
   static const all = <String>{
     basePage,
     explorePage,
@@ -61,7 +61,7 @@ class Routes {
     addDetailsForHome,
     costEstimateScreen,
     categoriesScreen,
-    postImageWidget,
+    postDetailWidget,
   };
 }
 
@@ -85,7 +85,7 @@ class AppRouter extends RouterBase {
     RouteDef(Routes.addDetailsForHome, page: AddDetailsForHome),
     RouteDef(Routes.costEstimateScreen, page: CostEstimateScreen),
     RouteDef(Routes.categoriesScreen, page: CategoriesScreen),
-    RouteDef(Routes.postImageWidget, page: PostDetailWidget),
+    RouteDef(Routes.postDetailWidget, page: PostDetailWidget),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -107,6 +107,7 @@ class AppRouter extends RouterBase {
         builder: (context) => ExplorePage(
           key: args.key,
           scaffoldKey: args.scaffoldKey,
+          refreshIndicatorKey: args.refreshIndicatorKey,
         ),
         settings: data,
       );
@@ -251,7 +252,7 @@ class AppRouter extends RouterBase {
       );
     },
     PostDetailWidget: (data) {
-      final args = data.getArgs<PostImageWidgetArguments>(nullOk: false);
+      final args = data.getArgs<PostDetailWidgetArguments>(nullOk: false);
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => PostDetailWidget(
           key: args.key,
@@ -277,7 +278,8 @@ class BasePageArguments {
 class ExplorePageArguments {
   final Key key;
   final GlobalKey<ScaffoldState> scaffoldKey;
-  ExplorePageArguments({this.key, this.scaffoldKey});
+  final GlobalKey<RefreshIndicatorState> refreshIndicatorKey;
+  ExplorePageArguments({this.key, this.scaffoldKey, this.refreshIndicatorKey});
 }
 
 /// WelcomePage arguments holder class
@@ -323,9 +325,9 @@ class CategoriesScreenArguments {
   CategoriesScreenArguments({this.key, this.scaffoldKey});
 }
 
-/// PostImageWidget arguments holder class
-class PostImageWidgetArguments {
+/// PostDetailWidget arguments holder class
+class PostDetailWidgetArguments {
   final Key key;
   final ImageData imageData;
-  PostImageWidgetArguments({this.key, @required this.imageData});
+  PostDetailWidgetArguments({this.key, @required this.imageData});
 }
