@@ -226,12 +226,14 @@ Widget postedUserSection(BuildContext context,
                 Container(
                   constraints:
                       BoxConstraints(maxHeight: fullWidth(context) / 1.6),
-                  child: Text(
-                    postedUser,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style:postedUserTextStyle??Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 12)
-                  ),
+                  child: Text(postedUser,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: postedUserTextStyle ??
+                          Theme.of(context)
+                              .textTheme
+                              .bodyText1
+                              .copyWith(fontSize: 12)),
                 ),
                 Container(
                   constraints:
@@ -240,7 +242,10 @@ Widget postedUserSection(BuildContext context,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: userTitleTextStyle ??
-                       Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 10)),
+                          Theme.of(context)
+                              .textTheme
+                              .bodyText1
+                              .copyWith(fontSize: 10)),
                 ),
               ]),
         ],
@@ -322,6 +327,8 @@ class CustomListTile extends StatelessWidget {
     this.disabledColor,
     this.height,
     this.width,
+    this.tilePadding,
+    this. internalPadding
   }) : super(key: key);
 
   ///title text widget. Either pass as Text("your text") or a specific widget
@@ -354,34 +361,41 @@ class CustomListTile extends StatelessWidget {
   final Color hoverColor;
   final Color selectedColor;
   final Color disabledColor;
+  final double tilePadding;
+  final double internalPadding;
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return GestureDetector(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
-          height: height ?? 64,
-          width: width ?? fullWidth(context),
-          decoration: BoxDecoration(
-            borderRadius: borderRadius ?? BorderRadius.circular(16.0),
-            color: backgroundColor ?? AppColors.kbSmokedWhite,
-          ),
-          child: Row(
-            children: [
-              leading ?? SizedBox(),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 2),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    titleText ?? SizedBox(),
-                    subTitle ?? SizedBox(),
-                  ],
+        color: backgroundColor ?? theme.colorScheme.surface,
+          padding: EdgeInsets.symmetric(horizontal:tilePadding ?? 0.0),
+          child: Container(
+             padding: EdgeInsets.all(internalPadding ?? 8.0),
+            height: height ?? 64,
+            width: width ?? fullWidth(context),
+            decoration: BoxDecoration(
+              borderRadius: borderRadius ?? BorderRadius.circular(16.0),
+             
+            ),
+            child: Row(
+              children: [
+                leading ?? SizedBox(),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 2),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      titleText ?? SizedBox(),
+                      subTitle ?? SizedBox(),
+                    ],
+                  ),
                 ),
-              ),
-              Spacer(),
-              trailing ?? SizedBox(),
-            ],
+                Spacer(),
+                trailing ?? SizedBox(),
+              ],
+            ),
           ),
         ),
         onTap: onTap,

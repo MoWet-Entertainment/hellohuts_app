@@ -239,6 +239,7 @@ class AppThemes {
       textTheme: _textTheme,
       primaryColor: colorScheme.primary,
       indicatorColor: colorScheme.onSurface.withOpacity(0.7),
+    
       accentIconTheme: IconThemeData(
           color: colorScheme.brightness == Brightness.dark
               ? AppColors.kbDarkGrey

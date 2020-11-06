@@ -4,28 +4,30 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hellohuts_app/constants/app_constants.dart';
-import 'package:hellohuts_app/ui/styles/themes/theme_manager.dart';
-import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
+import 'package:theme_provider/theme_provider.dart';
 
+import 'package:hellohuts_app/constants/app_constants.dart';
 import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/constants/hello_icons.dart';
 import 'package:hellohuts_app/models/test.dart';
 import 'package:hellohuts_app/states/auth_states/auth_state.dart';
 import 'package:hellohuts_app/states/feed_state.dart';
-import 'package:hellohuts_app/ui/common_widgets/app_bar/app_bar.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
-import 'package:hellohuts_app/ui/common_widgets/scroll_behavior/neat_scroll_behavior.dart';
 import 'package:hellohuts_app/ui/routes/router.gr.dart';
+import 'package:hellohuts_app/ui/screens/drawer/custom_drawer.dart';
 import 'package:hellohuts_app/ui/screens/feed_posts/feed_post.dart';
-import 'package:hellohuts_app/ui/screens/search/search_screen.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
+import 'package:hellohuts_app/ui/styles/theme_options.dart';
 
 class ExplorePage extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
-  ExplorePage({Key key, this.scaffoldKey}) : super(key: key);
+    final GlobalKey<RefreshIndicatorState> refreshIndicatorKey;
+
+
+  ExplorePage({Key key, this.scaffoldKey, this.refreshIndicatorKey})
+      : super(key: key);
 
   @override
   void initState() {}
@@ -37,17 +39,13 @@ class ExplorePage extends StatefulWidget {
 class _ExplorePageState extends State<ExplorePage>
     with AutomaticKeepAliveClientMixin<ExplorePage> {
   bool notificationFlag = false;
-
   @override
   Widget build(BuildContext context) {
-    bool isDarkTheme =
-        Theme.of(context).colorScheme.brightness == Brightness.dark
-            ? true
-            : false;
+
     super.build(context);
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: AppThemes.uiOverlayStyle(isDarkTheme, context),
+      value: ThemeOptions.of(context).getSystemUIOverlayStyle(context),
       child: Scaffold(
         primary: false,
         extendBody: true,
@@ -58,6 +56,7 @@ class _ExplorePageState extends State<ExplorePage>
             scaffoldKey: widget.scaffoldKey,
           ),
         ),
+      
       ),
     );
   }
@@ -83,6 +82,7 @@ class _FeedWidgetBody extends StatelessWidget {
         return <Widget>[
           _AppBarTop(
             innerBoxIsScrolled: innerBoxIsScrolled,
+            scaffoldKey: scaffoldKey,
           ),
           _HeaderSection(),
         ];
@@ -139,8 +139,12 @@ class _ExplorePostsFeed extends StatelessWidget {
 
 class _AppBarTop extends StatelessWidget {
   final bool innerBoxIsScrolled;
-  const _AppBarTop({Key key, this.innerBoxIsScrolled = false})
-      : super(key: key);
+  final GlobalKey<ScaffoldState> scaffoldKey;
+  const _AppBarTop({
+    Key key,
+    this.innerBoxIsScrolled,
+    this.scaffoldKey,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -173,9 +177,10 @@ class _AppBarTop extends StatelessWidget {
                     backgroundColor: Theme.of(context).colorScheme.surface,
                     borderRadius: 12.0,
                     actionCall: () {
-                      //TODO: Add App drawer code here
+                      scaffoldKey.currentState.openDrawer();
                       print("User clicked on App Drawer");
-                      getThemeManager(context).toggleDarkLightTheme();
+
+                      // ThemeProvider.controllerOf(context).nextTheme();
                     }),
               ),
               actions: <Widget>[
