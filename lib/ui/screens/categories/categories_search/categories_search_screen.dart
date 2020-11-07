@@ -11,6 +11,7 @@ import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
 import 'package:hellohuts_app/ui/routes/router.gr.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
+import 'package:hellohuts_app/ui/styles/theme_options.dart';
 import 'package:provider/provider.dart';
 import 'package:hellohuts_app/states/search/search_state_main.dart';
 
@@ -44,10 +45,8 @@ class _CategoriesSearchPageState extends State<CategoriesSearchPage> {
   Widget build(BuildContext context) {
     print("building parent");
     final state = Provider.of<SearchCategoriesState>(context);
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: AnnotatedRegion<SystemUiOverlayStyle>(
+    return 
+        AnnotatedRegion<SystemUiOverlayStyle>(
           value: SystemUiOverlayStyle.dark
               .copyWith(statusBarColor: AppColors.kbPureWhite),
           child: SafeArea(
@@ -60,9 +59,7 @@ class _CategoriesSearchPageState extends State<CategoriesSearchPage> {
               ),
               body: _SearchBody(),
             ),
-          ),
-        ),
-      ),
+          )
     );
   }
 
@@ -84,10 +81,11 @@ class _SearchBodyState extends State<_SearchBody> {
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<SearchCategoriesState>(context);
+    final theme = Theme.of(context);
     final bool isSearching = state.isSearching;
     return Container(
-      color: state.isSearching ? AppColors.kbAliceBlue : AppColors.kbPureWhite,
-      padding: const EdgeInsets.symmetric(horizontal: 18),
+      color:theme.colorScheme.background,
+      // padding: const EdgeInsets.symmetric(horizontal: 18),
       child: isSearching ? _ShowResults() : _BuildSuggestions(),
     );
   }
@@ -106,7 +104,7 @@ class __ShowResultsState extends State<_ShowResults> {
     final state = Provider.of<SearchCategoriesState>(context);
     final results = state.getSearchResults();
     return Container(
-      padding: const EdgeInsets.only(top: 12.0),
+      padding: const EdgeInsets.only(top: 4.0),
       child: ListView.builder(
           itemCount: results?.length ?? 0,
           itemBuilder: (context, index) {
@@ -124,11 +122,22 @@ class _SearchResultsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     var state = Provider.of<SearchCategoriesState>(context);
     return Padding(
-      padding: const EdgeInsets.only(bottom: 8.0),
+      padding: const EdgeInsets.only(bottom: 2.0),
       child: InkWell(
         splashColor: Colors.transparent,
         child: Container(
-          child: _searchResult(item),
+          child: Column(
+            children: [
+              _searchResult(item),
+              Container(
+                 padding: const EdgeInsets.symmetric(horizontal: 28),
+                              child: Container(
+                 
+                  height:1, color:Theme.of(context).dividerColor),
+              ),
+            ],
+          ),
+          
         ),
         onTap: () {
           state.setSelectedItem(item);
@@ -140,25 +149,36 @@ class _SearchResultsCard extends StatelessWidget {
   }
 
   Widget _searchResult(SearchItem item) {
-    return CustomListTile(
-      leading: customIconSquare(
-        backgroundColor: AppColors.kbAliceBlue,
-        iconAsset: _getLeadingIcon(item),
-        iconColor: AppColors.kbAlmostBlack,
-        backgroundSize: 40,
-        iconSize: 24,
-        isCustomIcon: true,
-      ),
-      titleText: Text(item.searchString,
-          style: AppThemes.normalTextStyle
-              .copyWith(fontSize: 14, color: AppColors.kbDarkTextColor)),
-      subTitle: Text(
-        item.searchType.toString(),
-        style: AppThemes.normalTextLightStyle
-            .copyWith(fontSize: 12, color: AppColors.kbDarkTextColor),
-      ),
-      backgroundColor: AppColors.kbPureWhite,
+
+      
+    return Builder(
+      builder: (BuildContext context){
+        final theme = Theme.of(context);
+      final isDarkTheme =ThemeOptions.of(context).isDarkTheme(context);
+          return CustomListTile(
+          tilePadding: const EdgeInsets.symmetric(vertical: 4.0, horizontal:16),
+           backgroundColor:theme.colorScheme.background,
+        borderRadius: BorderRadius.zero,
+        leading: customIconSquare(
+         backgroundColor:isDarkTheme? AppColors.kDark_7: theme.colorScheme.secondaryVariant,
+            iconAsset: _getLeadingIcon(item),
+            iconColor: isDarkTheme?AppColors.kbDarkGrey: theme.colorScheme.onBackground,
+            backgroundSize: 48,
+            iconSize: 24,
+            isCustomIcon: true,
+        ),
+            titleText: Text(item.searchString,
+            style: theme.textTheme.subtitle1),
+        subTitle: Text(
+          item.searchType.toString(),
+          style: theme.textTheme.bodyText1
+              .copyWith(fontSize: 12, fontWeight: FontWeight.w300),
+        ),
+      
+      );
+      }
     );
+      }
   }
 
   String _getLeadingIcon(SearchItem item) {
@@ -178,7 +198,7 @@ class _SearchResultsCard extends StatelessWidget {
         return HelloIcons.chart_bold_icon;
     }
   }
-}
+
 
 Widget _customIconForSeach(IconData iconData,
     {size = 16.0, Color color = AppColors.kbAlmostBlack}) {

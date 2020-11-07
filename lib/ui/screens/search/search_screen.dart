@@ -49,10 +49,12 @@ class _SearchPageState extends State<SearchPage> {
       child: SafeArea(
         child: Scaffold(
           appBar: CustomSearchBar(
+            
             hintText: AppStrings.searchHintTextForExplore,
             onSearchChanged: (text) => state.setSearchText(text),
             resetSearchCallback: () => state.resetSearch(),
             onActionPressed: () => state.resetSearch(),
+            
           ),
           body: _SearchBody(),
         ),
@@ -81,9 +83,7 @@ class _SearchBodyState extends State<_SearchBody> {
     final state = Provider.of<SearchStateMain>(context);
     final bool isSearching = state.isSearching;
     return Container(
-      color: state.isSearching
-          ? theme.colorScheme.secondaryVariant
-          : theme.colorScheme.background,
+      color:theme.colorScheme.background,
       // padding: const EdgeInsets.symmetric(horizontal: 18),
       child: isSearching ? _ShowResults() : _BuildSuggestions(),
     );
@@ -103,7 +103,7 @@ class __ShowResultsState extends State<_ShowResults> {
     final state = Provider.of<SearchStateMain>(context);
     final results = state.getSearchResults();
     return Container(
-      padding: const EdgeInsets.only(top: 12.0),
+      padding: const EdgeInsets.only(top: 4.0),
       child: ListView.builder(
           itemCount: results?.length ?? 0,
           itemBuilder: (context, index) {
@@ -125,7 +125,18 @@ class _SearchResultsCard extends StatelessWidget {
       child: InkWell(
         splashColor: Colors.transparent,
         child: Container(
-          child: _searchResult(item),
+          child: Column(
+            children: [
+              _searchResult(item),
+              Container(
+                 padding: const EdgeInsets.symmetric(horizontal: 28),
+                              child: Container(
+                 
+                  height:1, color:Theme.of(context).dividerColor),
+              ),
+            ],
+          ),
+          
         ),
         onTap: () {
           state.setSelectedItem(item);
@@ -144,25 +155,27 @@ class _SearchResultsCard extends StatelessWidget {
       final theme = Theme.of(context);
       final isDarkTheme =ThemeOptions.of(context).isDarkTheme(context);
       return CustomListTile(
-        tilePadding: 16,
+  
+        tilePadding: const EdgeInsets.symmetric(vertical: 4.0, horizontal:16),
+        backgroundColor:theme.colorScheme.background,
         borderRadius: BorderRadius.zero,
+        
         leading: customIconSquare(
           backgroundColor:isDarkTheme? AppColors.kDark_7: theme.colorScheme.secondaryVariant,
           iconAsset: _getLeadingIcon(item),
           iconColor: isDarkTheme?AppColors.kbDarkGrey: theme.colorScheme.onBackground,
-          backgroundSize: 40,
+          backgroundSize: 48,
           iconSize: 24,
           isCustomIcon: true,
           
         ),
         titleText: Text(item.searchString,
-            style: theme.textTheme.bodyText1),
+            style: theme.textTheme.subtitle1),
         subTitle: Text(
           item.searchType.toString(),
           style: theme.textTheme.bodyText1
               .copyWith(fontSize: 12, fontWeight: FontWeight.w300),
         ),
-        backgroundColor: theme.colorScheme.surface,
       );
     });
   }

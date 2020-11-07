@@ -311,25 +311,25 @@ Widget customIconSquare({
 class CustomListTile extends StatelessWidget {
   ///Creates a custom tile as per hellohuts design standards.
 
-  const CustomListTile({
-    Key key,
-    this.titleText,
-    this.subTitle,
-    this.leading,
-    this.trailing,
-    this.onTap,
-    this.onLongPress,
-    this.backgroundColor,
-    this.contentPadding,
-    this.borderRadius,
-    this.hoverColor,
-    this.selectedColor,
-    this.disabledColor,
-    this.height,
-    this.width,
-    this.tilePadding,
-    this. internalPadding
-  }) : super(key: key);
+  const CustomListTile(
+      {Key key,
+      this.titleText,
+      this.subTitle,
+      this.leading,
+      this.trailing,
+      this.onTap,
+      this.onLongPress,
+      this.backgroundColor,
+      this.contentPadding,
+      this.borderRadius,
+      this.hoverColor,
+      this.selectedColor,
+      this.disabledColor,
+      this.height,
+      this.width,
+      this.tilePadding,
+      this.internalPadding})
+      : super(key: key);
 
   ///title text widget. Either pass as Text("your text") or a specific widget
   final Widget titleText;
@@ -361,23 +361,22 @@ class CustomListTile extends StatelessWidget {
   final Color hoverColor;
   final Color selectedColor;
   final Color disabledColor;
-  final double tilePadding;
+  final EdgeInsetsGeometry tilePadding;
   final double internalPadding;
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return GestureDetector(
         child: Container(
-        color: backgroundColor ?? theme.colorScheme.surface,
-          padding: EdgeInsets.symmetric(horizontal:tilePadding ?? 0.0),
+          decoration: BoxDecoration(
+            borderRadius: borderRadius ?? BorderRadius.circular(16.0),
+            color: backgroundColor ?? theme.colorScheme.surface,
+          ),
+          padding: tilePadding ?? EdgeInsets.symmetric(horizontal: 0.0),
           child: Container(
-             padding: EdgeInsets.all(internalPadding ?? 8.0),
+            padding: EdgeInsets.all(internalPadding ?? 8.0),
             height: height ?? 64,
             width: width ?? fullWidth(context),
-            decoration: BoxDecoration(
-              borderRadius: borderRadius ?? BorderRadius.circular(16.0),
-             
-            ),
             child: Row(
               children: [
                 leading ?? SizedBox(),
