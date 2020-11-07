@@ -10,6 +10,7 @@ import 'package:hellohuts_app/ui/common_widgets/scroll_behavior/neat_scroll_beha
 import 'package:hellohuts_app/ui/routes/router.gr.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
+import 'package:hellohuts_app/ui/styles/theme_options.dart';
 import 'package:provider/provider.dart';
 
 class AddDetailsBody extends StatelessWidget {
@@ -18,35 +19,33 @@ class AddDetailsBody extends StatelessWidget {
   AddDetailsBody({Key key, @required this.pageController});
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final state = Provider.of<CostEstimateState>(context);
     return Container(
       width: fullWidth(context),
-      color: AppColors.kbPureWhite,
+      color: theme.colorScheme.background,
       child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 32),
-          child: ScrollableColumn(
-      shrinkWrap: true,
-      children: [
-        _StoreySelectionSection(),
-        _BedroomSelectionSection(),
-        _BathroomSelectionSection(),
-        _OtherDetailsSelectionSection(),
-        // Expanded(
-        //     child: Container(
-        //     constraints: BoxConstraints(
-        //       maxHeight: fullHeight(context) * 0.1,
-        //     ),
-        //     ),
-        // ),
-        
-      ],
-              ),
+        padding: const EdgeInsets.symmetric(horizontal: 32),
+        child: ScrollableColumn(
+          shrinkWrap: true,
+          children: [
+            _StoreySelectionSection(),
+            _BedroomSelectionSection(),
+            _BathroomSelectionSection(),
+            _OtherDetailsSelectionSection(),
+            // Expanded(
+            //     child: Container(
+            //     constraints: BoxConstraints(
+            //       maxHeight: fullHeight(context) * 0.1,
+            //     ),
+            //     ),
+            // ),
+          ],
         ),
+      ),
     );
   }
 }
-
-
 
 class _StoreySelectionSection extends StatelessWidget {
   const _StoreySelectionSection({
@@ -61,7 +60,9 @@ class _StoreySelectionSection extends StatelessWidget {
           Align(
               alignment: Alignment.centerLeft,
               child: Text("Storey",
-                  style: AppThemes.normalTextStyle
+                  style: Theme.of(context)
+                      .textTheme
+                      .subtitle1
                       .copyWith(fontWeight: FontWeight.bold, fontSize: 16))),
           SizedBox(
             height: 16.h,
@@ -120,7 +121,10 @@ class __StoreyContainerWidgetState extends State<_StoreyContainerWidget>
     with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final state = Provider.of<CostEstimateState>(context);
+    final bool isSelected = state.selectedNumberOfStoryes == widget.storeyCount;
+    final bool isDarkTheme = ThemeOptions.of(context).isDarkTheme(context);
     return GestureDetector(
         child: Padding(
           padding: const EdgeInsets.only(right: 18.0),
@@ -130,17 +134,13 @@ class __StoreyContainerWidgetState extends State<_StoreyContainerWidget>
                 duration: Duration(milliseconds: 300),
                 padding: const EdgeInsets.all(8.0),
                 curve: Curves.bounceInOut,
-                height: state.selectedNumberOfStoryes == widget.storeyCount
-                    ? 73
-                    : 72,
-                width: state.selectedNumberOfStoryes == widget.storeyCount
-                    ? 73
-                    : 72,
+                height: isSelected ? 73 : 72,
+                width: isSelected ? 73 : 72,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12.0),
-                  color: state.selectedNumberOfStoryes == widget.storeyCount
-                      ? AppColors.kbLavender
-                      : AppColors.kbAliceBlue,
+                  color: isSelected
+                      ? theme.colorScheme.secondary
+                      : theme.colorScheme.secondaryVariant,
                 ),
                 child: Column(
                   children: [
@@ -158,14 +158,18 @@ class __StoreyContainerWidgetState extends State<_StoreyContainerWidget>
                       children: [
                         Text(widget.storeyTextFirstLine,
                             overflow: TextOverflow.ellipsis,
-                            style: AppThemes.normalSecondaryTextStyle.copyWith(
-                                fontWeight: FontWeight.bold, fontSize: 12),
+                            style: theme.textTheme.bodyText1.copyWith(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12,
+                                color: isSelected
+                                    ? theme.colorScheme.onSecondary
+                                    : theme.colorScheme.onBackground),
                             textAlign: TextAlign.start),
                         Text(
                           widget.storeyTextSecondLine,
                           overflow: TextOverflow.ellipsis,
-                          style: AppThemes.normalSecondaryTextStyle
-                              .copyWith(fontSize: 12),
+                          style:
+                              theme.textTheme.bodyText2.copyWith(fontSize: 12),
                         )
                       ],
                     )
@@ -234,7 +238,9 @@ class _BedroomSelectionSection extends StatelessWidget {
           Align(
               alignment: Alignment.centerLeft,
               child: Text("Bedrooms",
-                  style: AppThemes.normalTextStyle
+                  style: Theme.of(context)
+                      .textTheme
+                      .subtitle1
                       .copyWith(fontWeight: FontWeight.bold, fontSize: 16))),
           SizedBox(
             height: 16.h,
@@ -283,7 +289,9 @@ class _BathroomSelectionSection extends StatelessWidget {
           Align(
               alignment: Alignment.centerLeft,
               child: Text("Bathrooms",
-                  style: AppThemes.normalTextStyle
+                  style: Theme.of(context)
+                      .textTheme
+                      .subtitle1
                       .copyWith(fontWeight: FontWeight.bold, fontSize: 16))),
           SizedBox(
             height: 16.h,
@@ -327,7 +335,9 @@ class _OtherDetailsSelectionSection extends StatelessWidget {
           Align(
               alignment: Alignment.centerLeft,
               child: Text("Other Details",
-                  style: AppThemes.normalTextStyle
+                  style: Theme.of(context)
+                      .textTheme
+                      .subtitle1
                       .copyWith(fontWeight: FontWeight.bold, fontSize: 16))),
           SizedBox(
             height: 16.h,
@@ -345,6 +355,8 @@ class _OtherDetailsContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<CostEstimateState>(context);
+    final theme = Theme.of(context);
+    final isDarkTheme = ThemeOptions.of(context).isDarkTheme(context);
     double widthOfContainer = (fullWidth(context) - (2 * 32) - (2 * 8)) / 3;
     return Container(
       child: Row(
@@ -392,8 +404,8 @@ class _OtherDetailsContainer extends StatelessWidget {
                           horizontal: 8, vertical: 12),
                       decoration: BoxDecoration(
                         color: state.selectedPack == 3
-                            ? AppColors.kbLavender
-                            : AppColors.kbAliceBlue,
+                            ? theme.colorScheme.secondary
+                            : theme.colorScheme.secondaryVariant,
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                       child: Center(
@@ -401,15 +413,15 @@ class _OtherDetailsContainer extends StatelessWidget {
                           children: [
                             customIconSquare(
                                 iconAsset: HelloIcons.plus_light_icon,
-                                iconColor: AppColors.kbDarkestGrey,
+                                iconColor: theme.colorScheme.onBackground,
                                 iconSize: 24,
                                 backgroundColor: state.selectedPack == 3
-                                    ? AppColors.kbLavender
-                                    : AppColors.kbAliceBlue,
+                                    ? theme.colorScheme.secondary
+                                    : theme.colorScheme.secondaryVariant,
                                 backgroundSize: 24),
                             Text(
                               "Custom",
-                              style: AppThemes.normalSecondaryTextStyle
+                              style: theme.textTheme.bodyText2
                                   .copyWith(fontSize: 12),
                             ),
                           ],
@@ -445,6 +457,7 @@ class _OtherDetailsContainer extends StatelessWidget {
   void _showCustomBottomSheet(BuildContext context,
       {List<Widget> listOfWidgets}) {
     var state = Provider.of<CostEstimateState>(context, listen: false);
+    final theme = Theme.of(context);
     state.setIsCustomOtherDetails = true;
     showModalBottomSheet(
         context: context,
@@ -458,7 +471,7 @@ class _OtherDetailsContainer extends StatelessWidget {
                 // height: fullHeight(context) * 0.9,
                 width: fullWidth(context),
                 decoration: BoxDecoration(
-                    color: AppColors.kbPureWhite,
+                    color: theme.colorScheme.background,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20),
                         topRight: Radius.circular(20))),
@@ -470,7 +483,7 @@ class _OtherDetailsContainer extends StatelessWidget {
                       width: fullWidth(context) * .15,
                       height: 5,
                       decoration: BoxDecoration(
-                        color: Theme.of(context).dividerColor,
+                        color: theme.dividerColor,
                         borderRadius: BorderRadius.all(
                           Radius.circular(10),
                         ),
@@ -486,9 +499,8 @@ class _OtherDetailsContainer extends StatelessWidget {
                           child: Align(
                               alignment: Alignment.topLeft,
                               child: Text("Custom Select",
-                                  style: AppThemes.normalTextStyle.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 24))),
+                                  style: theme.textTheme.headline2.copyWith(color:theme.colorScheme.onBackground.withOpacity(0.8))
+                                  )),
                         ),
                         SizedBox(
                           height: 24,
@@ -566,6 +578,8 @@ class _OtherDetailsContainerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var state = Provider.of<CostEstimateState>(context);
+    final theme = Theme.of(context);
+    final bool isDarkTheme = ThemeOptions.of(context).isDarkTheme(context);
     return Column(
       children: [
         GestureDetector(
@@ -578,8 +592,10 @@ class _OtherDetailsContainerWidget extends StatelessWidget {
                     left: 8, right: 12, top: 12, bottom: 12),
                 decoration: BoxDecoration(
                   color: state.selectedPack == packId
-                      ? AppColors.kbLavender
-                      : AppColors.kbAliceBlue,
+                      ? (isDarkTheme
+                          ? theme.colorScheme.secondary.withOpacity(0.5)
+                          : theme.colorScheme.secondary)
+                      : theme.colorScheme.secondaryVariant,
                   borderRadius: BorderRadius.circular(12.0),
                 ),
                 child: ScrollConfiguration(
@@ -587,7 +603,7 @@ class _OtherDetailsContainerWidget extends StatelessWidget {
                   child: ListView(
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
-                    children: _getDetailedListWidget(details),
+                    children: _getDetailedListWidget(details, context),
                   ),
                 ),
               ),
@@ -609,24 +625,22 @@ class _OtherDetailsContainerWidget extends StatelessWidget {
     );
   }
 
-  List<Widget> _getDetailedListWidget(List<String> items) {
+  List<Widget> _getDetailedListWidget(
+      List<String> items, BuildContext context) {
+    final theme = Theme.of(context);
     List<Widget> list = [];
     for (String item in items) {
       list.add(Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          FilledCircle(
-            size: 4.0,
-            color: AppColors.kbDarkTextColor,
-          ),
+          FilledCircle(size: 4.0, color: theme.colorScheme.onBackground),
           SizedBox(
             width: 8,
           ),
           Expanded(
             child: Text(
               item,
-              style: AppThemes.normalSecondaryTextStyle.copyWith(
-                color: AppColors.kbDarkTextColor,
+              style: theme.textTheme.bodyText2.copyWith(
                 fontSize: 12,
               ),
               maxLines: 2,

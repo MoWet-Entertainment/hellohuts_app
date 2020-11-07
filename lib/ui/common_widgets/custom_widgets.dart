@@ -1,8 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
+import 'package:hellohuts_app/ui/styles/theme_options.dart';
 
 double getDimention(context, double unit) {
   if (fullWidth(context) <= 360.0) {
@@ -272,40 +274,53 @@ Widget customIconSquare({
   bool isCustomIcon = true,
   String iconAsset,
   double backgroundSize = 30,
-  Color backgroundColor = AppColors.kbSmokedWhite,
+  Color backgroundColor,
   double iconSize = 24,
-  Color iconColor = AppColors.kbDarkTextColor,
+  Color iconColor,
   double borderRadius = 12,
   GestureTapCallback actionCall,
 }) {
-  return Stack(
-    alignment: Alignment.center,
-    children: <Widget>[
-      Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(borderRadius),
-          color: backgroundColor,
+  return Builder(builder: (BuildContext context) {
+    final theme = Theme.of(context);
+    final isDarkTheme = ThemeOptions.of(context).isDarkTheme(context);
+    return Stack(
+      alignment: Alignment.center,
+      children: <Widget>[
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(borderRadius),
+            color: backgroundColor ??
+                (isDarkTheme
+                    ? AppColors.kDark_2
+                    : theme.colorScheme.secondaryVariant),
+          ),
+          height: backgroundSize,
+          width: backgroundSize,
         ),
-        height: backgroundSize,
-        width: backgroundSize,
-      ),
-      IconButton(
-          splashColor: Colors.white,
-          icon: isCustomIcon
-              ? Image.asset(
-                  iconAsset,
-                  color: iconColor,
-                  width: iconSize,
-                  height: iconSize,
-                )
-              : Icon(
-                  iconData,
-                  color: iconColor,
-                  size: iconSize,
-                ),
-          onPressed: actionCall),
-    ],
-  );
+        IconButton(
+            splashColor: theme.splashColor,
+            icon: isCustomIcon
+                ? Image.asset(
+                    iconAsset,
+                    color: iconColor ??
+                        (isDarkTheme
+                            ? AppColors.kbMediumGrey
+                            : theme.colorScheme.onBackground),
+                    width: iconSize,
+                    height: iconSize,
+                  )
+                : Icon(
+                    iconData,
+                    color: iconColor ??
+                        (isDarkTheme
+                            ? AppColors.kbMediumGrey
+                            : theme.colorScheme.onBackground),
+                    size: iconSize,
+                  ),
+            onPressed: actionCall),
+      ],
+    );
+  });
 }
 
 class CustomListTile extends StatelessWidget {
@@ -416,7 +431,7 @@ class FilledCircle extends StatelessWidget {
         super(key: key);
   const FilledCircle({
     Key key,
-    this.color = AppColors.kbAlmostBlack,
+    this.color,
     this.size = 2.0,
     this.child,
   })  : isAnimated = false,
@@ -431,6 +446,7 @@ class FilledCircle extends StatelessWidget {
   final Duration duration;
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     if (isAnimated) {
       return AnimatedContainer(
         duration: duration,
@@ -439,7 +455,7 @@ class FilledCircle extends StatelessWidget {
         height: size,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: color,
+          color: color ?? theme.colorScheme.onBackground,
         ),
         child: child ?? Container(),
       );
@@ -449,7 +465,7 @@ class FilledCircle extends StatelessWidget {
         height: size,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: color,
+          color: color ?? theme.colorScheme.onBackground,
         ),
         child: child ?? Container(),
       );
@@ -468,8 +484,8 @@ class MultiSelectChip extends StatefulWidget {
     this.itemList,
     this.alreadySelected,
     this.onSelectionChanged,
-    this.backgroundColor = AppColors.kbAliceBlue,
-    this.selectedColor = AppColors.kbLavender,
+    this.backgroundColor,
+    this.selectedColor,
   });
 
   @override
@@ -480,7 +496,8 @@ class _MultiSelectChipState extends State<MultiSelectChip> {
   // String selectedChoice = "";
   List<String> selectedChoices = List();
 
-  _buildChoiceList() {
+  _buildChoiceList(BuildContext context) {
+    final theme = Theme.of(context);
     List<Widget> choices = List();
     selectedChoices = widget.alreadySelected;
     widget.itemList.forEach((item) {
@@ -490,13 +507,13 @@ class _MultiSelectChipState extends State<MultiSelectChip> {
           label: Text(
             item,
             style: selectedChoices.contains(item)
-                ? AppThemes.normalSecondaryTextStyle
-                    .copyWith(fontSize: 12, color: AppColors.kbDarkTextColor)
-                : AppThemes.normalSecondaryTextStyle
-                    .copyWith(fontSize: 12, color: AppColors.kbDarkTextColor),
+                ?  theme.textTheme.bodyText2
+                    .copyWith(fontSize: 12)
+                :  theme.textTheme.bodyText2
+                    .copyWith(fontSize: 12),
           ),
-          backgroundColor: widget.backgroundColor,
-          selectedColor: widget.selectedColor,
+          backgroundColor: widget.backgroundColor??theme.colorScheme.secondaryVariant,
+          selectedColor: widget.selectedColor??theme.colorScheme.secondary,
           selected: selectedChoices.contains(item),
           onSelected: (selected) {
             setState(() {
@@ -516,7 +533,7 @@ class _MultiSelectChipState extends State<MultiSelectChip> {
   @override
   Widget build(BuildContext context) {
     return Wrap(
-      children: _buildChoiceList(),
+      children: _buildChoiceList(context),
     );
   }
 }
@@ -611,5 +628,45 @@ class ScrollableColumn extends StatelessWidget {
             keyboardDismissBehavior: keyboardDismissBehavior,
             restorationId: restorationId,
             clipBehavior: clipBehavior));
+  }
+}
+
+class AnnotatedSafeArea extends StatelessWidget {
+  final Widget child;
+  final Color statusBarColor;
+  const AnnotatedSafeArea({Key key, @required this.child, this.statusBarColor})
+      : assert(child != null, "Child is not provided for the Annotated Area."),
+        super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: statusBarColor != null
+          ? ThemeOptions.of(context)
+              .getSystemUIOverlayStyle(context)
+              .copyWith(statusBarColor: statusBarColor)
+          : ThemeOptions.of(context).getSystemUIOverlayStyle(context),
+      child: SafeArea(child: child),
+    );
+  }
+}
+
+class AnnotatedScaffold extends StatelessWidget {
+  final Widget body;
+  final Color statusBarColor;
+  const AnnotatedScaffold({Key key, @required this.body, this.statusBarColor})
+      : assert(body != null, "Bodt is not provided for the Annotated Area."),
+        super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: statusBarColor != null
+          ? ThemeOptions.of(context)
+              .getSystemUIOverlayStyle(context)
+              .copyWith(statusBarColor: statusBarColor)
+          : ThemeOptions.of(context).getSystemUIOverlayStyle(context),
+      child: Scaffold(body: body),
+    );
   }
 }

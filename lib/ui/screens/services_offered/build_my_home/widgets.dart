@@ -28,6 +28,7 @@ class RoundedSelectableContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool _isSelected = selected == optionType ? true : false;
+    final theme = Theme.of(context);
     return GestureDetector(
         child: Column(
           children: [
@@ -39,13 +40,14 @@ class RoundedSelectableContainer extends StatelessWidget {
               width: width ?? 88,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12.0),
-                color: _isSelected ? AppColors.kbLavender : AppColors.kbAliceBlue,
+                color:
+                    _isSelected ? theme.colorScheme.secondary : theme.colorScheme.secondaryVariant,
               ),
               child: Center(
                 child: Text(
                   optionName,
                   style:
-                      AppThemes.normalSecondaryTextStyle.copyWith(fontSize: 12),
+                   theme.textTheme.bodyText2.copyWith(fontSize: 12),
                 ),
               ),
             ),
@@ -56,7 +58,7 @@ class RoundedSelectableContainer extends StatelessWidget {
                 alignment: Alignment.bottomCenter,
                 child: AnimatedContainer(
                   duration: Duration(milliseconds: 300),
-                  color: AppColors.kbDarkGreen,
+                  color: AppColors.kGreenDark,
                   curve: Curves.fastOutSlowIn,
                   height: 2.0,
                   width: _isSelected ? 24.0 : 0,
@@ -66,7 +68,6 @@ class RoundedSelectableContainer extends StatelessWidget {
         onTap: onPressed);
   }
 }
-
 
 ///For resuability of the code,
 class ItemSelectionModel {
@@ -104,7 +105,9 @@ class ItemTypeSelectSection extends StatelessWidget {
           Align(
               alignment: Alignment.centerLeft,
               child: Text(nameOfTheSection,
-                  style: AppThemes.normalTextStyle
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText1
                       .copyWith(fontWeight: FontWeight.bold, fontSize: 16))),
           SizedBox(
             height: 16.h,

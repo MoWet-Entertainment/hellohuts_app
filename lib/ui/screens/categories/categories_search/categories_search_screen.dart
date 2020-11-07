@@ -47,8 +47,7 @@ class _CategoriesSearchPageState extends State<CategoriesSearchPage> {
     final state = Provider.of<SearchCategoriesState>(context);
     return 
         AnnotatedRegion<SystemUiOverlayStyle>(
-          value: SystemUiOverlayStyle.dark
-              .copyWith(statusBarColor: AppColors.kbPureWhite),
+          value: ThemeOptions.of(context).getSystemUIOverlayStyle(context),
           child: SafeArea(
             child: Scaffold(
               appBar: CustomSearchBar(
@@ -163,7 +162,7 @@ class _SearchResultsCard extends StatelessWidget {
          backgroundColor:isDarkTheme? AppColors.kDark_7: theme.colorScheme.secondaryVariant,
             iconAsset: _getLeadingIcon(item),
             iconColor: isDarkTheme?AppColors.kbDarkGrey: theme.colorScheme.onBackground,
-            backgroundSize: 48,
+            backgroundSize: 40,
             iconSize: 24,
             isCustomIcon: true,
         ),

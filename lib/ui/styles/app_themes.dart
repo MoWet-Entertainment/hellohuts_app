@@ -237,6 +237,7 @@ class AppThemes {
       buttonColor: colorScheme.primary,
       colorScheme: colorScheme,
       textTheme: _textTheme,
+    
       primaryColor: colorScheme.primary,
       indicatorColor: colorScheme.onSurface.withOpacity(0.7),
     
@@ -284,14 +285,15 @@ class AppThemes {
   static const _medium = FontWeight.w500;
   static const _semiBold = FontWeight.w600;
   static const _bold = FontWeight.w700;
-  static final TextTheme _textTheme = TextTheme(
+  
+  static final TextTheme _textTheme =TextTheme(
     headline1: GoogleFonts.lato(fontWeight: _bold, fontSize: 32),
     headline2: GoogleFonts.lato(fontWeight: _bold, fontSize: 24),
     headline3: GoogleFonts.lato(
       fontWeight: _bold,
       fontSize: 20,
     ),
-    headline4: GoogleFonts.muli(fontWeight: _bold, fontSize: 16),
+    headline4: GoogleFonts.muli(fontWeight: _bold, fontSize: 20),
     headline5: GoogleFonts.muli(fontWeight: _bold, fontSize: 16),
     headline6: GoogleFonts.lato(
       fontWeight: _bold,
@@ -321,10 +323,10 @@ class AppThemes {
       onSurface: AppColors.kPureBlack,
       brightness: Brightness.light);
 
-  static const ColorScheme darkColorScheme = ColorScheme(
-      primary: AppColors.kPrimaryDark,
+  static  ColorScheme darkColorScheme = ColorScheme(
+      primary: AppColors.kPrimaryLight,
       primaryVariant: AppColors.kPrimaryVariantDark,
-      secondary: AppColors.kSecondaryDark,
+      secondary: AppColors.kSecondaryDark.withOpacity(0.5),
       secondaryVariant: AppColors.kSecondaryVariantDark,
       background: AppColors.kDark_1,
       onBackground: AppColors.kPureWhite,

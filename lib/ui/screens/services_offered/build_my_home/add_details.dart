@@ -12,6 +12,7 @@ import 'package:hellohuts_app/ui/screens/services_offered/build_my_home/pages/ad
 import 'package:hellohuts_app/ui/screens/services_offered/build_my_home/pages/customize_screen.dart';
 import 'package:hellohuts_app/ui/screens/services_offered/build_my_home/pages/nice_to_have_screen.dart';
 import 'package:hellohuts_app/ui/screens/services_offered/build_my_home/widgets.dart';
+import 'package:hellohuts_app/ui/styles/theme_options.dart';
 import 'package:provider/provider.dart';
 
 import 'package:hellohuts_app/states/collect_details_states/cost_estimate_state.dart';
@@ -29,6 +30,7 @@ class AddDetailsForHome extends StatefulWidget {
 
 class _AddDetailsForHomeState extends State<AddDetailsForHome> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   int pageIndex = 0;
   final PageController _pageController = PageController(
     initialPage: 0,
@@ -42,120 +44,109 @@ class _AddDetailsForHomeState extends State<AddDetailsForHome> {
 
   Widget build(BuildContext context) {
     var costEstimateState = Provider.of<CostEstimateState>(context);
+    final theme = Theme.of(context);
     return WillPopScope(
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          home: Scaffold(
-            body: AnnotatedRegion<SystemUiOverlayStyle>(
-              value: SystemUiOverlayStyle.dark
-                  .copyWith(statusBarColor: Colors.transparent),
-              child: SafeArea(
-                child: Scaffold(
-                  backgroundColor: AppColors.kbPureWhite,
-                  appBar: CustomAppBar(
-                    isBackButton: true,
-                    centerTitle: true,
-                    title: AnimatedSwitcher(
-                      switchInCurve: Curves.easeInSine,
-                      switchOutCurve: Curves.easeOutSine,
-                      duration: Duration(milliseconds: 500),
-                      child: costEstimateState.pageIndexOfCollectSection == 0
+        child: Scaffold(
+          backgroundColor: theme.colorScheme.background,
+          key: _scaffoldKey,
+          appBar: CustomAppBar(
+            isBackButton: true,
+            centerTitle: true,
+            title: AnimatedSwitcher(
+              switchInCurve: Curves.easeInSine,
+              switchOutCurve: Curves.easeOutSine,
+              duration: Duration(milliseconds: 500),
+              child: costEstimateState.pageIndexOfCollectSection == 0
+                  ? Text(
+                      "Add Details",
+                      style: theme.textTheme.headline3.copyWith(
+                          fontSize: 18,
+                          color:
+                              theme.colorScheme.onBackground.withOpacity(0.9)),
+                      key: ValueKey<int>(1),
+                    )
+                  : costEstimateState.pageIndexOfCollectSection == 1
+                      ? Text(
+                          "Customize",
+                          style: theme.textTheme.headline3.copyWith(
+                              fontSize: 18,
+                              color: theme.colorScheme.onBackground
+                                  .withOpacity(0.9)),
+                          key: ValueKey<int>(2),
+                        )
+                      : costEstimateState.pageIndexOfCollectSection == 2
                           ? Text(
-                              "Add Details",
-                              style: AppThemes.normalTextStyle.copyWith(
-                                  fontWeight: FontWeight.bold,
+                              "Nice to Have",
+                              style: theme.textTheme.headline3.copyWith(
                                   fontSize: 18,
-                                  color: AppColors.kbDarkTextColor),
+                                  color: theme.colorScheme.onBackground
+                                      .withOpacity(0.9)),
+                              key: ValueKey<int>(3),
                             )
-                          : costEstimateState.pageIndexOfCollectSection == 1
-                              ? Text(
-                                  "Customize",
-                                  style: AppThemes.normalTextStyle.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
-                                      color: AppColors.kbDarkTextColor),
-                                  key: ValueKey<int>(1),
-                                )
-                              : costEstimateState.pageIndexOfCollectSection == 2
-                                  ? Text(
-                                      "Nice to Have",
-                                      style: AppThemes.normalTextStyle.copyWith(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18,
-                                          color: AppColors.kbDarkTextColor),
-                                      key: ValueKey<int>(2),
-                                    )
-                                  : Text("", key: ValueKey<int>(3)),
-                    ),
-                    actions: costEstimateState.pageIndexOfCollectSection != 0
-                        ? AnimatedSwitcher(
-                            switchInCurve: Curves.easeInSine,
-                            switchOutCurve: Curves.easeOutSine,
-                            duration: Duration(milliseconds: 500),
-                            child: Padding(
-                              padding: EdgeInsets.only(right: 24),
-                              child: Align(
-                                  alignment: Alignment.centerRight,
-                                  child: Text(
-                                    "Reset",
-                                    style: AppThemes.normalTextStyle.copyWith(
-                                        fontSize: 14,
-                                        color: AppColors.kbDarkTextColor),
-                                  )),
-                            ),
-                          )
-                        : Container(),
-                    onActionPressed: () => {
-                      if (costEstimateState.pageIndexOfCollectSection == 1)
-                        {costEstimateState.resetCustomizePage()}
-                      else if (costEstimateState.pageIndexOfCollectSection == 2)
-                        {costEstimateState.resetNiceToHave()}
-                    },
-                    onBackButtonPressed: () => {
-                      // costEstimateState.resetAddDetailsPage(),
-                      if (costEstimateState.pageIndexOfCollectSection == 0)
-                        {
-                            costEstimateState.resetCostEstimateSectionAllPages(),
-                          ExtendedNavigator.of(context).pop()}
-                      else
-                        {
-                          print(costEstimateState.pageIndexOfCollectSection),
-                          costEstimateState.setPageIndexOfCollectSection =
-                              costEstimateState.pageIndexOfCollectSection - 1,
-                          _pageController.previousPage(
-                              duration: const Duration(milliseconds: 400),
-                              curve: Curves.easeInOutSine)
-                        }
-                    },
-                  ),
-                  bottomNavigationBar: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children:[
-                    CallToActionButtonCostEstimate(pageController: _pageController),
-                    AddDetailsProgressIndicator()
-                    ]),
-                  body: PageView(
-                    controller: _pageController,
-                    onPageChanged: (page) {
-                      costEstimateState.setPageIndexOfCollectSection = page;
-                    },
-                    physics: NeverScrollableScrollPhysics(),
-                    children: [
-                      AddDetailsBody(
-                        pageController: _pageController,
-                      ),
-                      CustomizeDetailsBody(
-                        pageController: _pageController,
-                      ),
-                      NiceToHaveDetailsBody(
-                        pageController: _pageController,
-                      )
-                    ],
-                  ),
-                ),
-              ),
+                          : Text("", key: ValueKey<int>(4)),
             ),
+            actions: costEstimateState.pageIndexOfCollectSection != 0
+                ? AnimatedSwitcher(
+                    switchInCurve: Curves.easeInSine,
+                    switchOutCurve: Curves.easeOutSine,
+                    duration: Duration(milliseconds: 500),
+                    child: Padding(
+                      padding: EdgeInsets.only(right: 24),
+                      child: Align(
+                          alignment: Alignment.centerRight,
+                          child:
+                              Text("Reset", style: theme.textTheme.bodyText1)),
+                    ),
+                  )
+                : Container(),
+            onActionPressed: () => {
+              if (costEstimateState.pageIndexOfCollectSection == 1)
+                {costEstimateState.resetCustomizePage()}
+              else if (costEstimateState.pageIndexOfCollectSection == 2)
+                {costEstimateState.resetNiceToHave()}
+            },
+            onBackButtonPressed: () => {
+              // costEstimateState.resetAddDetailsPage(),
+              if (costEstimateState.pageIndexOfCollectSection == 0)
+                {
+                  costEstimateState.resetCostEstimateSectionAllPages(),
+                  ExtendedNavigator.of(context).pop()
+                }
+              else
+                {
+                  print(costEstimateState.pageIndexOfCollectSection),
+                  costEstimateState.setPageIndexOfCollectSection =
+                      costEstimateState.pageIndexOfCollectSection - 1,
+                  _pageController.previousPage(
+                      duration: const Duration(milliseconds: 400),
+                      curve: Curves.easeInOutSine)
+                }
+            },
+          ),
+          bottomNavigationBar: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                CallToActionButtonCostEstimate(pageController: _pageController),
+                AddDetailsProgressIndicator()
+              ]),
+          body: PageView(
+            controller: _pageController,
+            onPageChanged: (page) {
+              costEstimateState.setPageIndexOfCollectSection = page;
+            },
+            physics: NeverScrollableScrollPhysics(),
+            children: [
+              AddDetailsBody(
+                pageController: _pageController,
+              ),
+              CustomizeDetailsBody(
+                pageController: _pageController,
+              ),
+              NiceToHaveDetailsBody(
+                pageController: _pageController,
+              )
+            ],
           ),
         ),
         onWillPop: () {
@@ -174,6 +165,7 @@ class _AddDetailsForHomeState extends State<AddDetailsForHome> {
         });
   }
 }
+
 class CallToActionButtonCostEstimate extends StatelessWidget {
   const CallToActionButtonCostEstimate({
     Key key,
@@ -182,7 +174,6 @@ class CallToActionButtonCostEstimate extends StatelessWidget {
 
   final PageController pageController;
 
-
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<CostEstimateState>(context);
@@ -190,16 +181,17 @@ class CallToActionButtonCostEstimate extends StatelessWidget {
         state.pageIndexOfCollectSection == state.lastPageIndexOfTheSection
             ? true
             : false;
+    final theme = Theme.of(context);
     return Padding(
-      padding: const EdgeInsets.only(top: 16, bottom: 12,right: 32),
+      padding: const EdgeInsets.only(top: 16, bottom: 12, right: 32),
       child: Align(
         alignment: Alignment.bottomRight,
         child: CupertinoButton(
             borderRadius: BorderRadius.circular(12),
-            color: AppColors.kbPrimaryDarkBlue,
+            color: theme.colorScheme.primary,
             child: Text(
               isLastPageOfSection ? "Calculate Rate" : "Next",
-              style: AppThemes.normalTextStyle
+              style: theme.textTheme.bodyText1
                   .copyWith(fontSize: 14, color: AppColors.kbAccentColor),
             ),
             onPressed: () => {
@@ -222,19 +214,21 @@ class CallToActionButtonCostEstimate extends StatelessWidget {
     );
   }
 }
+
 class AddDetailsProgressIndicator extends StatelessWidget {
   const AddDetailsProgressIndicator({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<CostEstimateState>(context);
+    final theme = Theme.of(context);
     ScreenUtil.init(context, designSize: Size(375.0, 801.0));
     final screenWidth = fullWidth(context);
     final widthExtent = (screenWidth * 0.8) / 4;
     return Container(
       width: screenWidth,
       height: 60,
-      color: AppColors.kbPureWhite,
+      color: theme.colorScheme.background,
       child: Stack(
         alignment: Alignment.centerLeft,
         children: [
@@ -246,28 +240,28 @@ class AddDetailsProgressIndicator extends StatelessWidget {
           Positioned(
             left: widthExtent,
             child: FilledCircle.animated(
-              size: state.pageIndexOfCollectSection == 1 ? 26 : 24,
+              size: state.pageIndexOfCollectSection == 0 ? 26 : 24,
               color: state.pageIndexOfCollectSection == 0
                   ? AppColors.kbPrimaryYellow
-                  : AppColors.kbPrimaryDarkBlue,
+                  :AppColors.kbDarkGrey,
               child: Center(
                 child: Text("1",
-                    style: AppThemes.normalSecondaryTextStyle
-                        .copyWith(fontSize: 12, color: AppColors.kbPureWhite)),
+                    style:theme.textTheme.bodyText1
+                        .copyWith(fontSize: 12, color: theme.colorScheme.background)),
               ),
             ),
           ),
           Positioned(
             left: 2 * widthExtent,
             child: FilledCircle.animated(
-              size: 24,
+              size:state.pageIndexOfCollectSection == 1 ? 26 : 24,
               color: state.pageIndexOfCollectSection == 1
                   ? AppColors.kbPrimaryYellow
-                  : AppColors.kbPrimaryDarkBlue,
+                  : AppColors.kbDarkGrey,
               child: Center(
                 child: Text("2",
-                    style: AppThemes.normalSecondaryTextStyle
-                        .copyWith(fontSize: 12, color: AppColors.kbPureWhite)),
+                    style:theme.textTheme.bodyText1
+                        .copyWith(fontSize: 12, color: theme.colorScheme.background)),
               ),
             ),
           ),
@@ -277,18 +271,18 @@ class AddDetailsProgressIndicator extends StatelessWidget {
               size: state.pageIndexOfCollectSection == 2 ? 26 : 24,
               color: state.pageIndexOfCollectSection == 2
                   ? AppColors.kbPrimaryYellow
-                  : AppColors.kbPrimaryDarkBlue,
+                  :AppColors.kbDarkGrey,
               child: Center(
                 child: Text("3",
-                    style: AppThemes.normalSecondaryTextStyle
-                        .copyWith(fontSize: 12, color: AppColors.kbPureWhite)),
+                    style:theme.textTheme.bodyText1
+                        .copyWith(fontSize: 12, color: theme.colorScheme.background)),
               ),
             ),
           ),
           Positioned(
             left: 4 * widthExtent,
             child: FilledCircle.animated(
-              size: state.pageIndexOfCollectSection == 3 ? 26 : 24,
+              size: 26,
               color: AppColors.kbDarkGrey,
               child: Center(
                 child: Image.asset(

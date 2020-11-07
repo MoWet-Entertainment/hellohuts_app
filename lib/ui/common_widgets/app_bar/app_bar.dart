@@ -83,7 +83,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       this.backgroundColor,
       this.centerTitle = true,
       this.appBarHeight,
-      this.brightness = Brightness.light})
+      this.brightness})
       : super(key: key);
 
   ///if the leading is a BackButton. Defaults to arrow based button(as in iOS). By default this will be [false]
@@ -116,16 +116,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => appBarHeight ?? Size.fromHeight(72.0);
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return AppBar(
-      brightness: Brightness.light,
-      backgroundColor: backgroundColor ?? AppColors.kbPureWhite,
+      backgroundColor: backgroundColor??theme.colorScheme.background,
       elevation: 0,
       leading: isBackButton
           ? GestureDetector(
               child: customBackButton ??
                   Icon(
                     Icons.arrow_back_ios,
-                    color: AppColors.kbAlmostBlack,
+                    color: theme.colorScheme.onBackground,
                   ),
               onTap: onBackButtonPressed,
             )
@@ -199,10 +199,12 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
       width: fullWidth(context),
       padding: const EdgeInsets.only(top: 16, bottom: 8.0, left: 24, right: 16),
       child: TextField(
-        style: theme.textTheme.bodyText2.copyWith(fontSize: 14,),
+        style: theme.textTheme.bodyText2.copyWith(
+          fontSize: 14,
+        ),
         autofocus: true,
         textCapitalization: TextCapitalization.words,
-        cursorColor:theme.colorScheme.onBackground.withOpacity(0.5),
+        cursorColor: theme.colorScheme.onBackground.withOpacity(0.5),
         onChanged: (text) {
           onSearchChanged(text);
         },
@@ -227,8 +229,10 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
                     )),
             prefixIconConstraints: BoxConstraints(maxHeight: 44, maxWidth: 44),
             hintText: hintText,
-            hintStyle: theme.textTheme.bodyText2.copyWith(fontSize: 12, color: theme.colorScheme.onBackground.withOpacity(0.5),),
-          
+            hintStyle: theme.textTheme.bodyText2.copyWith(
+              fontSize: 12,
+              color: theme.colorScheme.onBackground.withOpacity(0.5),
+            ),
             filled: true,
             suffixIcon: (controller.text.trim().length == 0)
                 ? Container(
@@ -239,7 +243,7 @@ class CustomSearchBar extends HookWidget implements PreferredSizeWidget {
                       padding: const EdgeInsets.only(left: 4, right: 12.0),
                       child: Image.asset(
                         HelloIcons.close_circle_bold_icon,
-                        color:  theme.colorScheme.onBackground.withOpacity(0.5),
+                        color: theme.colorScheme.onBackground.withOpacity(0.5),
                         height: 16,
                       ),
                     ),
