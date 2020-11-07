@@ -8,6 +8,7 @@ import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
 import 'package:hellohuts_app/ui/routes/router.gr.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
+import 'package:hellohuts_app/ui/styles/theme_options.dart';
 import 'package:provider/provider.dart';
 
 class ServicesOfferedBasePage extends StatelessWidget {
@@ -16,18 +17,13 @@ class ServicesOfferedBasePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var state = Provider.of<SearchStateMain>(context);
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-              body: SafeArea(
-          child: Scaffold(
-              appBar: CustomAppBar(
-                isBackButton: true,
-                onBackButtonPressed: ExtendedNavigator.of(context).pop,
-              ),
-              body: _ServicesOfferedBody()),
-        ),
-      ),
+    return AnnotatedSafeArea(
+      child: Scaffold(
+          appBar: CustomAppBar(
+            isBackButton: true,
+            onBackButtonPressed: ExtendedNavigator.of(context).pop,
+          ),
+          body: _ServicesOfferedBody()),
     );
   }
 }
@@ -39,27 +35,30 @@ class _ServicesOfferedBody extends StatelessWidget {
   Widget build(BuildContext context) {
     var searchState = Provider.of<SearchStateMain>(context);
     return Container(
-      color: AppColors.kbPureWhite,
+      color: Theme.of(context).colorScheme.background,
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
-      child:  ScrollableColumn(
-            // crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-      Text(
-        AppStrings.servicesOffered_WhatCanWeHelpWithText(
-            searchState.getSelectedItem.searchString),
-        maxLines: 2,
-        overflow: TextOverflow.ellipsis,
-        style: AppThemes.normalTextStyle.copyWith(
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
-            color: AppColors.kbDarkTextColor),
+      child: ScrollableColumn(
+        // crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            AppStrings.servicesOffered_WhatCanWeHelpWithText(
+                searchState.getSelectedItem.searchString),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: Theme.of(context).textTheme.headline3.copyWith(
+                  fontSize: 18,
+                  color: Theme.of(context)
+                      .colorScheme
+                      .onBackground
+                      .withOpacity(0.9),
+                ),
+          ),
+          SizedBox(
+            height: 32,
+          ),
+          ServicesOffferedItems(),
+        ],
       ),
-      SizedBox(
-        height: 32,
-      ),
-             ServicesOffferedItems(),
-            ],
-          ),      
     );
   }
 }
@@ -67,66 +66,68 @@ class _ServicesOfferedBody extends StatelessWidget {
 class ServicesOffferedItems extends StatelessWidget {
   const ServicesOffferedItems({Key key}) : super(key: key);
 
-  List<Widget> getServicesOffered() {
+  List<Widget> getServicesOffered(BuildContext context) {
     return [
-      _getBuildMyHome(),
-      _getProffessionals(),
-      _getDesignAndPlans(),
-      _getHomeStores()
+      _getBuildMyHome(context),
+      _getProffessionals(context),
+      _getDesignAndPlans(context),
+      _getHomeStores(context)
     ];
   }
 
-  Widget _getBuildMyHome() {
+  Widget _getBuildMyHome(BuildContext context) {
+    final theme = Theme.of(context);
+        final isDarkTheme = ThemeOptions.of(context).isDarkTheme(context);
     return Padding(
-            padding: const EdgeInsets.only(bottom: 12),
-
-          child: CustomListTile(
-        backgroundColor: AppColors.kbAliceBlue,
+      padding: const EdgeInsets.only(bottom: 12),
+      child: CustomListTile(
+        backgroundColor: theme.colorScheme.secondaryVariant,
         leading: customIconSquare(
-          backgroundColor: AppColors.kbPureWhite,
           iconAsset: HelloIcons.home_bold_icon,
-          iconColor: AppColors.kbAlmostBlack,
+          backgroundColor:  (isDarkTheme
+                    ? AppColors.kDark_2
+                    : theme.colorScheme.background),
           backgroundSize: 40,
           iconSize: 24,
           isCustomIcon: true,
         ),
         titleText: Text(
           "Build my home",
-          style: AppThemes.normalTextStyle
-              .copyWith(fontSize: 14, fontWeight: FontWeight.bold),
+          style:theme.textTheme.headline6
         ),
         subTitle: _HorizontalSeparatedTextItems(
           items: ["Design", "Build", "Smart"],
         ),
         onTap: () => {
-         ExtendedNavigator.root.push(Routes.addDetailsForHome),
+          ExtendedNavigator.root.push(Routes.addDetailsForHome),
         },
       ),
     );
   }
 
-  Widget _getProffessionals() {
+  Widget _getProffessionals(BuildContext context) {
+        final theme = Theme.of(context);
+                final isDarkTheme = ThemeOptions.of(context).isDarkTheme(context);
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
-          child: CustomListTile(
-        backgroundColor: AppColors.kbAliceBlue,
+      child: CustomListTile(
+        backgroundColor: theme.colorScheme.secondaryVariant,
         leading: customIconSquare(
-          backgroundColor: AppColors.kbPureWhite,
           iconAsset: HelloIcons.profile_bold_icon,
-          iconColor: AppColors.kbAlmostBlack,
+           backgroundColor:  (isDarkTheme
+                    ? AppColors.kDark_2
+                    : theme.colorScheme.background),
           backgroundSize: 40,
           iconSize: 24,
           isCustomIcon: true,
         ),
         titleText: Text(
           "Professionals",
-          style: AppThemes.normalTextStyle
-              .copyWith(fontSize: 14, fontWeight: FontWeight.bold),
+          style:theme.textTheme.headline6,
         ),
         subTitle: Text(
           "Professionals",
-          style: AppThemes.normalTextStyle
-              .copyWith(color: AppColors.kbDarkTextColor, fontSize: 12),
         ),
         onTap: () => {
           //TODO: Add Navigation to Professionals Screen
@@ -136,23 +137,26 @@ class ServicesOffferedItems extends StatelessWidget {
     );
   }
 
-  Widget _getDesignAndPlans() {
-     return Padding(
+  Widget _getDesignAndPlans(BuildContext context) {
+            final theme = Theme.of(context);
+                final isDarkTheme = ThemeOptions.of(context).isDarkTheme(context);
+
+    return Padding(
       padding: const EdgeInsets.only(bottom: 12),
-       child: CustomListTile(
-        backgroundColor: AppColors.kbAliceBlue,
+      child: CustomListTile(
+        backgroundColor: theme.colorScheme.secondaryVariant,
         leading: customIconSquare(
-          backgroundColor: AppColors.kbPureWhite,
           iconAsset: HelloIcons.chart_bold_icon,
-          iconColor: AppColors.kbAlmostBlack,
+           backgroundColor:  (isDarkTheme
+                    ? AppColors.kDark_2
+                    : theme.colorScheme.background),
           backgroundSize: 40,
           iconSize: 24,
           isCustomIcon: true,
         ),
         titleText: Text(
           "Design and Plans",
-          style: AppThemes.normalTextStyle
-              .copyWith(fontSize: 14, fontWeight: FontWeight.bold),
+          style: theme.textTheme.headline6,
         ),
         subTitle: _HorizontalSeparatedTextItems(
           items: ["Creative", "Pocket friendly"],
@@ -161,26 +165,30 @@ class ServicesOffferedItems extends StatelessWidget {
           //TODO: Add Navigation to Design and Plans
           print("User want to Navigate to Design and Plans")
         },
-    ),
-     );
+      ),
+    );
   }
-  Widget _getHomeStores() {
-     return Padding(
+
+  Widget _getHomeStores(BuildContext context) {
+                final theme = Theme.of(context);
+                final isDarkTheme = ThemeOptions.of(context).isDarkTheme(context);
+
+    return Padding(
       padding: const EdgeInsets.only(bottom: 12),
-       child: CustomListTile(
-        backgroundColor: AppColors.kbAliceBlue,
+      child: CustomListTile(
+        backgroundColor: theme.colorScheme.secondaryVariant,
         leading: customIconSquare(
-          backgroundColor: AppColors.kbPureWhite,
-          iconAsset: HelloIcons.chart_bold_icon,
-          iconColor: AppColors.kbAlmostBlack,
+          iconAsset: HelloIcons.bag_bold_icon,
+           backgroundColor:  (isDarkTheme
+                    ? AppColors.kDark_2
+                    : theme.colorScheme.background),
           backgroundSize: 40,
           iconSize: 24,
           isCustomIcon: true,
         ),
         titleText: Text(
           "Home Stores",
-          style: AppThemes.normalTextStyle
-              .copyWith(fontSize: 14, fontWeight: FontWeight.bold),
+          style: theme.textTheme.headline6,
         ),
         subTitle: _HorizontalSeparatedTextItems(
           items: ["Nearest Stores", "Latest Offers"],
@@ -189,15 +197,14 @@ class ServicesOffferedItems extends StatelessWidget {
           //TODO: Add Navigation to Home Stores
           print("User want to Navigate to Homes Stores")
         },
-    ),
-     );
+      ),
+    );
   }
-
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: getServicesOffered(),
+      children: getServicesOffered(context),
     );
   }
 }
@@ -214,7 +221,7 @@ class _HorizontalSeparatedTextItems extends StatelessWidget {
 
   ///To give custom styling to the texts. By default it will have a font size of 12
   final TextStyle style;
-  List<Widget> _buildItems(List<String> items) {
+  List<Widget> _buildItems(List<String> items,BuildContext context) {
     List<Widget> listOfItems = [];
 
     for (int i = 0; i < items.length; i++) {
@@ -227,7 +234,7 @@ class _HorizontalSeparatedTextItems extends StatelessWidget {
       }
       listOfItems.add(Text(
         items[i],
-        style: style ?? AppThemes.normalTextStyle.copyWith(fontSize: 12),
+        style: style ?? Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 12),
       ));
 
       listOfItems.add(
@@ -239,7 +246,7 @@ class _HorizontalSeparatedTextItems extends StatelessWidget {
       if (i != items.length - 1) {
         listOfItems.add(FilledCircle(
           size: 3.0,
-          color: AppColors.kbDarkTextColor,
+          color: Theme.of(context).colorScheme.onBackground,
         ));
       }
     }
@@ -251,7 +258,7 @@ class _HorizontalSeparatedTextItems extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
-      children: _buildItems(items),
+      children: _buildItems(items,context),
     );
   }
 }

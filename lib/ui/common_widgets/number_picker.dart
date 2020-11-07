@@ -138,9 +138,10 @@ class NumberPicker extends StatelessWidget {
   }
 
   Widget _integerListView(ThemeData themeData) {
-    TextStyle defaultStyle = AppThemes.normalSecondaryTextStyle
+  
+    TextStyle defaultStyle = themeData.textTheme.bodyText2
         .copyWith(fontWeight: FontWeight.bold, fontSize: 16);
-    TextStyle selectedStyle = AppThemes.normalSecondaryTextStyle
+    TextStyle selectedStyle = themeData.textTheme.bodyText2
         .copyWith(fontWeight: FontWeight.bold, fontSize: 18);
 
     var listItemCount = integerItemCount + 4;
@@ -193,8 +194,8 @@ class NumberPicker extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(12),
                                   color: value == selectedIntValue
-                                      ? AppColors.kbLavender
-                                      : AppColors.kbAliceBlue,
+                                      ? themeData.colorScheme.secondary
+                                      :themeData.colorScheme.secondaryVariant,
                                 ),
                                 child: Center(
                                   child: Text(
@@ -218,7 +219,7 @@ class NumberPicker extends StatelessWidget {
                             width: value == selectedIntValue ? 10 : 0,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.0),
-                                color: AppColors.kbDarkGreen),
+                                color: AppColors.kGreenDark),
                           )
                         ],
                       );

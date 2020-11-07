@@ -18,42 +18,35 @@ class CostEstimateScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var state = Provider.of<CostEstimateState>(context);
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: AnnotatedRegion<SystemUiOverlayStyle>(
-          value: SystemUiOverlayStyle.dark
-              .copyWith(statusBarColor: AppColors.kbPureWhite),
-          child: SafeArea(
-            child: Scaffold(
-              backgroundColor: AppColors.kbPureWhite,
-              appBar: CustomAppBar(
-                isBackButton: true,
-                onBackButtonPressed: ExtendedNavigator.of(context).pop,
-              ),
-              body: _CostEstimateScreenBody(),
-              bottomNavigationBar: Padding(
-                padding: const EdgeInsets.only(left:24.0,right:24,top:12,bottom: 40.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CupertinoButton(
-                      child: Text(
-                        "Connect with HelloTeam",
-                        style: AppThemes.normalTextStyle.copyWith(
-                            color: AppColors.kbPrimaryYellow,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      color: AppColors.kbPrimaryDarkBlue,
-                      onPressed: () {
-                        //TODO: Add onPressed action whhen user clicks on Connect with HelloTeam button
-                      },
-                    ),
-                  ],
+    final theme = Theme.of(context);
+    return AnnotatedSafeArea(
+      child: Scaffold(
+        backgroundColor: theme.colorScheme.background,
+        appBar: CustomAppBar(
+          isBackButton: true,
+          onBackButtonPressed: ExtendedNavigator.of(context).pop,
+        ),
+        body: _CostEstimateScreenBody(),
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.only(
+              left: 24.0, right: 24, top: 12, bottom: 40.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CupertinoButton(
+                child: Text(
+                  "Connect with HelloTeam",
+                  style: AppThemes.normalTextStyle.copyWith(
+                      color: AppColors.kbPrimaryYellow,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold),
                 ),
+                color:Theme.of(context).colorScheme.primary,
+                onPressed: () {
+                  //TODO: Add onPressed action whhen user clicks on Connect with HelloTeam button
+                },
               ),
-            ),
+            ],
           ),
         ),
       ),
@@ -67,6 +60,7 @@ class _CostEstimateScreenBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context, designSize: Size(375.0, 801.0));
+    final theme = Theme.of(context);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 40),
       child: ScrollableColumn(
@@ -79,11 +73,12 @@ class _CostEstimateScreenBody extends StatelessWidget {
               children: [
                 Text(
                   "Based on your selections,",
-                  style: AppThemes.normalTextLightStyle.copyWith(fontSize: 16),
+                  style: theme.textTheme.bodyText1
+                      .copyWith(fontWeight: FontWeight.w300, fontSize: 16),
                 ),
                 Text(
                   "We've got the best rate for you!",
-                  style: AppThemes.normalTextStyle
+                  style: theme.textTheme.bodyText1
                       .copyWith(fontWeight: FontWeight.bold, fontSize: 16),
                 )
               ],
@@ -94,7 +89,7 @@ class _CostEstimateScreenBody extends StatelessWidget {
           ),
           RoundedContainer(
               borderRadius: 20,
-              backGroundColor: AppColors.kbAliceBlue,
+              backGroundColor: theme.colorScheme.secondaryVariant,
               child: Container(
                 constraints: BoxConstraints(
                   maxHeight: fullHeight(context) * 0.25,
@@ -131,7 +126,7 @@ class _CostEstimateScreenBody extends StatelessWidget {
                           children: [
                             Text(
                               "starts from",
-                              style: AppThemes.normalTextStyle
+                              style: theme.textTheme.bodyText1
                                   .copyWith(fontSize: 12),
                               textAlign: TextAlign.left,
                             ),
@@ -140,10 +135,11 @@ class _CostEstimateScreenBody extends StatelessWidget {
                                 Spacer(),
                                 Text(
                                   "₹",
-                                  style: TextStyle(fontSize: 24),
+                                  style: theme.textTheme.headline4
+                                      .copyWith(fontSize: 24),
                                 ),
                                 Text("1885",
-                                    style: AppThemes.normalTextStyle.copyWith(
+                                    style: theme.textTheme.headline1.copyWith(
                                         fontSize: 48,
                                         fontWeight: FontWeight.bold)),
                                 Spacer(),
@@ -153,7 +149,7 @@ class _CostEstimateScreenBody extends StatelessWidget {
                                 alignment: Alignment.centerRight,
                                 child: Text(
                                   "per sq.ft",
-                                  style: AppThemes.normalTextStyle
+                                  style: theme.textTheme.bodyText1
                                       .copyWith(fontSize: 16),
                                 )),
                             SizedBox(
@@ -162,12 +158,12 @@ class _CostEstimateScreenBody extends StatelessWidget {
                             RichText(
                                 text: TextSpan(
                                     text: "with ",
-                                    style: AppThemes.normalTextStyle
+                                    style: theme.textTheme.bodyText1
                                         .copyWith(fontSize: 12),
                                     children: <TextSpan>[
                                   TextSpan(
                                       text: "HelloPro Builders",
-                                      style: AppThemes.normalTextStyle.copyWith(
+                                      style: theme.textTheme.bodyText1.copyWith(
                                           fontSize: 12,
                                           fontWeight: FontWeight.bold)),
                                 ]))
@@ -188,7 +184,7 @@ class _CostEstimateScreenBody extends StatelessWidget {
               children: [
                 Text(
                   "Features",
-                  style: AppThemes.normalTextStyle
+                  style: theme.textTheme.bodyText1
                       .copyWith(fontSize: 14, color: AppColors.kbDarkGrey),
                 ),
                 SizedBox(
@@ -227,9 +223,9 @@ class _CostEstimateScreenBody extends StatelessWidget {
                   title: "5 Year HelloCare  Extensive Warranty",
                   subTitle: "Long term support, even after project completion",
                 ),
-                 SizedBox(
+                SizedBox(
                   height: 12,
-                ),  
+                ),
               ],
             ),
           ),
@@ -257,19 +253,20 @@ class TitleSubTitleText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           title,
           style: titleStyle ??
-              AppThemes.normalTextStyle
+              theme.textTheme.bodyText1
                   .copyWith(fontSize: 14, fontWeight: FontWeight.bold),
         ),
         Text(
           subTitle,
           style: subTitleStyle ??
-              AppThemes.normalSecondaryTextStyle
+            theme.textTheme.bodyText2
                   .copyWith(fontSize: 12, fontWeight: FontWeight.w300),
         )
       ],

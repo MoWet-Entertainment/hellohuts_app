@@ -17,10 +17,11 @@ class CustomizeDetailsBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<CostEstimateState>(context);
+    final theme = Theme.of(context);
     ScreenUtil.init(context, designSize: Size(375.0, 801.0));
     return Container(
       width: fullWidth(context),
-      color: AppColors.kbPureWhite,
+      color: theme.colorScheme.background,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 32),
         child: ScrollableColumn(
@@ -41,15 +42,12 @@ class CustomizeDetailsBody extends StatelessWidget {
             //     ),
             //   ),
             // ),
-        
           ],
         ),
       ),
     );
   }
- 
 }
-
 
 class _BuildingMaterialsSelectSection extends StatelessWidget {
   const _BuildingMaterialsSelectSection({

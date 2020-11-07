@@ -73,6 +73,9 @@ class HelloIcons {
   static const String down_arrow_light_icon =
       _iconsRoot + "Arrow_down_icon.png";
 
+//Services Offeres Screen
+  static const String bag_light_icon = _iconsRoot + "Back_light_icon.png";
+
 //Add Details Services Offered Screen
   static const String minus_light_icon = _iconsRoot + "Minus_light_icon.png";
   static const String plus_light_icon = _iconsRoot + "Plus_light_icon.png";
@@ -97,5 +100,5 @@ class SessionData {
 
 class UIConstants {
   // Sentinel value for the system text scale factor option.
-static const  double systemTextScaleFactorOption = -1;
+  static const double systemTextScaleFactorOption = -1;
 }
