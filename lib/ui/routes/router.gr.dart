@@ -16,6 +16,7 @@ import '../screens/auth/phone_auth/get_phone.dart';
 import '../screens/base_page.dart';
 import '../screens/categories/categories_screen.dart';
 import '../screens/categories/categories_search/categories_search_screen.dart';
+import '../screens/categories/post_detail/post_detail.dart';
 import '../screens/explore.dart';
 import '../screens/feed_posts/feed_post_detail.dart';
 import '../screens/feed_posts/widgets/comments/post_comments_deatil.dart';
@@ -43,7 +44,7 @@ class Routes {
   static const String addDetailsForHome = '/add-details-for-home';
   static const String costEstimateScreen = '/cost-estimate-screen';
   static const String categoriesScreen = '/categories-screen';
-  static const String postDetailWidget = '/post-detail-widget';
+  static const String postDetailPage = '/post-detail-page';
   static const all = <String>{
     basePage,
     explorePage,
@@ -61,7 +62,7 @@ class Routes {
     addDetailsForHome,
     costEstimateScreen,
     categoriesScreen,
-    postDetailWidget,
+    postDetailPage,
   };
 }
 
@@ -85,7 +86,7 @@ class AppRouter extends RouterBase {
     RouteDef(Routes.addDetailsForHome, page: AddDetailsForHome),
     RouteDef(Routes.costEstimateScreen, page: CostEstimateScreen),
     RouteDef(Routes.categoriesScreen, page: CategoriesScreen),
-    RouteDef(Routes.postDetailWidget, page: PostDetailWidget),
+    RouteDef(Routes.postDetailPage, page: PostDetailPage),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -251,10 +252,10 @@ class AppRouter extends RouterBase {
         settings: data,
       );
     },
-    PostDetailWidget: (data) {
-      final args = data.getArgs<PostDetailWidgetArguments>(nullOk: false);
+    PostDetailPage: (data) {
+      final args = data.getArgs<PostDetailPageArguments>(nullOk: false);
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => PostDetailWidget(
+        builder: (context) => PostDetailPage(
           key: args.key,
           imageData: args.imageData,
         ),
@@ -325,9 +326,9 @@ class CategoriesScreenArguments {
   CategoriesScreenArguments({this.key, this.scaffoldKey});
 }
 
-/// PostDetailWidget arguments holder class
-class PostDetailWidgetArguments {
+/// PostDetailPage arguments holder class
+class PostDetailPageArguments {
   final Key key;
   final ImageData imageData;
-  PostDetailWidgetArguments({this.key, @required this.imageData});
+  PostDetailPageArguments({this.key, @required this.imageData});
 }

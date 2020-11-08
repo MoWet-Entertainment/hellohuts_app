@@ -5,6 +5,7 @@ import 'package:hellohuts_app/ui/screens/auth/phone_auth/get_phone.dart';
 import 'package:hellohuts_app/ui/screens/base_page.dart';
 import 'package:hellohuts_app/ui/screens/categories/categories_screen.dart';
 import 'package:hellohuts_app/ui/screens/categories/categories_search/categories_search_screen.dart';
+import 'package:hellohuts_app/ui/screens/categories/post_detail/post_detail.dart';
 import 'package:hellohuts_app/ui/screens/explore.dart';
 import 'package:hellohuts_app/ui/screens/feed_posts/feed_post_detail.dart';
 import 'package:hellohuts_app/ui/screens/feed_posts/widgets/comments/post_comments_deatil.dart';
@@ -35,7 +36,7 @@ CustomRoute(page: ServicesOfferedBasePage, transitionsBuilder:  TransitionsBuild
 CustomRoute(page: AddDetailsForHome, transitionsBuilder: TransitionsBuilders.slideLeft),
 CustomRoute(page:CostEstimateScreen,transitionsBuilder: TransitionsBuilders.fadeIn),
     AdaptiveRoute(page: CategoriesScreen),
-    AdaptiveRoute(page:PostDetailWidget, )
+    AdaptiveRoute(page:PostDetailPage, )
 
   ]
 )
