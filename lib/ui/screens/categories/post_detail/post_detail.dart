@@ -39,9 +39,10 @@ class _PostDetailPageState extends State<PostDetailPage> {
     final theme = Theme.of(context);
     print('Height of AppBar ' + heightOfAppBar.toString());
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent),
+      value: SystemUiOverlayStyle.light
+          .copyWith(statusBarColor: Colors.transparent),
       child: Scaffold(
-              body: Stack(
+        body: Stack(
           children: [
             ScrollConfiguration(
               behavior: NeatScrollBehavior(),
@@ -91,7 +92,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
                   _PostDetailContent(),
                   SliverToBoxAdapter(
                       child: SizedBox(
-                    height: 24,
+                    height: 2,
                   )),
                   NormalGrid(),
                 ],
@@ -103,8 +104,6 @@ class _PostDetailPageState extends State<PostDetailPage> {
     );
   }
 }
-
-
 
 class _PostDetailCommentPlaceholder extends StatelessWidget {
   const _PostDetailCommentPlaceholder({
@@ -146,7 +145,7 @@ class _PostDetailCommentPlaceholder extends StatelessWidget {
                   ],
                 )),
             onTap: () => {
-                 _buildShowModalBottomSheet(context, theme),
+                  _buildShowModalBottomSheet(context, theme),
                 }),
       ]),
     );
@@ -154,85 +153,256 @@ class _PostDetailCommentPlaceholder extends StatelessWidget {
 
   Future _buildShowModalBottomSheet(BuildContext context, ThemeData theme) {
     return showModalBottomSheet(
-                  isScrollControlled: true,
-                  backgroundColor: Colors.transparent,
-                  context: context,
-                  builder: (BuildContext context) => DraggableScrollableSheet(
-                    initialChildSize: 0.5,
-                    maxChildSize: 1,
-                    builder: (BuildContext context,
-                        ScrollController scrollController) {
-                      return Stack(
-                        children: [
-                          Container(
-                            width: fullWidth(context),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(20),
-                                topRight: Radius.circular(20),
-                              ),
-                              color: theme.colorScheme.surface,
-                            ),
-                            child: Container(
-                              padding: const EdgeInsets.only(top: 8),
-                              child: Column(
-                                children: [
-                                  Container(
-                                    width: fullWidth(context) * .15,
-                                    height: 5,
-                                    decoration: BoxDecoration(
-                                      color: theme.dividerColor,
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(10),
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      context: context,
+      builder: (BuildContext context) => _commentContainer(context),
+    );
+  }
+
+  Widget _commentContainer(BuildContext context) {
+    final double height = fullHeight(context);
+    final isDarkTheme = ThemeOptions.of(context).isDarkTheme(context);
+    final theme = Theme.of(context);
+
+    // return DraggableScrollableSheet(
+    //    initialChildSize: 0.5,
+    //     maxChildSize: 1,
+    //  builder: (BuildContext context, ScrollController scrollController){
+    //     return Container(
+    //      height: height,
+    //       decoration: BoxDecoration(
+    //         borderRadius: BorderRadius.only(
+    //           topLeft: Radius.circular(20),
+    //           topRight: Radius.circular(20),
+    //         ),
+    //         color: theme.colorScheme.surface,
+    //       ),
+    //       child: Container(
+    //         child: Stack(
+    //           children: [
+    //             Align(
+    //               alignment: Alignment.topCenter,
+
+    //                           child: Padding(
+    //                             padding: const EdgeInsets.symmetric(vertical: 5),
+    //                             child: Container(
+    //                   width: fullWidth(context) * .15,
+    //                   height: 5,
+    //                   decoration: BoxDecoration(
+    //                     color: theme.dividerColor,
+    //                     borderRadius: BorderRadius.all(
+    //                       Radius.circular(10),
+    //                     ),
+    //                   ),
+    //                 ),
+    //                           ),
+    //             ),
+
+    //           ],
+    //         ),
+    //       ),
+    //     );
+    //   },
+    // );
+    return Container(
+      height: height * 0.8,
+      padding:
+          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+      child: DraggableScrollableSheet(
+        initialChildSize: 0.5,
+        minChildSize: 0.3,
+        maxChildSize: 1,
+        builder: (BuildContext context, ScrollController scrollController) {
+          return Stack(
+            children: [
+              Align(
+                alignment: Alignment.topCenter,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  child: Container(
+                    width: fullWidth(context) * .15,
+                    height: 5,
+                    decoration: BoxDecoration(
+                      color: theme.dividerColor,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top:16.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    ),
+                    color: theme.colorScheme.surface,
+                  ),
+                  child: ScrollConfiguration(
+                    behavior: NeatScrollBehavior(),
+                    child: ListView.builder(
+                        controller: scrollController,
+                        itemCount: 20,
+                        itemBuilder: (BuildContext context, int index) {
+                          return ListTile(
+                            title: Text('Item $index'),
+                          );
+                        }),
+                  ),
+                ),
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  color: theme.colorScheme.surface,
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 8.0, vertical: 8.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(20),
+                      ),
+                      color: theme.colorScheme.secondaryVariant,
+                    ),
+                    child: Row(
+                      children: [
+                        Container(
+                          child: Expanded(
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0, vertical: .0),
+                                  child: CustomAvatar(radius: 10),
+                                ),
+                                Expanded(
+                                  child: TextField(
+                                    maxLength: 120,
+                                    minLines: 1,
+                                    maxLines: 4,
+                                    maxLengthEnforced: true,
+                                    buildCounter: null,
+                                    style: theme.textTheme.bodyText2,
+                                    keyboardType: TextInputType.multiline,
+                                    decoration: InputDecoration(
+                                      counterText: "",
+                                      contentPadding:
+                                          EdgeInsets.symmetric(horizontal: 4.0),
+                                      border: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            width: 0, style: BorderStyle.none),
+                                        borderRadius: const BorderRadius.all(
+                                          const Radius.circular(20.0),
+                                        ),
                                       ),
+                                      fillColor: theme.colorScheme.surface,
                                     ),
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
-                          Positioned(
-                            bottom: MediaQuery.of(context).viewInsets.bottom,
-                            left: 0,
-                            right: 0,
-                            child: Container(
-                              padding: const EdgeInsets.only(
-                                  left: 16, top: 14, right: 16, bottom: 20),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(20),
-                                  topRight: Radius.circular(20),
-                                ),
-                                color: theme.colorScheme.surface,
-                              ),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: theme.colorScheme.secondaryVariant,
-                                ),
-                                child: TextField(
-                                  decoration: InputDecoration(
-                                    prefixIcon: CustomAvatar(radius: 10),
-                                    prefixIconConstraints: BoxConstraints(
-                                        maxWidth: 20, maxHeight: 20),
-                                    border: OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                          width: 0, style: BorderStyle.none),
-                                      borderRadius: const BorderRadius.all(
-                                        const Radius.circular(20.0),
-                                      ),
-                                    ),
-                                    fillColor: theme.colorScheme.surface,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
-                      );
-                    },
+                        ),
+                        IconButton(
+                          icon: Image.asset(HelloIcons.send_bold_icon,
+                              color: AppColors.kbDarkGrey, height: 24),
+                          onPressed: () => {},
+                        )
+                      ],
+                    ),
                   ),
-                );
+                ),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _commentContainer1(BuildContext context, ThemeData theme) {
+    return Container(
+      padding:
+          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+      child: DraggableScrollableSheet(
+        initialChildSize: 0.5,
+        maxChildSize: 1,
+        builder: (BuildContext context, ScrollController scrollController) {
+          return Stack(
+            children: [
+              Container(
+                width: fullWidth(context),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
+                  color: theme.colorScheme.surface,
+                ),
+                child: Container(
+                  padding: const EdgeInsets.only(top: 8),
+                  child: Column(
+                    children: [
+                      Container(
+                        width: fullWidth(context) * .15,
+                        height: 5,
+                        decoration: BoxDecoration(
+                          color: theme.dividerColor,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Positioned(
+                bottom: MediaQuery.of(context).viewInsets.bottom,
+                left: 0,
+                right: 0,
+                child: Container(
+                  padding: const EdgeInsets.only(
+                      left: 16, top: 14, right: 16, bottom: 20),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    ),
+                    color: theme.colorScheme.surface,
+                  ),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: theme.colorScheme.secondaryVariant,
+                    ),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        prefixIcon: CustomAvatar(radius: 10),
+                        prefixIconConstraints:
+                            BoxConstraints(maxWidth: 20, maxHeight: 20),
+                        border: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              width: 0, style: BorderStyle.none),
+                          borderRadius: const BorderRadius.all(
+                            const Radius.circular(20.0),
+                          ),
+                        ),
+                        fillColor: theme.colorScheme.surface,
+                      ),
+                    ),
+                  ),
+                ),
+              )
+            ],
+          );
+        },
+      ),
+    );
   }
 }
 
@@ -277,20 +447,29 @@ class _PostDetailContent extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              Row(children: [
-              Text('2 days ago', style: theme.textTheme.bodyText1.copyWith(color: AppColors.kbDarkGrey, fontSize: 12),),
-              Spacer(),
               Row(
                 children: [
-                  Image.asset(HelloIcons.location_bold_icon, color: AppColors.kbDarkGrey, height: 14),
-                  SizedBox(width:4),
-                   Text('Kakkanad',style: theme.textTheme.bodyText1.copyWith(color: AppColors.kbDarkGrey, fontSize: 12)),
-                   SizedBox(width:4),
-              ],),
+                  Text(
+                    '2 days ago',
+                    style: theme.textTheme.bodyText1
+                        .copyWith(color: AppColors.kbDarkGrey, fontSize: 12),
+                  ),
+                  Spacer(),
+                  Row(
+                    children: [
+                      Image.asset(HelloIcons.location_bold_icon,
+                          color: AppColors.kbDarkGrey, height: 14),
+                      SizedBox(width: 4),
+                      Text('Kakkanad',
+                          style: theme.textTheme.bodyText1.copyWith(
+                              color: AppColors.kbDarkGrey, fontSize: 12)),
+                      SizedBox(width: 4),
+                    ],
+                  ),
                 ],
               ),
-             
-              SizedBox(height:16),
+
+              SizedBox(height: 16),
               _PostDetailCommentPlaceholder(),
             ],
           ),
