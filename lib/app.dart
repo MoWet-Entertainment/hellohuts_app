@@ -63,14 +63,20 @@ class _AppState extends State<App> {
                     _themeMode = ThemeMode.light;
                   }
                 } else {
+                  print(
+                      "No saced theme found: Checking for the default system theme...");
                   Brightness platformBrighteness =
                       SchedulerBinding.instance.window.platformBrightness;
                   if (platformBrighteness == Brightness.dark) {
+                    print(
+                        "System theme is found to be dark.. Setting the application theme as :DARK");
                     _themeMode = ThemeMode.dark;
 
                     controller.setTheme('dark_theme');
                   } else {
                     _themeMode = ThemeMode.light;
+                     print(
+                        "System theme is found to be light.. Setting the application theme as :LIGHT");
                     controller.setTheme('light_theme');
                   }
                   // controller.forgetSavedTheme();
@@ -94,12 +100,12 @@ class _AppState extends State<App> {
                     return ModelBinding(
                       initialModel: ThemeOptions(
                         themeMode: _themeMode,
-                        textScaleFactor: UIConstants.systemTextScaleFactorOption,
+                        textScaleFactor:
+                            UIConstants.systemTextScaleFactorOption,
                         customTextDirection: CustomTextDirection.localeBased,
                         locale: null,
                         timeDilation: timeDilation,
                         platform: defaultTargetPlatform,
-
                       ),
                       child: MaterialApp(
                         debugShowCheckedModeBanner: false,
