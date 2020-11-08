@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/constants/mock1.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
@@ -11,6 +12,7 @@ import 'package:hellohuts_app/ui/screens/categories/widgets/wigets.dart';
 import 'package:hellohuts_app/ui/screens/feed_posts/widgets/comments/comments_placeholder.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
+import 'package:hellohuts_app/ui/styles/theme_options.dart';
 
 class PostDetailPage extends StatefulWidget {
   final ImageData imageData;
@@ -36,65 +38,67 @@ class _PostDetailPageState extends State<PostDetailPage> {
     heightOfAppBar = fullHeight(context) * 0.7;
     final theme = Theme.of(context);
     print('Height of AppBar ' + heightOfAppBar.toString());
-    return AnnotatedScaffold(
-      statusBarColor: Colors.transparent,
-      body: Stack(
-        children: [
-          ScrollConfiguration(
-            behavior: NeatScrollBehavior(),
-            child: CustomScrollView(
-              slivers: [
-                SliverAppBar(
-                  backgroundColor: AppColors.kDark_1,
-                  elevation: 0,
-                  leading: Container(
-                    decoration: BoxDecoration(
-                        // color: Colors.black.withOpacity(0.1),
-                        gradient:
-                            RadialGradient(center: Alignment.center, colors: [
-                          AppColors.kDark_1.withOpacity(0.1),
-                          Colors.transparent,
-                        ]),
-                        borderRadius: BorderRadius.circular(40)),
-                    child: IconButton(
-                        icon: Icon(Icons.arrow_back),
-                        onPressed: () => ExtendedNavigator.of(context).pop()),
-                  ),
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent),
+      child: Scaffold(
+              body: Stack(
+          children: [
+            ScrollConfiguration(
+              behavior: NeatScrollBehavior(),
+              child: CustomScrollView(
+                slivers: [
+                  SliverAppBar(
+                    backgroundColor: AppColors.kDark_1,
+                    elevation: 0,
+                    leading: Container(
+                      decoration: BoxDecoration(
+                          // color: Colors.black.withOpacity(0.1),
+                          gradient:
+                              RadialGradient(center: Alignment.center, colors: [
+                            AppColors.kDark_1.withOpacity(0.1),
+                            Colors.transparent,
+                          ]),
+                          borderRadius: BorderRadius.circular(40)),
+                      child: IconButton(
+                          icon: Icon(Icons.arrow_back),
+                          onPressed: () => ExtendedNavigator.of(context).pop()),
+                    ),
 //               actions: [
 // IconButton(icon: Icon(Icons.more_horiz, color: AppColors.kPureWhite,), onPressed: null)
 //                ],
-                  floating: false,
-                  pinned: true,
-                  expandedHeight: heightOfAppBar,
-                  flexibleSpace: DecoratedBox(
-                    decoration: BoxDecoration(
-                        // gradient: LinearGradient(
-                        //   colors: <Color>[
-                        //     AppColors.kPrimaryYellow,
-                        //     AppColors.kPrimaryYellow,
-                        //   ],
-                        // ),
-                        color: AppColors.kDark_1),
-                    child: FlexibleSpaceBar(
-                      stretchModes: [StretchMode.zoomBackground],
-                      collapseMode: CollapseMode.pin,
-                      background: PostImage(
-                        imageData: widget.imageData,
+                    floating: false,
+                    pinned: true,
+                    expandedHeight: heightOfAppBar,
+                    flexibleSpace: DecoratedBox(
+                      decoration: BoxDecoration(
+                          // gradient: LinearGradient(
+                          //   colors: <Color>[
+                          //     AppColors.kPrimaryYellow,
+                          //     AppColors.kPrimaryYellow,
+                          //   ],
+                          // ),
+                          color: AppColors.kDark_1),
+                      child: FlexibleSpaceBar(
+                        stretchModes: [StretchMode.zoomBackground],
+                        collapseMode: CollapseMode.pin,
+                        background: PostImage(
+                          imageData: widget.imageData,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                _PostDetailTitleHeaders(),
-                _PostDetailContent(),
-                SliverToBoxAdapter(
-                    child: SizedBox(
-                  height: 24,
-                )),
-                NormalGrid(),
-              ],
+                  _PostDetailTitleHeaders(),
+                  _PostDetailContent(),
+                  SliverToBoxAdapter(
+                      child: SizedBox(
+                    height: 24,
+                  )),
+                  NormalGrid(),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
