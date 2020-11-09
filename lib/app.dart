@@ -54,8 +54,9 @@ class _AppState extends State<App> {
               saveThemesOnChange: true,
               onInitCallback: (controller, previouslySavedThemeFuture) async {
                 String savedTheme = await previouslySavedThemeFuture;
-                print("Saved Theme: " + savedTheme);
                 if (savedTheme != null) {
+                                  print("Saved Theme: " + savedTheme);
+
                   controller.setTheme(savedTheme);
                   if (savedTheme.contains('dark')) {
                     _themeMode = ThemeMode.dark;
@@ -64,7 +65,7 @@ class _AppState extends State<App> {
                   }
                 } else {
                   print(
-                      "No saced theme found: Checking for the default system theme...");
+                      "No saved theme found: Checking for the default system theme...");
                   Brightness platformBrighteness =
                       SchedulerBinding.instance.window.platformBrightness;
                   if (platformBrighteness == Brightness.dark) {

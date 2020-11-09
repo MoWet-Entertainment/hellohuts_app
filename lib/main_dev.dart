@@ -17,8 +17,8 @@ void main() async {
 
   // Pass all uncaught errors from the framework to Crashlytics.
   // FlutterError.onError = Crashlytics.instance.recordFlutterError;
-  WidgetsFlutterBinding.ensureInitialized();
   await setUpLocator();
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(Provider<AppConfig>(
     create: (context) => AppConfig(
       appTitle: AppConstants.appNameDev,
