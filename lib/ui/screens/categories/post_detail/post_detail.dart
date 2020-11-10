@@ -6,12 +6,12 @@ import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/constants/mock1.dart';
 import 'package:hellohuts_app/helper/utilities.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
-import 'package:hellohuts_app/ui/common_widgets/interactions/comment_textfield.dart';
+import 'package:hellohuts_app/ui/common_widgets/interactions/comment/comment_textfield.dart';
 import 'package:hellohuts_app/ui/common_widgets/interactions/follow_button.dart';
 import 'package:hellohuts_app/ui/common_widgets/scroll_behavior/neat_scroll_behavior.dart';
 import 'package:hellohuts_app/ui/screens/categories/post_detail/post_image.dart';
 import 'package:hellohuts_app/ui/screens/categories/widgets/wigets.dart';
-import 'package:hellohuts_app/ui/screens/feed_posts/widgets/comments/comments_placeholder.dart';
+import 'package:hellohuts_app/ui/common_widgets/interactions/comment/comments_placeholder.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
 import 'package:hellohuts_app/ui/styles/theme_options.dart';
@@ -166,47 +166,6 @@ class _PostDetailCommentPlaceholder extends StatelessWidget {
     final double height = fullHeight(context);
     final isDarkTheme = ThemeOptions.of(context).isDarkTheme(context);
     final theme = Theme.of(context);
-
-    // return DraggableScrollableSheet(
-    //    initialChildSize: 0.5,
-    //     maxChildSize: 1,
-    //  builder: (BuildContext context, ScrollController scrollController){
-    //     return Container(
-    //      height: height,
-    //       decoration: BoxDecoration(
-    //         borderRadius: BorderRadius.only(
-    //           topLeft: Radius.circular(20),
-    //           topRight: Radius.circular(20),
-    //         ),
-    //         color: theme.colorScheme.surface,
-    //       ),
-    //       child: Container(
-    //         child: Stack(
-    //           children: [
-    //             Align(
-    //               alignment: Alignment.topCenter,
-
-    //                           child: Padding(
-    //                             padding: const EdgeInsets.symmetric(vertical: 5),
-    //                             child: Container(
-    //                   width: fullWidth(context) * .15,
-    //                   height: 5,
-    //                   decoration: BoxDecoration(
-    //                     color: theme.dividerColor,
-    //                     borderRadius: BorderRadius.all(
-    //                       Radius.circular(10),
-    //                     ),
-    //                   ),
-    //                 ),
-    //                           ),
-    //             ),
-
-    //           ],
-    //         ),
-    //       ),
-    //     );
-    //   },
-    // );
     return Container(
       height: height * 0.8,
       padding:
@@ -235,7 +194,7 @@ class _PostDetailCommentPlaceholder extends StatelessWidget {
                         itemCount: 20,
                         itemBuilder: (BuildContext context, int index) {
                           return ListTile(
-                            title: Text('Item $index'),
+                            title: UsersCommentsWidget()
                           );
                         }),
                   ),

@@ -2,7 +2,7 @@ import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:hellohuts_app/models/test.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
-import 'package:hellohuts_app/ui/screens/feed_posts/widgets/comments/comments_placeholder.dart';
+import 'package:hellohuts_app/ui/common_widgets/interactions/comment/comments_placeholder.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
