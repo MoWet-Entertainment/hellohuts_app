@@ -6,6 +6,7 @@ import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/constants/mock1.dart';
 import 'package:hellohuts_app/helper/utilities.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
+import 'package:hellohuts_app/ui/common_widgets/interactions/comment_textfield.dart';
 import 'package:hellohuts_app/ui/common_widgets/interactions/follow_button.dart';
 import 'package:hellohuts_app/ui/common_widgets/scroll_behavior/neat_scroll_behavior.dart';
 import 'package:hellohuts_app/ui/screens/categories/post_detail/post_image.dart';
@@ -240,7 +241,7 @@ class _PostDetailCommentPlaceholder extends StatelessWidget {
                   ),
                 ),
               ),
-              getTextField1(theme, context),
+CommentTexFieldWidget(),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 4.0),
                 child: Align(
@@ -328,132 +329,9 @@ class _PostDetailCommentPlaceholder extends StatelessWidget {
     );
   }
 
-  Widget getTextField1(ThemeData theme, BuildContext context) {
-    final width = fullWidth(context);
-    return CommentTexFieldWidget(width: width);
-  }
+
 }
 
-class CommentTexFieldWidget extends StatefulWidget {
-  const CommentTexFieldWidget({
-    Key key,
-    @required this.width,
-  }) : super(key: key);
-
-  final double width;
-
-  @override
-  _CommentTexFieldWidgetState createState() => _CommentTexFieldWidgetState();
-}
-
-class _CommentTexFieldWidgetState extends State<CommentTexFieldWidget> {
-  bool _isTyping = false;
-
-  void _onChanged() {
-  }
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        Container(
-          width: widget.width,
-          decoration: BoxDecoration(
-              color: theme.colorScheme.background,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(16),
-                topRight: Radius.circular(16),
-              )),
-          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
-          child: Container(
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Container(
-                  constraints: BoxConstraints(
-                    maxWidth: widget.width * 0.75,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: theme.colorScheme.secondaryVariant,
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 8.0, right: 8, top: 14.0),
-                        child: CustomAvatar(radius: 10),
-                      ),
-                      Expanded(
-                        child: TextField(
-                          maxLength: 150,
-                          minLines: 1,
-                          maxLines: 8,
-                          maxLengthEnforced: true,
-                          buildCounter: null,
-                          style: theme.textTheme.bodyText2,
-                          keyboardType: TextInputType.multiline,
-                          decoration: InputDecoration(
-                            hintText: "Add Comment",
-                            hintStyle: theme.textTheme.bodyText2
-                                .copyWith(color: AppColors.kbDarkGrey),
-                            counterText: "",
-                            contentPadding:
-                                EdgeInsets.symmetric(horizontal: 8.0),
-                            border: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  width: 0, style: BorderStyle.none),
-                              borderRadius: const BorderRadius.all(
-                                const Radius.circular(20.0),
-                              ),
-                            ),
-                            fillColor: theme.colorScheme.surface,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      IconButton(
-                          icon: Icon(
-                            Icons.camera_alt_rounded,
-                            color: AppColors.kbDarkGrey,
-                          ),
-                          onPressed: () => {
-                                print("user wants to select photos"),
-                                //TODO: add photo selecting functionality here
-                              }),
-                      SizedBox(
-                        width: 8,
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                Container(
-                    decoration: BoxDecoration(
-                        // color:theme.colorScheme.secondaryVariant,
-
-                        shape: BoxShape.circle),
-                    child: IconButton(
-                      icon: Image.asset(HelloIcons.send_bold_icon,
-                          color: AppColors.kbDarkGrey, height: 28),
-                      onPressed: () => {},
-                    )),
-              ],
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
 
 class _PostDetailContent extends StatelessWidget {
   const _PostDetailContent({
