@@ -6,11 +6,12 @@ import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/constants/mock1.dart';
 import 'package:hellohuts_app/helper/utilities.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
+import 'package:hellohuts_app/ui/common_widgets/interactions/comment/comment_textfield.dart';
 import 'package:hellohuts_app/ui/common_widgets/interactions/follow_button.dart';
 import 'package:hellohuts_app/ui/common_widgets/scroll_behavior/neat_scroll_behavior.dart';
 import 'package:hellohuts_app/ui/screens/categories/post_detail/post_image.dart';
 import 'package:hellohuts_app/ui/screens/categories/widgets/wigets.dart';
-import 'package:hellohuts_app/ui/screens/feed_posts/widgets/comments/comments_placeholder.dart';
+import 'package:hellohuts_app/ui/common_widgets/interactions/comment/comments_placeholder.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
 import 'package:hellohuts_app/ui/styles/theme_options.dart';
@@ -165,47 +166,6 @@ class _PostDetailCommentPlaceholder extends StatelessWidget {
     final double height = fullHeight(context);
     final isDarkTheme = ThemeOptions.of(context).isDarkTheme(context);
     final theme = Theme.of(context);
-
-    // return DraggableScrollableSheet(
-    //    initialChildSize: 0.5,
-    //     maxChildSize: 1,
-    //  builder: (BuildContext context, ScrollController scrollController){
-    //     return Container(
-    //      height: height,
-    //       decoration: BoxDecoration(
-    //         borderRadius: BorderRadius.only(
-    //           topLeft: Radius.circular(20),
-    //           topRight: Radius.circular(20),
-    //         ),
-    //         color: theme.colorScheme.surface,
-    //       ),
-    //       child: Container(
-    //         child: Stack(
-    //           children: [
-    //             Align(
-    //               alignment: Alignment.topCenter,
-
-    //                           child: Padding(
-    //                             padding: const EdgeInsets.symmetric(vertical: 5),
-    //                             child: Container(
-    //                   width: fullWidth(context) * .15,
-    //                   height: 5,
-    //                   decoration: BoxDecoration(
-    //                     color: theme.dividerColor,
-    //                     borderRadius: BorderRadius.all(
-    //                       Radius.circular(10),
-    //                     ),
-    //                   ),
-    //                 ),
-    //                           ),
-    //             ),
-
-    //           ],
-    //         ),
-    //       ),
-    //     );
-    //   },
-    // );
     return Container(
       height: height * 0.8,
       padding:
@@ -234,13 +194,13 @@ class _PostDetailCommentPlaceholder extends StatelessWidget {
                         itemCount: 20,
                         itemBuilder: (BuildContext context, int index) {
                           return ListTile(
-                            title: Text('Item $index'),
+                            title: UsersCommentsWidget()
                           );
                         }),
                   ),
                 ),
               ),
-              getTextField1(theme, context),
+CommentTexFieldWidget(),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 4.0),
                 child: Align(
@@ -328,132 +288,9 @@ class _PostDetailCommentPlaceholder extends StatelessWidget {
     );
   }
 
-  Widget getTextField1(ThemeData theme, BuildContext context) {
-    final width = fullWidth(context);
-    return CommentTexFieldWidget(width: width);
-  }
+
 }
 
-class CommentTexFieldWidget extends StatefulWidget {
-  const CommentTexFieldWidget({
-    Key key,
-    @required this.width,
-  }) : super(key: key);
-
-  final double width;
-
-  @override
-  _CommentTexFieldWidgetState createState() => _CommentTexFieldWidgetState();
-}
-
-class _CommentTexFieldWidgetState extends State<CommentTexFieldWidget> {
-  bool _isTyping = false;
-
-  void _onChanged() {
-  }
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        Container(
-          width: widget.width,
-          decoration: BoxDecoration(
-              color: theme.colorScheme.background,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(16),
-                topRight: Radius.circular(16),
-              )),
-          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
-          child: Container(
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Container(
-                  constraints: BoxConstraints(
-                    maxWidth: widget.width * 0.75,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: theme.colorScheme.secondaryVariant,
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            left: 8.0, right: 8, top: 14.0),
-                        child: CustomAvatar(radius: 10),
-                      ),
-                      Expanded(
-                        child: TextField(
-                          maxLength: 150,
-                          minLines: 1,
-                          maxLines: 8,
-                          maxLengthEnforced: true,
-                          buildCounter: null,
-                          style: theme.textTheme.bodyText2,
-                          keyboardType: TextInputType.multiline,
-                          decoration: InputDecoration(
-                            hintText: "Add Comment",
-                            hintStyle: theme.textTheme.bodyText2
-                                .copyWith(color: AppColors.kbDarkGrey),
-                            counterText: "",
-                            contentPadding:
-                                EdgeInsets.symmetric(horizontal: 8.0),
-                            border: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  width: 0, style: BorderStyle.none),
-                              borderRadius: const BorderRadius.all(
-                                const Radius.circular(20.0),
-                              ),
-                            ),
-                            fillColor: theme.colorScheme.surface,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      IconButton(
-                          icon: Icon(
-                            Icons.camera_alt_rounded,
-                            color: AppColors.kbDarkGrey,
-                          ),
-                          onPressed: () => {
-                                print("user wants to select photos"),
-                                //TODO: add photo selecting functionality here
-                              }),
-                      SizedBox(
-                        width: 8,
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                Container(
-                    decoration: BoxDecoration(
-                        // color:theme.colorScheme.secondaryVariant,
-
-                        shape: BoxShape.circle),
-                    child: IconButton(
-                      icon: Image.asset(HelloIcons.send_bold_icon,
-                          color: AppColors.kbDarkGrey, height: 28),
-                      onPressed: () => {},
-                    )),
-              ],
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
 
 class _PostDetailContent extends StatelessWidget {
   const _PostDetailContent({

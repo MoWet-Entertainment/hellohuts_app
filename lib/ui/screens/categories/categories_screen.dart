@@ -15,7 +15,7 @@ import 'package:hellohuts_app/ui/routes/router.gr.dart';
 import 'package:hellohuts_app/ui/screens/categories/post_detail/post_image.dart';
 import 'package:hellohuts_app/ui/screens/categories/post_detail/post_image_fullview.dart';
 import 'package:hellohuts_app/ui/screens/categories/widgets/wigets.dart';
-import 'package:hellohuts_app/ui/screens/feed_posts/widgets/comments/comments_placeholder.dart';
+import 'package:hellohuts_app/ui/common_widgets/interactions/comment/comments_placeholder.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
 import 'package:hellohuts_app/ui/styles/theme_options.dart';

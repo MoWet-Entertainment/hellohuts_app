@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hellohuts_app/models/test.dart';
-import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
 import 'package:hellohuts_app/ui/routes/router.gr.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
@@ -76,7 +75,9 @@ class UsersCommentsWidget extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.bodyText1.copyWith(
-                          fontWeight: FontWeight.normal, fontSize: 14))
+                          fontWeight: FontWeight.normal, fontSize: 14)),
+                  SizedBox(height: 4,),
+                  Text('2 min ago', style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 10),)
                 ]),
           )
         ],
