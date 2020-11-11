@@ -13,11 +13,11 @@ class JsonConstants {
   static const String userId = 'uid';
   static const String email = 'email';
   static const String displayName = 'display_name';
+  static const String userName = "user_name";
   static const String phoneNumber = 'phone_number';
-  static const String photoUrl = 'photo_url';
+  static const String userPhotoUrl = "user_photo_url";
   static const String userRole = 'user_role';
   static const String isEmailVerified = 'is_email_verified';
-  static const String createdAt = 'created_at';
   static const String profLastUpdatedAt = "prof_last_updated_at";
   static const String lastLoginAt = 'last_login_at';
 
@@ -29,9 +29,8 @@ class JsonConstants {
   static const String plumbingType = "customization_plumbing";
   static const String doorsAndWindowsType = "customization_doors_and_windows";
   static const String kitchenDecorType = "customization_kitchen_decor";
-    static const String exteriorDecorType = "customization_exterior_decor";
+  static const String exteriorDecorType = "customization_exterior_decor";
   static const String interiorDecorType = "customization_interior_decor";
-
 
   //CUSTOMIZATION CONSTANTS
   static const String budgetType = "budget";
@@ -41,14 +40,11 @@ class JsonConstants {
   static const String basic = "basic";
   static const String standard = "standard";
   static const String classic = "classic";
-}
 
-class AppFeedConstants {
   //APP FEED CONSTANTS
-  static const String userId = 'uid';
-  static const String key = 'post_key';
+  static const String key = 'key';
+  static const String postId = 'post_id';
   static const String postTitle = 'post_title';
-  static const String postCreatedAt = 'post_created_at';
   static const String postDescription = "post_description";
   static const String postLikeCount = "post_like_count";
   static const String postCommentCount = "post_comment_count";
@@ -58,9 +54,20 @@ class AppFeedConstants {
   static const String postTags = "post_tags";
   static const String postCommentKeyList = "post_comment_key_list";
   static const String postedUser = "posted_user";
-  static const String postParentKey = "post_parent_key";
-  static const String postChildKey = "post_child_key";
+
   static const String postCommentsList = 'post_comment_list';
-  static const String userName = "user_name";
-  static const String userPhotoUrl = "user_photo_url";
+
+  //Comment
+  static const String comment = 'comment';
+
+  //Time stamp
+  static const String createdAt = 'created_at';
+  static const String updated_at = 'updated_at';
+
+  //Generic
+  static const String parentKey = "parent_key";
+  static const String childKey = "child_key";
+  static const String childKeyList = 'child_key_list';
+  static const String childList = 'child_list';
+  static const String isParent = 'is_parent';
 }

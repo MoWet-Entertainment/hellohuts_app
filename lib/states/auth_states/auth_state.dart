@@ -7,7 +7,7 @@ import 'package:hellohuts_app/constants/firebase_constants.dart';
 import 'package:hellohuts_app/constants/strings.dart';
 import 'package:hellohuts_app/helper/utilities.dart';
 import 'package:hellohuts_app/locators.dart';
-import 'package:hellohuts_app/models/app_user.dart';
+import 'package:hellohuts_app/models/user_feed/app_user.dart';
 import 'package:hellohuts_app/services/auth_services/auth_service.dart';
 import 'package:hellohuts_app/services/auth_services/firebase_auth_service.dart';
 import 'package:hellohuts_app/services/firestore_services/analytics_service.dart';

@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:hellohuts_app/models/comment/comment.dart';
 
 class Mock {
   static var list = [
@@ -375,7 +376,10 @@ const imageList = [
   ImageData(
     id: 'id-004',
     countOfImages: '2',
-    imageUrlList: ['https://picsum.photos/seed/image004/500/900','https://picsum.photos/seed/image003/500/300'],
+    imageUrlList: [
+      'https://picsum.photos/seed/image004/500/900',
+      'https://picsum.photos/seed/image003/500/300'
+    ],
   ),
   ImageData(
     id: 'id-005',
@@ -389,7 +393,10 @@ const imageList = [
   ImageData(
     id: 'id-007',
     countOfImages: '2',
-    imageUrlList: ['https://picsum.photos/seed/image007/500/400','https://picsum.photos/seed/image009/500/600'],
+    imageUrlList: [
+      'https://picsum.photos/seed/image007/500/400',
+      'https://picsum.photos/seed/image009/500/600'
+    ],
   ),
   ImageData(
     id: 'id-008',
@@ -398,7 +405,11 @@ const imageList = [
   ImageData(
     id: 'id-009',
     countOfImages: '3',
-    imageUrlList: ['https://picsum.photos/seed/image009/500/600','https://picsum.photos/seed/image008/500/700','https://picsum.photos/seed/image006/500/500'],
+    imageUrlList: [
+      'https://picsum.photos/seed/image009/500/600',
+      'https://picsum.photos/seed/image008/500/700',
+      'https://picsum.photos/seed/image006/500/500'
+    ],
   ),
   ImageData(
     id: 'id-010',
@@ -411,7 +422,11 @@ const imageList = [
   ImageData(
     id: 'id-012',
     countOfImages: '3',
-    imageUrlList: ['https://picsum.photos/seed/image012/500/700','https://picsum.photos/seed/image008/500/700','https://picsum.photos/seed/image006/500/500'],
+    imageUrlList: [
+      'https://picsum.photos/seed/image012/500/700',
+      'https://picsum.photos/seed/image008/500/700',
+      'https://picsum.photos/seed/image006/500/500'
+    ],
   ),
   ImageData(
     id: 'id-013',
@@ -421,7 +436,10 @@ const imageList = [
     id: 'id-014',
     isTrending: true,
     countOfImages: '2',
-    imageUrlList: ['https://picsum.photos/seed/image014/500/800','https://picsum.photos/seed/image008/500/700'],
+    imageUrlList: [
+      'https://picsum.photos/seed/image014/500/800',
+      'https://picsum.photos/seed/image008/500/700'
+    ],
   ),
   ImageData(
     id: 'id-015',
@@ -434,7 +452,10 @@ const imageList = [
   ImageData(
     id: 'id-017',
     countOfImages: '2',
-    imageUrlList: ['https://picsum.photos/seed/image017/500/600','https://picsum.photos/seed/image008/500/700'],
+    imageUrlList: [
+      'https://picsum.photos/seed/image017/500/600',
+      'https://picsum.photos/seed/image008/500/700'
+    ],
   ),
   ImageData(
     id: 'id-018',
@@ -460,7 +481,10 @@ const imageList = [
   ImageData(
     id: 'id-024',
     countOfImages: '2',
-    imageUrlList: ['https://picsum.photos/seed/image004/500/900','https://picsum.photos/seed/image008/500/700'],
+    imageUrlList: [
+      'https://picsum.photos/seed/image004/500/900',
+      'https://picsum.photos/seed/image008/500/700'
+    ],
   ),
   ImageData(
     id: 'id-025',
@@ -529,3 +553,7 @@ const imageList = [
     imageUrlList: ['https://picsum.photos/seed/image019/500/800'],
   ),
 ];
+
+class CommentMock {
+
+}
