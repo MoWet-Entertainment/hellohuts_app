@@ -102,7 +102,7 @@ dev_dependencies:
     sdk: flutter
   auto_route_generator: ^0.6.9
   freezed_annotation:
-
+  json_serializable:
   build_runner:
   # build_resolvers: 
 

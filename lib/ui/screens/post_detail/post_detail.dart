@@ -4,16 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/constants/mock1.dart';
-import 'package:hellohuts_app/helper/utilities.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
 import 'package:hellohuts_app/ui/common_widgets/interactions/comment/comment_textfield.dart';
 import 'package:hellohuts_app/ui/common_widgets/interactions/follow_button.dart';
 import 'package:hellohuts_app/ui/common_widgets/scroll_behavior/neat_scroll_behavior.dart';
-import 'package:hellohuts_app/ui/screens/categories/post_detail/post_image.dart';
 import 'package:hellohuts_app/ui/screens/categories/widgets/wigets.dart';
 import 'package:hellohuts_app/ui/common_widgets/interactions/comment/comments_placeholder.dart';
+import 'package:hellohuts_app/ui/screens/post_detail/post_image.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
-import 'package:hellohuts_app/ui/styles/app_themes.dart';
 import 'package:hellohuts_app/ui/styles/theme_options.dart';
 
 class PostDetailPage extends StatefulWidget {
@@ -287,7 +285,6 @@ CommentTexFieldWidget(),
       ),
     );
   }
-
 
 }
 

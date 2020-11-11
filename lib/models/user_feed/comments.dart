@@ -27,6 +27,7 @@ class Comment {
   String userId;
   String key;
   String parentKey;
+  List<String> childCommentKeyList;
   Comment({
     this.userName,
     this.userPhotoUrl,
@@ -35,19 +36,17 @@ class Comment {
     @required this.userId,
     this.key,
     this.parentKey,
+    this.childCommentKeyList,
   });
 
   Comment.fromJson(Map<String, dynamic> map, {String key}) {
     key = key;
     userName = AppFeedConstants.userName;
     userPhotoUrl = AppFeedConstants.userPhotoUrl;
-    
   }
 
   @override
   String toString() {
     return 'Comment{userName: $userName, userPhotoUrl: $userPhotoUrl, comment: $comment, timeStamp: $timeStamp, userId: $userId, key: $key, parentKey: $parentKey}';
   }
-
-
 }
