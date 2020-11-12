@@ -8,13 +8,13 @@ class CommentList {
   CommentList({this.key, this.userId, this.comment});
   CommentList.fromJson(Map<dynamic, dynamic> map, {String key}) {
     key = key;
-    userId = map[AppFeedConstants.userId];
-    comment = map[AppFeedConstants.postCommentsList];
+    userId = map[JsonConstants.userId];
+    comment = map[JsonConstants.postCommentsList];
   }
   toJson() {
     return {
-      AppFeedConstants.userId: userId,
-      AppFeedConstants.postCommentsList: comment,
+      JsonConstants.userId: userId,
+      JsonConstants.postCommentsList: comment,
     };
   }
 }
@@ -41,8 +41,8 @@ class Comment {
 
   Comment.fromJson(Map<String, dynamic> map, {String key}) {
     key = key;
-    userName = AppFeedConstants.userName;
-    userPhotoUrl = AppFeedConstants.userPhotoUrl;
+    userName = JsonConstants.userName;
+    userPhotoUrl = JsonConstants.userPhotoUrl;
   }
 
   @override

@@ -31,7 +31,7 @@ class AppUser extends Equatable {
     
     uid = data[JsonConstants.userId];
     email = data[JsonConstants.email];
-    photoUrl = data[JsonConstants.photoUrl];
+    photoUrl = data[JsonConstants.userPhotoUrl];
     displayName = data[JsonConstants.displayName];
     phoneNumber = data[JsonConstants.phoneNumber];
     userRole = data[JsonConstants.userRole];
@@ -46,7 +46,7 @@ class AppUser extends Equatable {
       JsonConstants.userId: this.uid,
       JsonConstants.email: this.email,
       JsonConstants.phoneNumber: this.phoneNumber,
-      JsonConstants.photoUrl: this.photoUrl,
+      JsonConstants.userPhotoUrl: this.photoUrl,
       JsonConstants.displayName: this.displayName,
       JsonConstants.userRole: this.userRole,
       JsonConstants.isEmailVerified: this.isEmailVerified,
