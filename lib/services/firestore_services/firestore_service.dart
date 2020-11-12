@@ -192,9 +192,9 @@ class FirestoreService {
     try {
       await _postsCollectionReference
           .doc(model.key)
-          .collection(AppFeedConstants.postLikeList)
+          .collection(JsonConstants.postLikeList)
           .doc(userId)
-          .set({AppFeedConstants.userId: userId});
+          .set({JsonConstants.userId: userId});
     } catch (error) {
       cprint(error, errorIn: 'updateLike');
       throw error;

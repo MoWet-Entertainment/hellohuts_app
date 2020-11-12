@@ -8,6 +8,9 @@ part of 'comment.dart';
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
+Comment _$CommentFromJson(Map<String, dynamic> json) {
+  return _Comment.fromJson(json);
+}
 
 /// @nodoc
 class _$CommentTearOff {
@@ -15,17 +18,33 @@ class _$CommentTearOff {
 
 // ignore: unused_element
   _Comment call(
-      {@JsonKey(name: JsonConstants.userName) String userName,
-      @JsonKey(name: JsonConstants.userPhotoUrl) String userPhotoUrl,
-      @required @JsonKey(name: JsonConstants.comment) String comment,
-      @required @JsonKey(name: JsonConstants.createdAt) String createdTimeStamp,
-      @JsonKey(name: JsonConstants.updated_at) String updatedTimeStamp,
-      @required @JsonKey(name: JsonConstants.userId) String userId,
-      @required @JsonKey(name: JsonConstants.key) String key,
-      @JsonKey(name: JsonConstants.parentKey) String parentKey,
-      @required @JsonKey(name: JsonConstants.postId) String postId,
-      @JsonKey(name: JsonConstants.isParent) bool isParent = false,
-      @JsonKey(name: JsonConstants.childList) List<dynamic> childCommentList}) {
+      {@JsonKey(name: JsonConstants.userName)
+          String userName,
+      @JsonKey(name: JsonConstants.userPhotoUrl)
+          String userPhotoUrl,
+      @required
+      @JsonKey(name: JsonConstants.comment)
+          String comment,
+      @required
+      @JsonKey(name: JsonConstants.createdAt, fromJson: Comment._dateTimeFromUTC, toJson: Comment._dateTimeToUTC)
+          DateTime createdTimeStamp,
+      @JsonKey(name: JsonConstants.updated_at, fromJson: Comment._dateTimeFromUTC, toJson: Comment._dateTimeToUTC)
+          DateTime updatedTimeStamp,
+      @required
+      @JsonKey(name: JsonConstants.userId)
+          String userId,
+      @required
+      @JsonKey(name: JsonConstants.key)
+          String key,
+      @JsonKey(name: JsonConstants.parentKey)
+          String parentKey,
+      @required
+      @JsonKey(name: JsonConstants.postId)
+          String postId,
+      @JsonKey(name: JsonConstants.isParent)
+          bool isParent = false,
+      @JsonKey(name: JsonConstants.childList)
+          List<Comment> childCommentList}) {
     return _Comment(
       userName: userName,
       userPhotoUrl: userPhotoUrl,
@@ -39,6 +58,11 @@ class _$CommentTearOff {
       isParent: isParent,
       childCommentList: childCommentList,
     );
+  }
+
+// ignore: unused_element
+  Comment fromJson(Map<String, Object> json) {
+    return Comment.fromJson(json);
   }
 }
 
@@ -54,10 +78,16 @@ mixin _$Comment {
   String get userPhotoUrl;
   @JsonKey(name: JsonConstants.comment)
   String get comment;
-  @JsonKey(name: JsonConstants.createdAt)
-  String get createdTimeStamp;
-  @JsonKey(name: JsonConstants.updated_at)
-  String get updatedTimeStamp;
+  @JsonKey(
+      name: JsonConstants.createdAt,
+      fromJson: Comment._dateTimeFromUTC,
+      toJson: Comment._dateTimeToUTC)
+  DateTime get createdTimeStamp;
+  @JsonKey(
+      name: JsonConstants.updated_at,
+      fromJson: Comment._dateTimeFromUTC,
+      toJson: Comment._dateTimeToUTC)
+  DateTime get updatedTimeStamp;
   @JsonKey(name: JsonConstants.userId)
   String get userId;
   @JsonKey(name: JsonConstants.key)
@@ -69,8 +99,9 @@ mixin _$Comment {
   @JsonKey(name: JsonConstants.isParent)
   bool get isParent;
   @JsonKey(name: JsonConstants.childList)
-  List<dynamic> get childCommentList;
+  List<Comment> get childCommentList;
 
+  Map<String, dynamic> toJson();
   $CommentCopyWith<Comment> get copyWith;
 }
 
@@ -79,17 +110,28 @@ abstract class $CommentCopyWith<$Res> {
   factory $CommentCopyWith(Comment value, $Res Function(Comment) then) =
       _$CommentCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(name: JsonConstants.userName) String userName,
-      @JsonKey(name: JsonConstants.userPhotoUrl) String userPhotoUrl,
-      @JsonKey(name: JsonConstants.comment) String comment,
-      @JsonKey(name: JsonConstants.createdAt) String createdTimeStamp,
-      @JsonKey(name: JsonConstants.updated_at) String updatedTimeStamp,
-      @JsonKey(name: JsonConstants.userId) String userId,
-      @JsonKey(name: JsonConstants.key) String key,
-      @JsonKey(name: JsonConstants.parentKey) String parentKey,
-      @JsonKey(name: JsonConstants.postId) String postId,
-      @JsonKey(name: JsonConstants.isParent) bool isParent,
-      @JsonKey(name: JsonConstants.childList) List<dynamic> childCommentList});
+      {@JsonKey(name: JsonConstants.userName)
+          String userName,
+      @JsonKey(name: JsonConstants.userPhotoUrl)
+          String userPhotoUrl,
+      @JsonKey(name: JsonConstants.comment)
+          String comment,
+      @JsonKey(name: JsonConstants.createdAt, fromJson: Comment._dateTimeFromUTC, toJson: Comment._dateTimeToUTC)
+          DateTime createdTimeStamp,
+      @JsonKey(name: JsonConstants.updated_at, fromJson: Comment._dateTimeFromUTC, toJson: Comment._dateTimeToUTC)
+          DateTime updatedTimeStamp,
+      @JsonKey(name: JsonConstants.userId)
+          String userId,
+      @JsonKey(name: JsonConstants.key)
+          String key,
+      @JsonKey(name: JsonConstants.parentKey)
+          String parentKey,
+      @JsonKey(name: JsonConstants.postId)
+          String postId,
+      @JsonKey(name: JsonConstants.isParent)
+          bool isParent,
+      @JsonKey(name: JsonConstants.childList)
+          List<Comment> childCommentList});
 }
 
 /// @nodoc
@@ -122,10 +164,10 @@ class _$CommentCopyWithImpl<$Res> implements $CommentCopyWith<$Res> {
       comment: comment == freezed ? _value.comment : comment as String,
       createdTimeStamp: createdTimeStamp == freezed
           ? _value.createdTimeStamp
-          : createdTimeStamp as String,
+          : createdTimeStamp as DateTime,
       updatedTimeStamp: updatedTimeStamp == freezed
           ? _value.updatedTimeStamp
-          : updatedTimeStamp as String,
+          : updatedTimeStamp as DateTime,
       userId: userId == freezed ? _value.userId : userId as String,
       key: key == freezed ? _value.key : key as String,
       parentKey: parentKey == freezed ? _value.parentKey : parentKey as String,
@@ -133,7 +175,7 @@ class _$CommentCopyWithImpl<$Res> implements $CommentCopyWith<$Res> {
       isParent: isParent == freezed ? _value.isParent : isParent as bool,
       childCommentList: childCommentList == freezed
           ? _value.childCommentList
-          : childCommentList as List<dynamic>,
+          : childCommentList as List<Comment>,
     ));
   }
 }
@@ -144,17 +186,28 @@ abstract class _$CommentCopyWith<$Res> implements $CommentCopyWith<$Res> {
       __$CommentCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(name: JsonConstants.userName) String userName,
-      @JsonKey(name: JsonConstants.userPhotoUrl) String userPhotoUrl,
-      @JsonKey(name: JsonConstants.comment) String comment,
-      @JsonKey(name: JsonConstants.createdAt) String createdTimeStamp,
-      @JsonKey(name: JsonConstants.updated_at) String updatedTimeStamp,
-      @JsonKey(name: JsonConstants.userId) String userId,
-      @JsonKey(name: JsonConstants.key) String key,
-      @JsonKey(name: JsonConstants.parentKey) String parentKey,
-      @JsonKey(name: JsonConstants.postId) String postId,
-      @JsonKey(name: JsonConstants.isParent) bool isParent,
-      @JsonKey(name: JsonConstants.childList) List<dynamic> childCommentList});
+      {@JsonKey(name: JsonConstants.userName)
+          String userName,
+      @JsonKey(name: JsonConstants.userPhotoUrl)
+          String userPhotoUrl,
+      @JsonKey(name: JsonConstants.comment)
+          String comment,
+      @JsonKey(name: JsonConstants.createdAt, fromJson: Comment._dateTimeFromUTC, toJson: Comment._dateTimeToUTC)
+          DateTime createdTimeStamp,
+      @JsonKey(name: JsonConstants.updated_at, fromJson: Comment._dateTimeFromUTC, toJson: Comment._dateTimeToUTC)
+          DateTime updatedTimeStamp,
+      @JsonKey(name: JsonConstants.userId)
+          String userId,
+      @JsonKey(name: JsonConstants.key)
+          String key,
+      @JsonKey(name: JsonConstants.parentKey)
+          String parentKey,
+      @JsonKey(name: JsonConstants.postId)
+          String postId,
+      @JsonKey(name: JsonConstants.isParent)
+          bool isParent,
+      @JsonKey(name: JsonConstants.childList)
+          List<Comment> childCommentList});
 }
 
 /// @nodoc
@@ -188,10 +241,10 @@ class __$CommentCopyWithImpl<$Res> extends _$CommentCopyWithImpl<$Res>
       comment: comment == freezed ? _value.comment : comment as String,
       createdTimeStamp: createdTimeStamp == freezed
           ? _value.createdTimeStamp
-          : createdTimeStamp as String,
+          : createdTimeStamp as DateTime,
       updatedTimeStamp: updatedTimeStamp == freezed
           ? _value.updatedTimeStamp
-          : updatedTimeStamp as String,
+          : updatedTimeStamp as DateTime,
       userId: userId == freezed ? _value.userId : userId as String,
       key: key == freezed ? _value.key : key as String,
       parentKey: parentKey == freezed ? _value.parentKey : parentKey as String,
@@ -199,7 +252,7 @@ class __$CommentCopyWithImpl<$Res> extends _$CommentCopyWithImpl<$Res>
       isParent: isParent == freezed ? _value.isParent : isParent as bool,
       childCommentList: childCommentList == freezed
           ? _value.childCommentList
-          : childCommentList as List<dynamic>,
+          : childCommentList as List<Comment>,
     ));
   }
 }
@@ -209,23 +262,42 @@ class __$CommentCopyWithImpl<$Res> extends _$CommentCopyWithImpl<$Res>
 /// @nodoc
 class _$_Comment with DiagnosticableTreeMixin implements _Comment {
   _$_Comment(
-      {@JsonKey(name: JsonConstants.userName) this.userName,
-      @JsonKey(name: JsonConstants.userPhotoUrl) this.userPhotoUrl,
-      @required @JsonKey(name: JsonConstants.comment) this.comment,
-      @required @JsonKey(name: JsonConstants.createdAt) this.createdTimeStamp,
-      @JsonKey(name: JsonConstants.updated_at) this.updatedTimeStamp,
-      @required @JsonKey(name: JsonConstants.userId) this.userId,
-      @required @JsonKey(name: JsonConstants.key) this.key,
-      @JsonKey(name: JsonConstants.parentKey) this.parentKey,
-      @required @JsonKey(name: JsonConstants.postId) this.postId,
-      @JsonKey(name: JsonConstants.isParent) this.isParent = false,
-      @JsonKey(name: JsonConstants.childList) this.childCommentList})
+      {@JsonKey(name: JsonConstants.userName)
+          this.userName,
+      @JsonKey(name: JsonConstants.userPhotoUrl)
+          this.userPhotoUrl,
+      @required
+      @JsonKey(name: JsonConstants.comment)
+          this.comment,
+      @required
+      @JsonKey(name: JsonConstants.createdAt, fromJson: Comment._dateTimeFromUTC, toJson: Comment._dateTimeToUTC)
+          this.createdTimeStamp,
+      @JsonKey(name: JsonConstants.updated_at, fromJson: Comment._dateTimeFromUTC, toJson: Comment._dateTimeToUTC)
+          this.updatedTimeStamp,
+      @required
+      @JsonKey(name: JsonConstants.userId)
+          this.userId,
+      @required
+      @JsonKey(name: JsonConstants.key)
+          this.key,
+      @JsonKey(name: JsonConstants.parentKey)
+          this.parentKey,
+      @required
+      @JsonKey(name: JsonConstants.postId)
+          this.postId,
+      @JsonKey(name: JsonConstants.isParent)
+          this.isParent = false,
+      @JsonKey(name: JsonConstants.childList)
+          this.childCommentList})
       : assert(comment != null),
         assert(createdTimeStamp != null),
         assert(userId != null),
         assert(key != null),
         assert(postId != null),
         assert(isParent != null);
+
+  factory _$_Comment.fromJson(Map<String, dynamic> json) =>
+      _$_$_CommentFromJson(json);
 
   @override
   @JsonKey(name: JsonConstants.userName)
@@ -237,11 +309,17 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
   @JsonKey(name: JsonConstants.comment)
   final String comment;
   @override
-  @JsonKey(name: JsonConstants.createdAt)
-  final String createdTimeStamp;
+  @JsonKey(
+      name: JsonConstants.createdAt,
+      fromJson: Comment._dateTimeFromUTC,
+      toJson: Comment._dateTimeToUTC)
+  final DateTime createdTimeStamp;
   @override
-  @JsonKey(name: JsonConstants.updated_at)
-  final String updatedTimeStamp;
+  @JsonKey(
+      name: JsonConstants.updated_at,
+      fromJson: Comment._dateTimeFromUTC,
+      toJson: Comment._dateTimeToUTC)
+  final DateTime updatedTimeStamp;
   @override
   @JsonKey(name: JsonConstants.userId)
   final String userId;
@@ -259,7 +337,7 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
   final bool isParent;
   @override
   @JsonKey(name: JsonConstants.childList)
-  final List<dynamic> childCommentList;
+  final List<Comment> childCommentList;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -338,6 +416,11 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
   @override
   _$CommentCopyWith<_Comment> get copyWith =>
       __$CommentCopyWithImpl<_Comment>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_CommentToJson(this);
+  }
 }
 
 abstract class _Comment implements Comment {
@@ -350,10 +433,10 @@ abstract class _Comment implements Comment {
       @JsonKey(name: JsonConstants.comment)
           String comment,
       @required
-      @JsonKey(name: JsonConstants.createdAt)
-          String createdTimeStamp,
-      @JsonKey(name: JsonConstants.updated_at)
-          String updatedTimeStamp,
+      @JsonKey(name: JsonConstants.createdAt, fromJson: Comment._dateTimeFromUTC, toJson: Comment._dateTimeToUTC)
+          DateTime createdTimeStamp,
+      @JsonKey(name: JsonConstants.updated_at, fromJson: Comment._dateTimeFromUTC, toJson: Comment._dateTimeToUTC)
+          DateTime updatedTimeStamp,
       @required
       @JsonKey(name: JsonConstants.userId)
           String userId,
@@ -368,7 +451,9 @@ abstract class _Comment implements Comment {
       @JsonKey(name: JsonConstants.isParent)
           bool isParent,
       @JsonKey(name: JsonConstants.childList)
-          List<dynamic> childCommentList}) = _$_Comment;
+          List<Comment> childCommentList}) = _$_Comment;
+
+  factory _Comment.fromJson(Map<String, dynamic> json) = _$_Comment.fromJson;
 
   @override
   @JsonKey(name: JsonConstants.userName)
@@ -380,11 +465,17 @@ abstract class _Comment implements Comment {
   @JsonKey(name: JsonConstants.comment)
   String get comment;
   @override
-  @JsonKey(name: JsonConstants.createdAt)
-  String get createdTimeStamp;
+  @JsonKey(
+      name: JsonConstants.createdAt,
+      fromJson: Comment._dateTimeFromUTC,
+      toJson: Comment._dateTimeToUTC)
+  DateTime get createdTimeStamp;
   @override
-  @JsonKey(name: JsonConstants.updated_at)
-  String get updatedTimeStamp;
+  @JsonKey(
+      name: JsonConstants.updated_at,
+      fromJson: Comment._dateTimeFromUTC,
+      toJson: Comment._dateTimeToUTC)
+  DateTime get updatedTimeStamp;
   @override
   @JsonKey(name: JsonConstants.userId)
   String get userId;
@@ -402,7 +493,7 @@ abstract class _Comment implements Comment {
   bool get isParent;
   @override
   @JsonKey(name: JsonConstants.childList)
-  List<dynamic> get childCommentList;
+  List<Comment> get childCommentList;
   @override
   _$CommentCopyWith<_Comment> get copyWith;
 }
