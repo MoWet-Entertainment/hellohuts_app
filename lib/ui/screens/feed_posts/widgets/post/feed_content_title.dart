@@ -46,7 +46,7 @@ class FeedPostTitleDetails extends StatelessWidget {
           //TODO:Add a condition for comments present or not here
           //Show the commments text should be based on whether
           //comments are present in the post or not
-          PostCommentsPlaceholder(model: model),
+          PostCommentsPlaceholder(model: model, isFeedPage:true),
           Padding(
             padding: const EdgeInsets.only(top: 12, bottom: 8.0),
             child: Row(

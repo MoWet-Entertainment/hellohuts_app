@@ -4,6 +4,7 @@ import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/constants/mock1.dart';
 import 'package:hellohuts_app/models/comment/comment.dart';
 import 'package:hellohuts_app/models/test.dart';
+import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
 import 'package:hellohuts_app/ui/routes/router.gr.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
@@ -11,7 +12,9 @@ import 'package:timeago/timeago.dart' as timeago;
 
 class PostCommentsPlaceholder extends StatelessWidget {
   final FeedModel model;
-  const PostCommentsPlaceholder({Key key, this.model}) : super(key: key);
+  final bool isFeedPage;
+  const PostCommentsPlaceholder({Key key, this.model, this.isFeedPage = false})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +41,7 @@ class PostCommentsPlaceholder extends StatelessWidget {
         ),
         UsersCommentsWidget(
           commentModel: Comment.fromJson(Mock.commentList[0]),
+          isFeedPage: isFeedPage,
         ),
       ],
     );
@@ -47,9 +51,12 @@ class PostCommentsPlaceholder extends StatelessWidget {
 class UsersCommentsWidget extends StatelessWidget {
   final Comment commentModel;
   final bool showFirstReplyComment;
+  final bool isFeedPage;
   const UsersCommentsWidget({
     Key key,
-    @required this.commentModel, this.showFirstReplyComment = true,
+    @required this.commentModel,
+    this.showFirstReplyComment = true,
+    this.isFeedPage = false,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -100,53 +107,117 @@ class UsersCommentsWidget extends StatelessWidget {
                         SizedBox(
                           height: 8,
                         ),
-                     
-                        Row(children: [
-                          GestureDetector(
-                            child: Text('Reply',
-                                style: theme.textTheme.bodyText1
-                                    .copyWith(fontSize: 10)),
-                            onTap: () => {
-                              //TODO: implement post reply feature here.
-                              print("User wants to reply to the post"),
-                            },
-                          ),
-                          SizedBox(width: 16),
-                          commentModel.childCommentList != null
-                              ? GestureDetector(
-                                  child: (Row(
-                                    children: [
-                                      Image.asset(
-                                        HelloIcons.comment_bold_icon,
-                                        height: 12,
-                                        color: AppColors.kbDarkGrey,
-                                      ),
-                                      SizedBox(width: 4),
-                                      Text(
-                                        commentModel.childCommentList.length
-                                            .toString(),
-                                        style: theme.textTheme.bodyText1
-                                            .copyWith(fontSize: 10),
-                                      )
-                                    ],
-                                  )),
-                                  onTap: () => {
-                                    //TODO: Implement feature to see all the replys to the comment
-                                    print(
-                                        "user wants to see all the replys to the comment"),
-                                  },
-                                )
-                              : SizedBox.shrink(),
-                          Spacer(),
-                          Text(
-                            timeago.format(now.subtract(difference),
-                                locale: 'en_short'),
-                            style: theme.textTheme.bodyText1
-                                .copyWith(fontSize: 10),
-                          ),
-                        ]),
-                        SizedBox(height:8),
-                           showFirstReplyComment && commentModel.childCommentList!=null? Container(width:20, height:20, color:Colors.blue):SizedBox.shrink(),
+
+                        isFeedPage
+                            ? SizedBox.shrink()
+                            : Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        GestureDetector(
+                                          child: Text('Reply',
+                                              style: theme.textTheme.bodyText1
+                                                  .copyWith(
+                                                      color:
+                                                          AppColors.kbDarkGrey,
+                                                      fontSize: 12,
+                                                      fontWeight:
+                                                          FontWeight.bold)),
+                                          onTap: () => {
+                                            //TODO: implement post reply feature here.
+                                            print(
+                                                "User wants to reply to the post"),
+                                          },
+                                        ),
+                                        SizedBox(width: 20),
+                                        commentModel.childCommentList != null
+                                            ? GestureDetector(
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 3.0),
+                                                  child: (Row(
+                                                    children: [
+                                                      Image.asset(
+                                                        HelloIcons
+                                                            .comment_light_icon,
+                                                        height: 12,
+                                                        color: AppColors
+                                                            .kbDarkGrey,
+                                                      ),
+                                                      SizedBox(width: 6),
+                                                      Text(
+                                                        commentModel
+                                                            .childCommentList
+                                                            .length
+                                                            .toString(),
+                                                        style: theme
+                                                            .textTheme.bodyText1
+                                                            .copyWith(
+                                                                fontSize: 12,
+                                                                color: AppColors
+                                                                    .kbDarkGrey),
+                                                      )
+                                                    ],
+                                                  )),
+                                                ),
+                                                onTap: () => {
+                                                  //TODO: Implement feature to see all the replys to the comment
+                                                  print(
+                                                      "user wants to see all the replys to the comment"),
+                                                },
+                                              )
+                                            : SizedBox.shrink(),
+                                        // Spacer(),
+                                      ]),
+                                  Text(
+                                    timeago.format(now.subtract(difference),
+                                        locale: 'en_short'),
+                                    style: theme.textTheme.bodyText1.copyWith(
+                                        fontSize: 10,
+                                        color: AppColors.kbDarkGrey),
+                                  ),
+                                ],
+                              ),
+                        !isFeedPage &&
+                                showFirstReplyComment &&
+                                commentModel.childCommentList != null
+                            ? Container(
+                              padding: const EdgeInsets.only(left:32.0, top: 8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                   
+                                    Row(
+                                      children: [
+                                        Container(
+
+                                          width: 2,
+                                          height: 40,
+                                          color: theme.dividerColor,
+                                        ),
+                                        SizedBox(width: 4),
+                                        Container(
+                                            width: 20,
+                                            height: 30,
+                                            color: Colors.blue),
+                                            
+                                      ],
+                                    ),
+                                     Container(
+                                       padding: const EdgeInsets.only(top:8.0),
+                                       child: commentModel.childCommentList.length > 1
+                                          ? Text('Show all replies', style: theme.textTheme.bodyText1.copyWith(fontSize: 12, color:AppColors.kbDarkGrey),)
+                                          : SizedBox.shrink(),
+                                     ),
+                                  ],
+                                ),
+                              )
+                            : SizedBox.shrink(),
                       ]),
                 ),
               ],
