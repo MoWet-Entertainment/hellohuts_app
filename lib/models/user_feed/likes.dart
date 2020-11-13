@@ -6,10 +6,10 @@ class LikeList {
   LikeList({this.key, this.userId});
   LikeList.fromJson(Map<dynamic, dynamic> map, {String key}) {
     key = key;
-    userId = map[AppFeedConstants.userId];
+    userId = map[JsonConstants.userId];
   }
   toJson() {
-    return {AppFeedConstants.userId: userId};
+    return {JsonConstants.userId: userId};
   }
 
   @override

@@ -63,28 +63,28 @@ class FeedModel {
           });
     }
     return {
-      AppFeedConstants.userId: userId,
-      AppFeedConstants.postTitle: title,
-      AppFeedConstants.postDescription: description,
-      AppFeedConstants.postLikeCount: likeCount,
-      AppFeedConstants.postCommentCount: commentCount ?? 0,
-      AppFeedConstants.postShareCount: shareCount ?? 0,
-      AppFeedConstants.postCreatedAt: createdAt,
-      AppFeedConstants.postImagePathList: imagePathList,
-      AppFeedConstants.postLikeList: likeMap,
-      AppFeedConstants.postCommentsList: commentMap,
-      AppFeedConstants.postTags: tags,
-      AppFeedConstants.postCommentKeyList: commentKeyList,
-      AppFeedConstants.postedUser: user == null ? null : user.toJson(),
-      AppFeedConstants.postParentKey: parentKey,
-      AppFeedConstants.postChildKey: childKey,
+      JsonConstants.userId: userId,
+      JsonConstants.postTitle: title,
+      JsonConstants.postDescription: description,
+      JsonConstants.postLikeCount: likeCount,
+      JsonConstants.postCommentCount: commentCount ?? 0,
+      JsonConstants.postShareCount: shareCount ?? 0,
+      JsonConstants.createdAt: createdAt,
+      JsonConstants.postImagePathList: imagePathList,
+      JsonConstants.postLikeList: likeMap,
+      JsonConstants.postCommentsList: commentMap,
+      JsonConstants.postTags: tags,
+      JsonConstants.postCommentKeyList: commentKeyList,
+      JsonConstants.postedUser: user == null ? null : user.toJson(),
+      JsonConstants.parentKey: parentKey,
+      JsonConstants.childKey: childKey,
     };
   }
 
   dynamic getLikeList(List<String> list) {
     if (list != null && list.length > 0) {
       var result = Map.fromIterable(list,
-          key: (v) => AppFeedConstants.userId, value: (v) => v[0]);
+          key: (v) => JsonConstants.userId, value: (v) => v[0]);
       return result;
     }
   }
@@ -93,34 +93,34 @@ class FeedModel {
     if (likeList == null) {
       likeList = [];
     }
-    key = map[AppFeedConstants.key];
-    title = map[AppFeedConstants.postTitle];
-    description = map[AppFeedConstants.postDescription];
-    userId = map[AppFeedConstants.userId];
-    likeCount = map[AppFeedConstants.postLikeCount];
-    commentCount = map[AppFeedConstants.postCommentCount];
-    shareCount = map[AppFeedConstants.postShareCount];
-    user = AppUser.fromJson(map[AppFeedConstants.postedUser]);
-    createdAt = map[AppFeedConstants.postCreatedAt];
-    parentKey = map[AppFeedConstants.postParentKey];
-    childKey = map[AppFeedConstants.postChildKey];
-    if (map[AppFeedConstants.postImagePathList] != null) {
+    key = map[JsonConstants.key];
+    title = map[JsonConstants.postTitle];
+    description = map[JsonConstants.postDescription];
+    userId = map[JsonConstants.userId];
+    likeCount = map[JsonConstants.postLikeCount];
+    commentCount = map[JsonConstants.postCommentCount];
+    shareCount = map[JsonConstants.postShareCount];
+    user = AppUser.fromJson(map[JsonConstants.postedUser]);
+    createdAt = map[JsonConstants.createdAt];
+    parentKey = map[JsonConstants.parentKey];
+    childKey = map[JsonConstants.childKey];
+    if (map[JsonConstants.postImagePathList] != null) {
       imagePathList = List<String>();
-      map[AppFeedConstants.postImagePathList].forEach((val) {
+      map[JsonConstants.postImagePathList].forEach((val) {
         imagePathList.add(val);
       });
     }
-    if (map[AppFeedConstants.postTags] != null) {
+    if (map[JsonConstants.postTags] != null) {
       tags = List<String>();
-      map[AppFeedConstants.postTags].forEach((val) {
+      map[JsonConstants.postTags].forEach((val) {
         tags.add(val);
       });
     }
-    if (map[AppFeedConstants.postLikeList] != null) {
-      map[AppFeedConstants.postLikeList].forEach((key, value) {
-        if (value.containsKey(AppFeedConstants.userId)) {
+    if (map[JsonConstants.postLikeList] != null) {
+      map[JsonConstants.postLikeList].forEach((key, value) {
+        if (value.containsKey(JsonConstants.userId)) {
           LikeList list =
-              LikeList(key: key, userId: value[AppFeedConstants.userId]);
+              LikeList(key: key, userId: value[JsonConstants.userId]);
           likeList.add(list);
         }
       });
@@ -129,10 +129,10 @@ class FeedModel {
       likeList = [];
       likeCount = 0;
     }
-    if (map[AppFeedConstants.postCommentKeyList] != null) {
-      map[AppFeedConstants.postCommentKeyList].forEach((value) {
+    if (map[JsonConstants.postCommentKeyList] != null) {
+      map[JsonConstants.postCommentKeyList].forEach((value) {
         commentKeyList = List<String>();
-        map[AppFeedConstants.postCommentKeyList].forEach((value) {
+        map[JsonConstants.postCommentKeyList].forEach((value) {
           commentKeyList.add(value);
         });
       });

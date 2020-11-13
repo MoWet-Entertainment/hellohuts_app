@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/constants/mock1.dart';
+import 'package:hellohuts_app/models/comment/comment.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
 import 'package:hellohuts_app/ui/common_widgets/interactions/comment/comment_textfield.dart';
 import 'package:hellohuts_app/ui/common_widgets/interactions/follow_button.dart';
@@ -156,11 +157,34 @@ class _PostDetailCommentPlaceholder extends StatelessWidget {
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       context: context,
-      builder: (BuildContext context) => _commentContainer(context),
+      builder: (BuildContext context) => _PostCommentListView(),
     );
   }
+}
 
-  Widget _commentContainer(BuildContext context) {
+class _PostCommentListView extends StatefulWidget {
+  const _PostCommentListView({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  __PostCommentListViewState createState() => __PostCommentListViewState();
+}
+
+class __PostCommentListViewState extends State<_PostCommentListView> {
+  List<Comment> commentList;
+  @override
+  void initState() {
+    // TODO: implement initState
+    //lauch all db related calls here
+  
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+      commentList =
+          Mock.commentList.map((ele) => Comment.fromJson(ele)).toList();
     final double height = fullHeight(context);
     final isDarkTheme = ThemeOptions.of(context).isDarkTheme(context);
     final theme = Theme.of(context);
@@ -189,16 +213,14 @@ class _PostDetailCommentPlaceholder extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 40.0),
                     child: ListView.builder(
                         controller: scrollController,
-                        itemCount: 20,
+                        itemCount: commentList.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return ListTile(
-                            title: UsersCommentsWidget()
-                          );
+                          return ListTile(title: UsersCommentsWidget(commentModel: commentList[index],));
                         }),
                   ),
                 ),
               ),
-CommentTexFieldWidget(),
+              CommentTexFieldWidget(),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 4.0),
                 child: Align(
@@ -221,73 +243,7 @@ CommentTexFieldWidget(),
       ),
     );
   }
-
-  Widget getTextField(ThemeData theme) {
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: Container(
-        color: theme.colorScheme.surface,
-        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(
-              Radius.circular(20),
-            ),
-            color: theme.colorScheme.secondaryVariant,
-          ),
-          child: Row(
-            children: [
-              Container(
-                child: Expanded(
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8.0, vertical: .0),
-                        child: CustomAvatar(radius: 10),
-                      ),
-                      Expanded(
-                        child: TextField(
-                          maxLength: 120,
-                          minLines: 1,
-                          maxLines: 4,
-                          maxLengthEnforced: true,
-                          buildCounter: null,
-                          style: theme.textTheme.bodyText2,
-                          keyboardType: TextInputType.multiline,
-                          decoration: InputDecoration(
-                            counterText: "",
-                            contentPadding:
-                                EdgeInsets.symmetric(horizontal: 4.0),
-                            border: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  width: 0, style: BorderStyle.none),
-                              borderRadius: const BorderRadius.all(
-                                const Radius.circular(20.0),
-                              ),
-                            ),
-                            fillColor: theme.colorScheme.surface,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              IconButton(
-                icon: Image.asset(HelloIcons.send_bold_icon,
-                    color: AppColors.kbDarkGrey, height: 24),
-                onPressed: () => {},
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
 }
-
 
 class _PostDetailContent extends StatelessWidget {
   const _PostDetailContent({

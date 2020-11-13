@@ -127,7 +127,8 @@ class ServicesOffferedItems extends StatelessWidget {
           style:theme.textTheme.headline6,
         ),
         subTitle: Text(
-          "Professionals",
+          "Verified Pros.",
+          style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 12),
         ),
         onTap: () => {
           //TODO: Add Navigation to Professionals Screen

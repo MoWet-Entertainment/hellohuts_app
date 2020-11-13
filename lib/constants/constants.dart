@@ -53,6 +53,8 @@ class HelloIcons {
   static const String heart_bold_icon =
       _iconsRoot + "Heart_Filled_bold_icon.png";
   static const String comment_bold_icon = _iconsRoot + "Chat_bold_icon.png";
+    static const String comment_light_icon = _iconsRoot + "Chat_light_icon.png";
+
   static const String share_bold_icon = _iconsRoot + "Share_bold_icon.png";
 
 //Search Screen
