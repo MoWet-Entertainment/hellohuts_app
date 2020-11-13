@@ -22,6 +22,7 @@ _$_Comment _$_$_CommentFromJson(Map<String, dynamic> json) {
         ?.map((e) =>
             e == null ? null : Comment.fromJson(e as Map<String, dynamic>))
         ?.toList(),
+    commentCount: json['post_comment_count'] as int,
   );
 }
 
@@ -39,4 +40,5 @@ Map<String, dynamic> _$_$_CommentToJson(_$_Comment instance) =>
       'is_parent': instance.isParent,
       'child_list':
           instance.childCommentList?.map((e) => e?.toJson())?.toList(),
+      'post_comment_count': instance.commentCount,
     };

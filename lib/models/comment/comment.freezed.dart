@@ -41,10 +41,13 @@ class _$CommentTearOff {
       @required
       @JsonKey(name: JsonConstants.postId)
           String postId,
+      @nullable
       @JsonKey(name: JsonConstants.isParent)
           bool isParent = false,
       @JsonKey(name: JsonConstants.childList)
-          List<Comment> childCommentList}) {
+          List<Comment> childCommentList,
+      @JsonKey(name: JsonConstants.postCommentCount)
+          int commentCount}) {
     return _Comment(
       userName: userName,
       userPhotoUrl: userPhotoUrl,
@@ -57,6 +60,7 @@ class _$CommentTearOff {
       postId: postId,
       isParent: isParent,
       childCommentList: childCommentList,
+      commentCount: commentCount,
     );
   }
 
@@ -96,10 +100,13 @@ mixin _$Comment {
   String get parentKey;
   @JsonKey(name: JsonConstants.postId)
   String get postId;
+  @nullable
   @JsonKey(name: JsonConstants.isParent)
   bool get isParent;
   @JsonKey(name: JsonConstants.childList)
   List<Comment> get childCommentList;
+  @JsonKey(name: JsonConstants.postCommentCount)
+  int get commentCount;
 
   Map<String, dynamic> toJson();
   $CommentCopyWith<Comment> get copyWith;
@@ -128,10 +135,13 @@ abstract class $CommentCopyWith<$Res> {
           String parentKey,
       @JsonKey(name: JsonConstants.postId)
           String postId,
+      @nullable
       @JsonKey(name: JsonConstants.isParent)
           bool isParent,
       @JsonKey(name: JsonConstants.childList)
-          List<Comment> childCommentList});
+          List<Comment> childCommentList,
+      @JsonKey(name: JsonConstants.postCommentCount)
+          int commentCount});
 }
 
 /// @nodoc
@@ -155,6 +165,7 @@ class _$CommentCopyWithImpl<$Res> implements $CommentCopyWith<$Res> {
     Object postId = freezed,
     Object isParent = freezed,
     Object childCommentList = freezed,
+    Object commentCount = freezed,
   }) {
     return _then(_value.copyWith(
       userName: userName == freezed ? _value.userName : userName as String,
@@ -176,6 +187,8 @@ class _$CommentCopyWithImpl<$Res> implements $CommentCopyWith<$Res> {
       childCommentList: childCommentList == freezed
           ? _value.childCommentList
           : childCommentList as List<Comment>,
+      commentCount:
+          commentCount == freezed ? _value.commentCount : commentCount as int,
     ));
   }
 }
@@ -204,10 +217,13 @@ abstract class _$CommentCopyWith<$Res> implements $CommentCopyWith<$Res> {
           String parentKey,
       @JsonKey(name: JsonConstants.postId)
           String postId,
+      @nullable
       @JsonKey(name: JsonConstants.isParent)
           bool isParent,
       @JsonKey(name: JsonConstants.childList)
-          List<Comment> childCommentList});
+          List<Comment> childCommentList,
+      @JsonKey(name: JsonConstants.postCommentCount)
+          int commentCount});
 }
 
 /// @nodoc
@@ -232,6 +248,7 @@ class __$CommentCopyWithImpl<$Res> extends _$CommentCopyWithImpl<$Res>
     Object postId = freezed,
     Object isParent = freezed,
     Object childCommentList = freezed,
+    Object commentCount = freezed,
   }) {
     return _then(_Comment(
       userName: userName == freezed ? _value.userName : userName as String,
@@ -253,6 +270,8 @@ class __$CommentCopyWithImpl<$Res> extends _$CommentCopyWithImpl<$Res>
       childCommentList: childCommentList == freezed
           ? _value.childCommentList
           : childCommentList as List<Comment>,
+      commentCount:
+          commentCount == freezed ? _value.commentCount : commentCount as int,
     ));
   }
 }
@@ -285,16 +304,18 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
       @required
       @JsonKey(name: JsonConstants.postId)
           this.postId,
+      @nullable
       @JsonKey(name: JsonConstants.isParent)
           this.isParent = false,
       @JsonKey(name: JsonConstants.childList)
-          this.childCommentList})
+          this.childCommentList,
+      @JsonKey(name: JsonConstants.postCommentCount)
+          this.commentCount})
       : assert(comment != null),
         assert(createdTimeStamp != null),
         assert(userId != null),
         assert(key != null),
-        assert(postId != null),
-        assert(isParent != null);
+        assert(postId != null);
 
   factory _$_Comment.fromJson(Map<String, dynamic> json) =>
       _$_$_CommentFromJson(json);
@@ -333,15 +354,19 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
   @JsonKey(name: JsonConstants.postId)
   final String postId;
   @override
+  @nullable
   @JsonKey(name: JsonConstants.isParent)
   final bool isParent;
   @override
   @JsonKey(name: JsonConstants.childList)
   final List<Comment> childCommentList;
+  @override
+  @JsonKey(name: JsonConstants.postCommentCount)
+  final int commentCount;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Comment(userName: $userName, userPhotoUrl: $userPhotoUrl, comment: $comment, createdTimeStamp: $createdTimeStamp, updatedTimeStamp: $updatedTimeStamp, userId: $userId, key: $key, parentKey: $parentKey, postId: $postId, isParent: $isParent, childCommentList: $childCommentList)';
+    return 'Comment(userName: $userName, userPhotoUrl: $userPhotoUrl, comment: $comment, createdTimeStamp: $createdTimeStamp, updatedTimeStamp: $updatedTimeStamp, userId: $userId, key: $key, parentKey: $parentKey, postId: $postId, isParent: $isParent, childCommentList: $childCommentList, commentCount: $commentCount)';
   }
 
   @override
@@ -359,7 +384,8 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
       ..add(DiagnosticsProperty('parentKey', parentKey))
       ..add(DiagnosticsProperty('postId', postId))
       ..add(DiagnosticsProperty('isParent', isParent))
-      ..add(DiagnosticsProperty('childCommentList', childCommentList));
+      ..add(DiagnosticsProperty('childCommentList', childCommentList))
+      ..add(DiagnosticsProperty('commentCount', commentCount));
   }
 
   @override
@@ -395,7 +421,10 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
                     .equals(other.isParent, isParent)) &&
             (identical(other.childCommentList, childCommentList) ||
                 const DeepCollectionEquality()
-                    .equals(other.childCommentList, childCommentList)));
+                    .equals(other.childCommentList, childCommentList)) &&
+            (identical(other.commentCount, commentCount) ||
+                const DeepCollectionEquality()
+                    .equals(other.commentCount, commentCount)));
   }
 
   @override
@@ -411,7 +440,8 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
       const DeepCollectionEquality().hash(parentKey) ^
       const DeepCollectionEquality().hash(postId) ^
       const DeepCollectionEquality().hash(isParent) ^
-      const DeepCollectionEquality().hash(childCommentList);
+      const DeepCollectionEquality().hash(childCommentList) ^
+      const DeepCollectionEquality().hash(commentCount);
 
   @override
   _$CommentCopyWith<_Comment> get copyWith =>
@@ -448,10 +478,13 @@ abstract class _Comment implements Comment {
       @required
       @JsonKey(name: JsonConstants.postId)
           String postId,
+      @nullable
       @JsonKey(name: JsonConstants.isParent)
           bool isParent,
       @JsonKey(name: JsonConstants.childList)
-          List<Comment> childCommentList}) = _$_Comment;
+          List<Comment> childCommentList,
+      @JsonKey(name: JsonConstants.postCommentCount)
+          int commentCount}) = _$_Comment;
 
   factory _Comment.fromJson(Map<String, dynamic> json) = _$_Comment.fromJson;
 
@@ -489,11 +522,15 @@ abstract class _Comment implements Comment {
   @JsonKey(name: JsonConstants.postId)
   String get postId;
   @override
+  @nullable
   @JsonKey(name: JsonConstants.isParent)
   bool get isParent;
   @override
   @JsonKey(name: JsonConstants.childList)
   List<Comment> get childCommentList;
+  @override
+  @JsonKey(name: JsonConstants.postCommentCount)
+  int get commentCount;
   @override
   _$CommentCopyWith<_Comment> get copyWith;
 }

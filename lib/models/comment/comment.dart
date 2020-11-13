@@ -25,8 +25,10 @@ abstract class Comment with _$Comment {
     @JsonKey(name: JsonConstants.key) @required String key,
     @JsonKey(name: JsonConstants.parentKey) String parentKey,
     @JsonKey(name: JsonConstants.postId) @required String postId,
-    @JsonKey(name: JsonConstants.isParent) @Default(false) bool isParent,
+  @nullable  @JsonKey(name: JsonConstants.isParent) @Default(false) bool isParent,
     @JsonKey(name: JsonConstants.childList) List<Comment> childCommentList,
+   @nullable @JsonKey(name:JsonConstants.postCommentCount)
+    int commentCount,
   }) = _Comment;
   factory Comment.fromJson(Map<String, dynamic> json) =>
       _$CommentFromJson(json);
@@ -43,4 +45,5 @@ abstract class Comment with _$Comment {
     var dateFormatted = DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(dt);
     return dateFormatted;
   }
+
 }
