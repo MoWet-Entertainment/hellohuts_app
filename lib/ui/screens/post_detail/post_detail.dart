@@ -210,7 +210,7 @@ class __PostCommentListViewState extends State<_PostCommentListView> {
                 child: ScrollConfiguration(
                   behavior: NeatScrollBehavior(),
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 40.0),
+                    padding: const EdgeInsets.only(top: 40.0, bottom:70.0),
                     child: ListView.builder(
                         controller: scrollController,
                         itemCount: commentList.length,

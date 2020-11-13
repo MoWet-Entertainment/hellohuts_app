@@ -375,7 +375,7 @@ class Mock {
           "user_name": "Simonne Seal",
           "uid": "fXMy6HQcXH",
           "user_photo_url":
-              "hhttps://robohash.org/omnisdolorumdolor.bmp?size=50x50&set=set1",
+              "https://robohash.org/omnisdolorumdolor.bmp?size=50x50&set=set1",
           "comment": "Great. So excited!",
           "created_at": "2020-10-30T00:36:26Z",
           "updated_at": "2020-11-09T06:41:07Z",
