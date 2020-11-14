@@ -1,15 +1,44 @@
+import 'package:flutter/foundation.dart';
 import 'package:hellohuts_app/constants/mock1.dart';
 import 'package:hellohuts_app/models/comment/comment.dart';
 import 'package:hellohuts_app/states/app_state.dart';
 
 class CommentState extends AppState {
   List<Comment> _commentList;
+  bool _isLoading = false;
 
   Comment _commentModel;
+  Comment _parentModel;
+  List<Comment> getCommentList() {
+    if (_commentList != null) {
+      return _commentList;
+    } else {
+      getCommentsForPost(postId: "");
+    }
+  }
+
+  bool get isLoading => _isLoading;
+  set setIsLoading(bool val) {
+    _isLoading = val;
+    notifyListeners();
+  }
+
   Comment getCommentModel() => _commentModel;
-  List<Comment> getCommentList() => _commentList;
+
   void setCommentModel(Comment model) {
     _commentModel = model;
+    notifyListeners();
+  }
+
+  Comment get getParenetModel => _parentModel;
+
+  set setParentModel(Comment model) {
+    _parentModel = model;
+    notifyListeners();
+  }
+
+  void resetParentModel() {
+    _parentModel = null;
     notifyListeners();
   }
 
@@ -23,7 +52,7 @@ class CommentState extends AppState {
     notifyListeners();
   }
 
-  void getCommentsForPost(String postId) {
+  void getCommentsForPost({@required String postId}) {
     //TODO: Include database operations here for getting the commens based on post id
 
     List<Comment> commentList =
@@ -32,7 +61,7 @@ class CommentState extends AppState {
   }
 
   bool _isReplying = false;
-  bool isReplying() => _isReplying;
+  bool get isReplying => _isReplying;
 
   set setIsReplying(bool value) {
     _isReplying = value;
@@ -51,5 +80,5 @@ class CommentState extends AppState {
     notifyListeners();
   }
 
-  String get replyingTo =>_replyingToName;
+  String get replyingTo => _replyingToName;
 }

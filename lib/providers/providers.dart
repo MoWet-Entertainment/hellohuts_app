@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:hellohuts_app/helper/theme_preferences.dart';
 import 'package:hellohuts_app/states/collect_details_states/cost_estimate_state.dart';
+import 'package:hellohuts_app/states/comment/comment_state.dart';
 import 'package:hellohuts_app/states/countries.dart';
 import 'package:hellohuts_app/states/feed_state.dart';
 import 'package:hellohuts_app/states/auth_states/phone_auth.dart';
@@ -18,6 +19,7 @@ List<SingleChildWidget> providers = [
   ChangeNotifierProvider<AuthState>(create: (_) => AuthState()),
   ChangeNotifierProvider<DarkThemeProvider>(create: (_) => DarkThemeProvider(),),
   ChangeNotifierProvider<FeedState>(create: (_) => FeedState()),
+   ChangeNotifierProvider<CommentState>(create: (_)=>CommentState(),),
    ChangeNotifierProvider<PopupState>(create: (_) => PopupState()),
    ChangeNotifierProvider<SearchStateMain>(create: (_) => SearchStateMain()),
       ChangeNotifierProvider<SearchCategoriesState>(create: (_) => SearchCategoriesState()),

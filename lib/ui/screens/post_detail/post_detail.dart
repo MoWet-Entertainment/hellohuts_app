@@ -220,7 +220,7 @@ class __PostCommentListViewState extends State<_PostCommentListView> {
                   ),
                 ),
               ),
-              CommentTexFieldWidget(),
+              CommentTextFieldWidget(),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 4.0),
                 child: Align(
