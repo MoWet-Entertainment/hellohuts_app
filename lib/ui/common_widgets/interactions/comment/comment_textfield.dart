@@ -1,19 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:hellohuts_app/constants/constants.dart';
+import 'package:hellohuts_app/models/comment/comment.dart';
+import 'package:hellohuts_app/states/comment/comment_state.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
 import 'package:hellohuts_app/ui/common_widgets/interactions/comment/comments_placeholder.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
+import 'package:provider/provider.dart';
 
-class CommentTexFieldWidget extends StatefulWidget {
-  const CommentTexFieldWidget({
+class CustomTextFieldWidget extends StatefulWidget {
+  final Function(String) onSubmitPressed;
+  final bool isImageSupported;
+  final VoidCallback onCameraClicked;
+  final String hintText;
+
+  const CustomTextFieldWidget({
     Key key,
+    this.onSubmitPressed,
+    this.isImageSupported,
+    this.onCameraClicked,
+    this.hintText,
   }) : super(key: key);
 
   @override
-  _CommentTexFieldWidgetState createState() => _CommentTexFieldWidgetState();
+  _CustomTextFieldWidgetState createState() => _CustomTextFieldWidgetState();
 }
 
-class _CommentTexFieldWidgetState extends State<CommentTexFieldWidget> {
+class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
   bool _isTyping = false;
   TextEditingController _controller = new TextEditingController();
 
@@ -38,6 +50,14 @@ class _CommentTexFieldWidgetState extends State<CommentTexFieldWidget> {
     }
   }
 
+  void _onSubmitted(String text) {
+    if (text.length > 0) {
+      if (widget.onSubmitPressed != null) {
+        widget.onSubmitPressed(text);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final width = fullWidth(context);
@@ -46,7 +66,7 @@ class _CommentTexFieldWidgetState extends State<CommentTexFieldWidget> {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         Container(
-          width:width,
+          width: width,
           decoration: BoxDecoration(
               color: theme.colorScheme.surface,
               borderRadius: BorderRadius.only(
@@ -75,7 +95,9 @@ class _CommentTexFieldWidgetState extends State<CommentTexFieldWidget> {
                       Padding(
                         padding: const EdgeInsets.only(
                             left: 8.0, right: 8, top: 14.0),
-                        child: CustomAvatar(radius: 10),
+                        child: CustomAvatar(
+                          radius: 10,
+                        ),
                       ),
                       Expanded(
                         flex: 4,
@@ -86,13 +108,14 @@ class _CommentTexFieldWidgetState extends State<CommentTexFieldWidget> {
                           maxLines: 8,
                           maxLengthEnforced: true,
                           buildCounter: null,
-                          style: theme.textTheme.bodyText2.copyWith(fontSize: 16),
+                          style:
+                              theme.textTheme.bodyText2.copyWith(fontSize: 16),
                           keyboardType: TextInputType.multiline,
                           onChanged: (text) {
                             _onChanged(text);
                           },
                           decoration: InputDecoration(
-                            hintText: "Add Comment",
+                            hintText: widget.hintText ?? "Add Comment",
                             hintStyle: theme.textTheme.bodyText2
                                 .copyWith(color: AppColors.kbDarkGrey),
                             counterText: "",
@@ -121,6 +144,10 @@ class _CommentTexFieldWidgetState extends State<CommentTexFieldWidget> {
                               ),
                               onPressed: () => {
                                     print("user wants to select photos"),
+                                    if (widget.onCameraClicked != null)
+                                      {
+                                        widget.onCameraClicked(),
+                                      }
                                     //TODO: add photo selecting functionality here
                                   }),
                       SizedBox(
@@ -129,19 +156,19 @@ class _CommentTexFieldWidgetState extends State<CommentTexFieldWidget> {
                     ],
                   ),
                 ),
-              
                 Flexible(
                   flex: 1,
-                                  child: Container(
+                  child: Container(
                       decoration: BoxDecoration(
                           // color:theme.colorScheme.secondaryVariant,
 
                           shape: BoxShape.circle),
                       child: IconButton(
-                        icon: Image.asset(HelloIcons.send_bold_icon,
-                            color: AppColors.kbDarkGrey, height: 28),
-                        onPressed: () => {},
-                      )),
+                          icon: Image.asset(HelloIcons.send_bold_icon,
+                              color: AppColors.kbDarkGrey, height: 28),
+                          onPressed: () => {
+                                _onSubmitted(_controller.text),
+                              })),
                 ),
               ],
             ),
@@ -151,3 +178,39 @@ class _CommentTexFieldWidgetState extends State<CommentTexFieldWidget> {
     );
   }
 }
+
+class CommentTextFieldWidget extends StatefulWidget {
+  const CommentTextFieldWidget({Key key}) : super(key: key);
+
+  @override
+  _CommentTextFieldWidgetState createState() => _CommentTextFieldWidgetState();
+}
+
+class _CommentTextFieldWidgetState extends State<CommentTextFieldWidget> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final commentState = Provider.of<CommentState>(context);
+    return CustomTextFieldWidget(
+        hintText: commentState.isReplying && commentState.replyingTo.length > 0
+            ? commentState.replyingTo
+            : "Add Comment",
+        isImageSupported: false,
+        onSubmitPressed: _onSubmitted);
+  }
+
+  void _onSubmitted(String value) {
+    final commentState = Provider.of<CommentState>(context);
+
+    Comment comment = Comment(
+      comment: value,
+    );
+    commentState.addToCommentList(comment);
+  }
+}
+
+typedef void TextFieldSubmittedCallback(String value, Comment parentModel);

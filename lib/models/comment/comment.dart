@@ -22,7 +22,7 @@ abstract class Comment with _$Comment {
     @JsonKey(name: JsonConstants.updated_at, fromJson: Comment._dateTimeFromUTC, toJson: Comment._dateTimeToUTC)
         DateTime updatedTimeStamp,
     @JsonKey(name: JsonConstants.userId) @required String userId,
-    @JsonKey(name: JsonConstants.key) @required String key,
+    @JsonKey(name: JsonConstants.key)  String key,
     @JsonKey(name: JsonConstants.parentKey) String parentKey,
     @JsonKey(name: JsonConstants.postId) @required String postId,
   @nullable  @JsonKey(name: JsonConstants.isParent) @Default(false) bool isParent,
