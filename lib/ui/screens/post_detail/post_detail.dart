@@ -5,15 +5,18 @@ import 'package:flutter/services.dart';
 import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/constants/mock1.dart';
 import 'package:hellohuts_app/models/comment/comment.dart';
+import 'package:hellohuts_app/states/comment/comment_state.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
 import 'package:hellohuts_app/ui/common_widgets/interactions/comment/comment_textfield.dart';
 import 'package:hellohuts_app/ui/common_widgets/interactions/follow_button.dart';
 import 'package:hellohuts_app/ui/common_widgets/scroll_behavior/neat_scroll_behavior.dart';
 import 'package:hellohuts_app/ui/screens/categories/widgets/wigets.dart';
 import 'package:hellohuts_app/ui/common_widgets/interactions/comment/comments_placeholder.dart';
+import 'package:hellohuts_app/ui/screens/post_detail/comment/comment_field.dart';
 import 'package:hellohuts_app/ui/screens/post_detail/post_image.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/theme_options.dart';
+import 'package:provider/provider.dart';
 
 class PostDetailPage extends StatefulWidget {
   final ImageData imageData;
@@ -172,19 +175,20 @@ class _PostCommentListView extends StatefulWidget {
 }
 
 class __PostCommentListViewState extends State<_PostCommentListView> {
-  List<Comment> commentList;
+  Future<List<Comment>> _commentList;
   @override
   void initState() {
     // TODO: implement initState
     //lauch all db related calls here
-  
     super.initState();
+
+    final commentState = Provider.of<CommentState>(context, listen: false);
+    _commentList = commentState.getCommentList();
   }
 
   @override
   Widget build(BuildContext context) {
-      commentList =
-          Mock.commentList.map((ele) => Comment.fromJson(ele)).toList();
+    final commentState = Provider.of<CommentState>(context);
     final double height = fullHeight(context);
     final isDarkTheme = ThemeOptions.of(context).isDarkTheme(context);
     final theme = Theme.of(context);
@@ -197,48 +201,62 @@ class __PostCommentListViewState extends State<_PostCommentListView> {
         minChildSize: 0.3,
         maxChildSize: 1,
         builder: (BuildContext context, ScrollController scrollController) {
-          return Stack(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
-                  ),
-                  color: theme.colorScheme.surface,
+          return Stack(children: [
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
                 ),
-                child: ScrollConfiguration(
-                  behavior: NeatScrollBehavior(),
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 40.0, bottom:70.0),
-                    child: ListView.builder(
-                        controller: scrollController,
-                        itemCount: commentList.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return ListTile(title: UsersCommentsWidget(commentModel: commentList[index],));
-                        }),
+                color: theme.colorScheme.surface,
+              ),
+              child: ScrollConfiguration(
+                behavior: NeatScrollBehavior(),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 40.0, bottom: 70.0),
+                  child: FutureBuilder(
+                    future: _commentList,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        return ListView.builder(
+                          controller: scrollController,
+                          itemCount: snapshot.data.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return ListTile(
+                              title: UsersCommentsWidget(
+                                commentModel: snapshot.data[index],
+                              ),
+                            );
+                          },
+                        );
+                      } else {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                    },
                   ),
                 ),
               ),
-              CommentTextFieldWidget(),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 4.0),
-                child: Align(
-                  alignment: Alignment.topCenter,
-                  child: Container(
-                    width: fullWidth(context) * .15,
-                    height: 5,
-                    decoration: BoxDecoration(
-                      color: theme.dividerColor,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
+            ),
+            CommentTextFieldWidget(),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4.0),
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: Container(
+                  width: fullWidth(context) * .15,
+                  height: 5,
+                  decoration: BoxDecoration(
+                    color: theme.dividerColor,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10),
                     ),
                   ),
                 ),
               ),
-            ],
-          );
+            ),
+          ]);
         },
       ),
     );
