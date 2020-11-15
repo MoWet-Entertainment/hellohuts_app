@@ -54,6 +54,7 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
     if (text.length > 0) {
       if (widget.onSubmitPressed != null) {
         widget.onSubmitPressed(text);
+        _controller.text = "";
       }
     }
   }
@@ -178,39 +179,3 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
     );
   }
 }
-
-class CommentTextFieldWidget extends StatefulWidget {
-  const CommentTextFieldWidget({Key key}) : super(key: key);
-
-  @override
-  _CommentTextFieldWidgetState createState() => _CommentTextFieldWidgetState();
-}
-
-class _CommentTextFieldWidgetState extends State<CommentTextFieldWidget> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final commentState = Provider.of<CommentState>(context);
-    return CustomTextFieldWidget(
-        hintText: commentState.isReplying && commentState.replyingTo.length > 0
-            ? commentState.replyingTo
-            : "Add Comment",
-        isImageSupported: false,
-        onSubmitPressed: _onSubmitted);
-  }
-
-  void _onSubmitted(String value) {
-    final commentState = Provider.of<CommentState>(context);
-
-    Comment comment = Comment(
-      comment: value,
-    );
-    commentState.addToCommentList(comment);
-  }
-}
-
-typedef void TextFieldSubmittedCallback(String value, Comment parentModel);

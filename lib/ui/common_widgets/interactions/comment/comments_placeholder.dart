@@ -87,7 +87,6 @@ class UsersCommentsWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      //TODO:Pass real user name via model
                       Row(
                         children: [
                           Text(commentModel?.userName,
@@ -96,14 +95,28 @@ class UsersCommentsWidget extends StatelessWidget {
                               style: theme.textTheme.bodyText1.copyWith(
                                   fontWeight: FontWeight.bold, fontSize: 14)),
                           SizedBox(width: 20),
+                          Spacer(),
+                            Text(
+                                  timeago.format(now.subtract(difference),
+                                      locale: 'en_short'),
+                                  style: theme.textTheme.bodyText1.copyWith(
+                                      fontSize: 10,
+                                      color: AppColors.kbDarkGrey),
+                                ),
                         ],
                       ),
 
-                      Text(commentModel?.comment,
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
-                          style: theme.textTheme.bodyText1.copyWith(
-                              fontWeight: FontWeight.normal, fontSize: 14)),
+                      Row(
+                        children: [
+                          Flexible(
+                                                      child: Text(commentModel?.comment,
+                                maxLines: 3,
+                                overflow: TextOverflow.ellipsis,
+                                style: theme.textTheme.bodyText1.copyWith(
+                                    fontWeight: FontWeight.normal, fontSize: 14)),
+                          ),
+                        ],
+                      ),
                       SizedBox(
                         height: 8,
                       ),
@@ -138,13 +151,7 @@ class UsersCommentsWidget extends StatelessWidget {
                                           : SizedBox.shrink(),
                                       // Spacer(),
                                     ]),
-                                Text(
-                                  timeago.format(now.subtract(difference),
-                                      locale: 'en_short'),
-                                  style: theme.textTheme.bodyText1.copyWith(
-                                      fontSize: 10,
-                                      color: AppColors.kbDarkGrey),
-                                ),
+                              
                               ],
                             ),
                       !isFeedPage &&
@@ -287,7 +294,7 @@ class _UserCommentWidget extends StatelessWidget {
     final theme = Theme.of(context);
     return showAllReplies
         ? _buildAllReplyComments(theme)
-        : _buildSingleReplyComment(theme, commentModel);
+        : _buildSingleReplyComment(theme, commentModel.childCommentList[0]);
   }
 
   Widget _buildAllReplyComments(ThemeData theme) {
@@ -305,6 +312,8 @@ class _UserCommentWidget extends StatelessWidget {
   }
 
   Widget _buildSingleReplyComment(ThemeData theme, Comment model) {
+      final now = new DateTime.now();
+    final difference = now.difference(commentModel.updatedTimeStamp);
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -339,8 +348,19 @@ class _UserCommentWidget extends StatelessWidget {
                   style: theme.textTheme.bodyText1
                       .copyWith(fontWeight: FontWeight.normal, fontSize: 14)),
               SizedBox(
+                height: 4,
+              ),
+                Text(
+                                  timeago.format(now.subtract(difference),
+                                      locale: 'en_short'),
+                                  style: theme.textTheme.bodyText1.copyWith(
+                                      fontSize: 10,
+                                      color: AppColors.kbDarkGrey),
+                                ),
+                                   SizedBox(
                 height: 8,
               ),
+
             ],
           ),
         ),

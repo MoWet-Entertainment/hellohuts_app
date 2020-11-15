@@ -4,17 +4,29 @@ import 'package:hellohuts_app/models/comment/comment.dart';
 import 'package:hellohuts_app/states/app_state.dart';
 
 class CommentState extends AppState {
-  List<Comment> _commentList;
+  List<Comment> _commentList = null;
   bool _isLoading = false;
 
-  Comment _commentModel;
-  Comment _parentModel;
-  List<Comment> getCommentList() {
-    if (_commentList != null) {
-      return _commentList;
-    } else {
-      getCommentsForPost(postId: "");
+  Comment _commentModel = null;
+  String _parentPostId = null;
+  bool _isReplying = false;
+  String _replyingToName = null;
+
+  Future<List<Comment>> getCommentList() async {
+    if (_commentList == null) {
+      return initCommentForPosts(postId: "");
     }
+    return _commentList;
+  }
+
+  Future<List<Comment>> initCommentForPosts({@required String postId}) async {
+    List<Comment> commentList =
+        Mock.commentList.map((ele) => Comment.fromJson(ele)).toList();
+    _parentPostId = postId;
+    _commentList = commentList;
+    return Future.delayed(Duration(seconds: 2), () {
+      return commentList;
+    });
   }
 
   bool get isLoading => _isLoading;
@@ -30,16 +42,15 @@ class CommentState extends AppState {
     notifyListeners();
   }
 
-  Comment get getParenetModel => _parentModel;
-
-  set setParentModel(Comment model) {
-    _parentModel = model;
+  void resetCommentModel() {
+    _commentModel = null;
     notifyListeners();
   }
 
-  void resetParentModel() {
-    _parentModel = null;
-    notifyListeners();
+  String get parentPostId => _parentPostId;
+
+  set setParentPostId(String parentPostId) {
+    _parentPostId = parentPostId;
   }
 
   void setCommentList(List<Comment> list) {
@@ -48,8 +59,15 @@ class CommentState extends AppState {
   }
 
   void addToCommentList(Comment comment) {
-    _commentList.add(comment);
+    _commentList.insert(0, comment);
+
     notifyListeners();
+  }
+
+  void addReplyToComment(Comment commentParent, Comment reply) {
+    commentParent.childCommentList.insert(0, reply);
+    notifyListeners();
+    _isReplying = false;
   }
 
   void getCommentsForPost({@required String postId}) {
@@ -57,18 +75,16 @@ class CommentState extends AppState {
 
     List<Comment> commentList =
         Mock.commentList.map((ele) => Comment.fromJson(ele)).toList();
-    setCommentList(commentList);
+    _parentPostId = postId;
+    _commentList = commentList;
   }
 
-  bool _isReplying = false;
   bool get isReplying => _isReplying;
 
   set setIsReplying(bool value) {
     _isReplying = value;
     notifyListeners();
   }
-
-  String _replyingToName = "";
 
   void resetReplyingTo() {
     _replyingToName = "";
@@ -81,4 +97,12 @@ class CommentState extends AppState {
   }
 
   String get replyingTo => _replyingToName;
+
+  void cleanSessionCommentData() {
+    _commentList = null;
+    _isLoading = false;
+    _parentPostId = null;
+    _isReplying = false;
+    _replyingToName = null;
+  }
 }
