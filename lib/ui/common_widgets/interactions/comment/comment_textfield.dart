@@ -160,6 +160,7 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
                 Flexible(
                   flex: 1,
                   child: Container(
+                    padding: const EdgeInsets.only(right:8),
                       decoration: BoxDecoration(
                           // color:theme.colorScheme.secondaryVariant,
 
