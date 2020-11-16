@@ -4,10 +4,12 @@ import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/constants/mock1.dart';
 import 'package:hellohuts_app/models/comment/comment.dart';
 import 'package:hellohuts_app/models/test.dart';
+import 'package:hellohuts_app/states/comment/comment_state.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
 import 'package:hellohuts_app/ui/routes/router.gr.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
+import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class PostCommentsPlaceholder extends StatelessWidget {
@@ -96,31 +98,29 @@ class UsersCommentsWidget extends StatelessWidget {
                                   fontWeight: FontWeight.bold, fontSize: 14)),
                           SizedBox(width: 20),
                           Spacer(),
-                            Text(
-                                  timeago.format(now.subtract(difference),
-                                      locale: 'en_short'),
-                                  style: theme.textTheme.bodyText1.copyWith(
-                                      fontSize: 10,
-                                      color: AppColors.kbDarkGrey),
-                                ),
+                          Text(
+                            timeago.format(now.subtract(difference),
+                                locale: 'en_short'),
+                            style: theme.textTheme.bodyText1.copyWith(
+                                fontSize: 10, color: AppColors.kbDarkGrey),
+                          ),
                         ],
                       ),
-
                       Row(
                         children: [
                           Flexible(
-                                                      child: Text(commentModel?.comment,
+                            child: Text(commentModel?.comment,
                                 maxLines: 3,
                                 overflow: TextOverflow.ellipsis,
                                 style: theme.textTheme.bodyText1.copyWith(
-                                    fontWeight: FontWeight.normal, fontSize: 14)),
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 14)),
                           ),
                         ],
                       ),
                       SizedBox(
                         height: 8,
                       ),
-
                       isFeedPage
                           ? SizedBox.shrink()
                           : Row(
@@ -151,7 +151,6 @@ class UsersCommentsWidget extends StatelessWidget {
                                           : SizedBox.shrink(),
                                       // Spacer(),
                                     ]),
-                              
                               ],
                             ),
                       !isFeedPage &&
@@ -234,47 +233,46 @@ class __CommentRepliesSectionState extends State<_CommentRepliesSection> {
     final theme = Theme.of(context);
     return Container(
       padding: const EdgeInsets.only(left: 28.0, top: 8.0),
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
-       children: [
-        Row(
+      child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-
-          Padding(
-            padding: const EdgeInsets.only(top:4.0),
-            child: Container(
-              height: 32,
-                width: 2,
-                color: theme.dividerColor,
+            Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 4.0),
+                child: Container(
+                  height: 32,
+                  width: 2,
+                  color: theme.dividerColor,
+                ),
               ),
-          ),
-          SizedBox(width: 8),
-          _UserCommentWidget(
-            commentModel: widget.commentModel,
-            showAllReplies: _showAllReplies,
-          ),
-        ]),
-        Container(
-          padding: const EdgeInsets.only(top: 8.0),
-          child: widget.commentModel.childCommentList.length > 1
-              ? GestureDetector(
-                  child: Text(
-                    _showAllReplies ? 'Show less' : 'Show all replies',
-                    style: theme.textTheme.bodyText1
-                        .copyWith(fontSize: 12, color: AppColors.kbDarkGrey),
-                  ),
-                  onTap: () => {
-                    //TODO: Implement a way to see all the replies to the specific comment
-                    print("User wants to see all the replies to this comment"),
-                    setState(() {
-                      _showAllReplies = !_showAllReplies;
-                    })
-                  },
-                )
-              : SizedBox.shrink(),
-        ),
-      ]),
+              SizedBox(width: 8),
+              _UserCommentWidget(
+                commentModel: widget.commentModel,
+                showAllReplies: _showAllReplies,
+              ),
+            ]),
+            Container(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: widget.commentModel.childCommentList.length > 1
+                  ? GestureDetector(
+                      child: Text(
+                        _showAllReplies ? 'Show less' : 'Show all replies',
+                        style: theme.textTheme.bodyText1.copyWith(
+                            fontSize: 12, color: AppColors.kbDarkGrey),
+                      ),
+                      onTap: () => {
+                        //TODO: Implement a way to see all the replies to the specific comment
+                        print(
+                            "User wants to see all the replies to this comment"),
+                        setState(() {
+                          _showAllReplies = !_showAllReplies;
+                        })
+                      },
+                    )
+                  : SizedBox.shrink(),
+            ),
+          ]),
     );
   }
 }
@@ -294,7 +292,9 @@ class _UserCommentWidget extends StatelessWidget {
     final theme = Theme.of(context);
     return showAllReplies
         ? _buildAllReplyComments(theme)
-        : _buildSingleReplyComment(theme, commentModel.childCommentList[0]);
+        : Expanded(
+            child: _buildSingleReplyComment(
+                theme, commentModel.childCommentList[0], context));
   }
 
   Widget _buildAllReplyComments(ThemeData theme) {
@@ -305,15 +305,17 @@ class _UserCommentWidget extends StatelessWidget {
         itemCount: commentModel.childCommentList.length,
         itemBuilder: (BuildContext context, int index) {
           return _buildSingleReplyComment(
-              theme, commentModel.childCommentList[index]);
+              theme, commentModel.childCommentList[index], context);
         },
       ),
     );
   }
 
-  Widget _buildSingleReplyComment(ThemeData theme, Comment model) {
-      final now = new DateTime.now();
-    final difference = now.difference(commentModel.updatedTimeStamp);
+  Widget _buildSingleReplyComment(
+      ThemeData theme, Comment model, BuildContext context) {
+    final now = new DateTime.now();
+    final difference = now.difference(model.updatedTimeStamp);
+    final commentState = Provider.of<CommentState>(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -350,17 +352,41 @@ class _UserCommentWidget extends StatelessWidget {
               SizedBox(
                 height: 4,
               ),
-                Text(
-                                  timeago.format(now.subtract(difference),
-                                      locale: 'en_short'),
-                                  style: theme.textTheme.bodyText1.copyWith(
-                                      fontSize: 10,
-                                      color: AppColors.kbDarkGrey),
-                                ),
-                                   SizedBox(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+                    GestureDetector(
+                      child: Text('Reply',
+                          style: theme.textTheme.bodyText1.copyWith(
+                              color: AppColors.kbDarkGrey,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold)),
+                      onTap: () => {
+                        commentState.setIsReplying = true,
+                         commentState.setCommentModel(model),
+                        //TODO: implement post reply feature here.
+                        print("User wants to reply to the post"),
+
+                      },
+                    ),
+                    SizedBox(width: 20),
+                    model.childCommentList != null
+                        ? _CommentBottomSection(commentModel: model)
+                        : SizedBox.shrink(),
+                    // Spacer(),
+                  ]),
+                  Text(
+                    timeago.format(now.subtract(difference),
+                        locale: 'en_short'),
+                    style: theme.textTheme.bodyText1
+                        .copyWith(fontSize: 10, color: AppColors.kbDarkGrey),
+                  ),
+                ],
+              ),
+              SizedBox(
                 height: 8,
               ),
-
             ],
           ),
         ),

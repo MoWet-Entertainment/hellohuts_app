@@ -60,7 +60,7 @@ class CommentState extends AppState {
 
   void addToCommentList(Comment comment) {
     _commentList.insert(0, comment);
-
+    _commentModel = null;
     notifyListeners();
   }
 
@@ -68,6 +68,7 @@ class CommentState extends AppState {
     commentParent.childCommentList.insert(0, reply);
     notifyListeners();
     _isReplying = false;
+    _commentModel = null;
   }
 
   void getCommentsForPost({@required String postId}) {
