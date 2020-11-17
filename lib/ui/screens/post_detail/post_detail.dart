@@ -73,8 +73,10 @@ class _PostDetailPageState extends State<PostDetailPage> {
                             borderRadius: BorderRadius.circular(40)),
                         child: IconButton(
                             icon: Icon(Icons.arrow_back),
-                            onPressed: () =>
-                                ExtendedNavigator.of(context).pop()),
+                            onPressed: () {
+                              commentState.cleanSessionCommentData();
+                              ExtendedNavigator.of(context).pop();
+                            }),
                       ),
 //               actions: [
 // IconButton(icon: Icon(Icons.more_horiz, color: AppColors.kPureWhite,), onPressed: null)
