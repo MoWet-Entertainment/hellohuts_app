@@ -24,7 +24,7 @@ class _CommentTextFieldWidgetState extends State<CommentTextFieldWidget> {
     final commentState = Provider.of<CommentState>(context);
     return CustomTextFieldWidget(
         hintText: commentState.isReplying
-            ? "Replying to "+commentState.replyingTo
+            ? "Replying to " + commentState.replyingTo + " .."
             : "Add Comment",
         isImageSupported: false,
         onSubmitPressed: _onSubmitted);
@@ -32,29 +32,34 @@ class _CommentTextFieldWidgetState extends State<CommentTextFieldWidget> {
 
   void _onSubmitted(String value) {
     final commentState = Provider.of<CommentState>(context, listen: false);
-    final authState = Provider.of<AuthState>(context, listen:  false);
+    final authState = Provider.of<AuthState>(context, listen: false);
 
     bool isReplying = commentState.isReplying;
 
     Comment comment = Comment(
-      postId:commentState.parentPostId??"12323",
+      postId: commentState.parentPostId ?? "12323",
       comment: value,
-      key:"1232323df",
+      key: "1232323df",
       createdTimeStamp: DateTime.now(),
       updatedTimeStamp: DateTime.now(),
       //TODO: get the user id from the user model
       //TODO: IMPORTANT : need to refactor
-      userId: authState.userId??"vinoop ks",
-      userName: (authState.userModel?.displayName)??"Vinoop KS",
-      userPhotoUrl: (authState.userModel?.photoUrl)??"http://www.gravatar.com/avatar/?d=identicon",
+      userId: authState.userId ?? "vinoop ks",
+      userName: (authState.userModel?.displayName) ?? "Vinoop KS",
+      userPhotoUrl: (authState.userModel?.photoUrl) ??
+          "http://www.gravatar.com/avatar/?d=identicon",
       parentKey: isReplying ? commentState.getCommentModel().key : null,
     );
 
     if (isReplying) {
       commentState.addReplyToComment(commentState.getCommentModel(), comment);
+
     } else {
       commentState.addToCommentList(comment);
     }
+          commentState.setIsReplying = false;
+      commentState.resetCommentModel();
+      commentState.setReplyingTo("");
   }
 }
 

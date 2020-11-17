@@ -65,7 +65,7 @@ class UsersCommentsWidget extends StatelessWidget {
     final now = new DateTime.now();
     final difference = now.difference(commentModel.updatedTimeStamp);
     final theme = Theme.of(context);
-
+    final commentState = Provider.of<CommentState>(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
       child: Row(
@@ -140,8 +140,10 @@ class UsersCommentsWidget extends StatelessWidget {
                                                         FontWeight.bold)),
                                         onTap: () => {
                                           //TODO: implement post reply feature here.
-                                          print(
-                                              "User wants to reply to the post"),
+                                          commentState.setCommentModel(commentModel),
+                                          commentState.setReplyingTo(commentModel.userName),
+                                          commentState.setIsReplying = true,
+                                             print( "User wants to reply to the post"),
                                         },
                                       ),
                                       SizedBox(width: 20),
@@ -363,11 +365,11 @@ class _UserCommentWidget extends StatelessWidget {
                               fontSize: 12,
                               fontWeight: FontWeight.bold)),
                       onTap: () => {
+                                                commentState.setCommentModel(model),
+                                                commentState.setReplyingTo(model.userName),
                         commentState.setIsReplying = true,
-                         commentState.setCommentModel(model),
                         //TODO: implement post reply feature here.
                         print("User wants to reply to the post"),
-
                       },
                     ),
                     SizedBox(width: 20),

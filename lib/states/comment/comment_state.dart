@@ -65,7 +65,12 @@ class CommentState extends AppState {
   }
 
   void addReplyToComment(Comment commentParent, Comment reply) {
-    commentParent.childCommentList.insert(0, reply);
+    if (commentParent.childCommentList == null ||
+        commentParent.childCommentList?.length == 0) {
+      commentParent.copyWith(childCommentList: [reply]);
+    } else {
+      commentParent.childCommentList.insert(0, reply);
+    }
     notifyListeners();
     _isReplying = false;
     _commentModel = null;
@@ -93,7 +98,7 @@ class CommentState extends AppState {
   }
 
   void setReplyingTo(String name) {
-    _replyingToName = name;
+    _replyingToName = name.split(" ").elementAt(0);
     notifyListeners();
   }
 
