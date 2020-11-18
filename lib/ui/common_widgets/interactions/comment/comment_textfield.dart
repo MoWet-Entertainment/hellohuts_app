@@ -12,6 +12,7 @@ class CustomTextFieldWidget extends StatefulWidget {
   final bool isImageSupported;
   final VoidCallback onCameraClicked;
   final String hintText;
+  final FocusNode focusNode;
 
   const CustomTextFieldWidget({
     Key key,
@@ -19,6 +20,7 @@ class CustomTextFieldWidget extends StatefulWidget {
     this.isImageSupported,
     this.onCameraClicked,
     this.hintText,
+    this.focusNode,
   }) : super(key: key);
 
   @override
@@ -28,6 +30,18 @@ class CustomTextFieldWidget extends StatefulWidget {
 class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
   bool _isTyping = false;
   TextEditingController _controller = new TextEditingController();
+  FocusNode _focusNode;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    if (widget.focusNode == null) {
+      _focusNode = FocusNode();
+    } else {
+      _focusNode = widget.focusNode;
+    }
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -104,6 +118,7 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
                         flex: 4,
                         child: TextField(
                           controller: _controller,
+                          focusNode: _focusNode,
                           maxLength: 150,
                           minLines: 1,
                           maxLines: 8,
@@ -117,8 +132,8 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
                           },
                           decoration: InputDecoration(
                             hintText: widget.hintText ?? "Add Comment",
-                            hintStyle: theme.textTheme.bodyText2
-                                .copyWith(color: AppColors.kbDarkGrey, fontSize: 12),
+                            hintStyle: theme.textTheme.bodyText2.copyWith(
+                                color: AppColors.kbDarkGrey, fontSize: 12),
                             counterText: "",
                             contentPadding:
                                 EdgeInsets.symmetric(horizontal: 8.0),
@@ -160,7 +175,7 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
                 Flexible(
                   flex: 1,
                   child: Container(
-                    padding: const EdgeInsets.only(right:8),
+                      padding: const EdgeInsets.only(right: 8),
                       decoration: BoxDecoration(
                           // color:theme.colorScheme.secondaryVariant,
 
