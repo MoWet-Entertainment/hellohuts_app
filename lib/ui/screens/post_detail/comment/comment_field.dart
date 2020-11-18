@@ -14,8 +14,10 @@ class CommentTextFieldWidget extends StatefulWidget {
 }
 
 class _CommentTextFieldWidgetState extends State<CommentTextFieldWidget> {
+  FocusNode focusNode;
   @override
   void initState() {
+    focusNode = FocusNode();
     super.initState();
   }
 
@@ -27,6 +29,7 @@ class _CommentTextFieldWidgetState extends State<CommentTextFieldWidget> {
             ? "Replying to " + commentState.replyingTo + " .."
             : "Add Comment",
         isImageSupported: false,
+        focusNode: focusNode,
         onSubmitPressed: _onSubmitted);
   }
 
@@ -52,14 +55,14 @@ class _CommentTextFieldWidgetState extends State<CommentTextFieldWidget> {
     );
 
     if (isReplying) {
+      focusNode.requestFocus();
       commentState.addReplyToComment(commentState.getCommentModel(), comment);
-
     } else {
       commentState.addToCommentList(comment);
     }
-          commentState.setIsReplying = false;
-      commentState.resetCommentModel();
-      commentState.setReplyingTo("");
+    commentState.setIsReplying = false;
+    commentState.resetCommentModel();
+    commentState.setReplyingTo("");
   }
 }
 

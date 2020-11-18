@@ -140,6 +140,7 @@ class UsersCommentsWidget extends StatelessWidget {
                                                         FontWeight.bold)),
                                         onTap: () => {
                                           //TODO: implement post reply feature here.
+                                          
                                           commentState.setCommentModel(commentModel),
                                           commentState.setReplyingTo(commentModel.userName),
                                           commentState.setIsReplying = true,

@@ -193,15 +193,22 @@ class __PostCommentListViewState extends State<_PostCommentListView> {
     //lauch all db related calls here
     super.initState();
 
-    final commentState = Provider.of<CommentState>(context, listen: false);
-    _commentList = commentState.getCommentList();
+
+
+  }
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
-    final commentState = Provider.of<CommentState>(context);
+    
+    final commentState = Provider.of<CommentState>(context, listen: false);
+      _commentList = commentState.getCommentList();
     final double height = fullHeight(context);
-    final isDarkTheme = ThemeOptions.of(context).isDarkTheme(context);
     final theme = Theme.of(context);
     return Container(
       height: height * 0.8,
