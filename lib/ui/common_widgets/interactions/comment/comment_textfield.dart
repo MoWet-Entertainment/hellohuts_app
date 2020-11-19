@@ -151,9 +151,9 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
                       SizedBox(
                         width: 8,
                       ),
-                      _isTyping
+                    _isTyping
                           ? SizedBox()
-                          : IconButton(
+                          : widget.isImageSupported? IconButton(
                               icon: Icon(
                                 Icons.camera_alt_rounded,
                                 color: AppColors.kbDarkGrey,
@@ -165,7 +165,7 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
                                         widget.onCameraClicked(),
                                       }
                                     //TODO: add photo selecting functionality here
-                                  }),
+                                  }):SizedBox.shrink(),
                       SizedBox(
                         width: 8,
                       ),
