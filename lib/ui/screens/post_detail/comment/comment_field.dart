@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/models/comment/comment.dart';
 import 'package:hellohuts_app/states/auth_states/auth_state.dart';
 import 'package:hellohuts_app/states/comment/comment_state.dart';
+import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
 import 'package:hellohuts_app/ui/common_widgets/interactions/comment/comment_textfield.dart';
 import 'package:provider/provider.dart';
 
@@ -24,13 +26,45 @@ class _CommentTextFieldWidgetState extends State<CommentTextFieldWidget> {
   @override
   Widget build(BuildContext context) {
     final commentState = Provider.of<CommentState>(context);
-    return CustomTextFieldWidget(
-        hintText: commentState.isReplying
-            ? "Replying to " + commentState.replyingTo + " .."
-            : "Add Comment",
-        isImageSupported: false,
-        focusNode: focusNode,
-        onSubmitPressed: _onSubmitted);
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        commentState.isReplying
+            ? Container(
+                color: Theme.of(context).colorScheme.background,
+                height: 30,
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Replying',
+                      style: Theme.of(context).textTheme.bodyText1,
+                    ),
+                    IconButton(
+                        icon: Icon(Icons.close,
+                            size: 16,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onBackground
+                                .withOpacity(0.6)),
+                        onPressed: () {
+                          commentState.resetReplySection();
+                        }),
+                  ],
+                ),
+              )
+            : SizedBox.shrink(),
+        CustomTextFieldWidget(
+            hintText: commentState.isReplying
+                ? "Replying to " + commentState.replyingTo + " .."
+                : "Add Comment",
+            isImageSupported: false,
+            focusNode: focusNode,
+            onSubmitPressed: _onSubmitted),
+      ],
+    );
   }
 
   void _onSubmitted(String value) {
@@ -55,7 +89,7 @@ class _CommentTextFieldWidgetState extends State<CommentTextFieldWidget> {
     );
 
     if (isReplying) {
-      focusNode.requestFocus();
+      print("isReplying: true");
       commentState.addReplyToComment(commentState.getCommentModel(), comment);
     } else {
       commentState.addToCommentList(comment);

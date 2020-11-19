@@ -11,7 +11,6 @@ class CommentState extends AppState {
   String _parentPostId = null;
   bool _isReplying = false;
   String _replyingToName = null;
-  
 
   Future<List<Comment>> getCommentList() async {
     if (_commentList == null) {
@@ -68,8 +67,8 @@ class CommentState extends AppState {
   void addReplyToComment(Comment commentParent, Comment reply) {
     if (commentParent.childCommentList == null ||
         commentParent.childCommentList?.length == 0) {
-                commentParent.copyWith(childCommentList: []);
-
+      commentParent = commentParent.copyWith(childCommentList: []);
+      print(commentParent);
       commentParent.childCommentList.add(reply);
       // commentParent.copyWith(childCommentList: [reply]);
     } else {
@@ -104,6 +103,12 @@ class CommentState extends AppState {
   void setReplyingTo(String name) {
     _replyingToName = name.split(" ").elementAt(0);
     notifyListeners();
+  }
+
+  void resetReplySection() {
+    setIsReplying = false;
+    resetReplyingTo();
+    resetCommentModel();
   }
 
   String get replyingTo => _replyingToName;
