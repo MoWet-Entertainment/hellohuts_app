@@ -90,7 +90,7 @@ class _CommentTextFieldWidgetState extends State<CommentTextFieldWidget> {
 
     if (isReplying) {
       print("isReplying: true");
-      commentState.addReplyToComment(commentState.getCommentModel(), comment);
+      commentState.addReplyToComment(comment);
     } else {
       commentState.addToCommentList(comment);
     }

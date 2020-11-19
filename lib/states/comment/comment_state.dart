@@ -64,16 +64,12 @@ class CommentState extends AppState {
     notifyListeners();
   }
 
-  void addReplyToComment(Comment commentParent, Comment reply) {
-    if (commentParent.childCommentList == null ||
-        commentParent.childCommentList?.length == 0) {
-      commentParent = commentParent.copyWith(childCommentList: []);
-      print(commentParent);
-      commentParent.childCommentList.add(reply);
-      // commentParent.copyWith(childCommentList: [reply]);
-    } else {
-      commentParent.childCommentList.insert(0, reply);
+  void addReplyToComment(Comment reply) {
+    print(_commentList.indexOf(_commentModel));
+    if (_commentModel.childCommentList == null) {
+      _commentModel = _commentModel.copyWith(childCommentList: []);
     }
+    _commentModel.childCommentList.add(reply);
     notifyListeners();
     _isReplying = false;
     _commentModel = null;
