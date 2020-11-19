@@ -369,7 +369,7 @@ class Mock {
           "key": "VadjllAy0ox",
           "parent_key": "DtYBUUYZ085",
           "post_id": "TSPzaQk",
-          "child_list": null
+          "child_list": []
         },
         {
           "user_name": "Simonne Seal",
@@ -382,7 +382,7 @@ class Mock {
           "key": "2RLaalHI7x8",
           "parent_key": "YSoNnAL4FB9",
           "post_id": "JWJU1oJZJqDD",
-          "child_list": null
+          "child_list": []
         }
       ]
     },
@@ -397,7 +397,7 @@ class Mock {
       "key": "l9RRno174",
       "parent_key": "46eugg",
       "post_id": "impMrvNjr0oQ",
-      "child_list": null
+      "child_list": []
     },
     {
       "user_name": "Isabel Bignold",
@@ -410,7 +410,7 @@ class Mock {
       "key": "rIcTjp",
       "parent_key": "UUVjbNKLu",
       "post_id": "PktMZzU0j",
-      "child_list": null
+      "child_list": []
     },
     {
       "user_name": "Darbee Goady",
@@ -423,7 +423,7 @@ class Mock {
       "key": "olFAOCENnDn",
       "parent_key": "asxGWVgt",
       "post_id": "ArkMQss",
-      "child_list": null
+      "child_list": []
     },
     {
       "user_name": "Sadella Gerhold",
@@ -436,7 +436,7 @@ class Mock {
       "key": "9ISOco",
       "parent_key": "Gb6xKYZw4s",
       "post_id": "APX3ZxCT7FLa",
-      "child_list": null
+      "child_list": []
     },
     {
       "user_name": "Sonnie Toulamain",
@@ -449,7 +449,7 @@ class Mock {
       "key": "BOi9t4wS7E1J",
       "parent_key": "fxx90fOplqPw",
       "post_id": "wUUMMfHGww",
-      "child_list": null
+      "child_list": []
     },
     {
       "user_name": "Joel Seivwright",
@@ -462,7 +462,7 @@ class Mock {
       "key": "fjECBc",
       "parent_key": "TnKpHfN",
       "post_id": "uOW7nizyZlvg",
-      "child_list": null
+      "child_list": []
     },
     {
       "user_name": "Clementius Clampett",
@@ -475,7 +475,7 @@ class Mock {
       "key": "6qrZrMUXP7O",
       "parent_key": "zkrhSatIoBeX",
       "post_id": "Dj4vLX63nZHq",
-      "child_list": null
+      "child_list": []
     },
     {
       "user_name": "Raul O'Deegan",
@@ -488,7 +488,7 @@ class Mock {
       "key": "hoCrFtP2h",
       "parent_key": "XX4OYJrcpqCX",
       "post_id": "km1ARbOV",
-      "child_list": null
+      "child_list": []
     },
     {
       "user_name": "Doy Spawton",
@@ -501,7 +501,7 @@ class Mock {
       "key": "d2Qznn1",
       "parent_key": "FkftxbJb2",
       "post_id": "2DAXsnmSHPY",
-      "child_list": null
+      "child_list": []
     },
     {
       "user_name": "Nari Farfolomeev",
@@ -514,7 +514,7 @@ class Mock {
       "key": "XpJLRDbs2pC",
       "parent_key": "XyhYL64lI5",
       "post_id": "JNbwHRyMUEY",
-      "child_list": null
+      "child_list": []
     },
     {
       "user_name": "Jessica Boldecke",
@@ -527,7 +527,7 @@ class Mock {
       "key": "8IqHHI",
       "parent_key": "h5xkmyp",
       "post_id": "QD1IwJ",
-      "child_list": null
+      "child_list": []
     },
     {
       "user_name": "Mathe de Merida",
@@ -540,7 +540,7 @@ class Mock {
       "key": "sZFaZyZc64Gt",
       "parent_key": "8yaBFCBitsco",
       "post_id": "ObtHHhEFl9t",
-      "child_list": null
+      "child_list": []
     },
     {
       "user_name": "Duky Todarello",
@@ -553,7 +553,7 @@ class Mock {
       "key": "BvjxOtAq7",
       "parent_key": "Zs5U2WMb",
       "post_id": "tTIrdNEft",
-      "child_list": null
+      "child_list": []
     },
     {
       "user_name": "Loree Henrie",
@@ -566,7 +566,7 @@ class Mock {
       "key": "od1q3GF6",
       "parent_key": "lv6UJJGsp",
       "post_id": "U4FaAY1QrLNg",
-      "child_list": null
+      "child_list": []
     },
     {
       "user_name": "Brittany De Bernardis",
@@ -591,7 +591,7 @@ class Mock {
           "key": "oFkfmA",
           "parent_key": "BPQ72L",
           "post_id": "QxIvwvUKhQrf",
-          "child_list": null
+          "child_list": []
         },
         {
           "user_name": "Lari Annear",
@@ -604,7 +604,7 @@ class Mock {
           "key": "FSRkNaVhoa1k",
           "parent_key": "WE9W1AUGXxx",
           "post_id": "NJAacl5vcCX",
-          "child_list": null
+          "child_list": []
         }
       ]
     }
