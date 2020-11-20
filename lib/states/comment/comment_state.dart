@@ -13,7 +13,7 @@ class CommentState extends AppState {
   String _replyingToName = null;
 
   Future<List<Comment>> getCommentList() async {
-    if (_commentList.length ==0 || _commentList ==null) {
+    if (_commentList.length == 0 || _commentList == null) {
       return initCommentForPosts(postId: "");
     }
     return _commentList;
@@ -36,6 +36,8 @@ class CommentState extends AppState {
   }
 
   Comment getCommentModel() => _commentModel;
+
+
 
   void setCommentModel(Comment model) {
     _commentModel = model;
@@ -74,6 +76,8 @@ class CommentState extends AppState {
     _commentModel = null;
   }
 
+
+
   void getCommentsForPost({@required String postId}) {
     //TODO: Include database operations here for getting the commens based on post id
 
@@ -108,11 +112,13 @@ class CommentState extends AppState {
 
   String get replyingTo => _replyingToName;
 
+
   void cleanSessionCommentData() {
     _commentList = [];
     _isLoading = false;
     _parentPostId = null;
     _isReplying = false;
     _replyingToName = null;
+    resetReplySection();
   }
 }

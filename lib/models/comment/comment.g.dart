@@ -8,6 +8,7 @@ part of 'comment.dart';
 
 _$_Comment _$_$_CommentFromJson(Map<String, dynamic> json) {
   return _$_Comment(
+    displayName: json['display_name'] as String,
     userName: json['user_name'] as String,
     userPhotoUrl: json['user_photo_url'] as String,
     comment: json['comment'] as String,
@@ -28,6 +29,7 @@ _$_Comment _$_$_CommentFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$_$_CommentToJson(_$_Comment instance) =>
     <String, dynamic>{
+      'display_name': instance.displayName,
       'user_name': instance.userName,
       'user_photo_url': instance.userPhotoUrl,
       'comment': instance.comment,

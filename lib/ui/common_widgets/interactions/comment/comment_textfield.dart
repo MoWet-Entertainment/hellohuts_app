@@ -131,6 +131,7 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
                             _onChanged(text);
                           },
                           decoration: InputDecoration(
+                            
                             hintText: widget.hintText ?? "Add Comment",
                             hintStyle: theme.textTheme.bodyText2.copyWith(
                                 color: AppColors.kbDarkGrey, fontSize: 12),
