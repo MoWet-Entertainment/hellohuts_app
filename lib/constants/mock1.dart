@@ -347,7 +347,8 @@ class Mock {
 
   static var commentList = [
     {
-      "user_name": "Simonne Seal",
+      "display_name": "Simonne Seal",
+      "user_name":"simone",
       "uid": "fXMy6HQcXH",
       "user_photo_url":
           "https://robohash.org/omnisdolorumdolor.bmp?size=50x50&set=set1",
@@ -359,7 +360,8 @@ class Mock {
       "post_id": "tueRGNG",
       "child_list": [
         {
-          "user_name": "Berty Rembrant",
+          "display_name": "Berty Rembrant",
+     "user_name":"berty",
           "uid": "JsQxPxS",
           "user_photo_url":
               "https://robohash.org/occaecatiillomolestiae.jpg?size=50x50&set=set1",
@@ -369,10 +371,11 @@ class Mock {
           "key": "VadjllAy0ox",
           "parent_key": "DtYBUUYZ085",
           "post_id": "TSPzaQk",
-          "child_list": null
+          "child_list": []
         },
         {
-          "user_name": "Simonne Seal",
+          "display_name": "Simonne Seal",
+       "user_name":"simone",
           "uid": "fXMy6HQcXH",
           "user_photo_url":
               "https://robohash.org/omnisdolorumdolor.bmp?size=50x50&set=set1",
@@ -382,12 +385,13 @@ class Mock {
           "key": "2RLaalHI7x8",
           "parent_key": "YSoNnAL4FB9",
           "post_id": "JWJU1oJZJqDD",
-          "child_list": null
+          "child_list": []
         }
       ]
     },
     {
-      "user_name": "Charissa Corryer",
+      "display_name": "Charissa Corryer",
+   "user_name":"charisa",
       "uid": "9WQsXyLF",
       "user_photo_url":
           "https://robohash.org/nonmolestiaeeos.bmp?size=50x50&set=set1",
@@ -397,10 +401,11 @@ class Mock {
       "key": "l9RRno174",
       "parent_key": "46eugg",
       "post_id": "impMrvNjr0oQ",
-      "child_list": null
+      "child_list": []
     },
     {
-      "user_name": "Isabel Bignold",
+      "display_name": "Isabel Bignold",
+     "user_name":"isbale",
       "uid": "KaOxLFSx3",
       "user_photo_url":
           "https://robohash.org/involuptatemdolore.png?size=50x50&set=set1",
@@ -410,10 +415,11 @@ class Mock {
       "key": "rIcTjp",
       "parent_key": "UUVjbNKLu",
       "post_id": "PktMZzU0j",
-      "child_list": null
+      "child_list": []
     },
     {
-      "user_name": "Darbee Goady",
+      "display_name": "Darbee Goady",
+      "user_name":"darbee",
       "uid": "EkLB4DwcJsG8",
       "user_photo_url":
           "https://robohash.org/accusamussuscipitet.jpg?size=50x50&set=set1",
@@ -423,10 +429,11 @@ class Mock {
       "key": "olFAOCENnDn",
       "parent_key": "asxGWVgt",
       "post_id": "ArkMQss",
-      "child_list": null
+      "child_list": []
     },
     {
-      "user_name": "Sadella Gerhold",
+      "display_name": "Sadella Gerhold",
+    "user_name":"sadella",
       "uid": "mv0ar4L",
       "user_photo_url":
           "https://robohash.org/impeditaccusamusomnis.png?size=50x50&set=set1",
@@ -436,10 +443,11 @@ class Mock {
       "key": "9ISOco",
       "parent_key": "Gb6xKYZw4s",
       "post_id": "APX3ZxCT7FLa",
-      "child_list": null
+      "child_list": []
     },
     {
-      "user_name": "Sonnie Toulamain",
+      "display_name": "Sonnie Toulamain",
+   "user_name":"sonnie",
       "uid": "NhyPiYcLU",
       "user_photo_url":
           "https://robohash.org/quiamolestiastenetur.bmp?size=50x50&set=set1",
@@ -449,10 +457,11 @@ class Mock {
       "key": "BOi9t4wS7E1J",
       "parent_key": "fxx90fOplqPw",
       "post_id": "wUUMMfHGww",
-      "child_list": null
+      "child_list": []
     },
     {
-      "user_name": "Joel Seivwright",
+      "display_name": "Joel Seivwright",
+    "user_name":"joe12",
       "uid": "UKuAds",
       "user_photo_url":
           "https://robohash.org/isteinciduntculpa.bmp?size=50x50&set=set1",
@@ -462,10 +471,11 @@ class Mock {
       "key": "fjECBc",
       "parent_key": "TnKpHfN",
       "post_id": "uOW7nizyZlvg",
-      "child_list": null
+      "child_list": []
     },
     {
-      "user_name": "Clementius Clampett",
+      "display_name": "Clementius Clampett",
+"user_name":"clema32",
       "uid": "BVyncY1",
       "user_photo_url":
           "https://robohash.org/perspiciatisquossint.png?size=50x50&set=set1",
@@ -475,10 +485,11 @@ class Mock {
       "key": "6qrZrMUXP7O",
       "parent_key": "zkrhSatIoBeX",
       "post_id": "Dj4vLX63nZHq",
-      "child_list": null
+      "child_list": []
     },
     {
-      "user_name": "Raul O'Deegan",
+      "display_name": "Raul O'Deegan",
+      "user_name":"raiisd",
       "uid": "2mlR0LDnYR",
       "user_photo_url":
           "https://robohash.org/errormolestiaeut.bmp?size=50x50&set=set1",
@@ -488,10 +499,11 @@ class Mock {
       "key": "hoCrFtP2h",
       "parent_key": "XX4OYJrcpqCX",
       "post_id": "km1ARbOV",
-      "child_list": null
+      "child_list": []
     },
     {
-      "user_name": "Doy Spawton",
+      "display_name": "Doy Spawton",
+      "user_name":"doyahoy",
       "uid": "R2Z3Ey",
       "user_photo_url":
           "https://robohash.org/temporamaioreserror.jpg?size=50x50&set=set1",
@@ -501,10 +513,11 @@ class Mock {
       "key": "d2Qznn1",
       "parent_key": "FkftxbJb2",
       "post_id": "2DAXsnmSHPY",
-      "child_list": null
+      "child_list": []
     },
     {
-      "user_name": "Nari Farfolomeev",
+      "display_name": "Nari Farfolomeev",
+   "user_name":"nariaya",
       "uid": "0nMyLb0xJtDQ",
       "user_photo_url":
           "https://robohash.org/utipsumofficia.png?size=50x50&set=set1",
@@ -514,10 +527,11 @@ class Mock {
       "key": "XpJLRDbs2pC",
       "parent_key": "XyhYL64lI5",
       "post_id": "JNbwHRyMUEY",
-      "child_list": null
+      "child_list": []
     },
     {
-      "user_name": "Jessica Boldecke",
+      "display_name": "Jessica Boldecke",
+   "user_name":"jasiiy",
       "uid": "1E4mmTjqQ3C",
       "user_photo_url":
           "https://robohash.org/voluptasrepellatdolor.bmp?size=50x50&set=set1",
@@ -527,10 +541,11 @@ class Mock {
       "key": "8IqHHI",
       "parent_key": "h5xkmyp",
       "post_id": "QD1IwJ",
-      "child_list": null
+      "child_list": []
     },
     {
-      "user_name": "Mathe de Merida",
+      "display_name": "Mathe de Merida",
+    "user_name":"mathes",
       "uid": "sFs9RAHNb",
       "user_photo_url":
           "https://robohash.org/autestvoluptas.jpg?size=50x50&set=set1",
@@ -540,10 +555,11 @@ class Mock {
       "key": "sZFaZyZc64Gt",
       "parent_key": "8yaBFCBitsco",
       "post_id": "ObtHHhEFl9t",
-      "child_list": null
+      "child_list": []
     },
     {
-      "user_name": "Duky Todarello",
+      "display_name": "Duky Todarello",
+     "user_name":"dsuc",
       "uid": "SQ2FYdFn",
       "user_photo_url":
           "https://robohash.org/molestiaseumunde.jpg?size=50x50&set=set1",
@@ -553,10 +569,11 @@ class Mock {
       "key": "BvjxOtAq7",
       "parent_key": "Zs5U2WMb",
       "post_id": "tTIrdNEft",
-      "child_list": null
+      "child_list": []
     },
     {
-      "user_name": "Loree Henrie",
+      "display_name": "Loree Henrie",
+      "user_name":"lorees",
       "uid": "mBWDKabpAt73",
       "user_photo_url":
           "https://robohash.org/rerumblanditiisquidem.png?size=50x50&set=set1",
@@ -566,10 +583,10 @@ class Mock {
       "key": "od1q3GF6",
       "parent_key": "lv6UJJGsp",
       "post_id": "U4FaAY1QrLNg",
-      "child_list": null
+      "child_list": []
     },
     {
-      "user_name": "Brittany De Bernardis",
+      "user_name":"sdsd","display_name": "Brittany De Bernardis",
       "uid": "X6YkS70d82m",
       "user_photo_url":
           "https://robohash.org/quisequinostrum.jpg?size=50x50&set=set1",
@@ -581,7 +598,8 @@ class Mock {
       "post_id": "2wBZZdZWcJ",
       "child_list": [
         {
-          "user_name": "Brigitta Hattigan",
+          "display_name": "Brigitta Hattigan",
+  "user_name":"brighte",
           "uid": "6HvqoFZj95F",
           "user_photo_url":
               "https://robohash.org/invelquo.jpg?size=50x50&set=set1",
@@ -591,10 +609,11 @@ class Mock {
           "key": "oFkfmA",
           "parent_key": "BPQ72L",
           "post_id": "QxIvwvUKhQrf",
-          "child_list": null
+          "child_list": []
         },
         {
-          "user_name": "Lari Annear",
+          "display_name": "Lari Annear",
+        "user_name":"laris",
           "uid": "xkIkhWh5H",
           "user_photo_url":
               "https://robohash.org/sintexercitationemdolorum.jpg?size=50x50&set=set1",
@@ -604,7 +623,7 @@ class Mock {
           "key": "FSRkNaVhoa1k",
           "parent_key": "WE9W1AUGXxx",
           "post_id": "NJAacl5vcCX",
-          "child_list": null
+          "child_list": []
         }
       ]
     }

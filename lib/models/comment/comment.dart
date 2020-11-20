@@ -10,7 +10,8 @@ part 'comment.g.dart';
 abstract class Comment with _$Comment {
   @JsonSerializable(explicitToJson: true)
   factory Comment({
-    @JsonKey(name: JsonConstants.userName) String userName,
+    @JsonKey(name: JsonConstants.displayName) String displayName,
+    @JsonKey(name:JsonConstants.userName) String userName,
     @JsonKey(name: JsonConstants.userPhotoUrl) String userPhotoUrl,
     @JsonKey(name: JsonConstants.comment) @required String comment,
     @JsonKey(

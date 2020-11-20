@@ -148,7 +148,7 @@ class UsersCommentsWidget extends StatelessWidget {
                                         },
                                       ),
                                       SizedBox(width: 20),
-                                      commentModel.childCommentList != null
+                                      commentModel.childCommentList?.length!=0
                                           ? _CommentBottomSection(
                                               commentModel: commentModel)
                                           : SizedBox.shrink(),
@@ -158,7 +158,7 @@ class UsersCommentsWidget extends StatelessWidget {
                             ),
                       !isFeedPage &&
                               showFirstReplyComment &&
-                              commentModel.childCommentList != null
+                              commentModel.childCommentList?.length!=0
                           ? _CommentRepliesSection(commentModel: commentModel)
                           : SizedBox.shrink(),
                     ],
@@ -201,7 +201,7 @@ class _CommentBottomSection extends StatelessWidget {
             ),
             SizedBox(width: 6),
             Text(
-              commentModel.childCommentList.length.toString(),
+              commentModel.childCommentList?.length.toString(),
               style: theme.textTheme.bodyText1
                   .copyWith(fontSize: 12, color: AppColors.kbDarkGrey),
             )
@@ -237,45 +237,46 @@ class __CommentRepliesSectionState extends State<_CommentRepliesSection> {
     return Container(
       padding: const EdgeInsets.only(left: 28.0, top: 8.0),
       child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 4.0),
-                child: Container(
-                  height: 32,
-                  width: 2,
-                  color: theme.dividerColor,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+      Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 4.0),
+          child: Container(
+            height: 32,
+            width: 2,
+            color: theme.dividerColor,
+          ),
+        ),
+        SizedBox(width: 8),
+        _UserCommentWidget(
+          commentModel: widget.commentModel,
+          showAllReplies: _showAllReplies,
+        ),
+      ]),
+      Container(
+        padding: const EdgeInsets.only(top: 8.0),
+        child: widget.commentModel.childCommentList.length > 1
+            ? GestureDetector(
+                child: Text(
+                  _showAllReplies ? 'Show less' : 'Show all replies',
+                  style: theme.textTheme.bodyText1.copyWith(
+                      fontSize: 12, color: AppColors.kbDarkGrey),
                 ),
-              ),
-              SizedBox(width: 8),
-              _UserCommentWidget(
-                commentModel: widget.commentModel,
-                showAllReplies: _showAllReplies,
-              ),
+                onTap: () => {
+                  //TODO: Implement a way to see all the replies to the specific comment
+                  print(
+                      "User wants to see all the replies to this comment"),
+                  setState(() {
+                    _showAllReplies = !_showAllReplies;
+                  })
+                },
+              )
+            : SizedBox.shrink(),
+      ),
             ]),
-            Container(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: widget.commentModel.childCommentList.length > 1
-                  ? GestureDetector(
-                      child: Text(
-                        _showAllReplies ? 'Show less' : 'Show all replies',
-                        style: theme.textTheme.bodyText1.copyWith(
-                            fontSize: 12, color: AppColors.kbDarkGrey),
-                      ),
-                      onTap: () => {
-                        //TODO: Implement a way to see all the replies to the specific comment
-                        print(
-                            "User wants to see all the replies to this comment"),
-                        setState(() {
-                          _showAllReplies = !_showAllReplies;
-                        })
-                      },
-                    )
-                  : SizedBox.shrink(),
-            ),
-          ]),
     );
   }
 }
@@ -305,7 +306,7 @@ class _UserCommentWidget extends StatelessWidget {
       child: ListView.builder(
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
-        itemCount: commentModel.childCommentList.length,
+        itemCount: commentModel.childCommentList?.length,
         itemBuilder: (BuildContext context, int index) {
           return _buildSingleReplyComment(
               theme, commentModel.childCommentList[index], context);
@@ -371,10 +372,11 @@ class _UserCommentWidget extends StatelessWidget {
                         commentState.setIsReplying = true,
                         //TODO: implement post reply feature here.
                         print("User wants to reply to the post"),
+
                       },
                     ),
                     SizedBox(width: 20),
-                    model.childCommentList != null
+                    model.childCommentList?.length!=0
                         ? _CommentBottomSection(commentModel: model)
                         : SizedBox.shrink(),
                     // Spacer(),
@@ -392,6 +394,7 @@ class _UserCommentWidget extends StatelessWidget {
               ),
             ],
           ),
+          
         ),
       ],
     );

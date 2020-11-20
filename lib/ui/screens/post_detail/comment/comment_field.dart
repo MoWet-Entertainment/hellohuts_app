@@ -74,23 +74,25 @@ class _CommentTextFieldWidgetState extends State<CommentTextFieldWidget> {
     bool isReplying = commentState.isReplying;
 
     Comment comment = Comment(
-      postId: commentState.parentPostId ?? "12323",
-      comment: value,
-      key: "1232323df",
-      createdTimeStamp: DateTime.now(),
-      updatedTimeStamp: DateTime.now(),
-      //TODO: get the user id from the user model
-      //TODO: IMPORTANT : need to refactor
-      userId: authState.userId ?? "vinoop ks",
-      userName: (authState.userModel?.displayName) ?? "Vinoop KS",
-      userPhotoUrl: (authState.userModel?.photoUrl) ??
-          "http://www.gravatar.com/avatar/?d=identicon",
-      parentKey: isReplying ? commentState.getCommentModel().key : null,
-    );
+        postId: commentState.parentPostId ?? "12323",
+        comment: value,
+        key: "1232323df",
+        createdTimeStamp: DateTime.now(),
+        updatedTimeStamp: DateTime.now(),
+        //TODO: get the user id from the user model
+        //TODO: IMPORTANT : need to refactor
+        userId: authState.userId ?? "vinoop ks",
+        displayName: (authState.userModel?.displayName) ?? "Vinoop KS",
+        userPhotoUrl: (authState.userModel?.photoUrl) ??
+            "http://www.gravatar.com/avatar/?d=identicon",
+        parentKey: isReplying? commentState.getCommentModel().key : null,
+        childCommentList: []);
 
     if (isReplying) {
       print("isReplying: true");
-      commentState.addReplyToComment(comment);
+    
+        commentState.addReplyToComment(comment);
+   
     } else {
       commentState.addToCommentList(comment);
     }

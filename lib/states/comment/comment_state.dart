@@ -4,7 +4,7 @@ import 'package:hellohuts_app/models/comment/comment.dart';
 import 'package:hellohuts_app/states/app_state.dart';
 
 class CommentState extends AppState {
-  List<Comment> _commentList = null;
+  List<Comment> _commentList = [];
   bool _isLoading = false;
 
   Comment _commentModel = null;
@@ -13,7 +13,7 @@ class CommentState extends AppState {
   String _replyingToName = null;
 
   Future<List<Comment>> getCommentList() async {
-    if (_commentList == null) {
+    if (_commentList.length == 0 || _commentList == null) {
       return initCommentForPosts(postId: "");
     }
     return _commentList;
@@ -36,6 +36,8 @@ class CommentState extends AppState {
   }
 
   Comment getCommentModel() => _commentModel;
+
+
 
   void setCommentModel(Comment model) {
     _commentModel = model;
@@ -66,14 +68,15 @@ class CommentState extends AppState {
 
   void addReplyToComment(Comment reply) {
     print(_commentList.indexOf(_commentModel));
-    if (_commentModel.childCommentList == null) {
-      _commentModel = _commentModel.copyWith(childCommentList: []);
-    }
-    _commentModel.childCommentList.add(reply);
+    _commentList[_commentList.indexOf(_commentModel)]
+        .childCommentList
+        .add(reply);
     notifyListeners();
     _isReplying = false;
     _commentModel = null;
   }
+
+
 
   void getCommentsForPost({@required String postId}) {
     //TODO: Include database operations here for getting the commens based on post id
@@ -109,11 +112,13 @@ class CommentState extends AppState {
 
   String get replyingTo => _replyingToName;
 
+
   void cleanSessionCommentData() {
-    _commentList = null;
+    _commentList = [];
     _isLoading = false;
     _parentPostId = null;
     _isReplying = false;
     _replyingToName = null;
+    resetReplySection();
   }
 }
