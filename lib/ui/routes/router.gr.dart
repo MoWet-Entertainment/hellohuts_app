@@ -16,6 +16,7 @@ import '../screens/auth/phone_auth/get_phone.dart';
 import '../screens/base_page.dart';
 import '../screens/categories/categories_screen.dart';
 import '../screens/categories/categories_search/categories_search_screen.dart';
+import '../screens/dashboard/dashboard_landing/dashboard_landing.dart';
 import '../screens/explore.dart';
 import '../screens/feed_posts/feed_post_detail.dart';
 import '../screens/feed_posts/widgets/comments/post_comments_deatil.dart';
@@ -33,6 +34,7 @@ class Routes {
   static const String welcomePage = '/welcome-page';
   static const String searchPage = '/search-page';
   static const String categoriesSearchPage = '/categories-search-page';
+  static const String dashboardLandingPage = '/dashboard-landing-page';
   static const String postDetailScreen = '/post-detail-screen';
   static const String commentsDetail = '/post-comments-detail';
   static const String costEstimate = '/cost-estimate';
@@ -51,6 +53,7 @@ class Routes {
     welcomePage,
     searchPage,
     categoriesSearchPage,
+    dashboardLandingPage,
     postDetailScreen,
     commentsDetail,
     costEstimate,
@@ -75,6 +78,7 @@ class AppRouter extends RouterBase {
     RouteDef(Routes.welcomePage, page: WelcomePage),
     RouteDef(Routes.searchPage, page: SearchPage),
     RouteDef(Routes.categoriesSearchPage, page: CategoriesSearchPage),
+    RouteDef(Routes.dashboardLandingPage, page: DashboardLandingPage),
     RouteDef(Routes.postDetailScreen, page: PostDetailScreen),
     RouteDef(Routes.commentsDetail, page: PostCommentsDetail),
     RouteDef(Routes.costEstimate, page: CostEstimate),
@@ -149,6 +153,13 @@ class AppRouter extends RouterBase {
         ),
         settings: data,
         transitionsBuilder: TransitionsBuilders.fadeIn,
+      );
+    },
+    DashboardLandingPage: (data) {
+      return PageRouteBuilder<dynamic>(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            const DashboardLandingPage(),
+        settings: data,
       );
     },
     PostDetailScreen: (data) {
