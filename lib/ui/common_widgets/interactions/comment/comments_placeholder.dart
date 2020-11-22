@@ -91,7 +91,7 @@ class UsersCommentsWidget extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Text(commentModel?.userName,
+                          Text(commentModel?.displayName,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: theme.textTheme.bodyText1.copyWith(
@@ -142,7 +142,7 @@ class UsersCommentsWidget extends StatelessWidget {
                                           //TODO: implement post reply feature here.
                                           
                                           commentState.setCommentModel(commentModel),
-                                          commentState.setReplyingTo(commentModel.userName),
+                                          commentState.setReplyingTo(commentModel.displayName),
                                           commentState.setIsReplying = true,
                                              print( "User wants to reply to the post"),
                                         },
@@ -340,7 +340,7 @@ class _UserCommentWidget extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Text(model?.userName,
+                  Text(model?.displayName,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: theme.textTheme.bodyText1
