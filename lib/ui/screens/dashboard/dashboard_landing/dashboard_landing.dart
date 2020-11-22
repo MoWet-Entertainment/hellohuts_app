@@ -11,58 +11,74 @@ class DashboardLandingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return AnnotatedSafeArea(
-        child: Scaffold(
-            appBar: AppBar(
-        
+      child: Scaffold(
+        body: buildNestedScrollView(),
+      ),
+    );
+  }
+
+  NestedScrollView buildNestedScrollView() {
+    return NestedScrollView(
+        body: Container(
+          child: Center(
+            child: Text("Dashboard"),
+          ),
+        ),
+        headerSliverBuilder: (context, bool innerboxScrolled) {
+          return <Widget>[buildAppBar(context)];
+        });
+  }
+
+  Widget buildAppBar(BuildContext context) {
+    final theme = Theme.of(context);
+    return SliverToBoxAdapter(
+      child: AppBar(
+        titleSpacing: 0,
         automaticallyImplyLeading: false,
-        leadingWidth: 250,
-      leading: Container(
+        centerTitle: false,
+        title: Container(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-      Text(
-        'Dashboard',
-        style: theme.textTheme.headline6.copyWith(
-            fontSize: 16, color: theme.colorScheme.onBackground),
-      ),
-      Row(
-        children: [
-          RichText(
-              text: TextSpan(
-                  text: "Vinoop\'s",
-                  style: theme.textTheme.bodyText1.copyWith(
-                      fontSize: 12, color: AppColors.kbDarkGrey),
-                  children: <InlineSpan>[
-                TextSpan(
-                  text: "LittleNest",
-                  style: theme.textTheme.headline6.copyWith(
-                      fontSize: 12, color: AppColors.kbDarkGrey),
-                )
-              ])),
-          GestureDetector(
-              child: Image.asset(
-                HelloIcons.down_arrow_light_icon,
-                height: 12,
-                color: AppColors.kbDarkGrey,
+              Text(
+                'Dashboard',
+                style: theme.textTheme.headline6.copyWith(
+                    fontSize: 16, color: theme.colorScheme.onBackground),
               ),
-              onTap: () {
-                print("Implement selecting different projects here");
-                //TODO: Multi project support
-              })
-        ],
-      )
+              SizedBox(height: 2,),
+              Row(
+                children: [
+                  RichText(
+                      text: TextSpan(
+                          text: "Vinoop\'s ",
+                          style: theme.textTheme.bodyText1.copyWith(
+                              fontSize: 12, color: AppColors.kbDarkGrey),
+                          children: <InlineSpan>[
+                        TextSpan(
+                          text: "LittleNest",
+                          style: theme.textTheme.headline6.copyWith(
+                              fontSize: 12, color: AppColors.kbDarkGrey),
+                        )
+                      ])),
+                      SizedBox(width:4),
+                  GestureDetector(
+                      child: Image.asset(
+                        HelloIcons.down_arrow_light_icon,
+                        height: 12,
+                        color: AppColors.kbDarkGrey,
+                      ),
+                      onTap: () {
+                        print("Implement selecting different projects here");
+                        //TODO: Multi project support
+                      })
+                ],
+              )
             ],
           ),
         ),
-      actions: [
-        customIconSquare(
-          iconAsset:HelloIcons.flame_bold_icon
-        )
-      ],
-    ),
-    body: Container(child: Center(child: Text("Dashboard"),),),
-    ),
-  );
+        actions: [customIconSquare(iconAsset: HelloIcons.flame_bold_icon)],
+      ),
+    );
   }
 }
