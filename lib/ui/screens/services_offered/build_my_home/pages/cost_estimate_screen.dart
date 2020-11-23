@@ -89,7 +89,7 @@ class _CostEstimateScreenBody extends StatelessWidget {
           ),
           RoundedContainer(
               borderRadius: 20,
-              backGroundColor: theme.colorScheme.secondaryVariant,
+              backgroundColor: theme.colorScheme.secondaryVariant,
               child: Container(
                 constraints: BoxConstraints(
                   maxHeight: fullHeight(context) * 0.25,

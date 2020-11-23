@@ -279,6 +279,10 @@ Widget customIconSquare({
   Color iconColor,
   double borderRadius = 12,
   GestureTapCallback actionCall,
+  bool notificationFlag = false,
+  Color notificationColor,
+  double notificationIconSize = 3,
+  double extraGapNotification = 2,
 }) {
   return Builder(builder: (BuildContext context) {
     final theme = Theme.of(context);
@@ -300,15 +304,37 @@ Widget customIconSquare({
         IconButton(
             splashColor: theme.splashColor,
             icon: isCustomIcon
-                ? Image.asset(
-                    iconAsset,
-                    color: iconColor ??
-                        (isDarkTheme
-                            ? AppColors.kbMediumGrey
-                            : theme.colorScheme.onBackground),
-                    width: iconSize,
-                    height: iconSize,
-                  )
+                ? Stack(children: [
+                    Image.asset(
+                      iconAsset,
+                      color: iconColor ??
+                          (isDarkTheme
+                              ? AppColors.kbMediumGrey
+                              : theme.colorScheme.onBackground),
+                      width: iconSize,
+                      height: iconSize,
+                    ),
+                    notificationFlag
+                        ? Positioned(
+                            top: 1,
+                            right: 2,
+                            child: Container(
+                              width: 2 *
+                                  (notificationIconSize + extraGapNotification),
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: AppColors.kPureWhite,
+                                    width: 2.0,
+                                  )),
+                              child: CircleAvatar(
+                                radius: notificationIconSize,
+                                backgroundColor: AppColors.kYellowLight,
+                              ),
+                            ),
+                          )
+                        : SizedBox.shrink()
+                  ])
                 : Icon(
                     iconData,
                     color: iconColor ??
@@ -507,13 +533,12 @@ class _MultiSelectChipState extends State<MultiSelectChip> {
           label: Text(
             item,
             style: selectedChoices.contains(item)
-                ?  theme.textTheme.bodyText2
-                    .copyWith(fontSize: 12)
-                :  theme.textTheme.bodyText2
-                    .copyWith(fontSize: 12),
+                ? theme.textTheme.bodyText2.copyWith(fontSize: 12)
+                : theme.textTheme.bodyText2.copyWith(fontSize: 12),
           ),
-          backgroundColor: widget.backgroundColor??theme.colorScheme.secondaryVariant,
-          selectedColor: widget.selectedColor??theme.colorScheme.secondary,
+          backgroundColor:
+              widget.backgroundColor ?? theme.colorScheme.secondaryVariant,
+          selectedColor: widget.selectedColor ?? theme.colorScheme.secondary,
           selected: selectedChoices.contains(item),
           onSelected: (selected) {
             setState(() {
@@ -541,9 +566,9 @@ class _MultiSelectChipState extends State<MultiSelectChip> {
 class RoundedContainer extends StatelessWidget {
   final Widget child;
   final double borderRadius;
-  final Color backGroundColor;
+  final Color backgroundColor;
   const RoundedContainer(
-      {Key key, this.child, this.borderRadius, this.backGroundColor})
+      {Key key, this.child, this.borderRadius, this.backgroundColor})
       : super(key: key);
 
   @override
@@ -551,7 +576,7 @@ class RoundedContainer extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(borderRadius ?? 12.0),
-        color: backGroundColor ?? AppColors.kbPureWhite,
+        color: backgroundColor ?? AppColors.kbPureWhite,
       ),
       child: child ?? Container(),
     );
@@ -668,5 +693,31 @@ class AnnotatedScaffold extends StatelessWidget {
           : ThemeOptions.of(context).getSystemUIOverlayStyle(context),
       child: Scaffold(body: body),
     );
+  }
+}
+
+class SliverSizedBox extends StatelessWidget {
+  final double height;
+  final double width;
+  final Widget child;
+  const SliverSizedBox({
+    Key key,
+    this.height,
+    this.width, this.child,
+  }) : super(key: key);
+
+ const SliverSizedBox.shrink({ Key key})
+    : width = 0.0,
+      height = 0.0,
+      child = null,
+      super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(
+        child: SizedBox(
+      height: height ?? 0,
+      width: width ?? 0,
+      child: child??SizedBox.shrink(),
+    ));
   }
 }

@@ -299,20 +299,20 @@ class _QuickPicks extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                _QuickPicksItem(
+                QuickPickItem(
                   iconAsset: HelloIcons.cost_estimate_icon,
                   text: "Cost Estimate",
                   call: _callCostEstimate,
                 ),
-                _QuickPicksItem(
+                QuickPickItem(
                     iconAsset: HelloIcons.professionals_icon,
                     text: "Professionals",
                     call: _callProfessionals),
-                _QuickPicksItem(
+                QuickPickItem(
                     iconAsset: HelloIcons.materials_icon,
                     text: "Materials",
                     call: _callMaterials),
-                _QuickPicksItem(
+                QuickPickItem(
                     iconAsset: HelloIcons.more_items_icon,
                     text: 'More',
                     call: _callMoreItems),
@@ -345,12 +345,12 @@ class _QuickPicks extends StatelessWidget {
   }
 }
 
-class _QuickPicksItem extends StatelessWidget {
+class QuickPickItem extends StatelessWidget {
   final String iconAsset;
   final String text;
   final Color textColor;
   final Function call;
-  _QuickPicksItem({
+  QuickPickItem({
     Key key,
     this.iconAsset,
     this.text,

@@ -11,6 +11,8 @@ class Assets {
   static const String firebase = _imagesRoot + "firebase.png";
   static const String colored_circles_svg =
       _imagesRoot + "grouped_cricles_image.svg";
+
+  static const String sample_house = _imagesRoot + "villa1.png";
 }
 
 class HelloIcons {
@@ -53,7 +55,7 @@ class HelloIcons {
   static const String heart_bold_icon =
       _iconsRoot + "Heart_Filled_bold_icon.png";
   static const String comment_bold_icon = _iconsRoot + "Chat_bold_icon.png";
-    static const String comment_light_icon = _iconsRoot + "Chat_light_icon.png";
+  static const String comment_light_icon = _iconsRoot + "Chat_light_icon.png";
 
   static const String share_bold_icon = _iconsRoot + "Share_bold_icon.png";
 
@@ -93,6 +95,12 @@ class HelloIcons {
 
   //Comment
   static const String send_bold_icon = _iconsRoot + "Send_bold_icon.png";
+
+  //dashboard
+  static const String notification_bold_icon =
+      _iconsRoot + "Notification_bold_icon.png";
+  static const String notification_light_icon =
+      _iconsRoot + "Notification_light_icon.png";
 }
 
 class SessionData {
