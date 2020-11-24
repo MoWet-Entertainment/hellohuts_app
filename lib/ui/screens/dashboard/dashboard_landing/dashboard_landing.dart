@@ -88,13 +88,17 @@ class _DashboardBody extends StatelessWidget {
                 future: dashboardState.getRecentActivityList(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
-                   return  ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: snapshot.data.length<10?snapshot.data.length:10,
-                    itemBuilder: (context, index) {
-                    });
-                    return _itemTile( item: snapshot.data[index], context:context,isDarkTheme: isDarkTheme);
+                   return  Padding(
+                     padding: const EdgeInsets.only(top:18.0, bottom: 40),
+                     child: ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: snapshot.data.length<10?snapshot.data.length:10,
+                      itemBuilder: (context, index) {
+                           return _itemTile( item: snapshot.data[index], context:context,isDarkTheme: isDarkTheme);
+                      }),
+                   );
+                 
                   }else {
                     return Center(
                       child: CircularProgressIndicator(),
@@ -218,9 +222,9 @@ class _DashboardBody extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
           child: CustomListTile(
-        tilePadding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8),
-        backgroundColor: isDarkTheme? theme.colorScheme.secondaryVariant: AppColors.kbSmokedWhite,
-        borderRadius: BorderRadius.circular(16.0),
+        tilePadding: const EdgeInsets.only(top: 4.0,bottom:4, left:8, right:12 ),
+        backgroundColor:theme.colorScheme.secondaryVariant,
+        borderRadius: BorderRadius.circular(20.0),
         leading: customIconSquare(
           backgroundColor: isDarkTheme
               ? AppColors.kDark_7
