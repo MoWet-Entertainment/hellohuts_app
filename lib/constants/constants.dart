@@ -101,6 +101,27 @@ class HelloIcons {
       _iconsRoot + "Notification_bold_icon.png";
   static const String notification_light_icon =
       _iconsRoot + "Notification_light_icon.png";
+
+  //quick items - dashboard
+  static const String folder_bold_icon = _iconsRoot + "Folder_bold_icon.png";
+  static const String folder_light_icon = _iconsRoot + "Folder_light_icon.png";
+
+  static const String wallet_bold_icon = _iconsRoot + "Wallet_bold_icon.png";
+  static const String wallet_light_icon = _iconsRoot + "Wallet_light_icon.png";
+
+  static const String reports_bold_icon = _iconsRoot + "Graph_bold_icon.png";
+  static const String reports_light_icon = _iconsRoot + "Graph_light_icon.png";
+
+  static const String calendar_bold_icon =
+      _iconsRoot + "Calendar_bold_icon.png";
+  static const String calendar_light_icon =
+      _iconsRoot + "Calendar_light_icon.png";
+
+  static const String star_bold_icon = _iconsRoot + "Star_bold_icon.png";
+  static const String star_light_icon = _iconsRoot + "Star_light_icon.png";
+
+  static const String contractor_light_icon =
+      _iconsRoot + "Construction_light_icon.png";
 }
 
 class SessionData {

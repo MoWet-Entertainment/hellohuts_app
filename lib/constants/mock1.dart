@@ -348,7 +348,7 @@ class Mock {
   static var commentList = [
     {
       "display_name": "Simonne Seal",
-      "user_name":"simone",
+      "user_name": "simone",
       "uid": "fXMy6HQcXH",
       "user_photo_url":
           "https://robohash.org/omnisdolorumdolor.bmp?size=50x50&set=set1",
@@ -361,7 +361,7 @@ class Mock {
       "child_list": [
         {
           "display_name": "Berty Rembrant",
-     "user_name":"berty",
+          "user_name": "berty",
           "uid": "JsQxPxS",
           "user_photo_url":
               "https://robohash.org/occaecatiillomolestiae.jpg?size=50x50&set=set1",
@@ -375,7 +375,7 @@ class Mock {
         },
         {
           "display_name": "Simonne Seal",
-       "user_name":"simone",
+          "user_name": "simone",
           "uid": "fXMy6HQcXH",
           "user_photo_url":
               "https://robohash.org/omnisdolorumdolor.bmp?size=50x50&set=set1",
@@ -391,7 +391,7 @@ class Mock {
     },
     {
       "display_name": "Charissa Corryer",
-   "user_name":"charisa",
+      "user_name": "charisa",
       "uid": "9WQsXyLF",
       "user_photo_url":
           "https://robohash.org/nonmolestiaeeos.bmp?size=50x50&set=set1",
@@ -405,7 +405,7 @@ class Mock {
     },
     {
       "display_name": "Isabel Bignold",
-     "user_name":"isbale",
+      "user_name": "isbale",
       "uid": "KaOxLFSx3",
       "user_photo_url":
           "https://robohash.org/involuptatemdolore.png?size=50x50&set=set1",
@@ -419,7 +419,7 @@ class Mock {
     },
     {
       "display_name": "Darbee Goady",
-      "user_name":"darbee",
+      "user_name": "darbee",
       "uid": "EkLB4DwcJsG8",
       "user_photo_url":
           "https://robohash.org/accusamussuscipitet.jpg?size=50x50&set=set1",
@@ -433,7 +433,7 @@ class Mock {
     },
     {
       "display_name": "Sadella Gerhold",
-    "user_name":"sadella",
+      "user_name": "sadella",
       "uid": "mv0ar4L",
       "user_photo_url":
           "https://robohash.org/impeditaccusamusomnis.png?size=50x50&set=set1",
@@ -447,7 +447,7 @@ class Mock {
     },
     {
       "display_name": "Sonnie Toulamain",
-   "user_name":"sonnie",
+      "user_name": "sonnie",
       "uid": "NhyPiYcLU",
       "user_photo_url":
           "https://robohash.org/quiamolestiastenetur.bmp?size=50x50&set=set1",
@@ -461,7 +461,7 @@ class Mock {
     },
     {
       "display_name": "Joel Seivwright",
-    "user_name":"joe12",
+      "user_name": "joe12",
       "uid": "UKuAds",
       "user_photo_url":
           "https://robohash.org/isteinciduntculpa.bmp?size=50x50&set=set1",
@@ -475,7 +475,7 @@ class Mock {
     },
     {
       "display_name": "Clementius Clampett",
-"user_name":"clema32",
+      "user_name": "clema32",
       "uid": "BVyncY1",
       "user_photo_url":
           "https://robohash.org/perspiciatisquossint.png?size=50x50&set=set1",
@@ -489,7 +489,7 @@ class Mock {
     },
     {
       "display_name": "Raul O'Deegan",
-      "user_name":"raiisd",
+      "user_name": "raiisd",
       "uid": "2mlR0LDnYR",
       "user_photo_url":
           "https://robohash.org/errormolestiaeut.bmp?size=50x50&set=set1",
@@ -503,7 +503,7 @@ class Mock {
     },
     {
       "display_name": "Doy Spawton",
-      "user_name":"doyahoy",
+      "user_name": "doyahoy",
       "uid": "R2Z3Ey",
       "user_photo_url":
           "https://robohash.org/temporamaioreserror.jpg?size=50x50&set=set1",
@@ -517,7 +517,7 @@ class Mock {
     },
     {
       "display_name": "Nari Farfolomeev",
-   "user_name":"nariaya",
+      "user_name": "nariaya",
       "uid": "0nMyLb0xJtDQ",
       "user_photo_url":
           "https://robohash.org/utipsumofficia.png?size=50x50&set=set1",
@@ -531,7 +531,7 @@ class Mock {
     },
     {
       "display_name": "Jessica Boldecke",
-   "user_name":"jasiiy",
+      "user_name": "jasiiy",
       "uid": "1E4mmTjqQ3C",
       "user_photo_url":
           "https://robohash.org/voluptasrepellatdolor.bmp?size=50x50&set=set1",
@@ -545,7 +545,7 @@ class Mock {
     },
     {
       "display_name": "Mathe de Merida",
-    "user_name":"mathes",
+      "user_name": "mathes",
       "uid": "sFs9RAHNb",
       "user_photo_url":
           "https://robohash.org/autestvoluptas.jpg?size=50x50&set=set1",
@@ -559,7 +559,7 @@ class Mock {
     },
     {
       "display_name": "Duky Todarello",
-     "user_name":"dsuc",
+      "user_name": "dsuc",
       "uid": "SQ2FYdFn",
       "user_photo_url":
           "https://robohash.org/molestiaseumunde.jpg?size=50x50&set=set1",
@@ -573,7 +573,7 @@ class Mock {
     },
     {
       "display_name": "Loree Henrie",
-      "user_name":"lorees",
+      "user_name": "lorees",
       "uid": "mBWDKabpAt73",
       "user_photo_url":
           "https://robohash.org/rerumblanditiisquidem.png?size=50x50&set=set1",
@@ -586,7 +586,8 @@ class Mock {
       "child_list": []
     },
     {
-      "user_name":"sdsd","display_name": "Brittany De Bernardis",
+      "user_name": "sdsd",
+      "display_name": "Brittany De Bernardis",
       "uid": "X6YkS70d82m",
       "user_photo_url":
           "https://robohash.org/quisequinostrum.jpg?size=50x50&set=set1",
@@ -599,7 +600,7 @@ class Mock {
       "child_list": [
         {
           "display_name": "Brigitta Hattigan",
-  "user_name":"brighte",
+          "user_name": "brighte",
           "uid": "6HvqoFZj95F",
           "user_photo_url":
               "https://robohash.org/invelquo.jpg?size=50x50&set=set1",
@@ -613,7 +614,7 @@ class Mock {
         },
         {
           "display_name": "Lari Annear",
-        "user_name":"laris",
+          "user_name": "laris",
           "uid": "xkIkhWh5H",
           "user_photo_url":
               "https://robohash.org/sintexercitationemdolorum.jpg?size=50x50&set=set1",
@@ -626,6 +627,105 @@ class Mock {
           "child_list": []
         }
       ]
+    }
+  ];
+
+  static var recentActivityList = [
+    {
+      "item_type": "transaction_received",
+      "item_text1": "Payment Received",
+      "item_text2": "50,000",
+      "created_at": "2020-11-21T22:44:26Z",
+      "updated_at": "2020-11-21T22:44:26Z",
+      "created_by": "vinoop ks"
+    },
+    {
+      "item_type": "item_delivered",
+      "item_text1": "Cements Bags Delivered",
+      "item_text2": "35,000",
+      "created_at": "2020-11-20T22:44:26Z",
+      "updated_at": "2020-11-20T22:44:26Z",
+      "created_by": "vinoop ks"
+    },
+    {
+      "item_type": "item_delivered",
+      "item_text1": "Steel Bars Delivered",
+      "item_text2": "45,000",
+      "created_at": "2020-11-20T10:44:26Z",
+      "updated_at": "2020-11-20T10:44:26Z",
+      "created_by": "vinoop ks"
+    },
+    {
+      "item_type": "service_debit",
+      "item_text1": "Service Debit",
+      "item_text2": "20,000",
+      "created_at": "2020-11-18T10:44:26Z",
+      "updated_at": "2020-11-18T10:44:26Z",
+      "created_by": "vinoop ks"
+    },
+    {
+      "item_type": "item_delivered",
+      "item_text1": "MSand Delivered",
+      "item_text2": "9,000",
+      "created_at": "2020-11-10T10:44:26Z",
+      "updated_at": "2020-11-10T10:44:26Z",
+      "created_by": "vinoop ks"
+    },
+    {
+      "item_type": "item_delivered",
+      "item_text1": "Steel Bars Delivered",
+      "item_text2": "45,000",
+      "created_at": "2020-11-20T10:44:26Z",
+      "updated_at": "2020-11-20T10:44:26Z",
+      "created_by": "vinoop ks"
+    },
+    {
+      "item_type": "starcoins_received",
+      "item_text1": "StarCoins credited",
+      "item_text2": "199",
+      "created_at": "2020-11-17T12:44:26Z",
+      "updated_at": "2020-11-17T12:44:26Z",
+      "created_by": "vinoop ks"
+    },
+    {
+      "item_type": "item_delivered",
+      "item_text1": "Cement Bags Delivered",
+      "item_text2": "41,000",
+      "created_at": "2020-11-09T10:44:26Z",
+      "updated_at": "2020-11-09T10:44:26Z",
+      "created_by": "vinoop ks"
+    },
+    {
+      "item_type": "transaction_received",
+      "item_text1": "Payment Received",
+      "item_text2": "89,000",
+      "created_at": "2020-11-02T10:44:26Z",
+      "updated_at": "2020-11-02T10:44:26Z",
+      "created_by": "vinoop ks"
+    },
+    {
+      "item_type": "item_delivered",
+      "item_text1": "Steel Bars Delivered",
+      "item_text2": "45,000",
+      "created_at": "2020-11-20T10:44:26Z",
+      "updated_at": "2020-11-20T10:44:26Z",
+      "created_by": "vinoop ks"
+    },
+    {
+      "item_type": "item_delivered",
+      "item_text1": "Bricks Delivered",
+      "item_text2": "12,000",
+      "created_at": "2020-11-01T10:44:26Z",
+      "updated_at": "2020-11-01T10:44:26Z",
+      "created_by": "vinoop ks"
+    },
+    {
+      "item_type": "item_delivered",
+      "item_text1": "MSand Delivered",
+      "item_text2": "8,000",
+      "created_at": "2020-11-20T10:44:26Z",
+      "updated_at": "2020-11-20T10:44:26Z",
+      "created_by": "vinoop ks"
     }
   ];
 }

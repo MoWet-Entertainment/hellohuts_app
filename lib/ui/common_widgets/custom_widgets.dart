@@ -1,6 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
@@ -703,21 +705,86 @@ class SliverSizedBox extends StatelessWidget {
   const SliverSizedBox({
     Key key,
     this.height,
-    this.width, this.child,
+    this.width,
+    this.child,
   }) : super(key: key);
 
- const SliverSizedBox.shrink({ Key key})
-    : width = 0.0,
-      height = 0.0,
-      child = null,
-      super(key: key);
+  const SliverSizedBox.shrink({Key key})
+      : width = 0.0,
+        height = 0.0,
+        child = null,
+        super(key: key);
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
         child: SizedBox(
       height: height ?? 0,
       width: width ?? 0,
-      child: child??SizedBox.shrink(),
+      child: child ?? SizedBox.shrink(),
     ));
+  }
+}
+
+class QuickPickItem extends StatelessWidget {
+  final String iconAsset;
+  final Color iconColor;
+  final double iconSize;
+  final String text;
+  final Color textColor;
+  final Function call;
+  final double backgroundSize;
+  final Color backgroundColor;
+  final double borderRadius;
+
+  QuickPickItem({
+    Key key,
+    this.iconAsset,
+    this.text,
+    this.textColor,
+    this.call,
+    this.backgroundSize,
+    this.iconColor,
+    this.iconSize,
+    this.backgroundColor, this.borderRadius,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    ScreenUtil.init(context,
+        designSize: Size(375, 801), allowFontScaling: false);
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      child: InkWell(
+        child: Column(
+          children: <Widget>[
+            customIconSquare(
+              iconAsset: iconAsset,
+              isCustomIcon: true,
+              iconSize: iconSize ?? 24.0,
+              iconColor:
+                  iconColor ?? Theme.of(context).colorScheme.onBackground,
+              backgroundSize: backgroundSize ?? 56,
+              borderRadius: borderRadius??16.0,
+              backgroundColor:
+                  backgroundColor ?? Theme.of(context).colorScheme.surface,
+              actionCall: call,
+            ),
+            spacer(height: 8.0),
+            Align(
+              alignment: Alignment.center,
+              child: text != null
+                  ? Text(text,
+                      style: Theme.of(context).textTheme.bodyText1.copyWith(
+                          fontSize: 10.0,
+                          fontWeight: FontWeight.w400,
+                          color: textColor ??
+                              Theme.of(context).colorScheme.onBackground))
+                  : Container(),
+            )
+          ],
+        ),
+        onTap: call,
+      ),
+    );
   }
 }
