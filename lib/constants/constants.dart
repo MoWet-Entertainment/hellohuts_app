@@ -66,6 +66,8 @@ class HelloIcons {
   static const String location_bold_icon =
       _iconsRoot + "Location_bold_icon.png";
   static const String bag_bold_icon = _iconsRoot + "Bag_bold_icon.png";
+    static const String bag_light_icon = _iconsRoot + "Bag_light_icon.png";
+
   static const String chart_bold_icon = _iconsRoot + "Chart_bold_icon.png";
 
   //Arrows for App Bar
@@ -78,7 +80,7 @@ class HelloIcons {
       _iconsRoot + "Arrow_down_icon.png";
 
 //Services Offeres Screen
-  static const String bag_light_icon = _iconsRoot + "Back_light_icon.png";
+  static const String back_light_icon = _iconsRoot + "Back_light_icon.png";
 
 //Add Details Services Offered Screen
   static const String minus_light_icon = _iconsRoot + "Minus_light_icon.png";

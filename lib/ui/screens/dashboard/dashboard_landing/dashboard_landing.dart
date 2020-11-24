@@ -11,6 +11,7 @@ import 'package:hellohuts_app/ui/routes/router.gr.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/theme_options.dart';
 import 'package:provider/provider.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class DashboardLandingPage extends StatelessWidget {
   const DashboardLandingPage({Key key}) : super(key: key);
@@ -92,8 +93,8 @@ class _DashboardBody extends StatelessWidget {
                     shrinkWrap: true,
                     itemCount: snapshot.data.length<10?snapshot.data.length:10,
                     itemBuilder: (context, index) {
-                    return _itemTile( item: snapshot.data[index], context:context,isDarkTheme: isDarkTheme);
                     });
+                    return _itemTile( item: snapshot.data[index], context:context,isDarkTheme: isDarkTheme);
                   }else {
                     return Center(
                       child: CircularProgressIndicator(),
@@ -214,36 +215,39 @@ class _DashboardBody extends StatelessWidget {
     final theme = Theme.of(context);
     final now = new DateTime.now();
     final difference = now.difference(item.updatedTimeStamp);
-    return CustomListTile(
-      tilePadding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16),
-      backgroundColor: theme.colorScheme.background,
-      borderRadius: BorderRadius.zero,
-      leading: customIconSquare(
-        backgroundColor: isDarkTheme
-            ? AppColors.kDark_7
-            : theme.colorScheme.secondaryVariant,
-        iconAsset: _getLeadingIcon(item),
-        iconColor: isDarkTheme
-            ? AppColors.kbMediumGrey
-            : theme.colorScheme.onBackground,
-        backgroundSize: 40,
-        iconSize: 24,
-        isCustomIcon: true,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+          child: CustomListTile(
+        tilePadding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8),
+        backgroundColor: isDarkTheme? theme.colorScheme.secondaryVariant: AppColors.kbSmokedWhite,
+        borderRadius: BorderRadius.circular(16.0),
+        leading: customIconSquare(
+          backgroundColor: isDarkTheme
+              ? AppColors.kDark_7
+              : theme.colorScheme.background,
+          iconAsset: _getLeadingIcon(item),
+          iconColor: isDarkTheme
+              ? AppColors.kbMediumGrey
+              : theme.colorScheme.onBackground,
+          backgroundSize: 48,
+          iconSize: 24,
+          isCustomIcon: true,
+        ),
+        titleText: Text(
+          item.itemText1,
+          style: theme.textTheme.bodyText2
+          .copyWith(fontWeight: FontWeight.bold, fontSize: 12),
+          overflow: TextOverflow.ellipsis,
+          maxLines: 1,
+        ),
+        subTitle: Text(
+         timeago.format(now.subtract(difference),
+                                  ),
+          style: theme.textTheme.bodyText2
+              .copyWith(fontSize: 10, fontWeight: FontWeight.w400),
+        ),
+        trailing: _getTrailingWidget(item, context),
       ),
-      titleText: Expanded(
-          child: Text(
-        item.itemText1,
-        style: theme.textTheme.bodyText2
-            .copyWith(fontWeight: FontWeight.bold, fontSize: 12),
-        overflow: TextOverflow.ellipsis,
-        maxLines: 1,
-      )),
-      subTitle: Text(
-        difference.toString(),
-        style: theme.textTheme.bodyText2
-            .copyWith(fontSize: 10, fontWeight: FontWeight.w400),
-      ),
-      trailing: _getTrailingWidget(item, context),
     );
   }
 
