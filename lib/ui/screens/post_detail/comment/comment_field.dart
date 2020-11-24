@@ -31,7 +31,7 @@ class _CommentTextFieldWidgetState extends State<CommentTextFieldWidget> {
       children: [
         commentState.isReplying
             ? Container(
-                color: Theme.of(context).colorScheme.background,
+                color: Theme.of(context).colorScheme.surface,
                 height: 30,
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Row(
@@ -39,7 +39,7 @@ class _CommentTextFieldWidgetState extends State<CommentTextFieldWidget> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      'Replying',
+                      'Replying to ' + commentState.replyingTo + " ..",
                       style: Theme.of(context).textTheme.bodyText1,
                     ),
                     IconButton(
@@ -57,9 +57,8 @@ class _CommentTextFieldWidgetState extends State<CommentTextFieldWidget> {
               )
             : SizedBox.shrink(),
         CustomTextFieldWidget(
-            hintText: commentState.isReplying
-                ? "Replying to " + commentState.replyingTo + " .."
-                : "Add Comment",
+            hintText:
+              "Add Comment",
             isImageSupported: false,
             focusNode: focusNode,
             onSubmitPressed: _onSubmitted),

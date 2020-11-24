@@ -345,58 +345,7 @@ class _QuickPicks extends StatelessWidget {
   }
 }
 
-class QuickPickItem extends StatelessWidget {
-  final String iconAsset;
-  final String text;
-  final Color textColor;
-  final Function call;
-  QuickPickItem({
-    Key key,
-    this.iconAsset,
-    this.text,
-    this.textColor,
-    this.call,
-  }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    ScreenUtil.init(context,
-        designSize: Size(375, 801), allowFontScaling: false);
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0),
-      child: InkWell(
-        child: Column(
-          children: <Widget>[
-            customIconSquare(
-              iconAsset: iconAsset,
-              isCustomIcon: true,
-              iconSize: 24.0,
-              iconColor: Theme.of(context).colorScheme.onBackground,
-              backgroundSize: 56,
-              borderRadius: 16.0,
-              backgroundColor: Theme.of(context).colorScheme.surface,
-              actionCall: call,
-            ),
-            spacer(height: 8.0),
-            Align(
-              alignment: Alignment.center,
-              child: text != null
-                  ? Text(text,
-                      style: GoogleFonts.lato(
-                          fontSize: 10.0,
-                          fontWeight: FontWeight.w400,
-                          color: textColor != null
-                              ? textColor
-                              : Theme.of(context).colorScheme.onBackground))
-                  : Container(),
-            )
-          ],
-        ),
-        onTap: call,
-      ),
-    );
-  }
-}
 
 class _SearchBar extends StatelessWidget {
   @override

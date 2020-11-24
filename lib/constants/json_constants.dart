@@ -64,6 +64,22 @@ class JsonConstants {
   static const String createdAt = 'created_at';
   static const String updated_at = 'updated_at';
 
+  //DashboardItem
+  static const String itemType = 'item_type';
+  static const String itemText1 = 'item_text1';
+  static const String itemText2 = 'item_text2';
+  static const String createdBy = 'created_by';
+  static const String updatedBy = 'updated_by';
+  static const String providedBy = "provided_by";
+
+  static const String trasactionRecieved = "transaction_received";
+  static const String transactionSpent = "transaction_spent";
+  static const String starCoinsRecieved = "starcoins_received";
+  static const String starCoinsSpent = "starcoins_spent";
+  static const String itemDelivered = "item_delivered";
+  static const String serviceDebit = "service_debit";
+  static const String payementReminder = "payment_reminder";
+
   //Generic
   static const String parentKey = "parent_key";
   static const String childKey = "child_key";

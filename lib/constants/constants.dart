@@ -66,6 +66,8 @@ class HelloIcons {
   static const String location_bold_icon =
       _iconsRoot + "Location_bold_icon.png";
   static const String bag_bold_icon = _iconsRoot + "Bag_bold_icon.png";
+    static const String bag_light_icon = _iconsRoot + "Bag_light_icon.png";
+
   static const String chart_bold_icon = _iconsRoot + "Chart_bold_icon.png";
 
   //Arrows for App Bar
@@ -78,7 +80,7 @@ class HelloIcons {
       _iconsRoot + "Arrow_down_icon.png";
 
 //Services Offeres Screen
-  static const String bag_light_icon = _iconsRoot + "Back_light_icon.png";
+  static const String back_light_icon = _iconsRoot + "Back_light_icon.png";
 
 //Add Details Services Offered Screen
   static const String minus_light_icon = _iconsRoot + "Minus_light_icon.png";
@@ -101,6 +103,27 @@ class HelloIcons {
       _iconsRoot + "Notification_bold_icon.png";
   static const String notification_light_icon =
       _iconsRoot + "Notification_light_icon.png";
+
+  //quick items - dashboard
+  static const String folder_bold_icon = _iconsRoot + "Folder_bold_icon.png";
+  static const String folder_light_icon = _iconsRoot + "Folder_light_icon.png";
+
+  static const String wallet_bold_icon = _iconsRoot + "Wallet_bold_icon.png";
+  static const String wallet_light_icon = _iconsRoot + "Wallet_light_icon.png";
+
+  static const String reports_bold_icon = _iconsRoot + "Graph_bold_icon.png";
+  static const String reports_light_icon = _iconsRoot + "Graph_light_icon.png";
+
+  static const String calendar_bold_icon =
+      _iconsRoot + "Calendar_bold_icon.png";
+  static const String calendar_light_icon =
+      _iconsRoot + "Calendar_light_icon.png";
+
+  static const String star_bold_icon = _iconsRoot + "Star_bold_icon.png";
+  static const String star_light_icon = _iconsRoot + "Star_light_icon.png";
+
+  static const String contractor_light_icon =
+      _iconsRoot + "Construction_light_icon.png";
 }
 
 class SessionData {
