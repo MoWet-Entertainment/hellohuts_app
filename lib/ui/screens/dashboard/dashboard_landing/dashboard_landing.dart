@@ -6,6 +6,7 @@ import 'package:hellohuts_app/models/dashboard/dashboard_item.dart';
 import 'package:hellohuts_app/states/dashboard/dashboard_state.dart';
 import 'package:hellohuts_app/ui/common_widgets/app_bar/app_bar.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
+import 'package:hellohuts_app/ui/common_widgets/flippable_box.dart';
 import 'package:hellohuts_app/ui/common_widgets/scroll_behavior/neat_scroll_behavior.dart';
 import 'package:hellohuts_app/ui/routes/router.gr.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
@@ -55,7 +56,7 @@ class _DashboardBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-        final isDarkTheme = ThemeOptions.of(context).isDarkTheme(context);
+    final isDarkTheme = ThemeOptions.of(context).isDarkTheme(context);
 
     final dashboardState = Provider.of<DashboardState>(context);
     return NotificationListener<OverscrollIndicatorNotification>(
@@ -68,6 +69,7 @@ class _DashboardBody extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             children: [
+              // _ProjectImageContainer(),
               imageContainer(context),
               SizedBox(height: 24),
               dashboardQuickPicks(context),
@@ -83,29 +85,34 @@ class _DashboardBody extends StatelessWidget {
                         .headline6
                         .copyWith(fontSize: 16),
                   )),
-           
               FutureBuilder(
                 future: dashboardState.getRecentActivityList(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
-                   return  Padding(
-                     padding: const EdgeInsets.only(top:18.0, bottom: 40),
-                     child: ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: snapshot.data.length<10?snapshot.data.length:10,
-                      itemBuilder: (context, index) {
-                           return _itemTile( item: snapshot.data[index], context:context,isDarkTheme: isDarkTheme);
-                      }),
-                   );
-                 
-                  }else {
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 18.0, bottom: 40),
+                      child: ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: snapshot.data.length < 10
+                              ? snapshot.data.length
+                              : 10,
+                          itemBuilder: (context, index) {
+                            return _itemTile(
+                                item: snapshot.data[index],
+                                context: context,
+                                isDarkTheme: isDarkTheme);
+                          }),
+                    );
+                  } else {
                     return Center(
-                      child: CircularProgressIndicator(),
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 24.0),
+                        child: CircularProgressIndicator(),
+                      ),
                     );
                   }
                 },
-                
               ),
             ],
           ),
@@ -200,35 +207,23 @@ class _DashboardBody extends StatelessWidget {
     //TODO: Calendar page
   }
 
-  Container imageContainer(BuildContext context) {
-    bool isDark = ThemeOptions.of(context).isDarkTheme(context);
-    final theme = Theme.of(context);
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(30),
-        color: isDark ? theme.colorScheme.onSurface : AppColors.kbSmokedWhite,
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(30),
-        child: Image(image: AssetImage(Assets.sample_house)),
-      ),
-    );
-  }
-
-  Widget _itemTile({@required DashboardItem item, @required BuildContext context, bool isDarkTheme =false}) {
+  Widget _itemTile(
+      {@required DashboardItem item,
+      @required BuildContext context,
+      bool isDarkTheme = false}) {
     final theme = Theme.of(context);
     final now = new DateTime.now();
     final difference = now.difference(item.updatedTimeStamp);
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
-          child: CustomListTile(
-        tilePadding: const EdgeInsets.only(top: 4.0,bottom:4, left:8, right:12 ),
-        backgroundColor:theme.colorScheme.secondaryVariant,
+      child: CustomListTile(
+        tilePadding:
+            const EdgeInsets.only(top: 4.0, bottom: 4, left: 8, right: 12),
+        backgroundColor: theme.colorScheme.secondaryVariant,
         borderRadius: BorderRadius.circular(20.0),
         leading: customIconSquare(
-          backgroundColor: isDarkTheme
-              ? AppColors.kDark_7
-              : theme.colorScheme.background,
+          backgroundColor:
+              isDarkTheme ? AppColors.kDark_7 : theme.colorScheme.background,
           iconAsset: _getLeadingIcon(item),
           iconColor: isDarkTheme
               ? AppColors.kbMediumGrey
@@ -240,13 +235,14 @@ class _DashboardBody extends StatelessWidget {
         titleText: Text(
           item.itemText1,
           style: theme.textTheme.bodyText2
-          .copyWith(fontWeight: FontWeight.bold, fontSize: 12),
+              .copyWith(fontWeight: FontWeight.bold, fontSize: 12),
           overflow: TextOverflow.ellipsis,
           maxLines: 1,
         ),
         subTitle: Text(
-         timeago.format(now.subtract(difference),
-                                  ),
+          timeago.format(
+            now.subtract(difference),
+          ),
           style: theme.textTheme.bodyText2
               .copyWith(fontSize: 10, fontWeight: FontWeight.w400),
         ),
@@ -374,6 +370,100 @@ class _DashboardBody extends StatelessWidget {
       default:
         return HelloIcons.wallet_light_icon;
     }
+  }
+}
+
+Widget imageContainer(BuildContext context) {
+  final width = fullWidth(context) * 0.9;
+  final height = fullHeight(context) * 0.35;
+  return FlipCard(
+    front: _ProjectImageContainer(width: width,height: height,),
+    back: buildContainer(context),
+  );
+}
+
+Widget buildContainer(BuildContext context,{double width, double height}) {
+  return Container(
+    width: width?? fullWidth(context) * 0.9,
+    height: height?? fullHeight(context) * 0.35,
+    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: Theme.of(context).backgroundColor,
+
+ 
+    ),
+    child: Center(child: Text("Hello Man")),
+  );
+}
+
+class _ProjectImageContainer extends StatefulWidget {
+  final double width;
+  final double height;
+  const _ProjectImageContainer({
+    Key key,
+    this.width,
+    this.height,
+  }) : super(key: key);
+
+  @override
+  _ProjectImageContainerState createState() => _ProjectImageContainerState();
+}
+
+class _ProjectImageContainerState extends State<_ProjectImageContainer> {
+  bool _isExpanded = false;
+  @override
+  Widget build(BuildContext context) {
+    bool isDark = ThemeOptions.of(context).isDarkTheme(context);
+    final theme = Theme.of(context);
+    return Container(
+      child: GestureDetector(
+        child: Stack(
+          children: [
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 400),
+              curve: Curves.easeInOutSine,
+              width: widget.width ?? fullWidth(context) * 0.9,
+              height: widget.height ?? fullHeight(context) * 0.35,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(30),
+                child: Image(
+                    image: AssetImage(Assets.sample_house), fit: BoxFit.cover),
+              ),
+            ),
+            Positioned(
+                right: 0,
+                bottom: 0,
+                child: IconButton(
+                  icon: Stack(
+                    children: [
+                      Container(
+                        height: 30,
+                        width: 30,
+                        decoration: BoxDecoration(
+                            // color: Colors.black.withOpacity(0.1),
+                            gradient: RadialGradient(
+                                center: Alignment.center,
+                                colors: [
+                                  AppColors.kDark_1.withOpacity(0.2),
+                                  Colors.transparent,
+                                ]),
+                            borderRadius: BorderRadius.circular(12)),
+                      ),
+                      Icon(
+                        Icons.filter_center_focus_rounded,
+                        color: AppColors.kPureWhite,
+                      ),
+                    ],
+                  ),
+                  onPressed: () {
+                    print("User wants to see the VR View");
+                    //TODO: When the image VR View is tapped by the user
+                  },
+                ))
+          ],
+        ),
+      ),
+    );
   }
 }
 
