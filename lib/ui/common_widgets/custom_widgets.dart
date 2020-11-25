@@ -326,7 +326,7 @@ Widget customIconSquare({
                               decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   border: Border.all(
-                                    color: AppColors.kPureWhite,
+                                    color: theme.colorScheme.surface,
                                     width: 2.0,
                                   )),
                               child: CircleAvatar(
