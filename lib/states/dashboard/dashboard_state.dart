@@ -1,5 +1,5 @@
 import 'package:hellohuts_app/constants/mock1.dart';
-import 'package:hellohuts_app/models/dashboard/dashboard_item.dart';
+import 'package:hellohuts_app/models/dashboard/dashboard_item/dashboard_item.dart';
 import 'package:hellohuts_app/states/app_state.dart';
 
 class DashboardState extends AppState {
