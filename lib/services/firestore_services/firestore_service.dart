@@ -6,7 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:hellohuts_app/constants/json_constants.dart';
 import 'package:hellohuts_app/helper/utilities.dart';
-import 'package:hellohuts_app/models/user_feed/app_user.dart';
+import 'package:hellohuts_app/models/user/app_user.dart';
 import 'package:hellohuts_app/models/user_feed/feed.dart';
 import 'package:hellohuts_app/services/firestore_services/firestore_path.dart';
 import 'package:hellohuts_app/helper/logger.dart';

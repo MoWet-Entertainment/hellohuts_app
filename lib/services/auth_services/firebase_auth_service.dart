@@ -4,7 +4,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/helper/logger.dart';
 import 'package:hellohuts_app/locators.dart';
-import 'package:hellohuts_app/models/user_feed/app_user.dart';
+import 'package:hellohuts_app/models/user/app_user.dart';
 import 'package:hellohuts_app/services/auth_services/auth_service.dart';
 import 'package:hellohuts_app/services/firestore_services/analytics_service.dart';
 import 'package:hellohuts_app/services/firestore_services/firestore_service.dart';

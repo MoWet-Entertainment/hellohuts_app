@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hellohuts_app/constants/json_constants.dart';
+import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
 part 'dashboard_item.freezed.dart';
 part 'dashboard_item.g.dart';
@@ -91,3 +92,12 @@ enum DashboardItemType {
   ServiceDebit,
   PaymentReminder,
 }
+
+
+
+
+
+
+
+
+

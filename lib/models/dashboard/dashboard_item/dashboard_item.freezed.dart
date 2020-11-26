@@ -222,7 +222,7 @@ class __$DashboardItemCopyWithImpl<$Res>
 @JsonSerializable(explicitToJson: true)
 
 /// @nodoc
-class _$_DashboardItem implements _DashboardItem {
+class _$_DashboardItem with DiagnosticableTreeMixin implements _DashboardItem {
   _$_DashboardItem(
       {@JsonKey(name: JsonConstants.itemType, fromJson: DashboardItem._setModeOfTransaction, toJson: DashboardItem._getDashbordItemType)
           this.itemType,
@@ -281,8 +281,23 @@ class _$_DashboardItem implements _DashboardItem {
   final String providedBy;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'DashboardItem(itemType: $itemType, itemText1: $itemText1, itemText2: $itemText2, createdTimeStamp: $createdTimeStamp, updatedTimeStamp: $updatedTimeStamp, createdBy: $createdBy, updatedBy: $updatedBy, providedBy: $providedBy)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'DashboardItem'))
+      ..add(DiagnosticsProperty('itemType', itemType))
+      ..add(DiagnosticsProperty('itemText1', itemText1))
+      ..add(DiagnosticsProperty('itemText2', itemText2))
+      ..add(DiagnosticsProperty('createdTimeStamp', createdTimeStamp))
+      ..add(DiagnosticsProperty('updatedTimeStamp', updatedTimeStamp))
+      ..add(DiagnosticsProperty('createdBy', createdBy))
+      ..add(DiagnosticsProperty('updatedBy', updatedBy))
+      ..add(DiagnosticsProperty('providedBy', providedBy));
   }
 
   @override

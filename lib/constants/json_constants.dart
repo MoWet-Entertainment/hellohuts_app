@@ -20,6 +20,9 @@ class JsonConstants {
   static const String isEmailVerified = 'is_email_verified';
   static const String profLastUpdatedAt = "prof_last_updated_at";
   static const String lastLoginAt = 'last_login_at';
+  static const String userTitle = 'user_title';
+  static const String userCompany = "user_company";
+  static const String assignedProjects = "assigned_projects";
 
   //COST ESTIMATION TYPES
   static const String buildingMaterialsType =
@@ -86,4 +89,55 @@ class JsonConstants {
   static const String childKeyList = 'child_key_list';
   static const String childList = 'child_list';
   static const String isParent = 'is_parent';
+
+  //Project Details
+  static const String project_area = "project_area";
+  static const String plinth_area = "plinth_area";
+  static const String projectDateOfCompletion = "project_date_of_completion";
+  static const String projectEstimatedDateOfCompletion =
+      "project_est_date_completion";
+  static const String projectStartDate = "project_start_date";
+  static const String projectEstimate = "project_estimate";
+  static const String projectTotalPaid = "project_total_paid";
+  static const String projectCompletionPercentage = "project_completion_perc";
+
+  static const String projectId = "project_id";
+  static const String projectLocation = "project_location";
+  static const String clientName = "client_name";
+
+  static const String address = "address";
+  static const String address1 = "address1";
+  static const String address2 = "address2";
+  static const String postalLoc = "postal_loc";
+  static const String postalCode = "postal_code";
+  static const String district = "district";
+  static const String state = "state";
+  static const String country = "country";
+
+  static const String projectAddress = "project_address";
+  static const String clientAddress = "client_address";
+
+  static const String contractor = "contractor";
+  static const String contractorDetails = "contractor_details";
+  static const String contractorName = "contractor_name";
+  static const String contractorCompany = "contractor_company";
+  static const String companyName = "company_name";
+  static const String contractorAddress = "contractor_address";
+
+  static const String engineerDetails = "engineer_details";
+
+  static const String baseRate = "base_rate";
+
+  static const String planCategory = "plan_category";
+  static const String selectedPlan = "selected_plan";
+  static const String itemMainGroup = "item_main_group";
+  static const String subItem = "sub_item";
+  static const String imagePresent = "image_present";
+  static const String itemHeadline = "item_headline";
+  static const String itemImage = "item_image";
+
+  static const String plan_type = "plan_type";
+  static const String plan_image = "plan_image";
+
+  static const String uniqueId = "unique_id";
 }

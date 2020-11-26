@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
-import 'package:hellohuts_app/models/user_feed/app_user.dart';
+import 'package:hellohuts_app/models/user/app_user.dart';
 
 abstract class AuthService {
   Future<AppUser> currentUser();
