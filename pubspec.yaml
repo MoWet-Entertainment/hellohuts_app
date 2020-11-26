@@ -90,7 +90,7 @@ dependencies:
   equatable: ^1.2.5
   logger: ^0.9.2
   flutter_hooks: ^0.14.0
-  freezed:
+  freezed: ^0.12.3
   timeago: ^2.0.28
 
 

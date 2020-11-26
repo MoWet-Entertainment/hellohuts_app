@@ -1,5 +1,5 @@
 import 'package:hellohuts_app/constants/json_constants.dart';
-import 'package:hellohuts_app/models/user_feed/app_user.dart';
+import 'package:hellohuts_app/models/user/app_user.dart';
 import 'package:hellohuts_app/models/user_feed/comments.dart';
 import 'package:hellohuts_app/models/user_feed/likes.dart';
 
