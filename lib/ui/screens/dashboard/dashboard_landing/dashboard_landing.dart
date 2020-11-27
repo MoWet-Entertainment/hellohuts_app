@@ -7,6 +7,7 @@ import 'package:hellohuts_app/states/dashboard/dashboard_state.dart';
 import 'package:hellohuts_app/ui/common_widgets/app_bar/app_bar.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
 import 'package:hellohuts_app/ui/common_widgets/flippable_box.dart';
+import 'package:hellohuts_app/ui/common_widgets/rounded_charts/radial_chart.dart';
 import 'package:hellohuts_app/ui/common_widgets/scroll_behavior/neat_scroll_behavior.dart';
 import 'package:hellohuts_app/ui/routes/router.gr.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
@@ -377,22 +378,87 @@ Widget imageContainer(BuildContext context) {
   final width = fullWidth(context) * 0.9;
   final height = fullHeight(context) * 0.35;
   return FlipCard(
-    front: _ProjectImageContainer(width: width,height: height,),
+    front: _ProjectImageContainer(
+      width: width,
+      height: height,
+    ),
     back: buildContainer(context),
   );
 }
 
-Widget buildContainer(BuildContext context,{double width, double height}) {
+Widget buildContainer(BuildContext context, {double width, double height}) {
   return Container(
-    width: width?? fullWidth(context) * 0.9,
-    height: height?? fullHeight(context) * 0.35,
+    width: width ?? fullWidth(context) * 0.9,
+    height: height ?? fullHeight(context) * 0.35,
     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: Theme.of(context).backgroundColor,
-
- 
+      borderRadius: BorderRadius.circular(30),
+      color: AppColors.kbSmokedWhite,
     ),
-    child: Center(child: Text("Hello Man")),
+    child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              child:Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                Row(
+                  children: [
+                     heroDetailedContainerText(heading:"Area", text:"2187",subTopText: 'sq.ft'),
+                     SizedBox(width: 16,),
+                     heroDetailedContainerText(heading:"Project Est", text:"4.5m",),
+
+
+                ],),
+                  Row(
+                    children: [
+                     heroDetailedContainerText(heading:"Exp. Completion", text:"22 Mar 2021", textSize: 16.0),
+                                          SizedBox(width: 16,),
+
+                     heroDetailedContainerText(heading:"Total Paid", text:"1.5m", textSize: 16.0),
+                ],)
+              ],)
+            ),
+         
+            RadialPieChart(
+              completedPercentage: 0.71,
+              widthOfCircle: 6,
+              size: 100,
+            ),
+          ],
+        )),
+  );
+}
+
+Widget heroDetailedContainerText({@required String heading, @required String text, double textSize=24.0,String subTopText=''}) {
+  return Builder(builder: (context) {
+    final theme = Theme.of(context);
+    return enhancedBoldText(heading, Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(text, style: theme.textTheme.headline2.copyWith(color: theme.colorScheme.onBackground, fontSize: textSize),),
+       subTopText!=''? SizedBox(width: 2,):SizedBox.shrink(),
+          subTopText!=''? Text(subTopText, style: theme.textTheme.headline6.copyWith(color: theme.colorScheme.onBackground),):SizedBox.shrink(),
+      ],
+    ));
+  });
+}
+
+Widget enhancedBoldText(String heading, Widget textInBold) {
+  return Builder(
+    builder: (context) {
+      final theme = Theme.of(context);
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(heading,
+              style: theme.textTheme.bodyText1
+                  .copyWith(color: AppColors.kbDarkGrey, fontSize: 12)),
+          textInBold,
+        ],
+      );
+    },
   );
 }
 
