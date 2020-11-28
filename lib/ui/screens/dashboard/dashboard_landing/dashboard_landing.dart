@@ -387,61 +387,149 @@ Widget imageContainer(BuildContext context) {
 }
 
 Widget buildContainer(BuildContext context, {double width, double height}) {
+  bool isDark = ThemeOptions.of(context).isDarkTheme(context);
   return Container(
     width: width ?? fullWidth(context) * 0.9,
     height: height ?? fullHeight(context) * 0.35,
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(30),
-      color: AppColors.kbSmokedWhite,
-    ),
+    color: Theme.of(context).colorScheme.background,
     child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              child:Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(30),
+        color: isDark?Theme.of(context).colorScheme.surface: AppColors.kbSmokedWhite,
+      ),
+      child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 40),
+          child: Container(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+
+
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+
                 children: [
-                Row(
-                  children: [
-                     heroDetailedContainerText(heading:"Area", text:"2187",subTopText: 'sq.ft'),
-                     SizedBox(width: 16,),
-                     heroDetailedContainerText(heading:"Project Est", text:"4.5m",),
+                     heroDetailedContainerText(
+                      heading: "Area", text: "2187", subTopText: 'sq.ft'),
+                          heroDetailedContainerText(
+                      heading: "Exp. Completion",
+                      text: "22 Mar 2021",
+                      textSize: 16.0),
+                      
+                  heroDetailedContainerText(
+                      heading: "Project by", text: "Hellohuts Pvt Ltd", textSize: 16.0),
+                ],
+              ),
+              Spacer(),
+              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
 
+                children: [
+                   
+                  heroDetailedContainerText(
+                    heading: "Project Est",
+                    text: "4.5m",
+                  ),
+                           heroDetailedContainerText(
+                      heading: "Total Paid", text: "1.5m", textSize: 16.0),
+                          heroDetailedContainerText(
+                      heading: "Current Stage",
+                      text: "Plastering",
+                      textSize: 16.0),
+                ],
+              ),
+              // Row(
+              //   // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //   children: [
+              //     heroDetailedContainerText(
+              //         heading: "Area", text: "2187", subTopText: 'sq.ft'),
+              //     // SizedBox(
+              //     //   width: 16,
+              //     // ),
+              //     Spacer(),
+              //     heroDetailedContainerText(
+              //       heading: "Project Est",
+              //       text: "4.5m",
+              //     ),
+              //   ],
+              // ),
+              // SizedBox(height: 16,),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //   children: [
+              //     heroDetailedContainerText(
+              //         heading: "Exp. Completion",
+              //         text: "22 Mar 2021",
+              //         textSize: 16.0),
+              //     // SizedBox(
+              //     //   width: 16,
+              //     // ),
+              //                       Spacer(),
 
-                ],),
-                  Row(
-                    children: [
-                     heroDetailedContainerText(heading:"Exp. Completion", text:"22 Mar 2021", textSize: 16.0),
-                                          SizedBox(width: 16,),
+              //     heroDetailedContainerText(
+              //         heading: "Total Paid", text: "1.5m", textSize: 16.0),
+              //   ],
+              // ),
+              // SizedBox(height: 16,),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //   children: [
+                 
+              //     // SizedBox(
+              //     //   width: 16,
+              //     // ),
+                                 
 
-                     heroDetailedContainerText(heading:"Total Paid", text:"1.5m", textSize: 16.0),
-                ],)
-              ],)
-            ),
-         
-            RadialPieChart(
-              completedPercentage: 0.71,
-              widthOfCircle: 6,
-              size: 100,
-            ),
-          ],
-        )),
+              //     heroDetailedContainerText(
+              //         heading: "Undertaken by", text: "Hellohuts Pro Builders", textSize: 16.0),
+              //            Spacer(),
+              //             heroDetailedContainerText(
+              //         heading: "Current Stage",
+              //         text: "Plastering",
+              //         textSize: 16.0),
+                // ],
+              // ),
+              SizedBox(height: 8,),
+            ],
+          ))),
+    ),
   );
 }
 
-Widget heroDetailedContainerText({@required String heading, @required String text, double textSize=24.0,String subTopText=''}) {
+Widget heroDetailedContainerText(
+    {@required String heading,
+    @required String text,
+    double textSize = 24.0,
+    String subTopText = ''}) {
   return Builder(builder: (context) {
     final theme = Theme.of(context);
-    return enhancedBoldText(heading, Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(text, style: theme.textTheme.headline2.copyWith(color: theme.colorScheme.onBackground, fontSize: textSize),),
-       subTopText!=''? SizedBox(width: 2,):SizedBox.shrink(),
-          subTopText!=''? Text(subTopText, style: theme.textTheme.headline6.copyWith(color: theme.colorScheme.onBackground),):SizedBox.shrink(),
-      ],
-    ));
+    print(theme.colorScheme.onBackground);
+    return enhancedBoldText(
+        heading,
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              text,
+              maxLines: 2,
+              style: theme.textTheme.headline2.copyWith(
+                  color: theme.colorScheme.onBackground, fontSize: textSize),
+            ),
+            subTopText != ''
+                ? SizedBox(
+                    width: 2,
+                  )
+                : SizedBox.shrink(),
+            subTopText != ''
+                ? Text(
+                    subTopText,
+                    style: theme.textTheme.headline6
+                        .copyWith(color: theme.colorScheme.onBackground),
+                  )
+                : SizedBox.shrink(),
+          ],
+        ));
   });
 }
 
@@ -449,14 +537,17 @@ Widget enhancedBoldText(String heading, Widget textInBold) {
   return Builder(
     builder: (context) {
       final theme = Theme.of(context);
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(heading,
-              style: theme.textTheme.bodyText1
-                  .copyWith(color: AppColors.kbDarkGrey, fontSize: 12)),
-          textInBold,
-        ],
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical:8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(heading,
+                style: theme.textTheme.bodyText1
+                    .copyWith(color: AppColors.kbDarkGrey, fontSize: 12)),
+            textInBold,
+          ],
+        ),
       );
     },
   );
