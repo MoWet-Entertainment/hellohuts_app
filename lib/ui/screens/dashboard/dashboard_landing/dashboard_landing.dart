@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/models/dashboard/dashboard_item/dashboard_item.dart';
+import 'package:hellohuts_app/models/dashboard/project_details/project_details.dart';
 import 'package:hellohuts_app/states/dashboard/dashboard_state.dart';
 import 'package:hellohuts_app/ui/common_widgets/app_bar/app_bar.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
@@ -71,7 +73,7 @@ class _DashboardBody extends StatelessWidget {
           child: Column(
             children: [
               // _ProjectImageContainer(),
-              imageContainer(context),
+              _ImageContainer(),
               SizedBox(height: 24),
               dashboardQuickPicks(context),
               SizedBox(
@@ -185,6 +187,7 @@ class _DashboardBody extends StatelessWidget {
 
   _projectDetailsCall() {
     print("user wants to navigate to the project details page");
+    ExtendedNavigator.root.push(Routes.projectDetailsPage);
     //TODO: Project Details page
   }
 
@@ -374,127 +377,129 @@ class _DashboardBody extends StatelessWidget {
   }
 }
 
-Widget imageContainer(BuildContext context) {
-  final width = fullWidth(context) * 0.9;
-  final height = fullHeight(context) * 0.35;
-  return FlipCard(
-    front: _ProjectImageContainer(
-      width: width,
-      height: height,
-    ),
-    back: buildContainer(context),
-  );
+class _ImageContainer extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return imageContainer(context);
+  }
+
+  Widget imageContainer(BuildContext context) {
+    final width = fullWidth(context) * 0.9;
+    final height = fullHeight(context) * 0.35;
+    return FlipCard(
+      front: _ProjectImageContainer(
+        width: width,
+        height: height,
+      ),
+      back: _QuickProjectSnapshot(),
+    );
+  }
 }
 
-Widget buildContainer(BuildContext context, {double width, double height}) {
-  bool isDark = ThemeOptions.of(context).isDarkTheme(context);
-  return Container(
-    width: width ?? fullWidth(context) * 0.9,
-    height: height ?? fullHeight(context) * 0.35,
-    color: Theme.of(context).colorScheme.background,
-    child: Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(30),
-        color: isDark?Theme.of(context).colorScheme.surface: AppColors.kbSmokedWhite,
-      ),
-      child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 40),
+class _QuickProjectSnapshot extends StatelessWidget {
+  const _QuickProjectSnapshot({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    print("build called Quick snapshot");
+    return buildContainer(context);
+  }
+
+  Widget buildContainer(BuildContext context, {double width, double height}) {
+    bool isDark = ThemeOptions.of(context).isDarkTheme(context);
+    return Consumer<DashboardState>(
+      builder: (context, model, child) {
+        return Container(
           child: Container(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-
-
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-
-                children: [
-                     heroDetailedContainerText(
-                      heading: "Area", text: "2187", subTopText: 'sq.ft'),
-                          heroDetailedContainerText(
-                      heading: "Exp. Completion",
-                      text: "22 Mar 2021",
-                      textSize: 16.0),
-                      
-                  heroDetailedContainerText(
-                      heading: "Project by", text: "Hellohuts Pvt Ltd", textSize: 16.0),
-                ],
-              ),
-              Spacer(),
-              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-
-                children: [
-                   
-                  heroDetailedContainerText(
-                    heading: "Project Est",
-                    text: "4.5m",
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              color: isDark
+                  ? Theme.of(context).colorScheme.surface
+                  : AppColors.kbSmokedWhite,
+            ),
+            child: Stack(
+              children: [
+                Positioned(
+                    right: 24,
+                    top: 16,
+                    child: Opacity(
+                        opacity: 0.3,
+                        child: SvgPicture.asset(Assets.colored_circles_svg))),
+                Positioned(
+                  left: -6,
+                  bottom: -68,
+                  child: Opacity(
+                    opacity: 0.3,
+                    child: SvgPicture.asset(
+                      Assets.colored_circles_svg,
+                      height: 128,
+                    ),
                   ),
-                           heroDetailedContainerText(
-                      heading: "Total Paid", text: "1.5m", textSize: 16.0),
-                          heroDetailedContainerText(
-                      heading: "Current Stage",
-                      text: "Plastering",
-                      textSize: 16.0),
-                ],
-              ),
-              // Row(
-              //   // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //   children: [
-              //     heroDetailedContainerText(
-              //         heading: "Area", text: "2187", subTopText: 'sq.ft'),
-              //     // SizedBox(
-              //     //   width: 16,
-              //     // ),
-              //     Spacer(),
-              //     heroDetailedContainerText(
-              //       heading: "Project Est",
-              //       text: "4.5m",
-              //     ),
-              //   ],
-              // ),
-              // SizedBox(height: 16,),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //   children: [
-              //     heroDetailedContainerText(
-              //         heading: "Exp. Completion",
-              //         text: "22 Mar 2021",
-              //         textSize: 16.0),
-              //     // SizedBox(
-              //     //   width: 16,
-              //     // ),
-              //                       Spacer(),
-
-              //     heroDetailedContainerText(
-              //         heading: "Total Paid", text: "1.5m", textSize: 16.0),
-              //   ],
-              // ),
-              // SizedBox(height: 16,),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //   children: [
-                 
-              //     // SizedBox(
-              //     //   width: 16,
-              //     // ),
-                                 
-
-              //     heroDetailedContainerText(
-              //         heading: "Undertaken by", text: "Hellohuts Pro Builders", textSize: 16.0),
-              //            Spacer(),
-              //             heroDetailedContainerText(
-              //         heading: "Current Stage",
-              //         text: "Plastering",
-              //         textSize: 16.0),
-                // ],
-              // ),
-              SizedBox(height: 8,),
-            ],
-          ))),
-    ),
-  );
+                ),
+                Container(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 24, horizontal: 40),
+                    child: Container(
+                        child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            heroDetailedContainerText(
+                                heading: "Area",
+                                text: "2187",
+                                subTopText: 'sq.ft'),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            heroDetailedContainerText(
+                              heading: "Project Est",
+                              text: "4.5m",
+                            ),
+                          ],
+                        ),
+                        Divider(
+                          thickness: 1,
+                          indent: 40,
+                          endIndent: 40,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            heroDetailedContainerText(
+                                heading: "Project by",
+                                text: "Hellohuts Pvt Ltd",
+                                textSize: 16.0),
+                          ],
+                        ),
+                        Divider(
+                          thickness: 1,
+                          indent: 40,
+                          endIndent: 40,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            heroDetailedContainerText(
+                                heading: "Exp. Completion",
+                                text: "22 Mar 2021",
+                                textSize: 16.0),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                      ],
+                    ))),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
 }
 
 Widget heroDetailedContainerText(
@@ -538,7 +543,7 @@ Widget enhancedBoldText(String heading, Widget textInBold) {
     builder: (context) {
       final theme = Theme.of(context);
       return Padding(
-        padding: const EdgeInsets.symmetric(vertical:8.0),
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -570,6 +575,8 @@ class _ProjectImageContainerState extends State<_ProjectImageContainer> {
   bool _isExpanded = false;
   @override
   Widget build(BuildContext context) {
+    print("build called image container");
+
     bool isDark = ThemeOptions.of(context).isDarkTheme(context);
     final theme = Theme.of(context);
     return Container(

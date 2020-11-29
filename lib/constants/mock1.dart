@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:hellohuts_app/models/comment/comment.dart';
 
 class Mock {
   static var list = [
@@ -728,6 +727,16 @@ class Mock {
       "created_by": "vinoop ks"
     }
   ];
+
+  static var projectDetails = {
+    "project_area":"2187",
+    "plinth_area":"2187",
+    "project_estimate":"4500000",
+    "project_total_paid":"2000000",
+    "project_start_date":"11 Nov 2019",
+    "project_date_of_completion":null,
+    "project_est_date_of_completion":"22 Mar 2021",
+  };
 }
 
 class ImageData {
