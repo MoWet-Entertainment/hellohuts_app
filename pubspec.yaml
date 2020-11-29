@@ -92,6 +92,7 @@ dependencies:
   flutter_hooks: ^0.14.0
   freezed: ^0.12.3
   timeago: ^2.0.28
+  hooks_riverpod: ^0.12.1
 
 
 
