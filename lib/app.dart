@@ -17,6 +17,7 @@ import 'package:hellohuts_app/ui/styles/app_themes.dart';
 import 'package:hellohuts_app/ui/styles/theme_options.dart';
 import 'package:provider/provider.dart';
 import 'package:theme_provider/theme_provider.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart' as rp;
 
 class App extends StatefulWidget {
   App({Key key}) : super(key: key);
@@ -55,7 +56,7 @@ class _AppState extends State<App> {
               onInitCallback: (controller, previouslySavedThemeFuture) async {
                 String savedTheme = await previouslySavedThemeFuture;
                 if (savedTheme != null) {
-                                  print("Saved Theme: " + savedTheme);
+                  print("Saved Theme: " + savedTheme);
 
                   controller.setTheme(savedTheme);
                   if (savedTheme.contains('dark')) {
@@ -76,7 +77,7 @@ class _AppState extends State<App> {
                     controller.setTheme('dark_theme');
                   } else {
                     _themeMode = ThemeMode.light;
-                     print(
+                    print(
                         "System theme is found to be light.. Setting the application theme as :LIGHT");
                     controller.setTheme('light_theme');
                   }
@@ -108,18 +109,20 @@ class _AppState extends State<App> {
                         timeDilation: timeDilation,
                         platform: defaultTargetPlatform,
                       ),
-                      child: MaterialApp(
-                        debugShowCheckedModeBanner: false,
-                        title: Provider.of<AppConfig>(context).appTitle,
-                        theme: ThemeProvider.themeOf(themeContext).data,
-                        home: Container(),
-                        builder: ExtendedNavigator.builder<AppRouter>(
-                          router: AppRouter(),
-                          guards: [AuthGuard()],
+                      child: rp.ProviderScope(
+                        child: MaterialApp(
+                          debugShowCheckedModeBanner: false,
+                          title: Provider.of<AppConfig>(context).appTitle,
+                          theme: ThemeProvider.themeOf(themeContext).data,
+                          home: Container(),
+                          builder: ExtendedNavigator.builder<AppRouter>(
+                            router: AppRouter(),
+                            guards: [AuthGuard()],
+                          ),
+                          navigatorObservers: <NavigatorObserver>[
+                            locator<AnalyticsService>().getAnalyticsObserver(),
+                          ],
                         ),
-                        navigatorObservers: <NavigatorObserver>[
-                          locator<AnalyticsService>().getAnalyticsObserver(),
-                        ],
                       ),
                     );
                   },

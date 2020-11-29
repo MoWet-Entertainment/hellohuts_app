@@ -15,6 +15,9 @@ import 'package:hellohuts_app/ui/routes/router.gr.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/theme_options.dart';
 import 'package:provider/provider.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart' as rp;
+import 'package:intl/intl.dart';
+
 import 'package:timeago/timeago.dart' as timeago;
 
 class DashboardLandingPage extends StatelessWidget {
@@ -407,99 +410,117 @@ class _QuickProjectSnapshot extends StatelessWidget {
 
   Widget buildContainer(BuildContext context, {double width, double height}) {
     bool isDark = ThemeOptions.of(context).isDarkTheme(context);
-    return Consumer<DashboardState>(
-      builder: (context, model, child) {
-        return Container(
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              color: isDark
-                  ? Theme.of(context).colorScheme.surface
-                  : AppColors.kbSmokedWhite,
-            ),
-            child: Stack(
-              children: [
-                Positioned(
-                    right: 24,
-                    top: 16,
+    return rp.Consumer(
+      builder: (context, watch, child) {
+        final projectDetail = watch(projectDetailsProvider);
+        final state = watch(dashbordState);
+        return projectDetail.map(
+          data: (_) => Container(
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                color: isDark
+                    ? Theme.of(context).colorScheme.surface
+                    : AppColors.kbSmokedWhite,
+              ),
+              child: Stack(
+                children: [
+                  Positioned(
+                      right: 24,
+                      top: 16,
+                      child: Opacity(
+                          opacity: 0.3,
+                          child: SvgPicture.asset(Assets.colored_circles_svg))),
+                  Positioned(
+                    left: -6,
+                    bottom: -68,
                     child: Opacity(
-                        opacity: 0.3,
-                        child: SvgPicture.asset(Assets.colored_circles_svg))),
-                Positioned(
-                  left: -6,
-                  bottom: -68,
-                  child: Opacity(
-                    opacity: 0.3,
-                    child: SvgPicture.asset(
-                      Assets.colored_circles_svg,
-                      height: 128,
+                      opacity: 0.3,
+                      child: SvgPicture.asset(
+                        Assets.colored_circles_svg,
+                        height: 128,
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 24, horizontal: 40),
-                    child: Container(
-                        child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            heroDetailedContainerText(
-                                heading: "Area",
-                                text: "2187",
-                                subTopText: 'sq.ft'),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            heroDetailedContainerText(
-                              heading: "Project Est",
-                              text: "4.5m",
-                            ),
-                          ],
-                        ),
-                        Divider(
-                          thickness: 1,
-                          indent: 40,
-                          endIndent: 40,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            heroDetailedContainerText(
-                                heading: "Project by",
-                                text: "Hellohuts Pvt Ltd",
-                                textSize: 16.0),
-                          ],
-                        ),
-                        Divider(
-                          thickness: 1,
-                          indent: 40,
-                          endIndent: 40,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            heroDetailedContainerText(
-                                heading: "Exp. Completion",
-                                text: "22 Mar 2021",
-                                textSize: 16.0),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                      ],
-                    ))),
-              ],
+                  Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 24, horizontal: 40),
+                      child: Container(
+                          child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              heroDetailedContainerText(
+                                  heading: "Area",
+                                  text: state.projectDetailsModel.projectArea,
+                                  subTopText: 'sq.ft'),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              heroDetailedContainerText(
+                                heading: "Project Est",
+                               
+                                text: _convertProjectEstimate(
+                                    state.projectDetailsModel.projectEstimate),
+                              ),
+                            ],
+                          ),
+                          
+                          Divider(
+                            thickness: 1,
+                            indent: 40,
+                            endIndent: 40,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              heroDetailedContainerText(
+                                  heading: "Project by",
+                                  text: "Hellohuts Pvt Ltd",
+                                  textSize: 16.0),
+                            ],
+                          ),
+                          Divider(
+                            thickness: 1,
+                            indent: 40,
+                            endIndent: 40,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              heroDetailedContainerText(
+                                  heading: "Exp. Completion",
+                                  text: "22 Mar 2021",
+                                  textSize: 16.0),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 8,
+                          ),
+                        ],
+                      ))),
+                ],
+              ),
             ),
+          ),
+          loading: (_) => CircularProgressIndicator(),
+          error: (_) => Text(
+            _.error.toString(),
+            style: TextStyle(color: Colors.red),
           ),
         );
       },
     );
   }
+}
+
+String _convertProjectEstimate(String value) {
+  double val = double.parse(value);
+  final formatter = NumberFormat.compactSimpleCurrency(name: 'INR');
+  return formatter.format(val);
 }
 
 Widget heroDetailedContainerText(

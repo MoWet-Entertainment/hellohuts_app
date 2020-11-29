@@ -2,6 +2,7 @@ import 'package:hellohuts_app/constants/mock1.dart';
 import 'package:hellohuts_app/models/dashboard/dashboard_item/dashboard_item.dart';
 import 'package:hellohuts_app/models/dashboard/project_details/project_details.dart';
 import 'package:hellohuts_app/states/app_state.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class DashboardState extends AppState {
   List<DashboardItem> _recentActivitList = [];
@@ -24,7 +25,8 @@ class DashboardState extends AppState {
     });
   }
 
-  ProjectDetailsModel get getProjectDetailsModel {
+  ProjectDetailsModel get projectDetailsModel => _projectDetailsModel;
+  Future<ProjectDetailsModel> get getProjectDetailsModel async {
     if (_projectDetailsModel == null) {
       initProjectDetailModel();
     }
@@ -42,3 +44,9 @@ class DashboardState extends AppState {
     });
   }
 }
+
+final dashbordState = Provider((ref) => DashboardState());
+final projectDetailsProvider = FutureProvider<ProjectDetailsModel>((ref) async {
+  final model = ref.read(dashbordState);
+  return model.getProjectDetailsModel;
+});
