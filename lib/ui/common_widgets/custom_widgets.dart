@@ -788,3 +788,58 @@ class QuickPickItem extends StatelessWidget {
     );
   }
 }
+Widget heroDetailedContainerText(
+    {@required String heading,
+    @required String text,
+    double textSize = 24.0,
+    String subTopText = ''}) {
+  return Builder(builder: (context) {
+    final theme = Theme.of(context);
+    print(theme.colorScheme.onBackground);
+    return enhancedBoldText(
+        heading,
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              text,
+              maxLines: 2,
+              style: theme.textTheme.headline2.copyWith(
+                  color: theme.colorScheme.onBackground, fontSize: textSize),
+            ),
+            subTopText != ''
+                ? SizedBox(
+                    width: 2,
+                  )
+                : SizedBox.shrink(),
+            subTopText != ''
+                ? Text(
+                    subTopText,
+                    style: theme.textTheme.headline6
+                        .copyWith(color: theme.colorScheme.onBackground),
+                  )
+                : SizedBox.shrink(),
+          ],
+        ));
+  });
+}
+
+Widget enhancedBoldText(String heading, Widget textInBold) {
+  return Builder(
+    builder: (context) {
+      final theme = Theme.of(context);
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(heading,
+                style: theme.textTheme.bodyText1
+                    .copyWith(color: AppColors.kbDarkGrey, fontSize: 12)),
+            textInBold,
+          ],
+        ),
+      );
+    },
+  );
+}

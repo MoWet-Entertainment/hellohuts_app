@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
 
 class AppColors {
+  AppColors._();
   //TODO: This contains Junk Values .Need to Tweak for correct needs. Refactor later
   static const kbAccentColor = Color(0xffFCA311);
   static const kbPureBlack = Color(0xff000000);

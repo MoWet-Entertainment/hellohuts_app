@@ -736,6 +736,7 @@ class Mock {
     "project_start_date":"11 Nov 2019",
     "project_date_of_completion":null,
     "project_est_date_of_completion":"22 Mar 2021",
+     "project_completion_perc":"0.7"
   };
 }
 
