@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/models/dashboard/dashboard_item/dashboard_item.dart';
@@ -14,8 +15,7 @@ import 'package:hellohuts_app/ui/common_widgets/scroll_behavior/neat_scroll_beha
 import 'package:hellohuts_app/ui/routes/router.gr.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/theme_options.dart';
-import 'package:provider/provider.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart' as rp;
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import 'package:timeago/timeago.dart' as timeago;
@@ -64,7 +64,6 @@ class _DashboardBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDarkTheme = ThemeOptions.of(context).isDarkTheme(context);
 
-    final dashboardState = Provider.of<DashboardState>(context);
     return NotificationListener<OverscrollIndicatorNotification>(
       onNotification: (OverscrollIndicatorNotification overscroll) {
         overscroll.disallowGlow();
@@ -91,34 +90,33 @@ class _DashboardBody extends StatelessWidget {
                         .headline6
                         .copyWith(fontSize: 16),
                   )),
-              FutureBuilder(
-                future: dashboardState.getRecentActivityList(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    return Padding(
+              Consumer(
+                builder:(context, watch, child){
+                  final snapshot = watch(recentActivityProvider);
+                 return snapshot.map(
+                    data: (_)=> Padding(
                       padding: const EdgeInsets.only(top: 18.0, bottom: 40),
                       child: ListView.builder(
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
-                          itemCount: snapshot.data.length < 10
-                              ? snapshot.data.length
+                          itemCount: snapshot.data.value.length< 10
+                              ? snapshot.data.value.length
                               : 10,
                           itemBuilder: (context, index) {
                             return _itemTile(
-                                item: snapshot.data[index],
+                                item: snapshot.data.value[index],
                                 context: context,
                                 isDarkTheme: isDarkTheme);
                           }),
-                    );
-                  } else {
-                    return Center(
+                    ), loading: (_)=>Center(
                       child: Padding(
                         padding: const EdgeInsets.only(top: 24.0),
                         child: CircularProgressIndicator(),
                       ),
-                    );
-                  }
-                },
+                    ), error: (_)=>Center(child: Text('error'),));
+                }
+                // future: dashboardState.getRecentActivityList(),
+              
               ),
             ],
           ),
@@ -410,7 +408,7 @@ class _QuickProjectSnapshot extends StatelessWidget {
 
   Widget buildContainer(BuildContext context, {double width, double height}) {
     bool isDark = ThemeOptions.of(context).isDarkTheme(context);
-    return rp.Consumer(
+    return Consumer(
       builder: (context, watch, child) {
         final projectDetail = watch(projectDetailsProvider);
         final state = watch(dashbordState);
@@ -462,13 +460,11 @@ class _QuickProjectSnapshot extends StatelessWidget {
                               ),
                               heroDetailedContainerText(
                                 heading: "Project Est",
-                               
                                 text: _convertProjectEstimate(
                                     state.projectDetailsModel.projectEstimate),
                               ),
                             ],
                           ),
-                          
                           Divider(
                             thickness: 1,
                             indent: 40,
@@ -506,7 +502,7 @@ class _QuickProjectSnapshot extends StatelessWidget {
               ),
             ),
           ),
-          loading: (_) => CircularProgressIndicator(),
+          loading: (_) => Center(child: CircularProgressIndicator()),
           error: (_) => Text(
             _.error.toString(),
             style: TextStyle(color: Colors.red),
