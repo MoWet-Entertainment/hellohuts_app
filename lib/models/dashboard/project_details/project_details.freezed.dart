@@ -32,7 +32,13 @@ class _$ProjectDetailsModelTearOff {
           String projectDateOfCompletion,
       String projectEstDateOfCompletion,
       @JsonKey(name: JsonConstants.projectCompletionPercentage)
-          String percentageOfCompletion}) {
+          String percentageOfCompletion,
+      @JsonKey(name: JsonConstants.projectEngineer)
+          EngineerModel projectEngineer,
+      @JsonKey(name: JsonConstants.contractor)
+          ContractorModel contractor,
+      @JsonKey(name: JsonConstants.projectAddress)
+          Address projectAddress}) {
     return _ProjectDetailsModel(
       projectArea: projectArea,
       plinthArea: plinthArea,
@@ -42,6 +48,9 @@ class _$ProjectDetailsModelTearOff {
       projectDateOfCompletion: projectDateOfCompletion,
       projectEstDateOfCompletion: projectEstDateOfCompletion,
       percentageOfCompletion: percentageOfCompletion,
+      projectEngineer: projectEngineer,
+      contractor: contractor,
+      projectAddress: projectAddress,
     );
   }
 
@@ -72,6 +81,12 @@ mixin _$ProjectDetailsModel {
   String get projectEstDateOfCompletion;
   @JsonKey(name: JsonConstants.projectCompletionPercentage)
   String get percentageOfCompletion;
+  @JsonKey(name: JsonConstants.projectEngineer)
+  EngineerModel get projectEngineer;
+  @JsonKey(name: JsonConstants.contractor)
+  ContractorModel get contractor;
+  @JsonKey(name: JsonConstants.projectAddress)
+  Address get projectAddress;
 
   Map<String, dynamic> toJson();
   $ProjectDetailsModelCopyWith<ProjectDetailsModel> get copyWith;
@@ -97,7 +112,17 @@ abstract class $ProjectDetailsModelCopyWith<$Res> {
           String projectDateOfCompletion,
       String projectEstDateOfCompletion,
       @JsonKey(name: JsonConstants.projectCompletionPercentage)
-          String percentageOfCompletion});
+          String percentageOfCompletion,
+      @JsonKey(name: JsonConstants.projectEngineer)
+          EngineerModel projectEngineer,
+      @JsonKey(name: JsonConstants.contractor)
+          ContractorModel contractor,
+      @JsonKey(name: JsonConstants.projectAddress)
+          Address projectAddress});
+
+  $EngineerModelCopyWith<$Res> get projectEngineer;
+  $ContractorModelCopyWith<$Res> get contractor;
+  $AddressCopyWith<$Res> get projectAddress;
 }
 
 /// @nodoc
@@ -119,6 +144,9 @@ class _$ProjectDetailsModelCopyWithImpl<$Res>
     Object projectDateOfCompletion = freezed,
     Object projectEstDateOfCompletion = freezed,
     Object percentageOfCompletion = freezed,
+    Object projectEngineer = freezed,
+    Object contractor = freezed,
+    Object projectAddress = freezed,
   }) {
     return _then(_value.copyWith(
       projectArea:
@@ -143,7 +171,46 @@ class _$ProjectDetailsModelCopyWithImpl<$Res>
       percentageOfCompletion: percentageOfCompletion == freezed
           ? _value.percentageOfCompletion
           : percentageOfCompletion as String,
+      projectEngineer: projectEngineer == freezed
+          ? _value.projectEngineer
+          : projectEngineer as EngineerModel,
+      contractor: contractor == freezed
+          ? _value.contractor
+          : contractor as ContractorModel,
+      projectAddress: projectAddress == freezed
+          ? _value.projectAddress
+          : projectAddress as Address,
     ));
+  }
+
+  @override
+  $EngineerModelCopyWith<$Res> get projectEngineer {
+    if (_value.projectEngineer == null) {
+      return null;
+    }
+    return $EngineerModelCopyWith<$Res>(_value.projectEngineer, (value) {
+      return _then(_value.copyWith(projectEngineer: value));
+    });
+  }
+
+  @override
+  $ContractorModelCopyWith<$Res> get contractor {
+    if (_value.contractor == null) {
+      return null;
+    }
+    return $ContractorModelCopyWith<$Res>(_value.contractor, (value) {
+      return _then(_value.copyWith(contractor: value));
+    });
+  }
+
+  @override
+  $AddressCopyWith<$Res> get projectAddress {
+    if (_value.projectAddress == null) {
+      return null;
+    }
+    return $AddressCopyWith<$Res>(_value.projectAddress, (value) {
+      return _then(_value.copyWith(projectAddress: value));
+    });
   }
 }
 
@@ -169,7 +236,20 @@ abstract class _$ProjectDetailsModelCopyWith<$Res>
           String projectDateOfCompletion,
       String projectEstDateOfCompletion,
       @JsonKey(name: JsonConstants.projectCompletionPercentage)
-          String percentageOfCompletion});
+          String percentageOfCompletion,
+      @JsonKey(name: JsonConstants.projectEngineer)
+          EngineerModel projectEngineer,
+      @JsonKey(name: JsonConstants.contractor)
+          ContractorModel contractor,
+      @JsonKey(name: JsonConstants.projectAddress)
+          Address projectAddress});
+
+  @override
+  $EngineerModelCopyWith<$Res> get projectEngineer;
+  @override
+  $ContractorModelCopyWith<$Res> get contractor;
+  @override
+  $AddressCopyWith<$Res> get projectAddress;
 }
 
 /// @nodoc
@@ -193,6 +273,9 @@ class __$ProjectDetailsModelCopyWithImpl<$Res>
     Object projectDateOfCompletion = freezed,
     Object projectEstDateOfCompletion = freezed,
     Object percentageOfCompletion = freezed,
+    Object projectEngineer = freezed,
+    Object contractor = freezed,
+    Object projectAddress = freezed,
   }) {
     return _then(_ProjectDetailsModel(
       projectArea:
@@ -217,6 +300,15 @@ class __$ProjectDetailsModelCopyWithImpl<$Res>
       percentageOfCompletion: percentageOfCompletion == freezed
           ? _value.percentageOfCompletion
           : percentageOfCompletion as String,
+      projectEngineer: projectEngineer == freezed
+          ? _value.projectEngineer
+          : projectEngineer as EngineerModel,
+      contractor: contractor == freezed
+          ? _value.contractor
+          : contractor as ContractorModel,
+      projectAddress: projectAddress == freezed
+          ? _value.projectAddress
+          : projectAddress as Address,
     ));
   }
 }
@@ -240,7 +332,13 @@ class _$_ProjectDetailsModel implements _ProjectDetailsModel {
           this.projectDateOfCompletion,
       this.projectEstDateOfCompletion,
       @JsonKey(name: JsonConstants.projectCompletionPercentage)
-          this.percentageOfCompletion});
+          this.percentageOfCompletion,
+      @JsonKey(name: JsonConstants.projectEngineer)
+          this.projectEngineer,
+      @JsonKey(name: JsonConstants.contractor)
+          this.contractor,
+      @JsonKey(name: JsonConstants.projectAddress)
+          this.projectAddress});
 
   factory _$_ProjectDetailsModel.fromJson(Map<String, dynamic> json) =>
       _$_$_ProjectDetailsModelFromJson(json);
@@ -268,10 +366,19 @@ class _$_ProjectDetailsModel implements _ProjectDetailsModel {
   @override
   @JsonKey(name: JsonConstants.projectCompletionPercentage)
   final String percentageOfCompletion;
+  @override
+  @JsonKey(name: JsonConstants.projectEngineer)
+  final EngineerModel projectEngineer;
+  @override
+  @JsonKey(name: JsonConstants.contractor)
+  final ContractorModel contractor;
+  @override
+  @JsonKey(name: JsonConstants.projectAddress)
+  final Address projectAddress;
 
   @override
   String toString() {
-    return 'ProjectDetailsModel(projectArea: $projectArea, plinthArea: $plinthArea, projectEstimate: $projectEstimate, projectTotalPaid: $projectTotalPaid, projectStartDate: $projectStartDate, projectDateOfCompletion: $projectDateOfCompletion, projectEstDateOfCompletion: $projectEstDateOfCompletion, percentageOfCompletion: $percentageOfCompletion)';
+    return 'ProjectDetailsModel(projectArea: $projectArea, plinthArea: $plinthArea, projectEstimate: $projectEstimate, projectTotalPaid: $projectTotalPaid, projectStartDate: $projectStartDate, projectDateOfCompletion: $projectDateOfCompletion, projectEstDateOfCompletion: $projectEstDateOfCompletion, percentageOfCompletion: $percentageOfCompletion, projectEngineer: $projectEngineer, contractor: $contractor, projectAddress: $projectAddress)';
   }
 
   @override
@@ -304,7 +411,16 @@ class _$_ProjectDetailsModel implements _ProjectDetailsModel {
                     projectEstDateOfCompletion)) &&
             (identical(other.percentageOfCompletion, percentageOfCompletion) ||
                 const DeepCollectionEquality().equals(
-                    other.percentageOfCompletion, percentageOfCompletion)));
+                    other.percentageOfCompletion, percentageOfCompletion)) &&
+            (identical(other.projectEngineer, projectEngineer) ||
+                const DeepCollectionEquality()
+                    .equals(other.projectEngineer, projectEngineer)) &&
+            (identical(other.contractor, contractor) ||
+                const DeepCollectionEquality()
+                    .equals(other.contractor, contractor)) &&
+            (identical(other.projectAddress, projectAddress) ||
+                const DeepCollectionEquality()
+                    .equals(other.projectAddress, projectAddress)));
   }
 
   @override
@@ -317,7 +433,10 @@ class _$_ProjectDetailsModel implements _ProjectDetailsModel {
       const DeepCollectionEquality().hash(projectStartDate) ^
       const DeepCollectionEquality().hash(projectDateOfCompletion) ^
       const DeepCollectionEquality().hash(projectEstDateOfCompletion) ^
-      const DeepCollectionEquality().hash(percentageOfCompletion);
+      const DeepCollectionEquality().hash(percentageOfCompletion) ^
+      const DeepCollectionEquality().hash(projectEngineer) ^
+      const DeepCollectionEquality().hash(contractor) ^
+      const DeepCollectionEquality().hash(projectAddress);
 
   @override
   _$ProjectDetailsModelCopyWith<_ProjectDetailsModel> get copyWith =>
@@ -346,7 +465,13 @@ abstract class _ProjectDetailsModel implements ProjectDetailsModel {
           String projectDateOfCompletion,
       String projectEstDateOfCompletion,
       @JsonKey(name: JsonConstants.projectCompletionPercentage)
-          String percentageOfCompletion}) = _$_ProjectDetailsModel;
+          String percentageOfCompletion,
+      @JsonKey(name: JsonConstants.projectEngineer)
+          EngineerModel projectEngineer,
+      @JsonKey(name: JsonConstants.contractor)
+          ContractorModel contractor,
+      @JsonKey(name: JsonConstants.projectAddress)
+          Address projectAddress}) = _$_ProjectDetailsModel;
 
   factory _ProjectDetailsModel.fromJson(Map<String, dynamic> json) =
       _$_ProjectDetailsModel.fromJson;
@@ -374,6 +499,15 @@ abstract class _ProjectDetailsModel implements ProjectDetailsModel {
   @override
   @JsonKey(name: JsonConstants.projectCompletionPercentage)
   String get percentageOfCompletion;
+  @override
+  @JsonKey(name: JsonConstants.projectEngineer)
+  EngineerModel get projectEngineer;
+  @override
+  @JsonKey(name: JsonConstants.contractor)
+  ContractorModel get contractor;
+  @override
+  @JsonKey(name: JsonConstants.projectAddress)
+  Address get projectAddress;
   @override
   _$ProjectDetailsModelCopyWith<_ProjectDetailsModel> get copyWith;
 }

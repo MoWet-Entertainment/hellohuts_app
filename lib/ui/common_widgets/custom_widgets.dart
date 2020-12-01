@@ -422,20 +422,20 @@ class CustomListTile extends StatelessWidget {
             width: width ?? fullWidth(context),
             child: Row(
               children: [
-                leading ?? SizedBox(),
+                leading ?? SizedBox.shrink(),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 2),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      titleText ?? SizedBox(),
-                      subTitle ?? SizedBox(),
+                      titleText ??SizedBox.shrink(),
+                      subTitle ??SizedBox.shrink(),
                     ],
                   ),
                 ),
                 Spacer(),
-                trailing ?? SizedBox(),
+                trailing ?? SizedBox.shrink(),
               ],
             ),
           ),

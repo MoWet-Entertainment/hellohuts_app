@@ -90,34 +90,37 @@ class _DashboardBody extends StatelessWidget {
                         .headline6
                         .copyWith(fontSize: 16),
                   )),
-              Consumer(
-                builder:(context, watch, child){
-                  final snapshot = watch(recentActivityProvider);
-                 return snapshot.map(
-                    data: (_)=> Padding(
-                      padding: const EdgeInsets.only(top: 18.0, bottom: 40),
-                      child: ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: snapshot.data.value.length< 10
-                              ? snapshot.data.value.length
-                              : 10,
-                          itemBuilder: (context, index) {
-                            return _itemTile(
-                                item: snapshot.data.value[index],
-                                context: context,
-                                isDarkTheme: isDarkTheme);
-                          }),
-                    ), loading: (_)=>Center(
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 24.0),
-                        child: CircularProgressIndicator(),
-                      ),
-                    ), error: (_)=>Center(child: Text('error'),));
-                }
-                // future: dashboardState.getRecentActivityList(),
-              
-              ),
+              Consumer(builder: (context, watch, child) {
+                final snapshot = watch(recentActivityProvider);
+                return snapshot.map(
+                    data: (_) => Padding(
+                          padding: const EdgeInsets.only(top: 18.0, bottom: 40),
+                          child: ListView.builder(
+                              physics: NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: snapshot.data.value.length < 10
+                                  ? snapshot.data.value.length
+                                  : 10,
+                              itemBuilder: (context, index) {
+                                return _itemTile(
+                                    item: snapshot.data.value[index],
+                                    context: context,
+                                    isDarkTheme: isDarkTheme);
+                              }),
+                        ),
+                    loading: (_) => Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 24.0),
+                            child: CircularProgressIndicator(),
+                          ),
+                        ),
+                    error: (_) => Center(
+                          child: Text('error'),
+                        ));
+              }
+                  // future: dashboardState.getRecentActivityList(),
+
+                  ),
             ],
           ),
         ),
@@ -127,6 +130,8 @@ class _DashboardBody extends StatelessWidget {
 
   Container dashboardQuickPicks(BuildContext context) {
     final theme = Theme.of(context);
+    final isDark = ThemeOptions.of(context).isDarkTheme(context);
+    print(isDark);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 28),
       decoration: BoxDecoration(
@@ -140,8 +145,14 @@ class _DashboardBody extends StatelessWidget {
             text: "Project Details",
             call: _projectDetailsCall,
             iconAsset: HelloIcons.home_bold_icon,
-            iconColor: theme.colorScheme.onBackground.withOpacity(0.8),
-            textColor: theme.colorScheme.onBackground,
+            iconColor: isDark
+                ? Colors.grey[300]
+                : theme.colorScheme.onBackground.withOpacity(0.8),
+            textColor:
+                isDark ? Colors.grey[300] : theme.colorScheme.onBackground,
+            backgroundColor: isDark
+                ? Colors.grey[300].withOpacity(0.2)
+                : theme.colorScheme.surface,
             backgroundSize: 48,
             borderRadius: 16,
           ),
@@ -149,8 +160,14 @@ class _DashboardBody extends StatelessWidget {
             text: "Documents",
             call: _documentsCall,
             iconAsset: HelloIcons.folder_bold_icon,
-            iconColor: theme.colorScheme.onBackground.withOpacity(0.8),
-            textColor: theme.colorScheme.onBackground,
+            iconColor: isDark
+                ? Colors.grey[300]
+                : theme.colorScheme.onBackground.withOpacity(0.8),
+            textColor:
+                isDark ? Colors.grey[300] : theme.colorScheme.onBackground,
+            backgroundColor: isDark
+                ? Colors.grey[300].withOpacity(0.2)
+                : theme.colorScheme.surface,
             backgroundSize: 48,
             borderRadius: 16,
           ),
@@ -158,8 +175,14 @@ class _DashboardBody extends StatelessWidget {
             text: "Pay",
             call: _payCall,
             iconAsset: HelloIcons.wallet_bold_icon,
-            iconColor: theme.colorScheme.onBackground.withOpacity(0.8),
-            textColor: theme.colorScheme.onBackground,
+            iconColor: isDark
+                ? Colors.grey[300]
+                : theme.colorScheme.onBackground.withOpacity(0.8),
+            textColor:
+                isDark ? Colors.grey[300] : theme.colorScheme.onBackground,
+            backgroundColor: isDark
+                ? Colors.grey[300].withOpacity(0.2)
+                : theme.colorScheme.surface,
             backgroundSize: 48,
             borderRadius: 16,
           ),
@@ -167,8 +190,14 @@ class _DashboardBody extends StatelessWidget {
             text: "Reports",
             call: _reportsCall,
             iconAsset: HelloIcons.reports_bold_icon,
-            iconColor: theme.colorScheme.onBackground.withOpacity(0.8),
-            textColor: theme.colorScheme.onBackground,
+            iconColor: isDark
+                ? Colors.grey[300]
+                : theme.colorScheme.onBackground.withOpacity(0.8),
+            textColor:
+                isDark ? Colors.grey[300] : theme.colorScheme.onBackground,
+            backgroundColor: isDark
+                ? Colors.grey[300].withOpacity(0.2)
+                : theme.colorScheme.surface,
             backgroundSize: 48,
             borderRadius: 16,
           ),
@@ -176,8 +205,14 @@ class _DashboardBody extends StatelessWidget {
             text: "Calendar",
             call: _calendarCall,
             iconAsset: HelloIcons.calendar_bold_icon,
-            iconColor: theme.colorScheme.onBackground.withOpacity(0.8),
-            textColor: theme.colorScheme.onBackground,
+            iconColor: isDark
+                ? Colors.grey[300]
+                : theme.colorScheme.onBackground.withOpacity(0.8),
+            textColor:
+                isDark ? Colors.grey[300] : theme.colorScheme.onBackground,
+            backgroundColor: isDark
+                ? Colors.grey[300].withOpacity(0.2)
+                : theme.colorScheme.surface,
             backgroundSize: 48,
             borderRadius: 16,
           ),
@@ -453,7 +488,7 @@ class _QuickProjectSnapshot extends StatelessWidget {
                             children: [
                               heroDetailedContainerText(
                                   heading: "Area",
-                                  text: state.projectDetailsModel.projectArea,
+                                  text: projectDetail.data.value.projectArea,
                                   subTopText: 'sq.ft'),
                               SizedBox(
                                 width: 20,
@@ -461,7 +496,7 @@ class _QuickProjectSnapshot extends StatelessWidget {
                               heroDetailedContainerText(
                                 heading: "Project Est",
                                 text: _convertProjectEstimate(
-                                    state.projectDetailsModel.projectEstimate),
+                                    projectDetail.data.value.projectEstimate),
                               ),
                             ],
                           ),
@@ -518,8 +553,6 @@ String _convertProjectEstimate(String value) {
   final formatter = NumberFormat.compactSimpleCurrency(name: 'INR');
   return formatter.format(val);
 }
-
-
 
 class _ProjectImageContainer extends StatefulWidget {
   final double width;
