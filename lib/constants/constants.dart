@@ -1,12 +1,14 @@
 import 'package:hellohuts_app/models/country.dart';
 
 class Constants {
+  Constants._();
   static const Map<String, String> countryCode = {
     "INDIA": "+91",
   };
 }
 
 class Assets {
+  Assets._();
   static const String _imagesRoot = "assets/images/";
   static const String firebase = _imagesRoot + "firebase.png";
   static const String colored_circles_svg =
@@ -16,6 +18,7 @@ class Assets {
 }
 
 class HelloIcons {
+  HelloIcons._();
   static const String _iconsRoot = "assets/icons/";
 
   //Nav bar Items
@@ -66,7 +69,7 @@ class HelloIcons {
   static const String location_bold_icon =
       _iconsRoot + "Location_bold_icon.png";
   static const String bag_bold_icon = _iconsRoot + "Bag_bold_icon.png";
-    static const String bag_light_icon = _iconsRoot + "Bag_light_icon.png";
+  static const String bag_light_icon = _iconsRoot + "Bag_light_icon.png";
 
   static const String chart_bold_icon = _iconsRoot + "Chart_bold_icon.png";
 
@@ -124,6 +127,14 @@ class HelloIcons {
 
   static const String contractor_light_icon =
       _iconsRoot + "Construction_light_icon.png";
+
+  //project details
+    static const String location_light_icon =
+      _iconsRoot + "Location_light_icon.png";
+
+    static const String phone_bold_icon = _iconsRoot +"Phone_bold_icon.png";
+        static const String mail_bold_icon = _iconsRoot +"Message_bold_icon.png";
+          static const String mail_light_icon = _iconsRoot +"Message_light_icon.png";
 }
 
 class SessionData {
@@ -132,6 +143,7 @@ class SessionData {
 }
 
 class UIConstants {
+  UIConstants._();
   // Sentinel value for the system text scale factor option.
   static const double systemTextScaleFactorOption = -1;
 }

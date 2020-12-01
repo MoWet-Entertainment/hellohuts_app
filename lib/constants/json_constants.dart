@@ -123,7 +123,7 @@ class JsonConstants {
   static const String contractorCompany = "contractor_company";
   static const String companyName = "company_name";
   static const String contractorAddress = "contractor_address";
-
+  static const String projectEngineer = "project_engineer";
   static const String engineerDetails = "engineer_details";
 
   static const String baseRate = "base_rate";

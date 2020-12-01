@@ -10,79 +10,91 @@ class RadialPieChart extends StatelessWidget {
   final double size;
   final double completedPercentage;
   final double widthOfCircle;
+  final double mainTextFontSize;
+  final double subTextFontSize;
+  final List<Color> progressIndicatorGradient;
+  final List<Color> circleIndicatorGradient;
   RadialPieChart(
-      {Key key, this.size = 100, @required this.completedPercentage, this.widthOfCircle=8});
+      {Key key,
+      this.size = 100,
+      @required this.completedPercentage,
+      this.widthOfCircle = 8,
+      this.mainTextFontSize = 18,
+      this.subTextFontSize = 12, this.progressIndicatorGradient, this.circleIndicatorGradient});
 
   @override
   Widget build(BuildContext context) {
     // Outer white circle
-    return Center(
-      // Container of the pie chart
-      child: Container(
-        height: size,
-        width: size,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          // boxShadow: [
-          //   BoxShadow(
-          //     color: Colors.grey.withOpacity(0.8),
-          //     spreadRadius: 20,
-          //     blurRadius: 45,
-          //     offset: Offset(0, 7), // changes position of shadow
-          //   ),
-          // ],
-        ),
-        child: Stack(
-          children: <Widget>[
-            // Center(child: MiddleRing(width: 300.0)),
+    return Container(
+      height: size,
+      width: size,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        // boxShadow: [
+        //   BoxShadow(
+        //     color: Colors.grey.withOpacity(0.8),
+        //     spreadRadius: 20,
+        //     blurRadius: 45,
+        //     offset: Offset(0, 7), // changes position of shadow
+        //   ),
+        // ],
+      ),
+      child: Stack(
+        children: <Widget>[
+          // Center(child: MiddleRing(width: 300.0)),
 
-            Transform.rotate(
-              angle: 0,
-              child: CustomPaint(
-                child: Center(),
-                painter: ProgressRings(
-                  completedPercentage: 1,
-                  circleWidth:widthOfCircle,
-                  gradient: [AppColors.kbMediumGrey, AppColors.kbMediumGrey],
-                  gradientStartAngle: 0.0,
-                  gradientEndAngle: pi / 3,
-                  progressStartAngle: 0,
-                  lengthToRemove: 0,
-                ),
+          Transform.rotate(
+            angle: 0,
+            child: CustomPaint(
+              child: Center(),
+              painter: ProgressRings(
+                completedPercentage: 1,
+                circleWidth: widthOfCircle,
+                gradient: circleIndicatorGradient??[AppColors.kbDarkGrey, AppColors.kbDarkGrey],
+                gradientStartAngle: 0.0,
+                gradientEndAngle: pi / 3,
+                progressStartAngle: 0,
+                lengthToRemove: 0,
               ),
             ),
-            Transform.rotate(
-              angle: 0,
-              child: CustomPaint(
-                child: Center(),
-                painter: ProgressRings(
-                  completedPercentage: completedPercentage,
-                  circleWidth: widthOfCircle,
-                  gradient: [AppColors.kYellowLight, AppColors.kYellowLight],
-                  gradientStartAngle: 0.0,
-                  gradientEndAngle: pi / 3,
-                  progressStartAngle: 0,
-                  lengthToRemove: 0,
-                ),
+          ),
+          Transform.rotate(
+            angle: 0,
+            child: CustomPaint(
+              child: Center(),
+              painter: ProgressRings(
+                completedPercentage: completedPercentage,
+                circleWidth: widthOfCircle,
+                gradient: progressIndicatorGradient?? [AppColors.kYellowLight, AppColors.kYellowLight],
+                gradientStartAngle: 0.0,
+                gradientEndAngle: pi / 3,
+                progressStartAngle: 0,
+                lengthToRemove: 0,
               ),
             ),
-            Center(
-              child: Expanded(
-                              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '${completedPercentage * 100}%',
-                      style: Theme.of(context).textTheme.headline3.copyWith(
-                          color: Theme.of(context).colorScheme.onBackground),
-                    ),
-                    Text('Completed'),
-                  ],
+          ),
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  '${completedPercentage * 100}%',
+                  style: Theme.of(context).textTheme.headline3.copyWith(
+                      color: Theme.of(context).colorScheme.onBackground,
+                      fontSize: mainTextFontSize),
                 ),
-              ),
+                Text(
+                  'Completed',
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText1
+                      .copyWith(fontSize: subTextFontSize),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

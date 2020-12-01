@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/models/dashboard/dashboard_item/dashboard_item.dart';
@@ -14,8 +15,7 @@ import 'package:hellohuts_app/ui/common_widgets/scroll_behavior/neat_scroll_beha
 import 'package:hellohuts_app/ui/routes/router.gr.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/theme_options.dart';
-import 'package:provider/provider.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart' as rp;
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import 'package:timeago/timeago.dart' as timeago;
@@ -64,7 +64,6 @@ class _DashboardBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDarkTheme = ThemeOptions.of(context).isDarkTheme(context);
 
-    final dashboardState = Provider.of<DashboardState>(context);
     return NotificationListener<OverscrollIndicatorNotification>(
       onNotification: (OverscrollIndicatorNotification overscroll) {
         overscroll.disallowGlow();
@@ -91,35 +90,37 @@ class _DashboardBody extends StatelessWidget {
                         .headline6
                         .copyWith(fontSize: 16),
                   )),
-              FutureBuilder(
-                future: dashboardState.getRecentActivityList(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    return Padding(
-                      padding: const EdgeInsets.only(top: 18.0, bottom: 40),
-                      child: ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: snapshot.data.length < 10
-                              ? snapshot.data.length
-                              : 10,
-                          itemBuilder: (context, index) {
-                            return _itemTile(
-                                item: snapshot.data[index],
-                                context: context,
-                                isDarkTheme: isDarkTheme);
-                          }),
-                    );
-                  } else {
-                    return Center(
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 24.0),
-                        child: CircularProgressIndicator(),
-                      ),
-                    );
-                  }
-                },
-              ),
+              Consumer(builder: (context, watch, child) {
+                final snapshot = watch(recentActivityProvider);
+                return snapshot.map(
+                    data: (_) => Padding(
+                          padding: const EdgeInsets.only(top: 18.0, bottom: 40),
+                          child: ListView.builder(
+                              physics: NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: snapshot.data.value.length < 10
+                                  ? snapshot.data.value.length
+                                  : 10,
+                              itemBuilder: (context, index) {
+                                return _itemTile(
+                                    item: snapshot.data.value[index],
+                                    context: context,
+                                    isDarkTheme: isDarkTheme);
+                              }),
+                        ),
+                    loading: (_) => Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 24.0),
+                            child: CircularProgressIndicator(),
+                          ),
+                        ),
+                    error: (_) => Center(
+                          child: Text('error'),
+                        ));
+              }
+                  // future: dashboardState.getRecentActivityList(),
+
+                  ),
             ],
           ),
         ),
@@ -129,6 +130,8 @@ class _DashboardBody extends StatelessWidget {
 
   Container dashboardQuickPicks(BuildContext context) {
     final theme = Theme.of(context);
+    final isDark = ThemeOptions.of(context).isDarkTheme(context);
+    print(isDark);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 28),
       decoration: BoxDecoration(
@@ -142,8 +145,14 @@ class _DashboardBody extends StatelessWidget {
             text: "Project Details",
             call: _projectDetailsCall,
             iconAsset: HelloIcons.home_bold_icon,
-            iconColor: theme.colorScheme.onBackground.withOpacity(0.8),
-            textColor: theme.colorScheme.onBackground,
+            iconColor: isDark
+                ? Colors.grey[300]
+                : theme.colorScheme.onBackground.withOpacity(0.8),
+            textColor:
+                isDark ? Colors.grey[300] : theme.colorScheme.onBackground,
+            backgroundColor: isDark
+                ? Colors.grey[300].withOpacity(0.2)
+                : theme.colorScheme.surface,
             backgroundSize: 48,
             borderRadius: 16,
           ),
@@ -151,8 +160,14 @@ class _DashboardBody extends StatelessWidget {
             text: "Documents",
             call: _documentsCall,
             iconAsset: HelloIcons.folder_bold_icon,
-            iconColor: theme.colorScheme.onBackground.withOpacity(0.8),
-            textColor: theme.colorScheme.onBackground,
+            iconColor: isDark
+                ? Colors.grey[300]
+                : theme.colorScheme.onBackground.withOpacity(0.8),
+            textColor:
+                isDark ? Colors.grey[300] : theme.colorScheme.onBackground,
+            backgroundColor: isDark
+                ? Colors.grey[300].withOpacity(0.2)
+                : theme.colorScheme.surface,
             backgroundSize: 48,
             borderRadius: 16,
           ),
@@ -160,8 +175,14 @@ class _DashboardBody extends StatelessWidget {
             text: "Pay",
             call: _payCall,
             iconAsset: HelloIcons.wallet_bold_icon,
-            iconColor: theme.colorScheme.onBackground.withOpacity(0.8),
-            textColor: theme.colorScheme.onBackground,
+            iconColor: isDark
+                ? Colors.grey[300]
+                : theme.colorScheme.onBackground.withOpacity(0.8),
+            textColor:
+                isDark ? Colors.grey[300] : theme.colorScheme.onBackground,
+            backgroundColor: isDark
+                ? Colors.grey[300].withOpacity(0.2)
+                : theme.colorScheme.surface,
             backgroundSize: 48,
             borderRadius: 16,
           ),
@@ -169,8 +190,14 @@ class _DashboardBody extends StatelessWidget {
             text: "Reports",
             call: _reportsCall,
             iconAsset: HelloIcons.reports_bold_icon,
-            iconColor: theme.colorScheme.onBackground.withOpacity(0.8),
-            textColor: theme.colorScheme.onBackground,
+            iconColor: isDark
+                ? Colors.grey[300]
+                : theme.colorScheme.onBackground.withOpacity(0.8),
+            textColor:
+                isDark ? Colors.grey[300] : theme.colorScheme.onBackground,
+            backgroundColor: isDark
+                ? Colors.grey[300].withOpacity(0.2)
+                : theme.colorScheme.surface,
             backgroundSize: 48,
             borderRadius: 16,
           ),
@@ -178,8 +205,14 @@ class _DashboardBody extends StatelessWidget {
             text: "Calendar",
             call: _calendarCall,
             iconAsset: HelloIcons.calendar_bold_icon,
-            iconColor: theme.colorScheme.onBackground.withOpacity(0.8),
-            textColor: theme.colorScheme.onBackground,
+            iconColor: isDark
+                ? Colors.grey[300]
+                : theme.colorScheme.onBackground.withOpacity(0.8),
+            textColor:
+                isDark ? Colors.grey[300] : theme.colorScheme.onBackground,
+            backgroundColor: isDark
+                ? Colors.grey[300].withOpacity(0.2)
+                : theme.colorScheme.surface,
             backgroundSize: 48,
             borderRadius: 16,
           ),
@@ -410,7 +443,7 @@ class _QuickProjectSnapshot extends StatelessWidget {
 
   Widget buildContainer(BuildContext context, {double width, double height}) {
     bool isDark = ThemeOptions.of(context).isDarkTheme(context);
-    return rp.Consumer(
+    return Consumer(
       builder: (context, watch, child) {
         final projectDetail = watch(projectDetailsProvider);
         final state = watch(dashbordState);
@@ -455,20 +488,18 @@ class _QuickProjectSnapshot extends StatelessWidget {
                             children: [
                               heroDetailedContainerText(
                                   heading: "Area",
-                                  text: state.projectDetailsModel.projectArea,
+                                  text: projectDetail.data.value.projectArea,
                                   subTopText: 'sq.ft'),
                               SizedBox(
                                 width: 20,
                               ),
                               heroDetailedContainerText(
                                 heading: "Project Est",
-                               
                                 text: _convertProjectEstimate(
-                                    state.projectDetailsModel.projectEstimate),
+                                    projectDetail.data.value.projectEstimate),
                               ),
                             ],
                           ),
-                          
                           Divider(
                             thickness: 1,
                             indent: 40,
@@ -506,7 +537,7 @@ class _QuickProjectSnapshot extends StatelessWidget {
               ),
             ),
           ),
-          loading: (_) => CircularProgressIndicator(),
+          loading: (_) => Center(child: CircularProgressIndicator()),
           error: (_) => Text(
             _.error.toString(),
             style: TextStyle(color: Colors.red),
@@ -521,62 +552,6 @@ String _convertProjectEstimate(String value) {
   double val = double.parse(value);
   final formatter = NumberFormat.compactSimpleCurrency(name: 'INR');
   return formatter.format(val);
-}
-
-Widget heroDetailedContainerText(
-    {@required String heading,
-    @required String text,
-    double textSize = 24.0,
-    String subTopText = ''}) {
-  return Builder(builder: (context) {
-    final theme = Theme.of(context);
-    print(theme.colorScheme.onBackground);
-    return enhancedBoldText(
-        heading,
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              text,
-              maxLines: 2,
-              style: theme.textTheme.headline2.copyWith(
-                  color: theme.colorScheme.onBackground, fontSize: textSize),
-            ),
-            subTopText != ''
-                ? SizedBox(
-                    width: 2,
-                  )
-                : SizedBox.shrink(),
-            subTopText != ''
-                ? Text(
-                    subTopText,
-                    style: theme.textTheme.headline6
-                        .copyWith(color: theme.colorScheme.onBackground),
-                  )
-                : SizedBox.shrink(),
-          ],
-        ));
-  });
-}
-
-Widget enhancedBoldText(String heading, Widget textInBold) {
-  return Builder(
-    builder: (context) {
-      final theme = Theme.of(context);
-      return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(heading,
-                style: theme.textTheme.bodyText1
-                    .copyWith(color: AppColors.kbDarkGrey, fontSize: 12)),
-            textInBold,
-          ],
-        ),
-      );
-    },
-  );
 }
 
 class _ProjectImageContainer extends StatefulWidget {

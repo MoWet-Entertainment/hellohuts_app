@@ -729,13 +729,38 @@ class Mock {
   ];
 
   static var projectDetails = {
-    "project_area":"2187",
-    "plinth_area":"2187",
-    "project_estimate":"4500000",
-    "project_total_paid":"2000000",
-    "project_start_date":"11 Nov 2019",
-    "project_date_of_completion":null,
-    "project_est_date_of_completion":"22 Mar 2021",
+    "project_area": "2187",
+    "plinth_area": "2187",
+    "project_estimate": "4500000",
+    "project_total_paid": "2000000",
+    "project_start_date": "11 Nov 2019",
+    "project_date_of_completion": null,
+    "project_est_date_of_completion": "22 Mar 2021",
+    "project_completion_perc": "0.7",
+    "project_engineer": {
+      "engineer_details": {
+        "uid": "234dsfsdwerwer",
+        "email": "anoop.pa@hellohuts.com",
+        "phone_number": "9961216130",
+        "display_name": "Anoop PA"
+      },
+      "user_role": "Senior Project Engineer",
+      "user_company": "Hellohuts Pvt Ltd"
+    },
+    "contractor": {
+      "contractor_name": "Hellohuts Builders",
+      "contractor_company": {
+        "company_name": "Hellohuts",
+        "unique_id": "123123dfsdwe"
+      }
+    },
+    "project_address": {
+      "address1": "Hevea Garden Villas",
+      "postal_loc": "Kizhakkambalam",
+      "district": "Ernakulam",
+      "state": "Kerala",
+      "country": "India"
+    }
   };
 }
 

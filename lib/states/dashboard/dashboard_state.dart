@@ -28,18 +28,16 @@ class DashboardState extends AppState {
   ProjectDetailsModel get projectDetailsModel => _projectDetailsModel;
   Future<ProjectDetailsModel> get getProjectDetailsModel async {
     if (_projectDetailsModel == null) {
-      initProjectDetailModel();
+      return initProjectDetailModel();
     }
     return _projectDetailsModel;
   }
 
-  Future<ProjectDetailsModel> initProjectDetailModel() {
+  Future<ProjectDetailsModel> initProjectDetailModel() async {
     ProjectDetailsModel model =
         ProjectDetailsModel.fromJson(Mock.projectDetails);
-    print(model);
-    return Future.delayed(Duration(seconds: 1), () {
+    return Future.delayed(Duration(seconds: 3), () {
       _projectDetailsModel = model;
-      notifyListeners();
       return model;
     });
   }
@@ -48,5 +46,11 @@ class DashboardState extends AppState {
 final dashbordState = Provider((ref) => DashboardState());
 final projectDetailsProvider = FutureProvider<ProjectDetailsModel>((ref) async {
   final model = ref.read(dashbordState);
+  print(model.getProjectDetailsModel);
   return model.getProjectDetailsModel;
+});
+
+final recentActivityProvider = FutureProvider<List<DashboardItem>>((ref) async {
+  final state = ref.read(dashbordState);
+  return state.getRecentActivityList();
 });
