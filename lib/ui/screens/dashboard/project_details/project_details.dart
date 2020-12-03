@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hellohuts_app/constants/constants.dart';
+import 'package:hellohuts_app/helper/utilities.dart';
+import 'package:hellohuts_app/models/dashboard/project_details/project_details.dart';
 import 'package:hellohuts_app/states/dashboard/dashboard_state.dart';
 import 'package:hellohuts_app/ui/common_widgets/app_bar/app_bar.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
@@ -34,25 +36,7 @@ class ProjectDetailsPage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
           children: [
-            Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30.0),
-                  color: isDark
-                      ? Theme.of(context).colorScheme.surface
-                      : AppColors.kbSmokedWhite,
-                ),
-                child: Container(
-                  child: LayoutBuilder(
-                    builder: (context, constrains) {
-                      print(constrains.maxWidth);
-                      if (constrains.maxWidth > 330) {
-                        return _NormalLayoutContainer();
-                      } else {
-                        return _SmallLayoutContainer();
-                      }
-                    },
-                  ),
-                )),
+            _ProjectSnapshotCard(),
             Container(
               padding: const EdgeInsets.symmetric(vertical: 32),
               child: Column(
@@ -173,9 +157,10 @@ class ProjectDetailsPage extends StatelessWidget {
                               iconAsset: HelloIcons.mail_bold_icon,
                               backgroundColor: Colors.transparent,
                               actionCall: () => {
-                                //TODO: This should lauch the default mail app / whatsapp with to as users email 
-                                print("user wants to mail/chat with engineer"),
-                              }),
+                                    //TODO: This should lauch the default mail app / whatsapp with to as users email
+                                    print(
+                                        "user wants to mail/chat with engineer"),
+                                  }),
                         ],
                       )
                     ],
@@ -194,8 +179,52 @@ class ProjectDetailsPage extends StatelessWidget {
   }
 }
 
+class _ProjectSnapshotCard extends ConsumerWidget {
+  const _ProjectSnapshotCard({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, ScopedReader watch) {
+    bool isDark = ThemeOptions.of(context).isDarkTheme(context);
+    final projectDetails = watch(projectDetailsProvider);
+    return projectDetails.map(
+      data: (_) => Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30.0),
+          color: isDark
+              ? Theme.of(context).colorScheme.surface
+              : AppColors.kbSmokedWhite,
+        ),
+        child: Container(
+          child: LayoutBuilder(
+            builder: (context, constrains) {
+              print(constrains.maxWidth);
+              if (constrains.maxWidth > 330) {
+                return _NormalLayoutContainer(model: _.data.value);
+              } else {
+                return _SmallLayoutContainer(model: _.data.value);
+              }
+            },
+          ),
+        ),
+      ),
+      loading: (_) => Center(
+        child: CircularProgressIndicator(),
+      ),
+      error: (_) => Center(
+          child: Text(_.error.toString(),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText1
+                  .copyWith(color: Theme.of(context).colorScheme.error))),
+    );
+  }
+}
+
 class _NormalLayoutContainer extends StatelessWidget {
-  const _NormalLayoutContainer({Key key}) : super(key: key);
+  final ProjectDetailsModel model;
+  const _NormalLayoutContainer({Key key, this.model}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -212,10 +241,12 @@ class _NormalLayoutContainer extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       heroDetailedContainerText(
-                          heading: 'Area', text: '2187', subTopText: 'sq.ft'),
+                          heading: 'Area',
+                          text: model.projectArea,
+                          subTopText: 'sq.ft'),
                       Spacer(),
                       heroDetailedContainerText(
-                          heading: 'Project Est', text: '4.5m'),
+                          heading: 'Project Est', text:convertProjectEstimate(model.projectEstimate)),
                       Spacer(),
                     ],
                   ),
@@ -227,11 +258,13 @@ class _NormalLayoutContainer extends StatelessWidget {
                   Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                     heroDetailedContainerText(
                         heading: 'Exp. completion',
-                        text: '22 Mar 2021',
+                        text: model.projectEstDateOfCompletion,
                         textSize: 16),
                     Spacer(),
                     heroDetailedContainerText(
-                        heading: 'Total Paid', text: '1.9m', textSize: 16),
+                        heading: 'Total Paid',
+                        text: model.projectTotalPaid,
+                        textSize: 16),
                     Spacer(),
                   ]),
                 ],
@@ -240,7 +273,7 @@ class _NormalLayoutContainer extends StatelessWidget {
             Flexible(
                 flex: 1,
                 child: RadialPieChart(
-                  completedPercentage: 0.6,
+              completedPercentage: double.parse(model.percentageOfCompletion),
                   widthOfCircle: 4,
                   progressIndicatorGradient: isDark
                       ? [Colors.orange[700], Colors.orange[600]]
@@ -256,7 +289,8 @@ class _NormalLayoutContainer extends StatelessWidget {
 }
 
 class _SmallLayoutContainer extends StatelessWidget {
-  const _SmallLayoutContainer({Key key}) : super(key: key);
+  final ProjectDetailsModel model;
+  const _SmallLayoutContainer({Key key, this.model}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -267,7 +301,7 @@ class _SmallLayoutContainer extends StatelessWidget {
           alignment: WrapAlignment.center,
           children: [
             RadialPieChart(
-              completedPercentage: 0.6,
+              completedPercentage: double.parse(model.percentageOfCompletion),
               widthOfCircle: 6,
               circleIndicatorGradient: isDark
                   ? [AppColors.kbDarkGrey, AppColors.kbDarkGrey]
@@ -281,9 +315,13 @@ class _SmallLayoutContainer extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     heroDetailedContainerText(
-                        heading: 'Area', text: '2187', subTopText: 'sq.ft'),
+                        heading: 'Area',
+                        text: model.projectArea,
+                        subTopText: 'sq.ft'),
                     heroDetailedContainerText(
-                        heading: 'Project Est', text: '4.5m'),
+                      heading: 'Project Est',
+                      text: convertProjectEstimate(model.projectEstimate),
+                    ),
                   ],
                 ),
                 Divider(
@@ -296,10 +334,12 @@ class _SmallLayoutContainer extends StatelessWidget {
                     children: [
                       heroDetailedContainerText(
                           heading: 'Exp. completion',
-                          text: '22 Mar 2021',
+                          text: model.projectEstDateOfCompletion,
                           textSize: 16),
                       heroDetailedContainerText(
-                          heading: 'Total Paid', text: '1.9m', textSize: 16),
+                          heading: 'Total Paid',
+                          text: model.projectTotalPaid,
+                          textSize: 16),
                     ]),
               ],
             ),
