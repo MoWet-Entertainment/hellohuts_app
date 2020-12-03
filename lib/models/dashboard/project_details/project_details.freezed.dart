@@ -30,7 +30,8 @@ class _$ProjectDetailsModelTearOff {
           String projectStartDate,
       @JsonKey(name: JsonConstants.projectDateOfCompletion)
           String projectDateOfCompletion,
-      String projectEstDateOfCompletion,
+      @JsonKey(name: JsonConstants.projectEstimatedDateOfCompletion)
+          String projectEstDateOfCompletion,
       @JsonKey(name: JsonConstants.projectCompletionPercentage)
           String percentageOfCompletion,
       @JsonKey(name: JsonConstants.projectEngineer)
@@ -78,6 +79,7 @@ mixin _$ProjectDetailsModel {
   String get projectStartDate;
   @JsonKey(name: JsonConstants.projectDateOfCompletion)
   String get projectDateOfCompletion;
+  @JsonKey(name: JsonConstants.projectEstimatedDateOfCompletion)
   String get projectEstDateOfCompletion;
   @JsonKey(name: JsonConstants.projectCompletionPercentage)
   String get percentageOfCompletion;
@@ -110,7 +112,8 @@ abstract class $ProjectDetailsModelCopyWith<$Res> {
           String projectStartDate,
       @JsonKey(name: JsonConstants.projectDateOfCompletion)
           String projectDateOfCompletion,
-      String projectEstDateOfCompletion,
+      @JsonKey(name: JsonConstants.projectEstimatedDateOfCompletion)
+          String projectEstDateOfCompletion,
       @JsonKey(name: JsonConstants.projectCompletionPercentage)
           String percentageOfCompletion,
       @JsonKey(name: JsonConstants.projectEngineer)
@@ -234,7 +237,8 @@ abstract class _$ProjectDetailsModelCopyWith<$Res>
           String projectStartDate,
       @JsonKey(name: JsonConstants.projectDateOfCompletion)
           String projectDateOfCompletion,
-      String projectEstDateOfCompletion,
+      @JsonKey(name: JsonConstants.projectEstimatedDateOfCompletion)
+          String projectEstDateOfCompletion,
       @JsonKey(name: JsonConstants.projectCompletionPercentage)
           String percentageOfCompletion,
       @JsonKey(name: JsonConstants.projectEngineer)
@@ -330,7 +334,8 @@ class _$_ProjectDetailsModel implements _ProjectDetailsModel {
           this.projectStartDate,
       @JsonKey(name: JsonConstants.projectDateOfCompletion)
           this.projectDateOfCompletion,
-      this.projectEstDateOfCompletion,
+      @JsonKey(name: JsonConstants.projectEstimatedDateOfCompletion)
+          this.projectEstDateOfCompletion,
       @JsonKey(name: JsonConstants.projectCompletionPercentage)
           this.percentageOfCompletion,
       @JsonKey(name: JsonConstants.projectEngineer)
@@ -362,6 +367,7 @@ class _$_ProjectDetailsModel implements _ProjectDetailsModel {
   @JsonKey(name: JsonConstants.projectDateOfCompletion)
   final String projectDateOfCompletion;
   @override
+  @JsonKey(name: JsonConstants.projectEstimatedDateOfCompletion)
   final String projectEstDateOfCompletion;
   @override
   @JsonKey(name: JsonConstants.projectCompletionPercentage)
@@ -463,7 +469,8 @@ abstract class _ProjectDetailsModel implements ProjectDetailsModel {
           String projectStartDate,
       @JsonKey(name: JsonConstants.projectDateOfCompletion)
           String projectDateOfCompletion,
-      String projectEstDateOfCompletion,
+      @JsonKey(name: JsonConstants.projectEstimatedDateOfCompletion)
+          String projectEstDateOfCompletion,
       @JsonKey(name: JsonConstants.projectCompletionPercentage)
           String percentageOfCompletion,
       @JsonKey(name: JsonConstants.projectEngineer)
@@ -495,6 +502,7 @@ abstract class _ProjectDetailsModel implements ProjectDetailsModel {
   @JsonKey(name: JsonConstants.projectDateOfCompletion)
   String get projectDateOfCompletion;
   @override
+  @JsonKey(name: JsonConstants.projectEstimatedDateOfCompletion)
   String get projectEstDateOfCompletion;
   @override
   @JsonKey(name: JsonConstants.projectCompletionPercentage)

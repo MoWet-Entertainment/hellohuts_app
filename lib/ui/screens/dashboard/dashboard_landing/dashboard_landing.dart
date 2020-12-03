@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hellohuts_app/constants/constants.dart';
+import 'package:hellohuts_app/helper/utilities.dart';
 import 'package:hellohuts_app/models/dashboard/dashboard_item/dashboard_item.dart';
 import 'package:hellohuts_app/models/dashboard/project_details/project_details.dart';
 import 'package:hellohuts_app/states/dashboard/dashboard_state.dart';
@@ -495,7 +496,7 @@ class _QuickProjectSnapshot extends StatelessWidget {
                               ),
                               heroDetailedContainerText(
                                 heading: "Project Est",
-                                text: _convertProjectEstimate(
+                                text: convertProjectEstimate(
                                     projectDetail.data.value.projectEstimate),
                               ),
                             ],
@@ -548,11 +549,6 @@ class _QuickProjectSnapshot extends StatelessWidget {
   }
 }
 
-String _convertProjectEstimate(String value) {
-  double val = double.parse(value);
-  final formatter = NumberFormat.compactSimpleCurrency(name: 'INR');
-  return formatter.format(val);
-}
 
 class _ProjectImageContainer extends StatefulWidget {
   final double width;

@@ -95,7 +95,7 @@ class JsonConstants {
   static const String plinth_area = "plinth_area";
   static const String projectDateOfCompletion = "project_date_of_completion";
   static const String projectEstimatedDateOfCompletion =
-      "project_est_date_completion";
+      "project_est_date_of_completion";
   static const String projectStartDate = "project_start_date";
   static const String projectEstimate = "project_estimate";
   static const String projectTotalPaid = "project_total_paid";

@@ -15,7 +15,8 @@ _$_ProjectDetailsModel _$_$_ProjectDetailsModelFromJson(
     projectTotalPaid: json['project_total_paid'] as String,
     projectStartDate: json['project_start_date'] as String,
     projectDateOfCompletion: json['project_date_of_completion'] as String,
-    projectEstDateOfCompletion: json['projectEstDateOfCompletion'] as String,
+    projectEstDateOfCompletion:
+        json['project_est_date_of_completion'] as String,
     percentageOfCompletion: json['project_completion_perc'] as String,
     projectEngineer: json['project_engineer'] == null
         ? null
@@ -39,7 +40,7 @@ Map<String, dynamic> _$_$_ProjectDetailsModelToJson(
       'project_total_paid': instance.projectTotalPaid,
       'project_start_date': instance.projectStartDate,
       'project_date_of_completion': instance.projectDateOfCompletion,
-      'projectEstDateOfCompletion': instance.projectEstDateOfCompletion,
+      'project_est_date_of_completion': instance.projectEstDateOfCompletion,
       'project_completion_perc': instance.percentageOfCompletion,
       'project_engineer': instance.projectEngineer?.toJson(),
       'contractor': instance.contractor?.toJson(),

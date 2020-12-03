@@ -124,3 +124,8 @@ void main() {
   print(getChatTime(testDate));
 }
 */
+String convertProjectEstimate(String value) {
+  double val = double.parse(value);
+  final formatter = NumberFormat.compactSimpleCurrency(name: 'INR');
+  return formatter.format(val);
+}
