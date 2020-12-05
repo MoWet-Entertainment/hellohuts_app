@@ -60,6 +60,8 @@ dependencies:
   #state management and dependecy injection
   provider: ^4.3.2+2 
   get_it: ^5.0.0
+  get: ^3.22.2
+  
 
 
 

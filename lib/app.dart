@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:get/get.dart';
 import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/helper/app_config.dart';
 import 'package:hellohuts_app/helper/logger.dart';
@@ -110,7 +111,7 @@ class _AppState extends State<App> {
                         platform: defaultTargetPlatform,
                       ),
                       child: rp.ProviderScope(
-                        child: MaterialApp(
+                        child: GetMaterialApp(
                           debugShowCheckedModeBanner: false,
                           title: Provider.of<AppConfig>(context).appTitle,
                           theme: ThemeProvider.themeOf(themeContext).data,
