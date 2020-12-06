@@ -35,140 +35,7 @@ class ProjectDetailsPage extends StatelessWidget {
           child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
-          children: [
-            _ProjectSnapshotCard(),
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 32),
-              child: Column(
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      customIconSquare(
-                          iconAsset: HelloIcons.location_light_icon,
-                          backgroundColor: Colors.transparent),
-                      Flexible(
-                        flex: 1,
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              RichText(
-                                softWrap: true,
-                                text: TextSpan(
-                                    text: "Hevea Garden Villas",
-                                    style: theme.textTheme.bodyText1
-                                        .copyWith(fontWeight: FontWeight.bold),
-                                    children: [
-                                      TextSpan(text: ","),
-                                      TextSpan(
-                                        text: " Kizhakkambalam",
-                                        style: theme.textTheme.bodyText1,
-                                      ),
-                                    ]),
-                              ),
-                              Text("Ernakulam ",
-                                  style: theme.textTheme.bodyText1
-                                      .copyWith(color: AppColors.kbDarkGrey)),
-                            ]),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 4.0,
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      customIconSquare(
-                          iconAsset: HelloIcons.bag_light_icon,
-                          backgroundColor: Colors.transparent),
-                      Flexible(
-                        flex: 1,
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              RichText(
-                                softWrap: true,
-                                text: TextSpan(
-                                  text: "Hellohuts Builders",
-                                  style: theme.textTheme.bodyText1
-                                      .copyWith(fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                              Text("from Hellohuts Team",
-                                  style: theme.textTheme.bodyText1
-                                      .copyWith(color: AppColors.kbDarkGrey)),
-                            ]),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 4.0,
-                  ),
-                  Row(
-                    children: [
-                      Flexible(
-                        flex: 3,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            customIconSquare(
-                                iconAsset: HelloIcons.contractor_light_icon,
-                                backgroundColor: Colors.transparent),
-                            Flexible(
-                              flex: 1,
-                              child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    RichText(
-                                      softWrap: true,
-                                      text: TextSpan(
-                                        text: "Anoop P A",
-                                        style: theme.textTheme.bodyText1
-                                            .copyWith(
-                                                fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                    Text("Senior Project Engineer",
-                                        style: theme.textTheme.bodyText1
-                                            .copyWith(
-                                                color: AppColors.kbDarkGrey)),
-                                  ]),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          customIconSquare(
-                              iconAsset: HelloIcons.phone_bold_icon,
-                              backgroundColor: Colors.transparent,
-                              actionCall: () => {
-                                    //TODO: Phone button clicked . This should launch phone dialer
-                                    print("User wants to call the engineer"),
-                                  }),
-                          customIconSquare(
-                              iconAsset: HelloIcons.mail_bold_icon,
-                              backgroundColor: Colors.transparent,
-                              actionCall: () => {
-                                    //TODO: This should lauch the default mail app / whatsapp with to as users email
-                                    print(
-                                        "user wants to mail/chat with engineer"),
-                                  }),
-                        ],
-                      )
-                    ],
-                  ),
-                ],
-              ),
-            )
-          ],
+          children: [_ProjectSnapshotCard(), _ProjectContactDetailsSection()],
         ),
       )),
     );
@@ -176,6 +43,169 @@ class ProjectDetailsPage extends StatelessWidget {
 
   void _onBackButtonPressed() {
     ExtendedNavigator.root.pop();
+  }
+}
+
+class _ProjectContactDetailsSection extends ConsumerWidget {
+  const _ProjectContactDetailsSection({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, ScopedReader watch) {
+    final theme = Theme.of(context);
+    final projectDetails = watch(projectDetailsProvider);
+
+   return projectDetails.map(
+        data: (_) => _projectContactDetails(theme, _.value),
+        loading: (_) => Center(
+        child: CircularProgressIndicator(),
+      ),
+      error: (_) => Center(
+          child: Text(_.error.toString(),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText1
+                  .copyWith(color: Theme.of(context).colorScheme.error))),
+    );
+  }
+
+  Widget _projectContactDetails(ThemeData theme, ProjectDetailsModel model) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 32),
+      child: Column(
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              customIconSquare(
+                  iconAsset: HelloIcons.location_light_icon,
+                  backgroundColor: Colors.transparent),
+              Flexible(
+                flex: 1,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      RichText(
+                        softWrap: true,
+                        text: TextSpan(
+                            text: model.projectAddress.address1,
+                            style: theme.textTheme.bodyText1
+                                .copyWith(fontWeight: FontWeight.bold),
+                            children: [
+                              TextSpan(text: ","),
+                              TextSpan(
+                                text: model.projectAddress.postalLoc,
+                                style: theme.textTheme.bodyText1,
+                              ),
+                            ]),
+                      ),
+                      Text(model.projectAddress.district,
+                          style: theme.textTheme.bodyText1
+                              .copyWith(color: AppColors.kbDarkGrey)),
+                    ]),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 4.0,
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              customIconSquare(
+                  iconAsset: HelloIcons.bag_light_icon,
+                  backgroundColor: Colors.transparent),
+              Flexible(
+                flex: 1,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      RichText(
+                        softWrap: true,
+                        text: TextSpan(
+                          text:model.contractor.contractorName,
+                          style: theme.textTheme.bodyText1
+                              .copyWith(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Text("from ${model.contractor.contractorCompany.companyName} Team",
+                          style: theme.textTheme.bodyText1
+                              .copyWith(color: AppColors.kbDarkGrey)),
+                    ]),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 4.0,
+          ),
+          Row(
+            children: [
+              Flexible(
+                flex: 3,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    customIconSquare(
+                        iconAsset: HelloIcons.contractor_light_icon,
+                        backgroundColor: Colors.transparent),
+                    Flexible(
+                      flex: 1,
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            RichText(
+                              softWrap: true,
+                              text: TextSpan(
+                                text:model.projectEngineer.engineer.displayName,
+                                style: theme.textTheme.bodyText1
+                                    .copyWith(fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            Text(model.projectEngineer.userRole,
+                                style: theme.textTheme.bodyText1
+                                    .copyWith(color: AppColors.kbDarkGrey)),
+                          ]),
+                    ),
+                  ],
+                ),
+              ),
+              Row(
+                children: [
+                  customIconSquare(
+                      iconAsset: HelloIcons.phone_bold_icon,
+                      backgroundColor: Colors.transparent,
+                      actionCall: () => {
+                            launchUrl("tel:${model.projectEngineer.engineer.phoneNumber}"),
+
+                            //TODO: Phone button clicked . This should launch phone dialer
+                            print("User wants to call the engineer"),
+
+                          }),
+                  customIconSquare(
+                      iconAsset: HelloIcons.mail_bold_icon,
+                      backgroundColor: Colors.transparent,
+                      actionCall: ()  => {
+                        launchUrl('''mailto:${model.projectEngineer.engineer.email}?subject=Query on Project
+                        &body=Dear ${model.projectEngineer.engineer.displayName.split(" ").first}
+                         %0D%0AHope you are keeping well!%0D%0ACan you please call me back at 2 my time.
+                         %0D%0A I have a few queries on my project'''),
+                            //TODO: This should lauch the default mail app / whatsapp with to as users email
+                            print("user wants to mail/chat with engineer"),
+                          }),
+                ],
+              )
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }
 
@@ -246,7 +276,8 @@ class _NormalLayoutContainer extends StatelessWidget {
                           subTopText: 'sq.ft'),
                       Spacer(),
                       heroDetailedContainerText(
-                          heading: 'Project Est', text:convertProjectEstimate(model.projectEstimate)),
+                          heading: 'Project Est',
+                          text: convertProjectEstimate(model.projectEstimate)),
                       Spacer(),
                     ],
                   ),
@@ -273,7 +304,8 @@ class _NormalLayoutContainer extends StatelessWidget {
             Flexible(
                 flex: 1,
                 child: RadialPieChart(
-              completedPercentage: double.parse(model.percentageOfCompletion),
+                  completedPercentage:
+                      double.parse(model.percentageOfCompletion),
                   widthOfCircle: 4,
                   progressIndicatorGradient: isDark
                       ? [Colors.orange[700], Colors.orange[600]]

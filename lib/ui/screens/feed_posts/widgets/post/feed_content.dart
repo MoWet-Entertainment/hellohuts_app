@@ -7,7 +7,15 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:hellohuts_app/models/comment/comment.dart';
+import 'package:hellohuts_app/states/comment/comment_state.dart';
+import 'package:hellohuts_app/ui/common_widgets/custom_style_widgets.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
+import 'package:hellohuts_app/ui/common_widgets/interactions/comment/comments_placeholder.dart';
+import 'package:hellohuts_app/ui/common_widgets/scroll_behavior/neat_scroll_behavior.dart';
+import 'package:hellohuts_app/ui/screens/feed_posts/widgets/comments/post_comments_deatil.dart';
+import 'package:hellohuts_app/ui/screens/post_detail/comment/comment_field.dart';
 import 'package:provider/provider.dart';
 
 import 'package:hellohuts_app/app.dart';
@@ -118,10 +126,11 @@ class _FeedPostMiddleSection extends StatelessWidget {
                   child: CachedNetworkImage(
                     imageUrl: imageListTemp[itemIndex],
                     fit: BoxFit.cover,
-                    progressIndicatorBuilder: (context, url, downloadProgress) => 
-                Center(child: CircularProgressIndicator(value: downloadProgress.progress)),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
-
+                    progressIndicatorBuilder:
+                        (context, url, downloadProgress) => Center(
+                            child: CircularProgressIndicator(
+                                value: downloadProgress.progress)),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
                   ),
                 ),
               ),
@@ -132,7 +141,6 @@ class _FeedPostMiddleSection extends StatelessWidget {
     );
   }
 }
-
 
 class _FeedPostBottomSection extends StatelessWidget {
   final FeedModel model;
@@ -156,7 +164,8 @@ class _FeedPostBottomSection extends StatelessWidget {
                 LikeButton(
                   isLiked: model.userLiked,
                   onLikedCallback: () => state.addLikeToPost(model, '1234'),
-                  defaultBackgroundColor: Theme.of(context).colorScheme.secondaryVariant,
+                  defaultBackgroundColor:
+                      Theme.of(context).colorScheme.secondaryVariant,
                   defaultIconColor: Theme.of(context).accentIconTheme.color,
                   defaultTextColor: Theme.of(context).accentIconTheme.color,
                 ),
@@ -164,10 +173,18 @@ class _FeedPostBottomSection extends StatelessWidget {
                   width: 12.0,
                 ),
                 CommentButton(
-                  color: Theme.of(context).accentIconTheme.color,
-                  onTap: () =>
-                      ExtendedNavigator.root.push(Routes.commentsDetail),
-                ),
+                    color: Theme.of(context).accentIconTheme.color,
+                    onTap: () {
+                      // ExtendedNavigator.root.push(Routes.commentsDetail),
+                      if (GetPlatform.isAndroid ||
+                          GetPlatform.isIOS ||
+                          GetPlatform.isMobile) {
+                        print("platform is mobile");
+                        changeStatusColor(Colors.transparent);
+                      }
+                      Get.bottomSheet(Container(color: Colors.red),
+                          isScrollControlled: false,).whenComplete(() =>changeStatusColor(Theme.of(context).colorScheme.background));
+                    }),
                 SizedBox(
                   width: 12.0,
                 ),
@@ -180,8 +197,10 @@ class _FeedPostBottomSection extends StatelessWidget {
                 ),
                 Spacer(),
                 PlusButton(
-                  defaultBackgroundColor: Theme.of(context).colorScheme.secondaryVariant,
-                     addedToBoardBackGroundColor: Theme.of(context).colorScheme.secondaryVariant,
+                  defaultBackgroundColor:
+                      Theme.of(context).colorScheme.secondaryVariant,
+                  addedToBoardBackGroundColor:
+                      Theme.of(context).colorScheme.secondaryVariant,
                   postId: '',
                   onTap: () => {
                     print('User wants to add the post to the saved boards'),
@@ -217,6 +236,107 @@ class _FeedPostBottomSection extends StatelessWidget {
   }
 }
 
+class _PostCommentListView extends StatefulWidget {
+  const _PostCommentListView({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  __PostCommentListViewState createState() => __PostCommentListViewState();
+}
+
+class __PostCommentListViewState extends State<_PostCommentListView> {
+  Future<List<Comment>> _commentList;
+  @override
+  void initState() {
+    // TODO: implement initState
+    //lauch all db related calls here
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final commentState = Provider.of<CommentState>(context, listen: false);
+    _commentList = commentState.getCommentList();
+    final double height = fullHeight(context);
+    final theme = Theme.of(context);
+    return Container(
+      height: height * 0.8,
+      padding:
+          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+      child: DraggableScrollableSheet(
+        initialChildSize: 0.5,
+        minChildSize: 0.3,
+        maxChildSize: 1,
+        builder: (BuildContext context, ScrollController scrollController) {
+          return Stack(children: [
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                ),
+                color: theme.colorScheme.surface,
+              ),
+              child: ScrollConfiguration(
+                behavior: NeatScrollBehavior(),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 40.0, bottom: 70.0),
+                  child: FutureBuilder(
+                    future: _commentList,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        return ListView.builder(
+                          controller: scrollController,
+                          itemCount: snapshot.data.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return ListTile(
+                              title: UsersCommentsWidget(
+                                commentModel: snapshot.data[index],
+                              ),
+                            );
+                          },
+                        );
+                      } else {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                    },
+                  ),
+                ),
+              ),
+            ),
+            CommentTextFieldWidget(),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4.0),
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: Container(
+                  width: fullWidth(context) * .15,
+                  height: 5,
+                  decoration: BoxDecoration(
+                    color: theme.dividerColor,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ]);
+        },
+      ),
+    );
+  }
+}
+
 class PlusButton extends StatelessWidget {
   final String postId;
   final bool addedToBoard;
@@ -245,7 +365,9 @@ class PlusButton extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.0),
-            color: addedToBoard?addedToBoardBackGroundColor: defaultBackgroundColor,
+            color: addedToBoard
+                ? addedToBoardBackGroundColor
+                : defaultBackgroundColor,
           ),
           //TODO: Change userLiked to userBookMarked or not
           child: addedToBoard
@@ -256,7 +378,8 @@ class PlusButton extends StatelessWidget {
                 )
               : Image.asset(
                   HelloIcons.bookmark_light_icon,
-                  color: defaultIconColor??Theme.of(context).accentIconTheme.color,
+                  color: defaultIconColor ??
+                      Theme.of(context).accentIconTheme.color,
                   height: 24.0,
                 )),
       onTap: onTap,

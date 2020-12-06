@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/screenutil.dart';
+import 'package:get/get.dart';
 
 import 'package:hellohuts_app/states/app_state.dart';
 import 'package:hellohuts_app/states/feed_state.dart';
@@ -23,9 +24,8 @@ class BasePage extends StatefulWidget {
 }
 
 class _BasePageState extends State<BasePage> {
-
-   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-     final refreshIndicatorKey = new GlobalKey<RefreshIndicatorState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final refreshIndicatorKey = new GlobalKey<RefreshIndicatorState>();
 
   int pageIndex = 0;
   final PageController _pageController = PageController(
@@ -63,8 +63,9 @@ class _BasePageState extends State<BasePage> {
     return PageView(
       physics: NeverScrollableScrollPhysics(),
       children: <Widget>[
-        ExplorePage(scaffoldKey: _scaffoldKey,
-        refreshIndicatorKey: refreshIndicatorKey),
+        ExplorePage(
+            scaffoldKey: _scaffoldKey,
+            refreshIndicatorKey: refreshIndicatorKey),
         CategoriesScreen(),
         DashboardLandingPage(),
         FirstPage()
@@ -127,18 +128,17 @@ class _BasePageState extends State<BasePage> {
   //   );
   // }
   @override
-  Widget build(BuildContext context) { 
-            return Scaffold(
-            drawerEnableOpenDragGesture:false ,
-              key: _scaffoldKey,
-              backgroundColor: Theme.of(context).colorScheme.background,
-              body: _body(Provider.of<AppState>(context).pageIndex),
-              extendBody: true,
-            
-              bottomNavigationBar: BottomNavBar(
-                pageController: _pageController,
-              ),
-              drawer: SidebarMenu(),
-            );
+  Widget build(BuildContext context) {
+    return Scaffold(
+      drawerEnableOpenDragGesture: false,
+      key: _scaffoldKey,
+      backgroundColor: Theme.of(context).colorScheme.background,
+      body: _body(Provider.of<AppState>(context).pageIndex),
+      extendBody: true,
+      bottomNavigationBar: BottomNavBar(
+        pageController: _pageController,
+      ),
+      drawer: SidebarMenu(),
+    );
   }
 }

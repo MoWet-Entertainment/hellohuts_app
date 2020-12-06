@@ -1,14 +1,15 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:hellohuts_app/constants/constants.dart';
+import 'package:hellohuts_app/controllers/theme_controller.dart';
 import 'package:hellohuts_app/states/auth_states/auth_state.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
 import 'package:hellohuts_app/ui/styles/theme_options.dart';
 import 'package:provider/provider.dart';
-import 'package:theme_provider/theme_provider.dart';
 
 class SidebarMenu extends StatefulWidget {
   const SidebarMenu({Key key, this.scaffoldKey}) : super(key: key);
@@ -169,7 +170,8 @@ class _SidebarMenuState extends State<SidebarMenu> {
             : false;
     return Drawer(
       child: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: ThemeOptions.of(context).getSystemUIOverlayStyle(context)
+        value: ThemeOptions.of(context)
+            .getSystemUIOverlayStyle(context)
             .copyWith(statusBarColor: Colors.transparent),
         child: Stack(
           children: <Widget>[
@@ -207,6 +209,7 @@ class _SidebarMenuState extends State<SidebarMenu> {
     );
   }
 }
+
 class CycleThemeIconButton1 extends StatelessWidget {
   final IconData icon;
 
@@ -216,12 +219,24 @@ class CycleThemeIconButton1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap:  ThemeProvider.controllerOf(context).nextTheme,
-           title: Text("Change Theme"),
-          trailing: IconButton(
-        icon: Icon(icon,color: Theme.of(context).colorScheme.onBackground,),
-        onPressed: ThemeProvider.controllerOf(context).nextTheme,
-      ),
+      onTap: () {
+        if (Get.isDarkMode) {
+          ThemeController.to.setThemeMode(ThemeMode.light);
+        } else
+          ThemeController.to.setThemeMode(ThemeMode.dark);
+      },
+      title: Text("Change Theme"),
+      trailing: IconButton(
+          icon: Icon(
+            icon,
+            color: Theme.of(context).colorScheme.onBackground,
+          ),
+          onPressed: () {
+            if (Get.isDarkMode) {
+          ThemeController.to.setThemeMode(ThemeMode.light);
+        } else
+          ThemeController.to.setThemeMode(ThemeMode.dark);
+      },),
     );
   }
 }

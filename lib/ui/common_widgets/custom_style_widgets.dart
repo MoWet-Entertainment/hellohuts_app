@@ -1,6 +1,8 @@
 import 'dart:wasm';
 
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 
 class GradientBorderWidget extends StatelessWidget {
   final _GradientPainter _painter;
@@ -51,3 +53,15 @@ class _GradientPainter extends CustomPainter {
 
   
 }
+ changeStatusColor(Color color) async {
+    try {
+      await FlutterStatusbarcolor.setStatusBarColor(color, animate: false);
+      if (useWhiteForeground(color)) {
+        FlutterStatusbarcolor.setStatusBarWhiteForeground(true);
+      } else {
+        FlutterStatusbarcolor.setStatusBarWhiteForeground(false);
+      }
+    } on PlatformException catch (e) {
+      debugPrint(e.toString());
+    }
+  }

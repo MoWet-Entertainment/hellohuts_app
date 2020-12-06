@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
 import 'package:hellohuts_app/ui/styles/theme_options.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 double getDimention(context, double unit) {
   if (fullWidth(context) <= 360.0) {
@@ -429,8 +430,8 @@ class CustomListTile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      titleText ??SizedBox.shrink(),
-                      subTitle ??SizedBox.shrink(),
+                      titleText ?? SizedBox.shrink(),
+                      subTitle ?? SizedBox.shrink(),
                     ],
                   ),
                 ),
@@ -745,7 +746,8 @@ class QuickPickItem extends StatelessWidget {
     this.backgroundSize,
     this.iconColor,
     this.iconSize,
-    this.backgroundColor, this.borderRadius,
+    this.backgroundColor,
+    this.borderRadius,
   }) : super(key: key);
 
   @override
@@ -764,7 +766,7 @@ class QuickPickItem extends StatelessWidget {
               iconColor:
                   iconColor ?? Theme.of(context).colorScheme.onBackground,
               backgroundSize: backgroundSize ?? 56,
-              borderRadius: borderRadius??16.0,
+              borderRadius: borderRadius ?? 16.0,
               backgroundColor:
                   backgroundColor ?? Theme.of(context).colorScheme.surface,
               actionCall: call,
@@ -788,6 +790,7 @@ class QuickPickItem extends StatelessWidget {
     );
   }
 }
+
 Widget heroDetailedContainerText(
     {@required String heading,
     @required String text,
@@ -842,4 +845,12 @@ Widget enhancedBoldText(String heading, Widget textInBold) {
       );
     },
   );
+}
+
+launchUrl(String url) async {
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
 }

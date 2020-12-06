@@ -12,5 +12,6 @@ Future setUpLocator() async {
   locator.registerLazySingleton(() => FirestoreService.instance);
   locator.registerLazySingleton(() => FireBaseAuthService());
   locator.registerLazySingleton(() => AnalyticsService());
-
+  var sharedPreferences = await SharedPreferencesService.getInstance();
+  locator.registerSingleton(sharedPreferences);
 }

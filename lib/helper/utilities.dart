@@ -105,9 +105,7 @@ bool validateCredentials(
   return true;
 }
 
-launchURL(String url) async {
-  cprint('Yet to implement');
-}
+
 
   Color randomColor() {
     return Color(Random().nextInt(0xffffffff));

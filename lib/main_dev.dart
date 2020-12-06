@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:hellohuts_app/app.dart';
 import 'package:hellohuts_app/constants/app_constants.dart';
+import 'package:hellohuts_app/controllers/theme_controller.dart';
 import 'package:hellohuts_app/helper/app_config.dart';
 import 'package:hellohuts_app/locators.dart';
 import 'package:provider/provider.dart';
@@ -17,8 +19,11 @@ void main() async {
 
   // Pass all uncaught errors from the framework to Crashlytics.
   // FlutterError.onError = Crashlytics.instance.recordFlutterError;
+    WidgetsFlutterBinding.ensureInitialized();
+
   await setUpLocator();
-  WidgetsFlutterBinding.ensureInitialized();
+  Get.lazyPut<ThemeController>(() => ThemeController());
+
   runApp(Provider<AppConfig>(
     create: (context) => AppConfig(
       appTitle: AppConstants.appNameDev,
