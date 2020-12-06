@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
-import 'package:theme_provider/theme_provider.dart';
 
 enum CustomTextDirection {
   localeBased,
@@ -105,8 +105,7 @@ class ThemeOptions {
 
   SystemUiOverlayStyle getSystemUIOverlayStyle(BuildContext context) {
     Brightness brightness;
-    brightness =
-        ThemeProvider.controllerOf(context).theme.data.colorScheme.brightness;
+    brightness = Get.theme.colorScheme.brightness;
     final overlayStyle = brightness == Brightness.dark
         ? SystemUiOverlayStyle.light.copyWith(statusBarColor: AppColors.kDark_1)
         : SystemUiOverlayStyle.dark
@@ -118,7 +117,7 @@ class ThemeOptions {
   ThemeMode selectedThemeMode(BuildContext context) {
     Brightness brightness;
     brightness =
-        ThemeProvider.controllerOf(context).theme.data.colorScheme.brightness;
+       Get.theme.colorScheme.brightness;
     if (brightness == Brightness.light) {
       return ThemeMode.light;
     }
@@ -126,10 +125,7 @@ class ThemeOptions {
   }
 
   bool isDarkTheme(BuildContext context) {
-    Brightness brightness;
-    brightness =
-        ThemeProvider.controllerOf(context).theme.data.colorScheme.brightness;
-    if (brightness == Brightness.dark) {
+    if (Get.isDarkMode) {
       return true;
     }
     return false;

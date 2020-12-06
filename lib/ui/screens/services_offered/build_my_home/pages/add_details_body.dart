@@ -2,8 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/states/collect_details_states/cost_estimate_state.dart';
+import 'package:hellohuts_app/ui/common_widgets/custom_style_widgets.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
 import 'package:hellohuts_app/ui/common_widgets/number_picker.dart';
 import 'package:hellohuts_app/ui/common_widgets/scroll_behavior/neat_scroll_behavior.dart';
@@ -459,6 +461,10 @@ class _OtherDetailsContainer extends StatelessWidget {
     var state = Provider.of<CostEstimateState>(context, listen: false);
     final theme = Theme.of(context);
     state.setIsCustomOtherDetails = true;
+    if (GetPlatform.isAndroid || GetPlatform.isIOS || GetPlatform.isMobile) {
+      print("platform is mobile");
+      changeStatusColor(Colors.transparent);
+    }
     showModalBottomSheet(
         context: context,
         backgroundColor: Colors.transparent,
@@ -499,8 +505,9 @@ class _OtherDetailsContainer extends StatelessWidget {
                           child: Align(
                               alignment: Alignment.topLeft,
                               child: Text("Custom Select",
-                                  style: theme.textTheme.headline2.copyWith(color:theme.colorScheme.onBackground.withOpacity(0.8))
-                                  )),
+                                  style: theme.textTheme.headline2.copyWith(
+                                      color: theme.colorScheme.onBackground
+                                          .withOpacity(0.8)))),
                         ),
                         SizedBox(
                           height: 24,
@@ -562,6 +569,7 @@ class _OtherDetailsContainer extends StatelessWidget {
       } else {
         state.setSelectedPack = state.lastSelectedPack;
       }
+      changeStatusColor(Theme.of(context).colorScheme.background);
     });
   }
 }

@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:theme_provider/theme_provider.dart';
 
 import 'package:hellohuts_app/constants/app_constants.dart';
 import 'package:hellohuts_app/constants/constants.dart';
@@ -15,10 +14,8 @@ import 'package:hellohuts_app/states/auth_states/auth_state.dart';
 import 'package:hellohuts_app/states/feed_state.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
 import 'package:hellohuts_app/ui/routes/router.gr.dart';
-import 'package:hellohuts_app/ui/screens/drawer/custom_drawer.dart';
 import 'package:hellohuts_app/ui/screens/feed_posts/feed_post.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
-import 'package:hellohuts_app/ui/styles/app_themes.dart';
 import 'package:hellohuts_app/ui/styles/theme_options.dart';
 
 class ExplorePage extends StatefulWidget {
