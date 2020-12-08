@@ -29,6 +29,7 @@ import 'package:hellohuts_app/ui/screens/feed_posts/widgets/comments/feed_commen
 import 'package:hellohuts_app/ui/screens/feed_posts/widgets/pinned_post/pinned_post.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
+import 'package:share/share.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../likes/feed_like_section.dart';
@@ -163,6 +164,7 @@ class _FeedPostBottomSection extends StatelessWidget {
               children: <Widget>[
                 LikeButton(
                   isLiked: model.userLiked,
+                  assetLocation: HelloIcons.heart_light_icon,
                   onLikedCallback: () => state.addLikeToPost(model, '1234'),
                   defaultBackgroundColor:
                       Theme.of(context).colorScheme.secondaryVariant,
@@ -182,8 +184,10 @@ class _FeedPostBottomSection extends StatelessWidget {
                         print("platform is mobile");
                         changeStatusColor(Colors.transparent);
                       }
-                      Get.bottomSheet(Container(color: Colors.red),
-                          isScrollControlled: false,).whenComplete(() =>changeStatusColor(Theme.of(context).colorScheme.background));
+                      Get.bottomSheet(
+                        _PostCommentListView(),
+      backgroundColor: Colors.transparent,
+                          isScrollControlled: true,).whenComplete(() =>changeStatusColor(Theme.of(context).colorScheme.background));
                     }),
                 SizedBox(
                   width: 12.0,
@@ -191,6 +195,9 @@ class _FeedPostBottomSection extends StatelessWidget {
                 // PinnedWidget(),
                 ShareWidget(
                   color: Theme.of(context).accentIconTheme.color,
+                  onTap: ()=>Share.share('Great picture')
+
+                  
                 ),
                 SizedBox(
                   width: 10.0,
@@ -268,12 +275,12 @@ class __PostCommentListViewState extends State<_PostCommentListView> {
     final theme = Theme.of(context);
     return Container(
       height: height * 0.8,
-      padding:
-          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+      // padding:
+      //     EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       child: DraggableScrollableSheet(
         initialChildSize: 0.5,
         minChildSize: 0.3,
-        maxChildSize: 1,
+        maxChildSize: 0.8,
         builder: (BuildContext context, ScrollController scrollController) {
           return Stack(children: [
             Container(
@@ -390,10 +397,12 @@ class PlusButton extends StatelessWidget {
 class ShareWidget extends StatelessWidget {
   final Color color;
   final double size;
+    final VoidCallback onTap;
+
   const ShareWidget({
     Key key,
     this.color,
-    this.size = 24,
+    this.size = 24, this.onTap,
   }) : super(key: key);
 
   @override
@@ -404,9 +413,7 @@ class ShareWidget extends StatelessWidget {
         color: color ?? AppColors.kbDarkestGrey,
         height: size,
       ),
-      onTap: () {
-        print('User wants to Share');
-      },
+      onTap: onTap
     );
   }
 }
