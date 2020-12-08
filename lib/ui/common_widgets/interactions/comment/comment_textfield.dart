@@ -131,7 +131,6 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
                             _onChanged(text);
                           },
                           decoration: InputDecoration(
-                            
                             hintText: widget.hintText ?? "Add Comment",
                             hintStyle: theme.textTheme.bodyText2.copyWith(
                                 color: AppColors.kbDarkGrey, fontSize: 12),
@@ -152,21 +151,23 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
                       SizedBox(
                         width: 8,
                       ),
-                    _isTyping
+                      _isTyping
                           ? SizedBox()
-                          : widget.isImageSupported? IconButton(
-                              icon: Icon(
-                                Icons.camera_alt_rounded,
-                                color: AppColors.kbDarkGrey,
-                              ),
-                              onPressed: () => {
-                                    print("user wants to select photos"),
-                                    if (widget.onCameraClicked != null)
-                                      {
-                                        widget.onCameraClicked(),
-                                      }
-                                    //TODO: add photo selecting functionality here
-                                  }):SizedBox.shrink(),
+                          : widget.isImageSupported
+                              ? IconButton(
+                                  icon: Icon(
+                                    Icons.camera_alt_rounded,
+                                    color: AppColors.kbDarkGrey,
+                                  ),
+                                  onPressed: () => {
+                                        print("user wants to select photos"),
+                                        if (widget.onCameraClicked != null)
+                                          {
+                                            widget.onCameraClicked(),
+                                          }
+                                        //TODO: add photo selecting functionality here
+                                      })
+                              : SizedBox.shrink(),
                       SizedBox(
                         width: 8,
                       ),

@@ -26,6 +26,9 @@ class _CommentTextFieldWidgetState extends State<CommentTextFieldWidget> {
   @override
   Widget build(BuildContext context) {
     final commentState = Provider.of<CommentState>(context);
+    if (commentState.isReplying) {
+      focusNode.requestFocus();
+    }
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
@@ -57,8 +60,7 @@ class _CommentTextFieldWidgetState extends State<CommentTextFieldWidget> {
               )
             : SizedBox.shrink(),
         CustomTextFieldWidget(
-            hintText:
-              "Add Comment",
+            hintText: "Add Comment",
             isImageSupported: false,
             focusNode: focusNode,
             onSubmitPressed: _onSubmitted),
@@ -84,14 +86,13 @@ class _CommentTextFieldWidgetState extends State<CommentTextFieldWidget> {
         displayName: (authState.userModel?.displayName) ?? "Vinoop KS",
         userPhotoUrl: (authState.userModel?.photoUrl) ??
             "http://www.gravatar.com/avatar/?d=identicon",
-        parentKey: isReplying? commentState.getCommentModel().key : null,
+        parentKey: isReplying ? commentState.getCommentModel().key : null,
         childCommentList: []);
 
     if (isReplying) {
       print("isReplying: true");
-    
-        commentState.addReplyToComment(comment);
-   
+
+      commentState.addReplyToComment(comment);
     } else {
       commentState.addToCommentList(comment);
     }
