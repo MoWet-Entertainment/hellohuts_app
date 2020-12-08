@@ -35,7 +35,18 @@ class ProjectDetailsPage extends StatelessWidget {
           child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
-          children: [_ProjectSnapshotCard(), _ProjectContactDetailsSection()],
+          children: [
+            _ProjectSnapshotCard(),
+            _ProjectContactDetailsSection(),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text("Floor Plans", style: theme.textTheme.bodyText1.copyWith(fontSize: 20, fontWeight: FontWeight.bold),),
+              )),
+            HorizList(),
+            _ProjectOverviewSection(),
+          ],
         ),
       )),
     );
@@ -43,6 +54,58 @@ class ProjectDetailsPage extends StatelessWidget {
 
   void _onBackButtonPressed() {
     ExtendedNavigator.root.pop();
+  }
+}
+
+class HorizList extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new Container(
+      height: 200.0,
+      child: new ListView.builder(
+        itemCount: 3,
+        itemBuilder: (context, index) {
+          return new Card(
+              child: new Container(
+            width: 200.0,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Flexible(child: new Placeholder()),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+                  child: Text(
+                    "Title",
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                ),
+              ],
+            ),
+          ));
+        },
+        scrollDirection: Axis.horizontal,
+      ),
+    );
+  }
+}
+
+class _ProjectOverviewSection extends StatelessWidget {
+  const _ProjectOverviewSection({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Column(
+      children: [
+        Align(
+          alignment: Alignment.centerLeft,
+                  child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text("Project Overview", style: theme.textTheme.bodyText1.copyWith(fontSize: 20, fontWeight: FontWeight.bold),),
+          ),
+        ),
+      ],
+    );
   }
 }
 
@@ -56,9 +119,9 @@ class _ProjectContactDetailsSection extends ConsumerWidget {
     final theme = Theme.of(context);
     final projectDetails = watch(projectDetailsProvider);
 
-   return projectDetails.map(
-        data: (_) => _projectContactDetails(theme, _.value),
-        loading: (_) => Center(
+    return projectDetails.map(
+      data: (_) => _projectContactDetails(theme, _.value),
+      loading: (_) => Center(
         child: CircularProgressIndicator(),
       ),
       error: (_) => Center(
@@ -128,12 +191,13 @@ class _ProjectContactDetailsSection extends ConsumerWidget {
                       RichText(
                         softWrap: true,
                         text: TextSpan(
-                          text:model.contractor.contractorName,
+                          text: model.contractor.contractorName,
                           style: theme.textTheme.bodyText1
                               .copyWith(fontWeight: FontWeight.bold),
                         ),
                       ),
-                      Text("from ${model.contractor.contractorCompany.companyName} Team",
+                      Text(
+                          "from ${model.contractor.contractorCompany.companyName} Team",
                           style: theme.textTheme.bodyText1
                               .copyWith(color: AppColors.kbDarkGrey)),
                     ]),
@@ -163,7 +227,8 @@ class _ProjectContactDetailsSection extends ConsumerWidget {
                             RichText(
                               softWrap: true,
                               text: TextSpan(
-                                text:model.projectEngineer.engineer.displayName,
+                                text:
+                                    model.projectEngineer.engineer.displayName,
                                 style: theme.textTheme.bodyText1
                                     .copyWith(fontWeight: FontWeight.bold),
                               ),
@@ -182,17 +247,18 @@ class _ProjectContactDetailsSection extends ConsumerWidget {
                       iconAsset: HelloIcons.phone_bold_icon,
                       backgroundColor: Colors.transparent,
                       actionCall: () => {
-                            launchUrl("tel:${model.projectEngineer.engineer.phoneNumber}"),
+                            launchUrl(
+                                "tel:${model.projectEngineer.engineer.phoneNumber}"),
 
                             //TODO: Phone button clicked . This should launch phone dialer
                             print("User wants to call the engineer"),
-
                           }),
                   customIconSquare(
                       iconAsset: HelloIcons.mail_bold_icon,
                       backgroundColor: Colors.transparent,
-                      actionCall: ()  => {
-                        launchUrl('''mailto:${model.projectEngineer.engineer.email}?subject=Query on Project
+                      actionCall: () => {
+                            launchUrl(
+                                '''mailto:${model.projectEngineer.engineer.email}?subject=Query on Project
                         &body=Dear ${model.projectEngineer.engineer.displayName.split(" ").first}
                          %0D%0AHope you are keeping well!%0D%0ACan you please call me back at 2 my time.
                          %0D%0A I have a few queries on my project'''),

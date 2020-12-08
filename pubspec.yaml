@@ -97,6 +97,7 @@ dependencies:
   timeago: ^2.0.28
   hooks_riverpod: ^0.12.1
   url_launcher: ^5.7.10
+  share: ^0.6.5+4
 
 
 
