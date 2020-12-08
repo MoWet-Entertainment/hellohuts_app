@@ -16,14 +16,14 @@ class LikeButton extends StatefulWidget {
     this.isLiked = false,
     this.likeCount,
     this.onLikedCallback,
-    this.sizeOfIcon=24,
-    this.fontSize=12,
-    this.likedIconColor= AppColors.kbPureWhite,
-    this.likedBackgroundColor= AppColors.kbPrimaryRed,
-    this.defaultIconColor=AppColors.kbDarkestGrey,
-    this.defaultBackgroundColor =AppColors.kbAliceBlue, 
-    this.likedTextColor =AppColors.kbPureWhite,
-     this.defaultTextColor=AppColors.kbDarkestGrey,
+    this.sizeOfIcon = 26,
+    this.fontSize = 12,
+    this.likedIconColor = AppColors.kbPureWhite,
+    this.likedBackgroundColor = AppColors.kbPrimaryRed,
+    this.defaultIconColor = AppColors.kbDarkestGrey,
+    this.defaultBackgroundColor = AppColors.kbAliceBlue,
+    this.likedTextColor = AppColors.kbPureWhite,
+    this.defaultTextColor = AppColors.kbDarkestGrey, this.assetLocation,
   }) : super(key: key);
 
   final bool isLiked;
@@ -35,8 +35,9 @@ class LikeButton extends StatefulWidget {
   final Color likedBackgroundColor;
   final Color defaultIconColor;
   final Color defaultBackgroundColor;
-    final Color likedTextColor;
+  final Color likedTextColor;
   final Color defaultTextColor;
+  final String assetLocation;
 
   @override
   _LikeButtonState createState() => _LikeButtonState();
@@ -57,13 +58,13 @@ class _LikeButtonState extends State<LikeButton> {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(14.0),
               color: widget.isLiked
-                  ?widget.likedBackgroundColor
-                  :widget.defaultBackgroundColor),
+                  ? widget.likedBackgroundColor
+                  : widget.defaultBackgroundColor),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Image.asset(
-                HelloIcons.heart_bold_icon,
+               widget.isLiked?HelloIcons.heart_bold_icon: widget.assetLocation??HelloIcons.heart_bold_icon,
                 height: widget.sizeOfIcon,
                 color: widget.isLiked
                     ? widget.likedIconColor
@@ -72,13 +73,14 @@ class _LikeButtonState extends State<LikeButton> {
               SizedBox(
                 width: 4.0,
               ),
-              Text(widget.likeCount ?? '1.2K',
-                  style: Theme.of(context).textTheme.bodyText1.copyWith(
-                    fontSize: widget.fontSize ,
-                      color: widget.isLiked
-                          ? widget.likedTextColor
-                          : widget.defaultTextColor),
-                          ),
+              Text(
+                widget.likeCount ?? '1.2K',
+                style: Theme.of(context).textTheme.bodyText1.copyWith(
+                    fontSize: widget.fontSize,
+                    color: widget.isLiked
+                        ? widget.likedTextColor
+                        : widget.defaultTextColor),
+              ),
               SizedBox(
                 width: 4.0,
               ),

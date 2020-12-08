@@ -57,10 +57,11 @@ class HelloIcons {
   //Feed Post Items
   static const String heart_bold_icon =
       _iconsRoot + "Heart_Filled_bold_icon.png";
+  static const String heart_light_icon = _iconsRoot + "Heart_light_icon.png";
   static const String comment_bold_icon = _iconsRoot + "Chat_bold_icon.png";
   static const String comment_light_icon = _iconsRoot + "Chat_light_icon.png";
 
-  static const String share_bold_icon = _iconsRoot + "Share_bold_icon.png";
+  static const String share_bold_icon = _iconsRoot + "Share6_light_icon.png";
 
 //Search Screen
   static const String close_circle_bold_icon =
@@ -129,12 +130,12 @@ class HelloIcons {
       _iconsRoot + "Construction_light_icon.png";
 
   //project details
-    static const String location_light_icon =
+  static const String location_light_icon =
       _iconsRoot + "Location_light_icon.png";
 
-    static const String phone_bold_icon = _iconsRoot +"Phone_bold_icon.png";
-        static const String mail_bold_icon = _iconsRoot +"Message_bold_icon.png";
-          static const String mail_light_icon = _iconsRoot +"Message_light_icon.png";
+  static const String phone_bold_icon = _iconsRoot + "Phone_bold_icon.png";
+  static const String mail_bold_icon = _iconsRoot + "Message_bold_icon.png";
+  static const String mail_light_icon = _iconsRoot + "Message_light_icon.png";
 }
 
 class SessionData {
