@@ -18,6 +18,7 @@ abstract class ProjectDetailsModel with _$ProjectDetailsModel {
     @JsonKey(name: JsonConstants.projectStartDate) String projectStartDate,
     @JsonKey(name: JsonConstants.projectDateOfCompletion)
         String projectDateOfCompletion,
+        @JsonKey(name: JsonConstants.baseRate) String baseRate,
     @JsonKey(name: JsonConstants.projectEstimatedDateOfCompletion)  String projectEstDateOfCompletion,
     @JsonKey(name: JsonConstants.projectCompletionPercentage)
         String percentageOfCompletion,

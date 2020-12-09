@@ -72,7 +72,7 @@ class _ProjectDetailsBody extends ConsumerWidget {
           ),
           _FloorPlansHeading(),
           _FloorPlansBody(),
-          _ProjectOverviewSection(),
+          _ProjectOverviewSection(model: model,),
         ],
       ),
     ));
@@ -134,7 +134,8 @@ class _FloorPlansBody extends StatelessWidget {
 }
 
 class _ProjectOverviewSection extends StatelessWidget {
-  const _ProjectOverviewSection({Key key}) : super(key: key);
+  final ProjectDetailsModel model;
+  const _ProjectOverviewSection({Key key, this.model}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -154,20 +155,24 @@ class _ProjectOverviewSection extends StatelessWidget {
         ),
         Column(
           children: [
-            _projectOverViewListTile(context, title:'Base Rate',description: '₹ 1885 per Sq.ft'),
-           _projectOverViewListTile(context, title:'Total Area',description: '2187 Sq.ft'),
-           _projectOverViewListTile(context, title:'Project Estimate',description: '₹45,00,000'),
-           _projectOverViewListTile(context, title:'Start date',description: '11 Nov 2019'),
-           _projectOverViewListTile(context, title:'Completion date',description: '22 March 2019*'),
-
-
+            _projectOverViewListTile(context,
+                title: 'Base Rate', description: '₹ ${model.baseRate} per Sq.ft'),
+            _projectOverViewListTile(context,
+                title: 'Total Area', description: '2187 Sq.ft'),
+            _projectOverViewListTile(context,
+                title: 'Project Estimate', description: '₹45,00,000'),
+            _projectOverViewListTile(context,
+                title: 'Start date', description: '11 Nov 2019'),
+            _projectOverViewListTile(context,
+                title: 'Completion date', description: '22 March 2019*'),
           ],
         )
       ],
     );
   }
 
-  Widget _projectOverViewListTile(BuildContext context, {String title, String description} ) {
+  Widget _projectOverViewListTile(BuildContext context,
+      {String title, String description}) {
     final theme = Theme.of(context);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
@@ -179,7 +184,7 @@ class _ProjectOverviewSection extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(title??''),
+                Text(title ?? ''),
                 Text(':'),
               ],
             ),
@@ -188,7 +193,7 @@ class _ProjectOverviewSection extends StatelessWidget {
             child: Padding(
                 padding: const EdgeInsets.only(left: 20.0),
                 child: Text(
-                 description??'',
+                  description ?? '',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: theme.textTheme.bodyText1

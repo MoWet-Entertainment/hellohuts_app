@@ -30,6 +30,8 @@ class _$ProjectDetailsModelTearOff {
           String projectStartDate,
       @JsonKey(name: JsonConstants.projectDateOfCompletion)
           String projectDateOfCompletion,
+      @JsonKey(name: JsonConstants.baseRate)
+          String baseRate,
       @JsonKey(name: JsonConstants.projectEstimatedDateOfCompletion)
           String projectEstDateOfCompletion,
       @JsonKey(name: JsonConstants.projectCompletionPercentage)
@@ -47,6 +49,7 @@ class _$ProjectDetailsModelTearOff {
       projectTotalPaid: projectTotalPaid,
       projectStartDate: projectStartDate,
       projectDateOfCompletion: projectDateOfCompletion,
+      baseRate: baseRate,
       projectEstDateOfCompletion: projectEstDateOfCompletion,
       percentageOfCompletion: percentageOfCompletion,
       projectEngineer: projectEngineer,
@@ -79,6 +82,8 @@ mixin _$ProjectDetailsModel {
   String get projectStartDate;
   @JsonKey(name: JsonConstants.projectDateOfCompletion)
   String get projectDateOfCompletion;
+  @JsonKey(name: JsonConstants.baseRate)
+  String get baseRate;
   @JsonKey(name: JsonConstants.projectEstimatedDateOfCompletion)
   String get projectEstDateOfCompletion;
   @JsonKey(name: JsonConstants.projectCompletionPercentage)
@@ -112,6 +117,8 @@ abstract class $ProjectDetailsModelCopyWith<$Res> {
           String projectStartDate,
       @JsonKey(name: JsonConstants.projectDateOfCompletion)
           String projectDateOfCompletion,
+      @JsonKey(name: JsonConstants.baseRate)
+          String baseRate,
       @JsonKey(name: JsonConstants.projectEstimatedDateOfCompletion)
           String projectEstDateOfCompletion,
       @JsonKey(name: JsonConstants.projectCompletionPercentage)
@@ -145,6 +152,7 @@ class _$ProjectDetailsModelCopyWithImpl<$Res>
     Object projectTotalPaid = freezed,
     Object projectStartDate = freezed,
     Object projectDateOfCompletion = freezed,
+    Object baseRate = freezed,
     Object projectEstDateOfCompletion = freezed,
     Object percentageOfCompletion = freezed,
     Object projectEngineer = freezed,
@@ -168,6 +176,7 @@ class _$ProjectDetailsModelCopyWithImpl<$Res>
       projectDateOfCompletion: projectDateOfCompletion == freezed
           ? _value.projectDateOfCompletion
           : projectDateOfCompletion as String,
+      baseRate: baseRate == freezed ? _value.baseRate : baseRate as String,
       projectEstDateOfCompletion: projectEstDateOfCompletion == freezed
           ? _value.projectEstDateOfCompletion
           : projectEstDateOfCompletion as String,
@@ -237,6 +246,8 @@ abstract class _$ProjectDetailsModelCopyWith<$Res>
           String projectStartDate,
       @JsonKey(name: JsonConstants.projectDateOfCompletion)
           String projectDateOfCompletion,
+      @JsonKey(name: JsonConstants.baseRate)
+          String baseRate,
       @JsonKey(name: JsonConstants.projectEstimatedDateOfCompletion)
           String projectEstDateOfCompletion,
       @JsonKey(name: JsonConstants.projectCompletionPercentage)
@@ -275,6 +286,7 @@ class __$ProjectDetailsModelCopyWithImpl<$Res>
     Object projectTotalPaid = freezed,
     Object projectStartDate = freezed,
     Object projectDateOfCompletion = freezed,
+    Object baseRate = freezed,
     Object projectEstDateOfCompletion = freezed,
     Object percentageOfCompletion = freezed,
     Object projectEngineer = freezed,
@@ -298,6 +310,7 @@ class __$ProjectDetailsModelCopyWithImpl<$Res>
       projectDateOfCompletion: projectDateOfCompletion == freezed
           ? _value.projectDateOfCompletion
           : projectDateOfCompletion as String,
+      baseRate: baseRate == freezed ? _value.baseRate : baseRate as String,
       projectEstDateOfCompletion: projectEstDateOfCompletion == freezed
           ? _value.projectEstDateOfCompletion
           : projectEstDateOfCompletion as String,
@@ -334,6 +347,8 @@ class _$_ProjectDetailsModel implements _ProjectDetailsModel {
           this.projectStartDate,
       @JsonKey(name: JsonConstants.projectDateOfCompletion)
           this.projectDateOfCompletion,
+      @JsonKey(name: JsonConstants.baseRate)
+          this.baseRate,
       @JsonKey(name: JsonConstants.projectEstimatedDateOfCompletion)
           this.projectEstDateOfCompletion,
       @JsonKey(name: JsonConstants.projectCompletionPercentage)
@@ -367,6 +382,9 @@ class _$_ProjectDetailsModel implements _ProjectDetailsModel {
   @JsonKey(name: JsonConstants.projectDateOfCompletion)
   final String projectDateOfCompletion;
   @override
+  @JsonKey(name: JsonConstants.baseRate)
+  final String baseRate;
+  @override
   @JsonKey(name: JsonConstants.projectEstimatedDateOfCompletion)
   final String projectEstDateOfCompletion;
   @override
@@ -384,7 +402,7 @@ class _$_ProjectDetailsModel implements _ProjectDetailsModel {
 
   @override
   String toString() {
-    return 'ProjectDetailsModel(projectArea: $projectArea, plinthArea: $plinthArea, projectEstimate: $projectEstimate, projectTotalPaid: $projectTotalPaid, projectStartDate: $projectStartDate, projectDateOfCompletion: $projectDateOfCompletion, projectEstDateOfCompletion: $projectEstDateOfCompletion, percentageOfCompletion: $percentageOfCompletion, projectEngineer: $projectEngineer, contractor: $contractor, projectAddress: $projectAddress)';
+    return 'ProjectDetailsModel(projectArea: $projectArea, plinthArea: $plinthArea, projectEstimate: $projectEstimate, projectTotalPaid: $projectTotalPaid, projectStartDate: $projectStartDate, projectDateOfCompletion: $projectDateOfCompletion, baseRate: $baseRate, projectEstDateOfCompletion: $projectEstDateOfCompletion, percentageOfCompletion: $percentageOfCompletion, projectEngineer: $projectEngineer, contractor: $contractor, projectAddress: $projectAddress)';
   }
 
   @override
@@ -410,6 +428,9 @@ class _$_ProjectDetailsModel implements _ProjectDetailsModel {
                     other.projectDateOfCompletion, projectDateOfCompletion) ||
                 const DeepCollectionEquality().equals(
                     other.projectDateOfCompletion, projectDateOfCompletion)) &&
+            (identical(other.baseRate, baseRate) ||
+                const DeepCollectionEquality()
+                    .equals(other.baseRate, baseRate)) &&
             (identical(other.projectEstDateOfCompletion,
                     projectEstDateOfCompletion) ||
                 const DeepCollectionEquality().equals(
@@ -438,6 +459,7 @@ class _$_ProjectDetailsModel implements _ProjectDetailsModel {
       const DeepCollectionEquality().hash(projectTotalPaid) ^
       const DeepCollectionEquality().hash(projectStartDate) ^
       const DeepCollectionEquality().hash(projectDateOfCompletion) ^
+      const DeepCollectionEquality().hash(baseRate) ^
       const DeepCollectionEquality().hash(projectEstDateOfCompletion) ^
       const DeepCollectionEquality().hash(percentageOfCompletion) ^
       const DeepCollectionEquality().hash(projectEngineer) ^
@@ -469,6 +491,8 @@ abstract class _ProjectDetailsModel implements ProjectDetailsModel {
           String projectStartDate,
       @JsonKey(name: JsonConstants.projectDateOfCompletion)
           String projectDateOfCompletion,
+      @JsonKey(name: JsonConstants.baseRate)
+          String baseRate,
       @JsonKey(name: JsonConstants.projectEstimatedDateOfCompletion)
           String projectEstDateOfCompletion,
       @JsonKey(name: JsonConstants.projectCompletionPercentage)
@@ -501,6 +525,9 @@ abstract class _ProjectDetailsModel implements ProjectDetailsModel {
   @override
   @JsonKey(name: JsonConstants.projectDateOfCompletion)
   String get projectDateOfCompletion;
+  @override
+  @JsonKey(name: JsonConstants.baseRate)
+  String get baseRate;
   @override
   @JsonKey(name: JsonConstants.projectEstimatedDateOfCompletion)
   String get projectEstDateOfCompletion;
