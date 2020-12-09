@@ -367,6 +367,8 @@ class _UserCommentWidget extends StatelessWidget {
                               fontSize: 12,
                               fontWeight: FontWeight.bold)),
                       onTap: () => {
+
+                        //TODO: there are some issues in this area. Need to debug
                                                 commentState.setCommentModel(model),
                                                 commentState.setReplyingTo(model.userName),
                         commentState.setIsReplying = true,

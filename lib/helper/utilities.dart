@@ -5,6 +5,7 @@ import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:hellohuts_app/locators.dart';
 import 'package:hellohuts_app/services/firestore_services/analytics_service.dart';
+import 'package:share/share.dart';
 
 final AnalyticsService _analyticsService = locator<AnalyticsService>();
 String setCurrentDateTime() {
@@ -105,14 +106,32 @@ bool validateCredentials(
   return true;
 }
 
+void share(String message, {String subject}) {
+  Share.share(message, subject: subject);
+}
 
-
-  Color randomColor() {
-    return Color(Random().nextInt(0xffffffff));
+List<String> getHashTags(String text) {
+  RegExp reg = RegExp(
+      r"([#])\w+|(https?|ftp|file|#)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]*");
+  Iterable<Match> _matches = reg.allMatches(text);
+  List<String> resultMatches = List<String>();
+  for (Match match in _matches) {
+    if (match.group(0).isNotEmpty) {
+      var tag = match.group(0);
+      resultMatches.add(tag);
+    }
   }
-  Color randomOpaqueColor() {
+  return resultMatches;
+}
+
+Color randomColor() {
+  return Color(Random().nextInt(0xffffffff));
+}
+
+Color randomOpaqueColor() {
   return Color(Random().nextInt(0xffffffff)).withAlpha(0xff);
 }
+
 /*
 void main() {
   var testDate = "2020-04-04T10:10:20Z";
@@ -124,6 +143,15 @@ void main() {
 */
 String convertProjectEstimate(String value) {
   double val = double.parse(value);
-  final formatter = NumberFormat.compactSimpleCurrency(name: 'INR');
+  final formatter = NumberFormat.compactSimpleCurrency(name: '₹');
   return formatter.format(val);
+}
+
+String convertCurrency(String value) {
+  double val = double.parse(value);
+  if (val != null || val !='') {
+    final formatter = NumberFormat.simpleCurrency(decimalDigits: 0, name: '₹');
+    return formatter.format(val);
+  }
+  return null;
 }

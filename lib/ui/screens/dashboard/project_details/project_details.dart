@@ -12,11 +12,11 @@ import 'package:hellohuts_app/ui/styles/app_themes.dart';
 import 'package:hellohuts_app/ui/styles/theme_options.dart';
 import 'package:hooks_riverpod/all.dart';
 
-class ProjectDetailsPage extends StatelessWidget {
+class ProjectDetailsPage extends ConsumerWidget {
   const ProjectDetailsPage({Key key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ScopedReader watch) {
     final theme = Theme.of(context);
     bool isDark = ThemeOptions.of(context).isDarkTheme(context);
 
@@ -31,24 +31,7 @@ class ProjectDetailsPage extends StatelessWidget {
         ),
         centerTitle: false,
       ),
-      body: SingleChildScrollView(
-          child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
-          children: [
-            _ProjectSnapshotCard(),
-            _ProjectContactDetailsSection(),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text("Floor Plans", style: theme.textTheme.bodyText1.copyWith(fontSize: 20, fontWeight: FontWeight.bold),),
-              )),
-            HorizList(),
-            _ProjectOverviewSection(),
-          ],
-        ),
-      )),
+      body: _ProjectDetailsBody(),
     );
   }
 
@@ -57,7 +40,69 @@ class ProjectDetailsPage extends StatelessWidget {
   }
 }
 
-class HorizList extends StatelessWidget {
+class _ProjectDetailsBody extends ConsumerWidget {
+  const _ProjectDetailsBody({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, ScopedReader watch) {
+    final theme = Theme.of(context);
+    final projectDetails = watch(projectDetailsProvider);
+    return projectDetails.map(
+        data: (_) => _projectDetailsWidget(theme, _.value),
+        loading: (_) => Center(child: CircularProgressIndicator()),
+        error: (_) => Text(
+              _.error.toString(),
+              style: theme.textTheme.bodyText1.copyWith(color: Colors.red),
+            ));
+  }
+
+  Widget _projectDetailsWidget(ThemeData theme, ProjectDetailsModel model) {
+    return SingleChildScrollView(
+        child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: Column(
+        children: [
+          _ProjectSnapshotCard(
+            model: model,
+          ),
+          _ProjectContactDetailsSection(
+            model: model,
+          ),
+          _FloorPlansHeading(),
+          _FloorPlansBody(),
+          _ProjectOverviewSection(
+            model: model,
+          ),
+        ],
+      ),
+    ));
+  }
+}
+
+class _FloorPlansHeading extends StatelessWidget {
+  const _FloorPlansHeading({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Align(
+        alignment: Alignment.centerLeft,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            "Floor Plans",
+            style: theme.textTheme.bodyText1
+                .copyWith(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+        ));
+  }
+}
+
+class _FloorPlansBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Container(
@@ -66,22 +111,23 @@ class HorizList extends StatelessWidget {
         itemCount: 3,
         itemBuilder: (context, index) {
           return new Card(
+              elevation: 0.5,
               child: new Container(
-            width: 200.0,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Flexible(child: new Placeholder()),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  child: Text(
-                    "Title",
-                    style: Theme.of(context).textTheme.headline6,
-                  ),
+                width: 200.0,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Flexible(child: new Placeholder()),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      child: Text(
+                        "Ground Floor Plan",
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ));
+              ));
         },
         scrollDirection: Axis.horizontal,
       ),
@@ -90,7 +136,8 @@ class HorizList extends StatelessWidget {
 }
 
 class _ProjectOverviewSection extends StatelessWidget {
-  const _ProjectOverviewSection({Key key}) : super(key: key);
+  final ProjectDetailsModel model;
+  const _ProjectOverviewSection({Key key, this.model}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -99,38 +146,84 @@ class _ProjectOverviewSection extends StatelessWidget {
       children: [
         Align(
           alignment: Alignment.centerLeft,
-                  child: Padding(
+          child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text("Project Overview", style: theme.textTheme.bodyText1.copyWith(fontSize: 20, fontWeight: FontWeight.bold),),
+            child: Text(
+              "Project Overview",
+              style: theme.textTheme.bodyText1
+                  .copyWith(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
           ),
         ),
+        Column(
+          children: [
+            _projectOverViewListTile(context,
+                title: 'Base Rate',
+                description: '${convertCurrency(model.baseRate)} per Sq.ft'),
+            _projectOverViewListTile(context,
+                title: 'Total Area', description: '${model.projectArea} Sq.ft'),
+            _projectOverViewListTile(context,
+                title: 'Project Estimate',
+                description: '${convertCurrency(model.projectEstimate)}'),
+            _projectOverViewListTile(context,
+                title: 'Start date', description: '${model.projectStartDate}'),
+
+              
+           (model.projectDateOfCompletion!=null)? _projectOverViewListTile(context,
+                title: 'Completion date', description: '${model.projectDateOfCompletion}'): _projectOverViewListTile(context,
+                title: 'Exp. Completion', description: '${model.projectEstDateOfCompletion}'),
+          ],
+        )
       ],
+    );
+  }
+
+  Widget _projectOverViewListTile(BuildContext context,
+      {String title, String description}) {
+    final theme = Theme.of(context);
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
+      child: Container(
+        child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+          Container(
+            width: fullWidth(context) * 0.40,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(title ?? ''),
+                Text(':'),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Padding(
+                padding: const EdgeInsets.only(left: 20.0),
+                child: Text(
+                  description ?? '',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: theme.textTheme.bodyText1
+                      .copyWith(fontWeight: FontWeight.bold),
+                )),
+          ),
+        ]),
+      ),
     );
   }
 }
 
-class _ProjectContactDetailsSection extends ConsumerWidget {
+class _ProjectContactDetailsSection extends StatelessWidget {
+  final ProjectDetailsModel model;
   const _ProjectContactDetailsSection({
     Key key,
+    @required this.model,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
+  Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final projectDetails = watch(projectDetailsProvider);
-
-    return projectDetails.map(
-      data: (_) => _projectContactDetails(theme, _.value),
-      loading: (_) => Center(
-        child: CircularProgressIndicator(),
-      ),
-      error: (_) => Center(
-          child: Text(_.error.toString(),
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyText1
-                  .copyWith(color: Theme.of(context).colorScheme.error))),
-    );
+    return _projectContactDetails(theme, model);
   }
 
   Widget _projectContactDetails(ThemeData theme, ProjectDetailsModel model) {
@@ -275,52 +368,44 @@ class _ProjectContactDetailsSection extends ConsumerWidget {
   }
 }
 
-class _ProjectSnapshotCard extends ConsumerWidget {
+class _ProjectSnapshotCard extends StatelessWidget {
+  final ProjectDetailsModel model;
   const _ProjectSnapshotCard({
     Key key,
+    @required this.model,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
+  Widget build(BuildContext context) {
     bool isDark = ThemeOptions.of(context).isDarkTheme(context);
-    final projectDetails = watch(projectDetailsProvider);
-    return projectDetails.map(
-      data: (_) => Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30.0),
-          color: isDark
-              ? Theme.of(context).colorScheme.surface
-              : AppColors.kbSmokedWhite,
-        ),
-        child: Container(
-          child: LayoutBuilder(
-            builder: (context, constrains) {
-              print(constrains.maxWidth);
-              if (constrains.maxWidth > 330) {
-                return _NormalLayoutContainer(model: _.data.value);
-              } else {
-                return _SmallLayoutContainer(model: _.data.value);
-              }
-            },
-          ),
+
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(30.0),
+        color: isDark
+            ? Theme.of(context).colorScheme.surface
+            : AppColors.kbSmokedWhite,
+      ),
+      child: Container(
+        child: LayoutBuilder(
+          builder: (context, constrains) {
+            print(constrains.maxWidth);
+            if (constrains.maxWidth > 330) {
+              return _NormalLayoutContainer(model: model);
+            } else {
+              return _SmallLayoutContainer(model: model);
+            }
+          },
         ),
       ),
-      loading: (_) => Center(
-        child: CircularProgressIndicator(),
-      ),
-      error: (_) => Center(
-          child: Text(_.error.toString(),
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyText1
-                  .copyWith(color: Theme.of(context).colorScheme.error))),
     );
   }
 }
 
 class _NormalLayoutContainer extends StatelessWidget {
   final ProjectDetailsModel model;
-  const _NormalLayoutContainer({Key key, this.model}) : super(key: key);
+  const _NormalLayoutContainer({Key key, @required this.model})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
