@@ -105,6 +105,7 @@ bool validateCredentials(
   }
   return true;
 }
+
 void share(String message, {String subject}) {
   Share.share(message, subject: subject);
 }
@@ -123,12 +124,14 @@ List<String> getHashTags(String text) {
   return resultMatches;
 }
 
-  Color randomColor() {
-    return Color(Random().nextInt(0xffffffff));
-  }
-  Color randomOpaqueColor() {
+Color randomColor() {
+  return Color(Random().nextInt(0xffffffff));
+}
+
+Color randomOpaqueColor() {
   return Color(Random().nextInt(0xffffffff)).withAlpha(0xff);
 }
+
 /*
 void main() {
   var testDate = "2020-04-04T10:10:20Z";
@@ -140,6 +143,15 @@ void main() {
 */
 String convertProjectEstimate(String value) {
   double val = double.parse(value);
-  final formatter = NumberFormat.compactSimpleCurrency(name: 'INR');
+  final formatter = NumberFormat.compactSimpleCurrency(name: '₹');
   return formatter.format(val);
+}
+
+String convertCurrency(String value) {
+  double val = double.parse(value);
+  if (val != null || val !='') {
+    final formatter = NumberFormat.simpleCurrency(decimalDigits: 0, name: '₹');
+    return formatter.format(val);
+  }
+  return null;
 }

@@ -72,7 +72,9 @@ class _ProjectDetailsBody extends ConsumerWidget {
           ),
           _FloorPlansHeading(),
           _FloorPlansBody(),
-          _ProjectOverviewSection(model: model,),
+          _ProjectOverviewSection(
+            model: model,
+          ),
         ],
       ),
     ));
@@ -156,15 +158,20 @@ class _ProjectOverviewSection extends StatelessWidget {
         Column(
           children: [
             _projectOverViewListTile(context,
-                title: 'Base Rate', description: '₹ ${model.baseRate} per Sq.ft'),
+                title: 'Base Rate',
+                description: '${convertCurrency(model.baseRate)} per Sq.ft'),
             _projectOverViewListTile(context,
-                title: 'Total Area', description: '2187 Sq.ft'),
+                title: 'Total Area', description: '${model.projectArea} Sq.ft'),
             _projectOverViewListTile(context,
-                title: 'Project Estimate', description: '₹45,00,000'),
+                title: 'Project Estimate',
+                description: '${convertCurrency(model.projectEstimate)}'),
             _projectOverViewListTile(context,
-                title: 'Start date', description: '11 Nov 2019'),
-            _projectOverViewListTile(context,
-                title: 'Completion date', description: '22 March 2019*'),
+                title: 'Start date', description: '${model.projectStartDate}'),
+
+              
+           (model.projectDateOfCompletion!=null)? _projectOverViewListTile(context,
+                title: 'Completion date', description: '${model.projectDateOfCompletion}'): _projectOverViewListTile(context,
+                title: 'Exp. Completion', description: '${model.projectEstDateOfCompletion}'),
           ],
         )
       ],
@@ -179,7 +186,7 @@ class _ProjectOverviewSection extends StatelessWidget {
       child: Container(
         child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
           Container(
-            width: fullWidth(context) * 0.3,
+            width: fullWidth(context) * 0.40,
             child: Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

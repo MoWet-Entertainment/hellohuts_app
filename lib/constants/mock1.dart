@@ -737,6 +737,7 @@ class Mock {
     "project_date_of_completion": null,
     "project_est_date_of_completion": "22 Mar 2021",
     "project_completion_perc": "0.7",
+    "base_rate":"1950",
     "project_engineer": {
       "engineer_details": {
         "uid": "234dsfsdwerwer",
