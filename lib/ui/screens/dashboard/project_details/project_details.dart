@@ -75,6 +75,7 @@ class _ProjectDetailsBody extends ConsumerWidget {
           _ProjectOverviewSection(
             model: model,
           ),
+          _SelectedPlanSection(),
         ],
       ),
     ));
@@ -142,39 +143,47 @@ class _ProjectOverviewSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Column(
-      children: [
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              "Project Overview",
-              style: theme.textTheme.bodyText1
-                  .copyWith(fontSize: 20, fontWeight: FontWeight.bold),
+    return Container(
+      padding: const EdgeInsets.only(top: 16.0),
+      child: Column(
+        children: [
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                "Project Overview",
+                style: theme.textTheme.bodyText1
+                    .copyWith(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
             ),
           ),
-        ),
-        Column(
-          children: [
-            _projectOverViewListTile(context,
-                title: 'Base Rate',
-                description: '${convertCurrency(model.baseRate)} per Sq.ft'),
-            _projectOverViewListTile(context,
-                title: 'Total Area', description: '${model.projectArea} Sq.ft'),
-            _projectOverViewListTile(context,
-                title: 'Project Estimate',
-                description: '${convertCurrency(model.projectEstimate)}'),
-            _projectOverViewListTile(context,
-                title: 'Start date', description: '${model.projectStartDate}'),
-
-              
-           (model.projectDateOfCompletion!=null)? _projectOverViewListTile(context,
-                title: 'Completion date', description: '${model.projectDateOfCompletion}'): _projectOverViewListTile(context,
-                title: 'Exp. Completion', description: '${model.projectEstDateOfCompletion}'),
-          ],
-        )
-      ],
+          Column(
+            children: [
+              _projectOverViewListTile(context,
+                  title: 'Base Rate',
+                  description: '${convertCurrency(model.baseRate)} per Sq.ft'),
+              _projectOverViewListTile(context,
+                  title: 'Total Area',
+                  description: '${model.projectArea} Sq.ft'),
+              _projectOverViewListTile(context,
+                  title: 'Project Estimate',
+                  description: '${convertCurrency(model.projectEstimate)}'),
+              _projectOverViewListTile(context,
+                  title: 'Start date',
+                  description: '${model.projectStartDate}'),
+              (model.projectDateOfCompletion != null)
+                  ? _projectOverViewListTile(context,
+                      title: 'Completion date',
+                      description: '${model.projectDateOfCompletion}')
+                  : _projectOverViewListTile(context,
+                      title: 'Exp. Completion',
+                      description: '${model.projectEstDateOfCompletion}'),
+            ],
+          ),
+          SizedBox(height: 20,)
+        ],
+      ),
     );
   }
 
@@ -208,6 +217,70 @@ class _ProjectOverviewSection extends StatelessWidget {
                 )),
           ),
         ]),
+      ),
+    );
+  }
+}
+
+class _SelectedPlanSection extends StatelessWidget {
+  const _SelectedPlanSection({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Container(
+      padding: const EdgeInsets.only(top:16.0),
+      child: Column(
+        children: [
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                "Selected Plan",
+                style: theme.textTheme.bodyText1
+                    .copyWith(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+            ),
+            
+          ),
+          SizedBox(height: 20,),
+          Container(
+            padding: const EdgeInsets.only(left: 8.0),
+            child: Row(
+              children: [
+               Container(width: fullWidth(context)*0.45,
+               child: Row(
+                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                 children: [
+                   Flexible(
+                                        child: Text("Building Materials", style: theme.textTheme.bodyText1
+                      .copyWith(fontSize: 16, fontWeight: FontWeight.bold), ),
+                   ),
+                   Text(":"),
+                 ],
+               ),
+               ),
+               Container(
+                 padding: const EdgeInsets.only(left:8),
+                 child: Row(
+                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                   children: [
+                   
+                   Text("Best",style: theme.textTheme.bodyText1
+                      .copyWith(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.kbDarkGreen)),
+                      Container(
+                        child: Text("Change", style:theme.textTheme.bodyText1
+                      .copyWith(fontSize: 14, color: AppColors.kbDarkGrey),),
+                      ),
+                   ],
+                 ),
+               )
+               
+              ],
+            )
+          )
+        ],
       ),
     );
   }
