@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hellohuts_app/helper/utilities.dart';
 import 'package:hellohuts_app/models/cost_estimation/cost_estimation.dart';
 import 'package:hellohuts_app/models/dashboard/selected_plan/selected_plan.dart';
 
@@ -226,11 +227,35 @@ class CostEstimateState extends ChangeNotifier {
     notifyListeners();
   }
 
+  BuildingRequirementsModel _buildingRequirementsModel = null;
+  get buildingRequirementsModel => _buildingRequirementsModel;
+
   SelectedPlanModel _selectedPlanModel = null;
   get selectedPlanModel => _selectedPlanModel;
 
   void calculateRate() {
-    
+    _selectedPlanModel = SelectedPlanModel(
+      buildingMaterialsType: _buildingMaterialTypeSelected,
+      flooringType: _flooringTypeSelected,
+      plumbingType: _plumbingTypeSelected,
+      electricalsType: _electricalsTypeSelected,
+      doorsAndWindowsType: _doorsAndWindowsTypeSelected,
+      kitchenDecorType: _kitchenDecorTypeSelected,
+      exteriorDecorType: _exteriorDecorTypeSelected,
+      interiorDecorType: _interiorDecorTypeSelected,
+      createdTimeStamp: setTimeStampInUTC(),
+      updatedTimeStamp: setTimeStampInUTC(),
+    );
+    _buildingRequirementsModel = BuildingRequirementsModel(
+      noOfStoreys: _selectedNumberOfStoreys,
+      noOfBedrooms: _selectedNumberOfBedrooms,
+      noOfBathrooms: _selectedNumberOfBathrooms,
+      otherBuildingRequirements: OtherBuildingRequirementsModel(
+        otherRequirementsList: [
+          
+        ],
+      ),
+    );
   }
 }
 
