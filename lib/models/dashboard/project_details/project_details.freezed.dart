@@ -41,7 +41,11 @@ class _$ProjectDetailsModelTearOff {
       @JsonKey(name: JsonConstants.contractor)
           ContractorModel contractor,
       @JsonKey(name: JsonConstants.projectAddress)
-          Address projectAddress}) {
+          Address projectAddress,
+      @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+          DateTime createdTimeStamp,
+      @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+          DateTime updatedTimeStamp}) {
     return _ProjectDetailsModel(
       projectArea: projectArea,
       plinthArea: plinthArea,
@@ -55,6 +59,8 @@ class _$ProjectDetailsModelTearOff {
       projectEngineer: projectEngineer,
       contractor: contractor,
       projectAddress: projectAddress,
+      createdTimeStamp: createdTimeStamp,
+      updatedTimeStamp: updatedTimeStamp,
     );
   }
 
@@ -94,6 +100,16 @@ mixin _$ProjectDetailsModel {
   ContractorModel get contractor;
   @JsonKey(name: JsonConstants.projectAddress)
   Address get projectAddress;
+  @JsonKey(
+      name: JsonConstants.createdAt,
+      fromJson: dateTimeFromUTC,
+      toJson: dateTimeToUTC)
+  DateTime get createdTimeStamp;
+  @JsonKey(
+      name: JsonConstants.updated_at,
+      fromJson: dateTimeFromUTC,
+      toJson: dateTimeToUTC)
+  DateTime get updatedTimeStamp;
 
   Map<String, dynamic> toJson();
   $ProjectDetailsModelCopyWith<ProjectDetailsModel> get copyWith;
@@ -128,7 +144,11 @@ abstract class $ProjectDetailsModelCopyWith<$Res> {
       @JsonKey(name: JsonConstants.contractor)
           ContractorModel contractor,
       @JsonKey(name: JsonConstants.projectAddress)
-          Address projectAddress});
+          Address projectAddress,
+      @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+          DateTime createdTimeStamp,
+      @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+          DateTime updatedTimeStamp});
 
   $EngineerModelCopyWith<$Res> get projectEngineer;
   $ContractorModelCopyWith<$Res> get contractor;
@@ -158,6 +178,8 @@ class _$ProjectDetailsModelCopyWithImpl<$Res>
     Object projectEngineer = freezed,
     Object contractor = freezed,
     Object projectAddress = freezed,
+    Object createdTimeStamp = freezed,
+    Object updatedTimeStamp = freezed,
   }) {
     return _then(_value.copyWith(
       projectArea:
@@ -192,6 +214,12 @@ class _$ProjectDetailsModelCopyWithImpl<$Res>
       projectAddress: projectAddress == freezed
           ? _value.projectAddress
           : projectAddress as Address,
+      createdTimeStamp: createdTimeStamp == freezed
+          ? _value.createdTimeStamp
+          : createdTimeStamp as DateTime,
+      updatedTimeStamp: updatedTimeStamp == freezed
+          ? _value.updatedTimeStamp
+          : updatedTimeStamp as DateTime,
     ));
   }
 
@@ -257,7 +285,11 @@ abstract class _$ProjectDetailsModelCopyWith<$Res>
       @JsonKey(name: JsonConstants.contractor)
           ContractorModel contractor,
       @JsonKey(name: JsonConstants.projectAddress)
-          Address projectAddress});
+          Address projectAddress,
+      @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+          DateTime createdTimeStamp,
+      @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+          DateTime updatedTimeStamp});
 
   @override
   $EngineerModelCopyWith<$Res> get projectEngineer;
@@ -292,6 +324,8 @@ class __$ProjectDetailsModelCopyWithImpl<$Res>
     Object projectEngineer = freezed,
     Object contractor = freezed,
     Object projectAddress = freezed,
+    Object createdTimeStamp = freezed,
+    Object updatedTimeStamp = freezed,
   }) {
     return _then(_ProjectDetailsModel(
       projectArea:
@@ -326,6 +360,12 @@ class __$ProjectDetailsModelCopyWithImpl<$Res>
       projectAddress: projectAddress == freezed
           ? _value.projectAddress
           : projectAddress as Address,
+      createdTimeStamp: createdTimeStamp == freezed
+          ? _value.createdTimeStamp
+          : createdTimeStamp as DateTime,
+      updatedTimeStamp: updatedTimeStamp == freezed
+          ? _value.updatedTimeStamp
+          : updatedTimeStamp as DateTime,
     ));
   }
 }
@@ -358,7 +398,11 @@ class _$_ProjectDetailsModel implements _ProjectDetailsModel {
       @JsonKey(name: JsonConstants.contractor)
           this.contractor,
       @JsonKey(name: JsonConstants.projectAddress)
-          this.projectAddress});
+          this.projectAddress,
+      @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+          this.createdTimeStamp,
+      @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+          this.updatedTimeStamp});
 
   factory _$_ProjectDetailsModel.fromJson(Map<String, dynamic> json) =>
       _$_$_ProjectDetailsModelFromJson(json);
@@ -399,10 +443,22 @@ class _$_ProjectDetailsModel implements _ProjectDetailsModel {
   @override
   @JsonKey(name: JsonConstants.projectAddress)
   final Address projectAddress;
+  @override
+  @JsonKey(
+      name: JsonConstants.createdAt,
+      fromJson: dateTimeFromUTC,
+      toJson: dateTimeToUTC)
+  final DateTime createdTimeStamp;
+  @override
+  @JsonKey(
+      name: JsonConstants.updated_at,
+      fromJson: dateTimeFromUTC,
+      toJson: dateTimeToUTC)
+  final DateTime updatedTimeStamp;
 
   @override
   String toString() {
-    return 'ProjectDetailsModel(projectArea: $projectArea, plinthArea: $plinthArea, projectEstimate: $projectEstimate, projectTotalPaid: $projectTotalPaid, projectStartDate: $projectStartDate, projectDateOfCompletion: $projectDateOfCompletion, baseRate: $baseRate, projectEstDateOfCompletion: $projectEstDateOfCompletion, percentageOfCompletion: $percentageOfCompletion, projectEngineer: $projectEngineer, contractor: $contractor, projectAddress: $projectAddress)';
+    return 'ProjectDetailsModel(projectArea: $projectArea, plinthArea: $plinthArea, projectEstimate: $projectEstimate, projectTotalPaid: $projectTotalPaid, projectStartDate: $projectStartDate, projectDateOfCompletion: $projectDateOfCompletion, baseRate: $baseRate, projectEstDateOfCompletion: $projectEstDateOfCompletion, percentageOfCompletion: $percentageOfCompletion, projectEngineer: $projectEngineer, contractor: $contractor, projectAddress: $projectAddress, createdTimeStamp: $createdTimeStamp, updatedTimeStamp: $updatedTimeStamp)';
   }
 
   @override
@@ -431,8 +487,7 @@ class _$_ProjectDetailsModel implements _ProjectDetailsModel {
             (identical(other.baseRate, baseRate) ||
                 const DeepCollectionEquality()
                     .equals(other.baseRate, baseRate)) &&
-            (identical(other.projectEstDateOfCompletion,
-                    projectEstDateOfCompletion) ||
+            (identical(other.projectEstDateOfCompletion, projectEstDateOfCompletion) ||
                 const DeepCollectionEquality().equals(
                     other.projectEstDateOfCompletion,
                     projectEstDateOfCompletion)) &&
@@ -447,7 +502,13 @@ class _$_ProjectDetailsModel implements _ProjectDetailsModel {
                     .equals(other.contractor, contractor)) &&
             (identical(other.projectAddress, projectAddress) ||
                 const DeepCollectionEquality()
-                    .equals(other.projectAddress, projectAddress)));
+                    .equals(other.projectAddress, projectAddress)) &&
+            (identical(other.createdTimeStamp, createdTimeStamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.createdTimeStamp, createdTimeStamp)) &&
+            (identical(other.updatedTimeStamp, updatedTimeStamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.updatedTimeStamp, updatedTimeStamp)));
   }
 
   @override
@@ -464,7 +525,9 @@ class _$_ProjectDetailsModel implements _ProjectDetailsModel {
       const DeepCollectionEquality().hash(percentageOfCompletion) ^
       const DeepCollectionEquality().hash(projectEngineer) ^
       const DeepCollectionEquality().hash(contractor) ^
-      const DeepCollectionEquality().hash(projectAddress);
+      const DeepCollectionEquality().hash(projectAddress) ^
+      const DeepCollectionEquality().hash(createdTimeStamp) ^
+      const DeepCollectionEquality().hash(updatedTimeStamp);
 
   @override
   _$ProjectDetailsModelCopyWith<_ProjectDetailsModel> get copyWith =>
@@ -502,7 +565,11 @@ abstract class _ProjectDetailsModel implements ProjectDetailsModel {
       @JsonKey(name: JsonConstants.contractor)
           ContractorModel contractor,
       @JsonKey(name: JsonConstants.projectAddress)
-          Address projectAddress}) = _$_ProjectDetailsModel;
+          Address projectAddress,
+      @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+          DateTime createdTimeStamp,
+      @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+          DateTime updatedTimeStamp}) = _$_ProjectDetailsModel;
 
   factory _ProjectDetailsModel.fromJson(Map<String, dynamic> json) =
       _$_ProjectDetailsModel.fromJson;
@@ -543,6 +610,18 @@ abstract class _ProjectDetailsModel implements ProjectDetailsModel {
   @override
   @JsonKey(name: JsonConstants.projectAddress)
   Address get projectAddress;
+  @override
+  @JsonKey(
+      name: JsonConstants.createdAt,
+      fromJson: dateTimeFromUTC,
+      toJson: dateTimeToUTC)
+  DateTime get createdTimeStamp;
+  @override
+  @JsonKey(
+      name: JsonConstants.updated_at,
+      fromJson: dateTimeFromUTC,
+      toJson: dateTimeToUTC)
+  DateTime get updatedTimeStamp;
   @override
   _$ProjectDetailsModelCopyWith<_ProjectDetailsModel> get copyWith;
 }

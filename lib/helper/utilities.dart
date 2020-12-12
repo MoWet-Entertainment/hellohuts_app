@@ -149,9 +149,24 @@ String convertProjectEstimate(String value) {
 
 String convertCurrency(String value) {
   double val = double.parse(value);
-  if (val != null || val !='') {
+  if (val != null || val != '') {
     final formatter = NumberFormat.simpleCurrency(decimalDigits: 0, name: '₹');
     return formatter.format(val);
   }
   return null;
+}
+
+DateTime dateTimeFromUTC(String timeStamp) =>
+    timeStamp == null ? null : DateTime.parse(timeStamp).toLocal();
+
+String dateTimeToUTC(DateTime timestamp) {
+  var dt = timestamp.toUtc();
+  var dateFormatted = DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(dt);
+  return dateFormatted;
+}
+
+String intToString(int val) => val.toString();
+int stringToInt(String val) {
+  val = val.trim();
+  return int.parse(val);
 }

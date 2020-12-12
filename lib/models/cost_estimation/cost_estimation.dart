@@ -11,6 +11,16 @@ enum RoomTypes {
   Sitout,
   Diningroom,
   Storeroom,
+  LivingCumDining,
+  StudyRoom,
+  DressingArea,
+  OpenKitchen,
+  Balcony,
+  UtilityRoom,
+  PrayerRoom, 
+  UpperLivingRoom, 
+  Bar,
+  GameRoom
 }
 
 ///for Defining different categories of the item used

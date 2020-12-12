@@ -8,8 +8,8 @@ part 'drawings_model.g.dart';
 abstract class DrawingsModel with _$DrawingsModel {
   @JsonSerializable(explicitToJson: true)
   factory DrawingsModel({
-    @JsonKey(name: JsonConstants.plan_type) String planType,
-    @JsonKey(name: JsonConstants.plan_image) String planImage,
+    @JsonKey(name: JsonConstants.planType) String planType,
+    @JsonKey(name: JsonConstants.planImage) String planImage,
   }) = _DrawingsModel;
 
 
