@@ -44,7 +44,7 @@ final Map<RoomTypes, String> customRequirementsSelection = {
   RoomTypes.Bar: "Bar"
 };
 
-final Map<RoomTypes, String> pack1 = {
+final Map<RoomTypes, String> requirementsBasePack1 = {
   RoomTypes.Kitchen: "Kitchen",
   RoomTypes.Livingroom: "Living Room",
   RoomTypes.Diningroom: "Dining Room",
@@ -53,13 +53,15 @@ final Map<RoomTypes, String> pack1 = {
   RoomTypes.Storeroom: "Store Room",
 };
 
-final Map<RoomTypes,String> pack2 = {
+final Map<RoomTypes, String> requirementsBasePack2 = {
   RoomTypes.Kitchen: "Kitchen",
-  RoomTypes.LivingCumDining:"Living + Dining Room",
- RoomTypes.Porch: "Porch",
-  RoomTypes.Sitout:"Sitout",
-  RoomTypes.Balcony:"Balcony",
+  RoomTypes.LivingCumDining: "Living + Dining Room",
+  RoomTypes.Porch: "Porch",
+  RoomTypes.Sitout: "Sitout",
+  RoomTypes.Balcony: "Balcony",
 };
+
+
 
 ///for Defining different categories of the item used
 enum CustomizeOptions {

@@ -134,6 +134,8 @@ class CostEstimateState extends ChangeNotifier {
     "Store Room"
   ];
 
+
+
   final List<String> pack2 = [
     "Kitchen",
     "Living + Dining Room",
@@ -252,7 +254,7 @@ class CostEstimateState extends ChangeNotifier {
       noOfBathrooms: _selectedNumberOfBathrooms,
       otherBuildingRequirements: OtherBuildingRequirementsModel(
         otherRequirementsList: [
-          
+
         ],
       ),
     );
