@@ -55,9 +55,8 @@ Map<String, dynamic> _$_$_SelectedPlanModelToJson(
 _$_OtherBuildingRequirementsModel _$_$_OtherBuildingRequirementsModelFromJson(
     Map<String, dynamic> json) {
   return _$_OtherBuildingRequirementsModel(
-    otherRequirementsList: (json['other_room_types'] as List)
-        ?.map((e) => _$enumDecodeNullable(_$RoomTypesEnumMap, e))
-        ?.toList(),
+    otherRequirementsList: OtherBuildingRequirementsModel._roomTypesFromJson(
+        json['other_room_types'] as List<String>),
     createdTimeStamp: dateTimeFromUTC(json['created_at'] as String),
     updatedTimeStamp: dateTimeFromUTC(json['updated_at'] as String),
   );
@@ -71,58 +70,6 @@ Map<String, dynamic> _$_$_OtherBuildingRequirementsModelToJson(
       'created_at': dateTimeToUTC(instance.createdTimeStamp),
       'updated_at': dateTimeToUTC(instance.updatedTimeStamp),
     };
-
-T _$enumDecode<T>(
-  Map<T, dynamic> enumValues,
-  dynamic source, {
-  T unknownValue,
-}) {
-  if (source == null) {
-    throw ArgumentError('A value must be provided. Supported values: '
-        '${enumValues.values.join(', ')}');
-  }
-
-  final value = enumValues.entries
-      .singleWhere((e) => e.value == source, orElse: () => null)
-      ?.key;
-
-  if (value == null && unknownValue == null) {
-    throw ArgumentError('`$source` is not one of the supported values: '
-        '${enumValues.values.join(', ')}');
-  }
-  return value ?? unknownValue;
-}
-
-T _$enumDecodeNullable<T>(
-  Map<T, dynamic> enumValues,
-  dynamic source, {
-  T unknownValue,
-}) {
-  if (source == null) {
-    return null;
-  }
-  return _$enumDecode<T>(enumValues, source, unknownValue: unknownValue);
-}
-
-const _$RoomTypesEnumMap = {
-  RoomTypes.Bedroom: 'Bedroom',
-  RoomTypes.Bathroom: 'Bathroom',
-  RoomTypes.Livingroom: 'Livingroom',
-  RoomTypes.Kitchen: 'Kitchen',
-  RoomTypes.Sitout: 'Sitout',
-  RoomTypes.Diningroom: 'Diningroom',
-  RoomTypes.Storeroom: 'Storeroom',
-  RoomTypes.LivingCumDining: 'LivingCumDining',
-  RoomTypes.StudyRoom: 'StudyRoom',
-  RoomTypes.DressingArea: 'DressingArea',
-  RoomTypes.OpenKitchen: 'OpenKitchen',
-  RoomTypes.Balcony: 'Balcony',
-  RoomTypes.UtilityRoom: 'UtilityRoom',
-  RoomTypes.PrayerRoom: 'PrayerRoom',
-  RoomTypes.UpperLivingRoom: 'UpperLivingRoom',
-  RoomTypes.Bar: 'Bar',
-  RoomTypes.GameRoom: 'GameRoom',
-};
 
 _$_BuildingRequirementsModel _$_$_BuildingRequirementsModelFromJson(
     Map<String, dynamic> json) {

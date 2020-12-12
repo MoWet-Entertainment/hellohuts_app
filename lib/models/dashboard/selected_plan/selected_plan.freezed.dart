@@ -568,7 +568,7 @@ class _$OtherBuildingRequirementsModelTearOff {
 
 // ignore: unused_element
   _OtherBuildingRequirementsModel call(
-      {@JsonKey(name: JsonConstants.otherRoomTypes, toJson: OtherBuildingRequirementsModel._roomTypesToJson, fromJson: _roomTypesFromJson)
+      {@JsonKey(name: JsonConstants.otherRoomTypes, toJson: OtherBuildingRequirementsModel._roomTypesToJson, fromJson: OtherBuildingRequirementsModel._roomTypesFromJson)
           List<RoomTypes> otherRequirementsList,
       @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           DateTime createdTimeStamp,
@@ -597,7 +597,7 @@ mixin _$OtherBuildingRequirementsModel {
   @JsonKey(
       name: JsonConstants.otherRoomTypes,
       toJson: OtherBuildingRequirementsModel._roomTypesToJson,
-      fromJson: _roomTypesFromJson)
+      fromJson: OtherBuildingRequirementsModel._roomTypesFromJson)
   List<RoomTypes> get otherRequirementsList;
   @JsonKey(
       name: JsonConstants.createdAt,
@@ -622,7 +622,7 @@ abstract class $OtherBuildingRequirementsModelCopyWith<$Res> {
           $Res Function(OtherBuildingRequirementsModel) then) =
       _$OtherBuildingRequirementsModelCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(name: JsonConstants.otherRoomTypes, toJson: OtherBuildingRequirementsModel._roomTypesToJson, fromJson: _roomTypesFromJson)
+      {@JsonKey(name: JsonConstants.otherRoomTypes, toJson: OtherBuildingRequirementsModel._roomTypesToJson, fromJson: OtherBuildingRequirementsModel._roomTypesFromJson)
           List<RoomTypes> otherRequirementsList,
       @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           DateTime createdTimeStamp,
@@ -668,7 +668,7 @@ abstract class _$OtherBuildingRequirementsModelCopyWith<$Res>
       __$OtherBuildingRequirementsModelCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(name: JsonConstants.otherRoomTypes, toJson: OtherBuildingRequirementsModel._roomTypesToJson, fromJson: _roomTypesFromJson)
+      {@JsonKey(name: JsonConstants.otherRoomTypes, toJson: OtherBuildingRequirementsModel._roomTypesToJson, fromJson: OtherBuildingRequirementsModel._roomTypesFromJson)
           List<RoomTypes> otherRequirementsList,
       @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           DateTime createdTimeStamp,
@@ -716,7 +716,7 @@ class _$_OtherBuildingRequirementsModel
     with DiagnosticableTreeMixin
     implements _OtherBuildingRequirementsModel {
   _$_OtherBuildingRequirementsModel(
-      {@JsonKey(name: JsonConstants.otherRoomTypes, toJson: OtherBuildingRequirementsModel._roomTypesToJson, fromJson: _roomTypesFromJson)
+      {@JsonKey(name: JsonConstants.otherRoomTypes, toJson: OtherBuildingRequirementsModel._roomTypesToJson, fromJson: OtherBuildingRequirementsModel._roomTypesFromJson)
           this.otherRequirementsList,
       @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           this.createdTimeStamp,
@@ -731,7 +731,7 @@ class _$_OtherBuildingRequirementsModel
   @JsonKey(
       name: JsonConstants.otherRoomTypes,
       toJson: OtherBuildingRequirementsModel._roomTypesToJson,
-      fromJson: _roomTypesFromJson)
+      fromJson: OtherBuildingRequirementsModel._roomTypesFromJson)
   final List<RoomTypes> otherRequirementsList;
   @override
   @JsonKey(
@@ -797,7 +797,7 @@ class _$_OtherBuildingRequirementsModel
 abstract class _OtherBuildingRequirementsModel
     implements OtherBuildingRequirementsModel {
   factory _OtherBuildingRequirementsModel(
-      {@JsonKey(name: JsonConstants.otherRoomTypes, toJson: OtherBuildingRequirementsModel._roomTypesToJson, fromJson: _roomTypesFromJson)
+      {@JsonKey(name: JsonConstants.otherRoomTypes, toJson: OtherBuildingRequirementsModel._roomTypesToJson, fromJson: OtherBuildingRequirementsModel._roomTypesFromJson)
           List<RoomTypes> otherRequirementsList,
       @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           DateTime createdTimeStamp,
@@ -811,7 +811,7 @@ abstract class _OtherBuildingRequirementsModel
   @JsonKey(
       name: JsonConstants.otherRoomTypes,
       toJson: OtherBuildingRequirementsModel._roomTypesToJson,
-      fromJson: _roomTypesFromJson)
+      fromJson: OtherBuildingRequirementsModel._roomTypesFromJson)
   List<RoomTypes> get otherRequirementsList;
   @override
   @JsonKey(

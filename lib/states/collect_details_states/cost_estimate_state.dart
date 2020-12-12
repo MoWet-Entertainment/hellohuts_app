@@ -63,10 +63,20 @@ class CostEstimateState extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<String> _selectedDetailsItems = [];
+  // List<String> _selectedDetailsItems = [];
+
+  Map<RoomTypes, String> _selectedDetailsItems = null;
+
   get selectedDetailsItems => _selectedDetailsItems;
-  set setSelectedDetailsItems(List list) {
-    _selectedDetailsItems = list;
+  set setSelectedDetailsItems(List<String> list) {
+    Map<RoomTypes, String> selectedMap = null;
+
+    selectedMap = Map.fromIterable(list,
+        key: (e) => customRequirementsSelection.keys.firstWhere(
+            (element) => customRequirementsSelection[element] == e,
+            orElse: () => null),
+        value: (e) => e);
+    _selectedDetailsItems = selectedMap;
     notifyListeners();
   }
 
@@ -103,46 +113,34 @@ class CostEstimateState extends ChangeNotifier {
 
   ///To reset the details if selected any
   void resetCustomDetail() {
-    List<String> list = [];
-    setSelectedDetailsItems = list;
+    List<String> listMap = null;
+    setSelectedDetailsItems = listMap;
   }
 
-  ///For custom Selection
-  final List<String> _listForCustomSelection = [
-    "Dining Room",
-    "Living Room",
-    "Living + Dining",
-    "Kitchen",
-    "Open Kitchen",
-    "Balcony",
-    "Dressing area",
-    "Store Room",
-    "Prayer Room",
-    "Study Room",
-    "Upper Living Room",
-    "Game Room",
-  ];
+  // ///For custom Selection
+  // final List<String> _listForCustomSelection = [
+  //   "Dining Room",
+  //   "Living Room",
+  //   "Living + Dining",
+  //   "Kitchen",
+  //   "Open Kitchen",
+  //   "Balcony",
+  //   "Dressing area",
+  //   "Store Room",
+  //   "Prayer Room",
+  //   "Study Room",
+  //   "Upper Living Room",
+  //   "Game Room",
+  // ];
 
-  get listForCustomSelection => _listForCustomSelection;
+  get listForCustomSelection =>
+      customRequirementsSelection.entries.map((e) => e.value).toList();
 
-  final List<String> pack1 = [
-    "Kitchen",
-    "Living Room",
-    "Dining Room",
-    "Porch",
-    "Sitout",
-    "Store Room"
-  ];
+  final List<String> pack1 =
+      requirementsBasePack1.entries.map((e) => e.value).toList();
 
+  final List<String> pack2 =requirementsBasePack2.entries.map((e) => e.value).toList();
 
-
-  final List<String> pack2 = [
-    "Kitchen",
-    "Living + Dining Room",
-    "Porch",
-    "Sitout",
-    "Balcony",
-  ];
 
   ///to determine the current page of the Collect details section
   int _pageIndexOfCollectSection = 0;
@@ -253,9 +251,7 @@ class CostEstimateState extends ChangeNotifier {
       noOfBedrooms: _selectedNumberOfBedrooms,
       noOfBathrooms: _selectedNumberOfBathrooms,
       otherBuildingRequirements: OtherBuildingRequirementsModel(
-        otherRequirementsList: [
-
-        ],
+        otherRequirementsList: [],
       ),
     );
   }

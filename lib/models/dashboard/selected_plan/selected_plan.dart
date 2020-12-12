@@ -89,7 +89,7 @@ abstract class OtherBuildingRequirementsModel
     with _$OtherBuildingRequirementsModel {
   @JsonSerializable(explicitToJson: true)
   factory OtherBuildingRequirementsModel({
-    @JsonKey(name: JsonConstants.otherRoomTypes, toJson: OtherBuildingRequirementsModel._roomTypesToJson, fromJson: _roomTypesFromJson)
+    @JsonKey(name: JsonConstants.otherRoomTypes, toJson: OtherBuildingRequirementsModel._roomTypesToJson, fromJson: OtherBuildingRequirementsModel._roomTypesFromJson)
         List<RoomTypes> otherRequirementsList,
            @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
         DateTime createdTimeStamp,
