@@ -136,8 +136,16 @@ class JsonConstants {
   static const String itemHeadline = "item_headline";
   static const String itemImage = "item_image";
 
-  static const String plan_type = "plan_type";
-  static const String plan_image = "plan_image";
+  static const String planType = "plan_type";
+  static const String planImage = "plan_image";
 
   static const String uniqueId = "unique_id";
+
+  //Requirements Details
+  static const String numberOfStoreys = "number_of_storeys";
+  static const String numberOfBedrooms = "number_of_bedrooms";
+  static const String numberOfBathrooms = "number_of_bathrooms";
+  static const String otherBuildingRequirements = "other_building_requirements";
+  static const String otherRoomTypes = "other_room_types";
+
 }

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hellohuts_app/constants/json_constants.dart';
+import 'package:hellohuts_app/helper/utilities.dart';
 import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
 part 'dashboard_item.freezed.dart';
@@ -9,6 +10,7 @@ part 'dashboard_item.g.dart';
 @freezed
 abstract class DashboardItem with _$DashboardItem {
   @JsonSerializable(explicitToJson: true)
+
   factory DashboardItem({
     @JsonKey(name: JsonConstants.itemType, fromJson: DashboardItem._setModeOfTransaction, toJson: DashboardItem._getDashbordItemType)
         DashboardItemType itemType,
@@ -16,25 +18,18 @@ abstract class DashboardItem with _$DashboardItem {
     @JsonKey(name: JsonConstants.itemText2) String itemText2,
     @JsonKey(
         name: JsonConstants.createdAt,
-        fromJson: DashboardItem._dateTimeFromUTC,
-        toJson: DashboardItem._dateTimeToUTC)
+        fromJson: dateTimeFromUTC,
+        toJson:dateTimeToUTC)
     @required
         DateTime createdTimeStamp,
-    @JsonKey(name: JsonConstants.updated_at, fromJson: DashboardItem._dateTimeFromUTC, toJson: DashboardItem._dateTimeToUTC)
+    @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
         DateTime updatedTimeStamp,
     @JsonKey(name: JsonConstants.createdBy) String createdBy,
     @JsonKey(name: JsonConstants.updatedBy) String updatedBy,
     @JsonKey(name: JsonConstants.providedBy) String providedBy,
   }) = _DashboardItem;
 
-  static DateTime _dateTimeFromUTC(String timeStamp) =>
-      timeStamp == null ? null : DateTime.parse(timeStamp).toLocal();
 
-  static String _dateTimeToUTC(DateTime timestamp) {
-    var dt = timestamp.toUtc();
-    var dateFormatted = DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(dt);
-    return dateFormatted;
-  }
 
   static DashboardItemType _setModeOfTransaction(String dataVal) {
     if (dataVal == JsonConstants.trasactionRecieved) {

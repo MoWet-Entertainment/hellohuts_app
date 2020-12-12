@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:hellohuts_app/models/cost_estimation/cost_estimation.dart';
-import 'package:hellohuts_app/states/app_state.dart';
+import 'package:hellohuts_app/models/dashboard/selected_plan/selected_plan.dart';
 
 class CostEstimateState extends ChangeNotifier {
   bool _needReset = false;
@@ -224,6 +224,13 @@ class CostEstimateState extends ChangeNotifier {
   set setExteriorDecorTypeSelected(CustomizeOptions option) {
     _exteriorDecorTypeSelected = option;
     notifyListeners();
+  }
+
+  SelectedPlanModel _selectedPlanModel = null;
+  get selectedPlanModel => _selectedPlanModel;
+
+  void calculateRate() {
+    
   }
 }
 

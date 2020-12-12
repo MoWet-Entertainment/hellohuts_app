@@ -18,8 +18,8 @@ class _$DrawingsModelTearOff {
 
 // ignore: unused_element
   _DrawingsModel call(
-      {@JsonKey(name: JsonConstants.plan_type) String planType,
-      @JsonKey(name: JsonConstants.plan_image) String planImage}) {
+      {@JsonKey(name: JsonConstants.planType) String planType,
+      @JsonKey(name: JsonConstants.planImage) String planImage}) {
     return _DrawingsModel(
       planType: planType,
       planImage: planImage,
@@ -38,9 +38,9 @@ const $DrawingsModel = _$DrawingsModelTearOff();
 
 /// @nodoc
 mixin _$DrawingsModel {
-  @JsonKey(name: JsonConstants.plan_type)
+  @JsonKey(name: JsonConstants.planType)
   String get planType;
-  @JsonKey(name: JsonConstants.plan_image)
+  @JsonKey(name: JsonConstants.planImage)
   String get planImage;
 
   Map<String, dynamic> toJson();
@@ -53,8 +53,8 @@ abstract class $DrawingsModelCopyWith<$Res> {
           DrawingsModel value, $Res Function(DrawingsModel) then) =
       _$DrawingsModelCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(name: JsonConstants.plan_type) String planType,
-      @JsonKey(name: JsonConstants.plan_image) String planImage});
+      {@JsonKey(name: JsonConstants.planType) String planType,
+      @JsonKey(name: JsonConstants.planImage) String planImage});
 }
 
 /// @nodoc
@@ -86,8 +86,8 @@ abstract class _$DrawingsModelCopyWith<$Res>
       __$DrawingsModelCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(name: JsonConstants.plan_type) String planType,
-      @JsonKey(name: JsonConstants.plan_image) String planImage});
+      {@JsonKey(name: JsonConstants.planType) String planType,
+      @JsonKey(name: JsonConstants.planImage) String planImage});
 }
 
 /// @nodoc
@@ -118,17 +118,17 @@ class __$DrawingsModelCopyWithImpl<$Res>
 /// @nodoc
 class _$_DrawingsModel implements _DrawingsModel {
   _$_DrawingsModel(
-      {@JsonKey(name: JsonConstants.plan_type) this.planType,
-      @JsonKey(name: JsonConstants.plan_image) this.planImage});
+      {@JsonKey(name: JsonConstants.planType) this.planType,
+      @JsonKey(name: JsonConstants.planImage) this.planImage});
 
   factory _$_DrawingsModel.fromJson(Map<String, dynamic> json) =>
       _$_$_DrawingsModelFromJson(json);
 
   @override
-  @JsonKey(name: JsonConstants.plan_type)
+  @JsonKey(name: JsonConstants.planType)
   final String planType;
   @override
-  @JsonKey(name: JsonConstants.plan_image)
+  @JsonKey(name: JsonConstants.planImage)
   final String planImage;
 
   @override
@@ -166,18 +166,18 @@ class _$_DrawingsModel implements _DrawingsModel {
 
 abstract class _DrawingsModel implements DrawingsModel {
   factory _DrawingsModel(
-          {@JsonKey(name: JsonConstants.plan_type) String planType,
-          @JsonKey(name: JsonConstants.plan_image) String planImage}) =
+          {@JsonKey(name: JsonConstants.planType) String planType,
+          @JsonKey(name: JsonConstants.planImage) String planImage}) =
       _$_DrawingsModel;
 
   factory _DrawingsModel.fromJson(Map<String, dynamic> json) =
       _$_DrawingsModel.fromJson;
 
   @override
-  @JsonKey(name: JsonConstants.plan_type)
+  @JsonKey(name: JsonConstants.planType)
   String get planType;
   @override
-  @JsonKey(name: JsonConstants.plan_image)
+  @JsonKey(name: JsonConstants.planImage)
   String get planImage;
   @override
   _$DrawingsModelCopyWith<_DrawingsModel> get copyWith;

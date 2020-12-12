@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hellohuts_app/constants/json_constants.dart';
 import 'package:hellohuts_app/models/address/address.dart';
+import 'package:hellohuts_app/helper/utilities.dart';
+
 import 'package:hellohuts_app/models/dashboard/contractor_model/contractor_model.dart';
 import 'package:hellohuts_app/models/dashboard/engineer_model/engineer_model.dart';
 part 'project_details.freezed.dart';
@@ -26,6 +28,13 @@ abstract class ProjectDetailsModel with _$ProjectDetailsModel {
         @JsonKey(name: JsonConstants.projectEngineer) EngineerModel projectEngineer,
         @JsonKey(name: JsonConstants.contractor) ContractorModel contractor,
         @JsonKey(name:JsonConstants.projectAddress) Address projectAddress,
+            @JsonKey(
+        name: JsonConstants.createdAt,
+        fromJson: dateTimeFromUTC,
+        toJson:dateTimeToUTC)
+        DateTime createdTimeStamp,
+    @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+        DateTime updatedTimeStamp,
   }) = _ProjectDetailsModel;
 
    factory ProjectDetailsModel.fromJson(Map<String, dynamic> json) =>

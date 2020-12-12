@@ -29,6 +29,8 @@ _$_ProjectDetailsModel _$_$_ProjectDetailsModelFromJson(
     projectAddress: json['project_address'] == null
         ? null
         : Address.fromJson(json['project_address'] as Map<String, dynamic>),
+    createdTimeStamp: dateTimeFromUTC(json['created_at'] as String),
+    updatedTimeStamp: dateTimeFromUTC(json['updated_at'] as String),
   );
 }
 
@@ -47,4 +49,6 @@ Map<String, dynamic> _$_$_ProjectDetailsModelToJson(
       'project_engineer': instance.projectEngineer?.toJson(),
       'contractor': instance.contractor?.toJson(),
       'project_address': instance.projectAddress?.toJson(),
+      'created_at': dateTimeToUTC(instance.createdTimeStamp),
+      'updated_at': dateTimeToUTC(instance.updatedTimeStamp),
     };
