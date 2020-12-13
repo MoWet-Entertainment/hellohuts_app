@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hellohuts_app/constants/json_constants.dart';
@@ -17,11 +19,49 @@ enum RoomTypes {
   OpenKitchen,
   Balcony,
   UtilityRoom,
-  PrayerRoom, 
-  UpperLivingRoom, 
+  PrayerRoom,
+  UpperLivingRoom,
   Bar,
-  GameRoom
+  Office,
+  GameRoom,
+  Porch
 }
+
+final Map<RoomTypes, String> customRequirementsSelection = {
+  RoomTypes.Diningroom: "Dining Room",
+  RoomTypes.Livingroom: "Living Room",
+  RoomTypes.Office: "Office",
+  RoomTypes.LivingCumDining: "Living + Dining",
+  RoomTypes.Kitchen: "Kitchen",
+  RoomTypes.OpenKitchen: "Open Kitchen",
+  RoomTypes.Balcony: "Balcony",
+  RoomTypes.DressingArea: "Dressing area",
+  RoomTypes.Storeroom: "Store Room",
+  RoomTypes.PrayerRoom: "Prayer Room",
+  RoomTypes.StudyRoom: "Study Room",
+  RoomTypes.UpperLivingRoom: "Upper Living Room",
+  RoomTypes.GameRoom: "Game Room",
+  RoomTypes.Bar: "Bar"
+};
+
+final Map<RoomTypes, String> requirementsBasePack1 = {
+  RoomTypes.Kitchen: "Kitchen",
+  RoomTypes.Livingroom: "Living Room",
+  RoomTypes.Diningroom: "Dining Room",
+  RoomTypes.Porch: "Porch",
+  RoomTypes.Sitout: "Sitout",
+  RoomTypes.Storeroom: "Store Room",
+};
+
+final Map<RoomTypes, String> requirementsBasePack2 = {
+  RoomTypes.Kitchen: "Kitchen",
+  RoomTypes.LivingCumDining: "Living + Dining Room",
+  RoomTypes.Porch: "Porch",
+  RoomTypes.Sitout: "Sitout",
+  RoomTypes.Balcony: "Balcony",
+};
+
+
 
 ///for Defining different categories of the item used
 enum CustomizeOptions {
@@ -33,8 +73,6 @@ enum CustomizeOptions {
   Standard,
   Classic,
 }
-
-
 
 class CostEstimation extends Equatable {
   final CustomizeOptions buildingMaterialsType;
@@ -90,7 +128,8 @@ class CostEstimation extends Equatable {
       return CustomizeOptions.Balanced;
     } else if (dataVal == JsonConstants.budgetType) {
       return CustomizeOptions.Budget;
-    }  if (dataVal == JsonConstants.none) {
+    }
+    if (dataVal == JsonConstants.none) {
       return CustomizeOptions.None;
     } else if (dataVal == JsonConstants.basic) {
       return CustomizeOptions.Basic;
@@ -103,16 +142,15 @@ class CostEstimation extends Equatable {
     }
   }
 
-
   String _getCustomizeOption(CustomizeOptions option) {
-
     if (option == CustomizeOptions.Budget) {
       return JsonConstants.budgetType;
     } else if (option == CustomizeOptions.Balanced) {
       return JsonConstants.balancedType;
     } else if (option == CustomizeOptions.Best) {
       return JsonConstants.bestType;
-    } if (option == CustomizeOptions.Basic) {
+    }
+    if (option == CustomizeOptions.Basic) {
       return JsonConstants.basic;
     } else if (option == CustomizeOptions.None) {
       return JsonConstants.none;
@@ -123,9 +161,7 @@ class CostEstimation extends Equatable {
     } else {
       return null;
     }
-   
   }
-
 
   @override
   List<Object> get props => [
@@ -139,10 +175,9 @@ class CostEstimation extends Equatable {
         this.exteriorDecorType
       ];
 
- @override
+  @override
   String toString() {
     // TODO: implement toString
     return super.toString();
   }
-
 }

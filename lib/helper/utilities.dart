@@ -170,3 +170,7 @@ int stringToInt(String val) {
   val = val.trim();
   return int.parse(val);
 }
+
+DateTime setTimeStampInUTC() {
+  return DateTime.now().toUtc();
+}

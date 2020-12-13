@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hellohuts_app/helper/utilities.dart';
 import 'package:hellohuts_app/models/cost_estimation/cost_estimation.dart';
 import 'package:hellohuts_app/models/dashboard/selected_plan/selected_plan.dart';
 
@@ -62,10 +63,32 @@ class CostEstimateState extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<String> _selectedDetailsItems = [];
-  get selectedDetailsItems => _selectedDetailsItems;
-  set setSelectedDetailsItems(List list) {
-    _selectedDetailsItems = list;
+  // List<String> _selectedDetailsItems = [];
+
+  Map<RoomTypes, String> _selectedDetailsItems = null;
+
+  // get selectedDetailsItems => _selectedDetailsItems != null
+  //     ? _selectedDetailsItems.entries.map((e) => e.value).toList()
+  //     : [];
+
+  List<String> get selectedDetailsItems {
+    if (_selectedDetailsItems == null || _selectedDetailsItems.isEmpty) {
+      return [];
+    } else {
+     return _selectedDetailsItems.entries.map((e) => e.value).toList();
+    }
+  }
+
+  set setSelectedDetailsItems(List<String> list) {
+    Map<RoomTypes, String> selectedMap = null;
+    if (list != null) {
+      selectedMap = Map.fromIterable(list,
+          key: (e) => customRequirementsSelection.keys.firstWhere(
+              (element) => customRequirementsSelection[element] == e,
+              orElse: () => null),
+          value: (e) => e);
+    }
+    _selectedDetailsItems = selectedMap;
     notifyListeners();
   }
 
@@ -102,44 +125,34 @@ class CostEstimateState extends ChangeNotifier {
 
   ///To reset the details if selected any
   void resetCustomDetail() {
-    List<String> list = [];
-    setSelectedDetailsItems = list;
+    List<String> listMap = null;
+    setSelectedDetailsItems = listMap;
   }
 
-  ///For custom Selection
-  final List<String> _listForCustomSelection = [
-    "Dining Room",
-    "Living Room",
-    "Living + Dining",
-    "Kitchen",
-    "Open Kitchen",
-    "Balcony",
-    "Dressing area",
-    "Store Room",
-    "Prayer Room",
-    "Study Room",
-    "Upper Living Room",
-    "Game Room",
-  ];
+  // ///For custom Selection
+  // final List<String> _listForCustomSelection = [
+  //   "Dining Room",
+  //   "Living Room",
+  //   "Living + Dining",
+  //   "Kitchen",
+  //   "Open Kitchen",
+  //   "Balcony",
+  //   "Dressing area",
+  //   "Store Room",
+  //   "Prayer Room",
+  //   "Study Room",
+  //   "Upper Living Room",
+  //   "Game Room",
+  // ];
 
-  get listForCustomSelection => _listForCustomSelection;
+  get listForCustomSelection =>
+      customRequirementsSelection.entries.map((e) => e.value).toList();
 
-  final List<String> pack1 = [
-    "Kitchen",
-    "Living Room",
-    "Dining Room",
-    "Porch",
-    "Sitout",
-    "Store Room"
-  ];
+  final List<String> pack1 =
+      requirementsBasePack1.entries.map((e) => e.value).toList();
 
-  final List<String> pack2 = [
-    "Kitchen",
-    "Living + Dining Room",
-    "Porch",
-    "Sitout",
-    "Balcony",
-  ];
+  final List<String> pack2 =
+      requirementsBasePack2.entries.map((e) => e.value).toList();
 
   ///to determine the current page of the Collect details section
   int _pageIndexOfCollectSection = 0;
@@ -226,11 +239,33 @@ class CostEstimateState extends ChangeNotifier {
     notifyListeners();
   }
 
+  BuildingRequirementsModel _buildingRequirementsModel = null;
+  get buildingRequirementsModel => _buildingRequirementsModel;
+
   SelectedPlanModel _selectedPlanModel = null;
   get selectedPlanModel => _selectedPlanModel;
 
   void calculateRate() {
-    
+    _selectedPlanModel = SelectedPlanModel(
+      buildingMaterialsType: _buildingMaterialTypeSelected,
+      flooringType: _flooringTypeSelected,
+      plumbingType: _plumbingTypeSelected,
+      electricalsType: _electricalsTypeSelected,
+      doorsAndWindowsType: _doorsAndWindowsTypeSelected,
+      kitchenDecorType: _kitchenDecorTypeSelected,
+      exteriorDecorType: _exteriorDecorTypeSelected,
+      interiorDecorType: _interiorDecorTypeSelected,
+      createdTimeStamp: setTimeStampInUTC(),
+      updatedTimeStamp: setTimeStampInUTC(),
+    );
+    _buildingRequirementsModel = BuildingRequirementsModel(
+      noOfStoreys: _selectedNumberOfStoreys,
+      noOfBedrooms: _selectedNumberOfBedrooms,
+      noOfBathrooms: _selectedNumberOfBathrooms,
+      otherBuildingRequirements: OtherBuildingRequirementsModel(
+        otherRequirementsList: [],
+      ),
+    );
   }
 }
 
