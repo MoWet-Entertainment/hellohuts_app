@@ -181,7 +181,9 @@ class _ProjectOverviewSection extends StatelessWidget {
                       description: '${model.projectEstDateOfCompletion}'),
             ],
           ),
-          SizedBox(height: 20,)
+          SizedBox(
+            height: 20,
+          )
         ],
       ),
     );
@@ -229,7 +231,7 @@ class _SelectedPlanSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Container(
-      padding: const EdgeInsets.only(top:16.0),
+      padding: const EdgeInsets.only(top: 16.0),
       child: Column(
         children: [
           Align(
@@ -242,47 +244,109 @@ class _SelectedPlanSection extends StatelessWidget {
                     .copyWith(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
-            
           ),
-          SizedBox(height: 20,),
-          Container(
-            padding: const EdgeInsets.only(left: 8.0),
-            child: Row(
-              children: [
-               Container(width: fullWidth(context)*0.45,
-               child: Row(
-                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                 children: [
-                   Flexible(
-                                        child: Text("Building Materials", style: theme.textTheme.bodyText1
-                      .copyWith(fontSize: 16, fontWeight: FontWeight.bold), ),
-                   ),
-                   Text(":"),
-                 ],
-               ),
-               ),
-               Container(
-                 padding: const EdgeInsets.only(left:8),
-                 child: Row(
-                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                   children: [
-                   
-                   Text("Best",style: theme.textTheme.bodyText1
-                      .copyWith(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.kbDarkGreen)),
-                      Container(
-                        child: Text("Change", style:theme.textTheme.bodyText1
-                      .copyWith(fontSize: 14, color: AppColors.kbDarkGrey),),
-                      ),
-                   ],
-                 ),
-               )
-               
-              ],
-            )
-          )
+          SizedBox(
+            height: 4,
+          ),
+          _ExpandableProjectSelectedPlan(),
+                    _ExpandableProjectSelectedPlan(),
+
+          _ExpandableProjectSelectedPlan()
+
         ],
       ),
     );
+  }
+}
+
+class _ExpandableProjectSelectedPlan extends StatefulWidget {
+  const _ExpandableProjectSelectedPlan({
+    Key key,
+    this.isExpandedInitial = false,
+  }) : super(key: key);
+
+  final bool isExpandedInitial;
+  @override
+  __ExpandableProjectSelectedPlanState createState() =>
+      __ExpandableProjectSelectedPlanState();
+}
+
+class __ExpandableProjectSelectedPlanState
+    extends State<_ExpandableProjectSelectedPlan> {
+  bool _expandedFlag = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _expandedFlag =
+        PageStorage.of(context)?.readState(context) ?? widget.isExpandedInitial;
+  }
+
+  void _handleTap() {
+    setState(() {
+      _expandedFlag = !_expandedFlag;
+      // setState(() {
+      //   // Rebuild without widget.children.
+      // });
+      PageStorage.of(context)?.writeState(context, _expandedFlag);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Container(
+        padding: const EdgeInsets.only(left: 8.0),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Container(
+                  width: fullWidth(context) * 0.45,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          "Building Materials",
+                          style: theme.textTheme.bodyText1.copyWith(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Text(":"),
+                    ],
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.only(left: 8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Best",
+                          style: theme.textTheme.bodyText1.copyWith(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.kbDarkGreen)),
+                      IconButton(
+                          icon: Image.asset(
+                            _expandedFlag?HelloIcons.up_arrow_light_icon: HelloIcons.down_arrow_light_icon,
+                            height: 18,
+                          ),
+                          onPressed: _handleTap),
+                    ],
+                  ),
+                )
+              ],
+            ),
+            _expandedFlag?AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOutSine,
+              color: Colors.red,
+              height: 200,
+             
+            ):SizedBox.shrink(),
+          ],
+        ));
   }
 }
 

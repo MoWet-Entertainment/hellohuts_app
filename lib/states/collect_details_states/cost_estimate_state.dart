@@ -67,15 +67,27 @@ class CostEstimateState extends ChangeNotifier {
 
   Map<RoomTypes, String> _selectedDetailsItems = null;
 
-  get selectedDetailsItems => _selectedDetailsItems;
+  // get selectedDetailsItems => _selectedDetailsItems != null
+  //     ? _selectedDetailsItems.entries.map((e) => e.value).toList()
+  //     : [];
+
+  List<String> get selectedDetailsItems {
+    if (_selectedDetailsItems == null || _selectedDetailsItems.isEmpty) {
+      return [];
+    } else {
+     return _selectedDetailsItems.entries.map((e) => e.value).toList();
+    }
+  }
+
   set setSelectedDetailsItems(List<String> list) {
     Map<RoomTypes, String> selectedMap = null;
-
-    selectedMap = Map.fromIterable(list,
-        key: (e) => customRequirementsSelection.keys.firstWhere(
-            (element) => customRequirementsSelection[element] == e,
-            orElse: () => null),
-        value: (e) => e);
+    if (list != null) {
+      selectedMap = Map.fromIterable(list,
+          key: (e) => customRequirementsSelection.keys.firstWhere(
+              (element) => customRequirementsSelection[element] == e,
+              orElse: () => null),
+          value: (e) => e);
+    }
     _selectedDetailsItems = selectedMap;
     notifyListeners();
   }
@@ -139,8 +151,8 @@ class CostEstimateState extends ChangeNotifier {
   final List<String> pack1 =
       requirementsBasePack1.entries.map((e) => e.value).toList();
 
-  final List<String> pack2 =requirementsBasePack2.entries.map((e) => e.value).toList();
-
+  final List<String> pack2 =
+      requirementsBasePack2.entries.map((e) => e.value).toList();
 
   ///to determine the current page of the Collect details section
   int _pageIndexOfCollectSection = 0;
