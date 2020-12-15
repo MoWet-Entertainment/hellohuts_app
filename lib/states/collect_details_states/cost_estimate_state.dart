@@ -75,7 +75,7 @@ class CostEstimateState extends ChangeNotifier {
     if (_selectedDetailsItems == null || _selectedDetailsItems.isEmpty) {
       return [];
     } else {
-     return _selectedDetailsItems.entries.map((e) => e.value).toList();
+      return _selectedDetailsItems.entries.map((e) => e.value).toList();
     }
   }
 
@@ -245,6 +245,23 @@ class CostEstimateState extends ChangeNotifier {
   SelectedPlanModel _selectedPlanModel = null;
   get selectedPlanModel => _selectedPlanModel;
 
+
+  List<RoomTypes> get  getSelectedOtherRequirements {
+    Map<RoomTypes, String> _selected = null;
+    if (_selectedPack == 1) {
+      _selected = requirementsBasePack1;
+    } else if (_selectedPack == 2) {
+      _selected = requirementsBasePack2;
+    } else {
+      if (!(_selectedDetailsItems == null || _selectedDetailsItems.isEmpty)) {
+        _selected = _selectedDetailsItems;
+      } else {
+        _selected = requirementsBasePack1;
+      }
+    }
+    return _selected.entries.map((e) => e.key).toList();
+  }
+
   void calculateRate() {
     _selectedPlanModel = SelectedPlanModel(
       buildingMaterialsType: _buildingMaterialTypeSelected,
@@ -263,9 +280,15 @@ class CostEstimateState extends ChangeNotifier {
       noOfBedrooms: _selectedNumberOfBedrooms,
       noOfBathrooms: _selectedNumberOfBathrooms,
       otherBuildingRequirements: OtherBuildingRequirementsModel(
-        otherRequirementsList: [],
+        otherRequirementsList: [
+          ...getSelectedOtherRequirements
+        ],
       ),
+      createdTimeStamp: setTimeStampInUTC(),
+      updatedTimeStamp: setTimeStampInUTC(),
     );
+    print(_selectedPlanModel);
+    print(_buildingRequirementsModel);
   }
 }
 

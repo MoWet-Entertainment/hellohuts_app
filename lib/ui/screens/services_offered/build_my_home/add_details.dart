@@ -207,6 +207,7 @@ class CallToActionButtonCostEstimate extends StatelessWidget {
                   else
                     {
                       print("User Wants to Calculate the Rate"),
+                      state.calculateRate(),
                       ExtendedNavigator.root.push(Routes.costEstimateScreen),
                     }
                 }),
