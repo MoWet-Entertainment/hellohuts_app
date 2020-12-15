@@ -248,11 +248,31 @@ class _SelectedPlanSection extends StatelessWidget {
           SizedBox(
             height: 4,
           ),
-          _ExpandableProjectSelectedPlan(),
-                    _ExpandableProjectSelectedPlan(),
-
-          _ExpandableProjectSelectedPlan()
-
+          _ExpandableProjectSelectedPlan(
+            isExpandedInitial: true,
+            itemTypeText: "Building Materials",
+          ),
+          _ExpandableProjectSelectedPlan(
+            itemTypeText: "Flooring",
+          ),
+          _ExpandableProjectSelectedPlan(
+            itemTypeText: "Electricals",
+          ),
+            _ExpandableProjectSelectedPlan(
+            itemTypeText: "Plumbing",
+          ),
+           _ExpandableProjectSelectedPlan(
+            itemTypeText: "Doors and Windows",
+          ),
+            _ExpandableProjectSelectedPlan(
+            itemTypeText: "Kitchen Decor",
+          ),
+           _ExpandableProjectSelectedPlan(
+            itemTypeText: "Interior Decor",
+          ),
+           _ExpandableProjectSelectedPlan(
+            itemTypeText: "Exterior Decor",
+          )
         ],
       ),
     );
@@ -262,10 +282,11 @@ class _SelectedPlanSection extends StatelessWidget {
 class _ExpandableProjectSelectedPlan extends StatefulWidget {
   const _ExpandableProjectSelectedPlan({
     Key key,
-    this.isExpandedInitial = false,
+    this.isExpandedInitial = false, this.itemTypeText,
   }) : super(key: key);
 
   final bool isExpandedInitial;
+  final String itemTypeText;
   @override
   __ExpandableProjectSelectedPlanState createState() =>
       __ExpandableProjectSelectedPlanState();
@@ -296,55 +317,62 @@ class __ExpandableProjectSelectedPlanState
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Container(
-        padding: const EdgeInsets.only(left: 8.0),
+        padding: const EdgeInsets.only(left: 16.0),
         child: Column(
           children: [
-            Row(
-              children: [
-                Container(
-                  width: fullWidth(context) * 0.45,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Flexible(
-                        child: Text(
-                          "Building Materials",
-                          style: theme.textTheme.bodyText1.copyWith(
-                              fontSize: 16, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      Text(":"),
-                    ],
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.only(left: 8),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Best",
-                          style: theme.textTheme.bodyText1.copyWith(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: AppColors.kbDarkGreen)),
-                      IconButton(
-                          icon: Image.asset(
-                            _expandedFlag?HelloIcons.up_arrow_light_icon: HelloIcons.down_arrow_light_icon,
-                            height: 18,
+            GestureDetector(
+                          child: Row(
+                children: [
+                  Container(
+                    width: fullWidth(context) * 0.45,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Flexible(
+                          child: Text(
+                            widget.itemTypeText??'Miscellaneous',
+                            style: theme.textTheme.bodyText1.copyWith(
+                                fontSize: 16, fontWeight: FontWeight.bold),
                           ),
-                          onPressed: _handleTap),
-                    ],
+                        ),
+                        Text(":"),
+                      ],
+                    ),
                   ),
-                )
-              ],
+                  Container(
+                    padding: const EdgeInsets.only(left: 24),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Best",
+                            style: theme.textTheme.bodyText1.copyWith(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.kbDarkGreen)),
+                        IconButton(
+                            icon: Image.asset(
+                              _expandedFlag
+                                  ? HelloIcons.up_arrow_light_icon
+                                  : HelloIcons.down_arrow_light_icon,
+                              height: 14,
+                              color: theme.colorScheme.onBackground.withOpacity(0.6),
+                            ),
+                            onPressed: _handleTap),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+              onTap: _handleTap,
             ),
-            _expandedFlag?AnimatedContainer(
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.easeInOutSine,
-              color: Colors.red,
-              height: 200,
-             
-            ):SizedBox.shrink(),
+           
+               AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOutSine,
+                    color: Colors.red,
+                    height:  _expandedFlag?200:0,
+                  ),
+                
           ],
         ));
   }
