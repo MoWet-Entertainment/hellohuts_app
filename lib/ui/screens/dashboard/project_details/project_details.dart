@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/helper/utilities.dart';
+import 'package:hellohuts_app/models/cost_estimation/cost_estimation.dart';
 import 'package:hellohuts_app/models/dashboard/project_details/project_details.dart';
 import 'package:hellohuts_app/states/dashboard/dashboard_state.dart';
 import 'package:hellohuts_app/ui/common_widgets/app_bar/app_bar.dart';
@@ -250,28 +251,28 @@ class _SelectedPlanSection extends StatelessWidget {
           ),
           _ExpandableProjectSelectedPlan(
             isExpandedInitial: true,
-            itemTypeText: "Building Materials",
+            itemHeadText: "Building Materials",
           ),
           _ExpandableProjectSelectedPlan(
-            itemTypeText: "Flooring",
+            itemHeadText: "Flooring",
           ),
           _ExpandableProjectSelectedPlan(
-            itemTypeText: "Electricals",
+            itemHeadText: "Electricals",
           ),
-            _ExpandableProjectSelectedPlan(
-            itemTypeText: "Plumbing",
+          _ExpandableProjectSelectedPlan(
+            itemHeadText: "Plumbing",
           ),
-           _ExpandableProjectSelectedPlan(
-            itemTypeText: "Doors and Windows",
+          _ExpandableProjectSelectedPlan(
+            itemHeadText: "Doors and Windows",
           ),
-            _ExpandableProjectSelectedPlan(
-            itemTypeText: "Kitchen Decor",
+          _ExpandableProjectSelectedPlan(
+            itemHeadText: "Kitchen Decor",
           ),
-           _ExpandableProjectSelectedPlan(
-            itemTypeText: "Interior Decor",
+          _ExpandableProjectSelectedPlan(
+            itemHeadText: "Interior Decor",
           ),
-           _ExpandableProjectSelectedPlan(
-            itemTypeText: "Exterior Decor",
+          _ExpandableProjectSelectedPlan(
+            itemHeadText: "Exterior Decor",
           )
         ],
       ),
@@ -282,11 +283,13 @@ class _SelectedPlanSection extends StatelessWidget {
 class _ExpandableProjectSelectedPlan extends StatefulWidget {
   const _ExpandableProjectSelectedPlan({
     Key key,
-    this.isExpandedInitial = false, this.itemTypeText,
+    this.isExpandedInitial = false,
+    this.itemHeadText, this.itemType,
   }) : super(key: key);
 
   final bool isExpandedInitial;
-  final String itemTypeText;
+  final String itemHeadText;
+  final RoomTypes itemType;
   @override
   __ExpandableProjectSelectedPlanState createState() =>
       __ExpandableProjectSelectedPlanState();
@@ -321,7 +324,7 @@ class __ExpandableProjectSelectedPlanState
         child: Column(
           children: [
             GestureDetector(
-                          child: Row(
+              child: Row(
                 children: [
                   Container(
                     width: fullWidth(context) * 0.45,
@@ -330,7 +333,7 @@ class __ExpandableProjectSelectedPlanState
                       children: [
                         Flexible(
                           child: Text(
-                            widget.itemTypeText??'Miscellaneous',
+                            widget.itemHeadText ?? 'Miscellaneous',
                             style: theme.textTheme.bodyText1.copyWith(
                                 fontSize: 16, fontWeight: FontWeight.bold),
                           ),
@@ -355,7 +358,8 @@ class __ExpandableProjectSelectedPlanState
                                   ? HelloIcons.up_arrow_light_icon
                                   : HelloIcons.down_arrow_light_icon,
                               height: 14,
-                              color: theme.colorScheme.onBackground.withOpacity(0.6),
+                              color: theme.colorScheme.onBackground
+                                  .withOpacity(0.6),
                             ),
                             onPressed: _handleTap),
                       ],
@@ -365,14 +369,12 @@ class __ExpandableProjectSelectedPlanState
               ),
               onTap: _handleTap,
             ),
-           
-               AnimatedContainer(
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.easeInOutSine,
-                    color: Colors.red,
-                    height:  _expandedFlag?200:0,
-                  ),
-                
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOutSine,
+              color: Colors.red,
+              height: _expandedFlag ? 200 : 0,
+            ),
           ],
         ));
   }
