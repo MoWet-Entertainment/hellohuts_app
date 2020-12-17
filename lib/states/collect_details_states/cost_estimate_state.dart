@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hellohuts_app/helper/utilities.dart';
 import 'package:hellohuts_app/models/cost_estimation/cost_estimation.dart';
 import 'package:hellohuts_app/models/dashboard/selected_plan/selected_plan.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class CostEstimateState extends ChangeNotifier {
   bool _needReset = false;
@@ -245,8 +246,7 @@ class CostEstimateState extends ChangeNotifier {
   SelectedPlanModel _selectedPlanModel = null;
   get selectedPlanModel => _selectedPlanModel;
 
-
-  List<RoomTypes> get  getSelectedOtherRequirements {
+  List<RoomTypes> get getSelectedOtherRequirements {
     Map<RoomTypes, String> _selected = null;
     if (_selectedPack == 1) {
       _selected = requirementsBasePack1;
@@ -280,9 +280,7 @@ class CostEstimateState extends ChangeNotifier {
       noOfBedrooms: _selectedNumberOfBedrooms,
       noOfBathrooms: _selectedNumberOfBathrooms,
       otherBuildingRequirements: OtherBuildingRequirementsModel(
-        otherRequirementsList: [
-          ...getSelectedOtherRequirements
-        ],
+        otherRequirementsList: [...getSelectedOtherRequirements],
       ),
       createdTimeStamp: setTimeStampInUTC(),
       updatedTimeStamp: setTimeStampInUTC(),
@@ -291,6 +289,20 @@ class CostEstimateState extends ChangeNotifier {
     print(_buildingRequirementsModel);
   }
 }
+
+final costEstimateState = Provider((ref) => CostEstimateState());
+
+final selectedPlanProvider = FutureProvider<SelectedPlanModel>((ref) async {
+  final model = ref.read(costEstimateState);
+  print(model.selectedPlanModel);
+  return model.selectedPlanModel;
+});
+
+final buildingRequirementsProvider =
+    FutureProvider<BuildingRequirementsModel>((ref) async {
+  final model = ref.read(costEstimateState);
+  return model.buildingRequirementsModel;
+});
 
 ///Page Types
 enum CostEstimatePageTypes {
