@@ -761,7 +761,40 @@ class Mock {
       "district": "Ernakulam",
       "state": "Kerala",
       "country": "India"
-    }
+    },
+    
+  "selected_plan": {
+    "customization_building_materials": "best",
+    "customization_flooring": "balanced",
+    "customization_electricals": "best",
+    "customization_plumbing": "balanced",
+    "customization_doors_and_windows": "balanced",
+    "customization_kitchen_decor": "standard",
+    "customization_interior_decor": "standard",
+    "customization_exterior_decor": "none",
+    "created_at": "2020-12-17T05:09:28Z",
+    "updated_at": "2020-12-17T05:09:28Z"
+  },
+  "building_requirements": {
+    "number_of_storeys": "2",
+    "number_of_bedrooms": "4",
+    "number_of_bathrooms": "3",
+    "other_building_requirements": {
+      "other_room_types": [
+        "Kitchen",
+        "Livingroom",
+        "Diningroom",
+        "Porch",
+        "Sitout",
+        "Storeroom"
+      ],
+      "created_at": "2020-12-17T05:09:28Z",
+      "updated_at": "2020-12-17T05:09:28Z"
+    },
+    "created_at": "2020-12-17T05:09:28Z",
+    "updated_at": "2020-12-17T05:09:28Z"
+  }
+
   };
 }
 

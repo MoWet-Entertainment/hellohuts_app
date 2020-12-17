@@ -146,6 +146,6 @@ class JsonConstants {
   static const String numberOfBedrooms = "number_of_bedrooms";
   static const String numberOfBathrooms = "number_of_bathrooms";
   static const String otherBuildingRequirements = "other_building_requirements";
+  static const String buildingRequirements = "building_requirements";
   static const String otherRoomTypes = "other_room_types";
-
 }
