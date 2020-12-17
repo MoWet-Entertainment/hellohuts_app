@@ -6,6 +6,7 @@ import 'package:hellohuts_app/helper/utilities.dart';
 
 import 'package:hellohuts_app/models/dashboard/contractor_model/contractor_model.dart';
 import 'package:hellohuts_app/models/dashboard/engineer_model/engineer_model.dart';
+import 'package:hellohuts_app/models/dashboard/selected_plan/selected_plan.dart';
 part 'project_details.freezed.dart';
 part 'project_details.g.dart';
 
@@ -28,6 +29,8 @@ abstract class ProjectDetailsModel with _$ProjectDetailsModel {
         @JsonKey(name: JsonConstants.projectEngineer) EngineerModel projectEngineer,
         @JsonKey(name: JsonConstants.contractor) ContractorModel contractor,
         @JsonKey(name:JsonConstants.projectAddress) Address projectAddress,
+        @JsonKey(name:JsonConstants.selectedPlan) SelectedPlanModel selectedPlan,
+        @JsonKey(name:JsonConstants.buildingRequirements) BuildingRequirementsModel buildingRequirements,
             @JsonKey(
         name: JsonConstants.createdAt,
         fromJson: dateTimeFromUTC,

@@ -160,6 +160,9 @@ DateTime dateTimeFromUTC(String timeStamp) =>
     timeStamp == null ? null : DateTime.parse(timeStamp).toLocal();
 
 String dateTimeToUTC(DateTime timestamp) {
+  if (timestamp == null) {
+    timestamp = DateTime.now();
+  }
   var dt = timestamp.toUtc();
   var dateFormatted = DateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(dt);
   return dateFormatted;

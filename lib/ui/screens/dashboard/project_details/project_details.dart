@@ -4,6 +4,7 @@ import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/helper/utilities.dart';
 import 'package:hellohuts_app/models/cost_estimation/cost_estimation.dart';
 import 'package:hellohuts_app/models/dashboard/project_details/project_details.dart';
+import 'package:hellohuts_app/states/collect_details_states/cost_estimate_state.dart';
 import 'package:hellohuts_app/states/dashboard/dashboard_state.dart';
 import 'package:hellohuts_app/ui/common_widgets/app_bar/app_bar.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
@@ -225,12 +226,13 @@ class _ProjectOverviewSection extends StatelessWidget {
   }
 }
 
-class _SelectedPlanSection extends StatelessWidget {
+class _SelectedPlanSection extends ConsumerWidget {
   const _SelectedPlanSection({Key key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ScopedReader watch) {
     final theme = Theme.of(context);
+    final selectedPlan = watch(selectedPlanProvider);
     return Container(
       padding: const EdgeInsets.only(top: 16.0),
       child: Column(
@@ -252,6 +254,7 @@ class _SelectedPlanSection extends StatelessWidget {
           _ExpandableProjectSelectedPlan(
             isExpandedInitial: true,
             itemHeadText: "Building Materials",
+           
           ),
           _ExpandableProjectSelectedPlan(
             itemHeadText: "Flooring",
@@ -284,12 +287,13 @@ class _ExpandableProjectSelectedPlan extends StatefulWidget {
   const _ExpandableProjectSelectedPlan({
     Key key,
     this.isExpandedInitial = false,
-    this.itemHeadText, this.itemType,
+    this.itemHeadText,
+    this.itemType,
   }) : super(key: key);
 
   final bool isExpandedInitial;
   final String itemHeadText;
-  final RoomTypes itemType;
+  final CustomizeOptions itemType;
   @override
   __ExpandableProjectSelectedPlanState createState() =>
       __ExpandableProjectSelectedPlanState();

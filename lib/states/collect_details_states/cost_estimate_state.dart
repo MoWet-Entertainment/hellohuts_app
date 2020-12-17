@@ -287,21 +287,20 @@ class CostEstimateState extends ChangeNotifier {
     );
     print(_selectedPlanModel);
     print(_buildingRequirementsModel);
+   print( _selectedPlanModel.toJson());
+    print(_buildingRequirementsModel.toJson());
   }
 }
 
-final costEstimateState = Provider((ref) => CostEstimateState());
-
 final selectedPlanProvider = FutureProvider<SelectedPlanModel>((ref) async {
-  final model = ref.read(costEstimateState);
-  print(model.selectedPlanModel);
-  return model.selectedPlanModel;
+  // print(model.selectedPlanModel);
+  // return model.selectedPlanModel;
 });
 
 final buildingRequirementsProvider =
-    FutureProvider<BuildingRequirementsModel>((ref) async {
-  final model = ref.read(costEstimateState);
-  return model.buildingRequirementsModel;
+    StateProvider<BuildingRequirementsModel>((ref) {
+  // final model = ref.read(costEstimateState);
+  // return model.buildingRequirementsModel;
 });
 
 ///Page Types
