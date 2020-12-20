@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/helper/utilities.dart';
@@ -232,7 +233,7 @@ class _SelectedPlanSection extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final theme = Theme.of(context);
-    final selectedPlan = watch(selectedPlanProvider);
+    final selectedPlan = watch(projectDetailsProvider).data.value.selectedPlan;
     return Container(
       padding: const EdgeInsets.only(top: 16.0),
       child: Column(
@@ -254,28 +255,34 @@ class _SelectedPlanSection extends ConsumerWidget {
           _ExpandableProjectSelectedPlan(
             isExpandedInitial: true,
             itemHeadText: "Building Materials",
-           
+            itemType: selectedPlan.buildingMaterialsType,
           ),
           _ExpandableProjectSelectedPlan(
             itemHeadText: "Flooring",
+            itemType: selectedPlan.flooringType,
           ),
           _ExpandableProjectSelectedPlan(
-            itemHeadText: "Electricals",
-          ),
+              itemHeadText: "Electricals",
+              itemType: selectedPlan.electricalsType),
           _ExpandableProjectSelectedPlan(
             itemHeadText: "Plumbing",
+            itemType: selectedPlan.plumbingType,
           ),
           _ExpandableProjectSelectedPlan(
             itemHeadText: "Doors and Windows",
+            itemType: selectedPlan.doorsAndWindowsType,
           ),
           _ExpandableProjectSelectedPlan(
             itemHeadText: "Kitchen Decor",
+            itemType: selectedPlan.kitchenDecorType,
           ),
           _ExpandableProjectSelectedPlan(
             itemHeadText: "Interior Decor",
+            itemType: selectedPlan.interiorDecorType,
           ),
           _ExpandableProjectSelectedPlan(
             itemHeadText: "Exterior Decor",
+            itemType: selectedPlan.exteriorDecorType,
           )
         ],
       ),
@@ -349,13 +356,11 @@ class __ExpandableProjectSelectedPlanState
                   Container(
                     padding: const EdgeInsets.only(left: 24),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisSize: MainAxisSize.min,
+                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Best",
-                            style: theme.textTheme.bodyText1.copyWith(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.kbDarkGreen)),
+                        _buildSelectedPlanTypeText(theme),
+                        Spacer(),
                         IconButton(
                             icon: Image.asset(
                               _expandedFlag
@@ -381,6 +386,36 @@ class __ExpandableProjectSelectedPlanState
             ),
           ],
         ));
+  }
+
+  Widget _buildSelectedPlanTypeText(ThemeData theme) {
+    return Text(
+        widget.itemType != null ? describeEnum(widget.itemType) : "Not Available",
+        style: theme.textTheme.bodyText1.copyWith(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: _getColorWithItemType(widget.itemType)));
+  }
+
+  Color _getColorWithItemType(CustomizeOptions type) {
+    switch (type) {
+      case CustomizeOptions.Best:
+        return AppColors.kbDarkGreen;
+      case CustomizeOptions.Balanced:
+        return Colors.blue;
+      case CustomizeOptions.Budget:
+        return AppColors.kbPrimaryYellow;
+      case CustomizeOptions.Classic:
+        return AppColors.kbDarkGreen;
+      case CustomizeOptions.Standard:
+        return Colors.blue;
+      case CustomizeOptions.Basic:
+        return AppColors.kbPrimaryYellow;
+      case CustomizeOptions.None:
+        return Colors.orange;
+      default:
+        return AppColors.kbPureBlack;
+    }
   }
 }
 
