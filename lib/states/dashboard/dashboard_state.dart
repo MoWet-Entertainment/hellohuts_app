@@ -46,7 +46,7 @@ class DashboardState extends AppState {
 final dashbordState = Provider((ref) => DashboardState());
 final projectDetailsProvider = FutureProvider<ProjectDetailsModel>((ref) async {
   final model = ref.read(dashbordState);
-  print(model.getProjectDetailsModel);
+  print(model.getProjectDetailsModel.toString());
   return model.getProjectDetailsModel;
 });
 
