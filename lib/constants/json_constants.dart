@@ -148,4 +148,16 @@ class JsonConstants {
   static const String otherBuildingRequirements = "other_building_requirements";
   static const String buildingRequirements = "building_requirements";
   static const String otherRoomTypes = "other_room_types";
+
+//Building Items Details
+  static const String itemName = "item_name";
+  static const String contents = "contents";
+  static const String buildingMaterials = "building_materials";
+  static const String flooring = "flooring";
+  static const String plumbing = "plumbing";
+  static const String electricals = "electricals";
+  static const String doorsAndWindows = "doors_and_windows";
+  static const String kitchenDecors = "kitchen_decor";
+  static const String interiorDecor = "interior_decor";
+  static const String exteriorDecor = "exterior_decor";
 }

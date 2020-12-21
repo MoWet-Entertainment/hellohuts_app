@@ -5,6 +5,7 @@ import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/helper/utilities.dart';
 import 'package:hellohuts_app/models/cost_estimation/cost_estimation.dart';
 import 'package:hellohuts_app/models/dashboard/project_details/project_details.dart';
+import 'package:hellohuts_app/models/dashboard/selected_plan/selected_plan.dart';
 import 'package:hellohuts_app/states/collect_details_states/cost_estimate_state.dart';
 import 'package:hellohuts_app/states/dashboard/dashboard_state.dart';
 import 'package:hellohuts_app/ui/common_widgets/app_bar/app_bar.dart';
@@ -234,6 +235,7 @@ class _SelectedPlanSection extends ConsumerWidget {
   Widget build(BuildContext context, ScopedReader watch) {
     final theme = Theme.of(context);
     final selectedPlan = watch(projectDetailsProvider).data.value.selectedPlan;
+    final materialSelected = watch(materialSelectedProvider);
     return Container(
       padding: const EdgeInsets.only(top: 16.0),
       child: Column(
@@ -253,37 +255,232 @@ class _SelectedPlanSection extends ConsumerWidget {
             height: 4,
           ),
           _ExpandableProjectSelectedPlan(
-            isExpandedInitial: true,
-            itemHeadText: "Building Materials",
-            itemType: selectedPlan.buildingMaterialsType,
-          ),
+              isExpandedInitial: false,
+              itemHeadText: "Building Materials",
+              itemType: selectedPlan.buildingMaterialsType,
+              child: materialSelected.map(
+                data: (_) => MaterialSelectedContainer(
+                  itemListModel: _.value.buildingMaterials,
+                ),
+                loading: (_) => Container(
+                  height: 200,
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
+                error: (_) => Container(
+                  height: 200,
+                  child: Center(
+                    child: Text("Error" + _.error),
+                  ),
+                ),
+              )),
           _ExpandableProjectSelectedPlan(
             itemHeadText: "Flooring",
             itemType: selectedPlan.flooringType,
+            child:  materialSelected.map(
+                data: (_) => MaterialSelectedContainer(
+                  itemListModel: _.value.flooring,
+                ),
+                loading: (_) => Container(
+                  height: 200,
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
+                error: (_) => Container(
+                  height: 200,
+                  child: Center(
+                    child: Text("Error" + _.error),
+                  ),
+                ),
+              )
           ),
           _ExpandableProjectSelectedPlan(
               itemHeadText: "Electricals",
-              itemType: selectedPlan.electricalsType),
+              itemType: selectedPlan.electricalsType,
+            child: materialSelected.map(
+                data: (_) => MaterialSelectedContainer(
+                  itemListModel: _.value.electricals,
+                ),
+                loading: (_) => Container(
+                  height: 200,
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
+                error: (_) => Container(
+                  height: 200,
+                  child: Center(
+                    child: Text("Error" + _.error),
+                  ),
+                ),
+              )),
           _ExpandableProjectSelectedPlan(
             itemHeadText: "Plumbing",
             itemType: selectedPlan.plumbingType,
+            child:  materialSelected.map(
+                data: (_) => MaterialSelectedContainer(
+                  itemListModel: _.value.plumbing,
+                ),
+                loading: (_) => Container(
+                  height: 200,
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
+                error: (_) => Container(
+                  height: 200,
+                  child: Center(
+                    child: Text("Error" + _.error),
+                  ),
+                ),
+              ),
           ),
           _ExpandableProjectSelectedPlan(
             itemHeadText: "Doors and Windows",
             itemType: selectedPlan.doorsAndWindowsType,
+            child:  materialSelected.map(
+                data: (_) => MaterialSelectedContainer(
+                  itemListModel: _.value.doorsAndWindows,
+                ),
+                loading: (_) => Container(
+                  height: 200,
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
+                error: (_) => Container(
+                  height: 200,
+                  child: Center(
+                    child: Text("Error" + _.error),
+                  ),
+                ),
+              ),
           ),
           _ExpandableProjectSelectedPlan(
             itemHeadText: "Kitchen Decor",
             itemType: selectedPlan.kitchenDecorType,
+            child:  materialSelected.map(
+                data: (_) => MaterialSelectedContainer(
+                  itemListModel: _.value.kitchenDecors,
+                ),
+                loading: (_) => Container(
+                  height: 200,
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
+                error: (_) => Container(
+                  height: 200,
+                  child: Center(
+                    child: Text("Error" + _.error),
+                  ),
+                ),
+              ),
           ),
           _ExpandableProjectSelectedPlan(
             itemHeadText: "Interior Decor",
             itemType: selectedPlan.interiorDecorType,
+            child: materialSelected.map(
+                data: (_) => MaterialSelectedContainer(
+                  itemListModel: _.value.interiorDecor,
+                ),
+                loading: (_) => Container(
+                  height: 200,
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
+                error: (_) => Container(
+                  height: 200,
+                  child: Center(
+                    child: Text("Error" + _.error),
+                  ),
+                ),
+              )
           ),
           _ExpandableProjectSelectedPlan(
             itemHeadText: "Exterior Decor",
             itemType: selectedPlan.exteriorDecorType,
-          )
+            child:  materialSelected.map(
+                data: (_) => MaterialSelectedContainer(
+                  itemListModel: _.value.exteriorDecor,
+                ),
+                loading: (_) => Container(
+                  height: 200,
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
+                error: (_) => Container(
+                  height: 200,
+                  child: Center(
+                    child: Text("Error" + _.error),
+                  ),
+                ),
+              ),
+          ),
+          SizedBox(height:32)
+        ],
+      
+      ),
+    );
+  }
+}
+
+class MaterialSelectedContainer extends StatelessWidget {
+  final List<MaterialGroupModel> itemListModel;
+  const MaterialSelectedContainer({Key key, this.itemListModel})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Container(
+      padding: const EdgeInsets.only(left: 8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ...itemListModel.map((ele) => Container(
+            
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical:2.0),
+                  child: Column(
+                    
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        ele.itemMainGroup ?? '',
+                        style: theme.textTheme.bodyText1.copyWith(fontWeight: FontWeight.bold, fontSize: 16),
+                      ),
+                    
+                      ...ele.contents.map((e) => Container(
+                                 padding: const EdgeInsets.only(left: 8.0,top: 4, bottom: 4),
+
+                            child: Column(
+                              children: [
+                              ( e.itemName?.trim()!='')? RichText(
+                                    text: TextSpan(
+                                        text: e.itemName?.trim() ?? '',
+                                        style: theme.textTheme.bodyText1.copyWith(
+                                            fontWeight: FontWeight.bold),
+                                        children: [
+                                      TextSpan(
+                                          text: e.itemText1?.trim() ?? '',
+                                          style: theme.textTheme.bodyText1)
+                                    ])):SizedBox.shrink(),
+                                  ( e.itemText2?.trim()!='')?  Text(e.itemText2??''):SizedBox.shrink(),
+                                  ( e.itemImage?.trim()!='')?Image.network(e.itemImage):SizedBox.shrink()
+                              ],
+                            ),
+                          )),
+                          SizedBox(height:12)
+                    ],
+                  ),
+                ),
+              )),
+              SizedBox(height: 12,)
         ],
       ),
     );
@@ -296,11 +493,13 @@ class _ExpandableProjectSelectedPlan extends StatefulWidget {
     this.isExpandedInitial = false,
     this.itemHeadText,
     this.itemType,
+    this.child,
   }) : super(key: key);
 
   final bool isExpandedInitial;
   final String itemHeadText;
   final CustomizeOptions itemType;
+  final Widget child;
   @override
   __ExpandableProjectSelectedPlanState createState() =>
       __ExpandableProjectSelectedPlanState();
@@ -320,9 +519,6 @@ class __ExpandableProjectSelectedPlanState
   void _handleTap() {
     setState(() {
       _expandedFlag = !_expandedFlag;
-      // setState(() {
-      //   // Rebuild without widget.children.
-      // });
       PageStorage.of(context)?.writeState(context, _expandedFlag);
     });
   }
@@ -357,10 +553,9 @@ class __ExpandableProjectSelectedPlanState
                     padding: const EdgeInsets.only(left: 24),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
-                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         _buildSelectedPlanTypeText(theme),
-                        Spacer(),
                         IconButton(
                             icon: Image.asset(
                               _expandedFlag
@@ -378,19 +573,29 @@ class __ExpandableProjectSelectedPlanState
               ),
               onTap: _handleTap,
             ),
-            AnimatedContainer(
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.easeInOutSine,
-              color: Colors.red,
-              height: _expandedFlag ? 200 : 0,
-            ),
+            // AnimatedContainer(
+            //   duration: const Duration(milliseconds: 300),
+            //   curve: Curves.easeInOutSine,
+            //   color: Colors.red,
+            //   height: _expandedFlag ? 200 : 0,
+            // ),
+            ExpandedSection(
+              child: widget.child ??
+                  Container(
+                    color: Colors.red,
+                    height: 200,
+                  ),
+              expand: _expandedFlag,
+            )
           ],
         ));
   }
 
   Widget _buildSelectedPlanTypeText(ThemeData theme) {
     return Text(
-        widget.itemType != null ? describeEnum(widget.itemType) : "Not Available",
+        widget.itemType != null
+            ? describeEnum(widget.itemType)
+            : "Not Available",
         style: theme.textTheme.bodyText1.copyWith(
             fontSize: 16,
             fontWeight: FontWeight.bold,

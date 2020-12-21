@@ -794,193 +794,284 @@ class Mock {
       "updated_at": "2020-12-17T05:09:28Z"
     }
   };
+  static var materials = {
+    "building_materials": [
+      {
+        "item_main_group": "Cement",
+        "contents": [
+          {
+            "item_name": "JSW Cements",
+            "item_text1": "",
+            "item_text2": "",
+            "item_image": ""
+          },
+          {
+            "item_name": "Ultratech Cements",
+            "item_text1": "",
+            "item_text2": "",
+            "item_image": ""
+          }
+        ]
+      },
+      {
+        "item_main_group": "Steel",
+        "contents": [
+          {
+            "item_name": "Tata Steels",
+            "item_text1": "",
+            "item_text2": "",
+            "item_image": ""
+          },
+          {
+            "item_name": "JSW Steels",
+            "item_text1": "",
+            "item_text2": "",
+            "item_image": ""
+          },
+          {
+            "item_name": "VIZAG Steels",
+            "item_text1": "",
+            "item_text2": "",
+            "item_image": ""
+          }
+        ]
+      },
+      {
+        "item_main_group": "Building Blocks",
+        "contents": [
+          {
+            "item_name": "High Quality Laterite",
+            "item_text1": "for load bearing members",
+            "item_text2": "",
+            "item_image": ""
+          },
+          {
+            "item_name": "Country burned Bricks",
+            "item_text1": "for load bearing design components",
+            "item_text2": "",
+            "item_image": ""
+          },
+          {
+            "item_name": "Solid Cement blocks",
+            "item_text1": "for non-load bearing design components",
+            "item_text2": "",
+            "item_image": ""
+          }
+        ]
+      }
+    ],
+    "flooring": [
+      {
+        "item_main_group": "Sitout/Stairs",
+        "contents": [
+          {
+            "item_name": "Polished Granite",
+            "item_text1": "Steel Grey or Black upto 200/sq.ft rate",
+            "item_text2": "",
+            "item_image": ""
+          }
+        ]
+      },
+      {
+        "item_main_group": "Living Room and Bedrooms",
+        "contents": [
+          {
+            "item_name": "Vitrified Tiles",
+            "item_text1": "Dezired sizes upto 90/sq.ft rate",
+            "item_text2": "",
+            "item_image": ""
+          }
+        ]
+      }
+    ],
+    "electricals": [
+      {
+        "item_main_group": "Wires and Conduits",
+        "contents": [
+          {
+            "item_name": "Finolex",
+            "item_text1": "",
+            "item_text2": "",
+            "item_image": ""
+          },
+          {
+            "item_name": "RR Kabel",
+            "item_text1": "",
+            "item_text2": "",
+            "item_image": ""
+          },
+          {
+            "item_name": "Polycab",
+            "item_text1": "",
+            "item_text2": "",
+            "item_image": ""
+          }
+        ]
+      },
+      {
+        "item_main_group": "Switches and Boards",
+        "contents": [
+          {
+            "item_name": "Legrand",
+            "item_text1": "Distribution boxes, MCBs etc",
+            "item_text2": "",
+            "item_image": ""
+          },
+          {
+            "item_name": "Philips",
+            "item_text1": "Distributers, Switch Boxes etc",
+            "item_text2": "",
+            "item_image": ""
+          },
+          {
+            "item_name": "Schneider",
+            "item_text1": "Swiches, Automation systems etc",
+            "item_text2": "",
+            "item_image": ""
+          }
+        ]
+      }
+    ],
+    "plumbing": [
+      {
+        "item_main_group": "PVC Pipes",
+        "contents": [
+          {
+            "item_name": "Supreme PVC Pipes",
+            "item_text1": "",
+            "item_text2": "",
+            "item_image": ""
+          },
+          {
+            "item_name": "Finolex Pipes",
+            "item_text1": "As per availablity",
+            "item_text2": "",
+            "item_image": ""
+          }
+        ]
+      },
+      {
+        "item_main_group": "Bathroom Fittings",
+        "contents": [
+          {
+            "item_name": "Jaquar",
+            "item_text1": "Toilets, Flushing Systems, Pipes and Shower systems",
+            "item_text2": "",
+            "item_image": ""
+          },
+          {
+            "item_name": "Hindware",
+            "item_text1": "Washbasins and additional fittings",
+            "item_text2": "",
+            "item_image": ""
+          }
+        ]
+      }
+    ],
+    "doors_and_windows": [
+      {
+        "item_main_group": "Doors",
+        "contents": [
+          {
+            "item_name": "Front Door/Main Doors",
+            "item_text1":
+                "GI Sheet Door of ISI quality or well seasoned Teak door",
+            "item_text2": "",
+            "item_image": ""
+          },
+          {
+            "item_name": "Bedroom Doors",
+            "item_text1": "Processed Wooden Doors with 5 year warranty",
+            "item_text2": "",
+            "item_image": ""
+          },
+          {
+            "item_name": "Bathroom Doors",
+            "item_text1":
+                "Processed Wooden Doors  or UPVC Doors with water resistant coats",
+            "item_text2": "",
+            "item_image": ""
+          }
+        ]
+      },
+      {
+        "item_main_group": "Windows",
+        "contents": [
+          {
+            "item_name": "Steel or Wooden Windows",
+            "item_text1":
+                "Stainless steel or well seasoned wood for long lasting",
+            "item_text2": "",
+            "item_image": ""
+          },
+          {
+            "item_name": "Openings",
+            "item_text1": "Sliding UPVC with Toughened glass",
+            "item_text2": "",
+            "item_image": ""
+          }
+        ]
+      }
+    ],
+    "kitchen_decor": [
+      {
+        "item_main_group": "Modular Kitchen",
+        "contents": [
+          {
+            "item_name": "Cabinets",
+            "item_text1":
+                "3 Pull boxes, 2 Cutlerys, 2 Tandem Boxes, 2 Waste bins, 3 Slide ups, 2 Slide downs plus additional Storage",
+            "item_text2": "",
+            "item_image": ""
+          },
+          {
+            "item_name": "Chimney",
+            "item_text1": "Electric Chinmey with full automatic",
+            "item_text2": "",
+            "item_image": ""
+          }
+        ]
+      },
+      {
+        "item_main_group": "Kitchen Island and table tops",
+        "contents": [
+          {
+            "item_name": "Wooden/Nanowhite table top",
+            "item_text1": "",
+            "item_text2": "",
+            "item_image": ""
+          }
+        ]
+      }
+    ],
+    "interior_decor": [
+      {
+        "item_main_group": "Bedroom Wadrobes",
+        "contents": [
+          {
+            "item_name": "Cabinets",
+            "item_text1": "High Quality Wooden/ Processed wood cabinets",
+            "item_text2": "",
+            "item_image": ""
+          }
+        ]
+      }
+    ],
+    "exterior_decor": [
+      {
+        "item_main_group": "Landscaping",
+        "contents": [
+          {
+            "item_name": "Garden Floor",
+            "item_text1": "Lorem Ipsum",
+            "item_text2": "",
+            "item_image": ""
+          }
+        ]
+      }
+    ]
+  };
 }
-
-const materials = {
-  "building_materials": [
-    {
-      "item_group_head": "Cement",
-      "contents": [
-        {"item_name": "JSW Cements", "item_sub": "", "item_image": ""},
-        {"item_name": "Ultratech Cements", "item_sub": "", "item_image": ""}
-      ]
-    },
-    {
-      "item_group_head": "Steel",
-      "contents": [
-        {"item_name": "Tata Steels", "item_sub": "", "item_image": ""},
-        {"item_name": "JSW Steels", "item_sub": "", "item_image": ""},
-        {"item_name": "VIZAG Steels", "item_sub": "", "item_image": ""}
-      ]
-    },
-    {
-      "item_group_head": "Building Blocks",
-      "contents": [
-        {
-          "item_name": "High Quality Laterite",
-          "item_sub": "for load bearing members",
-          "item_image": ""
-        },
-        {
-          "item_name": "Country burned Bricks",
-          "item_sub": "for load bearing design components",
-          "item_image": ""
-        },
-        {
-          "item_name": "Solid Cement blocks",
-          "item_sub": "for non-load bearing design components",
-          "item_image": ""
-        }
-      ]
-    }
-  ],
-  "flooring": [
-    {
-      "item_group_head": "Sitout/Stairs",
-      "contents": [
-        {
-          "item_name": "Polished Granite",
-          "item_sub": "Steel Grey or Black upto 200/sq.ft rate",
-          "item_image": ""
-        }
-      ]
-    },
-    {
-      "item_group_head": "Living Room and Bedrooms",
-      "contents": [
-        {
-          "item_name": "Vitrified Tiles",
-          "item_sub": "Dezired sizes upto 90/sq.ft rate",
-          "item_image": ""
-        }
-      ]
-    }
-  ],
-  "electricals": [
-    {
-      "item_group_head": "Wires and Conduits",
-      "contents": [
-        {"item_name": "Finolex", "item_sub": "", "item_image": ""},
-        {"item_name": "RR Kabel", "item_sub": "", "item_image": ""},
-        {"item_name": "Polycab", "item_sub": "", "item_image": ""}
-      ]
-    },
-    {
-      "item_group_head": "Switches and Boards",
-      "contents": [
-        {
-          "item_name": "Legrand",
-          "item_sub": "Distribution boxes, MCBs etc",
-          "item_image": ""
-        },
-        {
-          "item_name": "Philips",
-          "item_sub": "Distributers, Switch Boxes etc",
-          "item_image": ""
-        },
-        {
-          "item_name": "Schneider",
-          "item_sub": "Swiches, Automation systems etc",
-          "item_image": ""
-        }
-      ]
-    }
-  ],
-  "plumbing": [
-    {
-      "item_group_head": "PVC Pipes",
-      "contents": [
-        {"item_name": "Supreme PVC Pipes", "item_sub": "", "item_image": ""},
-        {
-          "item_name": "Finolex Pipes",
-          "item_sub": "As per availablity",
-          "item_image": ""
-        }
-      ]
-    },
-    {
-      "item_group_head": "Bathroom Fittings",
-      "contents": [
-        {
-          "item_name": "Jaquar",
-          "item_sub": "Toilets, Flushing Systems, Pipes and Shower systems",
-          "item_image": ""
-        },
-        {
-          "item_name": "Hindware",
-          "item_sub": "Washbasins and additional fittings",
-          "item_image": ""
-        }
-      ]
-    }
-  ],
-  "doors_and_windows": [
-    {
-      "item_group_head": "Doors",
-      "contents": [
-        {
-          "item_name": "Front Door/Main Doors",
-          "item_sub": "GI Sheet Door of ISI quality or well seasoned Teak door",
-          "item_image": ""
-        },
-        {
-          "item_name": "Bedroom Doors",
-          "item_sub": "Processed Wooden Doors with 5 year warranty",
-          "item_image": ""
-        },
-        {
-          "item_name": "Bathroom Doors",
-          "item_sub":
-              "Processed Wooden Doors  or UPVC Doors with water resistant coats",
-          "item_image": ""
-        }
-      ]
-    },
-    {
-      "item_group_head": "Windows",
-      "contents": [
-        {
-          "item_name": "Steel or Wooden Windows",
-          "item_sub": "Stainless steel or well seasoned wood for long lasting",
-          "item_image": ""
-        },
-        {
-          "item_name": "Openings",
-          "item_sub": "Sliding UPVC with Toughened glass",
-          "item_image": ""
-        }
-      ]
-    }
-  ],
-  "kitchen_decor": [
-    {
-      "item_group_head": "Modular Kitchen",
-      "contents": [
-        {
-          "item_name": "Cabinets",
-          "item_sub":
-              "3 Pull boxes, 2 Cutlerys, 2 Tandem Boxes, 2 Waste bins, 3 Slide ups, 2 Slide downs plus additional Storage",
-          "item_image": ""
-        },
-        {
-          "item_name": "Chimney",
-          "item_sub": "Electric Chinmey with full automatic",
-          "item_image": ""
-        }
-      ]
-    },
-    {
-      "item_group_head": "Kitchen Island and table tops",
-      "contents": [
-        {
-          "item_name": "Wooden/Nanowhite table top",
-          "item_sub": "",
-          "item_image": ""
-        }
-      ]
-    }
-  ]
-};
 
 class ImageData {
   final String id;

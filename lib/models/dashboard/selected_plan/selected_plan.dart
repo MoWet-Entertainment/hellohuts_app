@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/rendering.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hellohuts_app/constants/json_constants.dart';
 import 'package:hellohuts_app/helper/utilities.dart';
@@ -91,7 +92,7 @@ abstract class OtherBuildingRequirementsModel
   factory OtherBuildingRequirementsModel({
     @JsonKey(name: JsonConstants.otherRoomTypes, toJson: OtherBuildingRequirementsModel._roomTypesToJson, fromJson: OtherBuildingRequirementsModel._roomTypesFromJson)
         List<RoomTypes> otherRequirementsList,
-           @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+    @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
         DateTime createdTimeStamp,
     @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
         DateTime updatedTimeStamp,
@@ -102,7 +103,8 @@ abstract class OtherBuildingRequirementsModel
     toJsonList = list.map((val) => describeEnum(val)).toList();
     return toJsonList;
   }
-factory OtherBuildingRequirementsModel.fromJson(Map<String, dynamic> json) =>
+
+  factory OtherBuildingRequirementsModel.fromJson(Map<String, dynamic> json) =>
       _$OtherBuildingRequirementsModelFromJson(json);
 
   factory OtherBuildingRequirementsModel.fromFireStore(DocumentSnapshot doc) {
@@ -132,7 +134,7 @@ abstract class BuildingRequirementsModel with _$BuildingRequirementsModel {
         int noOfBathrooms,
     @JsonKey(name: JsonConstants.otherBuildingRequirements)
         OtherBuildingRequirementsModel otherBuildingRequirements,
-           @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+    @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
         DateTime createdTimeStamp,
     @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
         DateTime updatedTimeStamp,
@@ -143,5 +145,68 @@ abstract class BuildingRequirementsModel with _$BuildingRequirementsModel {
   factory BuildingRequirementsModel.fromFireStore(DocumentSnapshot doc) {
     Map<String, dynamic> json = doc.data();
     return BuildingRequirementsModel.fromJson(json);
+  }
+}
+
+@freezed
+abstract class MaterialItemModel with _$MaterialItemModel {
+  @JsonSerializable(explicitToJson: true)
+  factory MaterialItemModel({
+    @JsonKey(name: JsonConstants.itemName) String itemName,
+    @JsonKey(name: JsonConstants.itemText1) String itemText1,
+    @JsonKey(name: JsonConstants.itemText2) String itemText2,
+    @JsonKey(name: JsonConstants.itemImage) String itemImage,
+  }) = _MaterialItemModel;
+
+  factory MaterialItemModel.fromJson(Map<String, dynamic> json) =>
+      _$MaterialItemModelFromJson(json);
+
+  factory MaterialItemModel.fromFireStore(DocumentSnapshot doc) {
+    Map<String, dynamic> json = doc.data();
+    return MaterialItemModel.fromJson(json);
+  }
+}
+
+@freezed
+abstract class MaterialGroupModel with _$MaterialGroupModel {
+  @JsonSerializable(explicitToJson: true)
+  factory MaterialGroupModel({
+    @JsonKey(name: JsonConstants.itemMainGroup) String itemMainGroup,
+    @JsonKey(name: JsonConstants.contents) List<MaterialItemModel> contents,
+  }) = _MaterialGroupModel;
+
+   factory MaterialGroupModel.fromJson(Map<String, dynamic> json) =>
+      _$MaterialGroupModelFromJson(json);
+
+  factory MaterialGroupModel.fromFireStore(DocumentSnapshot doc) {
+    Map<String, dynamic> json = doc.data();
+    return MaterialGroupModel.fromJson(json);
+  }
+}
+
+@freezed
+abstract class MaterialSelectedModel with _$MaterialSelectedModel {
+  @JsonSerializable(explicitToJson: true)
+  factory MaterialSelectedModel({
+    @JsonKey(name:JsonConstants.buildingMaterials) List<MaterialGroupModel> buildingMaterials,
+    @JsonKey(name:JsonConstants.flooring) List<MaterialGroupModel> flooring,
+    @JsonKey(name:JsonConstants.plumbing) List<MaterialGroupModel> plumbing,
+    @JsonKey(name:JsonConstants.electricals) List<MaterialGroupModel> electricals,
+    @JsonKey(name: JsonConstants.doorsAndWindows)List<MaterialGroupModel> doorsAndWindows,
+    @JsonKey(name:JsonConstants.kitchenDecors) List<MaterialGroupModel> kitchenDecors,
+    @JsonKey(name:JsonConstants.interiorDecor) List<MaterialGroupModel> interiorDecor,
+    @JsonKey(name:JsonConstants.exteriorDecor)List<MaterialGroupModel> exteriorDecor,
+    @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+        DateTime createdTimeStamp,
+    @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+      DateTime updatedTimeStamp
+  }) = _MaterialSelectedModel;
+
+ factory MaterialSelectedModel.fromJson(Map<String, dynamic> json) =>
+      _$MaterialSelectedModelFromJson(json);
+
+  factory MaterialSelectedModel.fromFireStore(DocumentSnapshot doc) {
+    Map<String, dynamic> json = doc.data();
+    return MaterialSelectedModel.fromJson(json);
   }
 }
