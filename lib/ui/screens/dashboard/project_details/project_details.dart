@@ -236,6 +236,23 @@ class _SelectedPlanSection extends ConsumerWidget {
     final theme = Theme.of(context);
     final selectedPlan = watch(projectDetailsProvider).data.value.selectedPlan;
     final materialSelected = watch(materialSelectedProvider);
+    var map = materialSelected.map(
+                data: (_) => MaterialSelectedContainer(
+                  itemListModel: _.value.exteriorDecor,
+                ),
+                loading: (_) => Container(
+                  height: 200,
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
+                error: (_) => Container(
+                  height: 200,
+                  child: Center(
+                    child: Text("Error" + _.error),
+                  ),
+                ),
+              );
     return Container(
       padding: const EdgeInsets.only(top: 16.0),
       child: Column(
@@ -403,23 +420,7 @@ class _SelectedPlanSection extends ConsumerWidget {
           _ExpandableProjectSelectedPlan(
             itemHeadText: "Exterior Decor",
             itemType: selectedPlan.exteriorDecorType,
-            child:  materialSelected.map(
-                data: (_) => MaterialSelectedContainer(
-                  itemListModel: _.value.exteriorDecor,
-                ),
-                loading: (_) => Container(
-                  height: 200,
-                  child: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                ),
-                error: (_) => Container(
-                  height: 200,
-                  child: Center(
-                    child: Text("Error" + _.error),
-                  ),
-                ),
-              ),
+            child:  map,
           ),
           SizedBox(height:32)
         ],
@@ -438,7 +439,13 @@ class MaterialSelectedContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Container(
-      padding: const EdgeInsets.only(left: 8.0),
+
+      width: fullWidth(context),
+      padding: const EdgeInsets.all( 12.0),
+      decoration: BoxDecoration(
+        border: Border.all(color: AppColors.kbDarkGrey,width: 0.5),
+        borderRadius: BorderRadius.circular(8.0)
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -452,35 +459,37 @@ class MaterialSelectedContainer extends StatelessWidget {
                     children: [
                       Text(
                         ele.itemMainGroup ?? '',
-                        style: theme.textTheme.bodyText1.copyWith(fontWeight: FontWeight.bold, fontSize: 16),
+                        style: theme.textTheme.bodyText1.copyWith(fontWeight: FontWeight.bold, fontSize: 14),
                       ),
+                      SizedBox(height:4),
                     
                       ...ele.contents.map((e) => Container(
-                                 padding: const EdgeInsets.only(left: 8.0,top: 4, bottom: 4),
+                                 padding: const EdgeInsets.only(left: 14.0,top: 4, bottom: 4),
 
                             child: Column(
                               children: [
                               ( e.itemName?.trim()!='')? RichText(
                                     text: TextSpan(
                                         text: e.itemName?.trim() ?? '',
-                                        style: theme.textTheme.bodyText1.copyWith(
-                                            fontWeight: FontWeight.bold),
+                                        style: theme.textTheme.bodyText2.copyWith(
+                                            fontWeight: FontWeight.bold,fontSize: 12),
                                         children: [
                                       TextSpan(
-                                          text: e.itemText1?.trim() ?? '',
-                                          style: theme.textTheme.bodyText1)
+                                          text:  (e.itemText1?.trim()!='')?" "+e.itemText1 +" ":'',
+                                          style: theme.textTheme.bodyText2.copyWith(
+                                            fontSize: 12))
                                     ])):SizedBox.shrink(),
-                                  ( e.itemText2?.trim()!='')?  Text(e.itemText2??''):SizedBox.shrink(),
+                                  ( e.itemText2?.trim()!='')?  Text(e.itemText2??'', style: theme.textTheme.bodyText2.copyWith(
+                                            fontSize: 12)):SizedBox.shrink(),
                                   ( e.itemImage?.trim()!='')?Image.network(e.itemImage):SizedBox.shrink()
                               ],
                             ),
                           )),
-                          SizedBox(height:12)
+                          SizedBox(height:8)
                     ],
                   ),
                 ),
               )),
-              SizedBox(height: 12,)
         ],
       ),
     );
