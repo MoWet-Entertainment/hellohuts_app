@@ -1224,3 +1224,911 @@ abstract class _BuildingRequirementsModel implements BuildingRequirementsModel {
   @override
   _$BuildingRequirementsModelCopyWith<_BuildingRequirementsModel> get copyWith;
 }
+
+MaterialItemModel _$MaterialItemModelFromJson(Map<String, dynamic> json) {
+  return _MaterialItemModel.fromJson(json);
+}
+
+/// @nodoc
+class _$MaterialItemModelTearOff {
+  const _$MaterialItemModelTearOff();
+
+// ignore: unused_element
+  _MaterialItemModel call(
+      {@JsonKey(name: JsonConstants.itemName) String itemName,
+      @JsonKey(name: JsonConstants.itemText1) String itemText1,
+      @JsonKey(name: JsonConstants.itemText2) String itemText2,
+      @JsonKey(name: JsonConstants.itemImage) String itemImage}) {
+    return _MaterialItemModel(
+      itemName: itemName,
+      itemText1: itemText1,
+      itemText2: itemText2,
+      itemImage: itemImage,
+    );
+  }
+
+// ignore: unused_element
+  MaterialItemModel fromJson(Map<String, Object> json) {
+    return MaterialItemModel.fromJson(json);
+  }
+}
+
+/// @nodoc
+// ignore: unused_element
+const $MaterialItemModel = _$MaterialItemModelTearOff();
+
+/// @nodoc
+mixin _$MaterialItemModel {
+  @JsonKey(name: JsonConstants.itemName)
+  String get itemName;
+  @JsonKey(name: JsonConstants.itemText1)
+  String get itemText1;
+  @JsonKey(name: JsonConstants.itemText2)
+  String get itemText2;
+  @JsonKey(name: JsonConstants.itemImage)
+  String get itemImage;
+
+  Map<String, dynamic> toJson();
+  $MaterialItemModelCopyWith<MaterialItemModel> get copyWith;
+}
+
+/// @nodoc
+abstract class $MaterialItemModelCopyWith<$Res> {
+  factory $MaterialItemModelCopyWith(
+          MaterialItemModel value, $Res Function(MaterialItemModel) then) =
+      _$MaterialItemModelCopyWithImpl<$Res>;
+  $Res call(
+      {@JsonKey(name: JsonConstants.itemName) String itemName,
+      @JsonKey(name: JsonConstants.itemText1) String itemText1,
+      @JsonKey(name: JsonConstants.itemText2) String itemText2,
+      @JsonKey(name: JsonConstants.itemImage) String itemImage});
+}
+
+/// @nodoc
+class _$MaterialItemModelCopyWithImpl<$Res>
+    implements $MaterialItemModelCopyWith<$Res> {
+  _$MaterialItemModelCopyWithImpl(this._value, this._then);
+
+  final MaterialItemModel _value;
+  // ignore: unused_field
+  final $Res Function(MaterialItemModel) _then;
+
+  @override
+  $Res call({
+    Object itemName = freezed,
+    Object itemText1 = freezed,
+    Object itemText2 = freezed,
+    Object itemImage = freezed,
+  }) {
+    return _then(_value.copyWith(
+      itemName: itemName == freezed ? _value.itemName : itemName as String,
+      itemText1: itemText1 == freezed ? _value.itemText1 : itemText1 as String,
+      itemText2: itemText2 == freezed ? _value.itemText2 : itemText2 as String,
+      itemImage: itemImage == freezed ? _value.itemImage : itemImage as String,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$MaterialItemModelCopyWith<$Res>
+    implements $MaterialItemModelCopyWith<$Res> {
+  factory _$MaterialItemModelCopyWith(
+          _MaterialItemModel value, $Res Function(_MaterialItemModel) then) =
+      __$MaterialItemModelCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {@JsonKey(name: JsonConstants.itemName) String itemName,
+      @JsonKey(name: JsonConstants.itemText1) String itemText1,
+      @JsonKey(name: JsonConstants.itemText2) String itemText2,
+      @JsonKey(name: JsonConstants.itemImage) String itemImage});
+}
+
+/// @nodoc
+class __$MaterialItemModelCopyWithImpl<$Res>
+    extends _$MaterialItemModelCopyWithImpl<$Res>
+    implements _$MaterialItemModelCopyWith<$Res> {
+  __$MaterialItemModelCopyWithImpl(
+      _MaterialItemModel _value, $Res Function(_MaterialItemModel) _then)
+      : super(_value, (v) => _then(v as _MaterialItemModel));
+
+  @override
+  _MaterialItemModel get _value => super._value as _MaterialItemModel;
+
+  @override
+  $Res call({
+    Object itemName = freezed,
+    Object itemText1 = freezed,
+    Object itemText2 = freezed,
+    Object itemImage = freezed,
+  }) {
+    return _then(_MaterialItemModel(
+      itemName: itemName == freezed ? _value.itemName : itemName as String,
+      itemText1: itemText1 == freezed ? _value.itemText1 : itemText1 as String,
+      itemText2: itemText2 == freezed ? _value.itemText2 : itemText2 as String,
+      itemImage: itemImage == freezed ? _value.itemImage : itemImage as String,
+    ));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+
+/// @nodoc
+class _$_MaterialItemModel
+    with DiagnosticableTreeMixin
+    implements _MaterialItemModel {
+  _$_MaterialItemModel(
+      {@JsonKey(name: JsonConstants.itemName) this.itemName,
+      @JsonKey(name: JsonConstants.itemText1) this.itemText1,
+      @JsonKey(name: JsonConstants.itemText2) this.itemText2,
+      @JsonKey(name: JsonConstants.itemImage) this.itemImage});
+
+  factory _$_MaterialItemModel.fromJson(Map<String, dynamic> json) =>
+      _$_$_MaterialItemModelFromJson(json);
+
+  @override
+  @JsonKey(name: JsonConstants.itemName)
+  final String itemName;
+  @override
+  @JsonKey(name: JsonConstants.itemText1)
+  final String itemText1;
+  @override
+  @JsonKey(name: JsonConstants.itemText2)
+  final String itemText2;
+  @override
+  @JsonKey(name: JsonConstants.itemImage)
+  final String itemImage;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'MaterialItemModel(itemName: $itemName, itemText1: $itemText1, itemText2: $itemText2, itemImage: $itemImage)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'MaterialItemModel'))
+      ..add(DiagnosticsProperty('itemName', itemName))
+      ..add(DiagnosticsProperty('itemText1', itemText1))
+      ..add(DiagnosticsProperty('itemText2', itemText2))
+      ..add(DiagnosticsProperty('itemImage', itemImage));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _MaterialItemModel &&
+            (identical(other.itemName, itemName) ||
+                const DeepCollectionEquality()
+                    .equals(other.itemName, itemName)) &&
+            (identical(other.itemText1, itemText1) ||
+                const DeepCollectionEquality()
+                    .equals(other.itemText1, itemText1)) &&
+            (identical(other.itemText2, itemText2) ||
+                const DeepCollectionEquality()
+                    .equals(other.itemText2, itemText2)) &&
+            (identical(other.itemImage, itemImage) ||
+                const DeepCollectionEquality()
+                    .equals(other.itemImage, itemImage)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(itemName) ^
+      const DeepCollectionEquality().hash(itemText1) ^
+      const DeepCollectionEquality().hash(itemText2) ^
+      const DeepCollectionEquality().hash(itemImage);
+
+  @override
+  _$MaterialItemModelCopyWith<_MaterialItemModel> get copyWith =>
+      __$MaterialItemModelCopyWithImpl<_MaterialItemModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_MaterialItemModelToJson(this);
+  }
+}
+
+abstract class _MaterialItemModel implements MaterialItemModel {
+  factory _MaterialItemModel(
+          {@JsonKey(name: JsonConstants.itemName) String itemName,
+          @JsonKey(name: JsonConstants.itemText1) String itemText1,
+          @JsonKey(name: JsonConstants.itemText2) String itemText2,
+          @JsonKey(name: JsonConstants.itemImage) String itemImage}) =
+      _$_MaterialItemModel;
+
+  factory _MaterialItemModel.fromJson(Map<String, dynamic> json) =
+      _$_MaterialItemModel.fromJson;
+
+  @override
+  @JsonKey(name: JsonConstants.itemName)
+  String get itemName;
+  @override
+  @JsonKey(name: JsonConstants.itemText1)
+  String get itemText1;
+  @override
+  @JsonKey(name: JsonConstants.itemText2)
+  String get itemText2;
+  @override
+  @JsonKey(name: JsonConstants.itemImage)
+  String get itemImage;
+  @override
+  _$MaterialItemModelCopyWith<_MaterialItemModel> get copyWith;
+}
+
+MaterialGroupModel _$MaterialGroupModelFromJson(Map<String, dynamic> json) {
+  return _MaterialGroupModel.fromJson(json);
+}
+
+/// @nodoc
+class _$MaterialGroupModelTearOff {
+  const _$MaterialGroupModelTearOff();
+
+// ignore: unused_element
+  _MaterialGroupModel call(
+      {@JsonKey(name: JsonConstants.itemMainGroup)
+          String itemMainGroup,
+      @JsonKey(name: JsonConstants.contents)
+          List<MaterialItemModel> contents}) {
+    return _MaterialGroupModel(
+      itemMainGroup: itemMainGroup,
+      contents: contents,
+    );
+  }
+
+// ignore: unused_element
+  MaterialGroupModel fromJson(Map<String, Object> json) {
+    return MaterialGroupModel.fromJson(json);
+  }
+}
+
+/// @nodoc
+// ignore: unused_element
+const $MaterialGroupModel = _$MaterialGroupModelTearOff();
+
+/// @nodoc
+mixin _$MaterialGroupModel {
+  @JsonKey(name: JsonConstants.itemMainGroup)
+  String get itemMainGroup;
+  @JsonKey(name: JsonConstants.contents)
+  List<MaterialItemModel> get contents;
+
+  Map<String, dynamic> toJson();
+  $MaterialGroupModelCopyWith<MaterialGroupModel> get copyWith;
+}
+
+/// @nodoc
+abstract class $MaterialGroupModelCopyWith<$Res> {
+  factory $MaterialGroupModelCopyWith(
+          MaterialGroupModel value, $Res Function(MaterialGroupModel) then) =
+      _$MaterialGroupModelCopyWithImpl<$Res>;
+  $Res call(
+      {@JsonKey(name: JsonConstants.itemMainGroup) String itemMainGroup,
+      @JsonKey(name: JsonConstants.contents) List<MaterialItemModel> contents});
+}
+
+/// @nodoc
+class _$MaterialGroupModelCopyWithImpl<$Res>
+    implements $MaterialGroupModelCopyWith<$Res> {
+  _$MaterialGroupModelCopyWithImpl(this._value, this._then);
+
+  final MaterialGroupModel _value;
+  // ignore: unused_field
+  final $Res Function(MaterialGroupModel) _then;
+
+  @override
+  $Res call({
+    Object itemMainGroup = freezed,
+    Object contents = freezed,
+  }) {
+    return _then(_value.copyWith(
+      itemMainGroup: itemMainGroup == freezed
+          ? _value.itemMainGroup
+          : itemMainGroup as String,
+      contents: contents == freezed
+          ? _value.contents
+          : contents as List<MaterialItemModel>,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$MaterialGroupModelCopyWith<$Res>
+    implements $MaterialGroupModelCopyWith<$Res> {
+  factory _$MaterialGroupModelCopyWith(
+          _MaterialGroupModel value, $Res Function(_MaterialGroupModel) then) =
+      __$MaterialGroupModelCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {@JsonKey(name: JsonConstants.itemMainGroup) String itemMainGroup,
+      @JsonKey(name: JsonConstants.contents) List<MaterialItemModel> contents});
+}
+
+/// @nodoc
+class __$MaterialGroupModelCopyWithImpl<$Res>
+    extends _$MaterialGroupModelCopyWithImpl<$Res>
+    implements _$MaterialGroupModelCopyWith<$Res> {
+  __$MaterialGroupModelCopyWithImpl(
+      _MaterialGroupModel _value, $Res Function(_MaterialGroupModel) _then)
+      : super(_value, (v) => _then(v as _MaterialGroupModel));
+
+  @override
+  _MaterialGroupModel get _value => super._value as _MaterialGroupModel;
+
+  @override
+  $Res call({
+    Object itemMainGroup = freezed,
+    Object contents = freezed,
+  }) {
+    return _then(_MaterialGroupModel(
+      itemMainGroup: itemMainGroup == freezed
+          ? _value.itemMainGroup
+          : itemMainGroup as String,
+      contents: contents == freezed
+          ? _value.contents
+          : contents as List<MaterialItemModel>,
+    ));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+
+/// @nodoc
+class _$_MaterialGroupModel
+    with DiagnosticableTreeMixin
+    implements _MaterialGroupModel {
+  _$_MaterialGroupModel(
+      {@JsonKey(name: JsonConstants.itemMainGroup) this.itemMainGroup,
+      @JsonKey(name: JsonConstants.contents) this.contents});
+
+  factory _$_MaterialGroupModel.fromJson(Map<String, dynamic> json) =>
+      _$_$_MaterialGroupModelFromJson(json);
+
+  @override
+  @JsonKey(name: JsonConstants.itemMainGroup)
+  final String itemMainGroup;
+  @override
+  @JsonKey(name: JsonConstants.contents)
+  final List<MaterialItemModel> contents;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'MaterialGroupModel(itemMainGroup: $itemMainGroup, contents: $contents)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'MaterialGroupModel'))
+      ..add(DiagnosticsProperty('itemMainGroup', itemMainGroup))
+      ..add(DiagnosticsProperty('contents', contents));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _MaterialGroupModel &&
+            (identical(other.itemMainGroup, itemMainGroup) ||
+                const DeepCollectionEquality()
+                    .equals(other.itemMainGroup, itemMainGroup)) &&
+            (identical(other.contents, contents) ||
+                const DeepCollectionEquality()
+                    .equals(other.contents, contents)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(itemMainGroup) ^
+      const DeepCollectionEquality().hash(contents);
+
+  @override
+  _$MaterialGroupModelCopyWith<_MaterialGroupModel> get copyWith =>
+      __$MaterialGroupModelCopyWithImpl<_MaterialGroupModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_MaterialGroupModelToJson(this);
+  }
+}
+
+abstract class _MaterialGroupModel implements MaterialGroupModel {
+  factory _MaterialGroupModel(
+      {@JsonKey(name: JsonConstants.itemMainGroup)
+          String itemMainGroup,
+      @JsonKey(name: JsonConstants.contents)
+          List<MaterialItemModel> contents}) = _$_MaterialGroupModel;
+
+  factory _MaterialGroupModel.fromJson(Map<String, dynamic> json) =
+      _$_MaterialGroupModel.fromJson;
+
+  @override
+  @JsonKey(name: JsonConstants.itemMainGroup)
+  String get itemMainGroup;
+  @override
+  @JsonKey(name: JsonConstants.contents)
+  List<MaterialItemModel> get contents;
+  @override
+  _$MaterialGroupModelCopyWith<_MaterialGroupModel> get copyWith;
+}
+
+MaterialSelectedModel _$MaterialSelectedModelFromJson(
+    Map<String, dynamic> json) {
+  return _MaterialSelectedModel.fromJson(json);
+}
+
+/// @nodoc
+class _$MaterialSelectedModelTearOff {
+  const _$MaterialSelectedModelTearOff();
+
+// ignore: unused_element
+  _MaterialSelectedModel call(
+      {@JsonKey(name: JsonConstants.buildingMaterials)
+          List<MaterialGroupModel> buildingMaterials,
+      @JsonKey(name: JsonConstants.flooring)
+          List<MaterialGroupModel> flooring,
+      @JsonKey(name: JsonConstants.plumbing)
+          List<MaterialGroupModel> plumbing,
+      @JsonKey(name: JsonConstants.electricals)
+          List<MaterialGroupModel> electricals,
+      @JsonKey(name: JsonConstants.doorsAndWindows)
+          List<MaterialGroupModel> doorsAndWindows,
+      @JsonKey(name: JsonConstants.kitchenDecors)
+          List<MaterialGroupModel> kitchenDecors,
+      @JsonKey(name: JsonConstants.interiorDecor)
+          List<MaterialGroupModel> interiorDecor,
+      @JsonKey(name: JsonConstants.exteriorDecor)
+          List<MaterialGroupModel> exteriorDecor,
+      @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+          DateTime createdTimeStamp,
+      @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+          DateTime updatedTimeStamp}) {
+    return _MaterialSelectedModel(
+      buildingMaterials: buildingMaterials,
+      flooring: flooring,
+      plumbing: plumbing,
+      electricals: electricals,
+      doorsAndWindows: doorsAndWindows,
+      kitchenDecors: kitchenDecors,
+      interiorDecor: interiorDecor,
+      exteriorDecor: exteriorDecor,
+      createdTimeStamp: createdTimeStamp,
+      updatedTimeStamp: updatedTimeStamp,
+    );
+  }
+
+// ignore: unused_element
+  MaterialSelectedModel fromJson(Map<String, Object> json) {
+    return MaterialSelectedModel.fromJson(json);
+  }
+}
+
+/// @nodoc
+// ignore: unused_element
+const $MaterialSelectedModel = _$MaterialSelectedModelTearOff();
+
+/// @nodoc
+mixin _$MaterialSelectedModel {
+  @JsonKey(name: JsonConstants.buildingMaterials)
+  List<MaterialGroupModel> get buildingMaterials;
+  @JsonKey(name: JsonConstants.flooring)
+  List<MaterialGroupModel> get flooring;
+  @JsonKey(name: JsonConstants.plumbing)
+  List<MaterialGroupModel> get plumbing;
+  @JsonKey(name: JsonConstants.electricals)
+  List<MaterialGroupModel> get electricals;
+  @JsonKey(name: JsonConstants.doorsAndWindows)
+  List<MaterialGroupModel> get doorsAndWindows;
+  @JsonKey(name: JsonConstants.kitchenDecors)
+  List<MaterialGroupModel> get kitchenDecors;
+  @JsonKey(name: JsonConstants.interiorDecor)
+  List<MaterialGroupModel> get interiorDecor;
+  @JsonKey(name: JsonConstants.exteriorDecor)
+  List<MaterialGroupModel> get exteriorDecor;
+  @JsonKey(
+      name: JsonConstants.createdAt,
+      fromJson: dateTimeFromUTC,
+      toJson: dateTimeToUTC)
+  DateTime get createdTimeStamp;
+  @JsonKey(
+      name: JsonConstants.updated_at,
+      fromJson: dateTimeFromUTC,
+      toJson: dateTimeToUTC)
+  DateTime get updatedTimeStamp;
+
+  Map<String, dynamic> toJson();
+  $MaterialSelectedModelCopyWith<MaterialSelectedModel> get copyWith;
+}
+
+/// @nodoc
+abstract class $MaterialSelectedModelCopyWith<$Res> {
+  factory $MaterialSelectedModelCopyWith(MaterialSelectedModel value,
+          $Res Function(MaterialSelectedModel) then) =
+      _$MaterialSelectedModelCopyWithImpl<$Res>;
+  $Res call(
+      {@JsonKey(name: JsonConstants.buildingMaterials)
+          List<MaterialGroupModel> buildingMaterials,
+      @JsonKey(name: JsonConstants.flooring)
+          List<MaterialGroupModel> flooring,
+      @JsonKey(name: JsonConstants.plumbing)
+          List<MaterialGroupModel> plumbing,
+      @JsonKey(name: JsonConstants.electricals)
+          List<MaterialGroupModel> electricals,
+      @JsonKey(name: JsonConstants.doorsAndWindows)
+          List<MaterialGroupModel> doorsAndWindows,
+      @JsonKey(name: JsonConstants.kitchenDecors)
+          List<MaterialGroupModel> kitchenDecors,
+      @JsonKey(name: JsonConstants.interiorDecor)
+          List<MaterialGroupModel> interiorDecor,
+      @JsonKey(name: JsonConstants.exteriorDecor)
+          List<MaterialGroupModel> exteriorDecor,
+      @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+          DateTime createdTimeStamp,
+      @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+          DateTime updatedTimeStamp});
+}
+
+/// @nodoc
+class _$MaterialSelectedModelCopyWithImpl<$Res>
+    implements $MaterialSelectedModelCopyWith<$Res> {
+  _$MaterialSelectedModelCopyWithImpl(this._value, this._then);
+
+  final MaterialSelectedModel _value;
+  // ignore: unused_field
+  final $Res Function(MaterialSelectedModel) _then;
+
+  @override
+  $Res call({
+    Object buildingMaterials = freezed,
+    Object flooring = freezed,
+    Object plumbing = freezed,
+    Object electricals = freezed,
+    Object doorsAndWindows = freezed,
+    Object kitchenDecors = freezed,
+    Object interiorDecor = freezed,
+    Object exteriorDecor = freezed,
+    Object createdTimeStamp = freezed,
+    Object updatedTimeStamp = freezed,
+  }) {
+    return _then(_value.copyWith(
+      buildingMaterials: buildingMaterials == freezed
+          ? _value.buildingMaterials
+          : buildingMaterials as List<MaterialGroupModel>,
+      flooring: flooring == freezed
+          ? _value.flooring
+          : flooring as List<MaterialGroupModel>,
+      plumbing: plumbing == freezed
+          ? _value.plumbing
+          : plumbing as List<MaterialGroupModel>,
+      electricals: electricals == freezed
+          ? _value.electricals
+          : electricals as List<MaterialGroupModel>,
+      doorsAndWindows: doorsAndWindows == freezed
+          ? _value.doorsAndWindows
+          : doorsAndWindows as List<MaterialGroupModel>,
+      kitchenDecors: kitchenDecors == freezed
+          ? _value.kitchenDecors
+          : kitchenDecors as List<MaterialGroupModel>,
+      interiorDecor: interiorDecor == freezed
+          ? _value.interiorDecor
+          : interiorDecor as List<MaterialGroupModel>,
+      exteriorDecor: exteriorDecor == freezed
+          ? _value.exteriorDecor
+          : exteriorDecor as List<MaterialGroupModel>,
+      createdTimeStamp: createdTimeStamp == freezed
+          ? _value.createdTimeStamp
+          : createdTimeStamp as DateTime,
+      updatedTimeStamp: updatedTimeStamp == freezed
+          ? _value.updatedTimeStamp
+          : updatedTimeStamp as DateTime,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$MaterialSelectedModelCopyWith<$Res>
+    implements $MaterialSelectedModelCopyWith<$Res> {
+  factory _$MaterialSelectedModelCopyWith(_MaterialSelectedModel value,
+          $Res Function(_MaterialSelectedModel) then) =
+      __$MaterialSelectedModelCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {@JsonKey(name: JsonConstants.buildingMaterials)
+          List<MaterialGroupModel> buildingMaterials,
+      @JsonKey(name: JsonConstants.flooring)
+          List<MaterialGroupModel> flooring,
+      @JsonKey(name: JsonConstants.plumbing)
+          List<MaterialGroupModel> plumbing,
+      @JsonKey(name: JsonConstants.electricals)
+          List<MaterialGroupModel> electricals,
+      @JsonKey(name: JsonConstants.doorsAndWindows)
+          List<MaterialGroupModel> doorsAndWindows,
+      @JsonKey(name: JsonConstants.kitchenDecors)
+          List<MaterialGroupModel> kitchenDecors,
+      @JsonKey(name: JsonConstants.interiorDecor)
+          List<MaterialGroupModel> interiorDecor,
+      @JsonKey(name: JsonConstants.exteriorDecor)
+          List<MaterialGroupModel> exteriorDecor,
+      @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+          DateTime createdTimeStamp,
+      @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+          DateTime updatedTimeStamp});
+}
+
+/// @nodoc
+class __$MaterialSelectedModelCopyWithImpl<$Res>
+    extends _$MaterialSelectedModelCopyWithImpl<$Res>
+    implements _$MaterialSelectedModelCopyWith<$Res> {
+  __$MaterialSelectedModelCopyWithImpl(_MaterialSelectedModel _value,
+      $Res Function(_MaterialSelectedModel) _then)
+      : super(_value, (v) => _then(v as _MaterialSelectedModel));
+
+  @override
+  _MaterialSelectedModel get _value => super._value as _MaterialSelectedModel;
+
+  @override
+  $Res call({
+    Object buildingMaterials = freezed,
+    Object flooring = freezed,
+    Object plumbing = freezed,
+    Object electricals = freezed,
+    Object doorsAndWindows = freezed,
+    Object kitchenDecors = freezed,
+    Object interiorDecor = freezed,
+    Object exteriorDecor = freezed,
+    Object createdTimeStamp = freezed,
+    Object updatedTimeStamp = freezed,
+  }) {
+    return _then(_MaterialSelectedModel(
+      buildingMaterials: buildingMaterials == freezed
+          ? _value.buildingMaterials
+          : buildingMaterials as List<MaterialGroupModel>,
+      flooring: flooring == freezed
+          ? _value.flooring
+          : flooring as List<MaterialGroupModel>,
+      plumbing: plumbing == freezed
+          ? _value.plumbing
+          : plumbing as List<MaterialGroupModel>,
+      electricals: electricals == freezed
+          ? _value.electricals
+          : electricals as List<MaterialGroupModel>,
+      doorsAndWindows: doorsAndWindows == freezed
+          ? _value.doorsAndWindows
+          : doorsAndWindows as List<MaterialGroupModel>,
+      kitchenDecors: kitchenDecors == freezed
+          ? _value.kitchenDecors
+          : kitchenDecors as List<MaterialGroupModel>,
+      interiorDecor: interiorDecor == freezed
+          ? _value.interiorDecor
+          : interiorDecor as List<MaterialGroupModel>,
+      exteriorDecor: exteriorDecor == freezed
+          ? _value.exteriorDecor
+          : exteriorDecor as List<MaterialGroupModel>,
+      createdTimeStamp: createdTimeStamp == freezed
+          ? _value.createdTimeStamp
+          : createdTimeStamp as DateTime,
+      updatedTimeStamp: updatedTimeStamp == freezed
+          ? _value.updatedTimeStamp
+          : updatedTimeStamp as DateTime,
+    ));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+
+/// @nodoc
+class _$_MaterialSelectedModel
+    with DiagnosticableTreeMixin
+    implements _MaterialSelectedModel {
+  _$_MaterialSelectedModel(
+      {@JsonKey(name: JsonConstants.buildingMaterials)
+          this.buildingMaterials,
+      @JsonKey(name: JsonConstants.flooring)
+          this.flooring,
+      @JsonKey(name: JsonConstants.plumbing)
+          this.plumbing,
+      @JsonKey(name: JsonConstants.electricals)
+          this.electricals,
+      @JsonKey(name: JsonConstants.doorsAndWindows)
+          this.doorsAndWindows,
+      @JsonKey(name: JsonConstants.kitchenDecors)
+          this.kitchenDecors,
+      @JsonKey(name: JsonConstants.interiorDecor)
+          this.interiorDecor,
+      @JsonKey(name: JsonConstants.exteriorDecor)
+          this.exteriorDecor,
+      @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+          this.createdTimeStamp,
+      @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+          this.updatedTimeStamp});
+
+  factory _$_MaterialSelectedModel.fromJson(Map<String, dynamic> json) =>
+      _$_$_MaterialSelectedModelFromJson(json);
+
+  @override
+  @JsonKey(name: JsonConstants.buildingMaterials)
+  final List<MaterialGroupModel> buildingMaterials;
+  @override
+  @JsonKey(name: JsonConstants.flooring)
+  final List<MaterialGroupModel> flooring;
+  @override
+  @JsonKey(name: JsonConstants.plumbing)
+  final List<MaterialGroupModel> plumbing;
+  @override
+  @JsonKey(name: JsonConstants.electricals)
+  final List<MaterialGroupModel> electricals;
+  @override
+  @JsonKey(name: JsonConstants.doorsAndWindows)
+  final List<MaterialGroupModel> doorsAndWindows;
+  @override
+  @JsonKey(name: JsonConstants.kitchenDecors)
+  final List<MaterialGroupModel> kitchenDecors;
+  @override
+  @JsonKey(name: JsonConstants.interiorDecor)
+  final List<MaterialGroupModel> interiorDecor;
+  @override
+  @JsonKey(name: JsonConstants.exteriorDecor)
+  final List<MaterialGroupModel> exteriorDecor;
+  @override
+  @JsonKey(
+      name: JsonConstants.createdAt,
+      fromJson: dateTimeFromUTC,
+      toJson: dateTimeToUTC)
+  final DateTime createdTimeStamp;
+  @override
+  @JsonKey(
+      name: JsonConstants.updated_at,
+      fromJson: dateTimeFromUTC,
+      toJson: dateTimeToUTC)
+  final DateTime updatedTimeStamp;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'MaterialSelectedModel(buildingMaterials: $buildingMaterials, flooring: $flooring, plumbing: $plumbing, electricals: $electricals, doorsAndWindows: $doorsAndWindows, kitchenDecors: $kitchenDecors, interiorDecor: $interiorDecor, exteriorDecor: $exteriorDecor, createdTimeStamp: $createdTimeStamp, updatedTimeStamp: $updatedTimeStamp)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'MaterialSelectedModel'))
+      ..add(DiagnosticsProperty('buildingMaterials', buildingMaterials))
+      ..add(DiagnosticsProperty('flooring', flooring))
+      ..add(DiagnosticsProperty('plumbing', plumbing))
+      ..add(DiagnosticsProperty('electricals', electricals))
+      ..add(DiagnosticsProperty('doorsAndWindows', doorsAndWindows))
+      ..add(DiagnosticsProperty('kitchenDecors', kitchenDecors))
+      ..add(DiagnosticsProperty('interiorDecor', interiorDecor))
+      ..add(DiagnosticsProperty('exteriorDecor', exteriorDecor))
+      ..add(DiagnosticsProperty('createdTimeStamp', createdTimeStamp))
+      ..add(DiagnosticsProperty('updatedTimeStamp', updatedTimeStamp));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _MaterialSelectedModel &&
+            (identical(other.buildingMaterials, buildingMaterials) ||
+                const DeepCollectionEquality()
+                    .equals(other.buildingMaterials, buildingMaterials)) &&
+            (identical(other.flooring, flooring) ||
+                const DeepCollectionEquality()
+                    .equals(other.flooring, flooring)) &&
+            (identical(other.plumbing, plumbing) ||
+                const DeepCollectionEquality()
+                    .equals(other.plumbing, plumbing)) &&
+            (identical(other.electricals, electricals) ||
+                const DeepCollectionEquality()
+                    .equals(other.electricals, electricals)) &&
+            (identical(other.doorsAndWindows, doorsAndWindows) ||
+                const DeepCollectionEquality()
+                    .equals(other.doorsAndWindows, doorsAndWindows)) &&
+            (identical(other.kitchenDecors, kitchenDecors) ||
+                const DeepCollectionEquality()
+                    .equals(other.kitchenDecors, kitchenDecors)) &&
+            (identical(other.interiorDecor, interiorDecor) ||
+                const DeepCollectionEquality()
+                    .equals(other.interiorDecor, interiorDecor)) &&
+            (identical(other.exteriorDecor, exteriorDecor) ||
+                const DeepCollectionEquality()
+                    .equals(other.exteriorDecor, exteriorDecor)) &&
+            (identical(other.createdTimeStamp, createdTimeStamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.createdTimeStamp, createdTimeStamp)) &&
+            (identical(other.updatedTimeStamp, updatedTimeStamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.updatedTimeStamp, updatedTimeStamp)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(buildingMaterials) ^
+      const DeepCollectionEquality().hash(flooring) ^
+      const DeepCollectionEquality().hash(plumbing) ^
+      const DeepCollectionEquality().hash(electricals) ^
+      const DeepCollectionEquality().hash(doorsAndWindows) ^
+      const DeepCollectionEquality().hash(kitchenDecors) ^
+      const DeepCollectionEquality().hash(interiorDecor) ^
+      const DeepCollectionEquality().hash(exteriorDecor) ^
+      const DeepCollectionEquality().hash(createdTimeStamp) ^
+      const DeepCollectionEquality().hash(updatedTimeStamp);
+
+  @override
+  _$MaterialSelectedModelCopyWith<_MaterialSelectedModel> get copyWith =>
+      __$MaterialSelectedModelCopyWithImpl<_MaterialSelectedModel>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_MaterialSelectedModelToJson(this);
+  }
+}
+
+abstract class _MaterialSelectedModel implements MaterialSelectedModel {
+  factory _MaterialSelectedModel(
+      {@JsonKey(name: JsonConstants.buildingMaterials)
+          List<MaterialGroupModel> buildingMaterials,
+      @JsonKey(name: JsonConstants.flooring)
+          List<MaterialGroupModel> flooring,
+      @JsonKey(name: JsonConstants.plumbing)
+          List<MaterialGroupModel> plumbing,
+      @JsonKey(name: JsonConstants.electricals)
+          List<MaterialGroupModel> electricals,
+      @JsonKey(name: JsonConstants.doorsAndWindows)
+          List<MaterialGroupModel> doorsAndWindows,
+      @JsonKey(name: JsonConstants.kitchenDecors)
+          List<MaterialGroupModel> kitchenDecors,
+      @JsonKey(name: JsonConstants.interiorDecor)
+          List<MaterialGroupModel> interiorDecor,
+      @JsonKey(name: JsonConstants.exteriorDecor)
+          List<MaterialGroupModel> exteriorDecor,
+      @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+          DateTime createdTimeStamp,
+      @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+          DateTime updatedTimeStamp}) = _$_MaterialSelectedModel;
+
+  factory _MaterialSelectedModel.fromJson(Map<String, dynamic> json) =
+      _$_MaterialSelectedModel.fromJson;
+
+  @override
+  @JsonKey(name: JsonConstants.buildingMaterials)
+  List<MaterialGroupModel> get buildingMaterials;
+  @override
+  @JsonKey(name: JsonConstants.flooring)
+  List<MaterialGroupModel> get flooring;
+  @override
+  @JsonKey(name: JsonConstants.plumbing)
+  List<MaterialGroupModel> get plumbing;
+  @override
+  @JsonKey(name: JsonConstants.electricals)
+  List<MaterialGroupModel> get electricals;
+  @override
+  @JsonKey(name: JsonConstants.doorsAndWindows)
+  List<MaterialGroupModel> get doorsAndWindows;
+  @override
+  @JsonKey(name: JsonConstants.kitchenDecors)
+  List<MaterialGroupModel> get kitchenDecors;
+  @override
+  @JsonKey(name: JsonConstants.interiorDecor)
+  List<MaterialGroupModel> get interiorDecor;
+  @override
+  @JsonKey(name: JsonConstants.exteriorDecor)
+  List<MaterialGroupModel> get exteriorDecor;
+  @override
+  @JsonKey(
+      name: JsonConstants.createdAt,
+      fromJson: dateTimeFromUTC,
+      toJson: dateTimeToUTC)
+  DateTime get createdTimeStamp;
+  @override
+  @JsonKey(
+      name: JsonConstants.updated_at,
+      fromJson: dateTimeFromUTC,
+      toJson: dateTimeToUTC)
+  DateTime get updatedTimeStamp;
+  @override
+  _$MaterialSelectedModelCopyWith<_MaterialSelectedModel> get copyWith;
+}

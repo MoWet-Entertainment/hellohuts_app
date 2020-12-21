@@ -450,7 +450,7 @@ class _QuickProjectSnapshot extends StatelessWidget {
     return Consumer(
       builder: (context, watch, child) {
         final projectDetail = watch(projectDetailsProvider);
-        final state = watch(dashbordState);
+        final state = watch(dashboardState);
         return projectDetail.map(
           data: (_) => Container(
             child: Container(

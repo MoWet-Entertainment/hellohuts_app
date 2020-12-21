@@ -97,3 +97,108 @@ Map<String, dynamic> _$_$_BuildingRequirementsModelToJson(
       'created_at': dateTimeToUTC(instance.createdTimeStamp),
       'updated_at': dateTimeToUTC(instance.updatedTimeStamp),
     };
+
+_$_MaterialItemModel _$_$_MaterialItemModelFromJson(Map<String, dynamic> json) {
+  return _$_MaterialItemModel(
+    itemName: json['item_name'] as String,
+    itemText1: json['item_text1'] as String,
+    itemText2: json['item_text2'] as String,
+    itemImage: json['item_image'] as String,
+  );
+}
+
+Map<String, dynamic> _$_$_MaterialItemModelToJson(
+        _$_MaterialItemModel instance) =>
+    <String, dynamic>{
+      'item_name': instance.itemName,
+      'item_text1': instance.itemText1,
+      'item_text2': instance.itemText2,
+      'item_image': instance.itemImage,
+    };
+
+_$_MaterialGroupModel _$_$_MaterialGroupModelFromJson(
+    Map<String, dynamic> json) {
+  return _$_MaterialGroupModel(
+    itemMainGroup: json['item_main_group'] as String,
+    contents: (json['contents'] as List)
+        ?.map((e) => e == null
+            ? null
+            : MaterialItemModel.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+  );
+}
+
+Map<String, dynamic> _$_$_MaterialGroupModelToJson(
+        _$_MaterialGroupModel instance) =>
+    <String, dynamic>{
+      'item_main_group': instance.itemMainGroup,
+      'contents': instance.contents?.map((e) => e?.toJson())?.toList(),
+    };
+
+_$_MaterialSelectedModel _$_$_MaterialSelectedModelFromJson(
+    Map<String, dynamic> json) {
+  return _$_MaterialSelectedModel(
+    buildingMaterials: (json['building_materials'] as List)
+        ?.map((e) => e == null
+            ? null
+            : MaterialGroupModel.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    flooring: (json['flooring'] as List)
+        ?.map((e) => e == null
+            ? null
+            : MaterialGroupModel.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    plumbing: (json['plumbing'] as List)
+        ?.map((e) => e == null
+            ? null
+            : MaterialGroupModel.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    electricals: (json['electricals'] as List)
+        ?.map((e) => e == null
+            ? null
+            : MaterialGroupModel.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    doorsAndWindows: (json['doors_and_windows'] as List)
+        ?.map((e) => e == null
+            ? null
+            : MaterialGroupModel.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    kitchenDecors: (json['kitchen_decor'] as List)
+        ?.map((e) => e == null
+            ? null
+            : MaterialGroupModel.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    interiorDecor: (json['interior_decor'] as List)
+        ?.map((e) => e == null
+            ? null
+            : MaterialGroupModel.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    exteriorDecor: (json['exterior_decor'] as List)
+        ?.map((e) => e == null
+            ? null
+            : MaterialGroupModel.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    createdTimeStamp: dateTimeFromUTC(json['created_at'] as String),
+    updatedTimeStamp: dateTimeFromUTC(json['updated_at'] as String),
+  );
+}
+
+Map<String, dynamic> _$_$_MaterialSelectedModelToJson(
+        _$_MaterialSelectedModel instance) =>
+    <String, dynamic>{
+      'building_materials':
+          instance.buildingMaterials?.map((e) => e?.toJson())?.toList(),
+      'flooring': instance.flooring?.map((e) => e?.toJson())?.toList(),
+      'plumbing': instance.plumbing?.map((e) => e?.toJson())?.toList(),
+      'electricals': instance.electricals?.map((e) => e?.toJson())?.toList(),
+      'doors_and_windows':
+          instance.doorsAndWindows?.map((e) => e?.toJson())?.toList(),
+      'kitchen_decor':
+          instance.kitchenDecors?.map((e) => e?.toJson())?.toList(),
+      'interior_decor':
+          instance.interiorDecor?.map((e) => e?.toJson())?.toList(),
+      'exterior_decor':
+          instance.exteriorDecor?.map((e) => e?.toJson())?.toList(),
+      'created_at': dateTimeToUTC(instance.createdTimeStamp),
+      'updated_at': dateTimeToUTC(instance.updatedTimeStamp),
+    };
