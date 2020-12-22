@@ -6,6 +6,7 @@ import 'package:hellohuts_app/ui/screens/base_page.dart';
 import 'package:hellohuts_app/ui/screens/categories/categories_screen.dart';
 import 'package:hellohuts_app/ui/screens/categories/categories_search/categories_search_screen.dart';
 import 'package:hellohuts_app/ui/screens/dashboard/dashboard_landing/dashboard_landing.dart';
+import 'package:hellohuts_app/ui/screens/dashboard/documents/documents_page.dart';
 import 'package:hellohuts_app/ui/screens/dashboard/project_details/project_details.dart';
 import 'package:hellohuts_app/ui/screens/explore.dart';
 import 'package:hellohuts_app/ui/screens/feed_posts/feed_post_detail.dart';
@@ -41,6 +42,7 @@ CustomRoute(page:CostEstimateScreen,transitionsBuilder: TransitionsBuilders.fade
     AdaptiveRoute(page: CategoriesScreen),
     AdaptiveRoute(page:PostDetailPage, ),
     AdaptiveRoute(page: ProjectDetailsPage),
+    AdaptiveRoute(page:DocumentsPage),
 
   ]
 )

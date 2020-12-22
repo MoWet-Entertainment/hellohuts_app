@@ -17,6 +17,7 @@ import '../screens/base_page.dart';
 import '../screens/categories/categories_screen.dart';
 import '../screens/categories/categories_search/categories_search_screen.dart';
 import '../screens/dashboard/dashboard_landing/dashboard_landing.dart';
+import '../screens/dashboard/documents/documents_page.dart';
 import '../screens/dashboard/project_details/project_details.dart';
 import '../screens/explore.dart';
 import '../screens/feed_posts/feed_post_detail.dart';
@@ -49,6 +50,7 @@ class Routes {
   static const String categoriesScreen = '/categories-screen';
   static const String postDetailPage = '/post-detail-page';
   static const String projectDetailsPage = '/project-details-page';
+  static const String documentsPage = '/documents-page';
   static const all = <String>{
     basePage,
     explorePage,
@@ -69,6 +71,7 @@ class Routes {
     categoriesScreen,
     postDetailPage,
     projectDetailsPage,
+    documentsPage,
   };
 }
 
@@ -95,6 +98,7 @@ class AppRouter extends RouterBase {
     RouteDef(Routes.categoriesScreen, page: CategoriesScreen),
     RouteDef(Routes.postDetailPage, page: PostDetailPage),
     RouteDef(Routes.projectDetailsPage, page: ProjectDetailsPage),
+    RouteDef(Routes.documentsPage, page: DocumentsPage),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -280,6 +284,12 @@ class AppRouter extends RouterBase {
     ProjectDetailsPage: (data) {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => const ProjectDetailsPage(),
+        settings: data,
+      );
+    },
+    DocumentsPage: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const DocumentsPage(),
         settings: data,
       );
     },

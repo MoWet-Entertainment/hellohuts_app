@@ -37,9 +37,7 @@ class DashboardLandingPage extends StatelessWidget {
           heroTag: 'DahboardCustomerCare',
           child: Image.asset(HelloIcons.comment_bold_icon,
               height: 28, color: theme.colorScheme.background),
-          onPressed: () {
-           
-          },
+          onPressed: () {},
         ),
       ),
     );
@@ -233,6 +231,7 @@ class _DashboardBody extends StatelessWidget {
 
   _documentsCall() {
     print("user wants to navigate to the documents  page");
+    ExtendedNavigator.root.push(Routes.documentsPage);
     //TODO: Documents Details page
   }
 

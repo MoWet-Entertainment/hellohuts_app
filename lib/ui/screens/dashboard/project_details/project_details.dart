@@ -276,9 +276,9 @@ class _SelectedPlanSection extends ConsumerWidget {
                 ),
               )),
           _ExpandableProjectSelectedPlan(
-            itemHeadText: "Flooring",
-            itemType: selectedPlan.flooringType,
-            child:  materialSelected.map(
+              itemHeadText: "Flooring",
+              itemType: selectedPlan.flooringType,
+              child: materialSelected.map(
                 data: (_) => MaterialSelectedContainer(
                   itemListModel: _.value.flooring,
                 ),
@@ -294,12 +294,11 @@ class _SelectedPlanSection extends ConsumerWidget {
                     child: Text("Error" + _.error),
                   ),
                 ),
-              )
-          ),
+              )),
           _ExpandableProjectSelectedPlan(
               itemHeadText: "Electricals",
               itemType: selectedPlan.electricalsType,
-            child: materialSelected.map(
+              child: materialSelected.map(
                 data: (_) => MaterialSelectedContainer(
                   itemListModel: _.value.electricals,
                 ),
@@ -319,70 +318,70 @@ class _SelectedPlanSection extends ConsumerWidget {
           _ExpandableProjectSelectedPlan(
             itemHeadText: "Plumbing",
             itemType: selectedPlan.plumbingType,
-            child:  materialSelected.map(
-                data: (_) => MaterialSelectedContainer(
-                  itemListModel: _.value.plumbing,
-                ),
-                loading: (_) => Container(
-                  height: 200,
-                  child: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                ),
-                error: (_) => Container(
-                  height: 200,
-                  child: Center(
-                    child: Text("Error" + _.error),
-                  ),
+            child: materialSelected.map(
+              data: (_) => MaterialSelectedContainer(
+                itemListModel: _.value.plumbing,
+              ),
+              loading: (_) => Container(
+                height: 200,
+                child: Center(
+                  child: CircularProgressIndicator(),
                 ),
               ),
+              error: (_) => Container(
+                height: 200,
+                child: Center(
+                  child: Text("Error" + _.error),
+                ),
+              ),
+            ),
           ),
           _ExpandableProjectSelectedPlan(
             itemHeadText: "Doors and Windows",
             itemType: selectedPlan.doorsAndWindowsType,
-            child:  materialSelected.map(
-                data: (_) => MaterialSelectedContainer(
-                  itemListModel: _.value.doorsAndWindows,
-                ),
-                loading: (_) => Container(
-                  height: 200,
-                  child: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                ),
-                error: (_) => Container(
-                  height: 200,
-                  child: Center(
-                    child: Text("Error" + _.error),
-                  ),
+            child: materialSelected.map(
+              data: (_) => MaterialSelectedContainer(
+                itemListModel: _.value.doorsAndWindows,
+              ),
+              loading: (_) => Container(
+                height: 200,
+                child: Center(
+                  child: CircularProgressIndicator(),
                 ),
               ),
+              error: (_) => Container(
+                height: 200,
+                child: Center(
+                  child: Text("Error" + _.error),
+                ),
+              ),
+            ),
           ),
           _ExpandableProjectSelectedPlan(
             itemHeadText: "Kitchen Decor",
             itemType: selectedPlan.kitchenDecorType,
-            child:  materialSelected.map(
-                data: (_) => MaterialSelectedContainer(
-                  itemListModel: _.value.kitchenDecors,
-                ),
-                loading: (_) => Container(
-                  height: 200,
-                  child: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                ),
-                error: (_) => Container(
-                  height: 200,
-                  child: Center(
-                    child: Text("Error" + _.error),
-                  ),
+            child: materialSelected.map(
+              data: (_) => MaterialSelectedContainer(
+                itemListModel: _.value.kitchenDecors,
+              ),
+              loading: (_) => Container(
+                height: 200,
+                child: Center(
+                  child: CircularProgressIndicator(),
                 ),
               ),
+              error: (_) => Container(
+                height: 200,
+                child: Center(
+                  child: Text("Error" + _.error),
+                ),
+              ),
+            ),
           ),
           _ExpandableProjectSelectedPlan(
-            itemHeadText: "Interior Decor",
-            itemType: selectedPlan.interiorDecorType,
-            child: materialSelected.map(
+              itemHeadText: "Interior Decor",
+              itemType: selectedPlan.interiorDecorType,
+              child: materialSelected.map(
                 data: (_) => MaterialSelectedContainer(
                   itemListModel: _.value.interiorDecor,
                 ),
@@ -398,32 +397,56 @@ class _SelectedPlanSection extends ConsumerWidget {
                     child: Text("Error" + _.error),
                   ),
                 ),
-              )
-          ),
+              )),
           _ExpandableProjectSelectedPlan(
             itemHeadText: "Exterior Decor",
             itemType: selectedPlan.exteriorDecorType,
-            child:  materialSelected.map(
-                data: (_) => MaterialSelectedContainer(
-                  itemListModel: _.value.exteriorDecor,
-                ),
-                loading: (_) => Container(
-                  height: 200,
-                  child: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                ),
-                error: (_) => Container(
-                  height: 200,
-                  child: Center(
-                    child: Text("Error" + _.error),
-                  ),
+            child: materialSelected.map(
+              data: (_) => MaterialSelectedContainer(
+                itemListModel: _.value.exteriorDecor,
+              ),
+              loading: (_) => Container(
+                height: 200,
+                child: Center(
+                  child: CircularProgressIndicator(),
                 ),
               ),
+              error: (_) => Container(
+                height: 200,
+                child: Center(
+                  child: Text("Error" + _.error),
+                ),
+              ),
+            ),
           ),
-          SizedBox(height:32)
+          SizedBox(height: 32),
+          Center(
+            child: Container(
+                padding: const EdgeInsets.all(16.0),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8.0),
+                    color: AppColors.kbPrimaryYellow.withOpacity(0.2)),
+                alignment: Alignment.center,
+                child: RichText(
+                    text: TextSpan(text: 'Contact ', style:theme.textTheme.bodyText1
+                        .copyWith(color: AppColors.kbPrimaryYellow) ,
+                    children: [
+                  TextSpan(
+                    text: 'HelloCare Support ',
+                    style: theme.textTheme.bodyText1.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.kbPrimaryYellow),
+                  ),
+                  TextSpan(
+                    text:
+                        'if you wish to modify anything about the current plan',
+                    style: theme.textTheme.bodyText1
+                        .copyWith(color: AppColors.kbPrimaryYellow),
+                  )
+                ]))),
+          ),
+          SizedBox(height: 32)
         ],
-      
       ),
     );
   }
@@ -438,49 +461,65 @@ class MaterialSelectedContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Container(
-      padding: const EdgeInsets.only(left: 8.0),
+      width: fullWidth(context),
+      padding: const EdgeInsets.all(12.0),
+      decoration: BoxDecoration(
+          border: Border.all(color: AppColors.kbDarkGrey, width: 0.5),
+          borderRadius: BorderRadius.circular(8.0)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ...itemListModel.map((ele) => Container(
-            
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical:2.0),
+                  padding: const EdgeInsets.symmetric(vertical: 2.0),
                   child: Column(
-                    
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         ele.itemMainGroup ?? '',
-                        style: theme.textTheme.bodyText1.copyWith(fontWeight: FontWeight.bold, fontSize: 16),
+                        style: theme.textTheme.bodyText1.copyWith(
+                            fontWeight: FontWeight.bold, fontSize: 14),
                       ),
-                    
+                      SizedBox(height: 4),
                       ...ele.contents.map((e) => Container(
-                                 padding: const EdgeInsets.only(left: 8.0,top: 4, bottom: 4),
-
+                            padding: const EdgeInsets.only(
+                                left: 14.0, top: 4, bottom: 4),
                             child: Column(
                               children: [
-                              ( e.itemName?.trim()!='')? RichText(
-                                    text: TextSpan(
-                                        text: e.itemName?.trim() ?? '',
-                                        style: theme.textTheme.bodyText1.copyWith(
-                                            fontWeight: FontWeight.bold),
-                                        children: [
-                                      TextSpan(
-                                          text: e.itemText1?.trim() ?? '',
-                                          style: theme.textTheme.bodyText1)
-                                    ])):SizedBox.shrink(),
-                                  ( e.itemText2?.trim()!='')?  Text(e.itemText2??''):SizedBox.shrink(),
-                                  ( e.itemImage?.trim()!='')?Image.network(e.itemImage):SizedBox.shrink()
+                                (e.itemName?.trim() != '')
+                                    ? RichText(
+                                        text: TextSpan(
+                                            text: e.itemName?.trim() ?? '',
+                                            style: theme.textTheme.bodyText2
+                                                .copyWith(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 12),
+                                            children: [
+                                            TextSpan(
+                                                text: (e.itemText1?.trim() !=
+                                                        '')
+                                                    ? " " + e.itemText1 + " "
+                                                    : '',
+                                                style: theme.textTheme.bodyText2
+                                                    .copyWith(fontSize: 12))
+                                          ]))
+                                    : SizedBox.shrink(),
+                                (e.itemText2?.trim() != '')
+                                    ? Text(e.itemText2 ?? '',
+                                        style: theme.textTheme.bodyText2
+                                            .copyWith(fontSize: 12))
+                                    : SizedBox.shrink(),
+                                (e.itemImage?.trim() != '')
+                                    ? Image.network(e.itemImage)
+                                    : SizedBox.shrink()
                               ],
                             ),
                           )),
-                          SizedBox(height:12)
+                      SizedBox(height: 8)
                     ],
                   ),
                 ),
               )),
-              SizedBox(height: 12,)
         ],
       ),
     );
