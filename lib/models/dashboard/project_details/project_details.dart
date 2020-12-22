@@ -36,7 +36,7 @@ abstract class ProjectDetailsModel with _$ProjectDetailsModel {
         fromJson: dateTimeFromUTC,
         toJson:dateTimeToUTC)
         DateTime createdTimeStamp,
-    @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+    @JsonKey(name: JsonConstants.updatedAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
         DateTime updatedTimeStamp,
   }) = _ProjectDetailsModel;
 

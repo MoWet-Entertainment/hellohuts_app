@@ -31,7 +31,7 @@ abstract class SelectedPlanModel with _$SelectedPlanModel {
         CustomizeOptions exteriorDecorType,
     @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
         DateTime createdTimeStamp,
-    @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+    @JsonKey(name: JsonConstants.updatedAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
         DateTime updatedTimeStamp,
   }) = _SelectedPlanModel;
 
@@ -94,7 +94,7 @@ abstract class OtherBuildingRequirementsModel
         List<RoomTypes> otherRequirementsList,
     @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
         DateTime createdTimeStamp,
-    @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+    @JsonKey(name: JsonConstants.updatedAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
         DateTime updatedTimeStamp,
   }) = _OtherBuildingRequirementsModel;
 
@@ -136,7 +136,7 @@ abstract class BuildingRequirementsModel with _$BuildingRequirementsModel {
         OtherBuildingRequirementsModel otherBuildingRequirements,
     @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
         DateTime createdTimeStamp,
-    @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+    @JsonKey(name: JsonConstants.updatedAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
         DateTime updatedTimeStamp,
   }) = _BuildingRequirementsModel;
   factory BuildingRequirementsModel.fromJson(Map<String, dynamic> json) =>
@@ -198,7 +198,7 @@ abstract class MaterialSelectedModel with _$MaterialSelectedModel {
     @JsonKey(name:JsonConstants.exteriorDecor)List<MaterialGroupModel> exteriorDecor,
     @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
         DateTime createdTimeStamp,
-    @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+    @JsonKey(name: JsonConstants.updatedAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
       DateTime updatedTimeStamp
   }) = _MaterialSelectedModel;
 

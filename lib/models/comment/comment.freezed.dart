@@ -30,7 +30,7 @@ class _$CommentTearOff {
       @required
       @JsonKey(name: JsonConstants.createdAt, fromJson: Comment._dateTimeFromUTC, toJson: Comment._dateTimeToUTC)
           DateTime createdTimeStamp,
-      @JsonKey(name: JsonConstants.updated_at, fromJson: Comment._dateTimeFromUTC, toJson: Comment._dateTimeToUTC)
+      @JsonKey(name: JsonConstants.updatedAt, fromJson: Comment._dateTimeFromUTC, toJson: Comment._dateTimeToUTC)
           DateTime updatedTimeStamp,
       @required
       @JsonKey(name: JsonConstants.userId)
@@ -93,7 +93,7 @@ mixin _$Comment {
       toJson: Comment._dateTimeToUTC)
   DateTime get createdTimeStamp;
   @JsonKey(
-      name: JsonConstants.updated_at,
+      name: JsonConstants.updatedAt,
       fromJson: Comment._dateTimeFromUTC,
       toJson: Comment._dateTimeToUTC)
   DateTime get updatedTimeStamp;
@@ -133,7 +133,7 @@ abstract class $CommentCopyWith<$Res> {
           String comment,
       @JsonKey(name: JsonConstants.createdAt, fromJson: Comment._dateTimeFromUTC, toJson: Comment._dateTimeToUTC)
           DateTime createdTimeStamp,
-      @JsonKey(name: JsonConstants.updated_at, fromJson: Comment._dateTimeFromUTC, toJson: Comment._dateTimeToUTC)
+      @JsonKey(name: JsonConstants.updatedAt, fromJson: Comment._dateTimeFromUTC, toJson: Comment._dateTimeToUTC)
           DateTime updatedTimeStamp,
       @JsonKey(name: JsonConstants.userId)
           String userId,
@@ -221,7 +221,7 @@ abstract class _$CommentCopyWith<$Res> implements $CommentCopyWith<$Res> {
           String comment,
       @JsonKey(name: JsonConstants.createdAt, fromJson: Comment._dateTimeFromUTC, toJson: Comment._dateTimeToUTC)
           DateTime createdTimeStamp,
-      @JsonKey(name: JsonConstants.updated_at, fromJson: Comment._dateTimeFromUTC, toJson: Comment._dateTimeToUTC)
+      @JsonKey(name: JsonConstants.updatedAt, fromJson: Comment._dateTimeFromUTC, toJson: Comment._dateTimeToUTC)
           DateTime updatedTimeStamp,
       @JsonKey(name: JsonConstants.userId)
           String userId,
@@ -311,7 +311,7 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
       @required
       @JsonKey(name: JsonConstants.createdAt, fromJson: Comment._dateTimeFromUTC, toJson: Comment._dateTimeToUTC)
           this.createdTimeStamp,
-      @JsonKey(name: JsonConstants.updated_at, fromJson: Comment._dateTimeFromUTC, toJson: Comment._dateTimeToUTC)
+      @JsonKey(name: JsonConstants.updatedAt, fromJson: Comment._dateTimeFromUTC, toJson: Comment._dateTimeToUTC)
           this.updatedTimeStamp,
       @required
       @JsonKey(name: JsonConstants.userId)
@@ -359,7 +359,7 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
   final DateTime createdTimeStamp;
   @override
   @JsonKey(
-      name: JsonConstants.updated_at,
+      name: JsonConstants.updatedAt,
       fromJson: Comment._dateTimeFromUTC,
       toJson: Comment._dateTimeToUTC)
   final DateTime updatedTimeStamp;
@@ -495,7 +495,7 @@ abstract class _Comment implements Comment {
       @required
       @JsonKey(name: JsonConstants.createdAt, fromJson: Comment._dateTimeFromUTC, toJson: Comment._dateTimeToUTC)
           DateTime createdTimeStamp,
-      @JsonKey(name: JsonConstants.updated_at, fromJson: Comment._dateTimeFromUTC, toJson: Comment._dateTimeToUTC)
+      @JsonKey(name: JsonConstants.updatedAt, fromJson: Comment._dateTimeFromUTC, toJson: Comment._dateTimeToUTC)
           DateTime updatedTimeStamp,
       @required
       @JsonKey(name: JsonConstants.userId)
@@ -538,7 +538,7 @@ abstract class _Comment implements Comment {
   DateTime get createdTimeStamp;
   @override
   @JsonKey(
-      name: JsonConstants.updated_at,
+      name: JsonConstants.updatedAt,
       fromJson: Comment._dateTimeFromUTC,
       toJson: Comment._dateTimeToUTC)
   DateTime get updatedTimeStamp;
