@@ -48,7 +48,7 @@ class _$ProjectDetailsModelTearOff {
           BuildingRequirementsModel buildingRequirements,
       @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           DateTime createdTimeStamp,
-      @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+      @JsonKey(name: JsonConstants.updatedAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           DateTime updatedTimeStamp}) {
     return _ProjectDetailsModel(
       projectArea: projectArea,
@@ -116,7 +116,7 @@ mixin _$ProjectDetailsModel {
       toJson: dateTimeToUTC)
   DateTime get createdTimeStamp;
   @JsonKey(
-      name: JsonConstants.updated_at,
+      name: JsonConstants.updatedAt,
       fromJson: dateTimeFromUTC,
       toJson: dateTimeToUTC)
   DateTime get updatedTimeStamp;
@@ -161,7 +161,7 @@ abstract class $ProjectDetailsModelCopyWith<$Res> {
           BuildingRequirementsModel buildingRequirements,
       @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           DateTime createdTimeStamp,
-      @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+      @JsonKey(name: JsonConstants.updatedAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           DateTime updatedTimeStamp});
 
   $EngineerModelCopyWith<$Res> get projectEngineer;
@@ -337,7 +337,7 @@ abstract class _$ProjectDetailsModelCopyWith<$Res>
           BuildingRequirementsModel buildingRequirements,
       @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           DateTime createdTimeStamp,
-      @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+      @JsonKey(name: JsonConstants.updatedAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           DateTime updatedTimeStamp});
 
   @override
@@ -466,7 +466,7 @@ class _$_ProjectDetailsModel implements _ProjectDetailsModel {
           this.buildingRequirements,
       @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           this.createdTimeStamp,
-      @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+      @JsonKey(name: JsonConstants.updatedAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           this.updatedTimeStamp});
 
   factory _$_ProjectDetailsModel.fromJson(Map<String, dynamic> json) =>
@@ -522,7 +522,7 @@ class _$_ProjectDetailsModel implements _ProjectDetailsModel {
   final DateTime createdTimeStamp;
   @override
   @JsonKey(
-      name: JsonConstants.updated_at,
+      name: JsonConstants.updatedAt,
       fromJson: dateTimeFromUTC,
       toJson: dateTimeToUTC)
   final DateTime updatedTimeStamp;
@@ -647,7 +647,7 @@ abstract class _ProjectDetailsModel implements ProjectDetailsModel {
           BuildingRequirementsModel buildingRequirements,
       @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           DateTime createdTimeStamp,
-      @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+      @JsonKey(name: JsonConstants.updatedAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           DateTime updatedTimeStamp}) = _$_ProjectDetailsModel;
 
   factory _ProjectDetailsModel.fromJson(Map<String, dynamic> json) =
@@ -703,7 +703,7 @@ abstract class _ProjectDetailsModel implements ProjectDetailsModel {
   DateTime get createdTimeStamp;
   @override
   @JsonKey(
-      name: JsonConstants.updated_at,
+      name: JsonConstants.updatedAt,
       fromJson: dateTimeFromUTC,
       toJson: dateTimeToUTC)
   DateTime get updatedTimeStamp;

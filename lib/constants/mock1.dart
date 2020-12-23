@@ -1071,6 +1071,178 @@ class Mock {
       }
     ]
   };
+
+  static var documents = {
+    "project_documents": [
+      {
+        "item_name": "Ground Floor Plan",
+        "is_available": true,
+        "download_url": "https://www.google.com",
+        "updated_by": "Hellohuts team",
+        "updated_at": "2020-11-20T10:44:26Z",
+        "created_at": "2020-11-20T10:44:26Z",
+        "document_reason": ""
+      },
+      {
+        "item_name": "First Floor Plan",
+        "is_available": true,
+        "download_url": "https://www.google.com",
+        "updated_by": "Hellohuts team",
+        "provided_by": "Hellohuts team",
+        "updated_at": "2020-11-20T10:44:26Z",
+        "created_at": "2020-11-20T10:44:26Z",
+        "document_reason": ""
+      },
+      {
+        "item_name": "Permit Drawings",
+        "is_available": true,
+        "download_url": "https://www.google.com",
+        "updated_by": "Hellohuts team",
+        "provided_by": "Hellohuts team",
+        "updated_at": "2020-11-20T10:44:26Z",
+        "created_at": "2020-11-20T10:44:26Z",
+        "document_reason": ""
+      },
+      {
+        "item_name": "Ground Floor Plan",
+        "is_available": true,
+        "download_url": "https://www.google.com",
+        "updated_by": "Hellohuts team",
+        "provided_by": "Hellohuts team",
+        "updated_at": "2020-11-20T10:44:26Z",
+        "created_at": "2020-11-20T10:44:26Z",
+        "document_reason": ""
+      },
+      {
+        "item_name": "Building Permit",
+        "is_available": true,
+        "download_url": "https://www.google.com",
+        "updated_by": "Hellohuts team",
+        "provided_by": "Kizhakkambalam LSGD",
+        "updated_at": "2020-11-20T10:44:26Z",
+        "created_at": "2020-11-20T10:44:26Z",
+        "document_reason": ""
+      },
+      {
+        "item_name": "Electrical Permit",
+        "is_available": false,
+        "download_url": "https://www.google.com",
+        "updated_by": "Hellohuts team",
+        "provided_by": "KSEB, Kizhakkambalam",
+        "updated_at": "",
+        "created_at": "",
+        "document_reason": ""
+      }
+    ],
+    "personal_documents": [
+      {
+        "item_name": "Aadhaar Card",
+        "is_available": true,
+        "download_url": "https://www.google.com",
+        "updated_by": "Self",
+        "provided_by": "Self",
+        "updated_at": "2020-11-20T10:44:26Z",
+        "created_at": "2020-11-20T10:44:26Z",
+        "document_reason": "For building Permit"
+      },
+      {
+        "item_name": "Passport Size photo",
+        "is_available": false,
+        "download_url": "https://www.google.com",
+        "updated_by": "Self",
+        "provided_by": "Self",
+        "updated_at": "",
+        "created_at": "",
+        "document_reason": "For electric permit"
+      },
+      {
+        "item_name": "Land Deed/Ownership Certificate",
+        "is_available": false,
+        "download_url": "https://www.google.com",
+        "updated_by": "Self",
+        "provided_by": "Self",
+        "updated_at": "",
+        "created_at": "",
+        "document_reason": "For electric permit"
+      }
+    ],
+    "other_documents": [
+      {
+        "item_name": "Burglers Alarm Warranty Card",
+        "is_available": true,
+        "download_url": "https://www.google.com",
+        "updated_by": "Hellohuts Team",
+        "provided_by": "Hellohuts Team",
+        "updated_at": "2020-11-20T10:44:26Z",
+        "created_at": "2020-11-20T10:44:26Z",
+        "document_reason": ""
+      },
+      {
+        "item_name": "Bosch Oven 5 Year Warranty Card",
+        "is_available": true,
+        "download_url": "https://www.google.com",
+        "updated_by": "Hellohuts Team",
+        "provided_by": "Hellohuts Team",
+        "updated_at": "2020-11-20T10:44:26Z",
+        "created_at": "2020-11-20T10:44:26Z",
+        "document_reason": "For building Permit"
+      },
+      {
+        "item_name": "Philps CCTV Camera 2 Year Warranty Card",
+        "is_available": true,
+        "download_url": "https://www.google.com",
+        "updated_by": "Hellohuts Team",
+        "provided_by": "Hellohuts Team",
+        "updated_at": "2020-11-20T10:44:26Z",
+        "created_at": "2020-11-20T10:44:26Z",
+        "document_reason": ""
+      },
+      {
+        "item_name": "LED Lamps 2 Year Warranty Card",
+        "is_available": true,
+        "download_url": "https://www.google.com",
+        "updated_by": "Hellohuts Team",
+        "provided_by": "Hellohuts Team",
+        "updated_at": "2020-11-20T10:44:26Z",
+        "created_at": "2020-11-20T10:44:26Z",
+        "document_reason": ""
+      }
+    ],
+    "specification_documents": [
+      {
+        "item_name": "Electricals Specs",
+        "is_available": true,
+        "download_url": "https://www.google.com",
+        "updated_by": "Hellohuts Team",
+        "provided_by": "Hellohuts Team",
+        "updated_at": "2020-11-20T10:44:26Z",
+        "created_at": "2020-11-20T10:44:26Z",
+        "document_reason": ""
+      },
+      {
+        "item_name": "Sanitary Fittings Specs",
+        "is_available": true,
+        "download_url": "https://www.google.com",
+        "updated_by": "Hellohuts Team",
+        "provided_by": "Hellohuts Team",
+        "updated_at": "2020-11-20T10:44:26Z",
+        "created_at": "2020-11-20T10:44:26Z",
+        "document_reason": ""
+      },
+      {
+        "item_name": "CCTV Connections Specs",
+        "is_available": true,
+        "download_url": "https://www.google.com",
+        "updated_by": "Hellohuts Team",
+        "provided_by": "Hellohuts Team",
+        "updated_at": "2020-11-20T10:44:26Z",
+        "created_at": "2020-11-20T10:44:26Z",
+        "document_reason": ""
+      }
+    ],
+    "created_at": "2020-11-20T10:44:26Z",
+    "updated_at": "2020-11-20T10:44:26Z"
+  };
 }
 
 class ImageData {

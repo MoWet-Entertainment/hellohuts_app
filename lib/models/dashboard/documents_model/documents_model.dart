@@ -28,7 +28,7 @@ abstract class DocumentsModel with _$DocumentsModel {
           List<DocumentsGroupModel> specificationDocuments,
       @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           DateTime createdTimeStamp,
-      @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+      @JsonKey(name: JsonConstants.updatedAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           DateTime updatedTimeStamp}) = _DocumentsModel;
 
   factory DocumentsModel.fromJson(Map<String, dynamic> json) =>
@@ -49,10 +49,11 @@ abstract class DocumentsGroupModel with _$DocumentsGroupModel {
     @JsonKey(name: JsonConstants.downloadUrl) String downloadUrl,
     @JsonKey(ignore: true) bool isDownloaded,
     @JsonKey(name: JsonConstants.updatedBy) String updatedBy,
-    @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+    @JsonKey(name:JsonConstants.providedBy) String provideBy,
+    @JsonKey(name: JsonConstants.updatedAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
         DateTime updatedTimeStamp,
     @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
-        DateTime createdTimeStamp,
+        DateTime createdTimeStamp, 
     @JsonKey(name: JsonConstants.documentReason) String documentReason,
   }) = _DocumentsGroupModel;
 

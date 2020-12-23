@@ -1,7 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hellohuts_app/states/dashboard/documents_state.dart';
 import 'package:hellohuts_app/ui/common_widgets/app_bar/app_bar.dart';
+import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
+import 'package:hellohuts_app/ui/styles/theme_options.dart';
 import 'package:hooks_riverpod/all.dart';
 
 class DocumentsPage extends ConsumerWidget {
@@ -37,7 +40,7 @@ class _DocumentsPageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     final isDarkTheme = ThemeOptions.of(context).isDarkTheme(context);
+    final isDarkTheme = ThemeOptions.of(context).isDarkTheme(context);
 
     return NotificationListener<OverscrollIndicatorNotification>(
       onNotification: (OverscrollIndicatorNotification overscroll) {
@@ -49,7 +52,7 @@ class _DocumentsPageBody extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             children: [
-              SizedBox(height:32),
+              SizedBox(height: 32),
               Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -60,21 +63,15 @@ class _DocumentsPageBody extends StatelessWidget {
                         .copyWith(fontSize: 16),
                   )),
               Consumer(builder: (context, watch, child) {
-                final snapshot = watch(recentActivityProvider);
+                final snapshot = watch(documentStateProvider);
                 return snapshot.map(
                     data: (_) => Padding(
                           padding: const EdgeInsets.only(top: 18.0, bottom: 40),
                           child: ListView.builder(
                               physics: NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
-                              itemCount: snapshot.data.value.length < 10
-                                  ? snapshot.data.value.length
-                                  : 10,
                               itemBuilder: (context, index) {
-                                return _itemTile(
-                                    item: snapshot.data.value[index],
-                                    context: context,
-                                    isDarkTheme: isDarkTheme);
+                                return CustomListTile();
                               }),
                         ),
                     loading: (_) => Center(
@@ -95,4 +92,5 @@ class _DocumentsPageBody extends StatelessWidget {
         ),
       ),
     );
+  }
 }

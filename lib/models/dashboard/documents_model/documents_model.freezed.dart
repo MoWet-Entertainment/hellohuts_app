@@ -28,7 +28,7 @@ class _$DocumentsModelTearOff {
           List<DocumentsGroupModel> specificationDocuments,
       @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           DateTime createdTimeStamp,
-      @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+      @JsonKey(name: JsonConstants.updatedAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           DateTime updatedTimeStamp}) {
     return _DocumentsModel(
       projectDocuments: projectDocuments,
@@ -66,7 +66,7 @@ mixin _$DocumentsModel {
       toJson: dateTimeToUTC)
   DateTime get createdTimeStamp;
   @JsonKey(
-      name: JsonConstants.updated_at,
+      name: JsonConstants.updatedAt,
       fromJson: dateTimeFromUTC,
       toJson: dateTimeToUTC)
   DateTime get updatedTimeStamp;
@@ -91,7 +91,7 @@ abstract class $DocumentsModelCopyWith<$Res> {
           List<DocumentsGroupModel> specificationDocuments,
       @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           DateTime createdTimeStamp,
-      @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+      @JsonKey(name: JsonConstants.updatedAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           DateTime updatedTimeStamp});
 }
 
@@ -154,7 +154,7 @@ abstract class _$DocumentsModelCopyWith<$Res>
           List<DocumentsGroupModel> specificationDocuments,
       @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           DateTime createdTimeStamp,
-      @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+      @JsonKey(name: JsonConstants.updatedAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           DateTime updatedTimeStamp});
 }
 
@@ -216,7 +216,7 @@ class _$_DocumentsModel implements _DocumentsModel {
           this.specificationDocuments,
       @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           this.createdTimeStamp,
-      @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+      @JsonKey(name: JsonConstants.updatedAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           this.updatedTimeStamp});
 
   factory _$_DocumentsModel.fromJson(Map<String, dynamic> json) =>
@@ -242,7 +242,7 @@ class _$_DocumentsModel implements _DocumentsModel {
   final DateTime createdTimeStamp;
   @override
   @JsonKey(
-      name: JsonConstants.updated_at,
+      name: JsonConstants.updatedAt,
       fromJson: dateTimeFromUTC,
       toJson: dateTimeToUTC)
   final DateTime updatedTimeStamp;
@@ -308,7 +308,7 @@ abstract class _DocumentsModel implements DocumentsModel {
           List<DocumentsGroupModel> specificationDocuments,
       @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           DateTime createdTimeStamp,
-      @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+      @JsonKey(name: JsonConstants.updatedAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           DateTime updatedTimeStamp}) = _$_DocumentsModel;
 
   factory _DocumentsModel.fromJson(Map<String, dynamic> json) =
@@ -334,7 +334,7 @@ abstract class _DocumentsModel implements DocumentsModel {
   DateTime get createdTimeStamp;
   @override
   @JsonKey(
-      name: JsonConstants.updated_at,
+      name: JsonConstants.updatedAt,
       fromJson: dateTimeFromUTC,
       toJson: dateTimeToUTC)
   DateTime get updatedTimeStamp;
@@ -362,7 +362,9 @@ class _$DocumentsGroupModelTearOff {
           bool isDownloaded,
       @JsonKey(name: JsonConstants.updatedBy)
           String updatedBy,
-      @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+      @JsonKey(name: JsonConstants.providedBy)
+          String provideBy,
+      @JsonKey(name: JsonConstants.updatedAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           DateTime updatedTimeStamp,
       @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           DateTime createdTimeStamp,
@@ -374,6 +376,7 @@ class _$DocumentsGroupModelTearOff {
       downloadUrl: downloadUrl,
       isDownloaded: isDownloaded,
       updatedBy: updatedBy,
+      provideBy: provideBy,
       updatedTimeStamp: updatedTimeStamp,
       createdTimeStamp: createdTimeStamp,
       documentReason: documentReason,
@@ -402,8 +405,10 @@ mixin _$DocumentsGroupModel {
   bool get isDownloaded;
   @JsonKey(name: JsonConstants.updatedBy)
   String get updatedBy;
+  @JsonKey(name: JsonConstants.providedBy)
+  String get provideBy;
   @JsonKey(
-      name: JsonConstants.updated_at,
+      name: JsonConstants.updatedAt,
       fromJson: dateTimeFromUTC,
       toJson: dateTimeToUTC)
   DateTime get updatedTimeStamp;
@@ -435,7 +440,9 @@ abstract class $DocumentsGroupModelCopyWith<$Res> {
           bool isDownloaded,
       @JsonKey(name: JsonConstants.updatedBy)
           String updatedBy,
-      @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+      @JsonKey(name: JsonConstants.providedBy)
+          String provideBy,
+      @JsonKey(name: JsonConstants.updatedAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           DateTime updatedTimeStamp,
       @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           DateTime createdTimeStamp,
@@ -459,6 +466,7 @@ class _$DocumentsGroupModelCopyWithImpl<$Res>
     Object downloadUrl = freezed,
     Object isDownloaded = freezed,
     Object updatedBy = freezed,
+    Object provideBy = freezed,
     Object updatedTimeStamp = freezed,
     Object createdTimeStamp = freezed,
     Object documentReason = freezed,
@@ -472,6 +480,7 @@ class _$DocumentsGroupModelCopyWithImpl<$Res>
       isDownloaded:
           isDownloaded == freezed ? _value.isDownloaded : isDownloaded as bool,
       updatedBy: updatedBy == freezed ? _value.updatedBy : updatedBy as String,
+      provideBy: provideBy == freezed ? _value.provideBy : provideBy as String,
       updatedTimeStamp: updatedTimeStamp == freezed
           ? _value.updatedTimeStamp
           : updatedTimeStamp as DateTime,
@@ -503,7 +512,9 @@ abstract class _$DocumentsGroupModelCopyWith<$Res>
           bool isDownloaded,
       @JsonKey(name: JsonConstants.updatedBy)
           String updatedBy,
-      @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+      @JsonKey(name: JsonConstants.providedBy)
+          String provideBy,
+      @JsonKey(name: JsonConstants.updatedAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           DateTime updatedTimeStamp,
       @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           DateTime createdTimeStamp,
@@ -529,6 +540,7 @@ class __$DocumentsGroupModelCopyWithImpl<$Res>
     Object downloadUrl = freezed,
     Object isDownloaded = freezed,
     Object updatedBy = freezed,
+    Object provideBy = freezed,
     Object updatedTimeStamp = freezed,
     Object createdTimeStamp = freezed,
     Object documentReason = freezed,
@@ -542,6 +554,7 @@ class __$DocumentsGroupModelCopyWithImpl<$Res>
       isDownloaded:
           isDownloaded == freezed ? _value.isDownloaded : isDownloaded as bool,
       updatedBy: updatedBy == freezed ? _value.updatedBy : updatedBy as String,
+      provideBy: provideBy == freezed ? _value.provideBy : provideBy as String,
       updatedTimeStamp: updatedTimeStamp == freezed
           ? _value.updatedTimeStamp
           : updatedTimeStamp as DateTime,
@@ -570,7 +583,9 @@ class _$_DocumentsGroupModel implements _DocumentsGroupModel {
           this.isDownloaded,
       @JsonKey(name: JsonConstants.updatedBy)
           this.updatedBy,
-      @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+      @JsonKey(name: JsonConstants.providedBy)
+          this.provideBy,
+      @JsonKey(name: JsonConstants.updatedAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           this.updatedTimeStamp,
       @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           this.createdTimeStamp,
@@ -596,8 +611,11 @@ class _$_DocumentsGroupModel implements _DocumentsGroupModel {
   @JsonKey(name: JsonConstants.updatedBy)
   final String updatedBy;
   @override
+  @JsonKey(name: JsonConstants.providedBy)
+  final String provideBy;
+  @override
   @JsonKey(
-      name: JsonConstants.updated_at,
+      name: JsonConstants.updatedAt,
       fromJson: dateTimeFromUTC,
       toJson: dateTimeToUTC)
   final DateTime updatedTimeStamp;
@@ -613,7 +631,7 @@ class _$_DocumentsGroupModel implements _DocumentsGroupModel {
 
   @override
   String toString() {
-    return 'DocumentsGroupModel(itemName: $itemName, isAvailable: $isAvailable, downloadUrl: $downloadUrl, isDownloaded: $isDownloaded, updatedBy: $updatedBy, updatedTimeStamp: $updatedTimeStamp, createdTimeStamp: $createdTimeStamp, documentReason: $documentReason)';
+    return 'DocumentsGroupModel(itemName: $itemName, isAvailable: $isAvailable, downloadUrl: $downloadUrl, isDownloaded: $isDownloaded, updatedBy: $updatedBy, provideBy: $provideBy, updatedTimeStamp: $updatedTimeStamp, createdTimeStamp: $createdTimeStamp, documentReason: $documentReason)';
   }
 
   @override
@@ -635,6 +653,9 @@ class _$_DocumentsGroupModel implements _DocumentsGroupModel {
             (identical(other.updatedBy, updatedBy) ||
                 const DeepCollectionEquality()
                     .equals(other.updatedBy, updatedBy)) &&
+            (identical(other.provideBy, provideBy) ||
+                const DeepCollectionEquality()
+                    .equals(other.provideBy, provideBy)) &&
             (identical(other.updatedTimeStamp, updatedTimeStamp) ||
                 const DeepCollectionEquality()
                     .equals(other.updatedTimeStamp, updatedTimeStamp)) &&
@@ -654,6 +675,7 @@ class _$_DocumentsGroupModel implements _DocumentsGroupModel {
       const DeepCollectionEquality().hash(downloadUrl) ^
       const DeepCollectionEquality().hash(isDownloaded) ^
       const DeepCollectionEquality().hash(updatedBy) ^
+      const DeepCollectionEquality().hash(provideBy) ^
       const DeepCollectionEquality().hash(updatedTimeStamp) ^
       const DeepCollectionEquality().hash(createdTimeStamp) ^
       const DeepCollectionEquality().hash(documentReason);
@@ -681,7 +703,9 @@ abstract class _DocumentsGroupModel implements DocumentsGroupModel {
           bool isDownloaded,
       @JsonKey(name: JsonConstants.updatedBy)
           String updatedBy,
-      @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+      @JsonKey(name: JsonConstants.providedBy)
+          String provideBy,
+      @JsonKey(name: JsonConstants.updatedAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           DateTime updatedTimeStamp,
       @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           DateTime createdTimeStamp,
@@ -707,8 +731,11 @@ abstract class _DocumentsGroupModel implements DocumentsGroupModel {
   @JsonKey(name: JsonConstants.updatedBy)
   String get updatedBy;
   @override
+  @JsonKey(name: JsonConstants.providedBy)
+  String get provideBy;
+  @override
   @JsonKey(
-      name: JsonConstants.updated_at,
+      name: JsonConstants.updatedAt,
       fromJson: dateTimeFromUTC,
       toJson: dateTimeToUTC)
   DateTime get updatedTimeStamp;

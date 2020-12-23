@@ -65,7 +65,7 @@ class JsonConstants {
 
   //Time stamp
   static const String createdAt = 'created_at';
-  static const String updated_at = 'updated_at';
+  static const String updatedAt = 'updated_at';
 
   //DashboardItem
   static const String itemType = 'item_type';
@@ -170,4 +170,5 @@ class JsonConstants {
   static const String isAvailable = "is_available";
   static const String downloadUrl = "download_url";
   static const String documentReason = "document_reason";
+  
 }

@@ -22,7 +22,7 @@ abstract class DashboardItem with _$DashboardItem {
         toJson:dateTimeToUTC)
     @required
         DateTime createdTimeStamp,
-    @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+    @JsonKey(name: JsonConstants.updatedAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
         DateTime updatedTimeStamp,
     @JsonKey(name: JsonConstants.createdBy) String createdBy,
     @JsonKey(name: JsonConstants.updatedBy) String updatedBy,

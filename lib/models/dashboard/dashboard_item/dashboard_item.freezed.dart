@@ -27,7 +27,7 @@ class _$DashboardItemTearOff {
       @required
       @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           DateTime createdTimeStamp,
-      @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+      @JsonKey(name: JsonConstants.updatedAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           DateTime updatedTimeStamp,
       @JsonKey(name: JsonConstants.createdBy)
           String createdBy,
@@ -74,7 +74,7 @@ mixin _$DashboardItem {
       toJson: dateTimeToUTC)
   DateTime get createdTimeStamp;
   @JsonKey(
-      name: JsonConstants.updated_at,
+      name: JsonConstants.updatedAt,
       fromJson: dateTimeFromUTC,
       toJson: dateTimeToUTC)
   DateTime get updatedTimeStamp;
@@ -103,7 +103,7 @@ abstract class $DashboardItemCopyWith<$Res> {
           String itemText2,
       @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           DateTime createdTimeStamp,
-      @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+      @JsonKey(name: JsonConstants.updatedAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           DateTime updatedTimeStamp,
       @JsonKey(name: JsonConstants.createdBy)
           String createdBy,
@@ -168,7 +168,7 @@ abstract class _$DashboardItemCopyWith<$Res>
           String itemText2,
       @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           DateTime createdTimeStamp,
-      @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+      @JsonKey(name: JsonConstants.updatedAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           DateTime updatedTimeStamp,
       @JsonKey(name: JsonConstants.createdBy)
           String createdBy,
@@ -233,7 +233,7 @@ class _$_DashboardItem with DiagnosticableTreeMixin implements _DashboardItem {
       @required
       @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           this.createdTimeStamp,
-      @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+      @JsonKey(name: JsonConstants.updatedAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           this.updatedTimeStamp,
       @JsonKey(name: JsonConstants.createdBy)
           this.createdBy,
@@ -266,7 +266,7 @@ class _$_DashboardItem with DiagnosticableTreeMixin implements _DashboardItem {
   final DateTime createdTimeStamp;
   @override
   @JsonKey(
-      name: JsonConstants.updated_at,
+      name: JsonConstants.updatedAt,
       fromJson: dateTimeFromUTC,
       toJson: dateTimeToUTC)
   final DateTime updatedTimeStamp;
@@ -363,7 +363,7 @@ abstract class _DashboardItem implements DashboardItem {
       @required
       @JsonKey(name: JsonConstants.createdAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           DateTime createdTimeStamp,
-      @JsonKey(name: JsonConstants.updated_at, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
+      @JsonKey(name: JsonConstants.updatedAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
           DateTime updatedTimeStamp,
       @JsonKey(name: JsonConstants.createdBy)
           String createdBy,
@@ -395,7 +395,7 @@ abstract class _DashboardItem implements DashboardItem {
   DateTime get createdTimeStamp;
   @override
   @JsonKey(
-      name: JsonConstants.updated_at,
+      name: JsonConstants.updatedAt,
       fromJson: dateTimeFromUTC,
       toJson: dateTimeToUTC)
   DateTime get updatedTimeStamp;
