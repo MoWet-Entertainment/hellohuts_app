@@ -356,6 +356,8 @@ class _$DocumentsGroupModelTearOff {
           String itemName,
       @JsonKey(name: JsonConstants.isAvailable)
           bool isAvailable,
+      @JsonKey(name: JsonConstants.itemType, fromJson: DocumentsGroupModel._setDocumentType, toJson: DocumentsGroupModel._getDocumentType)
+          DocumentsType documentsType,
       @JsonKey(name: JsonConstants.downloadUrl)
           String downloadUrl,
       @JsonKey(ignore: true)
@@ -373,6 +375,7 @@ class _$DocumentsGroupModelTearOff {
     return _DocumentsGroupModel(
       itemName: itemName,
       isAvailable: isAvailable,
+      documentsType: documentsType,
       downloadUrl: downloadUrl,
       isDownloaded: isDownloaded,
       updatedBy: updatedBy,
@@ -399,6 +402,11 @@ mixin _$DocumentsGroupModel {
   String get itemName;
   @JsonKey(name: JsonConstants.isAvailable)
   bool get isAvailable;
+  @JsonKey(
+      name: JsonConstants.itemType,
+      fromJson: DocumentsGroupModel._setDocumentType,
+      toJson: DocumentsGroupModel._getDocumentType)
+  DocumentsType get documentsType;
   @JsonKey(name: JsonConstants.downloadUrl)
   String get downloadUrl;
   @JsonKey(ignore: true)
@@ -434,6 +442,8 @@ abstract class $DocumentsGroupModelCopyWith<$Res> {
           String itemName,
       @JsonKey(name: JsonConstants.isAvailable)
           bool isAvailable,
+      @JsonKey(name: JsonConstants.itemType, fromJson: DocumentsGroupModel._setDocumentType, toJson: DocumentsGroupModel._getDocumentType)
+          DocumentsType documentsType,
       @JsonKey(name: JsonConstants.downloadUrl)
           String downloadUrl,
       @JsonKey(ignore: true)
@@ -463,6 +473,7 @@ class _$DocumentsGroupModelCopyWithImpl<$Res>
   $Res call({
     Object itemName = freezed,
     Object isAvailable = freezed,
+    Object documentsType = freezed,
     Object downloadUrl = freezed,
     Object isDownloaded = freezed,
     Object updatedBy = freezed,
@@ -475,6 +486,9 @@ class _$DocumentsGroupModelCopyWithImpl<$Res>
       itemName: itemName == freezed ? _value.itemName : itemName as String,
       isAvailable:
           isAvailable == freezed ? _value.isAvailable : isAvailable as bool,
+      documentsType: documentsType == freezed
+          ? _value.documentsType
+          : documentsType as DocumentsType,
       downloadUrl:
           downloadUrl == freezed ? _value.downloadUrl : downloadUrl as String,
       isDownloaded:
@@ -506,6 +520,8 @@ abstract class _$DocumentsGroupModelCopyWith<$Res>
           String itemName,
       @JsonKey(name: JsonConstants.isAvailable)
           bool isAvailable,
+      @JsonKey(name: JsonConstants.itemType, fromJson: DocumentsGroupModel._setDocumentType, toJson: DocumentsGroupModel._getDocumentType)
+          DocumentsType documentsType,
       @JsonKey(name: JsonConstants.downloadUrl)
           String downloadUrl,
       @JsonKey(ignore: true)
@@ -537,6 +553,7 @@ class __$DocumentsGroupModelCopyWithImpl<$Res>
   $Res call({
     Object itemName = freezed,
     Object isAvailable = freezed,
+    Object documentsType = freezed,
     Object downloadUrl = freezed,
     Object isDownloaded = freezed,
     Object updatedBy = freezed,
@@ -549,6 +566,9 @@ class __$DocumentsGroupModelCopyWithImpl<$Res>
       itemName: itemName == freezed ? _value.itemName : itemName as String,
       isAvailable:
           isAvailable == freezed ? _value.isAvailable : isAvailable as bool,
+      documentsType: documentsType == freezed
+          ? _value.documentsType
+          : documentsType as DocumentsType,
       downloadUrl:
           downloadUrl == freezed ? _value.downloadUrl : downloadUrl as String,
       isDownloaded:
@@ -577,6 +597,8 @@ class _$_DocumentsGroupModel implements _DocumentsGroupModel {
           this.itemName,
       @JsonKey(name: JsonConstants.isAvailable)
           this.isAvailable,
+      @JsonKey(name: JsonConstants.itemType, fromJson: DocumentsGroupModel._setDocumentType, toJson: DocumentsGroupModel._getDocumentType)
+          this.documentsType,
       @JsonKey(name: JsonConstants.downloadUrl)
           this.downloadUrl,
       @JsonKey(ignore: true)
@@ -601,6 +623,12 @@ class _$_DocumentsGroupModel implements _DocumentsGroupModel {
   @override
   @JsonKey(name: JsonConstants.isAvailable)
   final bool isAvailable;
+  @override
+  @JsonKey(
+      name: JsonConstants.itemType,
+      fromJson: DocumentsGroupModel._setDocumentType,
+      toJson: DocumentsGroupModel._getDocumentType)
+  final DocumentsType documentsType;
   @override
   @JsonKey(name: JsonConstants.downloadUrl)
   final String downloadUrl;
@@ -631,7 +659,7 @@ class _$_DocumentsGroupModel implements _DocumentsGroupModel {
 
   @override
   String toString() {
-    return 'DocumentsGroupModel(itemName: $itemName, isAvailable: $isAvailable, downloadUrl: $downloadUrl, isDownloaded: $isDownloaded, updatedBy: $updatedBy, provideBy: $provideBy, updatedTimeStamp: $updatedTimeStamp, createdTimeStamp: $createdTimeStamp, documentReason: $documentReason)';
+    return 'DocumentsGroupModel(itemName: $itemName, isAvailable: $isAvailable, documentsType: $documentsType, downloadUrl: $downloadUrl, isDownloaded: $isDownloaded, updatedBy: $updatedBy, provideBy: $provideBy, updatedTimeStamp: $updatedTimeStamp, createdTimeStamp: $createdTimeStamp, documentReason: $documentReason)';
   }
 
   @override
@@ -644,6 +672,9 @@ class _$_DocumentsGroupModel implements _DocumentsGroupModel {
             (identical(other.isAvailable, isAvailable) ||
                 const DeepCollectionEquality()
                     .equals(other.isAvailable, isAvailable)) &&
+            (identical(other.documentsType, documentsType) ||
+                const DeepCollectionEquality()
+                    .equals(other.documentsType, documentsType)) &&
             (identical(other.downloadUrl, downloadUrl) ||
                 const DeepCollectionEquality()
                     .equals(other.downloadUrl, downloadUrl)) &&
@@ -672,6 +703,7 @@ class _$_DocumentsGroupModel implements _DocumentsGroupModel {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(itemName) ^
       const DeepCollectionEquality().hash(isAvailable) ^
+      const DeepCollectionEquality().hash(documentsType) ^
       const DeepCollectionEquality().hash(downloadUrl) ^
       const DeepCollectionEquality().hash(isDownloaded) ^
       const DeepCollectionEquality().hash(updatedBy) ^
@@ -697,6 +729,8 @@ abstract class _DocumentsGroupModel implements DocumentsGroupModel {
           String itemName,
       @JsonKey(name: JsonConstants.isAvailable)
           bool isAvailable,
+      @JsonKey(name: JsonConstants.itemType, fromJson: DocumentsGroupModel._setDocumentType, toJson: DocumentsGroupModel._getDocumentType)
+          DocumentsType documentsType,
       @JsonKey(name: JsonConstants.downloadUrl)
           String downloadUrl,
       @JsonKey(ignore: true)
@@ -721,6 +755,12 @@ abstract class _DocumentsGroupModel implements DocumentsGroupModel {
   @override
   @JsonKey(name: JsonConstants.isAvailable)
   bool get isAvailable;
+  @override
+  @JsonKey(
+      name: JsonConstants.itemType,
+      fromJson: DocumentsGroupModel._setDocumentType,
+      toJson: DocumentsGroupModel._getDocumentType)
+  DocumentsType get documentsType;
   @override
   @JsonKey(name: JsonConstants.downloadUrl)
   String get downloadUrl;

@@ -52,6 +52,8 @@ _$_DocumentsGroupModel _$_$_DocumentsGroupModelFromJson(
   return _$_DocumentsGroupModel(
     itemName: json['item_name'] as String,
     isAvailable: json['is_available'] as bool,
+    documentsType:
+        DocumentsGroupModel._setDocumentType(json['item_type'] as String),
     downloadUrl: json['download_url'] as String,
     updatedBy: json['updated_by'] as String,
     provideBy: json['provided_by'] as String,
@@ -66,6 +68,7 @@ Map<String, dynamic> _$_$_DocumentsGroupModelToJson(
     <String, dynamic>{
       'item_name': instance.itemName,
       'is_available': instance.isAvailable,
+      'item_type': DocumentsGroupModel._getDocumentType(instance.documentsType),
       'download_url': instance.downloadUrl,
       'updated_by': instance.updatedBy,
       'provided_by': instance.provideBy,

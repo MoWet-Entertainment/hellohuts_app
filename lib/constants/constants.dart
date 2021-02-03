@@ -136,6 +136,19 @@ class HelloIcons {
   static const String phone_bold_icon = _iconsRoot + "Phone_bold_icon.png";
   static const String mail_bold_icon = _iconsRoot + "Message_bold_icon.png";
   static const String mail_light_icon = _iconsRoot + "Message_light_icon.png";
+
+  //Project Documents
+  static const String download_light_icon =
+      _iconsRoot + "Download_light_icon.png";
+
+   static const String download_bold_icon =
+      _iconsRoot + "Download_bold_icon.png";
+
+        static const String upload_light_icon =
+      _iconsRoot + "Upload_light_icon.png";
+
+   static const String upload_bold_icon =
+      _iconsRoot + "Upload_bold_icon.png";
 }
 
 class SessionData {

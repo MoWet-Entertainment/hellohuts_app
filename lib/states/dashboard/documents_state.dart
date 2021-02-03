@@ -14,18 +14,17 @@ class DocumentState extends AppState {
   }
 
   Future<DocumentsModel> initDocumentsModel() async {
-     DocumentsModel model =
-        DocumentsModel.fromJson(Mock.documents);
+    DocumentsModel model = DocumentsModel.fromJson(Mock.documents);
+    _documentsModel = model;
+    print(model.toString());
     return Future.delayed(Duration(seconds: 3), () {
-      _documentsModel = model;
       return model;
     });
   }
 }
 
-final _documentsState = Provider((ref) => DocumentState());
-final documentStateProvider =
-    FutureProvider<DocumentsModel>((ref) async {
-  final model = ref.read(_documentsState);
+final documentState = Provider((ref) => DocumentState());
+final documentsStateProvider = FutureProvider<DocumentsModel>((ref) async {
+  final model = ref.read(documentState);
   return model.documentsModel;
 });
