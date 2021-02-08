@@ -1,16 +1,17 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hellohuts_app/constants/constants.dart';
-import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hooks_riverpod/all.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
+import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/models/dashboard/documents_model/documents_model.dart';
 import 'package:hellohuts_app/states/dashboard/documents_state.dart';
 import 'package:hellohuts_app/ui/common_widgets/app_bar/app_bar.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
+import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/theme_options.dart';
-import 'package:timeago/timeago.dart' as timeago;
+import 'dart:math';
 
 class DocumentsPage extends ConsumerWidget {
   const DocumentsPage({Key key}) : super(key: key);
@@ -104,14 +105,17 @@ class _DocumentsListBodyWidget extends StatelessWidget {
           itemModel: model.projectDocuments,
           sectionHeading: "Project Documents",
         ),
+        SizedBox(height: 12.0),
         _DocumentsListWidget(
           itemModel: model.personalDocuments,
           sectionHeading: "Personal Documents",
         ),
+        SizedBox(height: 12.0),
         _DocumentsListWidget(
           itemModel: model.otherDocuments,
           sectionHeading: "Other Documents",
         ),
+        SizedBox(height: 12.0),
         _DocumentsListWidget(
           itemModel: model.specificationDocuments,
           sectionHeading: "Specifications",
@@ -143,12 +147,17 @@ class _DocumentsListWidget extends StatelessWidget {
           style: theme.textTheme.bodyText1
               .copyWith(fontWeight: FontWeight.bold, fontSize: 16),
         ),
-        SizedBox(height: 12,),
+        SizedBox(
+          height: 12,
+        ),
         ListView.builder(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemCount: itemModel.length,
             itemBuilder: (context, index) {
+              itemModel[index] =
+                  itemModel[index].copyWith(isDownloaded: Random().nextBool());
+              print(itemModel[index].toString());
               return _itemTile(
                   item: itemModel[index],
                   context: context,
@@ -165,75 +174,150 @@ class _DocumentsListWidget extends StatelessWidget {
     final theme = Theme.of(context);
     final now = new DateTime.now();
     final isDarkTheme = Get.isDarkMode;
-    final difference = now.difference(item.updatedTimeStamp);
     return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
-      child: CustomListTile(
-        tilePadding:
-            const EdgeInsets.only(top: 4.0, bottom: 4, left: 8, right: 12),
-        backgroundColor: theme.colorScheme.secondaryVariant,
-        borderRadius: BorderRadius.circular(20.0),
+      padding: const EdgeInsets.only(bottom: 12),
+      child: CustomListTileV2(
+        model: item,
+        isEven: isEven,
+      ),
+    );
+  }
+}
+
+class CustomListTileV2 extends StatelessWidget {
+  DocumentsGroupModel model;
+  bool isEven = false;
+  CustomListTileV2({
+    Key key,
+    this.model,
+    this.isEven,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    bool isDarkTheme = Get.isDarkMode;
+    final theme = Theme.of(context);
+    return Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12.0),
+          color: isEven
+              ? theme.colorScheme.secondary.withOpacity(0.7)
+              : theme.colorScheme.secondary.withOpacity(0.4)),
+      child: ListTile(
         leading: customIconSquare(
           backgroundColor:
               isDarkTheme ? AppColors.kDark_7 : theme.colorScheme.background,
-          iconAsset: HelloIcons.folder_light_icon,
+          iconAsset: getLeadingIcon(model.documentsType),
           iconColor: isDarkTheme
               ? AppColors.kbMediumGrey
               : theme.colorScheme.onBackground,
-          backgroundSize: 48,
-          iconSize: 24,
+          backgroundSize: 40,
+          iconSize: 22,
           isCustomIcon: true,
         ),
-        titleText: Text(
-          item.itemName,
-          style: theme.textTheme.bodyText2
-              .copyWith(fontWeight: FontWeight.bold, fontSize: 12),
-          overflow: TextOverflow.ellipsis,
+        title: Text(
+          model.itemName,
           maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         ),
-        subTitle: Text(
-          timeago.format(
-            now.subtract(difference),
-          ),
-          style: theme.textTheme.bodyText2
-              .copyWith(fontSize: 10, fontWeight: FontWeight.w400),
-        ),
-        trailing: _getTrailingWidget(item, context),
+        trailing: _GetTrailingIconForDoc(model: model),
+        contentPadding: EdgeInsets.only(left: 8, right: 8),
       ),
     );
   }
 
-  Widget _getTrailingWidget(DocumentsGroupModel item, BuildContext context) {
-    final theme = Theme.of(context);
-    final isDarkTheme = Get.isDarkMode;
-    if (item.isAvailable) {
-      if (item.isDownloaded != null && item.isDownloaded) {
-        return customIconSquare(
-          backgroundColor:
-              isDarkTheme ? AppColors.kDark_7 : theme.colorScheme.background,
-          iconAsset: HelloIcons.download_light_icon,
-          iconColor: isDarkTheme
-              ? AppColors.kbMediumGrey
-              : theme.colorScheme.onBackground,
-          backgroundSize: 48,
-          iconSize: 24,
-          isCustomIcon: true,
+  String getLeadingIcon(DocumentsType type) {
+    switch (type) {
+      case DocumentsType.ProjectDrawing:
+        return HelloIcons.folder_light_icon;
+      case DocumentsType.ProjectApproval:
+      case DocumentsType.BillStatement:
+      case DocumentsType.Specifications:
+      case DocumentsType.WarrantyCard:
+        return HelloIcons.document_light_icon;
+      case DocumentsType.PersonalDoc:
+        return HelloIcons.profile_light_icon;
+      case DocumentsType.Specifications:
+        return HelloIcons.profile_light_icon;
+      default:
+        return HelloIcons.document_light_icon;
+    }
+  }
+}
+
+class _GetTrailingIconForDoc extends StatefulWidget {
+  _GetTrailingIconForDoc({
+    Key key,
+    @required this.model,
+  }) : super(key: key);
+
+  DocumentsGroupModel model;
+
+  @override
+  _GetTrailingIconForDocState createState() => _GetTrailingIconForDocState();
+}
+
+class _GetTrailingIconForDocState extends State<_GetTrailingIconForDoc> {
+  setDownload() {
+    widget.model =widget.model.copyWith(isDownloaded: true);
+    setState(() {});
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    print(widget.model.toString());
+
+    if (!widget.model.isAvailable &&
+        widget.model.documentsType != DocumentsType.PersonalDoc) {
+      return SizedBox.shrink();
+    } else if (!widget.model.isAvailable &&
+        widget.model.documentsType == DocumentsType.PersonalDoc) {
+      return IconButton(
+        icon: Image.asset(
+          HelloIcons.upload_bold_icon,
+          height: 22,
+          color: Colors.orange,
+        ),
+        onPressed: () => {},
+      );
+    } else if (widget.model.isAvailable) {
+      if (widget.model.isDownloaded == null) {
+        return IconButton(
+          icon: Image.asset(
+            HelloIcons.download_bold_icon,
+            height: 22,
+            color: Colors.blue,
+          ),
+          onPressed: () => {
+setDownload(),
+            print(widget.model.toString()),
+          },
+        );
+      } else if (widget.model.isDownloaded) {
+        print("model.isDownloaded:${widget.model.isDownloaded}");
+        return IconButton(
+          icon: Image.asset(
+            HelloIcons.tick_bold_icon,
+            color: AppColors.kbDarkGreen,
+            height: 18,
+          ),
+          onPressed: () => {},
         );
       } else {
-        return customIconSquare(
-          backgroundColor:
-              isDarkTheme ? AppColors.kDark_7 : theme.colorScheme.background,
-          iconAsset: HelloIcons.download_light_icon,
-          iconColor: isDarkTheme
-              ? AppColors.kbMediumGrey
-              : theme.colorScheme.onBackground,
-          backgroundSize: 48,
-          iconSize: 24,
-          isCustomIcon: true,
+        return IconButton(
+          icon: Image.asset(
+            HelloIcons.download_bold_icon,
+            height: 22,
+            color: Colors.blue,
+          ),
+          onPressed: () => {
+setDownload(),   
+print("downloaded")       },
         );
       }
     } else {
-      SizedBox.shrink();
+      print("Some issue");
+      return SizedBox.shrink();
     }
   }
 }

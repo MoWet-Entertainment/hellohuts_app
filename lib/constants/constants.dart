@@ -141,14 +141,21 @@ class HelloIcons {
   static const String download_light_icon =
       _iconsRoot + "Download_light_icon.png";
 
-   static const String download_bold_icon =
+  static const String download_bold_icon =
       _iconsRoot + "Download_bold_icon.png";
 
-        static const String upload_light_icon =
-      _iconsRoot + "Upload_light_icon.png";
+  static const String upload_light_icon = _iconsRoot + "Upload_light_icon.png";
 
-   static const String upload_bold_icon =
-      _iconsRoot + "Upload_bold_icon.png";
+  static const String upload_bold_icon = _iconsRoot + "Upload_bold_icon.png";
+
+  static const String tick_bold_icon = _iconsRoot + "Tick_bold_icon.png";
+  static const String tick_light_icon = _iconsRoot + "Tick_light_icon.png";
+
+  static const String document_light_icon =
+      _iconsRoot + "Document_light_icon.png";
+
+        static const String document_bold_icon =
+      _iconsRoot + "Document_bold_icon.png";
 }
 
 class SessionData {
