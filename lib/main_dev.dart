@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hellohuts_app/app.dart';
@@ -22,7 +23,10 @@ void main() async {
     WidgetsFlutterBinding.ensureInitialized();
 
   await setUpLocator();
+    await FlutterDownloader.initialize(debug: true);
+
   Get.lazyPut<ThemeController>(() => ThemeController());
+  
 
   runApp(Provider<AppConfig>(
     create: (context) => AppConfig(

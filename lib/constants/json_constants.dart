@@ -170,5 +170,15 @@ class JsonConstants {
   static const String isAvailable = "is_available";
   static const String downloadUrl = "download_url";
   static const String documentReason = "document_reason";
-  
+
+  static const String projectDrawing = "project_drawing";
+  static const String warrantyCard = "warranty_card";
+  static const String billStatement = "bill_statement";
+  static const String projectApproval = "project_approval";
+  static const String specification = "specification";
+  static const String personalDoc = "personal_doc";
+
+  //file
+  static const String fileName = "file_name";
+  static const String size = "size";
 }
