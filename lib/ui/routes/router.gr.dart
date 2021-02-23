@@ -17,21 +17,25 @@ import '../screens/base_page.dart';
 import '../screens/categories/categories_screen.dart';
 import '../screens/categories/categories_search/categories_search_screen.dart';
 import '../screens/dashboard/dashboard_landing/dashboard_landing.dart';
+import '../screens/dashboard/documents/document_upload.dart';
 import '../screens/dashboard/documents/documents_page.dart';
 import '../screens/dashboard/project_details/project_details.dart';
 import '../screens/explore.dart';
 import '../screens/feed_posts/feed_post_detail.dart';
 import '../screens/feed_posts/widgets/comments/post_comments_deatil.dart';
+import '../screens/onboarding/onboarding_screen.dart';
 import '../screens/post_detail/post_detail.dart';
 import '../screens/quick_items/quick_items.dart';
 import '../screens/search/search_screen.dart';
 import '../screens/services_offered/build_my_home/add_details.dart';
 import '../screens/services_offered/build_my_home/pages/cost_estimate_screen.dart';
 import '../screens/services_offered/services_offered_base_page.dart';
+import '../screens/startup_screen.dart';
 import '../screens/welcome_page.dart';
 
 class Routes {
-  static const String basePage = '/';
+  static const String startUpScreen = '/';
+  static const String basePage = '/base-page';
   static const String explorePage = '/explore-page';
   static const String welcomePage = '/welcome-page';
   static const String searchPage = '/search-page';
@@ -51,7 +55,10 @@ class Routes {
   static const String postDetailPage = '/post-detail-page';
   static const String projectDetailsPage = '/project-details-page';
   static const String documentsPage = '/documents-page';
+  static const String documentsUploadPage = '/documents-upload-page';
+  static const String onboardingScreen = '/onboarding-screen';
   static const all = <String>{
+    startUpScreen,
     basePage,
     explorePage,
     welcomePage,
@@ -72,6 +79,8 @@ class Routes {
     postDetailPage,
     projectDetailsPage,
     documentsPage,
+    documentsUploadPage,
+    onboardingScreen,
   };
 }
 
@@ -79,6 +88,7 @@ class AppRouter extends RouterBase {
   @override
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
+    RouteDef(Routes.startUpScreen, page: StartUpScreen),
     RouteDef(Routes.basePage, page: BasePage),
     RouteDef(Routes.explorePage, page: ExplorePage),
     RouteDef(Routes.welcomePage, page: WelcomePage),
@@ -99,10 +109,18 @@ class AppRouter extends RouterBase {
     RouteDef(Routes.postDetailPage, page: PostDetailPage),
     RouteDef(Routes.projectDetailsPage, page: ProjectDetailsPage),
     RouteDef(Routes.documentsPage, page: DocumentsPage),
+    RouteDef(Routes.documentsUploadPage, page: DocumentsUploadPage),
+    RouteDef(Routes.onboardingScreen, page: OnboardingScreen),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
   final _pagesMap = <Type, AutoRouteFactory>{
+    StartUpScreen: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const StartUpScreen(),
+        settings: data,
+      );
+    },
     BasePage: (data) {
       final args = data.getArgs<BasePageArguments>(
         orElse: () => BasePageArguments(),
@@ -293,6 +311,21 @@ class AppRouter extends RouterBase {
         settings: data,
       );
     },
+    DocumentsUploadPage: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const DocumentsUploadPage(),
+        settings: data,
+      );
+    },
+    OnboardingScreen: (data) {
+      final args = data.getArgs<OnboardingScreenArguments>(
+        orElse: () => OnboardingScreenArguments(),
+      );
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => OnboardingScreen(key: args.key),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -362,4 +395,10 @@ class PostDetailPageArguments {
   final Key key;
   final ImageData imageData;
   PostDetailPageArguments({this.key, @required this.imageData});
+}
+
+/// OnboardingScreen arguments holder class
+class OnboardingScreenArguments {
+  final Key key;
+  OnboardingScreenArguments({this.key});
 }

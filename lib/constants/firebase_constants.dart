@@ -25,3 +25,8 @@ class AuthErrors {
   static const String auth_userNotFoundPasswordReset = "USER_NOT_FOUND";
   static const String auth_weakPasswordWhileReset = "WEAK_PASSWORD";
 }
+
+class FirebaseConstans {
+  static const STORGE_USER_DOC_FOLDER = "app-user-documents";
+  
+}

@@ -26,7 +26,7 @@ class PhoneAuthDataProvider with ChangeNotifier {
       onAutoRetrievalTimeout;
 
   bool _loading = false;
-
+  bool _isValidPhoneNumber = false;
   final TextEditingController _phoneNumberController = TextEditingController();
 
   PhoneAuthState _status;
@@ -77,7 +77,6 @@ class PhoneAuthDataProvider with ChangeNotifier {
     _startAuth();
     return true;
   }
-
 
   _startAuth() {
     final PhoneCodeSent codeSent =
@@ -219,6 +218,17 @@ class PhoneAuthDataProvider with ChangeNotifier {
 
   set loading(bool value) {
     _loading = value;
+    notifyListeners();
+  }
+
+  bool get isValidPhoneNumber => _isValidPhoneNumber;
+
+  void setValidPhoneNumber(String val) {
+    if (val.trim().length < 10) {
+      _isValidPhoneNumber = false;
+    } else {
+      _isValidPhoneNumber = true;
+    }
     notifyListeners();
   }
 

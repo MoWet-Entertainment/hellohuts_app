@@ -14,5 +14,6 @@ enum AppPageNames {
 
 class StorageConstants {
     static const THEME_STATUS = "THEME_STATUS";
-
+    static const String SignedUpKey = 'SIGNED_UP';
+    static const String LoggedInKey = 'LOGGED_IN';
 }
