@@ -14,6 +14,7 @@ import 'package:hellohuts_app/ui/common_widgets/app_bar/app_bar.dart';
 import 'package:hellohuts_app/ui/common_widgets/widgets.dart';
 import 'package:hellohuts_app/ui/screens/auth/phone_auth/select_country.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
+import 'package:get/get.dart';
 
 class LoginSignupScreen extends StatelessWidget {
   const LoginSignupScreen({Key key}) : super(key: key);
@@ -130,7 +131,9 @@ class __LoginSignupScreenBodyState extends State<_LoginSignupScreenBody> {
             SizedBox(
               height: 24.0,
             ),
-            _PhoneBasedAuthWidget(buttonText: _isLogin?signInWithPhone:signUpWithPhone,),
+            _PhoneBasedAuthWidget(
+              buttonText: _isLogin ? signInWithPhone : signUpWithPhone,
+            ),
             SizedBox(
               height: 12,
             ),
@@ -168,7 +171,7 @@ class __LoginSignupScreenBodyState extends State<_LoginSignupScreenBody> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 4.0),
                     child: Text(
-                      signInText,
+                      _isLogin ? signUpText : signInText,
                       style: widget.theme.textTheme.bodyText2.copyWith(
                           fontWeight: FontWeight.bold,
                           decoration: TextDecoration.underline),
@@ -185,40 +188,43 @@ class __LoginSignupScreenBodyState extends State<_LoginSignupScreenBody> {
   }
 
   Widget _socialLoginWidget() {
-    return Center(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          _materialCircularButton(
-              child: Image.asset(
-                HelloIcons.google_bold_icon,
-                height: 30,
-              ),
-              onPressed: () {
-                //TODO:  Implement Google Sign in Here
-                print("Google Sign in");
-              }),
-          _materialCircularButton(
-              child: Image.asset(
-                HelloIcons.facebook_bold_icon,
-                height: 30,
-              ),
-              onPressed: () {
-                print("Facebook Sign in");
-                //TODO:  Implement Facebook Sign in Here
-              }),
-          _materialCircularButton(
-              child: Image.asset(
-                HelloIcons.apple_bold_icon,
-                height: 30,
-              ),
-              onPressed: () {
-                print("Apple Sign in ");
-                //TODO: Implemet Apple Sign in Here
-              }),
-        ],
-      ),
-    );
+    return Builder(builder: (context) {
+      bool _isDark = Get.isDarkMode;
+      return Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            _materialCircularButton(
+                child: Image.asset(
+                  HelloIcons.google_bold_icon,
+                  height: 30,
+                ),
+                onPressed: () {
+                  //TODO:  Implement Google Sign in Here
+                  print("Google Sign in");
+                }),
+            _materialCircularButton(
+                child: Image.asset(
+                  HelloIcons.facebook_bold_icon,
+                  height: 30,
+                ),
+                onPressed: () {
+                  print("Facebook Sign in");
+                  //TODO:  Implement Facebook Sign in Here
+                }),
+            _materialCircularButton(
+                child: Image.asset(
+                  HelloIcons.apple_bold_icon,
+                  height: 30,
+                ),
+                onPressed: () {
+                  print("Apple Sign in ");
+                  //TODO: Implemet Apple Sign in Here
+                }),
+          ],
+        ),
+      );
+    });
   }
 
   Widget _materialCircularButton({Widget child, VoidCallback onPressed}) {

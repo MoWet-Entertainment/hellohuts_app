@@ -8,6 +8,7 @@ import 'package:hellohuts_app/ui/screens/categories/categories_screen.dart';
 import 'package:hellohuts_app/ui/screens/categories/categories_search/categories_search_screen.dart';
 import 'package:hellohuts_app/ui/screens/dashboard/dashboard_landing/dashboard_landing.dart';
 import 'package:hellohuts_app/ui/screens/dashboard/documents/document_upload.dart';
+import 'package:hellohuts_app/ui/screens/dashboard/payments/payments_screen.dart';
 import 'package:hellohuts_app/ui/screens/dashboard/documents/documents_page.dart';
 import 'package:hellohuts_app/ui/screens/dashboard/project_details/project_details.dart';
 import 'package:hellohuts_app/ui/screens/explore.dart';
@@ -50,6 +51,7 @@ CustomRoute(page:CostEstimateScreen,transitionsBuilder: TransitionsBuilders.fade
     AdaptiveRoute(page:DocumentsPage),
     AdaptiveRoute(page:DocumentsUploadPage),
     AdaptiveRoute(page:OnboardingScreen),
+    AdaptiveRoute(page: PaymentScreen),
   ]
 )
 class $AppRouter {}

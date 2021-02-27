@@ -82,6 +82,7 @@ class _CategoriesScreenState extends State<CategoriesScreen>
                   sliver: SliverAppBar(
                     backgroundColor: theme.colorScheme.background,
                     title: _searchField(context),
+                    automaticallyImplyLeading: false,
                     floating: true,
                     pinned: true,
                     snap: false,
@@ -137,41 +138,42 @@ class _CategoriesScreenState extends State<CategoriesScreen>
         Routes.categoriesSearchPage,
       ),
       child: Container(
-        height: 64,
-        padding:
-            const EdgeInsets.only(top: 16, bottom: 8.0, left: 16, right: 16),
-        child: TextField(
-          enabled: false,
-          style: theme.textTheme.bodyText2.copyWith(fontSize: 14),
-          autofocus: true,
-          keyboardType: TextInputType.text,
-          decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderSide: const BorderSide(width: 0, style: BorderStyle.none),
-                borderRadius: const BorderRadius.all(
-                  const Radius.circular(20.0),
-                ),
-              ),
-              fillColor: theme.colorScheme.secondaryVariant,
-              // isDense: true,
-              prefixIcon: Padding(
-                  padding: EdgeInsets.only(left: 12.0, right: 8.0),
-                  child: Image.asset(
-                    HelloIcons.search_icon,
-                    color: AppColors.kbDarkGrey,
-                    height: 22,
-                  )),
-              prefixIconConstraints:
-                  BoxConstraints(maxHeight: 44, maxWidth: 44),
-              hintText: AppStrings.searchHintTextForCategories,
-              hintStyle: AppThemes.searchHintStyle,
-              focusColor: AppColors.kbPureWhite,
-              filled: true,
-              contentPadding: const EdgeInsets.only(left: 5, right: 4),
-              suffixIconConstraints:
-                  BoxConstraints(maxWidth: 40, maxHeight: 40)),
+
+          height: 64,
+          padding:
+      const EdgeInsets.only(top: 16, bottom: 8.0, left: 16, right: 16),
+          child: TextField(
+            enabled: false,
+            style: theme.textTheme.bodyText2.copyWith(fontSize: 14),
+            autofocus: true,
+            keyboardType: TextInputType.text,
+            decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderSide: const BorderSide(width: 0, style: BorderStyle.none),
+          borderRadius: const BorderRadius.all(
+            const Radius.circular(20.0),
+          ),
         ),
-      ),
+        fillColor: theme.colorScheme.secondaryVariant,
+        // isDense: true,
+        prefixIcon: Padding(
+            padding: EdgeInsets.only(left: 12.0, right: 8.0),
+            child: Image.asset(
+              HelloIcons.search_icon,
+              color: AppColors.kbDarkGrey,
+              height: 22,
+            )),
+        prefixIconConstraints:
+            BoxConstraints(maxHeight: 44, maxWidth: 44),
+        hintText: AppStrings.searchHintTextForCategories,
+        hintStyle: AppThemes.searchHintStyle,
+        focusColor: AppColors.kbPureWhite,
+        filled: true,
+        contentPadding: const EdgeInsets.only(left: 5, right: 4),
+        suffixIconConstraints:
+            BoxConstraints(maxWidth: 40, maxHeight: 40)),
+          ),
+        ),
     );
   }
   @override
