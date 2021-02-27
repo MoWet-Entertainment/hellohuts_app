@@ -1,28 +1,34 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_route/auto_route_annotations.dart';
+import 'package:flutter/material.dart';
 import 'package:hellohuts_app/models/user_feed/post_detail.dart';
 import 'package:hellohuts_app/ui/screens/auth/phone_auth/get_phone.dart';
 import 'package:hellohuts_app/ui/screens/base_page.dart';
 import 'package:hellohuts_app/ui/screens/categories/categories_screen.dart';
 import 'package:hellohuts_app/ui/screens/categories/categories_search/categories_search_screen.dart';
 import 'package:hellohuts_app/ui/screens/dashboard/dashboard_landing/dashboard_landing.dart';
+import 'package:hellohuts_app/ui/screens/dashboard/documents/document_upload.dart';
+import 'package:hellohuts_app/ui/screens/dashboard/payments/payments_screen.dart';
 import 'package:hellohuts_app/ui/screens/dashboard/documents/documents_page.dart';
 import 'package:hellohuts_app/ui/screens/dashboard/project_details/project_details.dart';
 import 'package:hellohuts_app/ui/screens/explore.dart';
 import 'package:hellohuts_app/ui/screens/feed_posts/feed_post_detail.dart';
 import 'package:hellohuts_app/ui/screens/feed_posts/widgets/comments/post_comments_deatil.dart';
+import 'package:hellohuts_app/ui/screens/onboarding/onboarding_screen.dart';
 import 'package:hellohuts_app/ui/screens/post_detail/post_detail.dart';
 import 'package:hellohuts_app/ui/screens/quick_items/quick_items.dart';
 import 'package:hellohuts_app/ui/screens/search/search_screen.dart';
 import 'package:hellohuts_app/ui/screens/services_offered/build_my_home/add_details.dart';
 import 'package:hellohuts_app/ui/screens/services_offered/build_my_home/pages/cost_estimate_screen.dart';
 import 'package:hellohuts_app/ui/screens/services_offered/services_offered_base_page.dart';
+import 'package:hellohuts_app/ui/screens/startup_screen.dart';
 import 'package:hellohuts_app/ui/screens/welcome_page.dart';
 
 
 @MaterialAutoRouter(
   routes:<AutoRoute> [
-    AdaptiveRoute(page: BasePage,initial: true),
+    AdaptiveRoute(page: StartUpScreen,initial:true),
+    AdaptiveRoute(page: BasePage),
     AdaptiveRoute(page: ExplorePage  ),
     CustomRoute(page: WelcomePage, transitionsBuilder: TransitionsBuilders.slideBottom ),
     CustomRoute(page: SearchPage, transitionsBuilder: TransitionsBuilders.fadeIn ),
@@ -43,7 +49,9 @@ CustomRoute(page:CostEstimateScreen,transitionsBuilder: TransitionsBuilders.fade
     AdaptiveRoute(page:PostDetailPage, ),
     AdaptiveRoute(page: ProjectDetailsPage),
     AdaptiveRoute(page:DocumentsPage),
-
+    AdaptiveRoute(page:DocumentsUploadPage),
+    AdaptiveRoute(page:OnboardingScreen),
+    AdaptiveRoute(page: PaymentScreen),
   ]
 )
 class $AppRouter {}

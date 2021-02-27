@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hellohuts_app/app.dart';
 import 'package:hellohuts_app/constants/app_constants.dart';

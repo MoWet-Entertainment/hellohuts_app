@@ -7,6 +7,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:get/get.dart';
+import 'package:hellohuts_app/ui/routes/router.gr.dart';
 import 'package:hooks_riverpod/all.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -19,6 +20,7 @@ import 'package:hellohuts_app/ui/common_widgets/app_bar/app_bar.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/theme_options.dart';
+import 'package:intl/intl.dart';
 
 const debug = true;
 
@@ -42,6 +44,19 @@ class DocumentsPage extends ConsumerWidget {
         centerTitle: false,
       ),
       body: _DocumentsPageBody(),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 24.0),
+        child: FloatingActionButton(
+          backgroundColor: AppColors.kYellowLight,
+          elevation: 0.5,
+          heroTag: 'DocumentsFileUpload',
+          child: Image.asset(HelloIcons.plus_bold_icon,
+              height: 28, color: theme.colorScheme.background),
+          onPressed: () {
+            ExtendedNavigator.root.push(Routes.documentsUploadPage);
+          },
+        ),
+      ),
     );
   }
 
@@ -706,10 +721,8 @@ class DownloadItem extends StatelessWidget {
     final isDarkTheme = Get.isDarkMode;
     return Container(
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12.0),
-          color: isEven
-              ?isDarkTheme? theme.colorScheme.secondaryVariant.withOpacity(1):theme.colorScheme.secondary.withOpacity(0.7)
-              : isDarkTheme?theme.colorScheme.secondaryVariant.withOpacity(0.6):theme.colorScheme.secondary.withOpacity(0.4)),
+          borderRadius: BorderRadius.circular(16.0),
+          color: theme.colorScheme.secondaryVariant.withOpacity(1)),
       child: ListTile(
         onTap: data.task.status == DownloadTaskStatus.complete
             ? () {
@@ -723,8 +736,8 @@ class DownloadItem extends StatelessWidget {
           iconColor: isDarkTheme
               ? AppColors.kbMediumGrey
               : theme.colorScheme.onBackground,
-          backgroundSize: 36,
-          iconSize: 20,
+          backgroundSize: 44,
+          iconSize: 22,
           isCustomIcon: true,
         ),
         title: Text(
@@ -733,33 +746,48 @@ class DownloadItem extends StatelessWidget {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
-        trailing:
-             data.task.status == DownloadTaskStatus.running ||
-                    data.task.status == DownloadTaskStatus.paused
-                ? Row(  
-                  mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text("${data.task.progress}%",style: TextStyle(fontSize: 10.0),),
-                    RawMaterialButton(
-        onPressed: () {
-          
-          // print("User wants to upload the item");
-        },
-        child: CircularProgressIndicator(
-                        strokeWidth: 3.0,
-                        backgroundColor: AppColors.kbDarkGrey,
-                       valueColor: new AlwaysStoppedAnimation<Color>(AppColors.kbPrimaryYellow),
-                        value: data.task.progress / 100,
-                      ),
-        shape: CircleBorder(),
-        constraints: BoxConstraints(maxHeight: 20.0, maxWidth: 20.0),
-      ),
-                  ],
-                )
-             :
-            _buildActionForTask(data),
-        
+        subtitle: Row(
+          children: [
+            data.task.itemModel.updatedTimeStamp != null
+                ? Text(
+                    DateFormat.yMMMd()
+                        .format(data.task.itemModel.updatedTimeStamp.toLocal()),
+                    style: TextStyle(fontSize: 12),
+                  )
+                : Text(
+                    "Yet to Upload",
+                    style: TextStyle(fontSize: 12),
+                  ),
+          ],
+        ),
+        trailing: data.task.status == DownloadTaskStatus.running ||
+                data.task.status == DownloadTaskStatus.paused
+            ? Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    "${data.task.progress}%",
+                    style: TextStyle(fontSize: 10.0),
+                  ),
+                  RawMaterialButton(
+                    onPressed: () {
+                      // print("User wants to upload the item");
+                    },
+                    child: CircularProgressIndicator(
+                      strokeWidth: 3.0,
+                      backgroundColor: AppColors.kbDarkGrey,
+                      valueColor: new AlwaysStoppedAnimation<Color>(
+                          AppColors.kbPrimaryYellow),
+                      value: data.task.progress / 100,
+                    ),
+                    shape: CircleBorder(),
+                    constraints:
+                        BoxConstraints(maxHeight: 20.0, maxWidth: 20.0),
+                  ),
+                ],
+              )
+            : _buildActionForTask(data),
         contentPadding: EdgeInsets.only(left: 8, right: 8),
       ),
     );
@@ -877,16 +905,15 @@ class DownloadItem extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-           
             RawMaterialButton(
               onPressed: () {
                 onAtionClick(task);
               },
-              child:  Image.asset(
-            HelloIcons.tick_bold_icon,
-            color: AppColors.kbDarkGreen,
-            height: 18,
-          ),
+              child: Image.asset(
+                HelloIcons.tick_bold_icon,
+                color: AppColors.kbDarkGreen,
+                height: 18,
+              ),
               shape: CircleBorder(),
               constraints: BoxConstraints(minHeight: 32.0, minWidth: 32.0),
             )
@@ -915,8 +942,7 @@ class DownloadItem extends StatelessWidget {
         );
       } else if (task.status == DownloadTaskStatus.enqueued) {
         return Text('Pending', style: TextStyle(color: Colors.orange));
-      }
-      else {
+      } else {
         return null;
       }
     } else if (data.task.itemModel.documentsType == DocumentsType.PersonalDoc) {

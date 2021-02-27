@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hellohuts_app/constants/app_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesService {
@@ -14,11 +15,6 @@ class SharedPreferencesService {
 
   final SharedPreferences _preferences;
   SharedPreferencesService._(this._preferences);
-
-
-
-
-
 
   void clearPreferences() {
     _preferences.clear();
@@ -46,4 +42,11 @@ class SharedPreferencesService {
       _preferences.setStringList(key, content);
     }
   }
+
+  //for checking the state of the user wrt app
+  bool get hasSignedUp => getFromDisk(StorageConstants.SignedUpKey) ?? false;
+  set hasSignedUp(bool val) => saveToDisk(StorageConstants.SignedUpKey, val);
+
+  bool get hasLoggedIn => getFromDisk(StorageConstants.LoggedInKey) ?? false;
+  set hasLoggedIn(bool val) => saveToDisk(StorageConstants.LoggedInKey, val);
 }

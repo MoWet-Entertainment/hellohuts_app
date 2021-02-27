@@ -15,6 +15,9 @@ class Assets {
       _imagesRoot + "grouped_cricles_image.svg";
 
   static const String sample_house = _imagesRoot + "villa1.png";
+  static const String onboarding1 = _imagesRoot + "onboarding-key-handover.jpg";
+  static const String onboarding2 = _imagesRoot + "onboarding-sitting.jpg";
+  static const String onboarding3 = _imagesRoot + "onboarding-relaxed.jpg";
 }
 
 class HelloIcons {
@@ -154,8 +157,20 @@ class HelloIcons {
   static const String document_light_icon =
       _iconsRoot + "Document_light_icon.png";
 
-        static const String document_bold_icon =
+  static const String document_bold_icon =
       _iconsRoot + "Document_bold_icon.png";
+
+  //Hellohuts Icon
+  static const String hellohuts_icon = _iconsRoot + "Hellohuts_icon.png";
+
+  //Social Media Login
+  static const String google_bold_icon =
+      _iconsRoot + "Google_bold_color_icon.png";
+  static const String facebook_bold_icon =
+      _iconsRoot + "Facebook_bold_color_icon.png";
+  static const String apple_bold_icon =
+      _iconsRoot + "Apple_bold_color_icon.png";
+  static const String twitter_bold_icon = _iconsRoot + "Twitter_bold_color.png";
 }
 
 class SessionData {

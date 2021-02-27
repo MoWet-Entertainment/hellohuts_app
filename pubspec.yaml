@@ -101,9 +101,9 @@ dependencies:
   configurable_expansion_tile: ^1.0.0
   flutter_linkify: ^4.0.2
   flutter_downloader: ^1.5.2
+  flutter_uploader: ^1.2.1
   permission_handler: ^5.1.0+2
   path_provider: ^1.6.27
-
 
 
 

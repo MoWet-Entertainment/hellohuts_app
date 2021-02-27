@@ -237,6 +237,7 @@ class _DashboardBody extends StatelessWidget {
 
   _payCall() {
     print("user wants to navigate to the Pay  page");
+    ExtendedNavigator.root.push(Routes.paymentScreen);
     //TODO: Pay page
   }
 

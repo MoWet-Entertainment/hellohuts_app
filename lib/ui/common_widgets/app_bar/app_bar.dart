@@ -118,6 +118,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return AppBar(
+      automaticallyImplyLeading: false,
       backgroundColor: backgroundColor??theme.colorScheme.background,
       elevation: 0,
       leading: isBackButton
