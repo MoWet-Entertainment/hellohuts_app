@@ -20,6 +20,8 @@ class _$DashboardItemTearOff {
   _DashboardItem call(
       {@JsonKey(name: JsonConstants.itemType, fromJson: DashboardItem._setModeOfTransaction, toJson: DashboardItem._getDashbordItemType)
           DashboardItemType itemType,
+      @JsonKey(name: JsonConstants.itemCategory, fromJson: DashboardItem._setItemCategory, toJson: DashboardItem._getItemCategory)
+          DashboardItemCategory itemCategory,
       @JsonKey(name: JsonConstants.itemText1)
           String itemText1,
       @JsonKey(name: JsonConstants.itemText2)
@@ -37,6 +39,7 @@ class _$DashboardItemTearOff {
           String providedBy}) {
     return _DashboardItem(
       itemType: itemType,
+      itemCategory: itemCategory,
       itemText1: itemText1,
       itemText2: itemText2,
       createdTimeStamp: createdTimeStamp,
@@ -64,6 +67,11 @@ mixin _$DashboardItem {
       fromJson: DashboardItem._setModeOfTransaction,
       toJson: DashboardItem._getDashbordItemType)
   DashboardItemType get itemType;
+  @JsonKey(
+      name: JsonConstants.itemCategory,
+      fromJson: DashboardItem._setItemCategory,
+      toJson: DashboardItem._getItemCategory)
+  DashboardItemCategory get itemCategory;
   @JsonKey(name: JsonConstants.itemText1)
   String get itemText1;
   @JsonKey(name: JsonConstants.itemText2)
@@ -97,6 +105,8 @@ abstract class $DashboardItemCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: JsonConstants.itemType, fromJson: DashboardItem._setModeOfTransaction, toJson: DashboardItem._getDashbordItemType)
           DashboardItemType itemType,
+      @JsonKey(name: JsonConstants.itemCategory, fromJson: DashboardItem._setItemCategory, toJson: DashboardItem._getItemCategory)
+          DashboardItemCategory itemCategory,
       @JsonKey(name: JsonConstants.itemText1)
           String itemText1,
       @JsonKey(name: JsonConstants.itemText2)
@@ -125,6 +135,7 @@ class _$DashboardItemCopyWithImpl<$Res>
   @override
   $Res call({
     Object itemType = freezed,
+    Object itemCategory = freezed,
     Object itemText1 = freezed,
     Object itemText2 = freezed,
     Object createdTimeStamp = freezed,
@@ -136,6 +147,9 @@ class _$DashboardItemCopyWithImpl<$Res>
     return _then(_value.copyWith(
       itemType:
           itemType == freezed ? _value.itemType : itemType as DashboardItemType,
+      itemCategory: itemCategory == freezed
+          ? _value.itemCategory
+          : itemCategory as DashboardItemCategory,
       itemText1: itemText1 == freezed ? _value.itemText1 : itemText1 as String,
       itemText2: itemText2 == freezed ? _value.itemText2 : itemText2 as String,
       createdTimeStamp: createdTimeStamp == freezed
@@ -162,6 +176,8 @@ abstract class _$DashboardItemCopyWith<$Res>
   $Res call(
       {@JsonKey(name: JsonConstants.itemType, fromJson: DashboardItem._setModeOfTransaction, toJson: DashboardItem._getDashbordItemType)
           DashboardItemType itemType,
+      @JsonKey(name: JsonConstants.itemCategory, fromJson: DashboardItem._setItemCategory, toJson: DashboardItem._getItemCategory)
+          DashboardItemCategory itemCategory,
       @JsonKey(name: JsonConstants.itemText1)
           String itemText1,
       @JsonKey(name: JsonConstants.itemText2)
@@ -192,6 +208,7 @@ class __$DashboardItemCopyWithImpl<$Res>
   @override
   $Res call({
     Object itemType = freezed,
+    Object itemCategory = freezed,
     Object itemText1 = freezed,
     Object itemText2 = freezed,
     Object createdTimeStamp = freezed,
@@ -203,6 +220,9 @@ class __$DashboardItemCopyWithImpl<$Res>
     return _then(_DashboardItem(
       itemType:
           itemType == freezed ? _value.itemType : itemType as DashboardItemType,
+      itemCategory: itemCategory == freezed
+          ? _value.itemCategory
+          : itemCategory as DashboardItemCategory,
       itemText1: itemText1 == freezed ? _value.itemText1 : itemText1 as String,
       itemText2: itemText2 == freezed ? _value.itemText2 : itemText2 as String,
       createdTimeStamp: createdTimeStamp == freezed
@@ -226,6 +246,8 @@ class _$_DashboardItem with DiagnosticableTreeMixin implements _DashboardItem {
   _$_DashboardItem(
       {@JsonKey(name: JsonConstants.itemType, fromJson: DashboardItem._setModeOfTransaction, toJson: DashboardItem._getDashbordItemType)
           this.itemType,
+      @JsonKey(name: JsonConstants.itemCategory, fromJson: DashboardItem._setItemCategory, toJson: DashboardItem._getItemCategory)
+          this.itemCategory,
       @JsonKey(name: JsonConstants.itemText1)
           this.itemText1,
       @JsonKey(name: JsonConstants.itemText2)
@@ -252,6 +274,12 @@ class _$_DashboardItem with DiagnosticableTreeMixin implements _DashboardItem {
       fromJson: DashboardItem._setModeOfTransaction,
       toJson: DashboardItem._getDashbordItemType)
   final DashboardItemType itemType;
+  @override
+  @JsonKey(
+      name: JsonConstants.itemCategory,
+      fromJson: DashboardItem._setItemCategory,
+      toJson: DashboardItem._getItemCategory)
+  final DashboardItemCategory itemCategory;
   @override
   @JsonKey(name: JsonConstants.itemText1)
   final String itemText1;
@@ -282,7 +310,7 @@ class _$_DashboardItem with DiagnosticableTreeMixin implements _DashboardItem {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DashboardItem(itemType: $itemType, itemText1: $itemText1, itemText2: $itemText2, createdTimeStamp: $createdTimeStamp, updatedTimeStamp: $updatedTimeStamp, createdBy: $createdBy, updatedBy: $updatedBy, providedBy: $providedBy)';
+    return 'DashboardItem(itemType: $itemType, itemCategory: $itemCategory, itemText1: $itemText1, itemText2: $itemText2, createdTimeStamp: $createdTimeStamp, updatedTimeStamp: $updatedTimeStamp, createdBy: $createdBy, updatedBy: $updatedBy, providedBy: $providedBy)';
   }
 
   @override
@@ -291,6 +319,7 @@ class _$_DashboardItem with DiagnosticableTreeMixin implements _DashboardItem {
     properties
       ..add(DiagnosticsProperty('type', 'DashboardItem'))
       ..add(DiagnosticsProperty('itemType', itemType))
+      ..add(DiagnosticsProperty('itemCategory', itemCategory))
       ..add(DiagnosticsProperty('itemText1', itemText1))
       ..add(DiagnosticsProperty('itemText2', itemText2))
       ..add(DiagnosticsProperty('createdTimeStamp', createdTimeStamp))
@@ -307,6 +336,9 @@ class _$_DashboardItem with DiagnosticableTreeMixin implements _DashboardItem {
             (identical(other.itemType, itemType) ||
                 const DeepCollectionEquality()
                     .equals(other.itemType, itemType)) &&
+            (identical(other.itemCategory, itemCategory) ||
+                const DeepCollectionEquality()
+                    .equals(other.itemCategory, itemCategory)) &&
             (identical(other.itemText1, itemText1) ||
                 const DeepCollectionEquality()
                     .equals(other.itemText1, itemText1)) &&
@@ -334,6 +366,7 @@ class _$_DashboardItem with DiagnosticableTreeMixin implements _DashboardItem {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(itemType) ^
+      const DeepCollectionEquality().hash(itemCategory) ^
       const DeepCollectionEquality().hash(itemText1) ^
       const DeepCollectionEquality().hash(itemText2) ^
       const DeepCollectionEquality().hash(createdTimeStamp) ^
@@ -356,6 +389,8 @@ abstract class _DashboardItem implements DashboardItem {
   factory _DashboardItem(
       {@JsonKey(name: JsonConstants.itemType, fromJson: DashboardItem._setModeOfTransaction, toJson: DashboardItem._getDashbordItemType)
           DashboardItemType itemType,
+      @JsonKey(name: JsonConstants.itemCategory, fromJson: DashboardItem._setItemCategory, toJson: DashboardItem._getItemCategory)
+          DashboardItemCategory itemCategory,
       @JsonKey(name: JsonConstants.itemText1)
           String itemText1,
       @JsonKey(name: JsonConstants.itemText2)
@@ -381,6 +416,12 @@ abstract class _DashboardItem implements DashboardItem {
       fromJson: DashboardItem._setModeOfTransaction,
       toJson: DashboardItem._getDashbordItemType)
   DashboardItemType get itemType;
+  @override
+  @JsonKey(
+      name: JsonConstants.itemCategory,
+      fromJson: DashboardItem._setItemCategory,
+      toJson: DashboardItem._getItemCategory)
+  DashboardItemCategory get itemCategory;
   @override
   @JsonKey(name: JsonConstants.itemText1)
   String get itemText1;

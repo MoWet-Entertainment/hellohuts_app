@@ -13,7 +13,9 @@ class AppStrings {
 
   static const String signUpHeroText = 'Smarter ways to your dream home';
   // Sign In Page
-  static const String signIn = 'Sign in';
+  static const String signIn = 'Login';
+  static const String signUp = 'Sign Up';
+
   static const String signInWithEmailPassword =
       'Sign in with email and password';
   static const String signInWithEmailLink = 'Sign in with email link';
@@ -21,7 +23,15 @@ class AppStrings {
   static const String signInWithGoogle = 'Sign in with Google';
   static const String goAnonymous = 'Go anonymous';
   static const String or = 'or';
-
+  static String greetText = "Hello ";
+  static String greetTextSignUp = "Hello there!";
+  static String actionTextSignUp = "Get Started with Hellohuts";
+  static String switchToSignInText = "Already have an account?";
+  static String actionTextSignIn = "Welcome Back to Hellohuts";
+  static String switchToSignUp = "New to Hellohuts?";
+  static String signInWithPhone = "Login with Phone Number";
+  static String signUpWithPhone = "Sign up with Phone Number";
+  static String continueWithText = "Continue with";
   // Email & Password page
   static const String register = 'Register';
   static const String forgotPassword = 'Forgot password';
@@ -90,7 +100,8 @@ class AppStrings {
 
   //Search Screen
   static const String searchHintTextForExplore = "Where do you want your home?";
-  static const String searchHintTextForCategories= "Search like Living room design";
+  static const String searchHintTextForCategories =
+      "Search like Living room design";
 
   //Services Offered
   static String servicesOffered_WhatCanWeHelpWithText(String location) =>

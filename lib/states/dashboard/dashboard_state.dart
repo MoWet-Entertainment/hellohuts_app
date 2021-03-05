@@ -7,6 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class DashboardState extends AppState {
   List<DashboardItem> _recentActivitList = [];
+  List<DashboardItem> _allEvents = [];
   MaterialSelectedModel _materialSelectedModel;
   ProjectDetailsModel _projectDetailsModel;
   Future<List<DashboardItem>> getRecentActivityList() async {
@@ -21,6 +22,22 @@ class DashboardState extends AppState {
         .map((ele) => DashboardItem.fromJson(ele))
         .toList();
     _recentActivitList = list;
+    return Future.delayed(Duration(seconds: 2), () {
+      return list;
+    });
+  }
+
+  Future<List<DashboardItem>> getAllEvents() async {
+    if (_allEvents.length == 0 || _allEvents == null) {
+      return initAllEvents();
+    }
+    return _allEvents;
+  }
+
+  Future<List<DashboardItem>> initAllEvents() async {
+    List<DashboardItem> list =
+        Mock.allEventsList.map((ele) => DashboardItem.fromJson(ele)).toList();
+    _allEvents = list;
     return Future.delayed(Duration(seconds: 2), () {
       return list;
     });
@@ -70,6 +87,22 @@ final projectDetailsProvider = FutureProvider<ProjectDetailsModel>((ref) async {
 final recentActivityProvider = FutureProvider<List<DashboardItem>>((ref) async {
   final state = ref.read(dashboardState);
   return state.getRecentActivityList();
+});
+
+final transactionsProvider = FutureProvider<List<DashboardItem>>((ref) async {
+  final state = ref.read(dashboardState);
+  List<DashboardItem> allItems = await state.getAllEvents();
+  return allItems
+      .where((ele) => ele.itemCategory == DashboardItemCategory.Transaction)
+      .toList();
+});
+final activitiesProvider = FutureProvider<List<DashboardItem>>((ref) async {
+  final state = ref.read(dashboardState);
+   List<DashboardItem> allItems = await state.getAllEvents();
+   
+  return allItems
+      .where((ele) => ele.itemCategory == DashboardItemCategory.Activity)
+      .toList();
 });
 
 final materialSelectedProvider =

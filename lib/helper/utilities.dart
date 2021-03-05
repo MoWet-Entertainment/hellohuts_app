@@ -150,7 +150,7 @@ String convertProjectEstimate(String value) {
 String convertCurrency(String value) {
   double val = double.parse(value);
   if (val != null || val != '') {
-    final formatter = NumberFormat.simpleCurrency(decimalDigits: 0, name: '₹');
+    final formatter = NumberFormat.simpleCurrency(decimalDigits: 0, name: '₹',locale: "HI");
     return formatter.format(val);
   }
   return null;
