@@ -21,7 +21,7 @@ jobs:
         java-version: '12.x'
     - uses: subosito/flutter-action@v1
       with:
-        flutter-version: '1.22.1'
+        flutter-version: '2.0.1'
     - run: flutter pub get
     # - run: flutter test
     - run:  flutter build apk --release -t lib/main_dev.dart --split-per-abi --flavor dev
