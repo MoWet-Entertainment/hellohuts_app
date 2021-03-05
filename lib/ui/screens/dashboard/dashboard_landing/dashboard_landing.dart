@@ -104,7 +104,7 @@ class _DashboardBody extends StatelessWidget {
                                   ? snapshot.data.value.length
                                   : 10,
                               itemBuilder: (context, index) {
-                                return _itemTile(
+                                return itemTile(
                                     item: snapshot.data.value[index],
                                     context: context,
                                     isDarkTheme: isDarkTheme);
@@ -251,170 +251,12 @@ class _DashboardBody extends StatelessWidget {
     //TODO: Calendar page
   }
 
-  Widget _itemTile(
-      {@required DashboardItem item,
-      @required BuildContext context,
-      bool isDarkTheme = false}) {
-    final theme = Theme.of(context);
-    final now = new DateTime.now();
-    final difference = now.difference(item.updatedTimeStamp);
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
-      child: CustomListTile(
-        tilePadding:
-            const EdgeInsets.only(top: 4.0, bottom: 4, left: 8, right: 12),
-        backgroundColor: theme.colorScheme.secondaryVariant,
-        borderRadius: BorderRadius.circular(20.0),
-        leading: customIconSquare(
-          backgroundColor:
-              isDarkTheme ? AppColors.kDark_7 : theme.colorScheme.background,
-          iconAsset: _getLeadingIcon(item),
-          iconColor: isDarkTheme
-              ? AppColors.kbMediumGrey
-              : theme.colorScheme.onBackground,
-          backgroundSize: 48,
-          iconSize: 24,
-          isCustomIcon: true,
-        ),
-        titleText: Text(
-          item.itemText1,
-          style: theme.textTheme.bodyText2
-              .copyWith(fontWeight: FontWeight.bold, fontSize: 12),
-          overflow: TextOverflow.ellipsis,
-          maxLines: 1,
-        ),
-        subTitle: Text(
-          timeago.format(
-            now.subtract(difference),
-          ),
-          style: theme.textTheme.bodyText2
-              .copyWith(fontSize: 10, fontWeight: FontWeight.w400),
-        ),
-        trailing: _getTrailingWidget(item, context),
-      ),
-    );
-  }
+  
 
-  Widget _getTrailingWidget(DashboardItem item, BuildContext context) {
-    final theme = Theme.of(context);
-    switch (item.itemType) {
-      case DashboardItemType.TransactionReceived:
-        return item.itemText2 != null
-            ? Text("₹" + item.itemText2,
-                style: theme.textTheme.headline6.copyWith(
-                  fontSize: 14,
-                  color: AppColors.kGreenLight,
-                ))
-            : SizedBox.shrink();
-      case DashboardItemType.TransactionSpent:
-        return item.itemText2 != null
-            ? Text("₹" + item.itemText2,
-                style: theme.textTheme.headline6.copyWith(
-                  fontSize: 14,
-                  color: AppColors.kRed,
-                ))
-            : SizedBox.shrink();
-      case DashboardItemType.ItemDelivered:
-        return item.itemText2 != null
-            ? Text("₹" + item.itemText2,
-                style: theme.textTheme.headline6.copyWith(
-                  fontSize: 14,
-                  color: AppColors.kRed,
-                ))
-            : SizedBox.shrink();
-      case DashboardItemType.StarcoinsReceived:
-        return item.itemText2 != null
-            ? Row(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Image.asset(
-                    HelloIcons.star_bold_icon,
-                    height: 14,
-                    color: AppColors.kYellowLight,
-                  ),
-                  SizedBox(width: 4.0),
-                  Text(item.itemText2,
-                      style: theme.textTheme.headline6.copyWith(
-                        fontSize: 14,
-                        color: AppColors.kYellowLight,
-                      )),
-                ],
-              )
-            : SizedBox.shrink();
-      case DashboardItemType.StarcoinsSpent:
-        return item.itemText2 != null
-            ? Row(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Image.asset(
-                    HelloIcons.star_bold_icon,
-                    height: 14,
-                    color: AppColors.kYellowLight,
-                  ),
-                  SizedBox(width: 4.0),
-                  Text(item.itemText2,
-                      style: theme.textTheme.headline6.copyWith(
-                        fontSize: 14,
-                        color: AppColors.kbDarkRed,
-                      )),
-                ],
-              )
-            : SizedBox.shrink();
-      case DashboardItemType.ServiceDebit:
-        return item.itemText2 != null
-            ? Text("₹" + item.itemText2,
-                style: theme.textTheme.headline6.copyWith(
-                  fontSize: 14,
-                  color: AppColors.kRed,
-                ))
-            : SizedBox.shrink();
+  
+  
 
-      case DashboardItemType.PaymentReminder:
-        return GestureDetector(
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12.0),
-                color: AppColors.kbDarkGreen.withOpacity(0.6),
-              ),
-              child: Text(
-                'Pay',
-                style: theme.textTheme.bodyText2
-                    .copyWith(fontSize: 12, color: AppColors.kbDarkGreen),
-              ),
-            ),
-            onTap: () => {
-                  print("User wishes to pay"),
-                  //TODO:Add Navigation to Payment Page
-                });
-      default:
-        return SizedBox.shrink();
-    }
-  }
 
-  String _getLeadingIcon(DashboardItem item) {
-    switch (item.itemType) {
-      case DashboardItemType.TransactionReceived:
-        return HelloIcons.wallet_light_icon;
-      case DashboardItemType.TransactionSpent:
-        return HelloIcons.wallet_light_icon;
-      case DashboardItemType.ItemDelivered:
-        return HelloIcons.bag_light_icon;
-
-      case DashboardItemType.StarcoinsReceived:
-        return HelloIcons.star_light_icon;
-      case DashboardItemType.StarcoinsSpent:
-        return HelloIcons.star_light_icon;
-      case DashboardItemType.ServiceDebit:
-        return HelloIcons.contractor_light_icon;
-      default:
-        return HelloIcons.wallet_light_icon;
-    }
-  }
 }
 
 class _ImageContainer extends StatelessWidget {

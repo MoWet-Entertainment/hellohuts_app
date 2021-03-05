@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hellohuts_app/constants/strings.dart';
 import 'package:provider/provider.dart';
 
 import 'package:hellohuts_app/constants/constants.dart';
@@ -57,19 +58,19 @@ class _LoginSignupScreenBody extends StatefulWidget {
 class __LoginSignupScreenBodyState extends State<_LoginSignupScreenBody> {
   var preference = locator<SharedPreferencesService>();
 
-  String greetTextSignUp = "Hello there!";
-  String actionTextSignUp = "Get Started with Hellohuts";
-  String switchToSignInText = "Already have an account?";
+  String greetTextSignUp = AppStrings.greetTextSignUp;
+  String actionTextSignUp = AppStrings.actionTextSignUp;
+  String switchToSignInText = AppStrings.switchToSignInText;
 
   String existingUserFirstName = '';
   String greetTextSignIn = '';
 
-  String actionTextSignIn = "Welcome Back to Hellohuts";
-  String switchToSignUp = "New to Hellohuts?";
-  String signInText = "Login";
-  String signUpText = "Sign Up";
-  String signInWithPhone = "Login with Phone Number";
-  String signUpWithPhone = "Sign up with Phone Number";
+  String actionTextSignIn = AppStrings.actionTextSignIn;
+  String switchToSignUp = AppStrings.switchToSignUp;
+  String signInText = AppStrings.signIn;
+  String signUpText = AppStrings.signUp;
+  String signInWithPhone = AppStrings.signInWithPhone;
+  String signUpWithPhone = AppStrings.signUpWithPhone;
   bool _isLogin = false;
 
   @override
@@ -77,8 +78,8 @@ class __LoginSignupScreenBodyState extends State<_LoginSignupScreenBody> {
     existingUserFirstName = preference.getFromDisk("user_first_name");
     greetTextSignIn =
         existingUserFirstName != null && existingUserFirstName.length > 0
-            ? "Hello " + existingUserFirstName
-            : "Hello there!";
+            ? AppStrings.greetText + existingUserFirstName
+            : AppStrings.greetTextSignUp;
     super.initState();
   }
 
@@ -135,7 +136,8 @@ class __LoginSignupScreenBodyState extends State<_LoginSignupScreenBody> {
               buttonText: _isLogin ? signInWithPhone : signUpWithPhone,
             ),
             SizedBox(
-              height: 12,
+
+              height: 24,
             ),
             Container(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -145,7 +147,7 @@ class __LoginSignupScreenBodyState extends State<_LoginSignupScreenBody> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Text(
-                      "or",
+                      AppStrings.or,
                       style: widget.theme.textTheme.bodyText1,
                     ),
                   ),
@@ -155,11 +157,13 @@ class __LoginSignupScreenBodyState extends State<_LoginSignupScreenBody> {
             ),
             Center(
                 child: Text(
-              "Continue with",
+              AppStrings.continueWithText,
               style: widget.theme.textTheme.bodyText1,
             )),
             SizedBox(height: 16),
+
             _socialLoginWidget(),
+
             SizedBox(
               height: 24,
             ),
@@ -213,10 +217,17 @@ class __LoginSignupScreenBodyState extends State<_LoginSignupScreenBody> {
                   //TODO:  Implement Facebook Sign in Here
                 }),
             _materialCircularButton(
-                child: Image.asset(
-                  HelloIcons.apple_bold_icon,
-                  height: 30,
-                ),
+                child: _isDark
+                    ? Image.asset(
+                        HelloIcons.apple_bold_icon,
+                        height: 30,
+                        color: AppColors.kPureWhite.withOpacity(0.9),
+                      )
+                    : Image.asset(
+                        HelloIcons.apple_bold_icon,
+                        height: 30,
+                        color: AppColors.kPureBlack,
+                      ),
                 onPressed: () {
                   print("Apple Sign in ");
                   //TODO: Implemet Apple Sign in Here

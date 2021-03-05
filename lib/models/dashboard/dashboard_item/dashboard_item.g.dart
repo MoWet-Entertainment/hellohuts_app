@@ -9,6 +9,8 @@ part of 'dashboard_item.dart';
 _$_DashboardItem _$_$_DashboardItemFromJson(Map<String, dynamic> json) {
   return _$_DashboardItem(
     itemType: DashboardItem._setModeOfTransaction(json['item_type'] as String),
+    itemCategory:
+        DashboardItem._setItemCategory(json['item_category'] as String),
     itemText1: json['item_text1'] as String,
     itemText2: json['item_text2'] as String,
     createdTimeStamp: dateTimeFromUTC(json['created_at'] as String),
@@ -22,6 +24,7 @@ _$_DashboardItem _$_$_DashboardItemFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$_$_DashboardItemToJson(_$_DashboardItem instance) =>
     <String, dynamic>{
       'item_type': DashboardItem._getDashbordItemType(instance.itemType),
+      'item_category': DashboardItem._getItemCategory(instance.itemCategory),
       'item_text1': instance.itemText1,
       'item_text2': instance.itemText2,
       'created_at': dateTimeToUTC(instance.createdTimeStamp),

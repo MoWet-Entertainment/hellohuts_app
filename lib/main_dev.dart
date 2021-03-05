@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
-import 'package:get/get.dart';
 import 'package:hellohuts_app/app.dart';
+import 'package:get/get.dart';
 import 'package:hellohuts_app/constants/app_constants.dart';
 import 'package:hellohuts_app/controllers/theme_controller.dart';
 import 'package:hellohuts_app/helper/app_config.dart';

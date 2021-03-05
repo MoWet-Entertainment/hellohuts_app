@@ -632,6 +632,7 @@ class Mock {
   static var recentActivityList = [
     {
       "item_type": "transaction_received",
+            "item_category":"101",
       "item_text1": "Payment Received",
       "item_text2": "50,000",
       "created_at": "2020-11-21T22:44:26Z",
@@ -640,6 +641,7 @@ class Mock {
     },
     {
       "item_type": "item_delivered",
+            "item_category":"102",
       "item_text1": "Cements Bags Delivered",
       "item_text2": "35,000",
       "created_at": "2020-11-20T22:44:26Z",
@@ -648,6 +650,8 @@ class Mock {
     },
     {
       "item_type": "item_delivered",
+                  "item_category":"102",
+
       "item_text1": "Steel Bars Delivered",
       "item_text2": "45,000",
       "created_at": "2020-11-20T10:44:26Z",
@@ -656,6 +660,8 @@ class Mock {
     },
     {
       "item_type": "service_debit",
+                  "item_category":"101",
+
       "item_text1": "Service Debit",
       "item_text2": "20,000",
       "created_at": "2020-11-18T10:44:26Z",
@@ -664,6 +670,8 @@ class Mock {
     },
     {
       "item_type": "item_delivered",
+                  "item_category":"102",
+
       "item_text1": "MSand Delivered",
       "item_text2": "9,000",
       "created_at": "2020-11-10T10:44:26Z",
@@ -672,6 +680,7 @@ class Mock {
     },
     {
       "item_type": "item_delivered",
+                  "item_category":"102",
       "item_text1": "Steel Bars Delivered",
       "item_text2": "45,000",
       "created_at": "2020-11-20T10:44:26Z",
@@ -680,6 +689,7 @@ class Mock {
     },
     {
       "item_type": "starcoins_received",
+                  "item_category":"101",
       "item_text1": "StarCoins credited",
       "item_text2": "199",
       "created_at": "2020-11-17T12:44:26Z",
@@ -688,6 +698,7 @@ class Mock {
     },
     {
       "item_type": "item_delivered",
+          "item_category":"102",
       "item_text1": "Cement Bags Delivered",
       "item_text2": "41,000",
       "created_at": "2020-11-09T10:44:26Z",
@@ -696,6 +707,7 @@ class Mock {
     },
     {
       "item_type": "transaction_received",
+          "item_category":"101",
       "item_text1": "Payment Received",
       "item_text2": "89,000",
       "created_at": "2020-11-02T10:44:26Z",
@@ -704,6 +716,7 @@ class Mock {
     },
     {
       "item_type": "item_delivered",
+          "item_category":"102",
       "item_text1": "Steel Bars Delivered",
       "item_text2": "45,000",
       "created_at": "2020-11-20T10:44:26Z",
@@ -712,6 +725,7 @@ class Mock {
     },
     {
       "item_type": "item_delivered",
+          "item_category":"102",
       "item_text1": "Bricks Delivered",
       "item_text2": "12,000",
       "created_at": "2020-11-01T10:44:26Z",
@@ -720,6 +734,7 @@ class Mock {
     },
     {
       "item_type": "item_delivered",
+          "item_category":"102",
       "item_text1": "MSand Delivered",
       "item_text2": "8,000",
       "created_at": "2020-11-20T10:44:26Z",
@@ -727,7 +742,229 @@ class Mock {
       "created_by": "vinoop ks"
     }
   ];
+ static var allEventsList = [
+    {
+      "item_type": "transaction_received",
+            "item_category":"101",
+      "item_text1": "Payment Received",
+      "item_text2": "50,000",
+      "created_at": "2020-11-21T22:44:26Z",
+      "updated_at": "2020-11-21T22:44:26Z",
+      "created_by": "vinoop ks"
+    },
+    {
+      "item_type": "item_delivered",
+            "item_category":"102",
+      "item_text1": "Cements Bags Delivered",
+      "item_text2": "35,000",
+      "created_at": "2020-11-20T22:44:26Z",
+      "updated_at": "2020-11-20T22:44:26Z",
+      "created_by": "vinoop ks"
+    },
+    {
+      "item_type": "item_delivered",
+                  "item_category":"102",
 
+      "item_text1": "Steel Bars Delivered",
+      "item_text2": "45,000",
+      "created_at": "2020-11-20T10:44:26Z",
+      "updated_at": "2020-11-20T10:44:26Z",
+      "created_by": "vinoop ks"
+    },
+    {
+      "item_type": "service_debit",
+                  "item_category":"101",
+
+      "item_text1": "Service Debit",
+      "item_text2": "20,000",
+      "created_at": "2020-11-18T10:44:26Z",
+      "updated_at": "2020-11-18T10:44:26Z",
+      "created_by": "vinoop ks"
+    },
+    {
+      "item_type": "item_delivered",
+                  "item_category":"102",
+
+      "item_text1": "MSand Delivered",
+      "item_text2": "9,000",
+      "created_at": "2020-11-10T10:44:26Z",
+      "updated_at": "2020-11-10T10:44:26Z",
+      "created_by": "vinoop ks"
+    },
+    {
+      "item_type": "item_delivered",
+                  "item_category":"102",
+      "item_text1": "Steel Bars Delivered",
+      "item_text2": "45,000",
+      "created_at": "2020-11-20T10:44:26Z",
+      "updated_at": "2020-11-20T10:44:26Z",
+      "created_by": "vinoop ks"
+    },
+    {
+      "item_type": "starcoins_received",
+                  "item_category":"101",
+      "item_text1": "StarCoins credited",
+      "item_text2": "199",
+      "created_at": "2020-11-17T12:44:26Z",
+      "updated_at": "2020-11-17T12:44:26Z",
+      "created_by": "vinoop ks"
+    },
+    {
+      "item_type": "item_delivered",
+          "item_category":"102",
+      "item_text1": "Cement Bags Delivered",
+      "item_text2": "41,000",
+      "created_at": "2020-11-09T10:44:26Z",
+      "updated_at": "2020-11-09T10:44:26Z",
+      "created_by": "vinoop ks"
+    },
+    {
+      "item_type": "transaction_received",
+          "item_category":"101",
+      "item_text1": "Payment Received",
+      "item_text2": "89,000",
+      "created_at": "2020-11-02T10:44:26Z",
+      "updated_at": "2020-11-02T10:44:26Z",
+      "created_by": "vinoop ks"
+    },
+    {
+      "item_type": "item_delivered",
+          "item_category":"102",
+      "item_text1": "Steel Bars Delivered",
+      "item_text2": "45,000",
+      "created_at": "2020-11-20T10:44:26Z",
+      "updated_at": "2020-11-20T10:44:26Z",
+      "created_by": "vinoop ks"
+    },
+    {
+      "item_type": "item_delivered",
+          "item_category":"102",
+      "item_text1": "Bricks Delivered",
+      "item_text2": "12,000",
+      "created_at": "2020-11-01T10:44:26Z",
+      "updated_at": "2020-11-01T10:44:26Z",
+      "created_by": "vinoop ks"
+    },
+    {
+      "item_type": "item_delivered",
+          "item_category":"102",
+      "item_text1": "MSand Delivered",
+      "item_text2": "8,000",
+      "created_at": "2020-11-20T10:44:26Z",
+      "updated_at": "2020-11-20T10:44:26Z",
+      "created_by": "vinoop ks"
+    },{
+      "item_type": "transaction_received",
+            "item_category":"101",
+      "item_text1": "Payment Received",
+      "item_text2": "50,000",
+      "created_at": "2020-11-21T22:44:26Z",
+      "updated_at": "2020-11-21T22:44:26Z",
+      "created_by": "vinoop ks"
+    },
+    {
+      "item_type": "item_delivered",
+            "item_category":"102",
+      "item_text1": "Cements Bags Delivered",
+      "item_text2": "35,000",
+      "created_at": "2020-11-20T22:44:26Z",
+      "updated_at": "2020-11-20T22:44:26Z",
+      "created_by": "vinoop ks"
+    },
+    {
+      "item_type": "item_delivered",
+                  "item_category":"102",
+
+      "item_text1": "Steel Bars Delivered",
+      "item_text2": "45,000",
+      "created_at": "2020-11-20T10:44:26Z",
+      "updated_at": "2020-11-20T10:44:26Z",
+      "created_by": "vinoop ks"
+    },
+    {
+      "item_type": "service_debit",
+                  "item_category":"101",
+
+      "item_text1": "Service Debit",
+      "item_text2": "20,000",
+      "created_at": "2020-11-18T10:44:26Z",
+      "updated_at": "2020-11-18T10:44:26Z",
+      "created_by": "vinoop ks"
+    },
+    {
+      "item_type": "item_delivered",
+                  "item_category":"102",
+
+      "item_text1": "MSand Delivered",
+      "item_text2": "9,000",
+      "created_at": "2020-11-10T10:44:26Z",
+      "updated_at": "2020-11-10T10:44:26Z",
+      "created_by": "vinoop ks"
+    },
+    {
+      "item_type": "item_delivered",
+                  "item_category":"102",
+      "item_text1": "Steel Bars Delivered",
+      "item_text2": "45,000",
+      "created_at": "2020-11-20T10:44:26Z",
+      "updated_at": "2020-11-20T10:44:26Z",
+      "created_by": "vinoop ks"
+    },
+    {
+      "item_type": "starcoins_received",
+                  "item_category":"101",
+      "item_text1": "StarCoins credited",
+      "item_text2": "199",
+      "created_at": "2020-11-17T12:44:26Z",
+      "updated_at": "2020-11-17T12:44:26Z",
+      "created_by": "vinoop ks"
+    },
+    {
+      "item_type": "item_delivered",
+          "item_category":"102",
+      "item_text1": "Cement Bags Delivered",
+      "item_text2": "41,000",
+      "created_at": "2020-11-09T10:44:26Z",
+      "updated_at": "2020-11-09T10:44:26Z",
+      "created_by": "vinoop ks"
+    },
+    {
+      "item_type": "transaction_received",
+          "item_category":"101",
+      "item_text1": "Payment Received",
+      "item_text2": "89,000",
+      "created_at": "2020-11-02T10:44:26Z",
+      "updated_at": "2020-11-02T10:44:26Z",
+      "created_by": "vinoop ks"
+    },
+    {
+      "item_type": "item_delivered",
+          "item_category":"102",
+      "item_text1": "Steel Bars Delivered",
+      "item_text2": "45,000",
+      "created_at": "2020-11-20T10:44:26Z",
+      "updated_at": "2020-11-20T10:44:26Z",
+      "created_by": "vinoop ks"
+    },
+    {
+      "item_type": "item_delivered",
+          "item_category":"102",
+      "item_text1": "Bricks Delivered",
+      "item_text2": "12,000",
+      "created_at": "2020-11-01T10:44:26Z",
+      "updated_at": "2020-11-01T10:44:26Z",
+      "created_by": "vinoop ks"
+    },
+    {
+      "item_type": "item_delivered",
+          "item_category":"102",
+      "item_text1": "MSand Delivered",
+      "item_text2": "8,000",
+      "created_at": "2020-11-20T10:44:26Z",
+      "updated_at": "2020-11-20T10:44:26Z",
+      "created_by": "vinoop ks"
+    }
+  ];
   static var projectDetails = {
     "project_area": "2187",
     "plinth_area": "2187",

@@ -8,7 +8,10 @@ class JsonConstants {
   static const String transactionFromaccountNo = 'trasaction_from_account_no';
   static const String transactionToAccountNo = 'trasaction_to_account_no';
   static const String modeOfTransaction = 'mode_of_transaction';
-
+  static const String transaction = "101";
+  static const String activity = "102";
+  static const String event = "103";
+  static const String undefined = "104"; 
   //USER SPECIFIC CONSTANTS
   static const String userId = 'uid';
   static const String email = 'email';
@@ -74,6 +77,7 @@ class JsonConstants {
   static const String createdBy = 'created_by';
   static const String updatedBy = 'updated_by';
   static const String providedBy = "provided_by";
+  static const String itemCategory = 'item_category';
 
   static const String trasactionRecieved = "transaction_received";
   static const String transactionSpent = "transaction_spent";

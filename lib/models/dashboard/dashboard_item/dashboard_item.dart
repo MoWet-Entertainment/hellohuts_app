@@ -10,16 +10,17 @@ part 'dashboard_item.g.dart';
 @freezed
 abstract class DashboardItem with _$DashboardItem {
   @JsonSerializable(explicitToJson: true)
-
   factory DashboardItem({
     @JsonKey(name: JsonConstants.itemType, fromJson: DashboardItem._setModeOfTransaction, toJson: DashboardItem._getDashbordItemType)
         DashboardItemType itemType,
+    @JsonKey(name: JsonConstants.itemCategory, fromJson: DashboardItem._setItemCategory, toJson: DashboardItem._getItemCategory)
+        DashboardItemCategory itemCategory,
     @JsonKey(name: JsonConstants.itemText1) String itemText1,
     @JsonKey(name: JsonConstants.itemText2) String itemText2,
     @JsonKey(
         name: JsonConstants.createdAt,
         fromJson: dateTimeFromUTC,
-        toJson:dateTimeToUTC)
+        toJson: dateTimeToUTC)
     @required
         DateTime createdTimeStamp,
     @JsonKey(name: JsonConstants.updatedAt, fromJson: dateTimeFromUTC, toJson: dateTimeToUTC)
@@ -28,8 +29,6 @@ abstract class DashboardItem with _$DashboardItem {
     @JsonKey(name: JsonConstants.updatedBy) String updatedBy,
     @JsonKey(name: JsonConstants.providedBy) String providedBy,
   }) = _DashboardItem;
-
-
 
   static DashboardItemType _setModeOfTransaction(String dataVal) {
     if (dataVal == JsonConstants.trasactionRecieved) {
@@ -69,6 +68,29 @@ abstract class DashboardItem with _$DashboardItem {
     return "";
   }
 
+  static DashboardItemCategory _setItemCategory(String dataVal) {
+    if (dataVal == JsonConstants.transaction) {
+      return DashboardItemCategory.Transaction;
+    } else if (dataVal == JsonConstants.activity) {
+      return DashboardItemCategory.Activity;
+    } else if (dataVal == JsonConstants.event) {
+      return DashboardItemCategory.Event;
+    } else
+      return DashboardItemCategory.Undefined;
+  }
+
+  static String _getItemCategory(DashboardItemCategory category) {
+    if (category == DashboardItemCategory.Activity) {
+      return JsonConstants.activity;
+    } else if (category == DashboardItemCategory.Event) {
+      return JsonConstants.event;
+    } else if (category == DashboardItemCategory.Transaction) {
+      return JsonConstants.transaction;
+    } else {
+      return JsonConstants.undefined;
+    }
+  }
+
   factory DashboardItem.fromJson(Map<String, dynamic> json) =>
       _$DashboardItemFromJson(json);
 
@@ -87,12 +109,4 @@ enum DashboardItemType {
   ServiceDebit,
   PaymentReminder,
 }
-
-
-
-
-
-
-
-
-
+enum DashboardItemCategory { Transaction, Activity, Event, Undefined }
