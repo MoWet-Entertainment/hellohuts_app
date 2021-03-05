@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import 'package:hellohuts_app/states/dashboard/dashboard_state.dart';
 import 'package:hellohuts_app/ui/common_widgets/app_bar/app_bar.dart';
 import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
 import 'package:hellohuts_app/ui/routes/router.gr.dart';
+import 'package:hellohuts_app/ui/screens/welcome_page.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -19,20 +21,18 @@ class PaymentScreen extends ConsumerWidget {
     final theme = Theme.of(context);
 
     bool isDark = Get.isDarkMode;
-    return AnnotatedSafeArea(
-      child: Scaffold(
-        appBar: CustomAppBar(
-          isBackButton: true,
-          onBackButtonPressed: _onBackButtonPressed,
-          title: Text(
-            "Payments",
-            style: theme.textTheme.bodyText1
-                .copyWith(fontWeight: FontWeight.bold, fontSize: 16),
-          ),
-          centerTitle: false,
+    return Scaffold(
+      appBar: CustomAppBar(
+        isBackButton: true,
+        onBackButtonPressed: _onBackButtonPressed,
+        title: Text(
+          "Payments",
+          style: theme.textTheme.bodyText1
+              .copyWith(fontWeight: FontWeight.bold, fontSize: 16),
         ),
-        body: _PaymentScreenBody(),
+        centerTitle: false,
       ),
+      body: _PaymentScreenBody(),
     );
   }
 
@@ -153,7 +153,7 @@ class _PaymentScreenBodyState extends State<_PaymentScreenBody>
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal:24.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: TabBarView(
                 controller: _tabController,
                 children: [
@@ -187,7 +187,8 @@ class _PaymentScreenBodyState extends State<_PaymentScreenBody>
       final snapshot = watch(transactionsProvider);
       return snapshot.map(
           data: (_) => Padding(
-                padding: const EdgeInsets.only(top: 18.0, bottom: 40),
+                padding: const EdgeInsets.only(
+                    top: 18.0, bottom: 40, right: 8, left: 8),
                 child: ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
@@ -220,9 +221,11 @@ class _PaymentScreenBodyState extends State<_PaymentScreenBody>
     bool isDarkTheme = Get.isDarkMode;
     return Consumer(builder: (context, watch, child) {
       final snapshot = watch(activitiesProvider);
+      final theme = Theme.of(context);
       return snapshot.map(
           data: (_) => Padding(
-                padding: const EdgeInsets.only(top: 18.0, bottom: 40),
+                padding: const EdgeInsets.only(
+                    top: 18.0, bottom: 40, right: 8, left: 8),
                 child: ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
@@ -230,10 +233,29 @@ class _PaymentScreenBodyState extends State<_PaymentScreenBody>
                         ? snapshot.data.value.length
                         : 10,
                     itemBuilder: (context, index) {
-                      return itemTile(
-                          item: snapshot.data.value[index],
-                          context: context,
-                          isDarkTheme: isDarkTheme);
+                      return OpenContainer(
+                        openBuilder: (context, closedContainer) {
+                          return WelcomePage();
+                        },
+                        openColor: theme.cardColor,
+                        closedShape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(30)),
+                        ),
+                        closedElevation: 0,
+                        closedColor: theme.cardColor,
+                        closedBuilder: (context, openContainer) {
+                          return InkWell(
+                            onTap: () {
+                              print("do action here");
+                              openContainer();
+                            },
+                            child:  itemTile(
+                            item: snapshot.data.value[index],
+                            context: context,
+                            isDarkTheme: isDarkTheme),
+                          );
+                        },
+                      );
                     }),
               ),
           loading: (_) => Center(

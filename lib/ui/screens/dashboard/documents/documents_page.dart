@@ -745,6 +745,8 @@ class DownloadItem extends StatelessWidget {
           softWrap: true,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
+          style: theme.textTheme.bodyText2
+              .copyWith(fontWeight: FontWeight.bold, fontSize: 12),
         ),
         subtitle: Row(
           children: [
@@ -752,12 +754,14 @@ class DownloadItem extends StatelessWidget {
                 ? Text(
                     DateFormat.yMMMd()
                         .format(data.task.itemModel.updatedTimeStamp.toLocal()),
-                    style: TextStyle(fontSize: 12),
-                  )
+                    style: theme.textTheme.bodyText2
+              .copyWith(fontSize: 10, fontWeight: FontWeight.w400),
+              )
                 : Text(
                     "Yet to Upload",
-                    style: TextStyle(fontSize: 12),
-                  ),
+                  style: theme.textTheme.bodyText2
+              .copyWith(fontSize: 10, fontWeight: FontWeight.w400),
+                ),
           ],
         ),
         trailing: data.task.status == DownloadTaskStatus.running ||
