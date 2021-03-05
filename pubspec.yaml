@@ -26,55 +26,55 @@ dependencies:
 
 
   #database and auth
-  cloud_firestore: ^0.14.0+2
-  firebase_core: ^0.5.0
-  firebase_storage: ^4.0.0
+  cloud_firestore: ^1.0.0
+  firebase_core: ^1.0.0
+  firebase_storage: ^8.0.0
 
 
   #auth methods
-  firebase_auth: ^0.18.0+1
-  google_sign_in: ^4.5.3
-  sign_in_with_apple: ^2.5.2
-  flutter_facebook_auth: ^0.3.0
+  firebase_auth: ^1.0.0
+  google_sign_in: ^5.0.0
+  sign_in_with_apple: ^3.0.0-nullsafety.0
+  flutter_facebook_auth: ^2.0.2+1
 
 
   #notifications
-  firebase_messaging: ^7.0.0
+  firebase_messaging: ^9.0.0
 
 
 
  #local storage
-  shared_preferences: ^0.5.12+4
+  shared_preferences: ^2.0.3
 
 
  
  #http requests
-  http: ^0.12.1
+  http: ^0.13.0
 
 
   #analytics
-  firebase_analytics: ^6.0.0
-  firebase_crashlytics: ^0.1.4+1
+  firebase_analytics: ^7.1.0
+  firebase_crashlytics: ^1.0.0
 
 
 
   #state management and dependecy injection
-  provider: ^4.3.2+2 
-  get_it: ^5.0.0
-  get: ^3.22.2
+  provider: ^5.0.0
+  get_it: ^6.0.0
+  get: ^3.26.0
   
 
 
 
   #user interface
-  google_fonts: ^1.1.0
-  flutter_screenutil: ^3.1.1
-  cached_network_image: ^2.3.3
-  expandable_text: ^0.1.0
+  google_fonts: ^2.0.0
+  flutter_screenutil: ^4.0.3+2
+  cached_network_image: ^2.5.0
+  expandable_text: ^2.0.0-nullsafety.1
   smooth_page_indicator: ^0.2.0
-  carousel_slider: ^2.3.1
-  flutter_svg: ^0.19.0
-  flutter_staggered_grid_view: ^0.3.2
+  carousel_slider: ^3.0.0
+  flutter_svg: ^0.21.0-nullsafety.0
+  flutter_staggered_grid_view: ^0.3.4
   flutter_statusbarcolor: ^0.2.3
 
 
@@ -90,21 +90,21 @@ dependencies:
   auto_route: ^0.6.9
 
   #utilities
-  equatable: ^1.2.5
-  logger: ^0.9.2
-  flutter_hooks: ^0.14.0
-  freezed: ^0.12.3
-  timeago: ^2.0.28
-  hooks_riverpod: ^0.12.1
-  url_launcher: ^5.7.10
-  share: ^0.6.5+4
+  equatable: ^2.0.0
+  logger: ^0.9.4
+  flutter_hooks: ^0.16.0
+  freezed: ^0.14.0
+  timeago: ^3.0.1
+  hooks_riverpod: ^0.13.0
+  url_launcher: ^6.0.2
+  share: ^2.0.0
   configurable_expansion_tile: ^1.0.0
-  flutter_linkify: ^4.0.2
+  flutter_linkify: ^5.0.0
   flutter_downloader: ^1.5.2
   flutter_uploader: ^1.2.1
   permission_handler: ^5.1.0+2
-  path_provider: ^1.6.27
-
+  path_provider: ^2.0.1
+  animations: ^2.0.0
 
 
 
