@@ -18,7 +18,6 @@ class CustomizeDetailsBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final state = Provider.of<CostEstimateState>(context);
     final theme = Theme.of(context);
-    ScreenUtil.init(context, designSize: Size(375.0, 801.0));
     return Container(
       width: fullWidth(context),
       color: theme.colorScheme.background,

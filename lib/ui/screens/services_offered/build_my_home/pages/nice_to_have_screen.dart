@@ -19,7 +19,6 @@ class NiceToHaveDetailsBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<CostEstimateState>(context);
-    ScreenUtil.init(context, designSize: Size(375.0, 801.0));
     return Container(
       width: fullWidth(context),
       color: Theme.of(context).colorScheme.background,

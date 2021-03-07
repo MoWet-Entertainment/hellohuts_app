@@ -755,8 +755,7 @@ class QuickPickItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context,
-        designSize: Size(375, 801), allowFontScaling: false);
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: InkWell(

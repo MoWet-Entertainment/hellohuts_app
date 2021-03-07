@@ -59,7 +59,6 @@ class _CostEstimateScreenBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context, designSize: Size(375.0, 801.0));
     final theme = Theme.of(context);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 40),

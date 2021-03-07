@@ -232,7 +232,6 @@ class _BedroomSelectionSection extends StatelessWidget {
     var state = Provider.of<CostEstimateState>(context);
     int _currentValue = state.selectedNumberOfBedrooms;
     var width = fullWidth(context);
-    ScreenUtil.init(context, designSize: Size(375.0, 801.0));
     return Container(
       padding: const EdgeInsets.only(bottom: 8.0),
       child: Column(
@@ -283,7 +282,6 @@ class _BathroomSelectionSection extends StatelessWidget {
   Widget build(BuildContext context) {
     var state = Provider.of<CostEstimateState>(context);
     int _currentValue = state.selectedNumberOfBathrooms;
-    ScreenUtil.init(context, designSize: Size(375.0, 801.0));
     return Container(
       padding: const EdgeInsets.only(bottom: 8.0),
       child: Column(
