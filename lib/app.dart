@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:hellohuts_app/constants/constants.dart';
 import 'package:hellohuts_app/controllers/theme_controller.dart';
@@ -63,22 +64,26 @@ class _AppState extends State<App> {
                     platform: defaultTargetPlatform,
                   ),
                   child: rp.ProviderScope(
-                    child: GetMaterialApp(
-                      debugShowCheckedModeBanner: false,
-                      navigatorKey: Get.key,
-                      title: Provider.of<AppConfig>(context).appTitle,
-                      theme:AppThemes.lightThemeData,
-                      darkTheme: AppThemes.darkThemeData,
-                      themeMode: ThemeController.to.themeMode,
-                      home: Container(),
-                      builder: ExtendedNavigator.builder<AppRouter>(
+                    child: ScreenUtilInit(
+                 designSize: Size(375.0, 801.0),
+                 allowFontScaling: false,
+                 builder: ()=> GetMaterialApp(
+                        debugShowCheckedModeBanner: false,
                         navigatorKey: Get.key,
-                        router: AppRouter(),
-                        guards: [AuthGuard()],
+                        title: Provider.of<AppConfig>(context).appTitle,
+                        theme:AppThemes.lightThemeData,
+                        darkTheme: AppThemes.darkThemeData,
+                        themeMode: ThemeController.to.themeMode,
+                        home: Container(),
+                        builder: ExtendedNavigator.builder<AppRouter>(
+                          navigatorKey: Get.key,
+                          router: AppRouter(),
+                          guards: [AuthGuard()],
+                        ),
+                        navigatorObservers: <NavigatorObserver>[
+                          locator<AnalyticsService>().getAnalyticsObserver(),
+                        ],
                       ),
-                      navigatorObservers: <NavigatorObserver>[
-                        locator<AnalyticsService>().getAnalyticsObserver(),
-                      ],
                     ),
                   ),
                 );

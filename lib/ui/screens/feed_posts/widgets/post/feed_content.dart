@@ -104,7 +104,7 @@ class _FeedPostMiddleSection extends StatelessWidget {
                 },
                 aspectRatio: _customAspectRatio ? 0.9 : (327.w / 243.w),
               ),
-              itemBuilder: (BuildContext context, int itemIndex) => Container(
+              itemBuilder: (BuildContext context, int itemIndex,_) => Container(
                 padding: const EdgeInsets.symmetric(horizontal: 0),
                 child: Container(
                   width: MediaQuery.of(context).size.width,

@@ -97,7 +97,6 @@ class ItemTypeSelectSection extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context, designSize: Size(375.0, 801.0));
     return Container(
       padding: const EdgeInsets.only(bottom: 16.0),
       child: Column(

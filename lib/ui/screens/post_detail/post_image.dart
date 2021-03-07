@@ -69,7 +69,7 @@ class _PostImageState extends State<PostImage> with TickerProviderStateMixin {
                               },
                             ),
                             itemBuilder:
-                                (BuildContext context, int itemIndex) =>
+                                (BuildContext context, int itemIndex,_) =>
                                     Container(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 0),

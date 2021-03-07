@@ -223,7 +223,6 @@ class AddDetailsProgressIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     final state = Provider.of<CostEstimateState>(context);
     final theme = Theme.of(context);
-    ScreenUtil.init(context, designSize: Size(375.0, 801.0));
     final screenWidth = fullWidth(context);
     final widthExtent = (screenWidth * 0.8) / 4;
     return Container(

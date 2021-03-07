@@ -35,7 +35,7 @@ dependencies:
   firebase_auth: ^1.0.0
   google_sign_in: ^5.0.0
   sign_in_with_apple: ^3.0.0-nullsafety.0
-  flutter_facebook_auth: ^2.0.2+1
+  flutter_facebook_auth: ^3.0.0-nullsafety.1
 
 
   #notifications
@@ -53,7 +53,7 @@ dependencies:
 
 
   #analytics
-  firebase_analytics: ^7.1.0
+  # firebase_analytics: ^7.1.0
   firebase_crashlytics: ^1.0.0
 
 
@@ -68,8 +68,8 @@ dependencies:
 
   #user interface
   google_fonts: ^2.0.0
-  flutter_screenutil: ^4.0.3+2
-  cached_network_image: ^2.5.0
+  flutter_screenutil: ^5.0.0-nullsafety.7
+  cached_network_image: ^3.0.0-nullsafety
   expandable_text: ^2.0.0-nullsafety.1
   smooth_page_indicator: ^0.2.0
   carousel_slider: ^3.0.0
@@ -102,7 +102,7 @@ dependencies:
   flutter_linkify: ^5.0.0
   flutter_downloader: ^1.5.2
   flutter_uploader: ^1.2.1
-  permission_handler: ^5.1.0+2
+  permission_handler: ^6.0.1
   path_provider: ^2.0.1
   animations: ^2.0.0
 
