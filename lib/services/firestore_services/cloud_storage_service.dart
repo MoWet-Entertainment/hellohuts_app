@@ -1,33 +1,37 @@
 import 'dart:io';
-import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/foundation.dart';
 
 class CloudStorageService {
+  final firebase_storage.FirebaseStorage _storage =
+      firebase_storage.FirebaseStorage.instance;
+
+
+
+      
   Future<CloudStorageResult> uploadFile({
     @required File fileToUpload,
     @required String title,
   }) async {
     var fileName = title + DateTime.now().millisecondsSinceEpoch.toString();
-    final StorageReference firebaseStorageRef =
-        FirebaseStorage.instance.ref().child(fileName);
-    StorageUploadTask uploadTask = firebaseStorageRef.putFile(fileToUpload);
-    StorageTaskSnapshot storageSnapshot = await uploadTask.onComplete;
-    var downloadUrl = await storageSnapshot.ref.getDownloadURL();
-    if (uploadTask.isComplete) {
+    
+
+    firebase_storage.UploadTask uploadTask =  _storage.ref().child(fileName).putFile(fileToUpload);
+    var downloadUrl = await (await uploadTask).ref.getDownloadURL();
+
       var url = downloadUrl.toString();
       return CloudStorageResult(
         fileUrl: url,
         fileName: fileName,
       );
     }
-    return null;
-  }
+
+  
 
   Future deleteImage(String fileName) async {
-    final StorageReference firebaseStorage =
-        FirebaseStorage.instance.ref().child(fileName);
+
     try {
-      await firebaseStorage.delete();
+      await _storage.ref().child(fileName).delete();
       return true;
     } catch (e) {
       return e.toString();

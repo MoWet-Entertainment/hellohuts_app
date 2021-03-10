@@ -82,14 +82,30 @@ class FireBaseAuthService implements AuthService {
   @override
   Future<String> signInWithFacebook() async {
     //Trigger sign-in flow
-    final LoginResult result = await FacebookAuth.instance.login();
-    if (result == null) {
-      throw Exception('Facebook login cancelled by user');
+    AccessToken accessToken = null;
+    try {
+       accessToken = await FacebookAuth.instance.login();
+    } on FacebookAuthException catch (e) {
+      switch (e.errorCode) {
+        case FacebookAuthErrorCode.OPERATION_IN_PROGRESS:
+          print("You have a previous login operation in progress");
+          throw e;
+          break;
+        case FacebookAuthErrorCode.CANCELLED:
+          print("login cancelled");
+          throw Exception('Facebook login cancelled by user');
+          break;
+        case FacebookAuthErrorCode.FAILED:
+          print("login failed");
+          throw Exception('Login failed');
+
+          break;
+      }
     }
 
     //Create a credential from the access token
     final FacebookAuthCredential facebookAuthCredential =
-        FacebookAuthProvider.credential(result.accessToken.token);
+        FacebookAuthProvider.credential(accessToken.token);
 
     try {
       //Once signed in, return the user credentials
