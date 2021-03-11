@@ -115,6 +115,7 @@ mixin _$Comment {
   int get commentCount;
 
   Map<String, dynamic> toJson();
+  @JsonKey(ignore: true)
   $CommentCopyWith<Comment> get copyWith;
 }
 
@@ -471,6 +472,7 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
       const DeepCollectionEquality().hash(childCommentList) ^
       const DeepCollectionEquality().hash(commentCount);
 
+  @JsonKey(ignore: true)
   @override
   _$CommentCopyWith<_Comment> get copyWith =>
       __$CommentCopyWithImpl<_Comment>(this, _$identity);
@@ -566,5 +568,6 @@ abstract class _Comment implements Comment {
   @JsonKey(name: JsonConstants.postCommentCount)
   int get commentCount;
   @override
+  @JsonKey(ignore: true)
   _$CommentCopyWith<_Comment> get copyWith;
 }

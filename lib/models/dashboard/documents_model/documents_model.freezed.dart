@@ -72,6 +72,7 @@ mixin _$DocumentsModel {
   DateTime get updatedTimeStamp;
 
   Map<String, dynamic> toJson();
+  @JsonKey(ignore: true)
   $DocumentsModelCopyWith<DocumentsModel> get copyWith;
 }
 
@@ -286,6 +287,7 @@ class _$_DocumentsModel implements _DocumentsModel {
       const DeepCollectionEquality().hash(createdTimeStamp) ^
       const DeepCollectionEquality().hash(updatedTimeStamp);
 
+  @JsonKey(ignore: true)
   @override
   _$DocumentsModelCopyWith<_DocumentsModel> get copyWith =>
       __$DocumentsModelCopyWithImpl<_DocumentsModel>(this, _$identity);
@@ -339,6 +341,7 @@ abstract class _DocumentsModel implements DocumentsModel {
       toJson: dateTimeToUTC)
   DateTime get updatedTimeStamp;
   @override
+  @JsonKey(ignore: true)
   _$DocumentsModelCopyWith<_DocumentsModel> get copyWith;
 }
 
@@ -429,6 +432,7 @@ mixin _$DocumentsGroupModel {
   String get documentReason;
 
   Map<String, dynamic> toJson();
+  @JsonKey(ignore: true)
   $DocumentsGroupModelCopyWith<DocumentsGroupModel> get copyWith;
 }
 
@@ -712,6 +716,7 @@ class _$_DocumentsGroupModel implements _DocumentsGroupModel {
       const DeepCollectionEquality().hash(createdTimeStamp) ^
       const DeepCollectionEquality().hash(documentReason);
 
+  @JsonKey(ignore: true)
   @override
   _$DocumentsGroupModelCopyWith<_DocumentsGroupModel> get copyWith =>
       __$DocumentsGroupModelCopyWithImpl<_DocumentsGroupModel>(
@@ -789,5 +794,6 @@ abstract class _DocumentsGroupModel implements DocumentsGroupModel {
   @JsonKey(name: JsonConstants.documentReason)
   String get documentReason;
   @override
+  @JsonKey(ignore: true)
   _$DocumentsGroupModelCopyWith<_DocumentsGroupModel> get copyWith;
 }

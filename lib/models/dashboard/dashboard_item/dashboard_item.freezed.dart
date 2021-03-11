@@ -94,6 +94,7 @@ mixin _$DashboardItem {
   String get providedBy;
 
   Map<String, dynamic> toJson();
+  @JsonKey(ignore: true)
   $DashboardItemCopyWith<DashboardItem> get copyWith;
 }
 
@@ -375,6 +376,7 @@ class _$_DashboardItem with DiagnosticableTreeMixin implements _DashboardItem {
       const DeepCollectionEquality().hash(updatedBy) ^
       const DeepCollectionEquality().hash(providedBy);
 
+  @JsonKey(ignore: true)
   @override
   _$DashboardItemCopyWith<_DashboardItem> get copyWith =>
       __$DashboardItemCopyWithImpl<_DashboardItem>(this, _$identity);
@@ -450,5 +452,6 @@ abstract class _DashboardItem implements DashboardItem {
   @JsonKey(name: JsonConstants.providedBy)
   String get providedBy;
   @override
+  @JsonKey(ignore: true)
   _$DashboardItemCopyWith<_DashboardItem> get copyWith;
 }

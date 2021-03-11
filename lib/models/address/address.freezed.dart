@@ -64,6 +64,7 @@ mixin _$Address {
   String get country;
 
   Map<String, dynamic> toJson();
+  @JsonKey(ignore: true)
   $AddressCopyWith<Address> get copyWith;
 }
 
@@ -252,6 +253,7 @@ class _$_Address with DiagnosticableTreeMixin implements _Address {
       const DeepCollectionEquality().hash(state) ^
       const DeepCollectionEquality().hash(country);
 
+  @JsonKey(ignore: true)
   @override
   _$AddressCopyWith<_Address> get copyWith =>
       __$AddressCopyWithImpl<_Address>(this, _$identity);
@@ -296,5 +298,6 @@ abstract class _Address implements Address {
   @JsonKey(name: JsonConstants.country)
   String get country;
   @override
+  @JsonKey(ignore: true)
   _$AddressCopyWith<_Address> get copyWith;
 }

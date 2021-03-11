@@ -122,6 +122,7 @@ mixin _$ProjectDetailsModel {
   DateTime get updatedTimeStamp;
 
   Map<String, dynamic> toJson();
+  @JsonKey(ignore: true)
   $ProjectDetailsModelCopyWith<ProjectDetailsModel> get copyWith;
 }
 
@@ -604,6 +605,7 @@ class _$_ProjectDetailsModel implements _ProjectDetailsModel {
       const DeepCollectionEquality().hash(createdTimeStamp) ^
       const DeepCollectionEquality().hash(updatedTimeStamp);
 
+  @JsonKey(ignore: true)
   @override
   _$ProjectDetailsModelCopyWith<_ProjectDetailsModel> get copyWith =>
       __$ProjectDetailsModelCopyWithImpl<_ProjectDetailsModel>(
@@ -708,5 +710,6 @@ abstract class _ProjectDetailsModel implements ProjectDetailsModel {
       toJson: dateTimeToUTC)
   DateTime get updatedTimeStamp;
   @override
+  @JsonKey(ignore: true)
   _$ProjectDetailsModelCopyWith<_ProjectDetailsModel> get copyWith;
 }

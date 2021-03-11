@@ -28,9 +28,9 @@ abstract class Comment with _$Comment {
     @JsonKey(name: JsonConstants.key)  String key,
     @JsonKey(name: JsonConstants.parentKey) String parentKey,
     @JsonKey(name: JsonConstants.postId) @required String postId,
-    @JsonKey(name: JsonConstants.isParent) @Default(false) bool isParent,
+    @nullable @JsonKey(name: JsonConstants.isParent) @Default(false) bool isParent,
     @JsonKey(name: JsonConstants.childList) List<Comment> childCommentList,
-    @JsonKey(name:JsonConstants.postCommentCount)
+    @nullable @JsonKey(name:JsonConstants.postCommentCount)
     int commentCount,
   }) = _Comment;
   factory Comment.fromJson(Map<String, dynamic> json) =>

@@ -48,6 +48,7 @@ mixin _$CompanyModel {
   String get companyId;
 
   Map<String, dynamic> toJson();
+  @JsonKey(ignore: true)
   $CompanyModelCopyWith<CompanyModel> get copyWith;
 }
 
@@ -191,6 +192,7 @@ class _$_CompanyModel implements _CompanyModel {
       const DeepCollectionEquality().hash(companyName) ^
       const DeepCollectionEquality().hash(companyId);
 
+  @JsonKey(ignore: true)
   @override
   _$CompanyModelCopyWith<_CompanyModel> get copyWith =>
       __$CompanyModelCopyWithImpl<_CompanyModel>(this, _$identity);
@@ -221,5 +223,6 @@ abstract class _CompanyModel implements CompanyModel {
   @JsonKey(name: JsonConstants.uniqueId)
   String get companyId;
   @override
+  @JsonKey(ignore: true)
   _$CompanyModelCopyWith<_CompanyModel> get copyWith;
 }
