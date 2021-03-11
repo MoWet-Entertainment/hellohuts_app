@@ -116,6 +116,7 @@ mixin _$SelectedPlanModel {
   DateTime get updatedTimeStamp;
 
   Map<String, dynamic> toJson();
+  @JsonKey(ignore: true)
   $SelectedPlanModelCopyWith<SelectedPlanModel> get copyWith;
 }
 
@@ -457,6 +458,7 @@ class _$_SelectedPlanModel
       const DeepCollectionEquality().hash(createdTimeStamp) ^
       const DeepCollectionEquality().hash(updatedTimeStamp);
 
+  @JsonKey(ignore: true)
   @override
   _$SelectedPlanModelCopyWith<_SelectedPlanModel> get copyWith =>
       __$SelectedPlanModelCopyWithImpl<_SelectedPlanModel>(this, _$identity);
@@ -554,6 +556,7 @@ abstract class _SelectedPlanModel implements SelectedPlanModel {
       toJson: dateTimeToUTC)
   DateTime get updatedTimeStamp;
   @override
+  @JsonKey(ignore: true)
   _$SelectedPlanModelCopyWith<_SelectedPlanModel> get copyWith;
 }
 
@@ -611,6 +614,7 @@ mixin _$OtherBuildingRequirementsModel {
   DateTime get updatedTimeStamp;
 
   Map<String, dynamic> toJson();
+  @JsonKey(ignore: true)
   $OtherBuildingRequirementsModelCopyWith<OtherBuildingRequirementsModel>
       get copyWith;
 }
@@ -783,6 +787,7 @@ class _$_OtherBuildingRequirementsModel
       const DeepCollectionEquality().hash(createdTimeStamp) ^
       const DeepCollectionEquality().hash(updatedTimeStamp);
 
+  @JsonKey(ignore: true)
   @override
   _$OtherBuildingRequirementsModelCopyWith<_OtherBuildingRequirementsModel>
       get copyWith => __$OtherBuildingRequirementsModelCopyWithImpl<
@@ -826,6 +831,7 @@ abstract class _OtherBuildingRequirementsModel
       toJson: dateTimeToUTC)
   DateTime get updatedTimeStamp;
   @override
+  @JsonKey(ignore: true)
   _$OtherBuildingRequirementsModelCopyWith<_OtherBuildingRequirementsModel>
       get copyWith;
 }
@@ -904,6 +910,7 @@ mixin _$BuildingRequirementsModel {
   DateTime get updatedTimeStamp;
 
   Map<String, dynamic> toJson();
+  @JsonKey(ignore: true)
   $BuildingRequirementsModelCopyWith<BuildingRequirementsModel> get copyWith;
 }
 
@@ -1158,6 +1165,7 @@ class _$_BuildingRequirementsModel
       const DeepCollectionEquality().hash(createdTimeStamp) ^
       const DeepCollectionEquality().hash(updatedTimeStamp);
 
+  @JsonKey(ignore: true)
   @override
   _$BuildingRequirementsModelCopyWith<_BuildingRequirementsModel>
       get copyWith =>
@@ -1222,6 +1230,7 @@ abstract class _BuildingRequirementsModel implements BuildingRequirementsModel {
       toJson: dateTimeToUTC)
   DateTime get updatedTimeStamp;
   @override
+  @JsonKey(ignore: true)
   _$BuildingRequirementsModelCopyWith<_BuildingRequirementsModel> get copyWith;
 }
 
@@ -1269,6 +1278,7 @@ mixin _$MaterialItemModel {
   String get itemImage;
 
   Map<String, dynamic> toJson();
+  @JsonKey(ignore: true)
   $MaterialItemModelCopyWith<MaterialItemModel> get copyWith;
 }
 
@@ -1420,6 +1430,7 @@ class _$_MaterialItemModel
       const DeepCollectionEquality().hash(itemText2) ^
       const DeepCollectionEquality().hash(itemImage);
 
+  @JsonKey(ignore: true)
   @override
   _$MaterialItemModelCopyWith<_MaterialItemModel> get copyWith =>
       __$MaterialItemModelCopyWithImpl<_MaterialItemModel>(this, _$identity);
@@ -1454,6 +1465,7 @@ abstract class _MaterialItemModel implements MaterialItemModel {
   @JsonKey(name: JsonConstants.itemImage)
   String get itemImage;
   @override
+  @JsonKey(ignore: true)
   _$MaterialItemModelCopyWith<_MaterialItemModel> get copyWith;
 }
 
@@ -1495,6 +1507,7 @@ mixin _$MaterialGroupModel {
   List<MaterialItemModel> get contents;
 
   Map<String, dynamic> toJson();
+  @JsonKey(ignore: true)
   $MaterialGroupModelCopyWith<MaterialGroupModel> get copyWith;
 }
 
@@ -1624,6 +1637,7 @@ class _$_MaterialGroupModel
       const DeepCollectionEquality().hash(itemMainGroup) ^
       const DeepCollectionEquality().hash(contents);
 
+  @JsonKey(ignore: true)
   @override
   _$MaterialGroupModelCopyWith<_MaterialGroupModel> get copyWith =>
       __$MaterialGroupModelCopyWithImpl<_MaterialGroupModel>(this, _$identity);
@@ -1651,6 +1665,7 @@ abstract class _MaterialGroupModel implements MaterialGroupModel {
   @JsonKey(name: JsonConstants.contents)
   List<MaterialItemModel> get contents;
   @override
+  @JsonKey(ignore: true)
   _$MaterialGroupModelCopyWith<_MaterialGroupModel> get copyWith;
 }
 
@@ -1739,6 +1754,7 @@ mixin _$MaterialSelectedModel {
   DateTime get updatedTimeStamp;
 
   Map<String, dynamic> toJson();
+  @JsonKey(ignore: true)
   $MaterialSelectedModelCopyWith<MaterialSelectedModel> get copyWith;
 }
 
@@ -2056,6 +2072,7 @@ class _$_MaterialSelectedModel
       const DeepCollectionEquality().hash(createdTimeStamp) ^
       const DeepCollectionEquality().hash(updatedTimeStamp);
 
+  @JsonKey(ignore: true)
   @override
   _$MaterialSelectedModelCopyWith<_MaterialSelectedModel> get copyWith =>
       __$MaterialSelectedModelCopyWithImpl<_MaterialSelectedModel>(
@@ -2130,5 +2147,6 @@ abstract class _MaterialSelectedModel implements MaterialSelectedModel {
       toJson: dateTimeToUTC)
   DateTime get updatedTimeStamp;
   @override
+  @JsonKey(ignore: true)
   _$MaterialSelectedModelCopyWith<_MaterialSelectedModel> get copyWith;
 }

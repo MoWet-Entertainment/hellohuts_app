@@ -44,6 +44,7 @@ mixin _$DrawingsModel {
   String get planImage;
 
   Map<String, dynamic> toJson();
+  @JsonKey(ignore: true)
   $DrawingsModelCopyWith<DrawingsModel> get copyWith;
 }
 
@@ -154,6 +155,7 @@ class _$_DrawingsModel implements _DrawingsModel {
       const DeepCollectionEquality().hash(planType) ^
       const DeepCollectionEquality().hash(planImage);
 
+  @JsonKey(ignore: true)
   @override
   _$DrawingsModelCopyWith<_DrawingsModel> get copyWith =>
       __$DrawingsModelCopyWithImpl<_DrawingsModel>(this, _$identity);
@@ -180,5 +182,6 @@ abstract class _DrawingsModel implements DrawingsModel {
   @JsonKey(name: JsonConstants.planImage)
   String get planImage;
   @override
+  @JsonKey(ignore: true)
   _$DrawingsModelCopyWith<_DrawingsModel> get copyWith;
 }

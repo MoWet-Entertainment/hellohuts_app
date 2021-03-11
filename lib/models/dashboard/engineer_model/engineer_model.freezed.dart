@@ -48,6 +48,7 @@ mixin _$EngineerModel {
   String get userCompany;
 
   Map<String, dynamic> toJson();
+  @JsonKey(ignore: true)
   $EngineerModelCopyWith<EngineerModel> get copyWith;
 }
 
@@ -189,6 +190,7 @@ class _$_EngineerModel implements _EngineerModel {
       const DeepCollectionEquality().hash(userRole) ^
       const DeepCollectionEquality().hash(userCompany);
 
+  @JsonKey(ignore: true)
   @override
   _$EngineerModelCopyWith<_EngineerModel> get copyWith =>
       __$EngineerModelCopyWithImpl<_EngineerModel>(this, _$identity);
@@ -219,5 +221,6 @@ abstract class _EngineerModel implements EngineerModel {
   @JsonKey(name: JsonConstants.userCompany)
   String get userCompany;
   @override
+  @JsonKey(ignore: true)
   _$EngineerModelCopyWith<_EngineerModel> get copyWith;
 }

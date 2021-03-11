@@ -51,6 +51,7 @@ mixin _$ContractorModel {
   CompanyModel get contractorCompany;
 
   Map<String, dynamic> toJson();
+  @JsonKey(ignore: true)
   $ContractorModelCopyWith<ContractorModel> get copyWith;
 }
 
@@ -221,6 +222,7 @@ class _$_ContractorModel implements _ContractorModel {
       const DeepCollectionEquality().hash(contractorAddress) ^
       const DeepCollectionEquality().hash(contractorCompany);
 
+  @JsonKey(ignore: true)
   @override
   _$ContractorModelCopyWith<_ContractorModel> get copyWith =>
       __$ContractorModelCopyWithImpl<_ContractorModel>(this, _$identity);
@@ -253,5 +255,6 @@ abstract class _ContractorModel implements ContractorModel {
   @JsonKey(name: JsonConstants.contractorCompany)
   CompanyModel get contractorCompany;
   @override
+  @JsonKey(ignore: true)
   _$ContractorModelCopyWith<_ContractorModel> get copyWith;
 }

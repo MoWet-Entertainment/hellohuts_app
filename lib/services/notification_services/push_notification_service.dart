@@ -4,7 +4,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'dart:developer' as dev;
 
 class PushNotificationService {
-  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
   bool initialized = false;
   String token;
 
@@ -17,23 +17,14 @@ class PushNotificationService {
       if (Platform.isIOS) {
         _requestPermission();
       }
-      _firebaseMessaging.configure(
-        onMessage: (Map<String, dynamic> message) {
-          dev.log("notification onMessage",
-              error: message, time: DateTime.now());
-          return;
-        },
-        onResume: (Map<String, dynamic> message) {
-          dev.log("notification onMessage",
-              error: message, time: DateTime.now());
-          return;
-        },
-        onLaunch: (Map<String, dynamic> message) {
-          dev.log("notification onMessage",
-              error: message, time: DateTime.now());
-          return;
-        },
-      );
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+  print('Got a message whilst in the foreground!');
+  print('Message data: ${message.data}');
+
+  if (message.notification != null) {
+    print('Message also contained a notification: ${message.notification}');
+  }
+});
       token = await _firebaseMessaging.getToken();
       if (token != null) {
         initialized = true;
@@ -44,13 +35,16 @@ class PushNotificationService {
     return token;
   }
 
-  Future<bool> _requestPermission() {
-    return _firebaseMessaging
-        .requestNotificationPermissions(const IosNotificationSettings(
-      sound: true,
-      badge: true,
+  Future<bool> _requestPermission() async {
+    NotificationSettings settings = await _firebaseMessaging.requestPermission(
       alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
       provisional: false,
-    ));
+      sound: true,
+    );
+    return settings.authorizationStatus == AuthorizationStatus.authorized;
   }
 }

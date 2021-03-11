@@ -76,6 +76,7 @@ mixin _$AppUser {
   String get lastLoginAt;
 
   Map<String, dynamic> toJson();
+  @JsonKey(ignore: true)
   $AppUserCopyWith<AppUser> get copyWith;
 }
 
@@ -306,6 +307,7 @@ class _$_AppUser implements _AppUser {
       const DeepCollectionEquality().hash(profLastUpdatedAt) ^
       const DeepCollectionEquality().hash(lastLoginAt);
 
+  @JsonKey(ignore: true)
   @override
   _$AppUserCopyWith<_AppUser> get copyWith =>
       __$AppUserCopyWithImpl<_AppUser>(this, _$identity);
@@ -374,5 +376,6 @@ abstract class _AppUser implements AppUser {
   @JsonKey(name: JsonConstants.lastLoginAt)
   String get lastLoginAt;
   @override
+  @JsonKey(ignore: true)
   _$AppUserCopyWith<_AppUser> get copyWith;
 }
