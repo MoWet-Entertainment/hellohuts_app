@@ -243,6 +243,7 @@ class _DashboardBody extends StatelessWidget {
 
   _reportsCall() {
     print("user wants to navigate to the reports  page");
+    ExtendedNavigator.root.push(Routes.reportsPage);
     //TODO: Reports page
   }
 
@@ -250,13 +251,6 @@ class _DashboardBody extends StatelessWidget {
     print("user wants to navigate to the Calendar  page");
     //TODO: Calendar page
   }
-
-  
-
-  
-  
-
-
 }
 
 class _ImageContainer extends StatelessWidget {

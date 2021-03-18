@@ -21,6 +21,7 @@ import '../screens/dashboard/documents/document_upload.dart';
 import '../screens/dashboard/documents/documents_page.dart';
 import '../screens/dashboard/payments/payments_screen.dart';
 import '../screens/dashboard/project_details/project_details.dart';
+import '../screens/dashboard/reports/reports_page.dart';
 import '../screens/explore.dart';
 import '../screens/feed_posts/feed_post_detail.dart';
 import '../screens/feed_posts/widgets/comments/post_comments_deatil.dart';
@@ -59,6 +60,7 @@ class Routes {
   static const String documentsUploadPage = '/documents-upload-page';
   static const String onboardingScreen = '/onboarding-screen';
   static const String paymentScreen = '/payment-screen';
+  static const String reportsPage = '/reports-page';
   static const all = <String>{
     startUpScreen,
     basePage,
@@ -84,6 +86,7 @@ class Routes {
     documentsUploadPage,
     onboardingScreen,
     paymentScreen,
+    reportsPage,
   };
 }
 
@@ -115,6 +118,7 @@ class AppRouter extends RouterBase {
     RouteDef(Routes.documentsUploadPage, page: DocumentsUploadPage),
     RouteDef(Routes.onboardingScreen, page: OnboardingScreen),
     RouteDef(Routes.paymentScreen, page: PaymentScreen),
+    RouteDef(Routes.reportsPage, page: ReportsPage),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -333,6 +337,12 @@ class AppRouter extends RouterBase {
     PaymentScreen: (data) {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => const PaymentScreen(),
+        settings: data,
+      );
+    },
+    ReportsPage: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => const ReportsPage(),
         settings: data,
       );
     },

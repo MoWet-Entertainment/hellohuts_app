@@ -1,0 +1,9 @@
+enum Stages{
+  ACTIVE,
+  PENDING,
+  COMPLETED,
+  REJECTED,
+  ON_HOLD,
+  REFUSED
+}
+

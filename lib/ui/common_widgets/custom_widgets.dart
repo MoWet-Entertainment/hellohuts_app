@@ -1088,3 +1088,22 @@ Widget itemTile(
     }
   }
 
+class ActiveTextWidget extends StatelessWidget {
+  const ActiveTextWidget({
+    Key key,
+    @required this.theme,
+  }) : super(key: key);
+
+  final ThemeData theme;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Text("Active", style: theme.textTheme.bodyText2.copyWith(color: AppColors.kbDarkGreen, fontWeight: FontWeight.bold),),
+        SizedBox(width: 8.0,),
+        Icon(Icons.motion_photos_on,color: AppColors.kbDarkGreen,size: 18,),
+      ],
+    );
+  }
+}

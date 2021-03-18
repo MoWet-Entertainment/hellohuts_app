@@ -14,7 +14,7 @@ import 'package:hellohuts_app/ui/common_widgets/rounded_charts/radial_chart.dart
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
 import 'package:hellohuts_app/ui/styles/theme_options.dart';
-import 'package:hooks_riverpod/all.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ProjectDetailsPage extends ConsumerWidget {
   const ProjectDetailsPage({Key key}) : super(key: key);
