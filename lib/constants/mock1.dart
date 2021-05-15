@@ -632,7 +632,7 @@ class Mock {
   static var recentActivityList = [
     {
       "item_type": "transaction_received",
-            "item_category":"101",
+      "item_category": "101",
       "item_text1": "Payment Received",
       "item_text2": "50,000",
       "created_at": "2020-11-21T22:44:26Z",
@@ -641,7 +641,7 @@ class Mock {
     },
     {
       "item_type": "item_delivered",
-            "item_category":"102",
+      "item_category": "102",
       "item_text1": "Cements Bags Delivered",
       "item_text2": "35,000",
       "created_at": "2020-11-20T22:44:26Z",
@@ -650,8 +650,7 @@ class Mock {
     },
     {
       "item_type": "item_delivered",
-                  "item_category":"102",
-
+      "item_category": "102",
       "item_text1": "Steel Bars Delivered",
       "item_text2": "45,000",
       "created_at": "2020-11-20T10:44:26Z",
@@ -660,8 +659,7 @@ class Mock {
     },
     {
       "item_type": "service_debit",
-                  "item_category":"101",
-
+      "item_category": "101",
       "item_text1": "Service Debit",
       "item_text2": "20,000",
       "created_at": "2020-11-18T10:44:26Z",
@@ -670,8 +668,7 @@ class Mock {
     },
     {
       "item_type": "item_delivered",
-                  "item_category":"102",
-
+      "item_category": "102",
       "item_text1": "MSand Delivered",
       "item_text2": "9,000",
       "created_at": "2020-11-10T10:44:26Z",
@@ -680,7 +677,7 @@ class Mock {
     },
     {
       "item_type": "item_delivered",
-                  "item_category":"102",
+      "item_category": "102",
       "item_text1": "Steel Bars Delivered",
       "item_text2": "45,000",
       "created_at": "2020-11-20T10:44:26Z",
@@ -689,7 +686,7 @@ class Mock {
     },
     {
       "item_type": "starcoins_received",
-                  "item_category":"101",
+      "item_category": "101",
       "item_text1": "StarCoins credited",
       "item_text2": "199",
       "created_at": "2020-11-17T12:44:26Z",
@@ -698,7 +695,7 @@ class Mock {
     },
     {
       "item_type": "item_delivered",
-          "item_category":"102",
+      "item_category": "102",
       "item_text1": "Cement Bags Delivered",
       "item_text2": "41,000",
       "created_at": "2020-11-09T10:44:26Z",
@@ -707,7 +704,7 @@ class Mock {
     },
     {
       "item_type": "transaction_received",
-          "item_category":"101",
+      "item_category": "101",
       "item_text1": "Payment Received",
       "item_text2": "89,000",
       "created_at": "2020-11-02T10:44:26Z",
@@ -716,7 +713,7 @@ class Mock {
     },
     {
       "item_type": "item_delivered",
-          "item_category":"102",
+      "item_category": "102",
       "item_text1": "Steel Bars Delivered",
       "item_text2": "45,000",
       "created_at": "2020-11-20T10:44:26Z",
@@ -725,7 +722,7 @@ class Mock {
     },
     {
       "item_type": "item_delivered",
-          "item_category":"102",
+      "item_category": "102",
       "item_text1": "Bricks Delivered",
       "item_text2": "12,000",
       "created_at": "2020-11-01T10:44:26Z",
@@ -734,7 +731,7 @@ class Mock {
     },
     {
       "item_type": "item_delivered",
-          "item_category":"102",
+      "item_category": "102",
       "item_text1": "MSand Delivered",
       "item_text2": "8,000",
       "created_at": "2020-11-20T10:44:26Z",
@@ -742,10 +739,10 @@ class Mock {
       "created_by": "vinoop ks"
     }
   ];
- static var allEventsList = [
+  static var allEventsList = [
     {
       "item_type": "transaction_received",
-            "item_category":"101",
+      "item_category": "101",
       "item_text1": "Payment Received",
       "item_text2": "50,000",
       "created_at": "2020-11-21T22:44:26Z",
@@ -754,7 +751,7 @@ class Mock {
     },
     {
       "item_type": "item_delivered",
-            "item_category":"102",
+      "item_category": "102",
       "item_text1": "Cements Bags Delivered",
       "item_text2": "35,000",
       "created_at": "2020-11-20T22:44:26Z",
@@ -763,8 +760,7 @@ class Mock {
     },
     {
       "item_type": "item_delivered",
-                  "item_category":"102",
-
+      "item_category": "102",
       "item_text1": "Steel Bars Delivered",
       "item_text2": "45,000",
       "created_at": "2020-11-20T10:44:26Z",
@@ -773,8 +769,7 @@ class Mock {
     },
     {
       "item_type": "service_debit",
-                  "item_category":"101",
-
+      "item_category": "101",
       "item_text1": "Service Debit",
       "item_text2": "20,000",
       "created_at": "2020-11-18T10:44:26Z",
@@ -783,8 +778,7 @@ class Mock {
     },
     {
       "item_type": "item_delivered",
-                  "item_category":"102",
-
+      "item_category": "102",
       "item_text1": "MSand Delivered",
       "item_text2": "9,000",
       "created_at": "2020-11-10T10:44:26Z",
@@ -793,7 +787,7 @@ class Mock {
     },
     {
       "item_type": "item_delivered",
-                  "item_category":"102",
+      "item_category": "102",
       "item_text1": "Steel Bars Delivered",
       "item_text2": "45,000",
       "created_at": "2020-11-20T10:44:26Z",
@@ -802,7 +796,7 @@ class Mock {
     },
     {
       "item_type": "starcoins_received",
-                  "item_category":"101",
+      "item_category": "101",
       "item_text1": "StarCoins credited",
       "item_text2": "199",
       "created_at": "2020-11-17T12:44:26Z",
@@ -811,7 +805,7 @@ class Mock {
     },
     {
       "item_type": "item_delivered",
-          "item_category":"102",
+      "item_category": "102",
       "item_text1": "Cement Bags Delivered",
       "item_text2": "41,000",
       "created_at": "2020-11-09T10:44:26Z",
@@ -820,7 +814,7 @@ class Mock {
     },
     {
       "item_type": "transaction_received",
-          "item_category":"101",
+      "item_category": "101",
       "item_text1": "Payment Received",
       "item_text2": "89,000",
       "created_at": "2020-11-02T10:44:26Z",
@@ -829,7 +823,7 @@ class Mock {
     },
     {
       "item_type": "item_delivered",
-          "item_category":"102",
+      "item_category": "102",
       "item_text1": "Steel Bars Delivered",
       "item_text2": "45,000",
       "created_at": "2020-11-20T10:44:26Z",
@@ -838,7 +832,7 @@ class Mock {
     },
     {
       "item_type": "item_delivered",
-          "item_category":"102",
+      "item_category": "102",
       "item_text1": "Bricks Delivered",
       "item_text2": "12,000",
       "created_at": "2020-11-01T10:44:26Z",
@@ -847,15 +841,16 @@ class Mock {
     },
     {
       "item_type": "item_delivered",
-          "item_category":"102",
+      "item_category": "102",
       "item_text1": "MSand Delivered",
       "item_text2": "8,000",
       "created_at": "2020-11-20T10:44:26Z",
       "updated_at": "2020-11-20T10:44:26Z",
       "created_by": "vinoop ks"
-    },{
+    },
+    {
       "item_type": "transaction_received",
-            "item_category":"101",
+      "item_category": "101",
       "item_text1": "Payment Received",
       "item_text2": "50,000",
       "created_at": "2020-11-21T22:44:26Z",
@@ -864,7 +859,7 @@ class Mock {
     },
     {
       "item_type": "item_delivered",
-            "item_category":"102",
+      "item_category": "102",
       "item_text1": "Cements Bags Delivered",
       "item_text2": "35,000",
       "created_at": "2020-11-20T22:44:26Z",
@@ -873,8 +868,7 @@ class Mock {
     },
     {
       "item_type": "item_delivered",
-                  "item_category":"102",
-
+      "item_category": "102",
       "item_text1": "Steel Bars Delivered",
       "item_text2": "45,000",
       "created_at": "2020-11-20T10:44:26Z",
@@ -883,8 +877,7 @@ class Mock {
     },
     {
       "item_type": "service_debit",
-                  "item_category":"101",
-
+      "item_category": "101",
       "item_text1": "Service Debit",
       "item_text2": "20,000",
       "created_at": "2020-11-18T10:44:26Z",
@@ -893,8 +886,7 @@ class Mock {
     },
     {
       "item_type": "item_delivered",
-                  "item_category":"102",
-
+      "item_category": "102",
       "item_text1": "MSand Delivered",
       "item_text2": "9,000",
       "created_at": "2020-11-10T10:44:26Z",
@@ -903,7 +895,7 @@ class Mock {
     },
     {
       "item_type": "item_delivered",
-                  "item_category":"102",
+      "item_category": "102",
       "item_text1": "Steel Bars Delivered",
       "item_text2": "45,000",
       "created_at": "2020-11-20T10:44:26Z",
@@ -912,7 +904,7 @@ class Mock {
     },
     {
       "item_type": "starcoins_received",
-                  "item_category":"101",
+      "item_category": "101",
       "item_text1": "StarCoins credited",
       "item_text2": "199",
       "created_at": "2020-11-17T12:44:26Z",
@@ -921,7 +913,7 @@ class Mock {
     },
     {
       "item_type": "item_delivered",
-          "item_category":"102",
+      "item_category": "102",
       "item_text1": "Cement Bags Delivered",
       "item_text2": "41,000",
       "created_at": "2020-11-09T10:44:26Z",
@@ -930,7 +922,7 @@ class Mock {
     },
     {
       "item_type": "transaction_received",
-          "item_category":"101",
+      "item_category": "101",
       "item_text1": "Payment Received",
       "item_text2": "89,000",
       "created_at": "2020-11-02T10:44:26Z",
@@ -939,7 +931,7 @@ class Mock {
     },
     {
       "item_type": "item_delivered",
-          "item_category":"102",
+      "item_category": "102",
       "item_text1": "Steel Bars Delivered",
       "item_text2": "45,000",
       "created_at": "2020-11-20T10:44:26Z",
@@ -948,7 +940,7 @@ class Mock {
     },
     {
       "item_type": "item_delivered",
-          "item_category":"102",
+      "item_category": "102",
       "item_text1": "Bricks Delivered",
       "item_text2": "12,000",
       "created_at": "2020-11-01T10:44:26Z",
@@ -957,7 +949,7 @@ class Mock {
     },
     {
       "item_type": "item_delivered",
-          "item_category":"102",
+      "item_category": "102",
       "item_text1": "MSand Delivered",
       "item_text2": "8,000",
       "created_at": "2020-11-20T10:44:26Z",
@@ -1008,6 +1000,7 @@ class Mock {
       "customization_kitchen_decor": "standard",
       "customization_interior_decor": "standard",
       "customization_exterior_decor": "none",
+      "customization_painting_materials": "best",
       "created_at": "2020-12-17T05:09:28Z",
       "updated_at": "2020-12-17T05:09:28Z"
     },
@@ -1314,20 +1307,19 @@ class Mock {
       {
         "item_name": "Ground Floor Plan",
         "is_available": true,
-        "is_downloaded":true,
+        "is_downloaded": true,
         "download_url":
             "http://barbra-coco.dyndns.org/student/learning_android_studio.pdf",
         "updated_by": "Hellohuts team",
         "updated_at": "2020-11-20T10:44:26Z",
         "created_at": "2020-11-20T10:44:26Z",
         "document_reason": "",
-        "item_type":"project_drawing"
+        "item_type": "project_drawing"
       },
       {
         "item_name": "First Floor Plan",
         "is_available": true,
-                                        "is_downloaded":false,
-
+        "is_downloaded": false,
         "download_url":
             "http://darwinlogic.com/uploads/education/iOS_Programming_Guide.pdf",
         "updated_by": "Hellohuts team",
@@ -1335,14 +1327,12 @@ class Mock {
         "updated_at": "2020-11-20T10:44:26Z",
         "created_at": "2020-11-20T10:44:26Z",
         "document_reason": "",
-                "item_type":"project_drawing"
-
+        "item_type": "project_drawing"
       },
       {
         "item_name": "Permit Drawings",
         "is_available": true,
-                "is_downloaded":true,
-
+        "is_downloaded": true,
         "download_url":
             "https://upload.wikimedia.org/wikipedia/commons/6/60/The_Organ_at_Arches_National_Park_Utah_Corrected.jpg",
         "updated_by": "Hellohuts team",
@@ -1350,14 +1340,12 @@ class Mock {
         "updated_at": "2020-11-20T10:44:26Z",
         "created_at": "2020-11-20T10:44:26Z",
         "document_reason": "",
-                "item_type":"project_drawing"
-
+        "item_type": "project_drawing"
       },
       {
         "item_name": "Ground Floor Plan",
         "is_available": true,
-                                        "is_downloaded":false,
-
+        "is_downloaded": false,
         "download_url":
             "https://upload.wikimedia.org/wikipedia/commons/6/60/The_Organ_at_Arches_National_Park_Utah_Corrected.jpg",
         "updated_by": "Hellohuts team",
@@ -1365,14 +1353,12 @@ class Mock {
         "updated_at": "2020-11-20T10:44:26Z",
         "created_at": "2020-11-20T10:44:26Z",
         "document_reason": "",
-                "item_type":"project_drawing"
-
+        "item_type": "project_drawing"
       },
       {
         "item_name": "Building Permit",
         "is_available": true,
-                                        "is_downloaded":false,
-
+        "is_downloaded": false,
         "download_url":
             "https://upload.wikimedia.org/wikipedia/commons/6/60/The_Organ_at_Arches_National_Park_Utah_Corrected.jpg",
         "updated_by": "Hellohuts team",
@@ -1380,14 +1366,12 @@ class Mock {
         "updated_at": "2020-11-20T10:44:26Z",
         "created_at": "2020-11-20T10:44:26Z",
         "document_reason": "",
-        "item_type":"project_approval"
-
+        "item_type": "project_approval"
       },
       {
         "item_name": "Electrical Permit",
         "is_available": false,
-                                "is_downloaded":false,
-
+        "is_downloaded": false,
         "download_url":
             "https://upload.wikimedia.org/wikipedia/commons/6/60/The_Organ_at_Arches_National_Park_Utah_Corrected.jpg",
         "updated_by": "Hellohuts team",
@@ -1395,16 +1379,14 @@ class Mock {
         "updated_at": "",
         "created_at": "",
         "document_reason": "",
-                "item_type":"project_approval"
-
+        "item_type": "project_approval"
       }
     ],
     "personal_documents": [
       {
         "item_name": "Aadhaar Card",
         "is_available": true,
-                "is_downloaded":true,
-
+        "is_downloaded": true,
         "download_url":
             "https://upload.wikimedia.org/wikipedia/commons/6/60/The_Organ_at_Arches_National_Park_Utah_Corrected.jpg",
         "updated_by": "Self",
@@ -1412,14 +1394,12 @@ class Mock {
         "updated_at": "2020-11-20T10:44:26Z",
         "created_at": "2020-11-20T10:44:26Z",
         "document_reason": "For building Permit",
-                "item_type":"personal_doc"
-
+        "item_type": "personal_doc"
       },
       {
         "item_name": "Passport Size photo",
         "is_available": false,
-                                "is_downloaded":false,
-
+        "is_downloaded": false,
         "download_url":
             "https://upload.wikimedia.org/wikipedia/commons/6/60/The_Organ_at_Arches_National_Park_Utah_Corrected.jpg",
         "updated_by": "Self",
@@ -1427,14 +1407,12 @@ class Mock {
         "updated_at": "",
         "created_at": "",
         "document_reason": "For electric permit",
-                        "item_type":"personal_doc"
-
+        "item_type": "personal_doc"
       },
       {
         "item_name": "Land Deed/Ownership Certificate",
         "is_available": false,
-                                "is_downloaded":false,
-
+        "is_downloaded": false,
         "download_url":
             "https://upload.wikimedia.org/wikipedia/commons/6/60/The_Organ_at_Arches_National_Park_Utah_Corrected.jpg",
         "updated_by": "Self",
@@ -1442,16 +1420,14 @@ class Mock {
         "updated_at": "",
         "created_at": "",
         "document_reason": "For electric permit",
-                        "item_type":"personal_doc"
-
+        "item_type": "personal_doc"
       }
     ],
     "other_documents": [
       {
         "item_name": "Burglers Alarm Warranty Card",
         "is_available": true,
-                "is_downloaded":true,
-
+        "is_downloaded": true,
         "download_url":
             "https://upload.wikimedia.org/wikipedia/commons/6/60/The_Organ_at_Arches_National_Park_Utah_Corrected.jpg",
         "updated_by": "Hellohuts Team",
@@ -1459,14 +1435,12 @@ class Mock {
         "updated_at": "2020-11-20T10:44:26Z",
         "created_at": "2020-11-20T10:44:26Z",
         "document_reason": "",
-                        "item_type":"warranty_card"
-
+        "item_type": "warranty_card"
       },
       {
         "item_name": "Bosch Oven 5 Year Warranty Card",
         "is_available": true,
-                "is_downloaded":false,
-
+        "is_downloaded": false,
         "download_url":
             "https://upload.wikimedia.org/wikipedia/commons/6/60/The_Organ_at_Arches_National_Park_Utah_Corrected.jpg",
         "updated_by": "Hellohuts Team",
@@ -1474,14 +1448,12 @@ class Mock {
         "updated_at": "2020-11-20T10:44:26Z",
         "created_at": "2020-11-20T10:44:26Z",
         "document_reason": "",
-                                "item_type":"warranty_card"
-
+        "item_type": "warranty_card"
       },
       {
         "item_name": "Philps CCTV Camera 2 Year Warranty Card",
         "is_available": true,
-                        "is_downloaded":false,
-
+        "is_downloaded": false,
         "download_url":
             "https://upload.wikimedia.org/wikipedia/commons/6/60/The_Organ_at_Arches_National_Park_Utah_Corrected.jpg",
         "updated_by": "Hellohuts Team",
@@ -1489,14 +1461,12 @@ class Mock {
         "updated_at": "2020-11-20T10:44:26Z",
         "created_at": "2020-11-20T10:44:26Z",
         "document_reason": "",
-                                "item_type":"warranty_card"
-
+        "item_type": "warranty_card"
       },
       {
         "item_name": "LED Lamps 2 Year Warranty Card",
         "is_available": true,
-                        "is_downloaded":false,
-
+        "is_downloaded": false,
         "download_url":
             "https://upload.wikimedia.org/wikipedia/commons/6/60/The_Organ_at_Arches_National_Park_Utah_Corrected.jpg",
         "updated_by": "Hellohuts Team",
@@ -1504,16 +1474,14 @@ class Mock {
         "updated_at": "2020-11-20T10:44:26Z",
         "created_at": "2020-11-20T10:44:26Z",
         "document_reason": "",
-                                "item_type":"warranty_card"
-
+        "item_type": "warranty_card"
       }
     ],
     "specification_documents": [
       {
         "item_name": "Electricals Specs",
         "is_available": true,
-                        "is_downloaded":true,
-
+        "is_downloaded": true,
         "download_url":
             "https://upload.wikimedia.org/wikipedia/commons/6/60/The_Organ_at_Arches_National_Park_Utah_Corrected.jpg",
         "updated_by": "Hellohuts Team",
@@ -1521,14 +1489,12 @@ class Mock {
         "updated_at": "2020-11-20T10:44:26Z",
         "created_at": "2020-11-20T10:44:26Z",
         "document_reason": "",
-                                "item_type":"specification"
-
+        "item_type": "specification"
       },
       {
         "item_name": "Sanitary Fittings Specs",
         "is_available": true,
-                                "is_downloaded":true,
-
+        "is_downloaded": true,
         "download_url":
             "https://upload.wikimedia.org/wikipedia/commons/6/60/The_Organ_at_Arches_National_Park_Utah_Corrected.jpg",
         "updated_by": "Hellohuts Team",
@@ -1536,13 +1502,12 @@ class Mock {
         "updated_at": "2020-11-20T10:44:26Z",
         "created_at": "2020-11-20T10:44:26Z",
         "document_reason": "",
-                                        "item_type":"specification"
-
+        "item_type": "specification"
       },
       {
         "item_name": "CCTV Connections Specs",
-        "is_available": false,                        "is_downloaded":false,
-
+        "is_available": false,
+        "is_downloaded": false,
         "download_url":
             "https://upload.wikimedia.org/wikipedia/commons/6/60/The_Organ_at_Arches_National_Park_Utah_Corrected.jpg",
         "updated_by": "Hellohuts Team",
@@ -1550,13 +1515,64 @@ class Mock {
         "updated_at": "2020-11-20T10:44:26Z",
         "created_at": "2020-11-20T10:44:26Z",
         "document_reason": "",
-                                        "item_type":"specification"
-
+        "item_type": "specification"
       }
     ],
     "created_at": "2020-11-20T10:44:26Z",
     "updated_at": "2020-11-20T10:44:26Z"
   };
+
+  static var projectStages = [
+    {
+      "item_name":"Painting",
+      "item_image":"",
+      "current_stage":"completed",
+      "actual_date":"2021-05-12T10:44:26Z",
+      "estimated_date":"2021-03-12T00:00:00Z"
+  },
+     {
+      "item_name":"Plastering",
+            "item_image":"",
+      "current_stage":"completed",
+      "actual_date":"2020-12-12T10:44:26Z",
+      "estimated_date":"2020-01-12T00:00:00Z"
+  },
+    {
+      "item_name":"Flooring",
+            "item_image":"",
+      "current_stage":"completed",
+      "actual_date":"2021-01-23T10:44:26Z",
+      "estimated_date":"2020-01-12T00:00:00Z"
+  },
+    {
+      "item_name":"Painting",
+            "item_image":"",
+      "current_stage":"completed",
+      "actual_date":"2021-01-23T10:44:26Z",
+      "estimated_date":"2020-01-12T00:00:00Z"
+  },
+  {
+      "item_name":"Plumbing",
+            "item_image":"",
+      "current_stage":"completed",
+      "actual_date":"2021-01-23T10:44:26Z",
+      "estimated_date":"2020-01-12T00:00:00Z"
+  },
+   {
+      "item_name":"Interior",
+            "item_image":"",
+      "current_stage":"active",
+      "actual_date":null,
+      "estimated_date":"2021-05-22T00:00:00Z"
+  },
+   {
+      "item_name":"Exterior",
+            "item_image":"",
+      "current_stage":"active",
+      "actual_date":null,
+      "estimated_date":"2021-05-22T00:00:00Z"
+  },
+  ];
 }
 
 class ImageData {

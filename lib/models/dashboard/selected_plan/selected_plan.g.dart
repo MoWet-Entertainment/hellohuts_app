@@ -18,6 +18,8 @@ _$_SelectedPlanModel _$_$_SelectedPlanModelFromJson(Map<String, dynamic> json) {
         json['customization_plumbing'] as String),
     doorsAndWindowsType: SelectedPlanModel._setCustomizeOptions(
         json['customization_doors_and_windows'] as String),
+    paintingMaterialsType: SelectedPlanModel._setCustomizeOptions(
+        json['customization_painting_materials'] as String),
     kitchenDecorType: SelectedPlanModel._setCustomizeOptions(
         json['customization_kitchen_decor'] as String),
     interiorDecorType: SelectedPlanModel._setCustomizeOptions(
@@ -42,6 +44,8 @@ Map<String, dynamic> _$_$_SelectedPlanModelToJson(
           SelectedPlanModel._getCustomizeOption(instance.plumbingType),
       'customization_doors_and_windows':
           SelectedPlanModel._getCustomizeOption(instance.doorsAndWindowsType),
+      'customization_painting_materials':
+          SelectedPlanModel._getCustomizeOption(instance.paintingMaterialsType),
       'customization_kitchen_decor':
           SelectedPlanModel._getCustomizeOption(instance.kitchenDecorType),
       'customization_interior_decor':

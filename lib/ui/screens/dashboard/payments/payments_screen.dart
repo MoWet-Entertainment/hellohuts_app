@@ -13,8 +13,8 @@ import 'package:hellohuts_app/ui/screens/welcome_page.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class PaymentScreen extends ConsumerWidget {
-  const PaymentScreen({Key key}) : super(key: key);
+class PaymentsPage extends ConsumerWidget {
+  const PaymentsPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {

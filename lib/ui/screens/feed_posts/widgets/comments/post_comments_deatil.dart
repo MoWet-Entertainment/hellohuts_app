@@ -4,8 +4,8 @@ import 'package:hellohuts_app/models/user_feed/comments.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
 
-class PostCommentsDetail extends StatelessWidget {
-  const PostCommentsDetail({Key key, this.model, this.commentsParentPostId})
+class PostCommentsDetailPage extends StatelessWidget {
+  const PostCommentsDetailPage({Key key, this.model, this.commentsParentPostId})
       : super(key: key);
   final String commentsParentPostId;
   final Comment model;

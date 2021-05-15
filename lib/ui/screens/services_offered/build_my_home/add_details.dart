@@ -21,14 +21,14 @@ import 'package:hellohuts_app/ui/common_widgets/custom_widgets.dart';
 import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
 
-class AddDetailsForHome extends StatefulWidget {
-  const AddDetailsForHome({Key key}) : super(key: key);
+class AddDetailsForHomePage extends StatefulWidget {
+  const AddDetailsForHomePage({Key key}) : super(key: key);
 
   @override
-  _AddDetailsForHomeState createState() => _AddDetailsForHomeState();
+  _AddDetailsForHomePageState createState() => _AddDetailsForHomePageState();
 }
 
-class _AddDetailsForHomeState extends State<AddDetailsForHome> {
+class _AddDetailsForHomePageState extends State<AddDetailsForHomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   int pageIndex = 0;
@@ -76,7 +76,7 @@ class _AddDetailsForHomeState extends State<AddDetailsForHome> {
                         )
                       : costEstimateState.pageIndexOfCollectSection == 2
                           ? Text(
-                              "Nice to Have",
+                              "Customize",
                               style: theme.textTheme.headline3.copyWith(
                                   fontSize: 18,
                                   color: theme.colorScheme.onBackground
@@ -208,7 +208,7 @@ class CallToActionButtonCostEstimate extends StatelessWidget {
                     {
                       print("User Wants to Calculate the Rate"),
                       state.calculateRate(),
-                      ExtendedNavigator.root.push(Routes.costEstimateScreen),
+                      ExtendedNavigator.root.push(Routes.costEstimatePage),
                     }
                 }),
       ),

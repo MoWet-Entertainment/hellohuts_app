@@ -38,7 +38,7 @@ class DocumentsUploadPage extends ConsumerWidget {
                 MaterialButton(
                   color: AppColors.kYellowDark,
                   child: Text("Hello"),
-                  onPressed: ()=>ExtendedNavigator.root.push(Routes.onboardingScreen))
+                  onPressed: ()=>ExtendedNavigator.root.push(Routes.onboardingPage))
               ],
             ),
 

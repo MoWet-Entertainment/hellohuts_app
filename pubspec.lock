@@ -133,7 +133,7 @@ packages:
       name: carousel_slider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.0"
+    version: "4.0.0-nullsafety.0"
   characters:
     dependency: transitive
     description:
@@ -204,13 +204,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.15.0"
-  configurable_expansion_tile:
-    dependency: "direct main"
-    description:
-      name: configurable_expansion_tile
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0"
   convert:
     dependency: transitive
     description:
@@ -425,7 +418,7 @@ packages:
       name: flutter_downloader
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.5.2"
+    version: "1.6.0-nullsafety.0"
   flutter_facebook_auth:
     dependency: "direct main"
     description:
@@ -481,14 +474,14 @@ packages:
       name: flutter_staggered_grid_view
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.4"
-  flutter_statusbarcolor:
+    version: "0.4.0-nullsafety.3"
+  flutter_statusbarcolor_ns:
     dependency: "direct main"
     description:
-      name: flutter_statusbarcolor
+      name: flutter_statusbarcolor_ns
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.3"
+    version: "0.3.0-nullsafety"
   flutter_svg:
     dependency: "direct main"
     description:
@@ -501,13 +494,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_uploader:
-    dependency: "direct main"
-    description:
-      name: flutter_uploader
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.2.1"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -666,7 +652,7 @@ packages:
       name: logger
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.9.4"
+    version: "1.0.0-nullsafety.0"
   logging:
     dependency: transitive
     description:
@@ -965,7 +951,7 @@ packages:
       name: smooth_page_indicator
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.0"
+    version: "0.3.0-nullsafety.0"
   source_gen:
     dependency: transitive
     description:

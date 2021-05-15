@@ -67,7 +67,7 @@ class _BasePageState extends State<BasePage> {
         ExplorePage(
             scaffoldKey: _scaffoldKey,
             refreshIndicatorKey: refreshIndicatorKey),
-        CategoriesScreen(),
+        CategoriesPage(),
         DashboardLandingPage(),
         LoginSignupScreen()
       ],

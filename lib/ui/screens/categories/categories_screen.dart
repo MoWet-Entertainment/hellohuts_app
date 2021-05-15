@@ -19,16 +19,16 @@ import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
 import 'package:hellohuts_app/ui/styles/theme_options.dart';
 
-class CategoriesScreen extends StatefulWidget {
+class CategoriesPage extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
 
-  const CategoriesScreen({Key key, this.scaffoldKey}) : super(key: key);
+  const CategoriesPage({Key key, this.scaffoldKey}) : super(key: key);
 
   @override
-  _CategoriesScreenState createState() => _CategoriesScreenState();
+  _CategoriesPageState createState() => _CategoriesPageState();
 }
 
-class _CategoriesScreenState extends State<CategoriesScreen>
+class _CategoriesPageState extends State<CategoriesPage>
     with AutomaticKeepAliveClientMixin, SingleTickerProviderStateMixin {
   TabController _tabController;
 

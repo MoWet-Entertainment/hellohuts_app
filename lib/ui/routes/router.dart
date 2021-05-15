@@ -1,7 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_route/auto_route_annotations.dart';
-import 'package:flutter/material.dart';
-import 'package:hellohuts_app/models/user_feed/post_detail.dart';
 import 'package:hellohuts_app/ui/screens/auth/phone_auth/get_phone.dart';
 import 'package:hellohuts_app/ui/screens/base_page.dart';
 import 'package:hellohuts_app/ui/screens/categories/categories_screen.dart';
@@ -28,7 +26,7 @@ import 'package:hellohuts_app/ui/screens/welcome_page.dart';
 
 @MaterialAutoRouter(
   routes:<AutoRoute> [
-    AdaptiveRoute(page: StartUpScreen,initial:true),
+    AdaptiveRoute(page: StartUpPage,initial:true),
     AdaptiveRoute(page: BasePage),
     AdaptiveRoute(page: ExplorePage  ),
     CustomRoute(page: WelcomePage, transitionsBuilder: TransitionsBuilders.slideBottom ),
@@ -37,22 +35,22 @@ import 'package:hellohuts_app/ui/screens/welcome_page.dart';
         CustomRoute(page: DashboardLandingPage),
 
      AdaptiveRoute(page: PostDetailScreen ),
- CustomRoute(page: PostCommentsDetail, name: "commentsDetail", transitionsBuilder: TransitionsBuilders.slideBottom ),
+ CustomRoute(page: PostCommentsDetailPage, name: "commentsDetail", transitionsBuilder: TransitionsBuilders.slideBottom ),
       CustomRoute(page: CostEstimate, transitionsBuilder: TransitionsBuilders.fadeIn ),
  CustomRoute(page: Professionals, name:"professionals", transitionsBuilder: TransitionsBuilders.fadeIn ),
  CustomRoute(page: MoreItems, transitionsBuilder: TransitionsBuilders.fadeIn ),
   CustomRoute(page: Materials, name:"materials",transitionsBuilder: TransitionsBuilders.fadeIn ),
 AdaptiveRoute(page: PhoneAuthGetPhone),
 CustomRoute(page: ServicesOfferedBasePage, transitionsBuilder:  TransitionsBuilders.fadeIn),
-CustomRoute(page: AddDetailsForHome, transitionsBuilder: TransitionsBuilders.slideLeft),
-CustomRoute(page:CostEstimateScreen,transitionsBuilder: TransitionsBuilders.fadeIn),
-    AdaptiveRoute(page: CategoriesScreen),
+CustomRoute(page: AddDetailsForHomePage, transitionsBuilder: TransitionsBuilders.slideLeft),
+CustomRoute(page:CostEstimatePage,transitionsBuilder: TransitionsBuilders.fadeIn),
+    AdaptiveRoute(page: CategoriesPage),
     AdaptiveRoute(page:PostDetailPage, ),
     AdaptiveRoute(page: ProjectDetailsPage),
     AdaptiveRoute(page:DocumentsPage),
     AdaptiveRoute(page:DocumentsUploadPage),
-    AdaptiveRoute(page:OnboardingScreen),
-    AdaptiveRoute(page: PaymentScreen),
+    AdaptiveRoute(page:OnboardingPage),
+    AdaptiveRoute(page: PaymentsPage),
     AdaptiveRoute(page: ReportsPage)
   ]
 )

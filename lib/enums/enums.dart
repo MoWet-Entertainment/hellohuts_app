@@ -4,6 +4,6 @@ enum Stages{
   COMPLETED,
   REJECTED,
   ON_HOLD,
-  REFUSED
+  REFUSED,
+  UNDEFINED
 }
-

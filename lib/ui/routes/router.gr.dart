@@ -36,7 +36,7 @@ import '../screens/startup_screen.dart';
 import '../screens/welcome_page.dart';
 
 class Routes {
-  static const String startUpScreen = '/';
+  static const String startUpPage = '/';
   static const String basePage = '/base-page';
   static const String explorePage = '/explore-page';
   static const String welcomePage = '/welcome-page';
@@ -44,25 +44,25 @@ class Routes {
   static const String categoriesSearchPage = '/categories-search-page';
   static const String dashboardLandingPage = '/dashboard-landing-page';
   static const String postDetailScreen = '/post-detail-screen';
-  static const String commentsDetail = '/post-comments-detail';
+  static const String commentsDetail = '/post-comments-detail-page';
   static const String costEstimate = '/cost-estimate';
   static const String professionals = '/Professionals';
   static const String moreItems = '/more-items';
   static const String materials = '/Materials';
   static const String phoneAuthGetPhone = '/phone-auth-get-phone';
   static const String servicesOfferedBasePage = '/services-offered-base-page';
-  static const String addDetailsForHome = '/add-details-for-home';
-  static const String costEstimateScreen = '/cost-estimate-screen';
-  static const String categoriesScreen = '/categories-screen';
+  static const String addDetailsForHomePage = '/add-details-for-home-page';
+  static const String costEstimatePage = '/cost-estimate-page';
+  static const String categoriesPage = '/categories-page';
   static const String postDetailPage = '/post-detail-page';
   static const String projectDetailsPage = '/project-details-page';
   static const String documentsPage = '/documents-page';
   static const String documentsUploadPage = '/documents-upload-page';
-  static const String onboardingScreen = '/onboarding-screen';
-  static const String paymentScreen = '/payment-screen';
+  static const String onboardingPage = '/onboarding-page';
+  static const String paymentsPage = '/payments-page';
   static const String reportsPage = '/reports-page';
   static const all = <String>{
-    startUpScreen,
+    startUpPage,
     basePage,
     explorePage,
     welcomePage,
@@ -77,15 +77,15 @@ class Routes {
     materials,
     phoneAuthGetPhone,
     servicesOfferedBasePage,
-    addDetailsForHome,
-    costEstimateScreen,
-    categoriesScreen,
+    addDetailsForHomePage,
+    costEstimatePage,
+    categoriesPage,
     postDetailPage,
     projectDetailsPage,
     documentsPage,
     documentsUploadPage,
-    onboardingScreen,
-    paymentScreen,
+    onboardingPage,
+    paymentsPage,
     reportsPage,
   };
 }
@@ -94,7 +94,7 @@ class AppRouter extends RouterBase {
   @override
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
-    RouteDef(Routes.startUpScreen, page: StartUpScreen),
+    RouteDef(Routes.startUpPage, page: StartUpPage),
     RouteDef(Routes.basePage, page: BasePage),
     RouteDef(Routes.explorePage, page: ExplorePage),
     RouteDef(Routes.welcomePage, page: WelcomePage),
@@ -102,30 +102,30 @@ class AppRouter extends RouterBase {
     RouteDef(Routes.categoriesSearchPage, page: CategoriesSearchPage),
     RouteDef(Routes.dashboardLandingPage, page: DashboardLandingPage),
     RouteDef(Routes.postDetailScreen, page: PostDetailScreen),
-    RouteDef(Routes.commentsDetail, page: PostCommentsDetail),
+    RouteDef(Routes.commentsDetail, page: PostCommentsDetailPage),
     RouteDef(Routes.costEstimate, page: CostEstimate),
     RouteDef(Routes.professionals, page: Professionals),
     RouteDef(Routes.moreItems, page: MoreItems),
     RouteDef(Routes.materials, page: Materials),
     RouteDef(Routes.phoneAuthGetPhone, page: PhoneAuthGetPhone),
     RouteDef(Routes.servicesOfferedBasePage, page: ServicesOfferedBasePage),
-    RouteDef(Routes.addDetailsForHome, page: AddDetailsForHome),
-    RouteDef(Routes.costEstimateScreen, page: CostEstimateScreen),
-    RouteDef(Routes.categoriesScreen, page: CategoriesScreen),
+    RouteDef(Routes.addDetailsForHomePage, page: AddDetailsForHomePage),
+    RouteDef(Routes.costEstimatePage, page: CostEstimatePage),
+    RouteDef(Routes.categoriesPage, page: CategoriesPage),
     RouteDef(Routes.postDetailPage, page: PostDetailPage),
     RouteDef(Routes.projectDetailsPage, page: ProjectDetailsPage),
     RouteDef(Routes.documentsPage, page: DocumentsPage),
     RouteDef(Routes.documentsUploadPage, page: DocumentsUploadPage),
-    RouteDef(Routes.onboardingScreen, page: OnboardingScreen),
-    RouteDef(Routes.paymentScreen, page: PaymentScreen),
+    RouteDef(Routes.onboardingPage, page: OnboardingPage),
+    RouteDef(Routes.paymentsPage, page: PaymentsPage),
     RouteDef(Routes.reportsPage, page: ReportsPage),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
   final _pagesMap = <Type, AutoRouteFactory>{
-    StartUpScreen: (data) {
+    StartUpPage: (data) {
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const StartUpScreen(),
+        builder: (context) => const StartUpPage(),
         settings: data,
       );
     },
@@ -208,13 +208,13 @@ class AppRouter extends RouterBase {
         settings: data,
       );
     },
-    PostCommentsDetail: (data) {
-      final args = data.getArgs<PostCommentsDetailArguments>(
-        orElse: () => PostCommentsDetailArguments(),
+    PostCommentsDetailPage: (data) {
+      final args = data.getArgs<PostCommentsDetailPageArguments>(
+        orElse: () => PostCommentsDetailPageArguments(),
       );
       return PageRouteBuilder<dynamic>(
         pageBuilder: (context, animation, secondaryAnimation) =>
-            PostCommentsDetail(
+            PostCommentsDetailPage(
           key: args.key,
           model: args.model,
           commentsParentPostId: args.commentsParentPostId,
@@ -269,28 +269,28 @@ class AppRouter extends RouterBase {
         transitionsBuilder: TransitionsBuilders.fadeIn,
       );
     },
-    AddDetailsForHome: (data) {
+    AddDetailsForHomePage: (data) {
       return PageRouteBuilder<dynamic>(
         pageBuilder: (context, animation, secondaryAnimation) =>
-            const AddDetailsForHome(),
+            const AddDetailsForHomePage(),
         settings: data,
         transitionsBuilder: TransitionsBuilders.slideLeft,
       );
     },
-    CostEstimateScreen: (data) {
+    CostEstimatePage: (data) {
       return PageRouteBuilder<dynamic>(
         pageBuilder: (context, animation, secondaryAnimation) =>
-            const CostEstimateScreen(),
+            const CostEstimatePage(),
         settings: data,
         transitionsBuilder: TransitionsBuilders.fadeIn,
       );
     },
-    CategoriesScreen: (data) {
-      final args = data.getArgs<CategoriesScreenArguments>(
-        orElse: () => CategoriesScreenArguments(),
+    CategoriesPage: (data) {
+      final args = data.getArgs<CategoriesPageArguments>(
+        orElse: () => CategoriesPageArguments(),
       );
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => CategoriesScreen(
+        builder: (context) => CategoriesPage(
           key: args.key,
           scaffoldKey: args.scaffoldKey,
         ),
@@ -325,18 +325,18 @@ class AppRouter extends RouterBase {
         settings: data,
       );
     },
-    OnboardingScreen: (data) {
-      final args = data.getArgs<OnboardingScreenArguments>(
-        orElse: () => OnboardingScreenArguments(),
+    OnboardingPage: (data) {
+      final args = data.getArgs<OnboardingPageArguments>(
+        orElse: () => OnboardingPageArguments(),
       );
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => OnboardingScreen(key: args.key),
+        builder: (context) => OnboardingPage(key: args.key),
         settings: data,
       );
     },
-    PaymentScreen: (data) {
+    PaymentsPage: (data) {
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => const PaymentScreen(),
+        builder: (context) => const PaymentsPage(),
         settings: data,
       );
     },
@@ -394,20 +394,20 @@ class PostDetailScreenArguments {
   PostDetailScreenArguments({this.key, this.model});
 }
 
-/// PostCommentsDetail arguments holder class
-class PostCommentsDetailArguments {
+/// PostCommentsDetailPage arguments holder class
+class PostCommentsDetailPageArguments {
   final Key key;
   final Comment model;
   final String commentsParentPostId;
-  PostCommentsDetailArguments(
+  PostCommentsDetailPageArguments(
       {this.key, this.model, this.commentsParentPostId});
 }
 
-/// CategoriesScreen arguments holder class
-class CategoriesScreenArguments {
+/// CategoriesPage arguments holder class
+class CategoriesPageArguments {
   final Key key;
   final GlobalKey<ScaffoldState> scaffoldKey;
-  CategoriesScreenArguments({this.key, this.scaffoldKey});
+  CategoriesPageArguments({this.key, this.scaffoldKey});
 }
 
 /// PostDetailPage arguments holder class
@@ -417,8 +417,8 @@ class PostDetailPageArguments {
   PostDetailPageArguments({this.key, @required this.imageData});
 }
 
-/// OnboardingScreen arguments holder class
-class OnboardingScreenArguments {
+/// OnboardingPage arguments holder class
+class OnboardingPageArguments {
   final Key key;
-  OnboardingScreenArguments({this.key});
+  OnboardingPageArguments({this.key});
 }

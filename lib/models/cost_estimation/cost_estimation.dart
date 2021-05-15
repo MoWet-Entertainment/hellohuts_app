@@ -61,8 +61,6 @@ final Map<RoomTypes, String> requirementsBasePack2 = {
   RoomTypes.Balcony: "Balcony",
 };
 
-
-
 ///for Defining different categories of the item used
 enum CustomizeOptions {
   Budget,
@@ -72,6 +70,7 @@ enum CustomizeOptions {
   Basic,
   Standard,
   Classic,
+  Premium
 }
 
 class CostEstimation extends Equatable {
@@ -80,6 +79,7 @@ class CostEstimation extends Equatable {
   final CustomizeOptions electricalsType;
   final CustomizeOptions plumbingType;
   final CustomizeOptions doorsAndWindowsType;
+  final CustomizeOptions paintingMaterialsType;
   final CustomizeOptions kitchenDeorType;
   final CustomizeOptions interiorDecorType;
   final CustomizeOptions exteriorDecorType;
@@ -90,6 +90,7 @@ class CostEstimation extends Equatable {
     @required this.electricalsType,
     @required this.plumbingType,
     @required this.doorsAndWindowsType,
+    @required this.paintingMaterialsType,
     @required this.kitchenDeorType,
     @required this.interiorDecorType,
     @required this.exteriorDecorType,
@@ -102,6 +103,10 @@ class CostEstimation extends Equatable {
       JsonConstants.electricalsType: this.electricalsType ?? null,
       JsonConstants.plumbingType: this.plumbingType ?? null,
       JsonConstants.doorsAndWindowsType: this.doorsAndWindowsType ?? null,
+      JsonConstants.paintingMaterialsType: this.paintingMaterialsType ?? null,
+      JsonConstants.interiorDecorType: this.interiorDecorType ?? null,
+      JsonConstants.exteriorDecorType: this.exteriorDecorType ?? null,
+      JsonConstants.kitchenDecorType: this.kitchenDeorType ?? null,
     };
   }
 
@@ -114,6 +119,8 @@ class CostEstimation extends Equatable {
         plumbingType = _setCustomizeOptions(data[JsonConstants.plumbingType]),
         doorsAndWindowsType =
             _setCustomizeOptions(data[JsonConstants.doorsAndWindowsType]),
+        paintingMaterialsType =
+            _setCustomizeOptions(data[JsonConstants.paintingMaterialsType]),
         kitchenDeorType =
             _setCustomizeOptions(data[JsonConstants.kitchenDecorType]),
         interiorDecorType =
@@ -137,6 +144,7 @@ class CostEstimation extends Equatable {
       return CustomizeOptions.Standard;
     } else if (dataVal == JsonConstants.classic) {
       return CustomizeOptions.Classic;
+    } else if (dataVal == JsonConstants.premium) {
     } else {
       return null;
     }
@@ -158,6 +166,8 @@ class CostEstimation extends Equatable {
       return JsonConstants.standard;
     } else if (option == CustomizeOptions.Classic) {
       return JsonConstants.classic;
+    } else if (option == CustomizeOptions.Premium) {
+      return JsonConstants.premium;
     } else {
       return null;
     }
@@ -170,6 +180,7 @@ class CostEstimation extends Equatable {
         this.electricalsType,
         this.plumbingType,
         this.doorsAndWindowsType,
+        this.paintingMaterialsType,
         this.kitchenDeorType,
         this.interiorDecorType,
         this.exteriorDecorType

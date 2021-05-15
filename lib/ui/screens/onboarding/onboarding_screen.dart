@@ -7,8 +7,8 @@ import 'package:hellohuts_app/ui/screens/explore.dart';
 import 'package:hellohuts_app/ui/screens/onboarding/onboarding_data.dart';
 import 'package:hellohuts_app/ui/screens/onboarding/onboarding_widget.dart';
 
-class OnboardingScreen extends StatelessWidget {
-  OnboardingScreen({Key key}) : super(key: key);
+class OnboardingPage extends StatelessWidget {
+  OnboardingPage({Key key}) : super(key: key);
 
   final List<OnboardingData> list = [
     OnboardingData(

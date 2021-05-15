@@ -28,6 +28,8 @@ class _$SelectedPlanModelTearOff {
           CustomizeOptions plumbingType,
       @JsonKey(name: JsonConstants.doorsAndWindowsType, fromJson: SelectedPlanModel._setCustomizeOptions, toJson: SelectedPlanModel._getCustomizeOption)
           CustomizeOptions doorsAndWindowsType,
+      @JsonKey(name: JsonConstants.paintingMaterialsType, fromJson: SelectedPlanModel._setCustomizeOptions, toJson: SelectedPlanModel._getCustomizeOption)
+          CustomizeOptions paintingMaterialsType,
       @JsonKey(name: JsonConstants.kitchenDecorType, fromJson: SelectedPlanModel._setCustomizeOptions, toJson: SelectedPlanModel._getCustomizeOption)
           CustomizeOptions kitchenDecorType,
       @JsonKey(name: JsonConstants.interiorDecorType, fromJson: SelectedPlanModel._setCustomizeOptions, toJson: SelectedPlanModel._getCustomizeOption)
@@ -44,6 +46,7 @@ class _$SelectedPlanModelTearOff {
       electricalsType: electricalsType,
       plumbingType: plumbingType,
       doorsAndWindowsType: doorsAndWindowsType,
+      paintingMaterialsType: paintingMaterialsType,
       kitchenDecorType: kitchenDecorType,
       interiorDecorType: interiorDecorType,
       exteriorDecorType: exteriorDecorType,
@@ -89,6 +92,11 @@ mixin _$SelectedPlanModel {
       fromJson: SelectedPlanModel._setCustomizeOptions,
       toJson: SelectedPlanModel._getCustomizeOption)
   CustomizeOptions get doorsAndWindowsType;
+  @JsonKey(
+      name: JsonConstants.paintingMaterialsType,
+      fromJson: SelectedPlanModel._setCustomizeOptions,
+      toJson: SelectedPlanModel._getCustomizeOption)
+  CustomizeOptions get paintingMaterialsType;
   @JsonKey(
       name: JsonConstants.kitchenDecorType,
       fromJson: SelectedPlanModel._setCustomizeOptions,
@@ -136,6 +144,8 @@ abstract class $SelectedPlanModelCopyWith<$Res> {
           CustomizeOptions plumbingType,
       @JsonKey(name: JsonConstants.doorsAndWindowsType, fromJson: SelectedPlanModel._setCustomizeOptions, toJson: SelectedPlanModel._getCustomizeOption)
           CustomizeOptions doorsAndWindowsType,
+      @JsonKey(name: JsonConstants.paintingMaterialsType, fromJson: SelectedPlanModel._setCustomizeOptions, toJson: SelectedPlanModel._getCustomizeOption)
+          CustomizeOptions paintingMaterialsType,
       @JsonKey(name: JsonConstants.kitchenDecorType, fromJson: SelectedPlanModel._setCustomizeOptions, toJson: SelectedPlanModel._getCustomizeOption)
           CustomizeOptions kitchenDecorType,
       @JsonKey(name: JsonConstants.interiorDecorType, fromJson: SelectedPlanModel._setCustomizeOptions, toJson: SelectedPlanModel._getCustomizeOption)
@@ -164,6 +174,7 @@ class _$SelectedPlanModelCopyWithImpl<$Res>
     Object electricalsType = freezed,
     Object plumbingType = freezed,
     Object doorsAndWindowsType = freezed,
+    Object paintingMaterialsType = freezed,
     Object kitchenDecorType = freezed,
     Object interiorDecorType = freezed,
     Object exteriorDecorType = freezed,
@@ -186,6 +197,9 @@ class _$SelectedPlanModelCopyWithImpl<$Res>
       doorsAndWindowsType: doorsAndWindowsType == freezed
           ? _value.doorsAndWindowsType
           : doorsAndWindowsType as CustomizeOptions,
+      paintingMaterialsType: paintingMaterialsType == freezed
+          ? _value.paintingMaterialsType
+          : paintingMaterialsType as CustomizeOptions,
       kitchenDecorType: kitchenDecorType == freezed
           ? _value.kitchenDecorType
           : kitchenDecorType as CustomizeOptions,
@@ -223,6 +237,8 @@ abstract class _$SelectedPlanModelCopyWith<$Res>
           CustomizeOptions plumbingType,
       @JsonKey(name: JsonConstants.doorsAndWindowsType, fromJson: SelectedPlanModel._setCustomizeOptions, toJson: SelectedPlanModel._getCustomizeOption)
           CustomizeOptions doorsAndWindowsType,
+      @JsonKey(name: JsonConstants.paintingMaterialsType, fromJson: SelectedPlanModel._setCustomizeOptions, toJson: SelectedPlanModel._getCustomizeOption)
+          CustomizeOptions paintingMaterialsType,
       @JsonKey(name: JsonConstants.kitchenDecorType, fromJson: SelectedPlanModel._setCustomizeOptions, toJson: SelectedPlanModel._getCustomizeOption)
           CustomizeOptions kitchenDecorType,
       @JsonKey(name: JsonConstants.interiorDecorType, fromJson: SelectedPlanModel._setCustomizeOptions, toJson: SelectedPlanModel._getCustomizeOption)
@@ -253,6 +269,7 @@ class __$SelectedPlanModelCopyWithImpl<$Res>
     Object electricalsType = freezed,
     Object plumbingType = freezed,
     Object doorsAndWindowsType = freezed,
+    Object paintingMaterialsType = freezed,
     Object kitchenDecorType = freezed,
     Object interiorDecorType = freezed,
     Object exteriorDecorType = freezed,
@@ -275,6 +292,9 @@ class __$SelectedPlanModelCopyWithImpl<$Res>
       doorsAndWindowsType: doorsAndWindowsType == freezed
           ? _value.doorsAndWindowsType
           : doorsAndWindowsType as CustomizeOptions,
+      paintingMaterialsType: paintingMaterialsType == freezed
+          ? _value.paintingMaterialsType
+          : paintingMaterialsType as CustomizeOptions,
       kitchenDecorType: kitchenDecorType == freezed
           ? _value.kitchenDecorType
           : kitchenDecorType as CustomizeOptions,
@@ -311,6 +331,8 @@ class _$_SelectedPlanModel
           this.plumbingType,
       @JsonKey(name: JsonConstants.doorsAndWindowsType, fromJson: SelectedPlanModel._setCustomizeOptions, toJson: SelectedPlanModel._getCustomizeOption)
           this.doorsAndWindowsType,
+      @JsonKey(name: JsonConstants.paintingMaterialsType, fromJson: SelectedPlanModel._setCustomizeOptions, toJson: SelectedPlanModel._getCustomizeOption)
+          this.paintingMaterialsType,
       @JsonKey(name: JsonConstants.kitchenDecorType, fromJson: SelectedPlanModel._setCustomizeOptions, toJson: SelectedPlanModel._getCustomizeOption)
           this.kitchenDecorType,
       @JsonKey(name: JsonConstants.interiorDecorType, fromJson: SelectedPlanModel._setCustomizeOptions, toJson: SelectedPlanModel._getCustomizeOption)
@@ -357,6 +379,12 @@ class _$_SelectedPlanModel
   final CustomizeOptions doorsAndWindowsType;
   @override
   @JsonKey(
+      name: JsonConstants.paintingMaterialsType,
+      fromJson: SelectedPlanModel._setCustomizeOptions,
+      toJson: SelectedPlanModel._getCustomizeOption)
+  final CustomizeOptions paintingMaterialsType;
+  @override
+  @JsonKey(
       name: JsonConstants.kitchenDecorType,
       fromJson: SelectedPlanModel._setCustomizeOptions,
       toJson: SelectedPlanModel._getCustomizeOption)
@@ -388,7 +416,7 @@ class _$_SelectedPlanModel
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SelectedPlanModel(buildingMaterialsType: $buildingMaterialsType, flooringType: $flooringType, electricalsType: $electricalsType, plumbingType: $plumbingType, doorsAndWindowsType: $doorsAndWindowsType, kitchenDecorType: $kitchenDecorType, interiorDecorType: $interiorDecorType, exteriorDecorType: $exteriorDecorType, createdTimeStamp: $createdTimeStamp, updatedTimeStamp: $updatedTimeStamp)';
+    return 'SelectedPlanModel(buildingMaterialsType: $buildingMaterialsType, flooringType: $flooringType, electricalsType: $electricalsType, plumbingType: $plumbingType, doorsAndWindowsType: $doorsAndWindowsType, paintingMaterialsType: $paintingMaterialsType, kitchenDecorType: $kitchenDecorType, interiorDecorType: $interiorDecorType, exteriorDecorType: $exteriorDecorType, createdTimeStamp: $createdTimeStamp, updatedTimeStamp: $updatedTimeStamp)';
   }
 
   @override
@@ -401,6 +429,7 @@ class _$_SelectedPlanModel
       ..add(DiagnosticsProperty('electricalsType', electricalsType))
       ..add(DiagnosticsProperty('plumbingType', plumbingType))
       ..add(DiagnosticsProperty('doorsAndWindowsType', doorsAndWindowsType))
+      ..add(DiagnosticsProperty('paintingMaterialsType', paintingMaterialsType))
       ..add(DiagnosticsProperty('kitchenDecorType', kitchenDecorType))
       ..add(DiagnosticsProperty('interiorDecorType', interiorDecorType))
       ..add(DiagnosticsProperty('exteriorDecorType', exteriorDecorType))
@@ -427,6 +456,9 @@ class _$_SelectedPlanModel
             (identical(other.doorsAndWindowsType, doorsAndWindowsType) ||
                 const DeepCollectionEquality()
                     .equals(other.doorsAndWindowsType, doorsAndWindowsType)) &&
+            (identical(other.paintingMaterialsType, paintingMaterialsType) ||
+                const DeepCollectionEquality().equals(
+                    other.paintingMaterialsType, paintingMaterialsType)) &&
             (identical(other.kitchenDecorType, kitchenDecorType) ||
                 const DeepCollectionEquality()
                     .equals(other.kitchenDecorType, kitchenDecorType)) &&
@@ -452,6 +484,7 @@ class _$_SelectedPlanModel
       const DeepCollectionEquality().hash(electricalsType) ^
       const DeepCollectionEquality().hash(plumbingType) ^
       const DeepCollectionEquality().hash(doorsAndWindowsType) ^
+      const DeepCollectionEquality().hash(paintingMaterialsType) ^
       const DeepCollectionEquality().hash(kitchenDecorType) ^
       const DeepCollectionEquality().hash(interiorDecorType) ^
       const DeepCollectionEquality().hash(exteriorDecorType) ^
@@ -481,6 +514,8 @@ abstract class _SelectedPlanModel implements SelectedPlanModel {
           CustomizeOptions plumbingType,
       @JsonKey(name: JsonConstants.doorsAndWindowsType, fromJson: SelectedPlanModel._setCustomizeOptions, toJson: SelectedPlanModel._getCustomizeOption)
           CustomizeOptions doorsAndWindowsType,
+      @JsonKey(name: JsonConstants.paintingMaterialsType, fromJson: SelectedPlanModel._setCustomizeOptions, toJson: SelectedPlanModel._getCustomizeOption)
+          CustomizeOptions paintingMaterialsType,
       @JsonKey(name: JsonConstants.kitchenDecorType, fromJson: SelectedPlanModel._setCustomizeOptions, toJson: SelectedPlanModel._getCustomizeOption)
           CustomizeOptions kitchenDecorType,
       @JsonKey(name: JsonConstants.interiorDecorType, fromJson: SelectedPlanModel._setCustomizeOptions, toJson: SelectedPlanModel._getCustomizeOption)
@@ -525,6 +560,12 @@ abstract class _SelectedPlanModel implements SelectedPlanModel {
       fromJson: SelectedPlanModel._setCustomizeOptions,
       toJson: SelectedPlanModel._getCustomizeOption)
   CustomizeOptions get doorsAndWindowsType;
+  @override
+  @JsonKey(
+      name: JsonConstants.paintingMaterialsType,
+      fromJson: SelectedPlanModel._setCustomizeOptions,
+      toJson: SelectedPlanModel._getCustomizeOption)
+  CustomizeOptions get paintingMaterialsType;
   @override
   @JsonKey(
       name: JsonConstants.kitchenDecorType,

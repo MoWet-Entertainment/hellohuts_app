@@ -1,4 +1,7 @@
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 class JsonConstants {
+  JsonConstants._();
   //TRANSACTION SPECIFIC CONSTANTS
   static const String transactionType = 'transaction_type';
   static const String timeStamp = 'time_stamp';
@@ -11,7 +14,7 @@ class JsonConstants {
   static const String transaction = "101";
   static const String activity = "102";
   static const String event = "103";
-  static const String undefined = "104"; 
+  static const String undefined = "104";
   //USER SPECIFIC CONSTANTS
   static const String userId = 'uid';
   static const String email = 'email';
@@ -37,6 +40,8 @@ class JsonConstants {
   static const String kitchenDecorType = "customization_kitchen_decor";
   static const String exteriorDecorType = "customization_exterior_decor";
   static const String interiorDecorType = "customization_interior_decor";
+  static const String paintingMaterialsType =
+      "customization_painting_materials";
 
   //CUSTOMIZATION CONSTANTS
   static const String budgetType = "budget";
@@ -46,6 +51,7 @@ class JsonConstants {
   static const String basic = "basic";
   static const String standard = "standard";
   static const String classic = "classic";
+  static const String premium = "premium";
 
   //APP FEED CONSTANTS
   static const String key = 'key';
@@ -164,6 +170,7 @@ class JsonConstants {
   static const String kitchenDecors = "kitchen_decor";
   static const String interiorDecor = "interior_decor";
   static const String exteriorDecor = "exterior_decor";
+  static const String painting = "painting";
 
   //Documents
   static const String projectDocuments = "project_documents";
@@ -185,4 +192,22 @@ class JsonConstants {
   //file
   static const String fileName = "file_name";
   static const String size = "size";
+
+  //project stages
+  static const String currentStage = "current_stage";
+  static const String activeStages = "active_stages";
+  static const String completedStages = "completed_stages";
+  static const String upcomingStages = "upcoming_stages";
+
+  static const String active = "active";
+  static const String completed = "completed";
+  static const String pending = "pending";
+  static const String refused = "refused";
+  static const String onHold = "on_hold";
+  static const String rejected = "rejected";
+
+  static const String estimatedDate = "estimated_date";
+  static const String actualDate = "actual_date";
+  static const String date = "date";
+  static const String isCompleted = "is_completed";
 }

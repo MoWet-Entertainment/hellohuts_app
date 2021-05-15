@@ -28,6 +28,7 @@ class NiceToHaveDetailsBody extends StatelessWidget {
           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           // mainAxisSize: MainAxisSize.min,
           children: [
+            _PaintingsTypeSelectSection(),
             _KitchenDecorTypeSelectSection(),
             _InteriorDecorTypeSelectSection(),
             _ExteriorDecorTypeSelectSection(),
@@ -48,6 +49,46 @@ class NiceToHaveDetailsBody extends StatelessWidget {
 }
 
 
+class _PaintingsTypeSelectSection extends StatelessWidget {
+  const _PaintingsTypeSelectSection({
+    Key key,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    final state = Provider.of<CostEstimateState>(context);
+    return ItemTypeSelectSection(
+      nameOfTheSection: "Painting",
+      selectedItem: state.paintingTypeSelected,
+      detailsList: [
+        ItemSelectionModel(
+            optionName: "Basic",
+            optionType: CustomizeOptions.Basic,
+            selectedItem: state.paintingTypeSelected,
+            onTap: () =>
+                {state.setPaintingTypeSelected = CustomizeOptions.Basic}),
+        ItemSelectionModel(
+            optionName: "Budget",
+            optionType: CustomizeOptions.Budget,
+            selectedItem: state.paintingTypeSelected,
+            onTap: () =>
+                {state.setPaintingTypeSelected = CustomizeOptions.Budget}),
+        ItemSelectionModel(
+            optionName: "Standard",
+            optionType: CustomizeOptions.Standard,
+            selectedItem: state.paintingTypeSelected,
+            onTap: () => {
+                  state.setPaintingTypeSelected = CustomizeOptions.Standard
+                }),
+        ItemSelectionModel(
+            optionName: "Premium",
+            optionType: CustomizeOptions.Premium,
+            selectedItem: state.paintingTypeSelected,
+            onTap: () =>
+                {state.setPaintingTypeSelected = CustomizeOptions.Premium}),
+      ],
+    );
+  }
+}
 
 class _KitchenDecorTypeSelectSection extends StatelessWidget {
   const _KitchenDecorTypeSelectSection({
@@ -80,11 +121,11 @@ class _KitchenDecorTypeSelectSection extends StatelessWidget {
                   state.setKitchenDecorTypeSelected = CustomizeOptions.Standard
                 }),
         ItemSelectionModel(
-            optionName: "Classic",
-            optionType: CustomizeOptions.Classic,
+            optionName: "Premium",
+            optionType: CustomizeOptions.Premium,
             selectedItem: state.kitchenDecorTypeSelected,
             onTap: () =>
-                {state.setKitchenDecorTypeSelected = CustomizeOptions.Classic}),
+                {state.setKitchenDecorTypeSelected = CustomizeOptions.Premium}),
       ],
     );
   }
@@ -121,11 +162,11 @@ class _InteriorDecorTypeSelectSection extends StatelessWidget {
                   state.setInteriorDecorTypeSelected = CustomizeOptions.Standard
                 }),
         ItemSelectionModel(
-            optionName: "Classic",
-            optionType: CustomizeOptions.Classic,
+            optionName: "Premium",
+            optionType: CustomizeOptions.Premium,
             selectedItem: state.interiorDecorTypeSelected,
             onTap: () => {
-                  state.setInteriorDecorTypeSelected = CustomizeOptions.Classic
+                  state.setInteriorDecorTypeSelected = CustomizeOptions.Premium
                 }),
       ],
     );
@@ -163,11 +204,11 @@ class _ExteriorDecorTypeSelectSection extends StatelessWidget {
                   state.setExteriorDecorTypeSelected = CustomizeOptions.Standard
                 }),
         ItemSelectionModel(
-            optionName: "Classic",
-            optionType: CustomizeOptions.Classic,
+            optionName: "Premium",
+            optionType: CustomizeOptions.Premium,
             selectedItem: state.exteriorDecorTypeSelected,
             onTap: () => {
-                  state.setExteriorDecorTypeSelected = CustomizeOptions.Classic
+                  state.setExteriorDecorTypeSelected = CustomizeOptions.Premium
                 }),
       ],
     );

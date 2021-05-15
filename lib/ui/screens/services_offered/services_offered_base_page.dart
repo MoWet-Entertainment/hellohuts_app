@@ -99,7 +99,7 @@ class ServicesOffferedItems extends StatelessWidget {
           items: ["Design", "Build", "Smart"],
         ),
         onTap: () => {
-          ExtendedNavigator.root.push(Routes.addDetailsForHome),
+          ExtendedNavigator.root.push(Routes.addDetailsForHomePage),
         },
       ),
     );

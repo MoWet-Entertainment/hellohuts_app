@@ -23,6 +23,8 @@ abstract class SelectedPlanModel with _$SelectedPlanModel {
         CustomizeOptions plumbingType,
     @JsonKey(name: JsonConstants.doorsAndWindowsType, fromJson: SelectedPlanModel._setCustomizeOptions, toJson: SelectedPlanModel._getCustomizeOption)
         CustomizeOptions doorsAndWindowsType,
+        @JsonKey(name:JsonConstants.paintingMaterialsType,fromJson: SelectedPlanModel._setCustomizeOptions, toJson:SelectedPlanModel._getCustomizeOption)
+        CustomizeOptions paintingMaterialsType,
     @JsonKey(name: JsonConstants.kitchenDecorType, fromJson: SelectedPlanModel._setCustomizeOptions, toJson: SelectedPlanModel._getCustomizeOption)
         CustomizeOptions kitchenDecorType,
     @JsonKey(name: JsonConstants.interiorDecorType, fromJson: SelectedPlanModel._setCustomizeOptions, toJson: SelectedPlanModel._getCustomizeOption)

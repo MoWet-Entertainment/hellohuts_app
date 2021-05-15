@@ -119,6 +119,7 @@ class CostEstimateState extends ChangeNotifier {
 
   ///to reset the NiceToHave Page to the initial state
   void resetNiceToHave() {
+    setPaintingTypeSelected = CustomizeOptions.Standard;
     setKitchenDecorTypeSelected = CustomizeOptions.Standard;
     setInteriorDecorTypeSelected = CustomizeOptions.Standard;
     setExteriorDecorTypeSelected = CustomizeOptions.None;
@@ -212,6 +213,15 @@ class CostEstimateState extends ChangeNotifier {
     notifyListeners();
   }
 
+  ///painting Selected Option
+  CustomizeOptions _paintingTypeSelected = CustomizeOptions.Standard;
+  get paintingTypeSelected => _paintingTypeSelected;
+
+  set setPaintingTypeSelected(CustomizeOptions option) {
+    _paintingTypeSelected = option;
+    notifyListeners();
+  }
+
   ///Optional Categores
   ///Kitchen Decor Selection Types
   CustomizeOptions _kitchenDecorTypeSelected = CustomizeOptions.Standard;
@@ -269,6 +279,7 @@ class CostEstimateState extends ChangeNotifier {
       plumbingType: _plumbingTypeSelected,
       electricalsType: _electricalsTypeSelected,
       doorsAndWindowsType: _doorsAndWindowsTypeSelected,
+      paintingMaterialsType: _paintingTypeSelected,
       kitchenDecorType: _kitchenDecorTypeSelected,
       exteriorDecorType: _exteriorDecorTypeSelected,
       interiorDecorType: _interiorDecorTypeSelected,
@@ -287,7 +298,7 @@ class CostEstimateState extends ChangeNotifier {
     );
     print(_selectedPlanModel);
     print(_buildingRequirementsModel);
-   print( _selectedPlanModel.toJson());
+    print(_selectedPlanModel.toJson());
     print(_buildingRequirementsModel.toJson());
   }
 }

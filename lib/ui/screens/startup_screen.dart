@@ -6,8 +6,8 @@ import 'package:hellohuts_app/ui/screens/base_page.dart';
 import 'package:hellohuts_app/ui/screens/onboarding/onboarding_screen.dart';
 import 'package:hellohuts_app/ui/screens/testpage.dart';
 
-class StartUpScreen extends StatelessWidget {
-  const StartUpScreen({Key key}) : super(key: key);
+class StartUpPage extends StatelessWidget {
+  const StartUpPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class StartUpScreen extends StatelessWidget {
       //return Login Page
       return FirstPage();
     } else {
-      return OnboardingScreen();
+      return OnboardingPage();
     }
   }
 }

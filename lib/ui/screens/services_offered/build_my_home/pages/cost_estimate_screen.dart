@@ -12,8 +12,8 @@ import 'package:hellohuts_app/ui/styles/app_colors.dart';
 import 'package:hellohuts_app/ui/styles/app_themes.dart';
 import 'package:provider/provider.dart';
 
-class CostEstimateScreen extends StatelessWidget {
-  const CostEstimateScreen({Key key}) : super(key: key);
+class CostEstimatePage extends StatelessWidget {
+  const CostEstimatePage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

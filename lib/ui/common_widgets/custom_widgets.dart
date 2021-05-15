@@ -1100,9 +1100,29 @@ class ActiveTextWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text("Active", style: theme.textTheme.bodyText2.copyWith(color: AppColors.kbDarkGreen, fontWeight: FontWeight.bold),),
+        Text("Active", style: theme.textTheme.bodyText2.copyWith(color: AppColors.kbPrimaryYellow, fontWeight: FontWeight.bold),),
         SizedBox(width: 8.0,),
-        Icon(Icons.motion_photos_on,color: AppColors.kbDarkGreen,size: 18,),
+        Icon(Icons.motion_photos_on,color: AppColors.kbPrimaryYellow,size: 18,),
+      ],
+    );
+  }
+}
+
+class CompletedTextWidget extends StatelessWidget {
+  const CompletedTextWidget({
+    Key key,
+    @required this.theme,
+  }) : super(key: key);
+
+  final ThemeData theme;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Text("Completed", style: theme.textTheme.bodyText2.copyWith(color: AppColors.kbDarkGreen, fontWeight: FontWeight.bold),),
+        SizedBox(width: 8.0,),
+        Icon(Icons.check_circle_outline_rounded,color: AppColors.kbDarkGreen,size: 18,),
       ],
     );
   }
