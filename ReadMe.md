@@ -1,5 +1,5 @@
 <p align="center">
-  <img max-height="250" src="media/hello_logo.png"/>
+  <img height="250" src="media/hello_logo.png"/>
 </p>
 
 <p align="center">
