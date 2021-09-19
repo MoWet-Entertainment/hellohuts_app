@@ -4,7 +4,8 @@
 
 <p align="center">
  A production ready tech enabled construction experience built with <a href="https://flutter.dev/">Flutter</a>
-
+</p>
+<p align="center">
  All pages are designed from ground up using <a href ="https://www.figma.com/" > Figma.
 </p>
 
@@ -31,33 +32,28 @@
 
 </p>
 
-<details>
-  <summary>More Gifs on Home </summary>
+
   
   | Like | Share | Theme selection |
   | :---: | :---: | :---: |
   | ![Like](media/like.gif) | ![Share](media/share.gif) | ![Theme selection](media/theme.gif) |
-</details>
-<details>
-  <summary>More Gifs on Explore </summary>
+
+
   
   | Comment | Follow |
   | :---: | :---: |
   | ![Comment](media/detail_comment.gif) | ![Follow](media/follow.gif) | 
-</details>
-<details>
-  <summary>More Gifs on Dashboard </summary>
+
+
   
   | Selected | Download Documents |  Quick view |
   | :---: | :---: | :---: |
   | ![Comment](media/selected_plan.gif) | ![Download Documents](media/documents_download.gif) |  ![Pay](media/hero_dash_proj_details.gif) | 
-</details>
 
-<details>
-  <summary>More Gifs on Dashboard </summary>
+
  <p> Some pages are added in the media folder like notifications, Idea pad etc, Chat Screens etc</p>
- <img src="media/Project Customer Chat -4.png"/>
-</details>
+ <img src="media/Project Customer Chat -4.png" height="400"/>
+
 </br>
 </br>
 
@@ -124,3 +120,8 @@ To generate [json_serializable](https://pub.dev/packages/json_serializable)
 , [auto_route](https://pub.dev/packages/json_serializable) [freezed](https://pub.dev/packages/freezed):
 
 * `flutter packages pub run build_runner build`
+
+
+## Created & Maintained By
+
+[Vinoop KS](https://github.com/vinoopks) ([Twitter](https://www.twitter.com/vinoopks)) ([Youtube](https://www.youtube.com/user/sonusharma045sonu/)) ([Insta](https://www.instagram.com/vinoopks))
