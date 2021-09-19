@@ -124,4 +124,4 @@ To generate [json_serializable](https://pub.dev/packages/json_serializable)
 
 ## Created & Maintained By
 
-[Vinoop KS](https://github.com/vinoopks) ([Twitter](https://www.twitter.com/vinoopks)) ([Youtube](https://www.youtube.com/user/sonusharma045sonu/)) ([Insta](https://www.instagram.com/vinoopks))
+[Vinoop KS](https://github.com/vinoopks) ([Twitter](https://www.twitter.com/vinoopks))  ([Instagram](https://www.instagram.com/vinoopks)) ([stackoverflow](https://stackoverflow.com/users/11126369/vinoop-ks))
