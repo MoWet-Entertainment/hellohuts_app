@@ -3,6 +3,6 @@
     <string name="app_name">Hellohuts-DEV</string>
 
     <!-- Hellohuts Facebook App ID -->
-    <string name="facebook_app_id">497373927836449</string>
-    <string name="fb_login_protocol_scheme">fb497373927836449</string>
+    <string name="facebook_app_id">[FB AUTH]</string>
+    <string name="fb_login_protocol_scheme">[FB AUTH]</string>
 </resources>

@@ -51,6 +51,8 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true
+        android.useAndroidX=true
+
     }
 signingConfigs {
        release {
